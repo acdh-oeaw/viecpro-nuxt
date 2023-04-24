@@ -1,0 +1,24 @@
+{
+	"configurations": [
+		{
+			"name": "Apps: Web (server-side)",
+			"request": "launch",
+			"runtimeArgs": ["run", "dev"],
+			"runtimeExecutable": "pnpm",
+			"skipFiles": ["<node_internals>/**"],
+			"type": "node"
+		},
+		{
+			"name": "Apps: Web (client-side)",
+			"type": "chrome",
+			"request": "launch",
+			"url": "http://localhost:3000"
+		}
+	],
+	"compounds": [
+		{
+			"name": "Apps: Web",
+			"configurations": ["Apps: Web (server-side)", "Apps: Web (client-side)"]
+		}
+	]
+}

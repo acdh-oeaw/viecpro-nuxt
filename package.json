@@ -1,0 +1,143 @@
+{
+	"name": "@acdh-oeaw/viecpro",
+	"private": true,
+	"license": "MIT",
+	"type": "module",
+	"engines": {
+		"node": "18.x",
+		"pnpm": "8.x"
+	},
+	"packageManager": "pnpm@8.4.0",
+	"scripts": {
+		"analyze": "BUNDLE_ANALYZER=\"enabled\" next build --no-lint",
+		"build": "next build",
+		"dev": "next dev",
+		"format:check": "prettier . \"!./content/**\" --cache --check --ignore-path ./.gitignore",
+		"format:fix": "pnpm run format:check --write",
+		"lint:check": "run-p \"lint:*:check\"",
+		"lint:fix": "run-p \"lint:*:fix\"",
+		"lint:code:check": "eslint . --cache --ignore-path ./.gitignore",
+		"lint:code:fix": "pnpm run lint:code:check --fix",
+		"lint:styles:check": "stylelint \"./**/*.css\" --allow-empty-input --cache --ignore-path ./.gitignore",
+		"lint:styles:fix": "pnpm run lint:styles:check --fix",
+		"prepare": "run-s setup",
+		"setup": "simple-git-hooks || exit 0",
+		"start": "next start",
+		"test": "exit 0",
+		"types:check": "tsc --noEmit",
+		"validate": "run-p format:check lint:check types:check test"
+	},
+	"dependencies": {
+		"@next/bundle-analyzer": "^13.4.1",
+		"@next/mdx": "^13.4.1",
+		"@stefanprobst/assert": "^1.0.3",
+		"@stefanprobst/css-reset": "^0.1.0",
+		"@stefanprobst/log": "^1.0.3",
+		"@stefanprobst/request": "^0.2.1",
+		"@t3-oss/env-nextjs": "^0.3.1",
+		"ms": "^2.1.3",
+		"next": "^13.4.1",
+		"next-intl": "2.14.0-beta.3",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-instantsearch-hooks-server": "^6.43.0",
+		"react-instantsearch-hooks-web": "^6.43.0",
+		"react-schemaorg": "^2.0.0",
+		"schema-dts": "^1.1.2",
+		"sharp": "^0.32.1",
+		"tailwind-merge": "^1.12.0",
+		"typesense-instantsearch-adapter": "^2.6.0",
+		"zod": "^3.21.4"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^17.6.3",
+		"@next/eslint-plugin-next": "^13.4.1",
+		"@stefanprobst/commitlint-config": "^1.0.3",
+		"@stefanprobst/eslint-config": "^1.1.2",
+		"@stefanprobst/eslint-config-next": "^7.0.7",
+		"@stefanprobst/eslint-config-react": "^1.0.5",
+		"@stefanprobst/prettier-config": "^3.0.1",
+		"@stefanprobst/stylelint-config": "^3.0.2",
+		"@stefanprobst/tsconfig": "^3.0.2",
+		"@tailwindcss/typography": "^0.5.9",
+		"@types/ms": "^0.7.31",
+		"@types/node": "^18.16.5",
+		"@types/react": "^18.2.6",
+		"@types/react-dom": "^18.2.4",
+		"autoprefixer": "^10.4.14",
+		"eslint": "^8.40.0",
+		"eslint-plugin-tailwindcss": "^3.11.0",
+		"lint-staged": "^13.2.2",
+		"npm-run-all": "^4.1.5",
+		"postcss": "^8.4.23",
+		"postcss-nesting": "^11.2.2",
+		"prettier": "^2.8.8",
+		"simple-git-hooks": "^2.8.1",
+		"stylelint": "^15.6.1",
+		"tailwindcss": "^3.3.2",
+		"tailwindcss-animate": "^1.0.5",
+		"ts-essentials": "^9.3.2",
+		"typescript": "^5.0.4"
+	},
+	"resolutions": {
+		"hogan.js": "npm:empty-npm-package@1.0.0"
+	},
+	"browserslist": {
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		],
+		"production": [
+			">=0.75%",
+			"not dead",
+			"not op_mini all"
+		]
+	},
+	"commitlint": {
+		"extends": "@stefanprobst/commitlint-config"
+	},
+	"eslintConfig": {
+		"extends": [
+			"@stefanprobst/eslint-config",
+			"@stefanprobst/eslint-config-react",
+			"@stefanprobst/eslint-config-next",
+			"plugin:eslint-plugin-tailwindcss/recommended"
+		],
+		"settings": {
+			"tailwindcss": {
+				"callees": [
+					"cn"
+				],
+				"config": "./tailwind.config.cjs"
+			}
+		}
+	},
+	"lint-staged": {
+		"*.@(cjs|js|mjs|ts|tsx)": [
+			"eslint --cache --fix",
+			"prettier --cache --write"
+		],
+		"*.@(css)": [
+			"stylelint --cache --fix",
+			"prettier --cache --write"
+		],
+		"*.!(cjs|css|js|mjs|ts|tsx),!./content/**": "prettier --cache --ignore-unknown --write"
+	},
+	"postcss": {
+		"plugins": {
+			"tailwindcss/nesting": "postcss-nesting",
+			"tailwindcss": {},
+			"autoprefixer": {}
+		}
+	},
+	"prettier": "@stefanprobst/prettier-config",
+	"simple-git-hooks": {
+		"commit-msg": "pnpm exec commitlint --edit",
+		"pre-commit": "pnpm exec lint-staged",
+		"pre-push": "pnpm run validate"
+	},
+	"stylelint": {
+		"extends": "@stefanprobst/stylelint-config"
+	}
+}

@@ -1,0 +1,21 @@
+{
+	"IndexPage": {
+		"title": "Startseite"
+	},
+	"LocaleSwitcher": {
+		"switch-locale": "Zu {locale, select, de {Deutsch} en {Englisch} other {Unbekannt}} wechseln"
+	},
+	"NotFoundPage": {
+		"meta": {
+			"title": "Seite nicht gefunden"
+		},
+		"title": "Seite nicht gefunden"
+	},
+	"RootLayout": {
+		"meta": {
+			"title": "VieCPro",
+			"description": "The Viennese Court. A prosopographical portal."
+		},
+		"skip-to-main-content": "Zum Hauptinhalt springen"
+	}
+}
