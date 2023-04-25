@@ -1,7 +1,12 @@
 {
 	"common": {
+		"collection": "Sammlung",
 		"main": "Haupt",
+		"pagination": "Paginierung",
+		"reset": "Zurücksetzen",
+		"search": "Suchen",
 		"skip-to-main-content": "Zum Hauptinhalt springen",
+		"submit": "Absenden",
 		"switch-language": "Sprache ändern"
 	},
 	"pages": {
@@ -9,5 +14,14 @@
 		"imprint": { "title": "Impressum" },
 		"search": { "title": "Suche" },
 		"page-not-found": { "title": "Seite nicht gefunden" }
+	},
+	"collections": {
+		"courts": "Hofstaat | Hofstaate",
+		"events": "Ereignis | Ereignisse",
+		"institutions": "Institution | Institutionen",
+		"persons": "Person | Personen",
+		"places": "Ort | Orte",
+		"references": "Quellenbeleg | Quellenbelege",
+		"relations": "Relation | Relationen"
 	}
 }

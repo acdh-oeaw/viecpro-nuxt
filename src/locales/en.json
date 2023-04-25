@@ -1,7 +1,12 @@
 {
 	"common": {
+		"collection": "Collection",
 		"main": "Main",
+		"pagination": "Pagination",
+		"reset": "Reset",
+		"search": "Search",
 		"skip-to-main-content": "Skip to main content",
+		"submit": "Submit",
 		"switch-language": "Switch language"
 	},
 	"pages": {
@@ -9,5 +14,14 @@
 		"imprint": { "title": "Imprint" },
 		"search": { "title": "Search" },
 		"page-not-found": { "title": "Page not found" }
+	},
+	"collections": {
+		"courts": "Court | Courts",
+		"events": "Event | Events",
+		"institutions": "Institution | Institutions",
+		"persons": "Person | Persons",
+		"places": "Place | Places",
+		"references": "Reference | References",
+		"relations": "Relation | Relations"
 	}
 }
