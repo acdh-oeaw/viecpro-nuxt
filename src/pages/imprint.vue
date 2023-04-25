@@ -5,6 +5,6 @@ import PageTitle from "@/components/page-title.vue";
 
 <template>
 	<MainContent>
-		<PageTitle>Home Page</PageTitle>
+		<PageTitle>Imprint</PageTitle>
 	</MainContent>
 </template>

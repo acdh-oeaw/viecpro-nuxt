@@ -1,1 +1,13 @@
-{}
+{
+	"common": {
+		"main": "Haupt",
+		"skip-to-main-content": "Zum Hauptinhalt springen",
+		"switch-language": "Sprache ändern"
+	},
+	"pages": {
+		"index": { "title": "Startseite" },
+		"imprint": { "title": "Impressum" },
+		"search": { "title": "Suche" },
+		"page-not-found": { "title": "Seite nicht gefunden" }
+	}
+}
