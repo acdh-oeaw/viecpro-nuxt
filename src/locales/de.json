@@ -13,7 +13,8 @@
 		"index": { "title": "Startseite" },
 		"imprint": { "title": "Impressum" },
 		"search": { "title": "Suche" },
-		"page-not-found": { "title": "Seite nicht gefunden" }
+		"page-not-found": { "title": "Seite nicht gefunden" },
+		"error": { "title": "Fehler" }
 	},
 	"collections": {
 		"courts": "Hofstaat | Hofstaate",

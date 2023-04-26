@@ -13,7 +13,8 @@
 		"index": { "title": "Home" },
 		"imprint": { "title": "Imprint" },
 		"search": { "title": "Search" },
-		"page-not-found": { "title": "Page not found" }
+		"page-not-found": { "title": "Page not found" },
+		"error": { "title": "Error" }
 	},
 	"collections": {
 		"courts": "Court | Courts",
