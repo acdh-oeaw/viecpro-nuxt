@@ -2,6 +2,9 @@
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"extends": ["./.nuxt/tsconfig.json", "@stefanprobst/tsconfig"],
 	"compilerOptions": {
+		/** `vue-tsc` does not currently work with `incremental` */
+		// @see https://github.com/vuejs/language-tools/issues/2622
+		"incremental": false,
 		"exactOptionalPropertyTypes": false,
 		"noPropertyAccessFromIndexSignature": false
 	}

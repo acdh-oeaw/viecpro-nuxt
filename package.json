@@ -27,7 +27,7 @@
 		"setup": "simple-git-hooks || exit 0",
 		"start": "nuxt preview",
 		"test": "exit 0",
-		"types:check": "nuxt typecheck",
+		"types:check": "vue-tsc --noEmit",
 		"validate": "run-s format:check lint:check types:check test"
 	},
 	"dependencies": {
