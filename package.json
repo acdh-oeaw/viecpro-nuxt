@@ -38,6 +38,7 @@
 		"@stefanprobst/assert": "^1.0.3",
 		"@stefanprobst/log": "^1.0.3",
 		"@stefanprobst/request": "^0.2.1",
+		"@t3-oss/env-core": "^0.2.1",
 		"instantsearch.js": "^4.55.0",
 		"nuxt": "^3.4.2",
 		"typesense-instantsearch-adapter": "^2.6.0",
