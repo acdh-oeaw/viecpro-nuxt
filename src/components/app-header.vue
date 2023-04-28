@@ -1,6 +1,9 @@
 <script lang="ts" setup>
+import { useI18n } from "@/composables/use-i18n";
 import { type NuxtLinkProps } from "#app";
 import { NuxtLink } from "#components";
+
+const { t } = useI18n();
 
 type NavLink = {
 	href: NuxtLinkProps["href"];
@@ -8,9 +11,9 @@ type NavLink = {
 };
 
 const links = {
-	home: { href: { path: "/" }, label: "Home" },
-	search: { href: { path: "/search" }, label: "Datenbank" },
-	documentation: { href: { path: "/documentation" }, label: "Dokumentation" },
+	home: { href: { path: "/" }, label: t("pages.home.label") },
+	search: { href: { path: "/search" }, label: t("pages.search.label") },
+	documentation: { href: { path: "/documentation" }, label: t("pages.documentation.label") },
 } satisfies Record<string, NavLink>;
 </script>
 
@@ -19,11 +22,12 @@ const links = {
 		<div
 			class="mx-auto flex w-full max-w-container flex-col items-center justify-between gap-x-4 gap-y-2 px-8 py-4 sm:flex-row"
 		>
-			<NuxtLink aria-label="Home" class="shrink-0" :href="{ path: '/' }">
+			<NuxtLink class="shrink-0" :href="links.home.href">
+				<span class="sr-only">{{ links.home.label }}</span>
 				<img alt="" class="h-20" src="@/assets/images/logo-white.png" />
 			</NuxtLink>
 
-			<nav aria-label="Haupt">
+			<nav :aria-label="t('common.main-navigation')">
 				<ul class="flex flex-wrap gap-x-4" role="list">
 					<li v-for="(link, key) of links" :key="key">
 						<NuxtLink :href="link.href">

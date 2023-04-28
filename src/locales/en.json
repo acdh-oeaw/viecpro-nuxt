@@ -1,1 +1,21 @@
-{}
+{
+	"common": {
+		"imprint": "Imprint",
+		"main-navigation": "Main",
+		"skip-to-main-content": "Skip to main content"
+	},
+	"pages": {
+		"home": {
+			"title": "Home",
+			"label": "Home"
+		},
+		"search": {
+			"title": "Database",
+			"label": "Database"
+		},
+		"documentation": {
+			"title": "Documentation",
+			"label": "Documentation"
+		}
+	}
+}
