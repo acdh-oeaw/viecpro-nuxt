@@ -7,10 +7,10 @@ import {
 	ListboxOptions,
 } from "@headlessui/vue";
 
-import { useI18n } from "#imports";
-import { type Locale, locales, type Schema } from "~/config/i18n.config";
+import { useI18n } from "@/lib/i18n/use-i18n";
+import { type Locale, locales } from "~/config/i18n.config";
 
-const { locale, setLocale, t } = useI18n<Schema, Locale>();
+const { locale, setLocale, t } = useI18n();
 
 function onChangeLanguage(locale: Locale) {
 	setLocale(locale);

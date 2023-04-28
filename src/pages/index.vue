@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import MainContent from "@/components/main-content.vue";
 import PageTitle from "@/components/page-title.vue";
+import { useI18n } from "@/lib/i18n/use-i18n";
 import { ContentRenderer } from "#components";
-import { definePageMeta, queryContent, useAsyncData, useI18n } from "#imports";
-import { type Locale, type Schema } from "~/config/i18n.config";
+import { definePageMeta, queryContent, useAsyncData } from "#imports";
 
 definePageMeta({
 	title: "pages.index.title",
 });
 
-const { locale, t } = useI18n<Schema, Locale>();
+const { locale, t } = useI18n();
 
 const content = await useAsyncData("pages.index", () => {
 	return queryContent("/").locale(locale.value).findOne();

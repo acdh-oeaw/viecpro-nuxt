@@ -1,9 +1,8 @@
 <script lang="ts" setup>
+import { useI18n } from "@/lib/i18n/use-i18n";
 import { NuxtLink } from "#components";
-import { useI18n } from "#imports";
-import { type Locale, type Schema } from "~/config/i18n.config";
 
-const { t } = useI18n<Schema, Locale>();
+const { t } = useI18n();
 
 const id = "main-content";
 const hash = "#" + id;

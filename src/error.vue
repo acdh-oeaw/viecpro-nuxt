@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import MainContent from "@/components/main-content.vue";
 import PageTitle from "@/components/page-title.vue";
-import { clearError, definePageMeta, useI18n } from "#imports";
-import { type Locale, type Schema } from "~/config/i18n.config";
+import { useI18n } from "@/lib/i18n/use-i18n";
+import { clearError, definePageMeta } from "#imports";
 
 definePageMeta({
 	title: "pages.error.title",
@@ -16,7 +16,7 @@ function handleError() {
 	clearError({ redirect: "/" });
 }
 
-const { t } = useI18n<Schema, Locale>();
+const { t } = useI18n();
 </script>
 
 <template>

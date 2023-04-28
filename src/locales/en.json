@@ -1,7 +1,7 @@
 {
 	"common": {
 		"collection": "Collection",
-		"main": "Main",
+		"main-navigation": "Main",
 		"pagination": "Pagination",
 		"reset": "Reset",
 		"search": "Search",

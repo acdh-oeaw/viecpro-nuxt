@@ -3,15 +3,15 @@ import { request } from "@stefanprobst/request";
 
 import MainContent from "@/components/main-content.vue";
 import PageTitle from "@/components/page-title.vue";
-import { definePageMeta, useAsyncData, useI18n } from "#imports";
-import { type Locale, type Schema } from "~/config/i18n.config";
+import { useI18n } from "@/lib/i18n/use-i18n";
+import { definePageMeta, useAsyncData } from "#imports";
 import { createImprintUrl } from "~/config/imprint.config";
 
 definePageMeta({
 	title: "pages.imprint.title",
 });
 
-const { locale, t } = useI18n<Schema, Locale>();
+const { locale, t } = useI18n();
 
 const imprint = await useAsyncData("pages.imprint", () => {
 	const url = createImprintUrl(locale.value);

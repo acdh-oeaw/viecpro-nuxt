@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import MainContent from "@/components/main-content.vue";
 import PageTitle from "@/components/page-title.vue";
-import { definePageMeta, useHead, useI18n } from "#imports";
-import { type Locale, type Schema } from "~/config/i18n.config";
+import { useI18n } from "@/lib/i18n/use-i18n";
+import { definePageMeta, useHead } from "#imports";
 
 definePageMeta({
 	title: "pages.page-not-found.title",
 });
 
-const { t } = useI18n<Schema, Locale>();
+const { t } = useI18n();
 
 useHead({
 	meta: [{ name: "robots", content: "noindex" }],

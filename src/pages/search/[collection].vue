@@ -21,11 +21,11 @@ import {
 
 import MainContent from "@/components/main-content.vue";
 import PageTitle from "@/components/page-title.vue";
+import { useI18n } from "@/lib/i18n/use-i18n";
 import { type Collection, collections } from "@/lib/search/collections.config";
 import { createSearchClient } from "@/lib/search/create-search-client";
 import { getPrefixedCollection } from "@/lib/search/get-prefixed-collection";
-import { definePageMeta, useI18n, useRoute, useRouter } from "#imports";
-import { type Locale, type Schema } from "~/config/i18n.config";
+import { definePageMeta, useRoute, useRouter } from "#imports";
 
 definePageMeta({
 	title: "pages.search.title",
@@ -34,7 +34,7 @@ definePageMeta({
 	},
 });
 
-const { t } = useI18n<Schema, Locale>();
+const { t } = useI18n();
 
 const router = useRouter();
 const route = useRoute();
