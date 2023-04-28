@@ -30,14 +30,14 @@ export default defineNuxtConfig({
 		baseUrl: env.VITE_APP_BASE_URL,
 		defaultLocale,
 		detectBrowserLanguage: {
-			// redirectOn: "root",
+			redirectOn: "root",
 			useCookie: false,
 		},
 		langDir: "./locales",
 		lazy: true,
 		locales: Object.values(locales),
-		strategy: "prefix_except_default",
-		// strategy: "prefix",
+		// strategy: "prefix_except_default",
+		strategy: "prefix",
 		vueI18n: {
 			fallbackLocale: defaultLocale,
 			legacy: false,
