@@ -25,7 +25,10 @@ definePageMeta({
 			<div
 				class="mx-auto mt-40 flex w-fit flex-col justify-center border-b-4 pb-4 text-center text-5xl text-primary-100 lg:flex-row"
 			>
-				<p class="pr-2 font-black">Der Wiener Hof.</p>
+				<p class="font-black">
+					Der Wiener Hof
+					<span class="hidden pr-2 lg:inline-block">.</span>
+				</p>
 				<p class="pt-4 font-sans text-3xl font-extralight lg:pt-0 lg:text-5xl">
 					Ein prosopographisches Portal
 				</p>
@@ -158,8 +161,6 @@ definePageMeta({
 						<a href="mailto:viecpro@oeaw.ac.at">viecpro@oeaw.ac.at</a>
 						.
 					</p>
-					<!-- slot for additional content -->
-					<slot></slot>
 				</div>
 			</div>
 		</div>
