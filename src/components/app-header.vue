@@ -1,20 +1,29 @@
 <script lang="ts" setup>
+import { computed } from "vue";
+
 import { useI18n } from "@/composables/use-i18n";
 import { type NuxtLinkProps } from "#app";
 import { NuxtLink } from "#components";
+import { useLocalePath } from "#imports";
 
 const { t } = useI18n();
+const localePath = useLocalePath();
 
 type NavLink = {
 	href: NuxtLinkProps["href"];
 	label: string;
 };
 
-const links = {
-	home: { href: { path: "/" }, label: t("pages.home.label") },
-	search: { href: { path: "/search" }, label: t("pages.search.label") },
-	documentation: { href: { path: "/documentation" }, label: t("pages.documentation.label") },
-} satisfies Record<string, NavLink>;
+const links = computed(() => {
+	return {
+		home: { href: { path: localePath("/") }, label: t("pages.home.label") },
+		search: { href: { path: localePath("/search") }, label: t("pages.search.label") },
+		documentation: {
+			href: { path: localePath("/documentation") },
+			label: t("pages.documentation.label"),
+		},
+	} satisfies Record<string, NavLink>;
+});
 </script>
 
 <template>
