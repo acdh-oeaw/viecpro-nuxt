@@ -33,12 +33,12 @@ export const metadata: Record<Locale, Metadata> = {
 		shortTitle: "VieCPro",
 		description: "The Viennese Court. A prosopographical portal.",
 		logo: {
-			path: "./public/assets/images/logo.svg",
+			path: "./public/assets/images/logo-acdh.svg",
 			fit: "contain",
 			maskable: false,
 		},
 		image: {
-			path: "./public/assets/images/logo.svg",
+			path: "./public/assets/images/logo-acdh.svg",
 			fit: "contain",
 		},
 		twitter: {
@@ -56,12 +56,12 @@ export const metadata: Record<Locale, Metadata> = {
 		shortTitle: "VieCPro",
 		description: "The Viennese Court. A prosopographical portal.",
 		logo: {
-			path: "./public/assets/images/logo.svg",
+			path: "./public/assets/images/logo-acdh.svg",
 			fit: "contain",
 			maskable: false,
 		},
 		image: {
-			path: "./public/assets/images/logo.svg",
+			path: "./public/assets/images/logo-acdh.svg",
 			fit: "contain",
 		},
 		twitter: {
