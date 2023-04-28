@@ -1,8 +1,15 @@
 <script lang="ts" setup>
 import MainContent from "@/components/main-content.vue";
-import { definePageMeta, useRouter } from "#imports";
+import { useI18n } from "@/composables/use-i18n";
+import { computed, definePageMeta, useRouter } from "#imports";
 
+const { locale } = useI18n();
 const router = useRouter();
+
+const prefixedRoute = computed(() => {
+	return `/${locale.value}/`;
+});
+
 definePageMeta({
 	title: "pages.home.title",
 });
@@ -52,7 +59,7 @@ definePageMeta({
 					<div class="mx-auto mb-10 text-center">
 						<button
 							class="mt-10 rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-							@click="router.push('/search/Person')"
+							@click="router.push(prefixedRoute + 'search')"
 						>
 							Zur Datenbank
 						</button>
@@ -97,7 +104,7 @@ definePageMeta({
 					<div class="mb-20 w-full text-center xl:hidden">
 						<button
 							class="mt-14 rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-							@click="router.push('/search/Person')"
+							@click="router.push(prefixedRoute + 'search')"
 						>
 							Database
 						</button>
@@ -116,7 +123,7 @@ definePageMeta({
 					<div class="w-full text-center xl:hidden">
 						<button
 							class="mt-14 rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-							@click="router.push('/about')"
+							@click="router.push(prefixedRoute + 'documentation')"
 						>
 							Zur Dokumentation
 						</button>
@@ -128,13 +135,13 @@ definePageMeta({
 			>
 				<button
 					class="mt-10 rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-					@click="router.push('/search/Person')"
+					@click="router.push(prefixedRoute + 'search')"
 				>
 					Database
 				</button>
 				<button
 					class="mt-10 rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-					@click="router.push('/about')"
+					@click="router.push(prefixedRoute + 'documentation')"
 				>
 					Zur Dokumentation
 				</button>
