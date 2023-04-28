@@ -33,3 +33,6 @@ dist
 /public/**/apple-touch-icon.png
 /public/**/app.webmanifest
 /public/**/image.webp
+
+# notes
+DEV_NOTES.md
