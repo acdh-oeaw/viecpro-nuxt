@@ -19,8 +19,10 @@ const links = computed(() => {
 
 <template>
 	<header class="bg-primary-100 text-white">
-		<div class="mx-auto flex w-full max-w-container items-center justify-between gap-4 px-4 py-2">
-			<NuxtLink :aria-label="links.home.label" :href="links.home.href">
+		<div
+			class="mx-auto flex w-full max-w-container flex-wrap items-center justify-between gap-4 px-4 py-2"
+		>
+			<NuxtLink :aria-label="links.home.label" class="shrink-0" :href="links.home.href">
 				<img alt="" class="h-16" src="@/assets/images/logo-white.png" />
 			</NuxtLink>
 
