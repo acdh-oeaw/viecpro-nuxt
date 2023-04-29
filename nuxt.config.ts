@@ -13,6 +13,7 @@ export default defineNuxtConfig({
 	components: false,
 	content: {
 		defaultLocale,
+		// docuemntDriven: true,
 		locales: Object.keys(locales),
 		markdown: {
 			anchorLinks: false,
