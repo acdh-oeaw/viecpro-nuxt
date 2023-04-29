@@ -1,6 +1,6 @@
 <template>
 	<footer>
-		<div class="mx-auto grid w-full max-w-container grid-cols-4 gap-4 px-4 py-2">
+		<div class="mx-auto grid w-full max-w-container grid-cols-5 gap-4 px-4 py-2">
 			<div>
 				<div>
 					<span>Österreichische Akademie der Wissenschaften</span>
@@ -19,11 +19,15 @@
 			</div>
 
 			<div>
-				<img alt="" src="/assets/images/logo-fwf.svg" />
+				<img alt="" src="/assets/images/logo-acdh-ch.svg" />
 			</div>
 
 			<div>
 				<img alt="" src="/assets/images/logo-oeaw.svg" />
+			</div>
+
+			<div>
+				<img alt="" src="/assets/images/logo-fwf.svg" />
 			</div>
 		</div>
 	</footer>
