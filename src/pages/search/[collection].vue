@@ -1,13 +1,6 @@
 <script lang="ts" setup>
 import "@/styles/search.css";
 
-import {
-	Listbox,
-	ListboxButton,
-	ListboxLabel,
-	ListboxOption,
-	ListboxOptions,
-} from "@headlessui/vue";
 import { history } from "instantsearch.js/es/lib/routers";
 import { simple } from "instantsearch.js/es/lib/stateMappings";
 import { computed } from "vue";
@@ -21,6 +14,7 @@ import {
 
 import MainContent from "@/components/main-content.vue";
 import PageTitle from "@/components/page-title.vue";
+import SingleSelect from "@/components/single-select.vue";
 import { useI18n } from "@/lib/i18n/use-i18n";
 import { type Collection, collections } from "@/lib/search/collections.config";
 import { createSearchClient } from "@/lib/search/create-search-client";
@@ -43,9 +37,15 @@ const selectedCollection = computed(() => {
 	return route.params.collection as Collection;
 });
 
-function onChangeSelectedCollection(collection: Collection) {
-	router.push({ path: `/search/${collection}` });
+function onChangeSelectedCollection(collection: string) {
+	router.push({ path: `/search/${collection as Collection}` });
 }
+
+const items = computed(() => {
+	return Object.keys(collections).map((id) => {
+		return { id, label: t(`collections.${id}`, 10) };
+	});
+});
 
 const searchClient = createSearchClient();
 
@@ -69,19 +69,12 @@ const routing = {
 			<AisInstantSearch :index-name="indexName" :routing="routing" :search-client="searchClient">
 				<AisConfigure :hits-per-page.camel="25" />
 
-				<Listbox :model-value="selectedCollection" @update:model-value="onChangeSelectedCollection">
-					<ListboxLabel>{{ t("common.collection") }}</ListboxLabel>
-					<ListboxButton>{{ t(`collections.${selectedCollection}`, 10) }}</ListboxButton>
-					<ListboxOptions>
-						<ListboxOption
-							v-for="collection of Object.keys(collections)"
-							:key="collection"
-							:value="collection"
-						>
-							{{ t(`collections.${collection}`, 10) }}
-						</ListboxOption>
-					</ListboxOptions>
-				</Listbox>
+				<SingleSelect
+					:items="items"
+					:label="t('common.collection')"
+					:selected-key="selectedCollection"
+					@change-selection="onChangeSelectedCollection"
+				/>
 
 				<AisSearchBox
 					autofocus
