@@ -28,7 +28,9 @@ const links = computed(() => {
 				<nav :aria-label="t('common.main-navigation')">
 					<ul class="flex items-center gap-4" role="list">
 						<li v-for="(link, key) of links" :key="key">
-							<NuxtLink :href="link.href">{{ link.label }}</NuxtLink>
+							<NuxtLink class="aria-[current]:underline" :href="link.href">
+								{{ link.label }}
+							</NuxtLink>
 						</li>
 					</ul>
 				</nav>
