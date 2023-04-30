@@ -37,7 +37,7 @@ const links = computed(() => {
 					</ul>
 				</nav>
 
-				<LanguageToggle />
+				<LanguageToggle class="min-w-[8rem]" />
 			</div>
 		</div>
 	</header>
