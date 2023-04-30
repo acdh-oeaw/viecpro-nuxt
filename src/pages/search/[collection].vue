@@ -14,12 +14,12 @@ import {
 
 import MainContent from "@/components/main-content.vue";
 import PageTitle from "@/components/page-title.vue";
-import SingleSelect from "@/components/single-select.vue";
+import SearchCollectionSelect from "@/components/search-collection-select.vue";
 import { useI18n } from "@/lib/i18n/use-i18n";
 import { type Collection, collections } from "@/lib/search/collections.config";
 import { createSearchClient } from "@/lib/search/create-search-client";
 import { getPrefixedCollection } from "@/lib/search/get-prefixed-collection";
-import { definePageMeta, useRoute, useRouter } from "#imports";
+import { definePageMeta, useRoute } from "#imports";
 
 definePageMeta({
 	title: "pages.search.title",
@@ -30,21 +30,10 @@ definePageMeta({
 
 const { t } = useI18n();
 
-const router = useRouter();
 const route = useRoute();
 
 const selectedCollection = computed(() => {
 	return route.params.collection as Collection;
-});
-
-function onChangeSelectedCollection(collection: string) {
-	router.push({ path: `/search/${collection as Collection}` });
-}
-
-const items = computed(() => {
-	return Object.keys(collections).map((id) => {
-		return { id, label: t(`collections.${id}`, 10) };
-	});
 });
 
 const searchClient = createSearchClient();
@@ -69,12 +58,7 @@ const routing = {
 			<AisInstantSearch :index-name="indexName" :routing="routing" :search-client="searchClient">
 				<AisConfigure :hits-per-page.camel="25" />
 
-				<SingleSelect
-					:items="items"
-					:label="t('common.collection')"
-					:selected-key="selectedCollection"
-					@change-selection="onChangeSelectedCollection"
-				/>
+				<SearchCollectionSelect />
 
 				<AisSearchBox
 					autofocus
