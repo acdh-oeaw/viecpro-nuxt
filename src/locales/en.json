@@ -10,6 +10,7 @@
 		"switch-language": "Switch language"
 	},
 	"pages": {
+		"documentation": { "title": "Documentation" },
 		"index": { "title": "Home" },
 		"imprint": { "title": "Imprint" },
 		"search": { "title": "Search" },

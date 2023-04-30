@@ -10,6 +10,7 @@
 		"switch-language": "Sprache ändern"
 	},
 	"pages": {
+		"documentation": { "title": "Dokumentation" },
 		"index": { "title": "Startseite" },
 		"imprint": { "title": "Impressum" },
 		"search": { "title": "Suche" },

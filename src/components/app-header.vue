@@ -11,6 +11,7 @@ const links = computed(() => {
 	return {
 		home: { href: { path: "/" }, label: t("pages.index.title") },
 		search: { href: { path: "/search/persons" }, label: t("pages.search.title") },
+		documentation: { href: { path: "/documentation" }, label: t("pages.documentation.title") },
 	};
 });
 </script>
