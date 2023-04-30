@@ -14,27 +14,24 @@ import {
 
 import MainContent from "@/components/main-content.vue";
 import PageTitle from "@/components/page-title.vue";
-import SearchCollectionSelect from "@/components/search-collection-select.vue";
+import CollectionSelect from "@/components/search/collection-select.vue";
 import { useI18n } from "@/lib/i18n/use-i18n";
-import { type Collection, collections } from "@/lib/search/collections.config";
 import { createSearchClient } from "@/lib/search/create-search-client";
 import { getPrefixedCollection } from "@/lib/search/get-prefixed-collection";
-import { definePageMeta, useRoute } from "#imports";
+import { isCollection } from "@/lib/search/is-collection";
+import { useCollection } from "@/lib/search/use-collection";
+import { definePageMeta } from "#imports";
 
 definePageMeta({
 	title: "pages.search.title",
 	validate(route) {
-		return Object.keys(collections).includes(route.params.collection as string);
+		return isCollection(route.params.collection);
 	},
 });
 
 const { t } = useI18n();
 
-const route = useRoute();
-
-const selectedCollection = computed(() => {
-	return route.params.collection as Collection;
-});
+const selectedCollection = useCollection();
 
 const searchClient = createSearchClient();
 
@@ -58,7 +55,7 @@ const routing = {
 			<AisInstantSearch :index-name="indexName" :routing="routing" :search-client="searchClient">
 				<AisConfigure :hits-per-page.camel="25" />
 
-				<SearchCollectionSelect />
+				<CollectionSelect />
 
 				<AisSearchBox
 					autofocus
