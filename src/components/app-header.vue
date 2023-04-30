@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 
+import LocaleSwitch from "@/components/locale-switch.vue";
 import { useI18n } from "@/composables/use-i18n";
 import { type NuxtLinkProps } from "#app";
 import { NuxtLink } from "#components";
@@ -19,7 +20,7 @@ const links = computed(() => {
 		home: { href: { path: localePath("/") }, label: t("pages.home.label") },
 		search: { href: { path: localePath("/search") }, label: t("pages.search.label") },
 		documentation: {
-			href: { path: localePath("/documentation") },
+			href: { path: localePath("/documentation/project") },
 			label: t("pages.documentation.label"),
 		},
 	} satisfies Record<string, NavLink>;
@@ -35,16 +36,18 @@ const links = computed(() => {
 				<span class="sr-only">{{ links.home.label }}</span>
 				<img alt="" class="h-20" src="@/assets/images/logo-white.png" />
 			</NuxtLink>
-
-			<nav :aria-label="t('common.main-navigation')">
-				<ul class="flex flex-wrap gap-x-4" role="list">
-					<li v-for="(link, key) of links" :key="key">
-						<NuxtLink :href="link.href">
-							{{ link.label }}
-						</NuxtLink>
-					</li>
-				</ul>
-			</nav>
+			<div class="flex">
+				<nav :aria-label="t('common.main-navigation')">
+					<ul class="flex flex-wrap gap-x-4" role="list">
+						<li v-for="(link, key) of links" :key="key">
+							<NuxtLink :href="link.href">
+								{{ link.label }}
+							</NuxtLink>
+						</li>
+					</ul>
+				</nav>
+				<LocaleSwitch></LocaleSwitch>
+			</div>
 		</div>
 	</header>
 </template>

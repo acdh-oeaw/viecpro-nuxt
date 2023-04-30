@@ -6,6 +6,7 @@ export const locales = {
 };
 
 export type Locale = keyof typeof locales;
+export type Locales = typeof locales.de;
 
 export const defaultLocale: Locale = "de";
 
