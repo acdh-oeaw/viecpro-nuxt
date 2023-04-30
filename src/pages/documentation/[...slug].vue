@@ -8,8 +8,8 @@ const { locale } = useI18n();
 definePageMeta({
 	title: "pages.documentation.title",
 });
-const route = useRoute();
 
+const route = useRoute();
 const currentDoc = computed(() => {
 	if (route.params.slug === undefined) {
 		return "/project";
