@@ -22,7 +22,8 @@ const currentDoc = computed(() => {
 <template>
 	<div class="mx-auto my-8 grid gap-10 xl:grid-cols-[auto_1fr]">
 		<nav>
-			<ContentNavigation v-slot="{ navigation }">
+			<ContentNavigation v-slot="{ navigation }" :query="{ where: [{ _locale: locale }] }">
+				<!-- :where="{ _locale: locale }" -->
 				<ul class="w-fit rounded bg-gray-200 py-3 pl-6 pr-14 text-lg font-black">
 					<li v-for="link of navigation" :key="link._path">
 						<NuxtLink :to="`/${locale}/documentation${link._path}`">{{ link.title }}</NuxtLink>

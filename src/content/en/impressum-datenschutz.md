@@ -1,3 +1,5 @@
+# Imprint | Data Protection | Privacy
+
 # Legal disclosure according to §§ 24, 25 Austrian media law and § 5 E-Commerce law:\*\*
 
 **Media owner, publisher, responsible for content and editorial office, service provider: **
