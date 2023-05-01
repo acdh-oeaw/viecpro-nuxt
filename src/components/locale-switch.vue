@@ -3,14 +3,12 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headless
 import { type Ref } from "vue";
 import { ref, watchEffect } from "vue";
 
+// TODO: GP: resolve these imports with correct typing, see also note in i18n.config
 import { useI18n } from "@/composables/use-i18n";
-import { type Locales } from "~/config/i18n.config";
+import { type LocaleObject, locales } from "~/config/i18n.config";
 
-const { locales, locale, setLocale } = useI18n();
-const initialLocale: Locales = locales.value.filter((l: Locales) => {
-	return l.code === locale.value;
-})[0];
-const selectedLocale: Ref<Locales> = ref(initialLocale);
+const { locale, setLocale } = useI18n();
+const selectedLocale: Ref<LocaleObject> = ref(locales[locale.value]);
 
 watchEffect(() => {
 	setLocale(selectedLocale.value.code);
@@ -27,7 +25,7 @@ watchEffect(() => {
 					v-for="loc in locales"
 					:key="loc.code"
 					:value="loc"
-					class="hover:cursor-pointer hover:text-primary-100"
+					class="hover:cursor-pointer hover:text-primary-400 hover:underline"
 				>
 					{{ loc.code }}
 				</ListboxOption>
