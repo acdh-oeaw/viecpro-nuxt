@@ -7,12 +7,12 @@ import { env } from "~/config/env.config";
 
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
 	server: {
-		apiKey: env.VITE_TYPESENSE_API_KEY,
+		apiKey: env.NUXT_PUBLIC_TYPESENSE_API_KEY,
 		nodes: [
 			{
-				host: env.VITE_TYPESENSE_HOST,
-				port: env.VITE_TYPESENSE_PORT,
-				protocol: env.VITE_TYPESENSE_PROTOCOL,
+				host: env.NUXT_PUBLIC_TYPESENSE_HOST,
+				port: env.NUXT_PUBLIC_TYPESENSE_PORT,
+				protocol: env.NUXT_PUBLIC_TYPESENSE_PROTOCOL,
 			},
 		],
 		cacheSearchResultsForSeconds: 2 * 60,

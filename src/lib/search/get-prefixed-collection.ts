@@ -13,5 +13,5 @@ export function getPrefixedCollection(collection: Collection): string {
 		relations: "Relations",
 	};
 
-	return [env.VITE_TYPESENSE_COLLECTION_PREFIX, map[collection]].join("");
+	return [env.NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX, map[collection]].join("");
 }

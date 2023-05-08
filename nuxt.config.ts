@@ -27,7 +27,7 @@ export default defineNuxtConfig({
 		public: "../public",
 	},
 	i18n: {
-		baseUrl: env.VITE_APP_BASE_URL,
+		baseUrl: env.NUXT_PUBLIC_APP_BASE_URL,
 		defaultLocale,
 		detectBrowserLanguage: {
 			redirectOn: "root",
