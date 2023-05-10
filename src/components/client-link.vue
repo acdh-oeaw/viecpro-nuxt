@@ -3,9 +3,11 @@ import { type NuxtLinkProps } from "#app";
 import { NuxtLink } from "#components";
 import { useLocalePath } from "#imports";
 
-const props = defineProps<
-	Omit<NuxtLinkProps, "href" | "to"> & Required<Pick<NuxtLinkProps, "href">>
->();
+interface ClientLinkProps extends Omit<NuxtLinkProps, "href" | "to"> {
+	href: NuxtLinkProps["href"];
+}
+
+const props = defineProps<ClientLinkProps>();
 
 const localePath = useLocalePath();
 </script>

@@ -77,4 +77,4 @@ export const metadata: Record<Locale, Metadata> = {
 
 export const manifestFileName = "app.webmanifest";
 
-export const openGraphImageName = "image.webp";
+export const openGraphImageName = "opengraph-image.png";
