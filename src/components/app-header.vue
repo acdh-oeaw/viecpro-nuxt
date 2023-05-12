@@ -36,7 +36,7 @@ const links = computed(() => {
 				<span class="sr-only">{{ links.home.label }}</span>
 				<img alt="" class="h-20" src="@/assets/images/logo-white.png" />
 			</NuxtLink>
-			<div class="flex">
+			<div class="flex items-center">
 				<nav :aria-label="t('common.main-navigation')">
 					<ul class="flex flex-wrap gap-x-4" role="list">
 						<li v-for="(link, key) of links" :key="key">
