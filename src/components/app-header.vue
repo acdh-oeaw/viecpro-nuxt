@@ -46,7 +46,7 @@ const links = computed(() => {
 						</li>
 					</ul>
 				</nav>
-				<LocaleSwitch></LocaleSwitch>
+				<LocaleSwitch />
 			</div>
 		</div>
 	</header>

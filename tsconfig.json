@@ -6,7 +6,6 @@
 		// @see https://github.com/vuejs/language-tools/issues/2622
 		"incremental": false,
 		"exactOptionalPropertyTypes": false,
-		"noPropertyAccessFromIndexSignature": false,
-		"noUncheckedIndexedAccess": true
+		"noPropertyAccessFromIndexSignature": false
 	}
 }

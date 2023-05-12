@@ -4,6 +4,6 @@ const id = "main-content";
 
 <template>
 	<main :id="id">
-		<slot></slot>
+		<slot />
 	</main>
 </template>

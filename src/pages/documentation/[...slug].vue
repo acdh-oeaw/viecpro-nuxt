@@ -34,7 +34,7 @@ const currentDoc = computed(() => {
 		<MainContent class="px-6 py-4">
 			<ContentQuery v-slot="{ data }" :path="currentDoc" :where="{ _locale: locale }" find="one">
 				<ContentRenderer :value="data">
-					<ContentRendererMarkdown :value="data" class="prose w-[60rem]"></ContentRendererMarkdown>
+					<ContentRendererMarkdown :value="data" class="prose w-[60rem]" />
 				</ContentRenderer>
 			</ContentQuery>
 		</MainContent>

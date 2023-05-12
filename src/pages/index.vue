@@ -18,10 +18,9 @@ definePageMeta({
 <template>
 	<MainContent>
 		<div class="flex flex-col">
-			<div class="h-2 w-full bg-primary-800"></div>
-
+			<div class="h-2 w-full bg-primary-800" />
 			<img src="/assets/images/background-court-ship.jpeg" alt="" class="w-full" />
-			<div class="h-2 w-full bg-primary-400"></div>
+			<div class="h-2 w-full bg-primary-400" />
 			<div
 				class="mx-auto mt-40 flex w-fit flex-col justify-center border-b-4 pb-4 text-center text-5xl text-primary-100 lg:flex-row"
 			>
@@ -78,7 +77,7 @@ definePageMeta({
 					<p class="mt-2">
 						... ist ein
 						<strong>Gemeinschaftsprodukt zweier Forschungsteams</strong>
-						, die vom
+						<span>, die vom</span>
 						<a href="https://www.oeaw.ac.at/foerderungen/innovationsfonds">ÖAW-Innovationsfonds</a>
 						(09/2020–03/2023) und dem Wissenschaftsfonds
 						<a href="https://www.fwf.ac.at/de/)">FWF</a>
