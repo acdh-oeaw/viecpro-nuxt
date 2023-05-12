@@ -12,10 +12,18 @@ export default defineNuxtConfig({
 	},
 	components: false,
 	content: {
-		defaultLocale,
+		// defaultLocale,
+		// docuemntDriven: true,
 		locales: Object.keys(locales),
 		markdown: {
 			anchorLinks: false,
+			remarkPlugins: [],
+			//  {
+			// 	"remark-mermaid": {
+			// 		simple: false,
+			// 	},
+			// },
+			// ["remark-mermaid",],
 		},
 	},
 	css: [
@@ -36,7 +44,8 @@ export default defineNuxtConfig({
 		langDir: "./locales",
 		lazy: true,
 		locales: Object.values(locales),
-		strategy: "prefix_except_default",
+		// strategy: "prefix_except_default",
+		strategy: "prefix",
 		vueI18n: {
 			fallbackLocale: defaultLocale,
 			legacy: false,

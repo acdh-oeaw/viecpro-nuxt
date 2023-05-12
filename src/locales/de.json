@@ -1,1 +1,21 @@
-{}
+{
+	"common": {
+		"imprint": "Impressum",
+		"main-navigation": "Haupt",
+		"skip-to-main-content": "Zum Hauptinhalt springen"
+	},
+	"pages": {
+		"home": {
+			"title": "Startseite",
+			"label": "Startseite"
+		},
+		"search": {
+			"title": "Datenbank",
+			"label": "Datenbank"
+		},
+		"documentation": {
+			"title": "Dokumentation",
+			"label": "Dokumentation"
+		}
+	}
+}
