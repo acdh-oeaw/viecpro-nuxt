@@ -17,13 +17,14 @@ export default defineNuxtConfig({
 		locales: Object.keys(locales),
 		markdown: {
 			anchorLinks: false,
-			remarkPlugins: [],
-			//  {
-			// 	"remark-mermaid": {
-			// 		simple: false,
-			// 	},
-			// },
-			// ["remark-mermaid",],
+			rehypePlugins: [
+				"rehype-mermaidjs",
+				//  {
+				// 	"remark-mermaid": {
+				// 		simple: false,
+				// 	},
+				// },
+			],
 		},
 	},
 	css: [

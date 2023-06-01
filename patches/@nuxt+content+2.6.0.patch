@@ -1,0 +1,14 @@
+diff --git a/node_modules/@nuxt/content/dist/runtime/markdown-parser/handler/code.mjs b/node_modules/@nuxt/content/dist/runtime/markdown-parser/handler/code.mjs
+index 9d1aa2b..43a4936 100644
+--- a/node_modules/@nuxt/content/dist/runtime/markdown-parser/handler/code.mjs
++++ b/node_modules/@nuxt/content/dist/runtime/markdown-parser/handler/code.mjs
+@@ -13,7 +13,8 @@ export default (h, node) => {
+       filename,
+       highlights,
+       meta: node.meta,
+-      code
++      code,
++      className: [`language-${language}`]
+     },
+     [h(node, "pre", {}, [h(node, "code", { __ignoreMap: "" }, [u("text", code)])])]
+   );
