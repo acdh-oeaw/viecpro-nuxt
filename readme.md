@@ -5,7 +5,10 @@ Frontend for the [APIS-Instance](https://viecpro-dev.acdh-dev.oeaw.ac.at/) of th
 
 ## How to run
 
-Prerequisites: [Node.js v18](https://nodejs.org/en/download)
+Prerequisites:
+
+- [Node.js v18](https://nodejs.org/en/download)
+- [pnpm](https://pnpm.io/installation)
 
 Set required environment variables in `.env`:
 
@@ -16,11 +19,11 @@ cp .env.example .env
 Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Run a development server on [http://localhost:3000](http://localhost:3000):
 
 ```bash
-npm run dev
+pnpm run dev
 ```

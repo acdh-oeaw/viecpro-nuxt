@@ -1,0 +1,85 @@
+{
+	"AppFooter": {
+		"links": {
+			"imprint": "Imprint"
+		},
+		"navigation-secondary": "Secondary"
+	},
+	"AppHeader": {
+		"links": {
+			"home": "Home",
+			"search": "Database",
+			"documentation": "Documentation"
+		},
+		"navigation-main": "Main"
+	},
+	"CollectionSelect": {
+		"select-collection": "Select collection",
+		"collections": {
+			"courts": "Courts",
+			"events": "Events",
+			"institutions": "Institutions",
+			"persons": "Persons",
+			"places": "Places",
+			"references": "References",
+			"relations": "Relations"
+		}
+	},
+	"DefaultLayout": {
+		"meta": {
+			"title": "VieCPro",
+			"description": "The Viennese Court. A prosopographical portal."
+		},
+		"skip-to-main-content": "Skip to main content"
+	},
+	"DocumentationPage": {
+		"meta": {
+			"title": "Documentation"
+		},
+		"title": "Documentation",
+		"navigation-documentation": "Documentation"
+	},
+	"ErrorPage": {
+		"meta": {
+			"title": "Error"
+		},
+		"title": "Something went wrong!",
+		"try-again": "Try again"
+	},
+	"ImprintPage": {
+		"meta": {
+			"title": "Imprint"
+		},
+		"title": "Imprint"
+	},
+	"IndexPage": {
+		"meta": {
+			"title": "Home"
+		},
+		"title": "Home"
+	},
+	"LocaleSwitcher": {
+		"languages": {
+			"english": "English",
+			"german": "German"
+		},
+		"current-locale": "Current language: {language}",
+		"switch-locale": "Switch to {language}"
+	},
+	"NotFoundPage": {
+		"meta": {
+			"title": "Page not found"
+		},
+		"title": "Page not found"
+	},
+	"SearchPage": {
+		"meta": {
+			"title": "Database"
+		},
+		"title": "Database",
+		"navigation-pagination": "Pagination",
+		"search": "Search",
+		"reset": "Reset",
+		"submit": "Submit"
+	}
+}

@@ -2,7 +2,7 @@
 	"recommendations": [
 		"bradlc.vscode-tailwindcss",
 		"dbaeumer.vscode-eslint",
-		"editorConfig.editorConfig",
+		"editorconfig.editorconfig",
 		"esbenp.prettier-vscode",
 		"mikestead.dotenv",
 		"stylelint.vscode-stylelint",

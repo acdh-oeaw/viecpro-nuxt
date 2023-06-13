@@ -1,0 +1,85 @@
+{
+	"AppFooter": {
+		"links": {
+			"imprint": "Impressum"
+		},
+		"navigation-secondary": "Sekundärnavigation"
+	},
+	"AppHeader": {
+		"links": {
+			"home": "Startseite",
+			"search": "Datenbank",
+			"documentation": "Dokumentation"
+		},
+		"navigation-main": "Hauptnavigation"
+	},
+	"CollectionSelect": {
+		"select-collection": "Sammlung auswählen",
+		"collections": {
+			"courts": "Hofstaate",
+			"events": "Ereignisse",
+			"institutions": "Institutionen",
+			"persons": "Personen",
+			"places": "Orte",
+			"references": "Quellenbelege",
+			"relations": "Beziehungen"
+		}
+	},
+	"DefaultLayout": {
+		"meta": {
+			"title": "VieCPro",
+			"description": "Der Wiener Hof. Ein prosopographisches Portal."
+		},
+		"skip-to-main-content": "Zum Hauptinhalt springen"
+	},
+	"DocumentationPage": {
+		"meta": {
+			"title": "Dokumentation"
+		},
+		"title": "Dokumentation",
+		"navigation-documentation": "Dokumentation"
+	},
+	"ErrorPage": {
+		"meta": {
+			"title": "Fehler"
+		},
+		"title": "Etwas ist schief gelaufen!",
+		"try-again": "Erneut versuchen"
+	},
+	"ImprintPage": {
+		"meta": {
+			"title": "Impressum"
+		},
+		"title": "Impressum"
+	},
+	"IndexPage": {
+		"meta": {
+			"title": "Startseite"
+		},
+		"title": "Startseite"
+	},
+	"LocaleSwitcher": {
+		"languages": {
+			"english": "Englisch",
+			"german": "Deutsch"
+		},
+		"current-locale": "Aktuelle Sprache: {language}",
+		"switch-locale": "Zu {language} wechseln"
+	},
+	"NotFoundPage": {
+		"meta": {
+			"title": "Seite nicht gefunden"
+		},
+		"title": "Seite nicht gefunden"
+	},
+	"SearchPage": {
+		"meta": {
+			"title": "Datenbank"
+		},
+		"title": "Datenbank",
+		"navigation-pagination": "Paginierung",
+		"search": "Suchen",
+		"reset": "Zurücksetzen",
+		"submit": "Absenden"
+	}
+}

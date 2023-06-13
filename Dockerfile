@@ -3,33 +3,37 @@
 # build
 FROM node:18-slim AS build
 
+RUN corepack enable
+
 RUN mkdir /app && chown -R node:node /app
 WORKDIR /app
 
 USER node
 
-ARG VITE_APP_BASE_URL
-ARG VITE_MATOMO_BASE_URL
-ARG VITE_MATOMO_ID
-ARG VITE_REDMINE_ID
-ARG VITE_TYPESENSE_API_KEY
-ARG VITE_TYPESENSE_PORT
-ARG VITE_TYPESENSE_PROTOCOL
-ARG VITE_TYPESENSE_HOST
-ARG VITE_TYPESENSE_COLLECTION_PREFIX
+COPY --chown=node:node .npmrc package.json pnpm-lock.yaml ./
 
-COPY --chown=node:node .npmrc package.json package-lock.json ./
-COPY --chown=node:node nuxt.config.ts tailwind.config.cjs tsconfig.json ./
-COPY --chown=node:node scripts ./scripts
+RUN pnpm fetch
+
+COPY --chown=node:node nuxt.config.ts tailwind.config.js tsconfig.json ./
 COPY --chown=node:node config ./config
 COPY --chown=node:node public ./public
 COPY --chown=node:node src ./src
 
-RUN npm install --ci --no-audit --no-fund
+ARG NUXT_PUBLIC_APP_BASE_URL
+ARG NUXT_PUBLIC_REDMINE_ID
+ARG NUXT_PUBLIC_MATOMO_BASE_URL
+ARG NUXT_PUBLIC_MATOMO_ID
+ARG NUXT_PUBLIC_TYPESENSE_API_KEY
+ARG NUXT_PUBLIC_TYPESENSE_PORT
+ARG NUXT_PUBLIC_TYPESENSE_PROTOCOL
+ARG NUXT_PUBLIC_TYPESENSE_HOST
+ARG NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX
+
+RUN pnpm install --frozen-lockfile --offline
 
 ENV NODE_ENV=production
 
-RUN npm run build
+RUN pnpm run build
 
 # serve
 FROM node:18-slim AS serve

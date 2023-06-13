@@ -11,7 +11,7 @@
 	background-color: theme(colors.neutral.50);
 	color: theme(colors.neutral.900);
 	font-size: theme(fontSize.base);
-	font-family: theme(fontFamily.sans);
+	font-family: theme(fontFamily.body);
 	overflow-wrap: break-word;
 	tab-size: 4;
 	block-size: 100%;
@@ -19,8 +19,34 @@
 	text-size-adjust: 100%;
 	text-rendering: optimizeLegibility;
 	-webkit-tap-highlight-color: transparent;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	overflow-y: auto;
+	block-size: 100%;
+}
+
+#__nuxt {
+	block-size: 100%;
+}
+
+:focus {
+	outline: none;
+}
+
+:focus-visible {
+	outline: 2px solid theme(colors.focus-ring);
+	outline-offset: 0;
+}
+
+a {
+	@apply transition;
+
+	text-underline-offset: 0.25em;
+}
+
+a:hover {
+	color: theme(colors.primary.foreground);
 }
 
 blockquote,
@@ -33,14 +59,8 @@ h6 {
 	text-wrap: balance;
 }
 
-body {
-	overflow: hidden;
-	block-size: 100%;
-}
-
-#__nuxt {
-	overflow-y: auto;
-	block-size: 100%;
+iframe {
+	border: 0;
 }
 
 [id] {

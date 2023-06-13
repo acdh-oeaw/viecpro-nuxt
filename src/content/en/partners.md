@@ -1,5 +1,0 @@
-# Cooperations
-
-# Dummy
-
-English Document

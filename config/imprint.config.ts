@@ -1,19 +1,17 @@
-import { createUrl } from "@stefanprobst/request";
+import { createUrl, createUrlSearchParams } from "@acdh-oeaw/lib";
 
-import { env } from "~/config/env.config";
 import { type Locale } from "~/config/i18n.config";
 
 const baseUrl = "https://shared.acdh.oeaw.ac.at";
 const pathname = "/acdh-common-assets/api/imprint.php";
-const redmineId = env.VITE_REDMINE_ID;
 
-export function createImprintUrl(locale: Locale): URL {
+export function createImprintUrl(locale: Locale, redmineId: string): URL {
 	return createUrl({
 		baseUrl,
 		pathname,
-		searchParams: {
+		searchParams: createUrlSearchParams({
 			outputLang: locale,
 			serviceID: redmineId,
-		},
+		}),
 	});
 }

@@ -4,12 +4,6 @@
 node_modules/
 .pnpm-store/
 
-# nuxt.js
-dist
-.nuxt/
-.nitro/
-.output/
-
 # logs
 *.log
 
@@ -23,17 +17,18 @@ dist
 .stylelintcache
 *.tsbuildinfo
 
+# vercel
+.vercel
+
 # misc
 .DS_Store
+.idea/
 
-# generated assets
-/public/**/favicon.ico
-/public/**/icon.svg
-/public/**/android-chrome-192x192.png
-/public/**/android-chrome-512x512.png
-/public/**/apple-touch-icon.png
-/public/**/app.webmanifest
-/public/**/image.webp
+# nuxt.js
+dist
+.nuxt/
+.nitro/
+.output/
 
 
 ## .dockerignore ##
