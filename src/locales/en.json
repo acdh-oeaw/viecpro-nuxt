@@ -15,7 +15,8 @@
 		},
 		"documentation": {
 			"title": "Documentation",
-			"label": "Documentation"
+			"label": "Documentation",
+			"contents": "Contents"
 		}
 	}
 }
