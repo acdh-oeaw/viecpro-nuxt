@@ -1,13 +1,27 @@
 <script lang="ts" setup>
 import MainContent from "@/components/main-content.vue";
 import { useI18n } from "@/composables/use-i18n";
-import { computed, definePageMeta, useRouter } from "#imports";
+import { type NuxtLinkProps } from "#app";
+import { NuxtLink } from "#components";
+import { computed, definePageMeta, useLocalePath } from "#imports";
 
-const { locale } = useI18n();
-const router = useRouter();
+const { t } = useI18n();
+const localePath = useLocalePath();
 
-const prefixedRoute = computed(() => {
-	return `/${locale.value}/`;
+type NavLink = {
+	href: NuxtLinkProps["href"];
+	label: string;
+};
+
+const links = computed(() => {
+	return {
+		home: { href: { path: localePath("/") }, label: t("pages.home.label") },
+		search: { href: { path: localePath("/search") }, label: t("pages.search.label") },
+		documentation: {
+			href: { path: localePath("/documentation/project") },
+			label: t("pages.documentation.label"),
+		},
+	} satisfies Record<string, NavLink>;
 });
 
 definePageMeta({
@@ -59,12 +73,12 @@ definePageMeta({
 						Funktionsträger*innen standen.
 					</p>
 					<div class="mx-auto mb-10 text-center">
-						<button
-							class="mt-10 rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-							@click="router.push(prefixedRoute + 'search')"
+						<NuxtLink
+							:href="links.search.href"
+							class="mt-10 inline-block rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
 						>
-							Zur Datenbank
-						</button>
+							{{ links.search.label }}
+						</NuxtLink>
 					</div>
 					<div>
 						<p class="mb-10 mt-4 text-center text-xl font-black text-primary-100">
@@ -104,12 +118,12 @@ definePageMeta({
 						(APIS).
 					</p>
 					<div class="mb-20 w-full text-center xl:hidden">
-						<button
-							class="mt-14 rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-							@click="router.push(prefixedRoute + 'search')"
+						<NuxtLink
+							:href="links.search.href"
+							class="mt-14 inline-block rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
 						>
-							Database
-						</button>
+							{{ links.search.label }}
+						</NuxtLink>
 					</div>
 				</div>
 				<div>
@@ -123,30 +137,30 @@ definePageMeta({
 						.
 					</p>
 					<div class="w-full text-center xl:hidden">
-						<button
-							class="mt-14 rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-							@click="router.push(prefixedRoute + 'documentation')"
+						<NuxtLink
+							:href="links.documentation.href"
+							class="mt-14 inline-block rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
 						>
-							Zur Dokumentation
-						</button>
+							{{ links.documentation.label }}
+						</NuxtLink>
 					</div>
 				</div>
 			</div>
 			<div
 				class="mx-auto mt-10 hidden max-w-[80rem] justify-between space-x-20 border-b-4 border-gray-200 pb-24 pl-20 pr-80 xl:flex"
 			>
-				<button
-					class="mt-10 rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-					@click="router.push(prefixedRoute + 'search')"
+				<NuxtLink
+					:href="links.search.href"
+					class="mt-10 inline-block rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
 				>
-					Database
-				</button>
-				<button
+					{{ links.search.label }}
+				</NuxtLink>
+				<NuxtLink
+					:href="links.documentation.href"
 					class="mt-10 rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-					@click="router.push(prefixedRoute + 'documentation')"
 				>
-					Zur Dokumentation
-				</button>
+					{{ links.documentation.label }}
+				</NuxtLink>
 			</div>
 			<div class="mx-auto mt-28 max-w-[50rem]">
 				<div class="rounded-lg bg-gray-100 p-8">
