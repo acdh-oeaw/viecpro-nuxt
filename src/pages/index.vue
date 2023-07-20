@@ -3,7 +3,7 @@ import MainContent from "@/components/main-content.vue";
 import { useI18n } from "@/composables/use-i18n";
 import { computed, definePageMeta, useRouter } from "#imports";
 
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 const router = useRouter();
 
 const prefixedRoute = computed(() => {
@@ -11,7 +11,7 @@ const prefixedRoute = computed(() => {
 });
 
 definePageMeta({
-	title: "pages.home.title",
+	title: t("pages.home.title"),
 });
 </script>
 
