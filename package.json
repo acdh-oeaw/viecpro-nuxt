@@ -33,6 +33,7 @@
 	"dependencies": {
 		"@fontsource/roboto-flex": "^4.5.5",
 		"@headlessui/vue": "^1.7.13",
+		"@heroicons/vue": "^2.0.18",
 		"@nuxt/image": "npm:@nuxt/image-edge",
 		"@nuxtjs/i18n": "8.0.0-beta.10",
 		"@stefanprobst/assert": "^1.0.3",
