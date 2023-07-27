@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import MainContent from "@/components/main-content.vue";
-import Tooltip from "@/components/tooltip.vue";
 import { useI18n } from "@/composables/use-i18n";
 import { computed, definePageMeta, useRouter } from "#imports";
 
@@ -30,8 +29,7 @@ definePageMeta({
 					<span class="hidden pr-2 lg:inline-block">.</span>
 				</p>
 				<p class="pt-4 font-sans text-3xl font-extralight lg:pt-0 lg:text-5xl">
-					Ein prosopographisches
-					<Tooltip content="Längerer text" use-icon>Portal</Tooltip>
+					Ein prosopographisches Portal
 				</p>
 			</div>
 		</div>
