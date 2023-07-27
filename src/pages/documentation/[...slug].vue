@@ -7,8 +7,10 @@ import { ContentQuery, ContentRenderer, ContentRendererMarkdown } from "#compone
 import { computed, definePageMeta, useRoute } from "#imports";
 
 const { locale, t } = useI18n();
+
+const title = t("pages.documentation.title");
 definePageMeta({
-	title: t("pages.documentation.title"),
+	title,
 });
 
 const route = useRoute();
