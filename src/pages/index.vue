@@ -25,7 +25,7 @@ const links = computed(() => {
 });
 
 definePageMeta({
-	title: "pages.home.title",
+	title: t("pages.home.title"),
 });
 </script>
 

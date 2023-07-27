@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import MainContent from "@/components/main-content.vue";
+import { useI18n } from "@/composables/use-i18n";
 import { definePageMeta } from "#imports";
 
+const { t } = useI18n();
+
 definePageMeta({
-	title: "pages.search.title",
+	title: t("pages.search.title"),
 });
 </script>
 
