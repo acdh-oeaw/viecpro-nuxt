@@ -24,9 +24,8 @@ const links = computed(() => {
 	} satisfies Record<string, NavLink>;
 });
 
-const title = t("pages.home.title");
 definePageMeta({
-	title,
+	title: "pages.home.title",
 });
 </script>
 

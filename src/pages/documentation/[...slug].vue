@@ -8,9 +8,8 @@ import { computed, definePageMeta, useRoute } from "#imports";
 
 const { locale, t } = useI18n();
 
-const title = t("pages.documentation.title");
 definePageMeta({
-	title,
+	title: "pages.documentation.title",
 });
 
 const route = useRoute();
