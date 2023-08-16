@@ -13,18 +13,11 @@ export default defineNuxtConfig({
 	components: false,
 	content: {
 		// defaultLocale,
-		// docuemntDriven: true,
+		// documentDriven: true,
 		locales: Object.keys(locales),
 		markdown: {
 			anchorLinks: false,
-			rehypePlugins: [
-				"rehype-mermaidjs",
-				//  {
-				// 	"remark-mermaid": {
-				// 		simple: false,
-				// 	},
-				// },
-			],
+			rehypePlugins: [["rehype-mermaidjs", { strategy: "img-svg" }]],
 		},
 	},
 	css: [
