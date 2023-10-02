@@ -3,17 +3,12 @@ import { computed } from "vue";
 
 import LocaleSwitch from "@/components/locale-switch.vue";
 import { useI18n } from "@/composables/use-i18n";
-import { type NuxtLinkProps } from "#app";
+import { type NavLink } from "@/lib/types";
 import { NuxtLink } from "#components";
 import { useLocalePath } from "#imports";
 
 const { t } = useI18n();
 const localePath = useLocalePath();
-
-type NavLink = {
-	href: NuxtLinkProps["href"];
-	label: string;
-};
 
 const links = computed(() => {
 	return {

@@ -1,6 +1,48 @@
 <script lang="ts" setup>
+import { CalendarRange, MapPin, School2, ScrollText, User, Users } from "lucide-vue-next";
+
 import MainContent from "@/components/main-content.vue";
-import { definePageMeta } from "#imports";
+import { type NavLink } from "@/lib/types";
+import { NuxtLink } from "#components";
+import { computed, definePageMeta, useI18n, useLocalePath } from "#imports";
+
+const { t } = useI18n();
+const localePath = useLocalePath();
+
+const links = computed(() => {
+	return {
+		courts: {
+			href: { path: localePath("/search/courts") },
+			label: t("pages.searchviews.courts.label"),
+			icon: Users,
+		},
+		references: {
+			href: { path: localePath("/search/references") },
+			label: t("pages.searchviews.references.label"),
+			icon: ScrollText,
+		},
+		places: {
+			href: { path: localePath("/search/places") },
+			label: t("pages.searchviews.places.label"),
+			icon: MapPin,
+		},
+		people: {
+			href: { path: localePath("/search/persons") },
+			label: t("pages.searchviews.people.label"),
+			icon: User,
+		},
+		institutions: {
+			href: { path: localePath("/search/institutions") },
+			label: t("pages.searchviews.institutions.label"),
+			icon: School2,
+		},
+		events: {
+			href: { path: localePath("/search/events") },
+			label: t("pages.searchviews.events.label"),
+			icon: CalendarRange,
+		},
+	} satisfies Record<string, NavLink>;
+});
 
 definePageMeta({
 	title: "pages.search.title",
@@ -9,6 +51,27 @@ definePageMeta({
 
 <template>
 	<MainContent>
-		<div>Database Page</div>
+		<div class="grid grid-cols-[1fr_5fr_1fr] gap-4">
+			<div class="m-4 flex flex-col gap-4">
+				<NuxtLink
+					v-for="link in links"
+					:key="link.label"
+					:to="link.href"
+					class="group flex items-center gap-4 rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
+					:class="$route.path === link.href.path && 'bg-slate-200'"
+				>
+					<component
+						:is="link.icon"
+						v-if="link.icon"
+						class="transition group-hover:scale-110 group-active:scale-90"
+					/>
+					{{ link.label }}
+				</NuxtLink>
+			</div>
+			<div class="mx-auto max-w-container">
+				<NuxtPage />
+			</div>
+			<div />
+		</div>
 	</MainContent>
 </template>

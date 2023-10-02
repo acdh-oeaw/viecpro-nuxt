@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ChevronRightIcon } from "@heroicons/vue/24/outline";
+import { ChevronRight } from "lucide-vue-next";
 
 import MainContent from "@/components/main-content.vue";
 import { useI18n } from "@/composables/use-i18n";
@@ -36,7 +36,7 @@ const currentDoc = computed(() => {
 							:to="`/${locale}/documentation${link._path}`"
 							class="flex w-full items-center gap-1 rounded px-2 hover:bg-gray-300 active:bg-gray-400"
 						>
-							<ChevronRightIcon class="h-4 w-4" />
+							<ChevronRight class="h-4 w-4" />
 							<span>
 								{{ link.title }}
 							</span>
