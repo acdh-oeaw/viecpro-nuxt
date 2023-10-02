@@ -17,6 +17,32 @@
 			"title": "Documentation",
 			"label": "Documentation",
 			"contents": "Contents"
+		},
+		"searchviews": {
+			"courts": {
+				"title": "Courts",
+				"label": "Courts"
+			},
+			"references": {
+				"title": "References",
+				"label": "References"
+			},
+			"places": {
+				"title": "Places",
+				"label": "Places"
+			},
+			"people": {
+				"title": "People",
+				"label": "People"
+			},
+			"institutions": {
+				"title": "Institutions",
+				"label": "Institutions"
+			},
+			"events": {
+				"title": "Events",
+				"label": "Events"
+			}
 		}
 	}
 }

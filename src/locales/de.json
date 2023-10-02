@@ -17,6 +17,32 @@
 			"title": "Dokumentation",
 			"label": "Dokumentation",
 			"contents": "Inhalt"
+		},
+		"searchviews": {
+			"courts": {
+				"title": "Hofstaaten",
+				"label": "Hofstaaten"
+			},
+			"references": {
+				"title": "Referenzen",
+				"label": "Referenzen"
+			},
+			"places": {
+				"title": "Orte",
+				"label": "Orte"
+			},
+			"people": {
+				"title": "Personen",
+				"label": "Personen"
+			},
+			"institutions": {
+				"title": "Institutionen",
+				"label": "Institutionen"
+			},
+			"events": {
+				"title": "Veranstaltungen",
+				"label": "Veranstaltungen"
+			}
 		}
 	}
 }
