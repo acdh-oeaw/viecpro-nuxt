@@ -10,6 +10,7 @@ const props = defineProps<{
 	queryBy: string;
 	collectionName: string;
 	koi: Array<string>;
+	facets?: Array<string>;
 }>();
 
 const route: RouteLocationNormalized = useRoute();
@@ -28,6 +29,7 @@ const search = async (collection: string, terms = "", page = 1, limit = 10) => {
 			query_by: props.queryBy,
 			per_page: limit,
 			page,
+			facet_by: props.facets?.join(","),
 			// max_facet_values: 500,
 		},
 		collection,
