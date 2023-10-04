@@ -11,7 +11,7 @@ export async function getDocuments<CollectionEntry extends Record<string, Docume
 }
 
 export async function getFacets<CollectionEntry extends Record<string, Document>>(
-	facets: string,
+	facet: string,
 	max = 500,
 	query: LocationQuery = {},
 	facetQuery = "",
@@ -26,8 +26,8 @@ export async function getFacets<CollectionEntry extends Record<string, Document>
 			per_page: 0,
 			query_by,
 			...query,
-			facet_by: facets,
-			facet_query: `${facets}:${facetQuery}`,
+			facet_by: facet,
+			facet_query: `${facet}:${facetQuery}`,
 			max_facet_values: max,
 		});
 }

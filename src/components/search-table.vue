@@ -4,6 +4,7 @@ import { type SearchResponse } from "typesense/lib/Typesense/Documents";
 import { computed, type ComputedRef, type Ref, ref, watch } from "vue";
 import { type LocationQuery, type RouteLocationNormalized, useRoute } from "vue-router";
 
+import FacetDisclosures from "@/components/facet-disclosures.vue";
 import { getDocuments } from "@/composables/use-ts-data";
 
 const props = defineProps<{
@@ -65,86 +66,96 @@ watch(
 </script>
 
 <template>
-	<div class="flex flex-col">
-		<div>
-			<label for="searchinput" class="sr-only">Search</label>
-			<input
-				id="searchinput"
-				v-model="input"
-				type="text"
-				class="my-2 h-12 w-full rounded p-2 shadow"
-				placeholder="Search..."
-				@input="
-					$router.replace({
+	<div class="grid grid-cols-[4fr_2fr]">
+		<div class="mx-auto flex max-w-container flex-col">
+			<div>
+				<label for="searchinput" class="sr-only">Search</label>
+				<input
+					id="searchinput"
+					v-model="input"
+					type="text"
+					class="my-2 h-12 w-full rounded p-2 shadow"
+					placeholder="Search..."
+					@input="
+						$router.replace({
+							query: {
+								...route.query,
+								q: input,
+								page: 1,
+							},
+						})
+					"
+				/>
+			</div>
+			<slot />
+			<div class="grid" :style="`grid-template-columns: repeat(${koi.length}, minmax(0, 1fr))`">
+				<div v-for="key in koi" :key="key" class="m-2">
+					{{ key }}
+				</div>
+				<template v-if="docs !== null">
+					<template v-for="hit in docs.hits">
+						<div v-for="key in koi" :key="key + hit.document.id" class="m-2">
+							{{ hit.document[key] }}
+						</div>
+					</template>
+				</template>
+			</div>
+			<div v-if="docs !== null" class="flex items-center justify-between">
+				<NuxtLink
+					v-if="pageNum > 1"
+					:to="{
 						query: {
 							...route.query,
-							q: input,
-							page: 1,
+							page: pageNum - 1,
 						},
-					})
-				"
-			/>
-		</div>
-		<slot />
-		<div class="grid" :style="`grid-template-columns: repeat(${koi.length}, minmax(0, 1fr))`">
-			<div v-for="key in koi" :key="key" class="m-2">
-				{{ key }}
-			</div>
-			<template v-if="docs !== null">
-				<template v-for="hit in docs.hits">
-					<div v-for="key in koi" :key="key + hit.document.id" class="m-2">
-						{{ hit.document[key] }}
+					}"
+				>
+					<div
+						class="cursor-pointer rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
+					>
+						<ChevronUp class="h-5 w-5 -rotate-90" />
+						<span class="sr-only">Previous Page</span>
 					</div>
-				</template>
-			</template>
-		</div>
-		<div v-if="docs !== null" class="flex items-center justify-between">
-			<NuxtLink
-				v-if="pageNum > 1"
-				:to="{
-					query: {
-						...route.query,
-						page: pageNum - 1,
-					},
-				}"
-			>
-				<div
-					class="cursor-pointer rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
-				>
+				</NuxtLink>
+				<div v-else class="cursor-not-allowed rounded border p-2 text-gray-400 transition">
 					<ChevronUp class="h-5 w-5 -rotate-90" />
-					<span class="sr-only">Previous Page</span>
+					<span class="sr-only">Previous Page, but you're already on page 1</span>
 				</div>
-			</NuxtLink>
-			<div v-else class="cursor-not-allowed rounded border p-2 text-gray-400 transition">
-				<ChevronUp class="h-5 w-5 -rotate-90" />
-				<span class="sr-only">Previous Page, but you're already on page 1</span>
-			</div>
-			<div>
-				showing {{ (docs.page - 1) * (docs.request_params.per_page || 10) + 1 }} -
-				{{ Math.min(docs.page * (docs.request_params.per_page || 10), docs.found) }} out of
-				{{ docs.found }}
-			</div>
-			<NuxtLink
-				v-if="pageNum * limitNum < Number(docs.found)"
-				:to="{
-					query: {
-						...route.query,
-						page: pageNum + 1,
-					},
-				}"
-			>
-				<div
-					class="cursor-pointer rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
+				<div>
+					showing {{ (docs.page - 1) * (docs.request_params.per_page || 10) + 1 }} -
+					{{ Math.min(docs.page * (docs.request_params.per_page || 10), docs.found) }} out of
+					{{ docs.found }}
+				</div>
+				<NuxtLink
+					v-if="pageNum * limitNum < Number(docs.found)"
+					:to="{
+						query: {
+							...route.query,
+							page: pageNum + 1,
+						},
+					}"
 				>
-					<ChevronUp class="h-5 w-5 rotate-90" />
-					<span class="sr-only">Next Page</span>
-				</div>
-			</NuxtLink>
+					<div
+						class="cursor-pointer rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
+					>
+						<ChevronUp class="h-5 w-5 rotate-90" />
+						<span class="sr-only">Next Page</span>
+					</div>
+				</NuxtLink>
 
-			<div v-else class="cursor-not-allowed rounded border p-2 transition">
-				<ChevronUp class="h-5 w-5 rotate-90 text-gray-400" />
-				<span class="sr-only">Next Page, but you're already on the last page</span>
+				<div v-else class="cursor-not-allowed rounded border p-2 transition">
+					<ChevronUp class="h-5 w-5 rotate-90 text-gray-400" />
+					<span class="sr-only">Next Page, but you're already on the last page</span>
+				</div>
 			</div>
+		</div>
+		<div v-if="docs">
+			<FacetDisclosures
+				:facets="docs.facet_counts"
+				:loading="loading"
+				:collection="collectionName"
+				:query-by="queryBy"
+			/>
 		</div>
 	</div>
 </template>
