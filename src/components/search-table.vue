@@ -21,7 +21,13 @@ const input: Ref<string> = ref(route.query.q === undefined ? "" : String(route.q
 
 const docs: Ref<SearchResponse<Record<string, Document>> | null> = ref(null);
 
-const search = async (collection: string, terms = "", page = 1, limit = 10) => {
+const search = async (
+	collection: string,
+	terms = "",
+	facetQuery: string | undefined,
+	page = 1,
+	limit = 10,
+) => {
 	loading.value = true;
 
 	const response = await getDocuments(
@@ -31,6 +37,7 @@ const search = async (collection: string, terms = "", page = 1, limit = 10) => {
 			per_page: limit,
 			page,
 			facet_by: props.facets?.join(","),
+			filter_by: facetQuery ?? "",
 			// max_facet_values: 500,
 		},
 		collection,
@@ -55,6 +62,7 @@ watch(
 		search(
 			props.collectionName,
 			String(query.q === undefined ? "" : query.q),
+			query.facets,
 			pageNum.value,
 			limitNum.value || 10,
 		);
@@ -93,8 +101,9 @@ watch(
 					{{ key }}
 				</div>
 				<template v-if="docs !== null">
-					<template v-for="hit in docs.hits">
-						<div v-for="key in koi" :key="key + hit.document.id" class="m-2">
+					<template v-for="hit in docs.hits" :key="hit.document.id">
+						<div class="border-t" :style="`grid-column: span ${koi.length} / span ${koi.length}`" />
+						<div v-for="key in koi" :key="key + hit.document.id" class="m-2 self-center">
 							{{ hit.document[key] }}
 						</div>
 					</template>
@@ -151,6 +160,7 @@ watch(
 		</div>
 		<div v-if="docs">
 			<FacetDisclosures
+				class="float-right m-4 max-w-sm"
 				:facets="docs.facet_counts"
 				:loading="loading"
 				:collection="collectionName"

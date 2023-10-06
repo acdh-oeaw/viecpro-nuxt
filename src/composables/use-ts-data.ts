@@ -17,12 +17,13 @@ export async function getFacets<CollectionEntry extends Record<string, Document>
 	facetQuery = "",
 	collection: string,
 	query_by: string,
+	q = "*",
 ): Promise<SearchResponse<CollectionEntry>> {
 	return useDefaultClient()
 		.collections<CollectionEntry>(collection)
 		.documents()
 		.search({
-			q: "*",
+			q,
 			per_page: 0,
 			query_by,
 			...query,

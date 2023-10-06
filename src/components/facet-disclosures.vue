@@ -2,8 +2,10 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { ChevronUp } from "lucide-vue-next";
 import { type SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
+import { useRoute, useRouter } from "vue-router";
 
 import FacetField from "@/components/facet-field.vue";
+import { facetObjectToTypesenseQuery, getFacetObjectFromURL } from "@/lib/facets";
 
 defineProps<{
 	facets: Array<SearchResponseFacetCountSchema<Record<string, Document>>> | undefined;
@@ -11,6 +13,22 @@ defineProps<{
 	collection: string;
 	queryBy: string;
 }>();
+const router = useRouter();
+const route = useRoute();
+
+const facetObject: { [key: string]: Array<string> } = getFacetObjectFromURL(true);
+
+const facetChange = (facets: Array<string>, field: string) => {
+	facetObject[field] = facets;
+
+	router.push({
+		query: {
+			...route.query,
+			page: 1,
+			facets: facetObjectToTypesenseQuery(facetObject),
+		},
+	});
+};
 </script>
 
 <template>
@@ -33,7 +51,9 @@ defineProps<{
 				:field-name="String(facet.field_name)"
 				:facets="facet.counts"
 				:collection="collection"
+				:selected="facetObject[facet.field_name] || []"
 				:query-by="queryBy"
+				@facet-change="(model) => facetChange(model, facet.field_name)"
 			/>
 		</DisclosurePanel>
 	</Disclosure>
