@@ -85,10 +85,14 @@ defineEmits(["facetChange"]);
 const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["counts"] | undefined> =
 	computed(() => {
 		const retArray = scopeFacet.value?.counts;
-		return retArray?.sort((a, b) => {
-			if (facetModel.value?.includes(b.value) ?? false) return 1;
-			return -1;
-		});
+		return retArray
+			?.sort((a, b) => {
+				return b.count - a.count;
+			})
+			.sort((a) => {
+				if (facetModel.value?.includes(a.value) ?? false) return -1;
+				return 0;
+			});
 	});
 </script>
 
