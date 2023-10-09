@@ -5,7 +5,10 @@ import { computed, type ComputedRef, type Ref, ref, watch } from "vue";
 import { type LocationQuery, type RouteLocationNormalized, useRoute } from "vue-router";
 
 import FacetDisclosures from "@/components/facet-disclosures.vue";
+import { useI18n } from "@/composables/use-i18n";
 import { getDocuments } from "@/composables/use-ts-data";
+
+const { t } = useI18n();
 
 const props = defineProps<{
 	queryBy: string;
@@ -36,7 +39,7 @@ const search = async (
 			query_by: props.queryBy,
 			per_page: limit,
 			page,
-			facet_by: props.facets?.join(","),
+			facet_by: props.facets ? props.facets.join(",") : "",
 			filter_by: facetQuery ?? "",
 			// max_facet_values: 500,
 		},
@@ -98,7 +101,7 @@ watch(
 			<slot />
 			<div class="grid" :style="`grid-template-columns: repeat(${koi.length}, minmax(0, 1fr))`">
 				<div v-for="key in koi" :key="key" class="m-2">
-					{{ key }}
+					{{ t(`collection-keys["${key}"]`) }}
 				</div>
 				<template v-if="docs !== null">
 					<template v-for="hit in docs.hits" :key="hit.document.id">

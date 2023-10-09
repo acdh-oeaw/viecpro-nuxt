@@ -7,6 +7,7 @@ const collectionName = "viecpro_events";
 const queryBy = "name";
 
 const koi = ["object_id", "name", "kind", "start_date", "end_date"];
+const facets = ["kind"];
 
 definePageMeta({
 	title: "pages.searchviews.events.title",
@@ -14,5 +15,7 @@ definePageMeta({
 </script>
 
 <template>
-	<SearchTable :collection-name="collectionName" :query-by="queryBy" :koi="koi">Events</SearchTable>
+	<SearchTable :collection-name="collectionName" :facets="facets" :query-by="queryBy" :koi="koi">
+		Events
+	</SearchTable>
 </template>

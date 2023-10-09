@@ -5,6 +5,7 @@ import { definePageMeta } from "#imports";
 const collectionName = "viecpro_references";
 const queryBy = "folio";
 const koi = ["id", "folio", "shortTitle"];
+const facets = ["shortTitle", "related_doc.name"];
 
 definePageMeta({
 	title: "pages.searchviews.courts.title",
@@ -12,5 +13,7 @@ definePageMeta({
 </script>
 
 <template>
-	<SearchTable :collection-name="collectionName" :query-by="queryBy" :koi="koi">Events</SearchTable>
+	<SearchTable :collection-name="collectionName" :facets="facets" :query-by="queryBy" :koi="koi">
+		Events
+	</SearchTable>
 </template>

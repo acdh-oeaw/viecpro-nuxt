@@ -44,5 +44,19 @@
 				"label": "Events"
 			}
 		}
+	},
+	"collection-keys": {
+		"object_id": "ID",
+		"name": "Name",
+		"kind": "Kind",
+		"start_date": "Start Date",
+		"end_date": "End Date",
+		"main_owner.name": "Owner",
+		"fullname": "Full Name",
+		"gender": "Gender",
+		"lat": "Lat",
+		"long": "Long",
+		"folio": "Folio",
+		"shortTitle": "Short Title"
 	}
 }

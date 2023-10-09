@@ -7,7 +7,10 @@ import { type ComputedRef, type Ref } from "vue";
 import { type RouteLocationNormalized, useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";
+import { useI18n } from "@/composables/use-i18n";
 import { getFacets } from "@/composables/use-ts-data";
+
+const { t } = useI18n();
 
 const props = defineProps<{
 	fieldName: string;
@@ -43,7 +46,7 @@ const loadFacets = async (max = 500) => {
 
 	loading.value = false;
 };
-const addToFacets = async (name: string, max = 500) => {
+const addToFacets = async (name: string, max = 1) => {
 	loading.value = true;
 	const results = await getFacets(
 		props.fieldName,
@@ -53,8 +56,8 @@ const addToFacets = async (name: string, max = 500) => {
 		props.collection,
 		props.queryBy,
 	);
-	if (results.facet_counts) {
-		scopeFacet.value?.counts.unshift(results.facet_counts[0]?.counts[0]);
+	if (results.facet_counts && scopeFacet.value) {
+		scopeFacet.value.counts.unshift(results.facet_counts[0]?.counts[0]);
 	}
 	loading.value = false;
 };
@@ -81,15 +84,18 @@ defineEmits(["facetChange"]);
 // add selected facet to model
 const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["counts"] | undefined> =
 	computed(() => {
-		let retArray = scopeFacet.value?.counts;
-		return retArray;
+		const retArray = scopeFacet.value?.counts;
+		return retArray?.sort((a, b) => {
+			if (facetModel.value?.includes(b.value) ?? false) return 1;
+			return -1;
+		});
 	});
 </script>
 
 <template>
 	<div class="flex flex-col">
 		<h1 class="flex items-center justify-between text-2xl">
-			{{ fieldName }}
+			{{ t(`collection-keys["${fieldName}"]`) }}
 		</h1>
 		<div
 			v-for="count in facetsWithSelected"
