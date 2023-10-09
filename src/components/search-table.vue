@@ -107,7 +107,12 @@ watch(
 					<template v-for="hit in docs.hits" :key="hit.document.id">
 						<div class="border-t" :style="`grid-column: span ${koi.length} / span ${koi.length}`" />
 						<div v-for="key in koi" :key="key + hit.document.id" class="m-2 self-center">
-							{{ hit.document[key] }}
+							<!-- TODO: fix this -->
+							{{
+								key.includes(".")
+									? hit.document[key.split(".")[0]][key.split(".")[1]]
+									: hit.document[key]
+							}}
 						</div>
 					</template>
 				</template>
