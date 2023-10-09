@@ -9,7 +9,6 @@ export async function getDocuments<CollectionEntry extends Record<string, Docume
 ): Promise<SearchResponse<CollectionEntry>> {
 	return useDefaultClient().collections<CollectionEntry>(collection).documents().search(query);
 }
-
 export async function getFacets<CollectionEntry extends Record<string, Document>>(
 	facet: string,
 	max = 500,
