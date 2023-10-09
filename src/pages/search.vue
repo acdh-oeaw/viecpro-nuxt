@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { CalendarRange, MapPin, School2, ScrollText, User, Users } from "lucide-vue-next";
+import { CalendarRange, FileText, MapPin, School2, User, Users } from "lucide-vue-next";
 
 import MainContent from "@/components/main-content.vue";
-import { type NavLink } from "@/lib/types";
+import { type NavLink } from "@/types/misc";
 import { NuxtLink } from "#components";
 import { computed, definePageMeta, useI18n, useLocalePath } from "#imports";
 
@@ -19,17 +19,17 @@ const links = computed(() => {
 		references: {
 			href: { path: localePath("/search/references") },
 			label: t("pages.searchviews.references.label"),
-			icon: ScrollText,
-		},
-		places: {
-			href: { path: localePath("/search/places") },
-			label: t("pages.searchviews.places.label"),
-			icon: MapPin,
+			icon: FileText,
 		},
 		people: {
 			href: { path: localePath("/search/persons") },
 			label: t("pages.searchviews.people.label"),
 			icon: User,
+		},
+		places: {
+			href: { path: localePath("/search/places") },
+			label: t("pages.searchviews.places.label"),
+			icon: MapPin,
 		},
 		institutions: {
 			href: { path: localePath("/search/institutions") },
@@ -51,8 +51,8 @@ definePageMeta({
 
 <template>
 	<MainContent>
-		<div class="grid grid-cols-[1fr_5fr_1fr] gap-4">
-			<div class="m-4 flex flex-col gap-4">
+		<div class="grid grid-cols-[2fr_6fr] gap-4">
+			<div class="m-4 flex max-w-sm flex-col gap-4">
 				<NuxtLink
 					v-for="link in links"
 					:key="link.label"
@@ -68,10 +68,9 @@ definePageMeta({
 					{{ link.label }}
 				</NuxtLink>
 			</div>
-			<div class="mx-auto max-w-container">
+			<div>
 				<NuxtPage />
 			</div>
-			<div />
 		</div>
 	</MainContent>
 </template>

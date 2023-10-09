@@ -44,5 +44,20 @@
 				"label": "Veranstaltungen"
 			}
 		}
+	},
+	"collection-keys": {
+		"object_id": "ID",
+		"id": "ID",
+		"name": "Name",
+		"kind": "Art",
+		"start_date": "Beginn",
+		"end_date": "Ende",
+		"main_owner.name": "Besitzer",
+		"fullname": "Voller Name",
+		"gender": "Geschlecht",
+		"lat": "Lat",
+		"long": "Long",
+		"folio": "Folio",
+		"shortTitle": "Titel (kurz)"
 	}
 }
