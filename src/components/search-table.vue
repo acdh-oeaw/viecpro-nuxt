@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import get from "lodash.get";
 import { ChevronUp } from "lucide-vue-next";
 import { type SearchResponse } from "typesense/lib/Typesense/Documents";
 import { computed, type ComputedRef, type Ref, ref, watch } from "vue";
@@ -99,7 +100,10 @@ watch(
 				/>
 			</div>
 			<slot />
-			<div class="grid" :style="`grid-template-columns: repeat(${koi.length}, minmax(0, 1fr))`">
+			<div
+				class="grid w-full"
+				:style="`grid-template-columns: repeat(${koi.length}, minmax(0, 1fr))`"
+			>
 				<div v-for="key in koi" :key="key" class="m-2">
 					{{ t(`collection-keys["${key}"]`) }}
 				</div>
@@ -107,12 +111,7 @@ watch(
 					<template v-for="hit in docs.hits" :key="hit.document.id">
 						<div class="border-t" :style="`grid-column: span ${koi.length} / span ${koi.length}`" />
 						<div v-for="key in koi" :key="key + hit.document.id" class="m-2 self-center">
-							<!-- TODO: fix this -->
-							{{
-								key.includes(".")
-									? hit.document[key.split(".")[0]][key.split(".")[1]]
-									: hit.document[key]
-							}}
+							{{ get(hit.document, key) }}
 						</div>
 					</template>
 				</template>
