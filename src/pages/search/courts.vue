@@ -6,7 +6,7 @@ const collectionName = "viecpro_courts";
 
 const queryBy = "name";
 
-const koi = ["object_id", "name", "kind", "start_date", "end_date", "main_owner.name"];
+const koi = ["id", "name", "kind", "start_date", "end_date", "main_owner.name"];
 const facets = ["main_owner.name", "kind"];
 
 definePageMeta({

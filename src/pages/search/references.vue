@@ -4,7 +4,7 @@ import { definePageMeta } from "#imports";
 
 const collectionName = "viecpro_references";
 const queryBy = "folio";
-const koi = ["id", "folio", "shortTitle"];
+const koi = ["id", "folio", "shortTitle", "related_doc.name"];
 const facets = ["shortTitle", "related_doc.name"];
 
 definePageMeta({

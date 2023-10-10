@@ -4,7 +4,7 @@ import { definePageMeta } from "#imports";
 
 const collectionName = "viecpro_persons";
 const queryBy = "name";
-const koi = ["object_id", "fullname", "gender", "start_date", "end_date"];
+const koi = ["id", "fullname", "gender", "start_date", "end_date"];
 const facets = ["name", "gender"];
 
 definePageMeta({

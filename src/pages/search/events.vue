@@ -6,7 +6,7 @@ const collectionName = "viecpro_events";
 
 const queryBy = "name";
 
-const koi = ["object_id", "name", "kind", "start_date", "end_date"];
+const koi = ["id", "name", "kind", "start_date", "end_date"];
 const facets = ["kind"];
 
 definePageMeta({
