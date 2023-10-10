@@ -51,6 +51,11 @@ const search = async (
 	loading.value = false;
 };
 
+// TODO: finde better solution
+const getDetailLink = (id: string) => {
+	return `/detail/${route.path.split("/")[3]}/${id}`;
+};
+
 const pageNum: ComputedRef<number> = computed(() => {
 	return Number(route.query.page) || 1;
 });
@@ -110,9 +115,16 @@ watch(
 				<template v-if="docs !== null">
 					<template v-for="hit in docs.hits" :key="hit.document.id">
 						<div class="border-t" :style="`grid-column: span ${koi.length} / span ${koi.length}`" />
-						<div v-for="key in koi" :key="key + hit.document.id" class="m-2 self-center">
+						<a
+							v-for="key in koi"
+							:key="key + hit.document.id"
+							class="m-2 self-center"
+							:href="
+								getDetailLink(String(hit.document.object_id || hit.document.id.replace(/\D/g, '')))
+							"
+						>
 							{{ get(hit.document, key) }}
-						</div>
+						</a>
 					</template>
 				</template>
 			</div>

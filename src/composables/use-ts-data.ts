@@ -9,6 +9,14 @@ export async function getDocuments<CollectionEntry extends Record<string, Docume
 ): Promise<SearchResponse<CollectionEntry>> {
 	return useDefaultClient().collections<CollectionEntry>(collection).documents().search(query);
 }
+
+export async function getDocument<CollectionEntry extends Record<string, Document>>(
+	collection: string,
+	id: string,
+): Promise<CollectionEntry> {
+	return useDefaultClient().collections<CollectionEntry>(collection).documents(id).retrieve();
+}
+
 export async function getFacets<CollectionEntry extends Record<string, Document>>(
 	facet: string,
 	max = 500,
