@@ -20,7 +20,5 @@ definePageMeta({
 		:cols="tableCols"
 		:query-by="queryBy"
 		:koi="koi"
-	>
-		Institutions
-	</SearchTable>
+	/>
 </template>

@@ -39,3 +39,10 @@ export async function getFacets<CollectionEntry extends Record<string, Document>
 			max_facet_values: max,
 		});
 }
+
+export async function getRelations<CollectionEntry extends Record<string, Document>>(
+	sourceId: string,
+	query_by: string,
+): Promise<SearchResponse<CollectionEntry>> {
+	return getDocuments({ q: sourceId, query_by }, "viecpro_relations");
+}

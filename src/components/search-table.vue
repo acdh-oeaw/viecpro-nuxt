@@ -157,9 +157,13 @@ watch(
 					<span class="sr-only">Previous Page, but you're already on page 1</span>
 				</div>
 				<div>
-					showing {{ (docs.page - 1) * (docs.request_params.per_page || 10) + 1 }} -
-					{{ Math.min(docs.page * (docs.request_params.per_page || 10), docs.found) }} out of
-					{{ docs.found }}
+					{{
+						t("ui.showing-results", {
+							first: (docs.page - 1) * (docs.request_params.per_page || 10) + 1,
+							last: Math.min(docs.page * (docs.request_params.per_page || 10), docs.found),
+							all: docs.found,
+						})
+					}}
 				</div>
 				<NuxtLink
 					v-if="pageNum * limitNum < Number(docs.found)"

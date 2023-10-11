@@ -132,7 +132,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 			class="flex cursor-pointer items-center justify-center gap-2 rounded p-1 transition hover:bg-slate-200 active:bg-slate-300"
 			@click="loadFacets()"
 		>
-			<span>show all... ({{ scopeFacet?.stats.total_values }} total)</span>
+			<span>{{ t("ui.show-all") }} ({{ scopeFacet?.stats.total_values }} total)</span>
 			<ChevronDown class="h-5 w-5" />
 		</button>
 	</div>

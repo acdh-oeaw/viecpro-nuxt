@@ -20,7 +20,5 @@ definePageMeta({
 		:query-by="queryBy"
 		:cols="tableCols"
 		:koi="koi"
-	>
-		People
-	</SearchTable>
+	/>
 </template>

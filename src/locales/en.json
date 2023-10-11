@@ -58,5 +58,11 @@
 		"long": "Long",
 		"folio": "Folio",
 		"shortTitle": "Short Title"
+	},
+	"ui": {
+		"showing-results": "Showing {first} - {last} out of {all}",
+		"show-all": "show all...",
+		"show-filters": "Show Filters...",
+		"hide-filters": "Hide Filters..."
 	}
 }

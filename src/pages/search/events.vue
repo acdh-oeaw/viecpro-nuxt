@@ -22,7 +22,5 @@ definePageMeta({
 		:query-by="queryBy"
 		:cols="tableCols"
 		:koi="koi"
-	>
-		Events
-	</SearchTable>
+	/>
 </template>
