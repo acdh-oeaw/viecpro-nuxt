@@ -9,13 +9,14 @@ import FacetDisclosures from "@/components/facet-disclosures.vue";
 import { useI18n } from "@/composables/use-i18n";
 import { getDocuments } from "@/composables/use-ts-data";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const props = defineProps<{
 	queryBy: string;
 	collectionName: string;
 	koi: Array<string>;
 	facets?: Array<string>;
+	cols?: string;
 }>();
 
 const route: RouteLocationNormalized = useRoute();
@@ -53,7 +54,8 @@ const search = async (
 
 // TODO: finde better solution
 const getDetailLink = (id: string) => {
-	return `/detail/${route.path.split("/")[3]}/${id}`;
+	const type = route.path.split("/")[3];
+	return `/${locale.value}/detail/${type}/${id}`;
 };
 
 const pageNum: ComputedRef<number> = computed(() => {
@@ -105,27 +107,32 @@ watch(
 				/>
 			</div>
 			<slot />
-			<div
-				class="grid w-full"
-				:style="`grid-template-columns: repeat(${koi.length}, minmax(0, 1fr))`"
-			>
-				<div v-for="key in koi" :key="key" class="m-2">
-					{{ t(`collection-keys["${key}"]`) }}
+			<div class="w-full">
+				<div class="grid" :class="cols">
+					<div v-for="key in koi" :key="key" class="m-2">
+						{{ t(`collection-keys["${key}"]`) }}
+					</div>
 				</div>
 				<template v-if="docs !== null">
-					<template v-for="hit in docs.hits" :key="hit.document.id">
-						<div class="border-t" :style="`grid-column: span ${koi.length} / span ${koi.length}`" />
-						<a
-							v-for="key in koi"
-							:key="key + hit.document.id"
-							class="m-2 self-center"
-							:href="
-								getDetailLink(String(hit.document.object_id || hit.document.id.replace(/\D/g, '')))
+					<div v-for="hit in docs.hits" :key="String(hit.document.id)" class="border-t py-1">
+						<NuxtLink
+							class="grid text-clip rounded transition hover:bg-slate-200 active:bg-slate-300"
+							:class="cols"
+							:to="
+								getDetailLink(
+									String(hit.document.object_id || String(hit.document.id)?.replace(/\D/g, '')),
+								)
 							"
 						>
-							{{ get(hit.document, key) }}
-						</a>
-					</template>
+							<div
+								v-for="key in koi"
+								:key="key + hit.document.id"
+								class="m-2 self-center overflow-auto"
+							>
+								{{ get(hit.document, key) }}
+							</div>
+						</NuxtLink>
+					</div>
 				</template>
 			</div>
 			<div v-if="docs !== null" class="flex items-center justify-between">
@@ -179,7 +186,7 @@ watch(
 		</div>
 		<div v-if="docs">
 			<FacetDisclosures
-				class="float-right m-4 max-w-sm"
+				class="float-right m-4 w-96 max-w-full"
 				:facets="docs.facet_counts"
 				:loading="loading"
 				:collection="collectionName"

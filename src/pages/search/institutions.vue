@@ -6,6 +6,7 @@ const collectionName = "viecpro_institutions";
 const queryBy = "name";
 const koi = ["id", "name", "kind", "start_date", "end_date"];
 const facets = ["kind"];
+const tableCols = "grid-cols-[2fr_3fr_3fr_2fr_2fr]";
 
 definePageMeta({
 	title: "pages.searchviews.courts.title",
@@ -13,7 +14,13 @@ definePageMeta({
 </script>
 
 <template>
-	<SearchTable :collection-name="collectionName" :facets="facets" :query-by="queryBy" :koi="koi">
+	<SearchTable
+		:collection-name="collectionName"
+		:facets="facets"
+		:cols="tableCols"
+		:query-by="queryBy"
+		:koi="koi"
+	>
 		Institutions
 	</SearchTable>
 </template>
