@@ -23,7 +23,7 @@ const currentDoc = computed(() => {
 </script>
 
 <template>
-	<div class="grid w-full lg:grid-cols-[1fr_3fr] lg:gap-10 xl:grid-cols-[1fr_2fr_1fr]">
+	<div class="grid w-full lg:grid-cols-[1fr_3fr] lg:gap-10 2xl:grid-cols-[1fr_2fr_1fr]">
 		<nav class="lg:justify-self-end">
 			<ContentNavigation v-slot="{ navigation }" :query="{ where: [{ _locale: locale }] }">
 				<!-- :where="{ _locale: locale }" -->

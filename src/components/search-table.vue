@@ -19,6 +19,8 @@ const props = defineProps<{
 	cols?: string;
 }>();
 
+const pageLimit = 25;
+
 const route: RouteLocationNormalized = useRoute();
 const loading: Ref<boolean> = ref(true);
 
@@ -31,7 +33,7 @@ const search = async (
 	terms = "",
 	facetQuery: string | undefined,
 	page = 1,
-	limit = 10,
+	limit = pageLimit,
 ) => {
 	loading.value = true;
 
@@ -62,7 +64,7 @@ const pageNum: ComputedRef<number> = computed(() => {
 	return Number(route.query.page) || 1;
 });
 const limitNum: ComputedRef<number> = computed(() => {
-	return Number(route.query.limit) || 10;
+	return Number(route.query.limit) || pageLimit;
 });
 
 watch(
@@ -75,7 +77,7 @@ watch(
 			String(query.q === undefined ? "" : query.q),
 			query.facets,
 			pageNum.value,
-			limitNum.value || 10,
+			limitNum.value || pageLimit,
 		);
 	},
 	{
@@ -159,8 +161,8 @@ watch(
 				<div>
 					{{
 						t("ui.showing-results", {
-							first: (docs.page - 1) * (docs.request_params.per_page || 10) + 1,
-							last: Math.min(docs.page * (docs.request_params.per_page || 10), docs.found),
+							first: (docs.page - 1) * (docs.request_params.per_page || pageLimit) + 1,
+							last: Math.min(docs.page * (docs.request_params.per_page || pageLimit), docs.found),
 							all: docs.found,
 						})
 					}}

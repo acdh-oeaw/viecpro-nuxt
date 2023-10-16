@@ -8,8 +8,8 @@ const route = useRoute();
 const id = String(route.params.id);
 
 const data = await getDocument("viecpro_persons", "Person_" + String(id));
-const relationsSource = await getRelations(id, "source.object_id");
-const relationsTarget = await getRelations(id, "target.object_id");
+const relationsSource = await getRelations(id, "source.object_id", "Person");
+const relationsTarget = await getRelations(id, "target.object_id", "Person");
 
 console.log(relationsSource, relationsTarget);
 

@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 
-import { getDocument, getRelations } from "@/composables/use-ts-data";
+import { getDocument } from "@/composables/use-ts-data";
 import { definePageMeta } from "#imports";
 
 const route = useRoute();
 const id = String(route.params.id);
 
 const data = await getDocument("viecpro_courts", "Hofstaat_" + String(id));
-const relationsSource = await getRelations(id, "source.object_id");
-const relationsTarget = await getRelations(id, "target.object_id");
+
+// const relationsSource = await getRelations(id, "source.object_id", "Hofstaat");
+// const relationsTarget = await getRelations(id, "target.object_id", "Hofstaat");
 
 console.log(data);
 
