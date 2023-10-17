@@ -9,6 +9,7 @@ const id = String(route.params.id);
 
 const data = await getDocument("viecpro_courts", "Hofstaat_" + String(id));
 
+// No relations should exist
 // const relationsSource = await getRelations(id, "source.object_id", "Hofstaat");
 // const relationsTarget = await getRelations(id, "target.object_id", "Hofstaat");
 
@@ -27,10 +28,6 @@ definePageMeta({
 		<div>
 			<h1 class="text-2xl">Entity:</h1>
 			<pre>{{ data }}</pre>
-			<h1 class="text-2xl">Relations with entity as source:</h1>
-			<pre>{{ relationsSource }}</pre>
-			<h1 class="text-2xl">Relations with entity as target:</h1>
-			<pre>{{ relationsTarget }}</pre>
 		</div>
 	</div>
 </template>
