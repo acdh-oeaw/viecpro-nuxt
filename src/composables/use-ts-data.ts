@@ -9,6 +9,14 @@ export async function getDocuments<CollectionEntry extends Record<string, Docume
 ): Promise<SearchResponse<CollectionEntry>> {
 	return useDefaultClient().collections<CollectionEntry>(collection).documents().search(query);
 }
+
+export async function getDocument<CollectionEntry extends Record<string, Document>>(
+	collection: string,
+	id: string,
+): Promise<CollectionEntry> {
+	return useDefaultClient().collections<CollectionEntry>(collection).documents(id).retrieve();
+}
+
 export async function getFacets<CollectionEntry extends Record<string, Document>>(
 	facet: string,
 	max = 500,
@@ -30,4 +38,15 @@ export async function getFacets<CollectionEntry extends Record<string, Document>
 			facet_query: `${facet}:${facetQuery}`,
 			max_facet_values: max,
 		});
+}
+
+export async function getRelations<CollectionEntry extends Record<string, Document>>(
+	sourceId: string,
+	query_by: string,
+	kind: string,
+): Promise<SearchResponse<CollectionEntry>> {
+	return getDocuments(
+		{ q: sourceId, query_by, filter_by: `target.model := ${kind} || source.model := ${kind}` },
+		"viecpro_relations",
+	);
 }

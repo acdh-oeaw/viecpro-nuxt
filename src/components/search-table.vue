@@ -1,22 +1,26 @@
 <script lang="ts" setup>
 import get from "lodash.get";
-import { ChevronUp } from "lucide-vue-next";
+import { ChevronRight } from "lucide-vue-next";
 import { type SearchResponse } from "typesense/lib/Typesense/Documents";
 import { computed, type ComputedRef, type Ref, ref, watch } from "vue";
 import { type LocationQuery, type RouteLocationNormalized, useRoute } from "vue-router";
 
 import FacetDisclosures from "@/components/facet-disclosures.vue";
+import Pagination from "@/components/pagination.vue";
 import { useI18n } from "@/composables/use-i18n";
 import { getDocuments } from "@/composables/use-ts-data";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const props = defineProps<{
 	queryBy: string;
 	collectionName: string;
 	koi: Array<string>;
 	facets?: Array<string>;
+	cols?: string;
 }>();
+
+const pageLimit = 25;
 
 const route: RouteLocationNormalized = useRoute();
 const loading: Ref<boolean> = ref(true);
@@ -30,7 +34,7 @@ const search = async (
 	terms = "",
 	facetQuery: string | undefined,
 	page = 1,
-	limit = 10,
+	limit = pageLimit,
 ) => {
 	loading.value = true;
 
@@ -51,11 +55,17 @@ const search = async (
 	loading.value = false;
 };
 
+// TODO: finde better solution
+const getDetailLink = (id: string) => {
+	const type = route.path.split("/")[3];
+	return `/${locale.value}/detail/${type}/${id}`;
+};
+
 const pageNum: ComputedRef<number> = computed(() => {
 	return Number(route.query.page) || 1;
 });
 const limitNum: ComputedRef<number> = computed(() => {
-	return Number(route.query.limit) || 10;
+	return Number(route.query.limit) || pageLimit;
 });
 
 watch(
@@ -68,7 +78,7 @@ watch(
 			String(query.q === undefined ? "" : query.q),
 			query.facets,
 			pageNum.value,
-			limitNum.value || 10,
+			limitNum.value || pageLimit,
 		);
 	},
 	{
@@ -100,74 +110,52 @@ watch(
 				/>
 			</div>
 			<slot />
-			<div
-				class="grid w-full"
-				:style="`grid-template-columns: repeat(${koi.length}, minmax(0, 1fr))`"
-			>
-				<div v-for="key in koi" :key="key" class="m-2">
-					{{ t(`collection-keys["${key}"]`) }}
+			<div class="w-full">
+				<Pagination
+					v-if="docs != null"
+					:page="docs.page"
+					:limit="docs.request_params.per_page || pageLimit"
+					:all="docs.found"
+				/>
+				<div class="grid" :class="cols">
+					<div v-for="key in koi" :key="key" class="m-2 font-semibold">
+						{{ t(`collection-keys["${key}"]`) }}
+					</div>
 				</div>
 				<template v-if="docs !== null">
-					<template v-for="hit in docs.hits" :key="hit.document.id">
-						<div class="border-t" :style="`grid-column: span ${koi.length} / span ${koi.length}`" />
-						<div v-for="key in koi" :key="key + hit.document.id" class="m-2 self-center">
-							{{ get(hit.document, key) }}
-						</div>
-					</template>
+					<div v-for="hit in docs.hits" :key="String(hit.document.id)" class="border-t py-1">
+						<NuxtLink
+							class="grid grid-cols-[1fr_auto] items-center text-clip rounded transition hover:bg-slate-200 active:bg-slate-300"
+							:to="
+								getDetailLink(
+									String(hit.document.object_id || String(hit.document.id)?.replace(/\D/g, '')),
+								)
+							"
+						>
+							<div class="grid" :class="cols">
+								<div
+									v-for="key in koi"
+									:key="key + hit.document.id"
+									class="m-2 self-center overflow-auto"
+								>
+									{{ get(hit.document, key) }}
+								</div>
+							</div>
+							<ChevronRight class="h-6 w-6 shrink-0" />
+						</NuxtLink>
+					</div>
 				</template>
 			</div>
-			<div v-if="docs !== null" class="flex items-center justify-between">
-				<NuxtLink
-					v-if="pageNum > 1"
-					:to="{
-						query: {
-							...route.query,
-							page: pageNum - 1,
-						},
-					}"
-				>
-					<div
-						class="cursor-pointer rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
-					>
-						<ChevronUp class="h-5 w-5 -rotate-90" />
-						<span class="sr-only">Previous Page</span>
-					</div>
-				</NuxtLink>
-				<div v-else class="cursor-not-allowed rounded border p-2 text-gray-400 transition">
-					<ChevronUp class="h-5 w-5 -rotate-90" />
-					<span class="sr-only">Previous Page, but you're already on page 1</span>
-				</div>
-				<div>
-					showing {{ (docs.page - 1) * (docs.request_params.per_page || 10) + 1 }} -
-					{{ Math.min(docs.page * (docs.request_params.per_page || 10), docs.found) }} out of
-					{{ docs.found }}
-				</div>
-				<NuxtLink
-					v-if="pageNum * limitNum < Number(docs.found)"
-					:to="{
-						query: {
-							...route.query,
-							page: pageNum + 1,
-						},
-					}"
-				>
-					<div
-						class="cursor-pointer rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
-					>
-						<ChevronUp class="h-5 w-5 rotate-90" />
-						<span class="sr-only">Next Page</span>
-					</div>
-				</NuxtLink>
-
-				<div v-else class="cursor-not-allowed rounded border p-2 transition">
-					<ChevronUp class="h-5 w-5 rotate-90 text-gray-400" />
-					<span class="sr-only">Next Page, but you're already on the last page</span>
-				</div>
-			</div>
+			<Pagination
+				v-if="docs != null"
+				:page="docs.page"
+				:limit="docs.request_params.per_page || pageLimit"
+				:all="docs.found"
+			/>
 		</div>
 		<div v-if="docs">
 			<FacetDisclosures
-				class="float-right m-4 max-w-sm"
+				class="float-right m-4 w-96 max-w-full"
 				:facets="docs.facet_counts"
 				:loading="loading"
 				:collection="collectionName"

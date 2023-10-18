@@ -8,7 +8,7 @@ const tsClient = new Client({
 			protocol: "https",
 		},
 	],
-	apiKey: "WFUrFcRl370UM00y6ich86bpdKhBIL1R", // read & retrieve only
+	apiKey: "cVjFs0UF7K11VSwNSii5VX2N7gbSNN4E", // read & retrieve only
 	connectionTimeoutSeconds: 3,
 });
 

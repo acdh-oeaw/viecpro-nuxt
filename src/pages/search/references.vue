@@ -6,6 +6,7 @@ const collectionName = "viecpro_references";
 const queryBy = "folio";
 const koi = ["id", "folio", "shortTitle", "related_doc.name"];
 const facets = ["shortTitle", "related_doc.name"];
+const tableCols = "grid-cols-[2fr_3fr_3fr_3fr]";
 
 definePageMeta({
 	title: "pages.searchviews.courts.title",
@@ -13,7 +14,11 @@ definePageMeta({
 </script>
 
 <template>
-	<SearchTable :collection-name="collectionName" :facets="facets" :query-by="queryBy" :koi="koi">
-		Events
-	</SearchTable>
+	<SearchTable
+		:collection-name="collectionName"
+		:facets="facets"
+		:query-by="queryBy"
+		:cols="tableCols"
+		:koi="koi"
+	/>
 </template>
