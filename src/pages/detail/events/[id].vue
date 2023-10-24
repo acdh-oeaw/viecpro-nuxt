@@ -4,7 +4,6 @@ import { useRoute } from "vue-router";
 import DetailPage from "@/components/detail-page.vue";
 import { getDocument, getRelations } from "@/composables/use-ts-data";
 import { definePageMeta, ref } from "#imports";
-
 const route = useRoute();
 const id = String(route.params.id);
 

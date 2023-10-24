@@ -9,7 +9,6 @@ const route = useRoute();
 const id = String(route.params.id);
 
 const loading = ref(true);
-
 const data = await getDocument("viecpro_courts", "Hofstaat_" + String(id));
 
 // No relations should exist
