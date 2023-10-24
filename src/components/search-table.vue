@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import get from "lodash.get";
-import { ChevronRight } from "lucide-vue-next";
+import { ChevronRight, Loader2, XCircle } from "lucide-vue-next";
 import { type SearchResponse } from "typesense/lib/Typesense/Documents";
 import { computed, type ComputedRef, type Ref, ref, watch } from "vue";
 import { type LocationQuery, type RouteLocationNormalized, useRoute } from "vue-router";
 
+import Centered from "@/components/centered.vue";
 import FacetDisclosures from "@/components/facet-disclosures.vue";
 import Pagination from "@/components/pagination.vue";
 import { useI18n } from "@/composables/use-i18n";
@@ -88,15 +89,15 @@ watch(
 </script>
 
 <template>
-	<div class="grid grid-cols-[4fr_2fr]">
-		<div class="mx-auto flex max-w-container flex-col">
-			<div>
+	<div class="grid h-full grid-cols-[4fr_2fr]">
+		<div class="mx-auto flex h-full w-full max-w-container flex-col">
+			<div class="my-2 grid h-12 w-full grid-cols-[1fr_auto] items-center rounded bg-white shadow">
 				<label for="searchinput" class="sr-only">Search</label>
 				<input
 					id="searchinput"
 					v-model="input"
 					type="text"
-					class="my-2 h-12 w-full rounded p-2 shadow"
+					class="h-full rounded pl-2"
 					placeholder="Search..."
 					@input="
 						$router.replace({
@@ -108,16 +109,32 @@ watch(
 						})
 					"
 				/>
+				<button
+					v-if="input"
+					@click="
+						$router.replace({
+							query: {
+								...route.query,
+								q: '',
+								page: 1,
+							},
+						});
+						input = '';
+					"
+				>
+					<span class="sr-only">Delete Input</span>
+					<XCircle class="mx-2 h-6 w-6 text-gray-400" />
+				</button>
 			</div>
 			<slot />
-			<div class="w-full">
-				<Pagination
-					v-if="docs != null"
-					:page="docs.page"
-					:limit="docs.request_params.per_page || pageLimit"
-					:all="docs.found"
-				/>
-				<div class="grid" :class="cols">
+			<Pagination
+				v-if="docs != null"
+				:page="docs.page"
+				:limit="docs.request_params.per_page || pageLimit"
+				:all="docs.found"
+			/>
+			<div v-if="!loading" class="w-full">
+				<div class="mr-6 grid" :class="cols">
 					<div v-for="key in koi" :key="key" class="m-2 font-semibold">
 						{{ t(`collection-keys["${key}"]`) }}
 					</div>
@@ -145,13 +162,16 @@ watch(
 						</NuxtLink>
 					</div>
 				</template>
+				<Pagination
+					v-if="docs != null"
+					:page="docs.page"
+					:limit="docs.request_params.per_page || pageLimit"
+					:all="docs.found"
+				/>
 			</div>
-			<Pagination
-				v-if="docs != null"
-				:page="docs.page"
-				:limit="docs.request_params.per_page || pageLimit"
-				:all="docs.found"
-			/>
+			<Centered v-else>
+				<Loader2 class="h-8 w-8 animate-spin" />
+			</Centered>
 		</div>
 		<div v-if="docs">
 			<FacetDisclosures
