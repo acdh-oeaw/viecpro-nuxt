@@ -35,7 +35,10 @@ const links = computed(() => {
 				<nav :aria-label="t('common.main-navigation')">
 					<ul class="flex flex-wrap gap-x-4" role="list">
 						<li v-for="(link, key) of links" :key="key">
-							<NuxtLink :href="link.href">
+							<NuxtLink
+								class="rounded p-2 transition hover:bg-primary-300 active:bg-primary-400"
+								:href="link.href"
+							>
 								{{ link.label }}
 							</NuxtLink>
 						</li>

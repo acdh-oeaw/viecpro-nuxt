@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 
+import DetailPage from "@/components/detail-page.vue";
 import { getDocument, getRelations } from "@/composables/use-ts-data";
-import { definePageMeta } from "#imports";
+import { definePageMeta, ref } from "#imports";
 
 const route = useRoute();
 const id = String(route.params.id);
+
+const loading = ref(true);
 
 const data = await getDocument("viecpro_places", "Place_" + String(id));
 const relationsSource = await getRelations(id, "source.object_id", "Place");
 const relationsTarget = await getRelations(id, "target.object_id", "Place");
 
+loading.value = false;
 console.log(data);
 
 definePageMeta({
@@ -19,17 +23,15 @@ definePageMeta({
 </script>
 
 <template>
-	<div class="mx-auto w-full max-w-container">
+	<div class="mx-auto h-full w-full max-w-container">
 		<div>
 			{{ route.params.id }}
 		</div>
-		<div>
-			<h1 class="text-2xl">Entity:</h1>
-			<pre>{{ data }}</pre>
-			<h1 class="text-2xl">Relations with entity as source:</h1>
-			<pre>{{ relationsSource }}</pre>
-			<h1 class="text-2xl">Relations with entity as target:</h1>
-			<pre>{{ relationsTarget }}</pre>
-		</div>
+		<DetailPage
+			:data="data"
+			:source="relationsSource"
+			:target="relationsTarget"
+			:loading="loading"
+		/>
 	</div>
 </template>
