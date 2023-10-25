@@ -21,27 +21,33 @@
 		"searchviews": {
 			"courts": {
 				"title": "Hofstaaten",
-				"label": "Hofstaaten"
+				"label": "Hofstaaten",
+				"detail": "{title} - Hofstaat"
 			},
 			"references": {
 				"title": "Referenzen",
-				"label": "Referenzen"
+				"label": "Referenzen",
+				"detail": "{title} - Referenz"
 			},
 			"places": {
 				"title": "Orte",
-				"label": "Orte"
+				"label": "Orte",
+				"detail": "{title} - Ort"
 			},
 			"people": {
 				"title": "Personen",
-				"label": "Personen"
+				"label": "Personen",
+				"detail": "{title} - Person"
 			},
 			"institutions": {
 				"title": "Institutionen",
-				"label": "Institutionen"
+				"label": "Institutionen",
+				"detail": "{title} - Institution"
 			},
 			"events": {
 				"title": "Ereignisse",
-				"label": "Ereignisse"
+				"label": "Ereignisse",
+				"detail": "{title} - Ereignis"
 			}
 		}
 	},

@@ -21,27 +21,33 @@
 		"searchviews": {
 			"courts": {
 				"title": "Courts",
-				"label": "Courts"
+				"label": "Courts",
+				"detail": "{title} - Court"
 			},
 			"references": {
 				"title": "References",
-				"label": "References"
+				"label": "References",
+				"detail": "{title} - Reference"
 			},
 			"places": {
 				"title": "Places",
-				"label": "Places"
+				"label": "Places",
+				"detail": "{title} - Place"
 			},
 			"people": {
 				"title": "People",
-				"label": "People"
+				"label": "People",
+				"detail": "{title} - Person"
 			},
 			"institutions": {
 				"title": "Institutions",
-				"label": "Institutions"
+				"label": "Institutions",
+				"detail": "{title} - Institution"
 			},
 			"events": {
 				"title": "Events",
-				"label": "Events"
+				"label": "Events",
+				"detail": "{title} - Event"
 			}
 		}
 	},
