@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { InformationCircleIcon } from "@heroicons/vue/24/outline";
+import { Info } from "lucide-vue-next";
 
 defineProps<{
 	useIcon?: boolean;
@@ -14,7 +14,7 @@ defineProps<{
 			<span class="border-dashed" :class="underline && 'border-b-2'">
 				<slot />
 			</span>
-			<InformationCircleIcon v-if="useIcon" class="h-5 w-5" />
+			<Info v-if="useIcon" class="h-5 w-5" />
 			<div
 				class="pointer-events-none absolute -top-10 left-0 w-max rounded bg-slate-500 p-2 text-base text-slate-50 opacity-0 transition-opacity group-hover:opacity-100"
 			>

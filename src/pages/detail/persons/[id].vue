@@ -18,7 +18,7 @@ loading.value = false;
 console.log(relationsSource, relationsTarget);
 
 definePageMeta({
-	title: "pages.searchviews.events.title",
+	title: "pages.searchviews.people.title",
 });
 </script>
 

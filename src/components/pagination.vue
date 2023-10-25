@@ -37,7 +37,7 @@ const { t } = useI18n();
 			<ChevronUp class="h-5 w-5 -rotate-90" />
 			<span class="sr-only">Previous Page, but you're already on page 1</span>
 		</div>
-		<div>
+		<div v-if="all != 0">
 			{{
 				t("ui.showing-results", {
 					first: (page - 1) * limit + 1,
@@ -46,6 +46,7 @@ const { t } = useI18n();
 				})
 			}}
 		</div>
+		<div v-else class="italic">Nothing Found.</div>
 		<NuxtLink
 			v-if="page * limit < Number(all)"
 			:to="{

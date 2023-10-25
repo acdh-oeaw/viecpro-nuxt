@@ -163,7 +163,7 @@ watch(
 					</div>
 				</template>
 				<Pagination
-					v-if="docs != null"
+					v-if="docs != null && docs.found != 0"
 					:page="docs.page"
 					:limit="docs.request_params.per_page || pageLimit"
 					:all="docs.found"
@@ -173,7 +173,7 @@ watch(
 				<Loader2 class="h-8 w-8 animate-spin" />
 			</Centered>
 		</div>
-		<div v-if="docs">
+		<div v-if="docs && docs.found">
 			<FacetDisclosures
 				class="float-right m-4 w-96 max-w-full"
 				:facets="docs.facet_counts"

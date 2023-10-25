@@ -2,7 +2,8 @@
 import { useRoute } from "vue-router";
 
 import DetailPage from "@/components/detail-page.vue";
-import { getDocument } from "@/composables/use-ts-data";
+import Tooltip from "@/components/tooltip.vue";
+import { getDocument, getRelations } from "@/composables/use-ts-data";
 import { definePageMeta, ref } from "#imports";
 
 const route = useRoute();
@@ -12,22 +13,29 @@ const loading = ref(true);
 const data = await getDocument("viecpro_courts", "Hofstaat_" + String(id));
 
 // No relations should exist
-// const relationsSource = await getRelations(id, "source.object_id", "Hofstaat");
-// const relationsTarget = await getRelations(id, "target.object_id", "Hofstaat");
+const relationsSource = await getRelations(id, "source.object_id");
+const relationsTarget = await getRelations(id, "target.object_id");
 
 loading.value = false;
 console.log(data);
 
 definePageMeta({
-	title: "pages.searchviews.events.title",
+	title: "pages.searchviews.courts.title",
 });
 </script>
 
 <template>
 	<div class="mx-auto h-full w-full max-w-container">
 		<div>
-			{{ route.params.id }}
+			<Tooltip content="test">
+				{{ route.params.id }}
+			</Tooltip>
 		</div>
-		<DetailPage :loading="loading" :data="data" />
+		<DetailPage
+			:loading="loading"
+			:data="data"
+			:target="relationsTarget"
+			:source="relationsSource"
+		/>
 	</div>
 </template>

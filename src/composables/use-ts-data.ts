@@ -43,10 +43,9 @@ export async function getFacets<CollectionEntry extends Record<string, Document>
 export async function getRelations<CollectionEntry extends Record<string, Document>>(
 	sourceId: string,
 	query_by: string,
-	kind: string,
+	kind?: string,
 ): Promise<SearchResponse<CollectionEntry>> {
-	return getDocuments(
-		{ q: sourceId, query_by, filter_by: `target.model := ${kind} || source.model := ${kind}` },
-		"viecpro_relations",
-	);
+	const query: SearchParams = { q: sourceId, query_by };
+	if (kind != null) query.filter_by = `target.model := ${kind} || source.model := ${kind}`;
+	return getDocuments(query, "viecpro_relations");
 }

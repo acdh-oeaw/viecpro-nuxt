@@ -17,7 +17,7 @@ loading.value = false;
 console.log(data);
 
 definePageMeta({
-	title: "pages.searchviews.events.title",
+	title: "pages.searchviews.references.title",
 });
 </script>
 
