@@ -77,7 +77,7 @@ watch(
 		search(
 			props.collectionName,
 			String(query.q === undefined ? "" : query.q),
-			query.facets,
+			String(query.facets),
 			pageNum.value,
 			limitNum.value || pageLimit,
 		);

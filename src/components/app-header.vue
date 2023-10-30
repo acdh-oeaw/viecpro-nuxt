@@ -27,14 +27,14 @@ const links = computed(() => {
 		<div
 			class="mx-auto flex w-full max-w-container flex-col items-center justify-between gap-x-4 gap-y-2 px-8 py-4 sm:flex-row"
 		>
-			<NuxtLink class="shrink-0" :href="links.home.href">
+			<NuxtLink class="shrink-0 select-none" :href="links.home.href">
 				<span class="sr-only">{{ links.home.label }}</span>
 				<img alt="" class="h-20" src="@/assets/images/logo-white.png" />
 			</NuxtLink>
 			<div class="flex items-center">
 				<nav :aria-label="t('common.main-navigation')">
 					<ul class="flex flex-wrap gap-x-4" role="list">
-						<li v-for="(link, key) of links" :key="key">
+						<li v-for="(link, key) of links" :key="key" class="select-none">
 							<NuxtLink
 								class="rounded p-2 transition hover:bg-primary-300 active:bg-primary-400"
 								:href="link.href"
@@ -44,7 +44,7 @@ const links = computed(() => {
 						</li>
 					</ul>
 				</nav>
-				<LocaleSwitch />
+				<LocaleSwitch class="select-none" />
 			</div>
 		</div>
 	</header>
