@@ -15,6 +15,7 @@ defineProps<{
 	loading: boolean;
 	collection: string;
 	queryBy: string;
+	defaultOpen?: boolean;
 }>();
 const router = useRouter();
 const route = useRoute();
@@ -35,7 +36,7 @@ const facetChange = (facets: Array<string>, field: string) => {
 </script>
 
 <template>
-	<Disclosure v-slot="{ open }" as="div" class="flex flex-col md:pt-2" default-open>
+	<Disclosure v-slot="{ open }" as="div" class="flex flex-col md:pt-2" :default-open="defaultOpen">
 		<DisclosureButton
 			class="flex items-center justify-end gap-2 rounded align-top text-xl transition hover:bg-slate-200 active:bg-slate-300 lg:justify-center"
 		>

@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
+import { Menu as MenuIcon } from "lucide-vue-next";
 import { computed } from "vue";
 
 import LocaleSwitch from "@/components/locale-switch.vue";
@@ -31,7 +33,7 @@ const links = computed(() => {
 				<span class="sr-only">{{ links.home.label }}</span>
 				<img alt="" class="h-20" src="@/assets/images/logo-white.png" />
 			</NuxtLink>
-			<div class="flex items-center">
+			<div class="hidden items-center md:flex">
 				<nav :aria-label="t('common.main-navigation')">
 					<ul class="flex flex-wrap gap-x-4" role="list">
 						<li v-for="(link, key) of links" :key="key" class="select-none">
@@ -45,6 +47,29 @@ const links = computed(() => {
 					</ul>
 				</nav>
 				<LocaleSwitch class="select-none" />
+			</div>
+			<div class="md:hidden">
+				<Menu as="div" class="relative inline-block">
+					<MenuButton as="button" class="rounded border border-gray-300 p-2">
+						<MenuIcon class="h-6 w-6 shrink-0" />
+					</MenuButton>
+					<MenuItems
+						as="div"
+						class="absolute right-0 mt-1 flex w-56 flex-col divide-y rounded bg-gray-50 shadow-lg ring"
+					>
+						<MenuItem v-for="(link, key) of links" :key="key">
+							<NuxtLink
+								class="p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300 active:bg-gray-400"
+								:href="link.href"
+							>
+								{{ link.label }}
+							</NuxtLink>
+						</MenuItem>
+						<!-- <MenuItem>
+							<LocaleSwitch />
+						</MenuItem> -->
+					</MenuItems>
+				</Menu>
 			</div>
 		</div>
 	</header>

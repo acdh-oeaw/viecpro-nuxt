@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useWindowSize } from "@vueuse/core";
 import get from "lodash.get";
 import { ChevronRight, Loader2, XCircle } from "lucide-vue-next";
 import { type SearchResponse } from "typesense/lib/Typesense/Documents";
@@ -29,6 +30,8 @@ const loading: Ref<boolean> = ref(true);
 const input: Ref<string> = ref(route.query.q === undefined ? "" : String(route.query.q));
 
 const docs: Ref<SearchResponse<Record<string, Document>> | null> = ref(null);
+
+const windowWidth = useWindowSize().width;
 
 const search = async (
 	collection: string,
@@ -76,8 +79,8 @@ watch(
 
 		search(
 			props.collectionName,
-			String(query.q === undefined ? "" : query.q),
-			String(query.facets),
+			String(query.q ?? ""),
+			String(query.facets ?? ""),
 			pageNum.value,
 			limitNum.value || pageLimit,
 		);
@@ -89,9 +92,11 @@ watch(
 </script>
 
 <template>
-	<div class="grid h-full grid-cols-[4fr_2fr]">
-		<div class="mx-auto flex h-full w-full max-w-container flex-col">
-			<div class="my-2 grid h-12 w-full grid-cols-[1fr_auto] items-center rounded bg-white shadow">
+	<div class="mx-2 flex h-full flex-col-reverse xl:grid xl:grid-cols-[4fr_2fr]">
+		<div class="mx-auto flex h-full w-full max-w-container flex-col p-2 xl:p-0">
+			<div
+				class="mb-4 grid h-12 w-full grid-cols-[1fr_auto] items-center rounded bg-white shadow xl:mb-0"
+			>
 				<label for="searchinput" class="sr-only">Search</label>
 				<input
 					id="searchinput"
@@ -134,13 +139,17 @@ watch(
 				:all="docs.found"
 			/>
 			<div v-if="!loading" class="w-full">
-				<div class="mr-6 grid" :class="cols">
+				<div class="mr-6 hidden md:grid" :class="cols">
 					<div v-for="key in koi" :key="key" class="m-2 font-semibold">
 						{{ t(`collection-keys["${key}"]`) }}
 					</div>
 				</div>
 				<template v-if="docs !== null">
-					<div v-for="hit in docs.hits" :key="String(hit.document.id)" class="border-t py-1">
+					<div
+						v-for="hit in docs.hits"
+						:key="String(hit.document.id)"
+						class="border-b py-1 md:border-t"
+					>
 						<NuxtLink
 							class="grid grid-cols-[1fr_auto] items-center text-clip rounded transition hover:bg-slate-200 active:bg-slate-300"
 							:to="
@@ -149,13 +158,19 @@ watch(
 								)
 							"
 						>
-							<div class="grid" :class="cols">
+							<div class="hidden md:grid" :class="cols">
 								<div
 									v-for="key in koi"
 									:key="key + hit.document.id"
 									class="m-2 self-center overflow-auto"
 								>
 									{{ get(hit.document, key) }}
+								</div>
+							</div>
+							<div class="flex flex-col gap-1 md:hidden">
+								<div v-for="key in koi" :key="key + hit.document.id">
+									<div class="text-sm text-gray-500">{{ t(`collection-keys["${key}"]`) }}</div>
+									<div>{{ get(hit.document, key) }}</div>
 								</div>
 							</div>
 							<ChevronRight class="h-6 w-6 shrink-0" />
@@ -180,6 +195,7 @@ watch(
 				:loading="loading"
 				:collection="collectionName"
 				:query-by="queryBy"
+				:default-open="windowWidth >= 1280"
 			/>
 		</div>
 	</div>
