@@ -27,7 +27,7 @@ const links = computed(() => {
 <template>
 	<header class="bg-primary-100 text-white">
 		<div
-			class="mx-auto flex w-full max-w-container flex-col items-center justify-between gap-x-4 gap-y-2 px-8 py-4 sm:flex-row"
+			class="mx-auto flex w-full max-w-container items-center justify-between gap-x-4 gap-y-2 px-8 py-4"
 		>
 			<NuxtLink class="shrink-0 select-none" :href="links.home.href">
 				<span class="sr-only">{{ links.home.label }}</span>
