@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { Menu as MenuIcon } from "lucide-vue-next";
+import { Menu as MenuIcon, X } from "lucide-vue-next";
 import { computed } from "vue";
 
 import LocaleSwitch from "@/components/locale-switch.vue";
@@ -49,9 +49,10 @@ const links = computed(() => {
 				<LocaleSwitch class="select-none" />
 			</div>
 			<div class="md:hidden">
-				<Menu as="div" class="relative inline-block">
+				<Menu v-slot="{ open }" as="div" class="relative inline-block">
 					<MenuButton as="button" class="rounded border border-gray-300 p-2">
-						<MenuIcon class="h-6 w-6 shrink-0" />
+						<X v-if="open" class="h-6 w-6 shrink-0" />
+						<MenuIcon v-else class="h-6 w-6 shrink-0" />
 					</MenuButton>
 					<MenuItems
 						as="div"
@@ -65,9 +66,9 @@ const links = computed(() => {
 								{{ link.label }}
 							</NuxtLink>
 						</MenuItem>
-						<!-- <MenuItem>
-							<LocaleSwitch />
-						</MenuItem> -->
+						<MenuItem>
+							<LocaleSwitch no-select />
+						</MenuItem>
 					</MenuItems>
 				</Menu>
 			</div>

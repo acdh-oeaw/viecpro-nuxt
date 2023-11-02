@@ -167,7 +167,7 @@ watch(
 									{{ get(hit.document, key) }}
 								</div>
 							</div>
-							<div class="flex flex-col gap-1 md:hidden">
+							<div class="flex flex-col gap-1 p-1 md:hidden">
 								<div v-for="key in koi" :key="key + hit.document.id">
 									<div class="text-sm text-gray-500">{{ t(`collection-keys["${key}"]`) }}</div>
 									<div>{{ get(hit.document, key) }}</div>
@@ -179,6 +179,7 @@ watch(
 				</template>
 				<Pagination
 					v-if="docs != null && docs.found != 0"
+					class="mt-2"
 					:page="docs.page"
 					:limit="docs.request_params.per_page || pageLimit"
 					:all="docs.found"
