@@ -49,7 +49,7 @@ const links = computed(() => {
 				<LocaleSwitch class="select-none" />
 			</div>
 			<div class="md:hidden">
-				<Menu v-slot="{ open }" as="div" class="relative inline-block">
+				<Menu v-slot="{ open, close }" as="div" class="relative inline-block">
 					<MenuButton as="button" class="rounded border border-gray-300 p-2">
 						<X v-if="open" class="h-6 w-6 shrink-0" />
 						<MenuIcon v-else class="h-6 w-6 shrink-0" />
@@ -58,10 +58,11 @@ const links = computed(() => {
 						as="div"
 						class="absolute right-0 mt-1 flex w-56 flex-col divide-y rounded bg-gray-50 shadow-lg ring"
 					>
-						<MenuItem v-for="(link, key) of links" :key="key">
+						<MenuItem v-for="(link, key) of links" :key="key" class="flex" as="div">
 							<NuxtLink
-								class="p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300 active:bg-gray-400"
+								class="w-full p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300 active:bg-gray-400"
 								:href="link.href"
+								@click="close"
 							>
 								{{ link.label }}
 							</NuxtLink>
