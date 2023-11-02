@@ -33,7 +33,11 @@ definePageMeta({
 	<MainContent>
 		<div class="flex flex-col">
 			<div class="h-2 w-full bg-primary-800" />
-			<img src="/assets/images/background-court-ship.jpeg" alt="" class="w-full" />
+			<img
+				src="/assets/images/background-court-ship.jpeg"
+				alt=""
+				class="min-h-[20rem] w-full object-cover"
+			/>
 			<div class="h-2 w-full bg-primary-400" />
 			<div
 				class="mx-auto mt-40 flex w-fit flex-col justify-center border-b-4 pb-4 text-center text-5xl text-primary-100 lg:flex-row"

@@ -39,6 +39,7 @@
 		"@stefanprobst/log": "^1.0.3",
 		"@stefanprobst/request": "^0.2.1",
 		"@t3-oss/env-core": "^0.2.1",
+		"@vueuse/core": "^10.5.0",
 		"instantsearch.js": "^4.55.0",
 		"lodash.get": "^4.4.2",
 		"lucide-vue-next": "^0.279.0",
