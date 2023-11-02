@@ -40,7 +40,7 @@ definePageMeta({
 			/>
 			<div class="h-2 w-full bg-primary-400" />
 			<div
-				class="mx-auto mt-40 flex w-fit flex-col justify-center border-b-4 pb-4 text-center text-5xl text-primary-100 lg:flex-row"
+				class="mx-auto mt-20 flex w-fit flex-col justify-center border-b-4 pb-4 text-center text-5xl text-primary-100 md:mt-40 lg:flex-row"
 			>
 				<p class="font-black">
 					Der Wiener Hof
@@ -51,7 +51,7 @@ definePageMeta({
 				</p>
 			</div>
 		</div>
-		<div class="mb-60 min-h-screen">
+		<div class="mb-8 min-h-screen md:mb-20">
 			<div class="mx-auto mt-20 max-w-[32rem] flex-col lg:max-w-[50rem]">
 				<div class="mb-10">
 					<p>
@@ -106,11 +106,11 @@ definePageMeta({
 				</div>
 			</div>
 			<div
-				class="mx-auto mt-32 flex max-w-[80rem] flex-col items-center border-t-4 border-gray-200 pt-10 xl:flex-row xl:justify-between xl:space-x-20"
+				class="mx-auto mt-20 flex max-w-[32rem] flex-col items-center border-t-4 border-gray-200 pt-10 md:mt-32 lg:max-w-[50rem] xl:flex-row xl:justify-between xl:space-x-20"
 			>
 				<div>
 					<h1 class="my-8 text-3xl font-black text-primary-100">Datenbank</h1>
-					<p class="w-[35rem]">
+					<p>
 						Die Datenbank beinhaltet die prosopographischen Datensammlungen zweier abgeschlossener
 						FWF-Projekte zum Wiener Hof von Kaiser Leopold I. (1657–1705) bis Leopold II.
 						(1790–1792). Diese Sammlungen werden durch eine
@@ -132,7 +132,7 @@ definePageMeta({
 				</div>
 				<div>
 					<h1 class="my-8 text-3xl font-black text-primary-100">Materialien und Dokumentation</h1>
-					<p class="w-[35rem]">
+					<p>
 						Unsere Dokumentation und Materialien zur Benutzung der VieCPro-Datenbank reichen von
 						einer Erklärung der APIS-Funktionalitäten über die Darlegung der Bearbeitungsrichtlinien
 						bis hin zu diversen Verzeichnissen (Projektpublikationen, Hofstaatslisten,
@@ -166,7 +166,7 @@ definePageMeta({
 					{{ links.documentation.label }}
 				</NuxtLink>
 			</div>
-			<div class="mx-auto mt-28 max-w-[50rem]">
+			<div class="mx-auto mt-20 max-w-[32rem] md:mt-28 lg:max-w-[50rem]">
 				<div class="rounded-lg bg-gray-100 p-8">
 					<h1 class="mb-8 text-3xl font-black text-primary-100">Kontaktaufnahme</h1>
 					<p>

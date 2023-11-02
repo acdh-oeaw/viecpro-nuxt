@@ -25,15 +25,18 @@ defineProps<{
 			:model-value="selectedLocale"
 			@update:model-value="(selectedValue) => setLocale(selectedValue.code)"
 		>
-			<ListboxButton class="px-4 py-2">{{ selectedLocale.code }}</ListboxButton>
-			<ListboxOptions class="fixed ml-4 mt-4 -translate-x-4 rounded bg-white px-4 py-2 shadow-lg">
+			<ListboxButton class="px-4 py-2">{{ selectedLocale.code.toUpperCase() }}</ListboxButton>
+			<ListboxOptions
+				class="fixed ml-4 mt-4 flex -translate-x-4 flex-col rounded bg-white shadow-lg"
+			>
 				<ListboxOption
 					v-for="loc in locales"
 					:key="loc.code"
+					as="button"
 					:value="loc"
-					class="hover:cursor-pointer hover:text-primary-400 hover:underline"
+					class="min-w-[5rem] p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300 active:bg-gray-400"
 				>
-					{{ loc.code }}
+					{{ loc.code.toUpperCase() }}
 				</ListboxOption>
 			</ListboxOptions>
 		</Listbox>
