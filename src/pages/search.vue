@@ -52,12 +52,12 @@ definePageMeta({
 <template>
 	<MainContent>
 		<div class="grid h-full gap-4 xl:grid-cols-[2fr_6fr]">
-			<div class="m-4 mx-auto flex h-full max-w-fit flex-wrap lg:mx-0 xl:max-w-sm xl:flex-col">
+			<div class="m-4 mx-auto flex h-full max-w-fit flex-wrap lg:mx-4 xl:max-w-sm xl:flex-col">
 				<NuxtLink
 					v-for="link in links"
 					:key="link.label"
 					:to="link.href"
-					class="group mx-2 flex h-fit items-center gap-4 rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300 lg:my-2"
+					class="group mx-2 flex h-fit items-center gap-4 rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300 md:mx-0 lg:my-2"
 					:class="$route.path === link.href.path && 'bg-slate-200'"
 				>
 					<component
