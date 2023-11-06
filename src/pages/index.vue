@@ -30,11 +30,12 @@ definePageMeta({
 </script>
 
 <template>
-	<MainContent class="mx-2 mb-8 flex flex-col gap-8 md:mx-0">
+	<MainContent class="mb-4 flex flex-col gap-8 md:mb-8">
 		<div class="flex flex-col gap-16 md:gap-32">
 			<div>
 				<div class="h-2 w-full bg-primary-800" />
-				<img
+				<NuxtImg
+					placeholder
 					src="/assets/images/background-court-ship.jpeg"
 					alt=""
 					class="min-h-[20rem] w-full object-cover"
@@ -55,7 +56,7 @@ definePageMeta({
 		</div>
 		<div class="mx-auto flex min-h-screen max-w-content flex-col gap-8 px-4 md:gap-16">
 			<div class="mx-auto flex flex-col gap-8">
-				<div class="flex flex-col gap-8">
+				<div class="flex flex-col gap-8 text-justify">
 					<p>
 						VieCPro liefert erstmals
 						<strong>tausende prosopographische Profile</strong>
@@ -94,8 +95,8 @@ definePageMeta({
 				</div>
 				<div class="rounded-lg bg-gray-100 p-8">
 					<h1 class="text-left text-3xl font-bold text-primary-100">VieCPro</h1>
-					<p class="">
-						... ist ein
+					<p class="text-justify">
+						...ist ein
 						<strong>Gemeinschaftsprodukt zweier Forschungsteams</strong>
 						<span>, die vom</span>
 						<a href="https://www.oeaw.ac.at/foerderungen/innovationsfonds">ÖAW-Innovationsfonds</a>
@@ -109,9 +110,9 @@ definePageMeta({
 			</div>
 			<div class="flex flex-col gap-8">
 				<div
-					class="mx-auto grid justify-stretch gap-8 border-t-4 border-gray-200 pt-8 xl:grid-cols-2"
+					class="mx-auto grid justify-stretch gap-8 border-t-4 border-gray-200 pt-8 text-justify xl:grid-cols-2"
 				>
-					<div>
+					<div class="flex flex-col gap-4">
 						<h1 class="text-3xl font-black text-primary-100">Datenbank</h1>
 						<p>
 							Die Datenbank beinhaltet die prosopographischen Datensammlungen zweier abgeschlossener
@@ -133,7 +134,7 @@ definePageMeta({
 							</NuxtLink>
 						</div>
 					</div>
-					<div>
+					<div class="flex flex-col gap-4">
 						<h1 class="text-3xl font-black text-primary-100">Materialien und Dokumentation</h1>
 						<p>
 							Unsere Dokumentation und Materialien zur Benutzung der VieCPro-Datenbank reichen von
@@ -171,10 +172,10 @@ definePageMeta({
 				</div>
 			</div>
 			<div class="mx-auto">
-				<div class="rounded-lg bg-gray-100 p-8">
+				<div class="rounded-lg bg-gray-100 p-8 text-justify">
 					<h1 class="text-3xl font-black text-primary-100">Kontaktaufnahme</h1>
 					<p>
-						... zum VieCPro-Team ist stets herzlich willkommen.
+						...zum VieCPro-Team ist stets herzlich willkommen.
 						<strong>Die Datenbank befindet sich im Aufbau</strong>
 						. Wir freuen uns über Ihre sachdienlichen Hinweise und Ergänzungsvorschläge. Falls Sie
 						eine Idee für Anschlussprojekte haben oder an einer Kooperation interessiert sind, dann
