@@ -70,6 +70,7 @@
 		"showing-results": "Zeige {first} - {last} von {all} Ergebnissen",
 		"show-all": "Zeige alle...",
 		"show-filters": "Filter ausfahren...",
-		"hide-filters": "Filter verstecken..."
+		"hide-filters": "Filter verstecken...",
+		"search-placeholder": "Suche..."
 	}
 }

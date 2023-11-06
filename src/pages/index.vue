@@ -30,17 +30,19 @@ definePageMeta({
 </script>
 
 <template>
-	<MainContent>
-		<div class="flex flex-col">
-			<div class="h-2 w-full bg-primary-800" />
-			<img
-				src="/assets/images/background-court-ship.jpeg"
-				alt=""
-				class="min-h-[20rem] w-full object-cover"
-			/>
-			<div class="h-2 w-full bg-primary-400" />
+	<MainContent class="mx-2 mb-8 flex flex-col gap-8 md:mx-0">
+		<div class="flex flex-col gap-16 md:gap-32">
+			<div>
+				<div class="h-2 w-full bg-primary-800" />
+				<img
+					src="/assets/images/background-court-ship.jpeg"
+					alt=""
+					class="min-h-[20rem] w-full object-cover"
+				/>
+				<div class="h-2 w-full bg-primary-400" />
+			</div>
 			<div
-				class="mx-auto mt-20 flex w-fit flex-col justify-center border-b-4 pb-4 text-center text-5xl text-primary-100 md:mt-40 lg:flex-row"
+				class="mx-auto flex w-fit flex-col justify-center border-b-4 pb-4 text-center text-5xl text-primary-100 lg:flex-row"
 			>
 				<p class="font-black">
 					Der Wiener Hof
@@ -51,9 +53,9 @@ definePageMeta({
 				</p>
 			</div>
 		</div>
-		<div class="mb-8 min-h-screen md:mb-20">
-			<div class="mx-auto mt-20 max-w-[32rem] flex-col lg:max-w-[50rem]">
-				<div class="mb-10">
+		<div class="mx-auto flex min-h-screen max-w-content flex-col gap-8 px-4 md:gap-16">
+			<div class="mx-auto flex flex-col gap-8">
+				<div class="flex flex-col gap-8">
 					<p>
 						VieCPro liefert erstmals
 						<strong>tausende prosopographische Profile</strong>
@@ -76,23 +78,23 @@ definePageMeta({
 						Zahlungen erhalten haben, und drittens in einem verwandtschaftlichen Verhältnis zu
 						Funktionsträger*innen standen.
 					</p>
-					<div class="mx-auto mb-10 text-center">
+					<div class="mx-auto text-center">
 						<NuxtLink
 							:href="links.search.href"
-							class="mt-10 inline-block rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
+							class="inline-block rounded border bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 transition hover:bg-gray-400 hover:text-gray-800 active:bg-gray-500"
 						>
 							{{ links.search.label }}
 						</NuxtLink>
 					</div>
 					<div>
-						<p class="mb-10 mt-4 text-center text-xl font-black text-primary-100">
+						<p class="text-center text-xl font-black text-primary-100">
 							Diese Datenbank befindet sich im Aufbau!
 						</p>
 					</div>
 				</div>
-				<div class="mt-10 rounded-lg bg-gray-100 p-8">
+				<div class="rounded-lg bg-gray-100 p-8">
 					<h1 class="text-left text-3xl font-bold text-primary-100">VieCPro</h1>
-					<p class="mt-2">
+					<p class="">
 						... ist ein
 						<strong>Gemeinschaftsprodukt zweier Forschungsteams</strong>
 						<span>, die vom</span>
@@ -105,70 +107,72 @@ definePageMeta({
 					</p>
 				</div>
 			</div>
-			<div
-				class="mx-auto mt-20 flex max-w-[32rem] flex-col items-center border-t-4 border-gray-200 pt-10 md:mt-32 lg:max-w-[50rem] xl:flex-row xl:justify-between xl:space-x-20"
-			>
-				<div>
-					<h1 class="my-8 text-3xl font-black text-primary-100">Datenbank</h1>
-					<p>
-						Die Datenbank beinhaltet die prosopographischen Datensammlungen zweier abgeschlossener
-						FWF-Projekte zum Wiener Hof von Kaiser Leopold I. (1657–1705) bis Leopold II.
-						(1790–1792). Diese Sammlungen werden durch eine
-						<strong>Datenneuaufnahme</strong>
-						für die Hofgesellschaft unter Kaiser Franz II./I. (1792–1835) erweitert. In seiner
-						technischen Umsetzung setzt das Team auf die am ACDH-CH der ÖAW entwickelte virtuelle
-						Forschungsumgebung
-						<strong>Austrian Prosopographical Information System</strong>
-						(APIS).
-					</p>
-					<div class="mb-20 w-full text-center xl:hidden">
-						<NuxtLink
-							:href="links.search.href"
-							class="mt-14 inline-block rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-						>
-							{{ links.search.label }}
-						</NuxtLink>
+			<div class="flex flex-col gap-8">
+				<div
+					class="mx-auto grid justify-stretch gap-8 border-t-4 border-gray-200 pt-8 xl:grid-cols-2"
+				>
+					<div>
+						<h1 class="text-3xl font-black text-primary-100">Datenbank</h1>
+						<p>
+							Die Datenbank beinhaltet die prosopographischen Datensammlungen zweier abgeschlossener
+							FWF-Projekte zum Wiener Hof von Kaiser Leopold I. (1657–1705) bis Leopold II.
+							(1790–1792). Diese Sammlungen werden durch eine
+							<strong>Datenneuaufnahme</strong>
+							für die Hofgesellschaft unter Kaiser Franz II./I. (1792–1835) erweitert. In seiner
+							technischen Umsetzung setzt das Team auf die am ACDH-CH der ÖAW entwickelte virtuelle
+							Forschungsumgebung
+							<strong>Austrian Prosopographical Information System</strong>
+							(APIS).
+						</p>
+						<div class="w-full text-center xl:hidden">
+							<NuxtLink
+								:href="links.search.href"
+								class="inline-block rounded border bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 transition hover:bg-gray-400 hover:text-gray-800 active:bg-gray-500"
+							>
+								{{ links.search.label }}
+							</NuxtLink>
+						</div>
+					</div>
+					<div>
+						<h1 class="text-3xl font-black text-primary-100">Materialien und Dokumentation</h1>
+						<p>
+							Unsere Dokumentation und Materialien zur Benutzung der VieCPro-Datenbank reichen von
+							einer Erklärung der APIS-Funktionalitäten über die Darlegung der
+							Bearbeitungsrichtlinien bis hin zu diversen Verzeichnissen (Projektpublikationen,
+							Hofstaatslisten, Abkürzungsverzeichnis).
+							<strong>Der Inhalt befindet sich wie die Datenbank selber noch in Arbeit</strong>
+							.
+						</p>
+						<div class="w-full text-center xl:hidden">
+							<NuxtLink
+								:href="links.documentation.href"
+								class="inline-block rounded border bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 transition hover:bg-gray-400 hover:text-gray-800 active:bg-gray-500"
+							>
+								{{ links.documentation.label }}
+							</NuxtLink>
+						</div>
 					</div>
 				</div>
-				<div>
-					<h1 class="my-8 text-3xl font-black text-primary-100">Materialien und Dokumentation</h1>
-					<p>
-						Unsere Dokumentation und Materialien zur Benutzung der VieCPro-Datenbank reichen von
-						einer Erklärung der APIS-Funktionalitäten über die Darlegung der Bearbeitungsrichtlinien
-						bis hin zu diversen Verzeichnissen (Projektpublikationen, Hofstaatslisten,
-						Abkürzungsverzeichnis).
-						<strong>Der Inhalt befindet sich wie die Datenbank selber noch in Arbeit</strong>
-						.
-					</p>
-					<div class="w-full text-center xl:hidden">
-						<NuxtLink
-							:href="links.documentation.href"
-							class="mt-14 inline-block rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-						>
-							{{ links.documentation.label }}
-						</NuxtLink>
-					</div>
+				<div
+					class="mx-auto hidden w-full grid-cols-2 gap-8 border-b-4 border-gray-200 pb-4 xl:grid"
+				>
+					<NuxtLink
+						:href="links.search.href"
+						class="mx-auto block w-fit rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 transition hover:bg-gray-400 hover:text-gray-800 active:bg-gray-500"
+					>
+						{{ links.search.label }}
+					</NuxtLink>
+					<NuxtLink
+						:href="links.documentation.href"
+						class="mx-auto block w-fit rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 transition hover:bg-gray-400 hover:text-gray-800 active:bg-gray-500"
+					>
+						{{ links.documentation.label }}
+					</NuxtLink>
 				</div>
 			</div>
-			<div
-				class="mx-auto mt-10 hidden max-w-[80rem] justify-between space-x-20 border-b-4 border-gray-200 pb-24 pl-20 pr-80 xl:flex"
-			>
-				<NuxtLink
-					:href="links.search.href"
-					class="mt-10 inline-block rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-				>
-					{{ links.search.label }}
-				</NuxtLink>
-				<NuxtLink
-					:href="links.documentation.href"
-					class="mt-10 rounded bg-gray-300 px-4 py-2 font-sans uppercase text-gray-600 hover:bg-gray-400 hover:text-gray-800"
-				>
-					{{ links.documentation.label }}
-				</NuxtLink>
-			</div>
-			<div class="mx-auto mt-20 max-w-[32rem] md:mt-28 lg:max-w-[50rem]">
+			<div class="mx-auto">
 				<div class="rounded-lg bg-gray-100 p-8">
-					<h1 class="mb-8 text-3xl font-black text-primary-100">Kontaktaufnahme</h1>
+					<h1 class="text-3xl font-black text-primary-100">Kontaktaufnahme</h1>
 					<p>
 						... zum VieCPro-Team ist stets herzlich willkommen.
 						<strong>Die Datenbank befindet sich im Aufbau</strong>

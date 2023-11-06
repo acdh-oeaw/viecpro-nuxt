@@ -103,7 +103,7 @@ watch(
 					v-model="input"
 					type="text"
 					class="h-full rounded pl-2"
-					placeholder="Search..."
+					:placeholder="t('ui.search-placeholder')"
 					@input="
 						$router.replace({
 							query: {
