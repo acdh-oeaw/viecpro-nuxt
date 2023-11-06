@@ -54,23 +54,32 @@ const links = computed(() => {
 						<X v-if="open" class="h-6 w-6 shrink-0" />
 						<MenuIcon v-else class="h-6 w-6 shrink-0" />
 					</MenuButton>
-					<MenuItems
-						as="div"
-						class="absolute right-0 mt-1 flex w-56 flex-col divide-y rounded bg-gray-50 shadow-lg ring"
+					<transition
+						enter-active-class="transition duration-100 ease-out"
+						enter-from-class="transform scale-95 -translate-y-8 opacity-0"
+						enter-to-class="transform scale-100 translate-y-0 opacity-100"
+						leave-active-class="transition duration-75 ease-in"
+						leave-from-class="transform scale-100 opacity-100"
+						leave-to-class="transform scale-95 opacity-0"
 					>
-						<MenuItem v-for="(link, key) of links" :key="key" class="flex" as="div">
-							<NuxtLink
-								class="w-full p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300 active:bg-gray-400"
-								:href="link.href"
-								@click="close"
-							>
-								{{ link.label }}
-							</NuxtLink>
-						</MenuItem>
-						<MenuItem>
-							<LocaleSwitch no-select />
-						</MenuItem>
-					</MenuItems>
+						<MenuItems
+							as="div"
+							class="absolute right-0 mt-1 flex w-56 flex-col divide-y rounded bg-gray-50 shadow-lg ring"
+						>
+							<MenuItem v-for="(link, key) of links" :key="key" class="flex" as="div">
+								<NuxtLink
+									class="w-full p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300 active:bg-gray-400"
+									:href="link.href"
+									@click="close"
+								>
+									{{ link.label }}
+								</NuxtLink>
+							</MenuItem>
+							<MenuItem>
+								<LocaleSwitch no-select />
+							</MenuItem>
+						</MenuItems>
+					</transition>
 				</Menu>
 			</div>
 		</div>

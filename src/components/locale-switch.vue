@@ -26,19 +26,28 @@ defineProps<{
 			@update:model-value="(selectedValue) => setLocale(selectedValue.code)"
 		>
 			<ListboxButton class="px-4 py-2">{{ selectedLocale.code.toUpperCase() }}</ListboxButton>
-			<ListboxOptions
-				class="fixed ml-4 mt-4 flex -translate-x-4 flex-col rounded bg-white shadow-lg"
+			<Transition
+				enter-active-class="transition duration-100 ease-out"
+				enter-from-class="transform scale-95 -translate-y-8 opacity-0"
+				enter-to-class="transform scale-100 translate-y-0 opacity-100"
+				leave-active-class="transition duration-75 ease-in"
+				leave-from-class="transform scale-100 opacity-100"
+				leave-to-class="transform scale-95 opacity-0"
 			>
-				<ListboxOption
-					v-for="loc in locales"
-					:key="loc.code"
-					as="button"
-					:value="loc"
-					class="min-w-[5rem] p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300 active:bg-gray-400"
+				<ListboxOptions
+					class="fixed ml-4 mt-4 flex -translate-x-4 flex-col rounded bg-white shadow-lg"
 				>
-					{{ loc.code.toUpperCase() }}
-				</ListboxOption>
-			</ListboxOptions>
+					<ListboxOption
+						v-for="loc in locales"
+						:key="loc.code"
+						as="button"
+						:value="loc"
+						class="min-w-[5rem] p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300 active:bg-gray-400"
+					>
+						{{ loc.code.toUpperCase() }}
+					</ListboxOption>
+				</ListboxOptions>
+			</Transition>
 		</Listbox>
 	</div>
 	<div v-else class="flex w-full divide-x">
