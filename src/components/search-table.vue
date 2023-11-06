@@ -92,7 +92,7 @@ watch(
 </script>
 
 <template>
-	<div class="mx-2 flex h-full flex-col-reverse xl:grid xl:grid-cols-[4fr_2fr]">
+	<div class="mx-2 flex h-full flex-col-reverse gap-4 xl:grid xl:grid-cols-[4fr_2fr]">
 		<div class="mx-auto flex h-full w-full max-w-container flex-col p-2 xl:p-0">
 			<div
 				class="mb-4 grid h-12 w-full grid-cols-[1fr_auto] items-center rounded bg-white shadow xl:my-4"
