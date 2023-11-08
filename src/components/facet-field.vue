@@ -1,6 +1,6 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
-import { ChevronDown } from "lucide-vue-next";
+import { ChevronDown, XCircle } from "lucide-vue-next";
 import { type SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
 import { computed, onMounted, ref } from "vue";
 import { type ComputedRef, type Ref } from "vue";
@@ -22,6 +22,8 @@ const props = defineProps<{
 
 const route: RouteLocationNormalized = useRoute();
 
+const facetSearch: Ref<string> = ref("");
+
 let facetModel: Ref<Array<string> | undefined> = ref(props.selected || []);
 let loading: Ref<boolean> = ref(true);
 
@@ -31,13 +33,13 @@ let scopeFacet: Ref<SearchResponseFacetCountSchema<any> | undefined> = ref({
 	stats: {},
 });
 
-const loadFacets = async (max = 500) => {
+const loadFacets = async (max = 500, query = "") => {
 	loading.value = true;
 	const results = await getFacets(
 		props.fieldName,
 		max,
 		route.query,
-		"",
+		query,
 		props.collection,
 		props.queryBy,
 	);
@@ -101,6 +103,23 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 		<h1 class="flex items-center justify-between text-2xl">
 			{{ t(`collection-keys["${fieldName}"]`) }}
 		</h1>
+
+		<div class="m-1 grid w-full grid-cols-[1fr_auto] items-center rounded bg-white shadow-sm">
+			<label :for="`${fieldName}Search`" class="sr-only">Search through facets</label>
+			<input
+				:id="`${fieldName}Search`"
+				v-model="facetSearch"
+				type="text"
+				class="rounded p-1"
+				:name="`${fieldName}Search`"
+				:placeholder="t('ui.search-placeholder')"
+				@input="loadFacets(10, facetSearch)"
+			/>
+			<button v-if="facetSearch" @click="(facetSearch = ''), loadFacets(10)">
+				<span class="sr-only">Delete Input</span>
+				<XCircle class="mx-2 h-6 w-6 text-gray-400" />
+			</button>
+		</div>
 		<div
 			v-for="count in facetsWithSelected"
 			:key="count.value"
@@ -122,9 +141,9 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 				<span>
 					{{ count.value }}
 				</span>
-				<chip v-if="count.count">
+				<Chip v-if="count.count">
 					{{ count.count }}
-				</chip>
+				</Chip>
 			</label>
 		</div>
 		<button

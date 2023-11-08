@@ -69,6 +69,7 @@
 		"showing-results": "Showing {first} - {last} out of {all}",
 		"show-all": "show all...",
 		"show-filters": "Show Filters...",
-		"hide-filters": "Hide Filters..."
+		"hide-filters": "Hide Filters...",
+		"search-placeholder": "Search..."
 	}
 }

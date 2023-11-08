@@ -2,17 +2,15 @@
 import { useRoute } from "vue-router";
 
 import DetailPage from "@/components/detail-page.vue";
-import { getDocument } from "@/composables/use-ts-data";
+import { getDocumentAndRelations } from "@/composables/use-ts-data";
 import { definePageMeta, ref } from "#imports";
 
 const route = useRoute();
 const id = String(route.params.id);
 const loading = ref(true);
-const data = await getDocument("viecpro_references", "Reference_" + String(id));
 
-// No relations should exist
-// const relationsSource = await getRelations(id, "source.object_id");
-// const relationsTarget = await getRelations(id, "target.object_id");
+const data = await getDocumentAndRelations("Reference_", "viecpro_references", id);
+
 loading.value = false;
 console.log(data);
 
@@ -26,6 +24,11 @@ definePageMeta({
 		<div>
 			{{ route.params.id }}
 		</div>
-		<DetailPage :loading="loading" :data="data" />
+		<DetailPage
+			:loading="loading"
+			:data="data.entity"
+			:source="data.source"
+			:target="data.target"
+		/>
 	</div>
 </template>

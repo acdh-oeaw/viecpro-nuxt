@@ -49,3 +49,21 @@ export async function getRelations<CollectionEntry extends Record<string, Docume
 	if (kind != null) query.filter_by = `target.model := ${kind} || source.model := ${kind}`;
 	return getDocuments(query, "viecpro_relations");
 }
+
+export async function getDocumentAndRelations(
+	prefix: string,
+	collection: string,
+	id: string,
+	kind?: string,
+): Promise<{
+	entity: Record<string, Document>;
+	source: SearchResponse<Record<string, Document>>;
+	target: SearchResponse<Record<string, Document>>;
+}> {
+	const [entity, source, target] = await Promise.all([
+		getDocument(collection, prefix + id),
+		getRelations(id, "source.object_id", kind),
+		getRelations(id, "target.object_id", kind),
+	]);
+	return { entity, source, target };
+}
