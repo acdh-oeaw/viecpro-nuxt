@@ -54,9 +54,9 @@ definePageMeta({
 				</p>
 			</div>
 		</div>
-		<div class="mx-auto flex min-h-screen max-w-content flex-col gap-8 px-4 md:gap-16">
+		<div class="mx-auto flex min-h-screen max-w-4xl flex-col gap-8 px-4 md:gap-16">
 			<div class="mx-auto flex flex-col gap-8">
-				<div class="flex flex-col gap-8 text-justify">
+				<div class="flex flex-col gap-8">
 					<p>
 						VieCPro liefert erstmals
 						<strong>tausende prosopographische Profile</strong>
@@ -94,8 +94,8 @@ definePageMeta({
 					</div>
 				</div>
 				<div class="rounded-lg bg-gray-100 p-8">
-					<h1 class="text-left text-3xl font-bold text-primary-100">VieCPro</h1>
-					<p class="text-justify">
+					<h1 class="mb-2 text-left text-3xl font-bold text-primary-100">VieCPro</h1>
+					<p>
 						...ist ein
 						<strong>Gemeinschaftsprodukt zweier Forschungsteams</strong>
 						<span>, die vom</span>
@@ -110,10 +110,12 @@ definePageMeta({
 			</div>
 			<div class="flex flex-col gap-8">
 				<div
-					class="mx-auto grid justify-stretch gap-8 border-t-4 border-gray-200 pt-8 text-justify xl:grid-cols-2"
+					class="mx-auto grid justify-stretch gap-8 border-t-4 border-gray-200 pt-8 xl:grid-cols-2"
 				>
 					<div class="flex flex-col gap-4">
-						<h1 class="text-3xl font-black text-primary-100">Datenbank</h1>
+						<h1 class="inline-block align-baseline text-3xl font-black text-primary-100">
+							Datenbank
+						</h1>
 						<p>
 							Die Datenbank beinhaltet die prosopographischen Datensammlungen zweier abgeschlossener
 							FWF-Projekte zum Wiener Hof von Kaiser Leopold I. (1657–1705) bis Leopold II.
@@ -141,8 +143,7 @@ definePageMeta({
 							einer Erklärung der APIS-Funktionalitäten über die Darlegung der
 							Bearbeitungsrichtlinien bis hin zu diversen Verzeichnissen (Projektpublikationen,
 							Hofstaatslisten, Abkürzungsverzeichnis).
-							<strong>Der Inhalt befindet sich wie die Datenbank selber noch in Arbeit</strong>
-							.
+							<strong>Der Inhalt befindet sich wie die Datenbank selber noch in Arbeit.</strong>
 						</p>
 						<div class="w-full text-center xl:hidden">
 							<NuxtLink
@@ -172,8 +173,8 @@ definePageMeta({
 				</div>
 			</div>
 			<div class="mx-auto">
-				<div class="rounded-lg bg-gray-100 p-8 text-justify">
-					<h1 class="text-3xl font-black text-primary-100">Kontaktaufnahme</h1>
+				<div class="rounded-lg bg-gray-100 p-8">
+					<h1 class="mb-2 text-3xl font-black text-primary-100">Kontaktaufnahme</h1>
 					<p>
 						...zum VieCPro-Team ist stets herzlich willkommen.
 						<strong>Die Datenbank befindet sich im Aufbau</strong>
