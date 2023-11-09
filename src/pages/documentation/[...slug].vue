@@ -27,7 +27,7 @@ const currentDoc = computed(() => {
 		<nav class="lg:justify-self-end">
 			<ContentNavigation v-slot="{ navigation }" :query="{ where: [{ _locale: locale }] }">
 				<!-- :where="{ _locale: locale }" -->
-				<ul class="m-4 rounded bg-gray-200 p-4 text-lg">
+				<ul class="m-4 rounded bg-gray-200 p-4 text-lg shadow">
 					<h2 class="mb-2 text-xl font-black">
 						{{ t("pages.documentation.contents") }}
 					</h2>
@@ -47,7 +47,7 @@ const currentDoc = computed(() => {
 		</nav>
 		<MainContent class="w-full px-6 py-4">
 			<ContentQuery v-slot="{ data }" :path="currentDoc" :where="{ _locale: locale }" find="one">
-				<ContentRenderer :value="data">
+				<ContentRenderer v-if="data" :value="data">
 					<ContentRendererMarkdown :value="data" class="prose" />
 				</ContentRenderer>
 			</ContentQuery>

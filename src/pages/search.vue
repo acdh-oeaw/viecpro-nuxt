@@ -57,7 +57,7 @@ definePageMeta({
 					v-for="link in links"
 					:key="link.label"
 					:to="link.href"
-					class="group mx-2 flex h-fit items-center gap-4 rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300 md:mx-0 lg:my-2"
+					class="group mx-2 flex h-fit items-center gap-4 rounded border p-2 shadow transition hover:bg-slate-200 active:bg-slate-300 lg:my-2 xl:mx-0"
 					:class="$route.path === link.href.path && 'bg-slate-200'"
 				>
 					<component
