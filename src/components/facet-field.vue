@@ -64,20 +64,29 @@ const addToFacets = async (name: string, max = 1) => {
 	loading.value = false;
 };
 
+const addSelected = async (selected: Array<string>) => {
+	selected.forEach((sel) => {
+		if (
+			!(
+				scopeFacet.value?.counts.some((facet) => {
+					return facet.value === sel;
+				}) ?? false
+			)
+		) {
+			addToFacets(sel);
+		}
+	});
+};
+
+const facetSearchInput = async (input: string) => {
+	await loadFacets(10, input);
+	if (props.selected && scopeFacet.value !== undefined) addSelected(props.selected);
+};
+
 onMounted(async () => {
 	await loadFacets(10);
 	if (props.selected && scopeFacet.value !== undefined) {
-		props.selected.forEach((sel) => {
-			if (
-				!(
-					scopeFacet.value?.counts.some((facet) => {
-						return facet.value === sel;
-					}) ?? false
-				)
-			) {
-				addToFacets(sel);
-			}
-		});
+		addSelected(props.selected);
 	}
 });
 
@@ -113,7 +122,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 				class="rounded p-1"
 				:name="`${fieldName}Search`"
 				:placeholder="t('ui.search-placeholder')"
-				@input="loadFacets(10, facetSearch)"
+				@input="facetSearchInput(facetSearch)"
 			/>
 			<button v-if="facetSearch" @click="(facetSearch = ''), loadFacets(10)">
 				<span class="sr-only">Delete Input</span>

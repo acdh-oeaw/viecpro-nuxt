@@ -35,7 +35,6 @@ definePageMeta({
 			<div>
 				<div class="h-2 w-full bg-primary-800" />
 				<NuxtImg
-					placeholder
 					src="/assets/images/background-court-ship.jpeg"
 					alt=""
 					class="min-h-[20rem] w-full object-cover"
