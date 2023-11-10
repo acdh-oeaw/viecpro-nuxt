@@ -43,7 +43,7 @@ const highlight = {
 
 /** @type {TailwindConfig} */
 const config = {
-	content: ["./src/**/*.@(css|ts|vue)"],
+	content: ["./**/*.@(css|ts|vue)"],
 	plugins: [animate, headlessui, typography],
 	theme: {
 		extend: {

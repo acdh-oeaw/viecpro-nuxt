@@ -7,8 +7,7 @@ import { defaultLocale, locales } from "./config/i18n.config";
 
 export default defineNuxtConfig({
 	alias: {
-		"@": fileURLToPath(new URL("./src", import.meta.url)),
-		"~": fileURLToPath(new URL("./", import.meta.url)),
+		"@": fileURLToPath(new URL("./", import.meta.url)),
 	},
 	components: false,
 	content: {
@@ -25,9 +24,6 @@ export default defineNuxtConfig({
 		"tailwindcss/tailwind.css",
 		"@/styles/index.css",
 	],
-	dir: {
-		public: "../public",
-	},
 	i18n: {
 		baseUrl: env.VITE_APP_BASE_URL,
 		defaultLocale,
@@ -63,7 +59,6 @@ export default defineNuxtConfig({
 		"/": { static: true },
 		"/imprint": { static: true },
 	},
-	srcDir: "./src/",
 	typescript: {
 		shim: false,
 		strict: true,
@@ -71,8 +66,7 @@ export default defineNuxtConfig({
 		tsConfig: {
 			compilerOptions: {
 				paths: {
-					"@/*": ["./src/*"],
-					"~/*": ["./*"],
+					"@/*": ["./*"],
 				},
 			},
 		},

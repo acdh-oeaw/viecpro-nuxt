@@ -20,11 +20,7 @@ ARG VITE_TYPESENSE_COLLECTION_PREFIX
 
 COPY --chown=node:node .npmrc package.json package-lock.json ./
 COPY --chown=node:node nuxt.config.ts tailwind.config.cjs tsconfig.json ./
-COPY --chown=node:node scripts ./scripts
-COPY --chown=node:node config ./config
-COPY --chown=node:node public ./public
-COPY --chown=node:node src ./src
-COPY --chown=node:node patches ./patches
+COPY --chown=node:node . ./
 
 RUN npm install --ci --no-audit --no-fund
 

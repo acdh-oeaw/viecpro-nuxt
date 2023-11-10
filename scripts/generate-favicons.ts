@@ -4,8 +4,8 @@ import { extname, join } from "node:path";
 import generateFavicons, { generateSocialImage } from "@stefanprobst/favicons";
 import { log } from "@stefanprobst/log";
 
-import { defaultLocale } from "~/config/i18n.config";
-import { manifestFileName, metadata, openGraphImageName } from "~/config/metadata.config";
+import { defaultLocale } from "@/config/i18n.config";
+import { manifestFileName, metadata, openGraphImageName } from "@/config/metadata.config";
 
 async function generate() {
 	const publicFolder = join(process.cwd(), "public");

@@ -3,7 +3,7 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headless
 import { computed } from "vue";
 
 import { useI18n } from "@/composables/use-i18n";
-import { locales } from "~/config/i18n.config";
+import { locales } from "@/config/i18n.config";
 
 const { locale, setLocale } = useI18n();
 

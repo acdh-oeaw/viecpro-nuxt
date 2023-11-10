@@ -6,7 +6,7 @@ import AppHeader from "@/components/app-header.vue";
 import SkipLink from "@/components/skip-link.vue";
 import { useI18n } from "@/composables/use-i18n";
 import { useHead, useRoute } from "#imports";
-import { metadata } from "~/config/metadata.config";
+import { metadata } from "@/config/metadata.config";
 
 const route = useRoute();
 const { locale, t } = useI18n();
