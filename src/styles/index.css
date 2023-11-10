@@ -39,7 +39,7 @@ body {
 }
 
 #__nuxt {
-	overflow-y: auto;
+	overflow-y: scroll;
 	block-size: 100%;
 }
 

@@ -95,7 +95,7 @@ watch(
 	<div class="mx-2 flex h-full flex-col-reverse gap-4 xl:grid xl:grid-cols-[4fr_2fr]">
 		<div class="mx-auto flex h-full w-full max-w-container flex-col p-2 xl:p-0">
 			<div
-				class="mb-4 grid h-12 w-full grid-cols-[1fr_auto] items-center rounded border bg-white shadow-md xl:my-4"
+				class="mb-4 grid h-12 w-full shrink-0 grid-cols-[1fr_auto] items-center rounded border bg-white shadow-md xl:my-4"
 			>
 				<label for="searchinput" class="sr-only">Search</label>
 				<input
@@ -164,13 +164,27 @@ watch(
 									:key="key + hit.document.id"
 									class="m-2 self-center overflow-auto"
 								>
-									{{ get(hit.document, key) }}
+									<span
+										v-if="key === queryBy && hit.highlight[key]?.snippet"
+										v-html="hit.highlight[key].snippet"
+									/>
+									<span v-else>
+										{{ get(hit.document, key) }}
+									</span>
 								</div>
 							</div>
 							<div class="flex flex-col gap-1 p-1 md:hidden">
 								<div v-for="key in koi" :key="key + hit.document.id">
 									<div class="text-gray-500">{{ t(`collection-keys["${key}"]`) }}</div>
-									<div class="text-2xl">{{ get(hit.document, key) }}</div>
+									<div class="text-2xl">
+										<span
+											v-if="key === queryBy && hit.highlight[key]?.snippet"
+											v-html="hit.highlight[key].snippet"
+										/>
+										<span v-else>
+											{{ get(hit.document, key) }}
+										</span>
+									</div>
 								</div>
 							</div>
 							<ChevronRight class="h-6 w-6 shrink-0" />
@@ -201,3 +215,9 @@ watch(
 		</div>
 	</div>
 </template>
+
+<style lang="postcss">
+mark {
+	@apply bg-lime-300 p-0.5 -m-0.5 rounded;
+}
+</style>

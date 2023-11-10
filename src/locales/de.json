@@ -68,6 +68,11 @@
 	},
 	"ui": {
 		"showing-results": "Zeige {first} - {last} von {all} Ergebnissen",
+		"no-results": "Keine Ergebnisse.",
+		"next-page": "Nächste Seite",
+		"prev-page": "Vorherige Seite",
+		"first-page": "Es gibt keine Seite vor dieser.",
+		"last-page": "Das ist bereits die letzte Seite.",
 		"show-all": "Zeige alle...",
 		"show-filters": "Filter ausfahren...",
 		"hide-filters": "Filter verstecken...",

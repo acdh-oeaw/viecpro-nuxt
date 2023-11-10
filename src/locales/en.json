@@ -67,6 +67,11 @@
 	},
 	"ui": {
 		"showing-results": "Showing {first} - {last} out of {all}",
+		"no-results": "Nothing Found.",
+		"next-page": "Next Page",
+		"prev-page": "Previous Page",
+		"first-page": "You're already on the first page.",
+		"last-page": "You're already on the last page.",
 		"show-all": "show all...",
 		"show-filters": "Show Filters...",
 		"hide-filters": "Hide Filters...",

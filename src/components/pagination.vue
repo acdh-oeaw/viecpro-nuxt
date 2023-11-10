@@ -30,12 +30,12 @@ const { t } = useI18n();
 				class="cursor-pointer rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
 			>
 				<ChevronUp class="h-5 w-5 -rotate-90" />
-				<span class="sr-only">Previous Page</span>
+				<span class="sr-only">{{ t("ui.prev-page") }}</span>
 			</div>
 		</NuxtLink>
 		<div v-else class="cursor-not-allowed rounded border p-2 text-gray-400 transition">
 			<ChevronUp class="h-5 w-5 -rotate-90" />
-			<span class="sr-only">Previous Page, but you're already on page 1</span>
+			<span class="sr-only">{{ t("ui.first-page") }}</span>
 		</div>
 		<div v-if="all != 0">
 			{{
@@ -46,7 +46,7 @@ const { t } = useI18n();
 				})
 			}}
 		</div>
-		<div v-else class="italic">Nothing Found.</div>
+		<div v-else class="italic">{{ t("ui.no-results") }}</div>
 		<NuxtLink
 			v-if="page * limit < Number(all)"
 			:to="{
@@ -60,13 +60,13 @@ const { t } = useI18n();
 				class="cursor-pointer rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
 			>
 				<ChevronUp class="h-5 w-5 rotate-90" />
-				<span class="sr-only">Next Page</span>
+				<span class="sr-only">{{ t("ui.next-page") }}</span>
 			</div>
 		</NuxtLink>
 
 		<div v-else class="cursor-not-allowed rounded border p-2 transition">
 			<ChevronUp class="h-5 w-5 rotate-90 text-gray-400" />
-			<span class="sr-only">Next Page, but you're already on the last page</span>
+			<span class="sr-only">{{ t("ui.last-page") }}</span>
 		</div>
 	</div>
 </template>
