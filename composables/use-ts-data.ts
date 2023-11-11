@@ -1,5 +1,5 @@
-import { type SearchParams, type SearchResponse } from "typesense/lib/Typesense/Documents";
-import { type LocationQuery } from "vue-router";
+import type { SearchParams, SearchResponse } from "typesense/lib/Typesense/Documents";
+import type { LocationQuery } from "vue-router";
 
 import { useDefaultClient } from "@/lib/get-ts-data";
 

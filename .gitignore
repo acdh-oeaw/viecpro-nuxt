@@ -2,17 +2,10 @@
 node_modules/
 .pnpm-store/
 
-# nuxt.js
-dist
-.nuxt/
-.nitro/
-.output/
-
 # logs
 *.log
 
 # non-public environment variables
-.env
 .env.local
 .env.*.local
 
@@ -21,18 +14,20 @@ dist
 .stylelintcache
 *.tsbuildinfo
 
+# vercel
+.vercel
+
 # misc
 .DS_Store
-.idea
+.idea/
 
-# generated assets
-/public/**/favicon.ico
-/public/**/icon.svg
-/public/**/android-chrome-192x192.png
-/public/**/android-chrome-512x512.png
-/public/**/apple-touch-icon.png
-/public/**/app.webmanifest
-/public/**/image.webp
+# nuxt.js
+dist
+.nuxt/
+.nitro/
+.output/
 
-# notes
-DEV_NOTES.md
+# playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/

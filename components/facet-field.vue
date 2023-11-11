@@ -1,16 +1,10 @@
-<!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
-import { ChevronDown, XCircle } from "lucide-vue-next";
-import { type SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
-import { computed, onMounted, ref } from "vue";
-import { type ComputedRef, type Ref } from "vue";
-import { type RouteLocationNormalized, useRoute } from "vue-router";
+import { ChevronDownIcon, XCircleIcon } from "lucide-vue-next";
+import type { SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
 
-import Chip from "@/components/chip.vue";
-import { useI18n } from "@/composables/use-i18n";
 import { getFacets } from "@/composables/use-ts-data";
 
-const { t } = useI18n();
+const t = useTranslations();
 
 const props = defineProps<{
 	fieldName: string;
@@ -20,14 +14,14 @@ const props = defineProps<{
 	queryBy: string;
 }>();
 
-const route: RouteLocationNormalized = useRoute();
+const route = useRoute();
 
-const facetSearch: Ref<string> = ref("");
+const facetSearch = ref("");
 
-let facetModel: Ref<Array<string> | undefined> = ref(props.selected || []);
-let loading: Ref<boolean> = ref(true);
+let facetModel = ref(props.selected || []);
+let loading = ref(true);
 
-let scopeFacet: Ref<SearchResponseFacetCountSchema<any> | undefined> = ref({
+let scopeFacet = ref<SearchResponseFacetCountSchema<any> | undefined>({
 	field_name: props.fieldName,
 	counts: [],
 	stats: {},
@@ -101,7 +95,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 				return b.count - a.count;
 			})
 			.sort((a) => {
-				if (facetModel.value?.includes(a.value) ?? false) return -1;
+				if (facetModel.value.includes(a.value) ?? false) return -1;
 				return 0;
 			});
 	});
@@ -113,26 +107,26 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 			{{ t(`collection-keys["${fieldName}"]`) }}
 		</h1>
 
-		<div class="m-1 grid w-full grid-cols-[1fr_auto] items-center rounded bg-white shadow-sm">
+		<div class="grid m-1 w-full grid-cols-[1fr_auto] items-center rounded-md bg-white shadow-sm">
 			<label :for="`${fieldName}Search`" class="sr-only">Search through facets</label>
 			<input
 				:id="`${fieldName}Search`"
 				v-model="facetSearch"
 				type="text"
-				class="rounded p-1"
+				class="rounded-md p-1"
 				:name="`${fieldName}Search`"
 				:placeholder="t('ui.search-placeholder')"
 				@input="facetSearchInput(facetSearch)"
 			/>
 			<button v-if="facetSearch" @click="(facetSearch = ''), loadFacets(10)">
 				<span class="sr-only">Delete Input</span>
-				<XCircle class="mx-2 h-6 w-6 text-gray-400" />
+				<XCircleIcon class="mx-2 h-6 w-6 text-neutral-400" />
 			</button>
 		</div>
 		<div
 			v-for="count in facetsWithSelected"
 			:key="count.value"
-			class="flex items-center gap-2 rounded p-1 transition hover:bg-slate-200 active:bg-slate-300"
+			class="flex items-center gap-2 rounded-md p-1 transition hover:bg-neutral-200 active:bg-neutral-300"
 		>
 			<input
 				:id="`${fieldName}:${count.value}`"
@@ -157,11 +151,11 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 		</div>
 		<button
 			v-if="scopeFacet?.stats?.total_values != scopeFacet?.counts.length"
-			class="flex cursor-pointer items-center justify-center gap-2 rounded p-1 transition hover:bg-slate-200 active:bg-slate-300"
+			class="flex cursor-pointer items-center justify-center gap-2 rounded-md p-1 transition hover:bg-neutral-200 active:bg-neutral-300"
 			@click="loadFacets()"
 		>
 			<span>{{ t("ui.show-all") }} ({{ scopeFacet?.stats.total_values }} total)</span>
-			<ChevronDown class="h-5 w-5" />
+			<ChevronDownIcon class="h-5 w-5" />
 		</button>
 	</div>
 </template>

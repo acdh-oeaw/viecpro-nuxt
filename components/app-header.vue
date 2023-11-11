@@ -1,87 +1,35 @@
 <script lang="ts" setup>
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { Menu as MenuIcon, X } from "lucide-vue-next";
-import { computed } from "vue";
+import type { NavLinkProps } from "@/components/nav-link.vue";
 
-import LocaleSwitch from "@/components/locale-switch.vue";
-import { useI18n } from "@/composables/use-i18n";
-import { type NavLink } from "@/lib/types";
-import { NuxtLink } from "#components";
-import { useLocalePath } from "#imports";
-
-const { t } = useI18n();
-const localePath = useLocalePath();
+const t = useTranslations();
 
 const links = computed(() => {
 	return {
-		home: { href: { path: localePath("/") }, label: t("pages.home.label") },
-		search: { href: { path: localePath("/search/courts") }, label: t("pages.search.label") },
+		home: { href: { path: "/" }, label: t("AppHeader.links.home") },
+		search: { href: { path: "/search" }, label: t("AppHeader.links.search") },
 		documentation: {
-			href: { path: localePath("/documentation/project") },
-			label: t("pages.documentation.label"),
+			href: { path: "/documentation" },
+			label: t("AppHeader.links.documentation"),
 		},
-	} satisfies Record<string, NavLink>;
+	} satisfies Record<string, { href: NavLinkProps["href"]; label: string }>;
 });
 </script>
 
 <template>
-	<header class="bg-primary-100 text-white">
-		<div
-			class="mx-auto flex w-full max-w-container items-center justify-between gap-x-4 gap-y-2 px-8 py-4"
-		>
-			<NuxtLink class="shrink-0 select-none" :href="links.home.href">
+	<header class="bg-brand-600 text-white">
+		<div class="container flex items-center justify-between gap-6 py-6">
+			<NavLink class="flex shrink-0" :href="links.home.href">
 				<span class="sr-only">{{ links.home.label }}</span>
-				<img alt="" class="h-20" src="@/assets/images/logo-white.png" />
-			</NuxtLink>
-			<div class="hidden items-center md:flex">
-				<nav :aria-label="t('common.main-navigation')">
-					<ul class="flex flex-wrap gap-x-4" role="list">
-						<li v-for="(link, key) of links" :key="key" class="select-none">
-							<NuxtLink
-								class="rounded p-2 transition hover:bg-primary-300 active:bg-primary-400"
-								:href="link.href"
-							>
-								{{ link.label }}
-							</NuxtLink>
-						</li>
-					</ul>
-				</nav>
-				<LocaleSwitch class="select-none" />
+				<img alt="" class="block h-16" height="64" src="/assets/images/logo-light.png" />
+			</NavLink>
+
+			<div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-between lg:gap-6">
+				<AppNavigationMenu :label="t('AppHeader.navigation-main')" :links="links" />
 			</div>
-			<div class="md:hidden">
-				<Menu v-slot="{ open, close }" as="div" class="relative z-50 inline-block">
-					<MenuButton as="button" class="rounded border border-gray-300 p-2">
-						<X v-if="open" class="h-6 w-6 shrink-0" />
-						<MenuIcon v-else class="h-6 w-6 shrink-0" />
-					</MenuButton>
-					<transition
-						enter-active-class="transition duration-100 ease-out"
-						enter-from-class="transform scale-95 -translate-y-8 opacity-0"
-						enter-to-class="transform scale-100 translate-y-0 opacity-100"
-						leave-active-class="transition duration-75 ease-in"
-						leave-from-class="transform scale-100 opacity-100"
-						leave-to-class="transform scale-95 opacity-0"
-					>
-						<MenuItems
-							as="div"
-							class="absolute right-0 mt-1 flex w-56 flex-col divide-y rounded bg-gray-50 shadow-lg ring"
-						>
-							<MenuItem v-for="(link, key) of links" :key="key" class="flex" as="div">
-								<NuxtLink
-									class="w-full p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300 active:bg-gray-400"
-									:href="link.href"
-									@click="close"
-								>
-									{{ link.label }}
-								</NuxtLink>
-							</MenuItem>
-							<MenuItem>
-								<LocaleSwitch no-select />
-							</MenuItem>
-						</MenuItems>
-					</transition>
-				</Menu>
-			</div>
+
+			<nav :aria-label="t('AppHeader.navigation-main')" class="flex shrink-0 lg:hidden">
+				<AppNavigationMenuMobile :links="links" :title="t('AppHeader.navigation-menu')" />
+			</nav>
 		</div>
 	</header>
 </template>

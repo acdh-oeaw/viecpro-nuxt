@@ -2,9 +2,12 @@
 	"recommendations": [
 		"bradlc.vscode-tailwindcss",
 		"dbaeumer.vscode-eslint",
-		"editorConfig.editorConfig",
+		"editorconfig.editorconfig",
 		"esbenp.prettier-vscode",
+		"lokalise.i18n-ally",
 		"mikestead.dotenv",
+		"ms-playwright.playwright",
+		"nuxt.mdc",
 		"stylelint.vscode-stylelint",
 		"vue.volar",
 		"vue.vscode-typescript-vue-plugin"

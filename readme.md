@@ -1,26 +1,34 @@
-# VieCPro Frontend
+# viecpro frontend
 
-Frontend for the [APIS-Instance](https://viecpro-dev.acdh-dev.oeaw.ac.at/) of the
-[VieCPro project](https://viecpro.oeaw.ac.at/).
+frontend for the [apis instance](https://viecpro-dev.acdh-dev.oeaw.ac.at/) of the
+[viecpro project](https://viecpro.oeaw.ac.at/) ("the viennese court. a prosopographical portal").
 
-## How to run
+## how to run
 
-Prerequisites: [Node.js v18](https://nodejs.org/en/download)
+prerequisites:
 
-Set required environment variables in `.env`:
+- [Node.js v20](https://nodejs.org/en/download)
+- [pnpm](https://pnpm.io/installation)
+
+set required environment variables in `.env.local`:
 
 ```bash
-cp .env.example .env
+cp .env.example .env.local
 ```
 
-Install dependencies:
+also, set environment variables required by github actions. use
+["variables"](https://github.com/acdh-oeaw/template-app-nuxt/settings/variables/actions) for every
+environment variable prefixed with `NUXT_PUBLIC_`, and
+["secrets"](https://github.com/acdh-oeaw/template-app-nuxt/settings/secrets/actions) for all others.
+
+install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
-Run a development server on [http://localhost:3000](http://localhost:3000):
+run a development server on [http://localhost:3000](http://localhost:3000):
 
 ```bash
-npm run dev
+pnpm run dev
 ```

@@ -1,22 +1,28 @@
-import type messages from "@/locales/de.json";
+import type { LocaleObject } from "vue-i18n-routing";
 
-export type LocaleObject = {
-	code: string;
-	iso: string;
-	name: string;
-	file: string;
-};
+import type de from "@/messages/de.json";
+import type en from "@/messages/en.json";
 
-// GP:  shouldn't this just be an array of LocaleObjects? see: https://i18n.nuxtjs.org/api#locales (section locales)
-export const locales: Record<"de" | "en", LocaleObject> = {
-	de: { code: "de", iso: "de-AT", name: "Deutsch", file: "de.json" },
-	en: { code: "en", iso: "en-US", name: "English", file: "en.json" },
-};
+export const locales = {
+	de: { code: "de", iso: "de-AT", file: "de.json" },
+	en: { code: "en", iso: "en-GB", file: "en.json" },
+} satisfies Record<string, LocaleObject>;
 
 export type Locale = keyof typeof locales;
-export type Locales = typeof locales.de;
-export const defaultLocale: Locale = "de";
 
-export type Messages = typeof messages;
+export const defaultLocale: Locale = "en";
 
-export type Schema = { message: Messages };
+export type Messages = typeof en;
+
+export interface Schema {
+	message: Messages;
+}
+
+export function isValidLocale(value: string): value is Locale {
+	return value in locales;
+}
+
+export interface Translations extends Record<Locale, Messages> {
+	de: typeof de;
+	en: typeof en;
+}

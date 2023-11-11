@@ -1,18 +1,14 @@
 <script lang="ts" setup>
 import { useWindowSize } from "@vueuse/core";
 import get from "lodash.get";
-import { ChevronRight, Loader2, XCircle } from "lucide-vue-next";
-import { type SearchResponse } from "typesense/lib/Typesense/Documents";
-import { computed, type ComputedRef, type Ref, ref, watch } from "vue";
-import { type LocationQuery, type RouteLocationNormalized, useRoute } from "vue-router";
+import { ChevronRightIcon, XCircleIcon } from "lucide-vue-next";
+import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 
-import Centered from "@/components/centered.vue";
 import FacetDisclosures from "@/components/facet-disclosures.vue";
-import Pagination from "@/components/pagination.vue";
-import { useI18n } from "@/composables/use-i18n";
 import { getDocuments } from "@/composables/use-ts-data";
 
-const { t, locale } = useI18n();
+const locale = useLocale();
+const t = useTranslations();
 
 const props = defineProps<{
 	queryBy: string;
@@ -24,12 +20,12 @@ const props = defineProps<{
 
 const pageLimit = 25;
 
-const route: RouteLocationNormalized = useRoute();
-const loading: Ref<boolean> = ref(true);
+const route = useRoute();
+const loading = ref(true);
 
-const input: Ref<string> = ref(route.query.q === undefined ? "" : String(route.query.q));
+const input = ref(route.query.q === undefined ? "" : String(route.query.q));
 
-const docs: Ref<SearchResponse<Record<string, Document>> | null> = ref(null);
+const docs = ref<SearchResponse<Record<string, Document>> | null>(null);
 
 const windowWidth = useWindowSize().width;
 
@@ -75,7 +71,7 @@ const limitNum: ComputedRef<number> = computed(() => {
 watch(
 	route,
 	(newRoute) => {
-		const query: LocationQuery = newRoute.query;
+		const query = newRoute.query;
 
 		search(
 			props.collectionName,
@@ -93,16 +89,16 @@ watch(
 
 <template>
 	<div class="mx-2 flex h-full flex-col-reverse gap-4 xl:grid xl:grid-cols-[4fr_2fr]">
-		<div class="mx-auto flex h-full w-full max-w-container flex-col p-2 xl:p-0">
+		<div class="max-w-container mx-auto flex h-full w-full flex-col p-2 xl:p-0">
 			<div
-				class="mb-4 grid h-12 w-full shrink-0 grid-cols-[1fr_auto] items-center rounded border bg-white shadow-md xl:my-4"
+				class="grid mb-4 h-12 w-full shrink-0 grid-cols-[1fr_auto] items-center rounded-md border bg-white shadow-md xl:my-4"
 			>
 				<label for="searchinput" class="sr-only">Search</label>
 				<input
 					id="searchinput"
 					v-model="input"
 					type="text"
-					class="h-full rounded pl-2"
+					class="h-full rounded-md pl-2"
 					:placeholder="t('ui.search-placeholder')"
 					@input="
 						$router.replace({
@@ -128,7 +124,7 @@ watch(
 					"
 				>
 					<span class="sr-only">Delete Input</span>
-					<XCircle class="mx-2 h-6 w-6 text-gray-400" />
+					<XCircleIcon class="mx-2 h-6 w-6 text-neutral-400" />
 				</button>
 			</div>
 			<slot />
@@ -151,7 +147,7 @@ watch(
 						class="border-b py-1 md:border-t"
 					>
 						<NuxtLink
-							class="grid grid-cols-[1fr_auto] items-center text-clip rounded transition hover:bg-slate-200 active:bg-slate-300"
+							class="grid grid-cols-[1fr_auto] items-center text-clip rounded-md transition hover:bg-neutral-200 active:bg-neutral-300"
 							:to="
 								getDetailLink(
 									String(hit.document.object_id || String(hit.document.id)?.replace(/\D/g, '')),
@@ -175,7 +171,7 @@ watch(
 							</div>
 							<div class="flex flex-col gap-1 p-1 md:hidden">
 								<div v-for="key in koi" :key="key + hit.document.id">
-									<div class="text-gray-500">{{ t(`collection-keys["${key}"]`) }}</div>
+									<div class="text-neutral-500">{{ t(`collection-keys["${key}"]`) }}</div>
 									<div class="text-2xl">
 										<span
 											v-if="key === queryBy && hit.highlight[key]?.snippet"
@@ -187,7 +183,7 @@ watch(
 									</div>
 								</div>
 							</div>
-							<ChevronRight class="h-6 w-6 shrink-0" />
+							<ChevronRightIcon class="h-6 w-6 shrink-0" />
 						</NuxtLink>
 					</div>
 				</template>
@@ -200,7 +196,7 @@ watch(
 				/>
 			</div>
 			<Centered v-else>
-				<Loader2 class="h-8 w-8 animate-spin" />
+				<LoadingIndicator size="lg" />
 			</Centered>
 		</div>
 		<div v-if="docs && docs.found">
@@ -218,6 +214,6 @@ watch(
 
 <style lang="postcss">
 mark {
-	@apply bg-lime-300 p-0.5 -m-0.5 rounded;
+	@apply bg-brand-300 p-0.5 -m-0.5 rounded;
 }
 </style>

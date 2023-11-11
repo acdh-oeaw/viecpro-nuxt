@@ -1,18 +1,23 @@
 <script lang="ts" setup>
-import { useI18n } from "@/composables/use-i18n";
-import { NuxtLink } from "#components";
+const props = defineProps<{
+	targetId: string;
+}>();
 
-const { t } = useI18n();
-
-const id = "main-content";
-const hash = "#" + id;
+/**
+ * @see https://bugzilla.mozilla.org/show_bug.cgi?id=308064
+ */
+function onClick() {
+	const element = document.getElementById(props.targetId);
+	element?.focus();
+}
 </script>
 
 <template>
 	<NuxtLink
-		class="fixed translate-y-[-120%] rounded bg-white px-4 py-3 text-black focus:translate-y-0"
-		:href="{ hash }"
+		class="fixed -translate-y-full rounded-md bg-background px-4 py-3 text-on-background transition focus:translate-y-0"
+		:href="{ hash: `#${props.targetId}` }"
+		@click="onClick"
 	>
-		{{ t("common.skip-to-main-content") }}
+		<slot />
 	</NuxtLink>
 </template>

@@ -15,12 +15,10 @@ export const facetObjectToTypesenseQuery = (facetObject: object, encode = false)
 export const typesenseQueryToFacetObject = (
 	typeQuery: string,
 	decode = false,
-): { [key: string]: Array<string> } => {
+): Record<string, Array<string>> => {
 	const query: string = decode ? decodeURIComponent(typeQuery) : typeQuery;
 	const facetArray: Array<string> = query.split("&&");
-	const retObject: {
-		[key: string]: Array<string>;
-	} = {};
+	const retObject: Record<string, Array<string>> = {};
 	facetArray.forEach((facetString: string) => {
 		const [key, value] = facetString.split(":=");
 		if (key !== undefined) {
@@ -30,7 +28,7 @@ export const typesenseQueryToFacetObject = (
 	return retObject;
 };
 
-export const getFacetObjectFromURL = (decode = false): { [key: string]: Array<string> } => {
+export const getFacetObjectFromURL = (decode = false): Record<string, Array<string>> => {
 	const query = useRoute().query;
 	if (query.facets === undefined) return {};
 	return typesenseQueryToFacetObject(String(query.facets), decode);

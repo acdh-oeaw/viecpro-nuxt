@@ -1,0 +1,187 @@
+{
+	"AppFooter": {
+		"links": {
+			"imprint": "Impressum"
+		},
+		"logos": {
+			"ihb": {
+				"href": "https://www.oeaw.ac.at/ihb",
+				"label": "Institut für die Erforschung der Habsburgermonarchie und des Balkanraumes"
+			},
+			"acdh": {
+				"href": "https://www.oeaw.ac.at/de/acdh",
+				"label": "Austrian Centre for Digital Humanities and Cultural Heritage"
+			},
+			"oeaw": {
+				"href": "https://www.oeaw.ac.at",
+				"label": "Österreichische Akademie der Wissenschaften"
+			},
+			"fwf": { "href": "https://www.fwf.ac.at/de", "label": "Österreichischer Wissenschaftsfonds" }
+		},
+		"navigation-secondary": "Sekundärnavigation"
+	},
+	"AppHeader": {
+		"links": {
+			"documentation": "Dokumentation",
+			"home": "Startseite",
+			"search": "Datenbank"
+		},
+		"navigation-main": "Hauptnavigation",
+		"navigation-menu": "Navigationsmenü"
+	},
+	"ColorSchemeToggle": {
+		"change-color-scheme": "Farbschema ändern",
+		"color-schemes": {
+			"dark": "Dunkel",
+			"light": "Hell",
+			"system": "System"
+		}
+	},
+	"DefaultLayout": {
+		"meta": {
+			"description": "ACDH-CH App",
+			"title": "ACDH-CH App"
+		},
+		"skip-to-main-content": "Zum Hauptinhalt springen"
+	},
+	"DocumentationPage": {
+		"error": {
+			"not-found": "Dokument nicht gefunden",
+			"unknown": "Kann Dokument nicht anzeigen"
+		},
+		"meta": {
+			"title": "Dokumentation"
+		},
+		"navigation": "Dokumentation",
+		"title": "Dokumentation"
+	},
+	"ErrorBoundary": {
+		"error": "Fehler"
+	},
+	"ErrorPage": {
+		"meta": {
+			"title": "Fehler"
+		},
+		"title": "Etwas ist schief gelaufen!",
+		"try-again": "Erneut versuchen"
+	},
+	"ImprintPage": {
+		"meta": {
+			"title": "Impressum"
+		},
+		"title": "Impressum"
+	},
+	"IndexPage": {
+		"meta": {
+			"title": "Startseite"
+		},
+		"title": "Startseite"
+	},
+	"LocaleSwitcher": {
+		"current-locale": "Aktuelle Sprache: {locale}",
+		"switch-locale": "Zu {locale} wechseln"
+	},
+	"NotFoundPage": {
+		"meta": {
+			"title": "Seite nicht gefunden"
+		},
+		"title": "Seite nicht gefunden"
+	},
+	"SearchPage": {
+		"meta": {
+			"title": "Datenbank"
+		},
+		"title": "Datenbank"
+	},
+	"SearchCourtsPage": {
+		"meta": {
+			"title": "Suche Hofstaaten"
+		},
+		"title": "Suche Hofstaaten"
+	},
+	"SearchEventsPage": {
+		"meta": {
+			"title": "Suche Ereignisse"
+		},
+		"title": "Suche Ereignisse"
+	},
+	"SearchInstitutionsPage": {
+		"meta": {
+			"title": "Suche Institutionen"
+		},
+		"title": "Suche Institutionen"
+	},
+	"SearchPersonsPage": {
+		"meta": {
+			"title": "Suche Personen"
+		},
+		"title": "Suche Personen"
+	},
+	"SearchPlacesPage": {
+		"meta": {
+			"title": "Suche Orte"
+		},
+		"title": "Suche Orte"
+	},
+	"SearchReferencesPage": {
+		"meta": {
+			"title": "Suche Referenzen"
+		},
+		"title": "Suche Referenzen"
+	},
+	"pages": {
+		"searchviews": {
+			"courts": {
+				"label": "Hofstaaten",
+				"detail": "{title} - Hofstaat"
+			},
+			"references": {
+				"label": "Referenzen",
+				"detail": "{title} - Referenz"
+			},
+			"places": {
+				"label": "Orte",
+				"detail": "{title} - Ort"
+			},
+			"people": {
+				"label": "Personen",
+				"detail": "{title} - Person"
+			},
+			"institutions": {
+				"label": "Institutionen",
+				"detail": "{title} - Institution"
+			},
+			"events": {
+				"label": "Ereignisse",
+				"detail": "{title} - Ereignis"
+			}
+		}
+	},
+	"collection-keys": {
+		"object_id": "ID",
+		"id": "ID",
+		"name": "Name",
+		"kind": "Art",
+		"start_date": "Beginn",
+		"end_date": "Ende",
+		"main_owner.name": "Besitzer",
+		"fullname": "Voller Name",
+		"gender": "Geschlecht",
+		"lat": "Lat",
+		"long": "Long",
+		"folio": "Folio",
+		"shortTitle": "Titel (kurz)"
+	},
+	"ui": {
+		"showing-results": "Zeige {first} - {last} von {all} Ergebnissen",
+		"no-results": "Keine Ergebnisse.",
+		"next-page": "Nächste Seite",
+		"prev-page": "Vorherige Seite",
+		"first-page": "Es gibt keine Seite vor dieser.",
+		"last-page": "Das ist bereits die letzte Seite.",
+		"show-all": "Zeige alle...",
+		"show-filters": "Filter ausfahren...",
+		"hide-filters": "Filter verstecken...",
+		"search-placeholder": "Suche..."
+	}
+}

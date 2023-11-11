@@ -1,0 +1,5 @@
+<template>
+	<div class="flex flex-col gap-y-2 text-center sm:text-left">
+		<slot />
+	</div>
+</template>

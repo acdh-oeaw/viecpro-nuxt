@@ -1,8 +1,4 @@
 <script lang="ts" setup>
-import { Loader2 } from "lucide-vue-next";
-
-import Centered from "@/components/centered.vue";
-
 defineProps<{
 	loading: boolean;
 	data: object;
@@ -37,7 +33,7 @@ defineProps<{
 			</div>
 		</div>
 		<Centered v-else>
-			<Loader2 class="h-8 w-8 animate-spin" />
+			<LoadingIndicator size="lg" />
 		</Centered>
 	</div>
 </template>

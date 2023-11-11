@@ -1,14 +1,13 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
-import { ChevronUp } from "lucide-vue-next";
-import { type SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
+import { ChevronUpIcon } from "lucide-vue-next";
+import type { SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
 import { useRoute, useRouter } from "vue-router";
 
 import FacetField from "@/components/facet-field.vue";
-import { useI18n } from "@/composables/use-i18n";
 import { facetObjectToTypesenseQuery, getFacetObjectFromURL } from "@/lib/facets";
 
-const { t } = useI18n();
+const t = useTranslations();
 
 defineProps<{
 	facets: Array<SearchResponseFacetCountSchema<Record<string, Document>>> | undefined;
@@ -20,7 +19,7 @@ defineProps<{
 const router = useRouter();
 const route = useRoute();
 
-const facetObject: { [key: string]: Array<string> } = getFacetObjectFromURL(true);
+const facetObject: Record<string, Array<string>> = getFacetObjectFromURL(true);
 
 const facetChange = (facets: Array<string>, field: string) => {
 	facetObject[field] = facets;
@@ -38,12 +37,12 @@ const facetChange = (facets: Array<string>, field: string) => {
 <template>
 	<Disclosure v-slot="{ open }" as="div" class="flex flex-col md:pt-2" :default-open="defaultOpen">
 		<DisclosureButton
-			class="flex items-center justify-end gap-2 rounded align-top text-xl transition hover:bg-slate-200 active:bg-slate-300 lg:justify-center"
+			class="flex items-center justify-end gap-2 rounded-md align-top text-xl transition hover:bg-neutral-200 active:bg-neutral-300 lg:justify-center"
 		>
 			{{ open ? t("ui.hide-filters") : t("ui.show-filters") }}
-			<ChevronUp class="h-5 w-5 rotate-180 ui-open:rotate-0" />
+			<ChevronUpIcon class="ui-open:rotate-0 h-5 w-5 rotate-180" />
 		</DisclosureButton>
-		<transition
+		<Transition
 			enter-active-class="transition duration-100 ease-out"
 			enter-from-class="transform scale-95 translate-x-8 opacity-0"
 			enter-to-class="transform scale-100 translate-x-0 opacity-100"
@@ -68,6 +67,6 @@ const facetChange = (facets: Array<string>, field: string) => {
 					@facet-change="(model) => facetChange(model, facet.field_name)"
 				/>
 			</DisclosurePanel>
-		</transition>
+		</Transition>
 	</Disclosure>
 </template>

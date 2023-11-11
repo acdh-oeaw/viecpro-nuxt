@@ -1,18 +1,15 @@
 <script lang="ts" setup>
 import SearchTable from "@/components/search-table.vue";
-import { definePageMeta } from "#imports";
+
+definePageMeta({
+	title: "SearchCourtsPage.meta.title",
+});
 
 const collectionName = "viecpro_courts";
-
 const queryBy = "name";
-
 const koi = ["id", "name", "kind", "start_date", "end_date", "main_owner.name"];
 const facets = ["main_owner.name", "kind"];
 const tableCols = "grid-cols-[2fr_2fr_2fr_2fr_2fr_3fr]";
-
-definePageMeta({
-	title: "pages.searchviews.courts.title",
-});
 </script>
 
 <template>

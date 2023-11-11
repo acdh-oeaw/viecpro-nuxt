@@ -1,35 +1,56 @@
 <script lang="ts" setup>
-import { useI18n } from "@/composables/use-i18n";
+import type { NavLinkProps } from "@/components/nav-link.vue";
 
-const { t } = useI18n();
+const t = useTranslations();
+
+const links = computed(() => {
+	return {
+		imprint: { href: { path: "/imprint" }, label: t("AppFooter.links.imprint") },
+	} satisfies Record<string, { href: NavLinkProps["href"]; label: string }>;
+});
+
+const logos = {
+	ihb: "/assets/images/logo-ihb.svg",
+	acdh: "/assets/images/logo-acdh-with-text.svg",
+	oeaw: "/assets/images/logo-oeaw.svg",
+	fwf: "/assets/images/logo-fwf.svg",
+};
 </script>
 
 <template>
-	<footer class="mt-2 border-t">
-		<div
-			class="mx-auto grid w-full max-w-[20rem] gap-8 px-8 py-4 text-xs sm:max-w-container sm:grid-cols-7 sm:text-sm"
-		>
+	<footer class="border-t text-sm">
+		<div class="grid container grid-cols-2 py-8">
 			<div>
-				<img src="/assets/images/logo-ihb.svg" alt="" class="mx-auto max-h-[8rem]" />
-			</div>
-			<div class="sm:col-span-2">
-				<div>Österreichische Akademie der Wissenschaften</div>
 				<div>Institute for Habsburg and Balkan Studies (IHB)</div>
-				<div>Hollandstraße 11-13</div>
+				<div>Austrian Academy of Sciences</div>
+				<div>Hollandstrasse 11-13</div>
 				<div>1020 Wien</div>
 			</div>
 			<div>
-				<img src="/assets/images/logo-acdh-with-text.svg" alt="" />
+				<div>Austrian Centre for Digital Humanities and Cultural Heritage</div>
+				<div>Austrian Academy of Sciences</div>
+				<div>Bäckerstrasse 13</div>
+				<div>1010 Wien</div>
 			</div>
-			<div>
-				<img src="/assets/images/logo-oeaw.svg" alt="" />
+		</div>
+		<div class="grid container grid-cols-4 items-center gap-16">
+			<div v-for="(src, key) of logos" :key="key">
+				<a class="flex items-center justify-center" :href="t(`AppFooter.logos.${key}.href`)">
+					<span class="sr-only">{{ t(`AppFooter.logos.${key}.label`) }}</span>
+					<img alt="" class="max-h-12 object-contain" :src="src" />
+				</a>
 			</div>
-			<div>
-				<img src="/assets/images/logo-fwf.svg" alt="" />
-			</div>
-			<div>
-				<span>{{ t("common.imprint") }}</span>
-			</div>
+		</div>
+		<div class="container flex items-center justify-center gap-4 py-8">
+			<nav :aria-label="t('AppFooter.navigation-secondary')">
+				<ul class="flex items-center gap-4" role="list">
+					<li v-for="(link, key) of links" :key="key">
+						<NavLink :href="link.href">
+							{{ link.label }}
+						</NavLink>
+					</li>
+				</ul>
+			</nav>
 		</div>
 	</footer>
 </template>

@@ -1,8 +1,7 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useRoute } from "vue-router";
 
 import DetailPage from "@/components/detail-page.vue";
-import Tooltip from "@/components/tooltip.vue";
 import { getDocumentAndRelations } from "@/composables/use-ts-data";
 import { definePageMeta, ref } from "#imports";
 
@@ -21,7 +20,7 @@ definePageMeta({
 </script>
 
 <template>
-	<div class="mx-auto h-full w-full max-w-container">
+	<div class="max-w-container mx-auto h-full w-full">
 		<div>
 			<Tooltip content="test">
 				{{ route.params.id }}

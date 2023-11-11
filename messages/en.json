@@ -1,0 +1,183 @@
+{
+	"AppFooter": {
+		"links": {
+			"imprint": "Imprint"
+		},
+		"logos": {
+			"ihb": {
+				"href": "https://www.oeaw.ac.at/en/ihb",
+				"label": "Institute for Habsburg and Balkan Studies"
+			},
+			"acdh": {
+				"href": "https://www.oeaw.ac.at/acdh",
+				"label": "Austrian Centre for Digital Humanities and Cultural Heritage"
+			},
+			"oeaw": { "href": "https://www.oeaw.ac.at", "label": "Austrian Academy of Sciences" },
+			"fwf": { "href": "https://www.fwf.ac.at/en", "label": "Austrian Science Fund" }
+		},
+		"navigation-secondary": "Secondary"
+	},
+	"AppHeader": {
+		"links": {
+			"documentation": "Documentation",
+			"home": "Home",
+			"search": "Database"
+		},
+		"navigation-main": "Main",
+		"navigation-menu": "Navigation menu"
+	},
+	"ColorSchemeToggle": {
+		"change-color-scheme": "Change color scheme",
+		"color-schemes": {
+			"dark": "Dark",
+			"light": "Light",
+			"system": "System"
+		}
+	},
+	"DefaultLayout": {
+		"meta": {
+			"description": "ACDH-CH App",
+			"title": "ACDH-CH App"
+		},
+		"skip-to-main-content": "Skip to main content"
+	},
+	"DocumentationPage": {
+		"error": {
+			"not-found": "Document not found",
+			"unknown": "Failed to display document"
+		},
+		"meta": {
+			"title": "Documentation"
+		},
+		"navigation": "Documentation",
+		"title": "Documentation"
+	},
+	"ErrorBoundary": {
+		"error": "Error"
+	},
+	"ErrorPage": {
+		"meta": {
+			"title": "Error"
+		},
+		"title": "Something went wrong!",
+		"try-again": "Try again"
+	},
+	"ImprintPage": {
+		"meta": {
+			"title": "Imprint"
+		},
+		"title": "Imprint"
+	},
+	"IndexPage": {
+		"meta": {
+			"title": "Home"
+		},
+		"title": "Home"
+	},
+	"LocaleSwitcher": {
+		"current-locale": "Current language: {locale}",
+		"switch-locale": "Switch to {locale}"
+	},
+	"NotFoundPage": {
+		"meta": {
+			"title": "Page not found"
+		},
+		"title": "Page not found"
+	},
+	"SearchPage": {
+		"meta": {
+			"title": "Database"
+		},
+		"title": "Database"
+	},
+	"SearchCourtsPage": {
+		"meta": {
+			"title": "Search courts"
+		},
+		"title": "Search courts"
+	},
+	"SearchEventsPage": {
+		"meta": {
+			"title": "Suche events"
+		},
+		"title": "Suche events"
+	},
+	"SearchInstitutionsPage": {
+		"meta": {
+			"title": "Suche institutions"
+		},
+		"title": "Suche institutions"
+	},
+	"SearchPersonsPage": {
+		"meta": {
+			"title": "Suche persons"
+		},
+		"title": "Suche persons"
+	},
+	"SearchPlacesPage": {
+		"meta": {
+			"title": "Suche places"
+		},
+		"title": "Suche places"
+	},
+	"SearchReferencesPage": {
+		"meta": {
+			"title": "Suche references"
+		},
+		"title": "Suche references"
+	},
+	"pages": {
+		"searchviews": {
+			"courts": {
+				"label": "Courts",
+				"detail": "{title} - Court"
+			},
+			"references": {
+				"label": "References",
+				"detail": "{title} - Reference"
+			},
+			"places": {
+				"label": "Places",
+				"detail": "{title} - Place"
+			},
+			"people": {
+				"label": "People",
+				"detail": "{title} - Person"
+			},
+			"institutions": {
+				"label": "Institutions",
+				"detail": "{title} - Institution"
+			},
+			"events": {
+				"label": "Events",
+				"detail": "{title} - Event"
+			}
+		}
+	},
+	"collection-keys": {
+		"object_id": "ID",
+		"name": "Name",
+		"kind": "Kind",
+		"start_date": "Start Date",
+		"end_date": "End Date",
+		"main_owner.name": "Owner",
+		"fullname": "Full Name",
+		"gender": "Gender",
+		"lat": "Lat",
+		"long": "Long",
+		"folio": "Folio",
+		"shortTitle": "Short Title"
+	},
+	"ui": {
+		"showing-results": "Showing {first} - {last} out of {all}",
+		"no-results": "Nothing Found.",
+		"next-page": "Next Page",
+		"prev-page": "Previous Page",
+		"first-page": "You're already on the first page.",
+		"last-page": "You're already on the last page.",
+		"show-all": "show all...",
+		"show-filters": "Show Filters...",
+		"hide-filters": "Hide Filters...",
+		"search-placeholder": "Search..."
+	}
+}

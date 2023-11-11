@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useRoute } from "vue-router";
 
 import DetailPage from "@/components/detail-page.vue";
@@ -21,7 +21,7 @@ definePageMeta({
 </script>
 
 <template>
-	<div class="mx-auto h-full w-full max-w-container">
+	<div class="max-w-container mx-auto h-full w-full">
 		<div>
 			{{ route.params.id }}
 		</div>
