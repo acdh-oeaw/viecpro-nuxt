@@ -11,6 +11,7 @@ import FacetDisclosures from "@/components/facet-disclosures.vue";
 import Pagination from "@/components/pagination.vue";
 import { useI18n } from "@/composables/use-i18n";
 import { getDocuments } from "@/composables/use-ts-data";
+import { type AnyEntity } from "@/lib/schema.types";
 
 const { t, locale } = useI18n();
 
@@ -29,7 +30,7 @@ const loading: Ref<boolean> = ref(true);
 
 const input: Ref<string> = ref(route.query.q === undefined ? "" : String(route.query.q));
 
-const docs: Ref<SearchResponse<Record<string, Document>> | null> = ref(null);
+const docs: Ref<SearchResponse<AnyEntity> | null> = ref(null);
 
 const windowWidth = useWindowSize().width;
 

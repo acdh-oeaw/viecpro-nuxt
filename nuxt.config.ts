@@ -2,7 +2,6 @@ import { fileURLToPath } from "node:url";
 
 import { defineNuxtConfig } from "nuxt/config";
 
-import { env } from "./config/env.config";
 import { defaultLocale, locales } from "./config/i18n.config";
 
 export default defineNuxtConfig({
@@ -29,7 +28,7 @@ export default defineNuxtConfig({
 		public: "../public",
 	},
 	i18n: {
-		baseUrl: env.VITE_APP_BASE_URL,
+		baseUrl: process.env.NUXT_PUBLIC_APP_BASE_URL,
 		defaultLocale,
 		detectBrowserLanguage: {
 			redirectOn: "root",
@@ -62,6 +61,19 @@ export default defineNuxtConfig({
 	routeRules: {
 		"/": { static: true },
 		"/imprint": { static: true },
+	},
+	runtimeConfig: {
+		public: {
+			NUXT_PUBLIC_APP_BASE_URL: process.env.NUXT_PUBLIC_APP_BASE_URL,
+			NUXT_PUBLIC_MATOMO_BASE_URL: process.env.NUXT_PUBLIC_MATOMO_BASE_URL,
+			NUXT_PUBLIC_MATOMO_ID: process.env.NUXT_PUBLIC_MATOMO_ID,
+			NUXT_PUBLIC_REDMINE_ID: process.env.NUXT_PUBLIC_REDMINE_ID,
+			NUXT_PUBLIC_TYPESENSE_API_KEY: process.env.NUXT_PUBLIC_TYPESENSE_API_KEY,
+			NUXT_PUBLIC_TYPESENSE_PORT: process.env.NUXT_PUBLIC_TYPESENSE_PORT,
+			NUXT_PUBLIC_TYPESENSE_PROTOCOL: process.env.NUXT_PUBLIC_TYPESENSE_PROTOCOL,
+			NUXT_PUBLIC_TYPESENSE_HOST: process.env.NUXT_PUBLIC_TYPESENSE_HOST,
+			NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX: process.env.NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX,
+		},
 	},
 	srcDir: "./src/",
 	typescript: {

@@ -3,8 +3,9 @@ import { useRoute } from "vue-router";
 
 import DetailPage from "@/components/detail-page.vue";
 import { getDocumentAndRelations } from "@/composables/use-ts-data";
-import { definePageMeta, ref } from "#imports";
+import { definePageMeta, ref, useRuntimeConfig } from "#imports";
 
+const env = useRuntimeConfig();
 const route = useRoute();
 const id = String(route.params.id);
 
@@ -12,7 +13,7 @@ const loading = ref(true);
 
 const data = await getDocumentAndRelations(
 	"Institution_",
-	"viecpro_institutions",
+	`${env.public.NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX}institutions`,
 	id,
 	"Institution",
 );
