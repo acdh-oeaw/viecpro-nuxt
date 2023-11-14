@@ -8,15 +8,17 @@ const animate = require("tailwindcss-animate");
 const neutral = colors.slate;
 const negative = colors.red;
 const primary = {
-	100: "#3c5a50",
-	200: "#345148",
-	300: "#2c4940",
-	400: "#244138",
-	500: "#1c3930",
-	600: "#143128",
-	700: "#0c2921",
-	800: "#04221a",
-	900: "#001b12",
+	50: "#f5f8f6",
+	100: "#dee9e4",
+	200: "#bcd3c8",
+	300: "#93b5a7",
+	400: "#6d9485",
+	500: "#527a6b",
+	600: "#3c5a50",
+	700: "#364f47",
+	800: "#2e413a",
+	900: "#293833",
+	950: "#141f1b",
 };
 const secondary = {
 	100: "#159199",
