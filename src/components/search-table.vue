@@ -219,6 +219,6 @@ watch(
 
 <style lang="postcss">
 mark {
-	@apply bg-lime-300 p-0.5 -m-0.5 rounded;
+	@apply bg-primary-200 p-0.5 -m-0.5 rounded;
 }
 </style>
