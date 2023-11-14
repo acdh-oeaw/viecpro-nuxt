@@ -23,7 +23,7 @@ defineProps<{
 			:class="
 				rels.length === 0
 					? 'opacity-50 cursor-not-allowed'
-					: 'hover:border-primary-200 hover:bg-primary-100'
+					: 'hover:border-primary-200 hover:bg-primary-100 shadow-sm'
 			"
 		>
 			<span>{{ title }}</span>
