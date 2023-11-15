@@ -6,21 +6,14 @@ import Chip from "@/components/chip.vue";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import { getDocumentAndRelations } from "@/composables/use-ts-data";
 import { type Person, type Relation } from "@/lib/schema.types";
-import { definePageMeta, ref, useRuntimeConfig } from "#imports";
-
-const env = useRuntimeConfig();
+import { definePageMeta, ref } from "#imports";
 
 const route = useRoute();
 const id = String(route.params.id);
 
 const loading = ref(true);
 
-const data = (await getDocumentAndRelations(
-	"Person_",
-	`${env.public.NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX}persons`,
-	id,
-	"Person",
-)) as {
+const data = (await getDocumentAndRelations("Person_", `viecpro_persons`, id, "Person")) as {
 	entity: Person;
 	source: SearchResponse<Relation>;
 	target: SearchResponse<Relation>;
@@ -51,53 +44,75 @@ definePageMeta({
 			}}
 		</Chip>
 		<div class="mt-4 grid gap-16 md:grid-cols-[2fr_3fr]">
-			<div>
-				<h2 class="text-2xl text-gray-500">Stammdaten</h2>
-				<div v-if="!loading" class="grid grid-cols-2">
-					<div class="col-span-2 my-1 border-t"></div>
-					<template v-if="data.entity.name">
-						<span>Geburtsname:</span>
-						<span>{{ data.entity.name }}</span>
+			<div class="flex flex-col gap-8">
+				<div>
+					<h2 class="text-2xl text-gray-500">Stammdaten</h2>
+					<div v-if="!loading" class="grid grid-cols-2">
 						<div class="col-span-2 my-1 border-t"></div>
-					</template>
-					<template
-						v-if="
-							data.entity.labels &&
-							data.entity.labels.some(
-								(label) => label.label_type && label.label_type.includes('verheiratet'),
-							)
-						"
-					>
-						<span>Ehename/n:</span>
-						<div>
-							<div
-								v-for="label in data.entity.labels.filter(
-									(x) => x.label_type && x.label_type.includes('verheiratet'),
-								)"
-								:key="label.object_id"
-							>
-								{{ label.name }}
+						<template v-if="data.entity.name">
+							<span>Geburtsname:</span>
+							<span>{{ data.entity.name }}</span>
+							<div class="col-span-2 my-1 border-t"></div>
+						</template>
+						<template
+							v-if="
+								data.entity.labels &&
+								data.entity.labels.some(
+									(label) => label.label_type && label.label_type.includes('verheiratet'),
+								)
+							"
+						>
+							<span>Ehename/n:</span>
+							<div>
+								<div
+									v-for="label in data.entity.labels.filter(
+										(x) => x.label_type && x.label_type.includes('verheiratet'),
+									)"
+									:key="label.object_id"
+								>
+									{{ label.name }}
+								</div>
 							</div>
-						</div>
+							<div class="col-span-2 my-1 border-t"></div>
+						</template>
+						<span>Vorname/n:</span>
+						<span>{{ data.entity.first_name }}</span>
 						<div class="col-span-2 my-1 border-t"></div>
-					</template>
-					<span>Vorname/n:</span>
-					<span>{{ data.entity.first_name }}</span>
-					<div class="col-span-2 my-1 border-t"></div>
 
-					<span>Geboren:</span>
-					<span>
-						{{ data.entity.start }}
-					</span>
-					<div class="col-span-2 my-1 border-t"></div>
+						<span>Geboren:</span>
+						<span>
+							{{ data.entity.start }}
+						</span>
+						<div class="col-span-2 my-1 border-t"></div>
 
-					<span>Gestorben:</span>
-					<span>
-						{{ data.entity.end }}
-					</span>
-					<div class="col-span-2 my-1 border-t"></div>
-					<span>Geschlecht:</span>
-					<span>{{ data.entity.gender }}</span>
+						<span>Gestorben:</span>
+						<span>
+							{{ data.entity.end }}
+						</span>
+						<div class="col-span-2 my-1 border-t"></div>
+						<span>Geschlecht:</span>
+						<span>{{ data.entity.gender }}</span>
+					</div>
+				</div>
+				<div class="flex flex-col gap-3">
+					<DetailDisclosure
+						title="Potenizelle Dubletten"
+						:rels="
+							data.source.hits || data.target.hits
+								? [...data.source.hits, ...data.target.hits].filter(
+										(hit) => hit.document.relation_type_id === 9028,
+								  )
+								: []
+						"
+						:headers="{
+							source: 'document.source.name',
+							target: 'document.target.name',
+						}"
+					/>
+					<DetailDisclosure title="Alternative Namenschreibweisen" :rels="[]" />
+					<DetailDisclosure title="Adelstand und Auszeichnungen" :rels="[]" />
+					<DetailDisclosure title="Akademische Titel" :rels="[]" />
+					<DetailDisclosure title="Download und Zitierweise" :rels="[]" />
 				</div>
 			</div>
 			<div class="flex flex-col gap-3">
@@ -105,6 +120,12 @@ definePageMeta({
 				<DetailDisclosure
 					default-open
 					title="Funktionen am Hof"
+					:headers="{
+						Bezeichnung: 'document.relation_type',
+						Institution: 'document.target.name',
+						Von: 'document.start_date',
+						Bis: 'document.end_date',
+					}"
 					:rels="
 						data.source.hits
 							? data.source.hits?.filter((hit) => hit.document.model === 'PersonInstitution')
@@ -113,6 +134,10 @@ definePageMeta({
 				/>
 				<DetailDisclosure title="Personenbeziehungen am Hof" :rels="[]" />
 				<DetailDisclosure title="Sonsitger Bezug zum Hof" :rels="[]" />
+				<h2 class="text-2xl text-gray-500">Weitere Informationen</h2>
+				<DetailDisclosure title="Ehe- und Verwandschaftsverhältnisse" :rels="[]" />
+				<DetailDisclosure title="Bezug zu Kirche und Orden" :rels="[]" />
+				<DetailDisclosure title="Sonstige Tätigkeiten" :rels="[]" />
 			</div>
 		</div>
 	</div>

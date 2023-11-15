@@ -1,19 +1,15 @@
 import { Client } from "typesense";
 
-import { useRuntimeConfig } from "#imports";
-
 export function useDefaultClient(): Client {
-	const env = useRuntimeConfig();
-
 	const tsClient = new Client({
 		nodes: [
 			{
-				host: env.public.NUXT_PUBLIC_TYPESENSE_HOST,
-				port: Number(env.public.NUXT_PUBLIC_TYPESENSE_PORT),
-				protocol: env.public.NUXT_PUBLIC_TYPESENSE_PROTOCOL,
+				host: "typesense.acdh-dev.oeaw.ac.at",
+				port: 443,
+				protocol: "https",
 			},
 		],
-		apiKey: env.public.NUXT_PUBLIC_TYPESENSE_API_KEY, // read & retrieve only
+		apiKey: "cVjFs0UF7K11VSwNSii5VX2N7gbSNN4E", // read & retrieve only
 		connectionTimeoutSeconds: 3,
 	});
 

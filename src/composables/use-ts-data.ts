@@ -3,7 +3,6 @@ import { type LocationQuery } from "vue-router";
 
 import { useDefaultClient } from "@/lib/get-ts-data";
 import { type AnyEntity, type Relation } from "@/lib/schema.types";
-import { useRuntimeConfig } from "#app";
 
 export async function getDocuments<CollectionEntry extends AnyEntity>(
 	query: SearchParams,
@@ -47,11 +46,9 @@ export async function getRelations<CollectionEntry extends Relation>(
 	query_by: string,
 	kind?: string,
 ): Promise<SearchResponse<CollectionEntry>> {
-	const env = useRuntimeConfig();
-
 	const query: SearchParams = { q: sourceId, query_by };
 	if (kind != null) query.filter_by = `target.model := ${kind} || source.model := ${kind}`;
-	return getDocuments(query, `${env.public.NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX}relations`);
+	return getDocuments(query, `viecpro_relations`);
 }
 
 export async function getDocumentAndRelations(
