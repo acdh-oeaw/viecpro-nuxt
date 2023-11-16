@@ -1,18 +1,13 @@
 <script lang="ts" setup>
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
-import get from "lodash.get";
 import { ChevronDown } from "lucide-vue-next";
-import { type SearchResponseHit } from "typesense/lib/Typesense/Documents";
-
-import { type Relation } from "@/lib/schema.types";
 
 defineProps<{
-	rels: Array<SearchResponseHit<Relation>>;
+	rels: Array<object>;
+	gridClass?: string;
 	title: string;
 	defaultOpen?: boolean;
-	headers?: {
-		[index: string]: string;
-	};
+	headers?: Array<string>;
 }>();
 </script>
 
@@ -35,15 +30,21 @@ defineProps<{
 			v-if="rels.length !== 0 && headers"
 			static
 			as="div"
-			class="box-border grid grid-cols-4 gap-2 overflow-hidden rounded rounded-t-none p-2 transition-[height_padding] ui-open:max-h-screen ui-open:border-2 ui-open:border-t-0 ui-not-open:max-h-0 ui-not-open:p-0"
+			class="box-border overflow-hidden rounded rounded-t-none p-2 transition-[height_padding] ui-open:max-h-screen ui-open:border-2 ui-open:border-t-0 ui-not-open:max-h-0 ui-not-open:p-0"
 		>
-			<span v-for="header in Object.keys(headers)" :key="header" class="font-bold">
-				{{ header }}
-			</span>
-			<template v-for="hit in rels" :key="hit.document.id">
-				<div class="col-span-4 border-t first-of-type:border-t-2" />
-				<span v-for="col in Object.values(headers)" :key="col">{{ get(hit, col) }}</span>
-			</template>
+			<div class="grid gap-2" :class="gridClass">
+				<span v-for="header in headers" :key="header" class="font-bold">
+					{{ header }}
+				</span>
+			</div>
+			<div
+				v-for="hit in rels"
+				:key="String(hit)"
+				class="mt-1 grid gap-2 border-t pt-1"
+				:class="gridClass"
+			>
+				<span v-for="val in Object.values(hit)" :key="val">{{ val }}</span>
+			</div>
 		</DisclosurePanel>
 	</Disclosure>
 </template>

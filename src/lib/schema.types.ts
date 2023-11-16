@@ -1,7 +1,7 @@
 interface BaseEntity {
 	object_id: number;
-	start_data: string;
-	end_data: string;
+	start_date: string;
+	end_date: string;
 	start: string;
 	name?: string;
 	end: string;
