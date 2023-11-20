@@ -76,6 +76,7 @@
 		"show-all": "Zeige alle...",
 		"show-filters": "Filter ausfahren...",
 		"hide-filters": "Filter verstecken...",
-		"search-placeholder": "Suche..."
+		"search-placeholder": "Suche...",
+		"sort-by": "Sortiere nach dieser Spalte"
 	}
 }

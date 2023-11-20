@@ -1,3 +1,4 @@
+import { type CollectionSchema } from "typesense/lib/Typesense/Collection";
 import { type SearchParams, type SearchResponse } from "typesense/lib/Typesense/Documents";
 import { type LocationQuery } from "vue-router";
 
@@ -67,4 +68,9 @@ export async function getDocumentAndRelations(
 		getRelations(id, "target.object_id", kind),
 	]);
 	return { entity, source, target };
+}
+
+// Might be useful somedays
+export async function getCollections(): Promise<Array<CollectionSchema>> {
+	return useDefaultClient().collections().retrieve();
 }
