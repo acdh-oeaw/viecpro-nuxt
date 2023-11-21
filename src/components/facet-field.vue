@@ -119,7 +119,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 				:id="`${fieldName}Search`"
 				v-model="facetSearch"
 				type="text"
-				class="rounded p-1"
+				class="rounded border p-1"
 				:name="`${fieldName}Search`"
 				:placeholder="t('ui.search-placeholder')"
 				@input="facetSearchInput(facetSearch)"

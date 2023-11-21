@@ -15,7 +15,7 @@ const localePath = useLocalePath();
 const links = computed(() => {
 	return {
 		home: { href: { path: localePath("/") }, label: t("pages.home.label") },
-		search: { href: { path: localePath("/search/courts") }, label: t("pages.search.label") },
+		search: { href: { path: localePath("/search/persons") }, label: t("pages.search.label") },
 		documentation: {
 			href: { path: localePath("/documentation/project") },
 			label: t("pages.documentation.label"),

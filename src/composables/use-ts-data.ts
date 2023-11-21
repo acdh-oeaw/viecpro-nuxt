@@ -3,7 +3,7 @@ import { type SearchParams, type SearchResponse } from "typesense/lib/Typesense/
 import { type LocationQuery } from "vue-router";
 
 import { useDefaultClient } from "@/lib/get-ts-data";
-import { type AnyEntity, type Relation } from "@/lib/schema.types";
+import { type AnyEntity, type Person, type PersonDetail, type Relation } from "@/lib/schema.types";
 
 export async function getDocuments<CollectionEntry extends AnyEntity>(
 	query: SearchParams,
@@ -68,6 +68,28 @@ export async function getDocumentAndRelations(
 		getRelations(id, "target.object_id", kind),
 	]);
 	return { entity, source, target };
+}
+
+export async function getDetails(model: string, id: string): Promise<object> {
+	return useDefaultClient()
+		.collections(`viecpro_detail_${model}`)
+		.documents(`detail_${model}_${id}`)
+		.retrieve();
+}
+
+export async function getEntityAndDetails(
+	id: string,
+	prefix: string,
+	model: string,
+): Promise<{
+	entity: Person;
+	details: PersonDetail;
+}> {
+	const [entity, details] = await Promise.all([
+		getDocument(`viecpro_${model}s`, prefix + id),
+		getDetails(model, id),
+	]);
+	return { entity, details };
 }
 
 // Might be useful somedays

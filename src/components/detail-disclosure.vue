@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
+import { get } from "lodash";
 import { ChevronDown } from "lucide-vue-next";
+
+import { useI18n } from "@/composables/use-i18n";
 
 defineProps<{
 	rels: Array<object>;
@@ -9,6 +12,8 @@ defineProps<{
 	defaultOpen?: boolean;
 	headers?: Array<string>;
 }>();
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -34,7 +39,7 @@ defineProps<{
 		>
 			<div class="grid gap-2" :class="gridClass">
 				<span v-for="header in headers" :key="header" class="font-bold">
-					{{ header }}
+					{{ t(header) }}
 				</span>
 			</div>
 			<div
@@ -43,7 +48,7 @@ defineProps<{
 				class="mt-1 grid gap-2 border-t pt-1"
 				:class="gridClass"
 			>
-				<span v-for="val in Object.values(hit)" :key="val">{{ val }}</span>
+				<span v-for="header in headers" :key="hit + header">{{ get(hit, header) }}</span>
 			</div>
 		</DisclosurePanel>
 	</Disclosure>
