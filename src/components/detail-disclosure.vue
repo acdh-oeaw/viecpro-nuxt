@@ -38,7 +38,7 @@ const { t } = useI18n();
 			as="div"
 			class="box-border overflow-hidden rounded rounded-t-none p-2 transition-[height_padding] ui-open:max-h-screen ui-open:border-2 ui-open:border-t-0 ui-not-open:max-h-0 ui-not-open:py-0"
 		>
-			<slot name="custom-grid">
+			<slot>
 				<div class="grid gap-2" :class="gridClass">
 					<span v-for="header in headers" :key="header" class="font-bold">
 						{{ t(header) }}

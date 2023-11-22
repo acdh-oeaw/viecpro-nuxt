@@ -103,16 +103,16 @@ definePageMeta({
 						title="Alternative Namenschreibweisen"
 						:rels="[]"
 						:custom-slot="
-							[
+							!isEmpty([
 								...data.details.alternative_first_names,
 								...data.details.alternative_last_names,
 								...data.details.married_names,
-							].length > 0
+							])
 						"
 						grid-class="grid-cols-3"
 					>
 						<div class="grid gap-2">
-							<div v-if="data.details.alternative_first_names.length">
+							<div v-if="!isEmpty(data.details.alternative_first_names)">
 								<div class="font-semibold">alternative_first_names</div>
 								<div
 									v-for="name in data.details.alternative_first_names"
@@ -122,7 +122,7 @@ definePageMeta({
 									{{ name }}
 								</div>
 							</div>
-							<div v-if="data.details.alternative_last_names.length">
+							<div v-if="!isEmpty(data.details.alternative_last_names)">
 								<div class="font-semibold">alternative_last_names</div>
 								<div
 									v-for="name in data.details.alternative_last_names"
@@ -132,7 +132,7 @@ definePageMeta({
 									{{ name }}
 								</div>
 							</div>
-							<div v-if="data.details.married_names.length">
+							<div v-if="!isEmpty(data.details.married_names)">
 								<div class="font-semibold">married_names</div>
 								<div v-for="name in data.details.married_names" :key="name.name" class="border-t">
 									{{ name.name }}
