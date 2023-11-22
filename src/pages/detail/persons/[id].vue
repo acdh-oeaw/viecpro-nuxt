@@ -33,7 +33,7 @@ definePageMeta({
 					data.details.court_functions
 						.map((func) => func.relation_type)
 						.slice(0, 3)
-						.join(", ")
+						.join("; ")
 				}}
 			</span>
 			<span v-if="data.details.court_functions.length > 3">
@@ -98,23 +98,48 @@ definePageMeta({
 						:headers="['name']"
 						grid-class="grid-cols-1"
 					/>
-					<!-- TODO: create sections -->
+					<!-- dont judge me -->
 					<DetailDisclosure
 						title="Alternative Namenschreibweisen"
-						:rels="[
-							...data.details.alternative_first_names.map((name) => ({
-								alternative_first_name: name,
-							})),
-							...data.details.alternative_last_names.map((name) => ({
-								alternative_last_name: name,
-							})),
-							...data.details.married_names.map((name) => ({
-								married_name: name,
-							})),
-						]"
-						:headers="['alternative_first_name', 'alternative_last_name', 'married_names']"
+						:rels="[]"
+						:custom-slot="
+							[
+								...data.details.alternative_first_names,
+								...data.details.alternative_last_names,
+								...data.details.married_names,
+							].length > 0
+						"
 						grid-class="grid-cols-3"
-					/>
+					>
+						<div class="grid gap-2">
+							<div v-if="data.details.alternative_first_names.length">
+								<div class="font-semibold">alternative_first_names</div>
+								<div
+									v-for="name in data.details.alternative_first_names"
+									:key="name"
+									class="border-t"
+								>
+									{{ name }}
+								</div>
+							</div>
+							<div v-if="data.details.alternative_last_names.length">
+								<div class="font-semibold">alternative_last_names</div>
+								<div
+									v-for="name in data.details.alternative_last_names"
+									:key="name"
+									class="border-t"
+								>
+									{{ name }}
+								</div>
+							</div>
+							<div v-if="data.details.married_names.length">
+								<div class="font-semibold">married_names</div>
+								<div v-for="name in data.details.married_names" :key="name.name" class="border-t">
+									{{ name.name }}
+								</div>
+							</div>
+						</div>
+					</DetailDisclosure>
 					<DetailDisclosure
 						title="Adelstand und Auszeichnungen"
 						:rels="data.details.honorary_titles"
