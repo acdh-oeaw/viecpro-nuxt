@@ -33,7 +33,7 @@ definePageMeta({
 					data.details.court_functions
 						.map((func) => func.relation_type)
 						.slice(0, 3)
-						.join("; ")
+						.join(" - ")
 				}}
 			</span>
 			<span v-if="data.details.court_functions.length > 3">
