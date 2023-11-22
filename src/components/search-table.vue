@@ -9,8 +9,10 @@ import { type LocationQuery, type RouteLocationNormalized, useRoute } from "vue-
 import Centered from "@/components/centered.vue";
 import FacetDisclosures from "@/components/facet-disclosures.vue";
 import Pagination from "@/components/pagination.vue";
+import SortableColumn from "@/components/sortable-column.vue";
 import { useI18n } from "@/composables/use-i18n";
 import { getDocuments } from "@/composables/use-ts-data";
+import { type AnyEntity } from "@/lib/schema.types";
 
 const { t, locale } = useI18n();
 
@@ -20,6 +22,7 @@ const props = defineProps<{
 	koi: Array<string>;
 	facets?: Array<string>;
 	cols?: string;
+	sort?: Array<string>;
 }>();
 
 const pageLimit = 25;
@@ -29,7 +32,7 @@ const loading: Ref<boolean> = ref(true);
 
 const input: Ref<string> = ref(route.query.q === undefined ? "" : String(route.query.q));
 
-const docs: Ref<SearchResponse<Record<string, Document>> | null> = ref(null);
+const docs: Ref<SearchResponse<AnyEntity> | null> = ref(null);
 
 const windowWidth = useWindowSize().width;
 
@@ -39,6 +42,7 @@ const search = async (
 	facetQuery: string | undefined,
 	page = 1,
 	limit = pageLimit,
+	sortBy = "",
 ) => {
 	loading.value = true;
 
@@ -50,6 +54,7 @@ const search = async (
 			page,
 			facet_by: props.facets ? props.facets.join(",") : "",
 			filter_by: facetQuery ?? "",
+			sort_by: sortBy,
 			// max_facet_values: 500,
 		},
 		collection,
@@ -83,6 +88,7 @@ watch(
 			String(query.facets ?? ""),
 			pageNum.value,
 			limitNum.value || pageLimit,
+			String(query.sort ?? ""),
 		);
 	},
 	{
@@ -141,7 +147,10 @@ watch(
 			<div v-if="!loading" class="w-full">
 				<div class="mr-6 hidden md:grid" :class="cols">
 					<div v-for="key in koi" :key="key" class="m-2 font-semibold">
-						{{ t(`collection-keys["${key}"]`) }}
+						<SortableColumn v-if="sort && sort.includes(key)" :query="route.query" :col="key" />
+						<span v-else>
+							{{ t(`collection-keys["${key}"]`) }}
+						</span>
 					</div>
 				</div>
 				<template v-if="docs !== null">
@@ -218,6 +227,6 @@ watch(
 
 <style lang="postcss">
 mark {
-	@apply bg-lime-300 p-0.5 -m-0.5 rounded;
+	@apply bg-primary-200 p-0.5 -m-0.5 rounded;
 }
 </style>

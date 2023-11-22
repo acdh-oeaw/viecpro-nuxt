@@ -119,7 +119,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 				:id="`${fieldName}Search`"
 				v-model="facetSearch"
 				type="text"
-				class="rounded p-1"
+				class="rounded border p-1"
 				:name="`${fieldName}Search`"
 				:placeholder="t('ui.search-placeholder')"
 				@input="facetSearchInput(facetSearch)"
@@ -132,7 +132,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 		<div
 			v-for="count in facetsWithSelected"
 			:key="count.value"
-			class="flex items-center gap-2 rounded p-1 transition hover:bg-slate-200 active:bg-slate-300"
+			class="flex items-center gap-2 rounded p-1 py-1.5 transition hover:bg-slate-200 active:bg-slate-300"
 		>
 			<input
 				:id="`${fieldName}:${count.value}`"
@@ -150,7 +150,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 				<span>
 					{{ count.value }}
 				</span>
-				<Chip v-if="count.count">
+				<Chip v-if="count.count" class="mx-1">
 					{{ count.count }}
 				</Chip>
 			</label>

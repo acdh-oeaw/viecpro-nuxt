@@ -4,9 +4,10 @@ import { definePageMeta } from "#imports";
 
 const collectionName = "viecpro_persons";
 const queryBy = "fullname";
-const koi = ["id", "fullname", "gender", "start_date", "end_date"];
+const koi = ["id", "fullname", "gender", "start_date", "end_date", "labels.name"];
 const facets = ["name", "gender"];
-const tableCols = "grid-cols-[2fr_3fr_2fr_2fr_2fr]";
+const sortable = ["first_name", "fullname"];
+const tableCols = "grid-cols-[2fr_3fr_2fr_2fr_2fr_1fr]";
 
 definePageMeta({
 	title: "pages.searchviews.courts.title",
@@ -19,6 +20,7 @@ definePageMeta({
 		:facets="facets"
 		:query-by="queryBy"
 		:cols="tableCols"
+		:sort="sortable"
 		:koi="koi"
 	/>
 </template>

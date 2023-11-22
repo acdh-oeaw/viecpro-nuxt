@@ -10,7 +10,7 @@ const id = String(route.params.id);
 
 const loading = ref(true);
 
-const data = await getDocumentAndRelations("Event_", "viecpro_events", id, "Event");
+const data = await getDocumentAndRelations("Event_", `viecpro_events`, id, "Event");
 
 loading.value = false;
 console.log(data);

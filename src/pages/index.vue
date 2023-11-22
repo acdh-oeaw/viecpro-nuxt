@@ -33,16 +33,16 @@ definePageMeta({
 	<MainContent class="mb-4 flex flex-col gap-8 md:mb-8">
 		<div class="flex flex-col gap-16 md:gap-32">
 			<div>
-				<div class="h-2 w-full bg-primary-800" />
+				<div class="h-2 w-full bg-primary-900" />
 				<NuxtImg
 					src="/assets/images/background-court-ship.jpeg"
 					alt=""
 					class="min-h-[20rem] w-full object-cover"
 				/>
-				<div class="h-2 w-full bg-primary-400" />
+				<div class="h-2 w-full bg-primary-800" />
 			</div>
 			<div
-				class="mx-auto flex w-fit flex-col justify-center border-b-4 pb-4 text-center text-5xl text-primary-100 lg:flex-row"
+				class="mx-auto flex w-fit flex-col justify-center border-b-4 pb-4 text-center text-5xl text-primary-600 lg:flex-row"
 			>
 				<p class="font-black">
 					Der Wiener Hof
@@ -87,13 +87,13 @@ definePageMeta({
 						</NuxtLink>
 					</div>
 					<div>
-						<p class="text-center text-xl font-black text-primary-100">
+						<p class="text-center text-xl font-black text-primary-600">
 							Diese Datenbank befindet sich im Aufbau!
 						</p>
 					</div>
 				</div>
 				<div class="rounded-lg bg-gray-100 p-8">
-					<h1 class="mb-2 text-left text-3xl font-bold text-primary-100">VieCPro</h1>
+					<h1 class="mb-2 text-left text-3xl font-bold text-primary-600">VieCPro</h1>
 					<p>
 						...ist ein
 						<strong>Gemeinschaftsprodukt zweier Forschungsteams</strong>
@@ -112,7 +112,7 @@ definePageMeta({
 					class="mx-auto grid justify-stretch gap-8 border-t-4 border-gray-200 pt-8 xl:grid-cols-2"
 				>
 					<div class="flex flex-col gap-4">
-						<h1 class="inline-block align-baseline text-3xl font-black text-primary-100">
+						<h1 class="inline-block align-baseline text-3xl font-black text-primary-600">
 							Datenbank
 						</h1>
 						<p>
@@ -136,7 +136,7 @@ definePageMeta({
 						</div>
 					</div>
 					<div class="flex flex-col gap-4">
-						<h1 class="text-3xl font-black text-primary-100">Materialien und Dokumentation</h1>
+						<h1 class="text-3xl font-black text-primary-600">Materialien und Dokumentation</h1>
 						<p>
 							Unsere Dokumentation und Materialien zur Benutzung der VieCPro-Datenbank reichen von
 							einer Erklärung der APIS-Funktionalitäten über die Darlegung der
@@ -173,7 +173,7 @@ definePageMeta({
 			</div>
 			<div class="mx-auto">
 				<div class="rounded-lg bg-gray-100 p-8">
-					<h1 class="mb-2 text-3xl font-black text-primary-100">Kontaktaufnahme</h1>
+					<h1 class="mb-2 text-3xl font-black text-primary-600">Kontaktaufnahme</h1>
 					<p>
 						...zum VieCPro-Team ist stets herzlich willkommen.
 						<strong>Die Datenbank befindet sich im Aufbau</strong>

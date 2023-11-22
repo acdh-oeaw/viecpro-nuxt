@@ -9,7 +9,7 @@ const route = useRoute();
 const id = String(route.params.id);
 const loading = ref(true);
 
-const data = await getDocumentAndRelations("Reference_", "viecpro_references", id);
+const data = await getDocumentAndRelations("Reference_", `viecpro_references`, id);
 
 loading.value = false;
 console.log(data);

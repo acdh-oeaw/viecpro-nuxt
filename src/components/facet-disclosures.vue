@@ -7,11 +7,12 @@ import { useRoute, useRouter } from "vue-router";
 import FacetField from "@/components/facet-field.vue";
 import { useI18n } from "@/composables/use-i18n";
 import { facetObjectToTypesenseQuery, getFacetObjectFromURL } from "@/lib/facets";
+import { type AnyEntity } from "@/lib/schema.types";
 
 const { t } = useI18n();
 
 defineProps<{
-	facets: Array<SearchResponseFacetCountSchema<Record<string, Document>>> | undefined;
+	facets: Array<SearchResponseFacetCountSchema<AnyEntity>> | undefined;
 	loading: boolean;
 	collection: string;
 	queryBy: string;

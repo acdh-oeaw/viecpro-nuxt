@@ -75,6 +75,7 @@
 		"show-all": "show all...",
 		"show-filters": "Show Filters...",
 		"hide-filters": "Hide Filters...",
-		"search-placeholder": "Search..."
+		"search-placeholder": "Search...",
+		"sort-by": "sort by this column"
 	}
 }

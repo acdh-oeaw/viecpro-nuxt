@@ -10,25 +10,15 @@ const { t } = useI18n();
 const localePath = useLocalePath();
 const links = computed(() => {
 	return {
-		courts: {
-			href: { path: localePath("/search/courts") },
-			label: t("pages.searchviews.courts.label"),
-			icon: Users,
-		},
-		references: {
-			href: { path: localePath("/search/references") },
-			label: t("pages.searchviews.references.label"),
-			icon: FileText,
-		},
 		people: {
 			href: { path: localePath("/search/persons") },
 			label: t("pages.searchviews.people.label"),
 			icon: User,
 		},
-		places: {
-			href: { path: localePath("/search/places") },
-			label: t("pages.searchviews.places.label"),
-			icon: MapPin,
+		courts: {
+			href: { path: localePath("/search/courts") },
+			label: t("pages.searchviews.courts.label"),
+			icon: Users,
 		},
 		institutions: {
 			href: { path: localePath("/search/institutions") },
@@ -39,6 +29,16 @@ const links = computed(() => {
 			href: { path: localePath("/search/events") },
 			label: t("pages.searchviews.events.label"),
 			icon: CalendarRange,
+		},
+		places: {
+			href: { path: localePath("/search/places") },
+			label: t("pages.searchviews.places.label"),
+			icon: MapPin,
+		},
+		references: {
+			href: { path: localePath("/search/references") },
+			label: t("pages.searchviews.references.label"),
+			icon: FileText,
 		},
 	} satisfies Record<string, NavLink>;
 });

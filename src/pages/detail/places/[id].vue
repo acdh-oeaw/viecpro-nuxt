@@ -10,7 +10,7 @@ const id = String(route.params.id);
 
 const loading = ref(true);
 
-const data = await getDocumentAndRelations("Place_", "viecpro_places", id, "Place");
+const data = await getDocumentAndRelations("Place_", `viecpro_places`, id, "Place");
 
 loading.value = false;
 console.log(data);

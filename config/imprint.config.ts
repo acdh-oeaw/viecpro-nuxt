@@ -1,13 +1,16 @@
 import { createUrl } from "@stefanprobst/request";
 
-import { env } from "~/config/env.config";
+import { useRuntimeConfig } from "#app";
 import { type Locale } from "~/config/i18n.config";
 
 const baseUrl = "https://shared.acdh.oeaw.ac.at";
 const pathname = "/acdh-common-assets/api/imprint.php";
-const redmineId = env.VITE_REDMINE_ID;
 
 export function createImprintUrl(locale: Locale): URL {
+	const env = useRuntimeConfig();
+
+	const redmineId = env.public.NUXT_PUBLIC_APP_BASE_URL;
+
 	return createUrl({
 		baseUrl,
 		pathname,

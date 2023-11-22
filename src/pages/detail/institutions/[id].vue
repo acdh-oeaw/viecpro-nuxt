@@ -12,7 +12,7 @@ const loading = ref(true);
 
 const data = await getDocumentAndRelations(
 	"Institution_",
-	"viecpro_institutions",
+	`viecpro_institutions`,
 	id,
 	"Institution",
 );
