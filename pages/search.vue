@@ -1,12 +1,9 @@
 <script lang="ts" setup>
 import { CalendarRange, FileText, MapPin, School2, User, Users } from "lucide-vue-next";
 
-import MainContent from "@/components/main-content.vue";
 import type { NavLink } from "@/types/misc.d.ts";
-import { NuxtLink } from "#components";
-import { computed, definePageMeta, useI18n, useLocalePath } from "#imports";
 
-const { t } = useI18n();
+const t = useTranslations();
 const localePath = useLocalePath();
 const links = computed(() => {
 	return {

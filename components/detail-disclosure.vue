@@ -3,8 +3,6 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { get } from "lodash";
 import { ChevronDown } from "lucide-vue-next";
 
-import { useI18n } from "@/composables/use-i18n";
-
 defineProps<{
 	rels: Array<object>;
 	gridClass?: string;
@@ -14,7 +12,7 @@ defineProps<{
 	customSlot?: boolean;
 }>();
 
-const { t } = useI18n();
+const t = useTranslations();
 </script>
 
 <template>

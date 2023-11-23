@@ -2,19 +2,13 @@
 import { useWindowSize } from "@vueuse/core";
 import get from "lodash.get";
 import { ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
-import { type SearchResponse } from "typesense/lib/Typesense/Documents";
-import { computed, type ComputedRef, type Ref, ref, watch } from "vue";
-import { type LocationQuery, type RouteLocationNormalized, useRoute } from "vue-router";
+import type { SearchResponse } from "typesense/lib/Typesense/Documents";
+import type { LocationQuery, RouteLocationNormalized } from "vue-router";
 
-import Centered from "@/components/centered.vue";
-import FacetDisclosures from "@/components/facet-disclosures.vue";
-import Pagination from "@/components/pagination.vue";
-import SortableColumn from "@/components/sortable-column.vue";
-import { useI18n } from "@/composables/use-i18n";
-import { getDocuments } from "@/composables/use-ts-data";
-import { type AnyEntity } from "@/lib/schema.types";
+import type { AnyEntity } from "@/lib/schema.types";
 
-const { t, locale } = useI18n();
+const locale = useLocale();
+const t = useTranslations();
 
 const props = defineProps<{
 	queryBy: string;
@@ -28,9 +22,9 @@ const props = defineProps<{
 const pageLimit = 25;
 
 const route: RouteLocationNormalized = useRoute();
-const loading: Ref<boolean> = ref(true);
+const loading = ref(true);
 
-const input: Ref<string> = ref(route.query.q === undefined ? "" : String(route.query.q));
+const input = ref(route.query.q === undefined ? "" : String(route.query.q));
 
 const docs: Ref<SearchResponse<AnyEntity> | null> = ref(null);
 
@@ -79,10 +73,10 @@ const limitNum: ComputedRef<number> = computed(() => {
 
 watch(
 	route,
-	(newRoute) => {
+	async (newRoute) => {
 		const query: LocationQuery = newRoute.query;
 
-		search(
+		await search(
 			props.collectionName,
 			String(query.q ?? ""),
 			String(query.facets ?? ""),

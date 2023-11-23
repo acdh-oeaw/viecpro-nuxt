@@ -1,10 +1,8 @@
 <script lang="ts" setup>
 import { ChevronsUpDown, ChevronUp } from "lucide-vue-next";
-import { type LocationQuery } from "vue-router";
+import type { LocationQuery } from "vue-router";
 
-import { useI18n } from "@/composables/use-i18n";
-
-const { t } = useI18n();
+const t = useTranslations();
 
 const props = defineProps<{
 	col: string;

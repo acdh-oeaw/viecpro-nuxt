@@ -1,13 +1,8 @@
 <script lang="ts" setup>
 import { ChevronRight } from "lucide-vue-next";
 
-import MainContent from "@/components/main-content.vue";
-import { useI18n } from "@/composables/use-i18n";
-import { ContentQuery, ContentRenderer, ContentRendererMarkdown } from "#components";
-import { computed, definePageMeta, useRoute } from "#imports";
-
-const { locale, t } = useI18n();
-
+const t = useTranslations();
+const locale = useLocale();
 definePageMeta({
 	title: "pages.documentation.title",
 });

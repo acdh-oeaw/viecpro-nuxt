@@ -7,9 +7,8 @@ import { defaultLocale, locales } from "./config/i18n.config";
 export default defineNuxtConfig({
 	alias: {
 		"@": fileURLToPath(new URL("./", import.meta.url)),
-		"~": fileURLToPath(new URL("./", import.meta.url)),
 	},
-	components: false,
+	components: [{ path: "@/components", extensions: [".vue"], pathPrefix: false }],
 	content: {
 		// defaultLocale,
 		// documentDriven: true,
@@ -29,20 +28,12 @@ export default defineNuxtConfig({
 		defaultLocale,
 		detectBrowserLanguage: {
 			redirectOn: "root",
-			useCookie: false,
 		},
 		langDir: "./locales",
 		lazy: true,
 		locales: Object.values(locales),
-		// strategy: "prefix_except_default",
 		strategy: "prefix",
-		vueI18n: {
-			fallbackLocale: defaultLocale,
-			legacy: false,
-		},
-	},
-	imports: {
-		autoImport: false,
+		vueI18n: "./i18n.config.ts",
 	},
 	modules: ["@nuxt/content", "@nuxt/image", "@nuxtjs/i18n"],
 	nitro: {
@@ -79,7 +70,6 @@ export default defineNuxtConfig({
 			compilerOptions: {
 				paths: {
 					"@/*": ["./*"],
-					"~/*": ["./*"],
 				},
 			},
 		},

@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { ChevronUp } from "lucide-vue-next";
-import { type SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
-import { useRoute, useRouter } from "vue-router";
+import type { SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
 
-import FacetField from "@/components/facet-field.vue";
-import { useI18n } from "@/composables/use-i18n";
 import { facetObjectToTypesenseQuery, getFacetObjectFromURL } from "@/lib/facets";
-import { type AnyEntity } from "@/lib/schema.types";
+import type { AnyEntity } from "@/lib/schema.types";
 
-const { t } = useI18n();
+const t = useTranslations();
 
 defineProps<{
 	facets: Array<SearchResponseFacetCountSchema<AnyEntity>> | undefined;
@@ -18,15 +15,16 @@ defineProps<{
 	queryBy: string;
 	defaultOpen?: boolean;
 }>();
+
 const router = useRouter();
 const route = useRoute();
 
-const facetObject: { [key: string]: Array<string> } = getFacetObjectFromURL(true);
+const facetObject: Record<string, Array<string>> = getFacetObjectFromURL(true);
 
-const facetChange = (facets: Array<string>, field: string) => {
+const facetChange = async (facets: Array<string>, field: string) => {
 	facetObject[field] = facets;
 
-	router.push({
+	await router.push({
 		query: {
 			...route.query,
 			page: 1,
@@ -44,7 +42,7 @@ const facetChange = (facets: Array<string>, field: string) => {
 			{{ open ? t("ui.hide-filters") : t("ui.show-filters") }}
 			<ChevronUp class="h-5 w-5 rotate-180 ui-open:rotate-0" />
 		</DisclosureButton>
-		<transition
+		<Transition
 			enter-active-class="transition duration-100 ease-out"
 			enter-from-class="transform scale-95 translate-x-8 opacity-0"
 			enter-to-class="transform scale-100 translate-x-0 opacity-100"
@@ -69,6 +67,6 @@ const facetChange = (facets: Array<string>, field: string) => {
 					@facet-change="(model) => facetChange(model, facet.field_name)"
 				/>
 			</DisclosurePanel>
-		</transition>
+		</Transition>
 	</Disclosure>
 </template>

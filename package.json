@@ -1,25 +1,25 @@
 {
-	"name": "nuxt-i18n",
+	"name": "@acdh-oeaw/viecpro",
 	"private": true,
 	"license": "MIT",
 	"type": "module",
 	"engines": {
-		"node": ">=18",
-		"npm": ">=9"
+		"node": "20.x",
+		"pnpm": "8.x"
 	},
-	"packageManager": "npm@9.5.1",
+	"packageManager": "pnpm@8.10.5",
 	"scripts": {
 		"build": "nuxt build",
 		"dev": "nuxt dev",
 		"format:check": "prettier . --cache --check --ignore-path ./.gitignore",
-		"format:fix": "npm run format:check -- --write",
+		"format:fix": "pnpm run format:check --write",
 		"generate": "nuxt generate",
 		"lint:check": "run-p lint:*:check",
 		"lint:fix": "run-p lint:*:fix",
 		"lint:code:check": "eslint . --cache --ext .cjs,.mjs,.ts,.vue --ignore-path ./.gitignore",
-		"lint:code:fix": "npm run lint:code:check -- --fix",
+		"lint:code:fix": "pnpm run lint:code:check --fix",
 		"lint:styles:check": "stylelint \"./**/*.@(css|vue)\" --allow-empty-input --cache --ignore-path ./.gitignore",
-		"lint:styles:fix": "npm run lint:styles:check -- --fix",
+		"lint:styles:fix": "pnpm run lint:styles:check --fix",
 		"postinstall": "nuxt prepare",
 		"prepare": "run-s setup",
 		"preview": "nuxt preview",
@@ -34,7 +34,7 @@
 		"@fontsource/roboto-flex": "^4.5.5",
 		"@headlessui/vue": "^1.7.13",
 		"@nuxt/image": "npm:@nuxt/image-edge",
-		"@nuxtjs/i18n": "8.0.0-beta.10",
+		"@nuxtjs/i18n": "^8.0.0-rc.5",
 		"@vueuse/core": "^10.5.0",
 		"instantsearch.js": "^4.55.0",
 		"lodash.get": "^4.4.2",
@@ -113,7 +113,7 @@
 	},
 	"prettier": "@acdh-oeaw/prettier-config",
 	"simple-git-hooks": {
-		"pre-commit": "npx lint-staged"
+		"pre-commit": "pnpm exec lint-staged"
 	},
 	"stylelint": {
 		"extends": [

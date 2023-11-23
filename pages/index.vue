@@ -1,17 +1,8 @@
 <script lang="ts" setup>
-import MainContent from "@/components/main-content.vue";
-import { useI18n } from "@/composables/use-i18n";
-import { type NuxtLinkProps } from "#app";
-import { NuxtLink } from "#components";
-import { computed, definePageMeta, useLocalePath } from "#imports";
+import type { NavLink } from "@/types/misc";
 
-const { t } = useI18n();
+const t = useTranslations();
 const localePath = useLocalePath();
-
-type NavLink = {
-	href: NuxtLinkProps["href"];
-	label: string;
-};
 
 const links = computed(() => {
 	return {

@@ -1,8 +1,5 @@
 <script lang="ts" setup>
-import { useI18n } from "@/composables/use-i18n";
-import { NuxtLink } from "#components";
-
-const { t } = useI18n();
+const t = useTranslations();
 
 const id = "main-content";
 const hash = "#" + id;

@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { useI18n } from "@/composables/use-i18n";
-
-const { t } = useI18n();
+const t = useTranslations();
 </script>
 
 <template>

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ChevronUp } from "lucide-vue-next";
-import { type RouteLocationNormalized, useRoute } from "vue-router";
-
-import { useI18n } from "@/composables/use-i18n";
+import type { RouteLocationNormalized } from "vue-router";
 
 const route: RouteLocationNormalized = useRoute();
 
@@ -12,7 +10,7 @@ defineProps<{
 	all: number;
 }>();
 
-const { t } = useI18n();
+const t = useTranslations();
 </script>
 
 <template>

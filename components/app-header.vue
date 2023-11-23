@@ -1,15 +1,10 @@
 <script lang="ts" setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { Menu as MenuIcon, X } from "lucide-vue-next";
-import { computed } from "vue";
 
-import LocaleSwitch from "@/components/locale-switch.vue";
-import { useI18n } from "@/composables/use-i18n";
-import { type NavLink } from "@/lib/types";
-import { NuxtLink } from "#components";
-import { useLocalePath } from "#imports";
+import type { NavLink } from "@/lib/types";
 
-const { t } = useI18n();
+const t = useTranslations();
 const localePath = useLocalePath();
 
 const links = computed(() => {
@@ -54,7 +49,7 @@ const links = computed(() => {
 						<X v-if="open" class="h-6 w-6 shrink-0" />
 						<MenuIcon v-else class="h-6 w-6 shrink-0" />
 					</MenuButton>
-					<transition
+					<Transition
 						enter-active-class="transition duration-100 ease-out"
 						enter-from-class="transform scale-95 -translate-y-8 opacity-0"
 						enter-to-class="transform scale-100 translate-y-0 opacity-100"
@@ -79,7 +74,7 @@ const links = computed(() => {
 								<LocaleSwitch no-select />
 							</MenuItem>
 						</MenuItems>
-					</transition>
+					</Transition>
 				</Menu>
 			</div>
 		</div>

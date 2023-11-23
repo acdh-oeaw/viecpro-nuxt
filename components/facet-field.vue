@@ -1,16 +1,12 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
 import { ChevronDown, Search, XCircle } from "lucide-vue-next";
-import { type SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
-import { computed, onMounted, ref } from "vue";
-import { type ComputedRef, type Ref } from "vue";
-import { type RouteLocationNormalized, useRoute } from "vue-router";
+import type { SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
+import type { RouteLocationNormalized } from "vue-router";
 
 import Chip from "@/components/chip.vue";
-import { useI18n } from "@/composables/use-i18n";
-import { getFacets } from "@/composables/use-ts-data";
 
-const { t } = useI18n();
+const t = useTranslations();
 
 const props = defineProps<{
 	fieldName: string;
@@ -24,7 +20,7 @@ const route: RouteLocationNormalized = useRoute();
 
 const facetSearch: Ref<string> = ref("");
 
-let facetModel: Ref<Array<string> | undefined> = ref(props.selected || []);
+let facetModel: Ref<Array<string> | undefined> = ref(props.selected ?? []);
 let loading: Ref<boolean> = ref(true);
 
 let scopeFacet: Ref<SearchResponseFacetCountSchema<any> | undefined> = ref({
@@ -58,14 +54,14 @@ const addToFacets = async (name: string, max = 1) => {
 		props.collection,
 		props.queryBy,
 	);
-	if (results.facet_counts && scopeFacet.value) {
+	if (results.facet_counts && scopeFacet.value && results.facet_counts[0]?.counts[0]) {
 		scopeFacet.value.counts.unshift(results.facet_counts[0]?.counts[0]);
 	}
 	loading.value = false;
 };
 
 const addSelected = async (selected: Array<string>) => {
-	selected.forEach((sel) => {
+	for (const sel of selected) {
 		if (
 			!(
 				scopeFacet.value?.counts.some((facet) => {
@@ -73,20 +69,20 @@ const addSelected = async (selected: Array<string>) => {
 				}) ?? false
 			)
 		) {
-			addToFacets(sel);
+			await addToFacets(sel);
 		}
-	});
+	}
 };
 
 const facetSearchInput = async (input: string) => {
 	await loadFacets(10, input);
-	if (props.selected && scopeFacet.value !== undefined) addSelected(props.selected);
+	if (props.selected && scopeFacet.value !== undefined) await addSelected(props.selected);
 };
 
 onMounted(async () => {
 	await loadFacets(10);
 	if (props.selected && scopeFacet.value !== undefined) {
-		addSelected(props.selected);
+		await addSelected(props.selected);
 	}
 });
 
