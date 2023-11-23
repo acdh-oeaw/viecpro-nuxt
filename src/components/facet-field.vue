@@ -1,6 +1,6 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
-import { ChevronDown, XCircle } from "lucide-vue-next";
+import { ChevronDown, Search, XCircle } from "lucide-vue-next";
 import { type SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
 import { computed, onMounted, ref } from "vue";
 import { type ComputedRef, type Ref } from "vue";
@@ -113,20 +113,25 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 			{{ t(`collection-keys["${fieldName}"]`) }}
 		</h1>
 
-		<div class="m-1 grid w-full grid-cols-[1fr_auto] items-center rounded bg-white shadow-sm">
-			<label :for="`${fieldName}Search`" class="sr-only">Search through facets</label>
+		<div
+			class="m-1 grid w-full grid-cols-[auto_1fr_auto] items-center rounded border bg-white shadow-sm"
+		>
+			<label :for="`${fieldName}Search`">
+				<Search class="mx-2 h-4 w-4 shrink-0 text-gray-400" />
+				<span class="sr-only">{{ t("ui.search-placeholder") }} facets</span>
+			</label>
 			<input
 				:id="`${fieldName}Search`"
 				v-model="facetSearch"
 				type="text"
-				class="rounded border p-1"
+				class="p-1"
 				:name="`${fieldName}Search`"
 				:placeholder="t('ui.search-placeholder')"
 				@input="facetSearchInput(facetSearch)"
 			/>
 			<button v-if="facetSearch" @click="(facetSearch = ''), loadFacets(10)">
 				<span class="sr-only">Delete Input</span>
-				<XCircle class="mx-2 h-6 w-6 text-gray-400" />
+				<XCircle class="mx-2 h-5 w-5 text-gray-400" />
 			</button>
 		</div>
 		<div

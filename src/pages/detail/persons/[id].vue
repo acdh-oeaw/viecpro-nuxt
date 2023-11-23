@@ -25,9 +25,11 @@ definePageMeta({
 
 <template>
 	<div class="mx-auto h-full w-full max-w-container px-2 py-4 xl:px-0">
-		<h2 class="text-2xl text-gray-500">Datenblatt - Person</h2>
-		<h1 class="text-3xl font-bold text-primary-600">{{ data.entity.fullname }}</h1>
-		<Chip v-if="data.details" class="my-1" square>
+		<h2 class="text-lg text-gray-500 lg:text-2xl">Datenblatt - Person</h2>
+		<h1 class="text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
+			{{ data.entity.fullname }}
+		</h1>
+		<Chip v-if="data.details" class="my-1 text-sm lg:text-base" square>
 			<span>
 				{{
 					data.details.court_functions

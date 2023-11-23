@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useWindowSize } from "@vueuse/core";
 import get from "lodash.get";
-import { ChevronRight, Loader2, XCircle } from "lucide-vue-next";
+import { ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
 import { type SearchResponse } from "typesense/lib/Typesense/Documents";
 import { computed, type ComputedRef, type Ref, ref, watch } from "vue";
 import { type LocationQuery, type RouteLocationNormalized, useRoute } from "vue-router";
@@ -101,14 +101,19 @@ watch(
 	<div class="mx-2 flex h-full flex-col-reverse gap-4 xl:grid xl:grid-cols-[4fr_2fr]">
 		<div class="mx-auto flex h-full w-full max-w-container flex-col p-2 xl:p-0">
 			<div
-				class="mb-4 grid h-12 w-full shrink-0 grid-cols-[1fr_auto] items-center rounded border bg-white shadow-md xl:my-4"
+				class="mb-4 grid h-12 w-full shrink-0 grid-cols-[auto_1fr_auto] items-center rounded border bg-white shadow-md xl:my-4"
 			>
-				<label for="searchinput" class="sr-only">Search</label>
+				<label for="searchinput">
+					<Search class="mx-3 h-5 w-5 shrink-0 text-gray-400" />
+					<span class="sr-only">
+						{{ t("ui.search-placeholder") }}
+					</span>
+				</label>
 				<input
 					id="searchinput"
 					v-model="input"
 					type="text"
-					class="h-full rounded pl-2"
+					class="h-full rounded"
 					:placeholder="t('ui.search-placeholder')"
 					@input="
 						$router.replace({
