@@ -6,7 +6,7 @@ import { defaultLocale, locales } from "./config/i18n.config";
 
 export default defineNuxtConfig({
 	alias: {
-		"@": fileURLToPath(new URL("./src", import.meta.url)),
+		"@": fileURLToPath(new URL("./", import.meta.url)),
 		"~": fileURLToPath(new URL("./", import.meta.url)),
 	},
 	components: false,
@@ -24,9 +24,6 @@ export default defineNuxtConfig({
 		"tailwindcss/tailwind.css",
 		"@/styles/index.css",
 	],
-	dir: {
-		public: "../public",
-	},
 	i18n: {
 		baseUrl: process.env.NUXT_PUBLIC_APP_BASE_URL,
 		defaultLocale,
@@ -75,7 +72,6 @@ export default defineNuxtConfig({
 			NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX: process.env.NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX,
 		},
 	},
-	srcDir: "./src/",
 	typescript: {
 		shim: false,
 		strict: true,
@@ -83,7 +79,7 @@ export default defineNuxtConfig({
 		tsConfig: {
 			compilerOptions: {
 				paths: {
-					"@/*": ["./src/*"],
+					"@/*": ["./*"],
 					"~/*": ["./*"],
 				},
 			},

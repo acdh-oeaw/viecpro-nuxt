@@ -2,7 +2,6 @@
 
 ## 1. Grundsätzliches zu den Daten
 
-
 #### Vollständigkeit und Aktualität der Personendaten
 
 Das Ziel dieser Pilotphase war die **Überführung und Aufbereitung der Leopold- und

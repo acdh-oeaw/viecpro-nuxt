@@ -23,7 +23,7 @@ COPY --chown=node:node nuxt.config.ts tailwind.config.cjs tsconfig.json ./
 COPY --chown=node:node scripts ./scripts
 COPY --chown=node:node config ./config
 COPY --chown=node:node public ./public
-COPY --chown=node:node src ./src
+COPY --chown=node:node src ./
 COPY --chown=node:node patches ./patches
 
 RUN npm install --ci --no-audit --no-fund
