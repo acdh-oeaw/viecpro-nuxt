@@ -2,7 +2,7 @@
 import { CalendarRange, FileText, MapPin, School2, User, Users } from "lucide-vue-next";
 
 import MainContent from "@/components/main-content.vue";
-import { type NavLink } from "@/types/misc";
+import type { NavLink } from "@/types/misc.d.ts";
 import { NuxtLink } from "#components";
 import { computed, definePageMeta, useI18n, useLocalePath } from "#imports";
 
