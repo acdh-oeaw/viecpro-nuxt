@@ -1,4 +1,5 @@
 interface BaseEntity {
+	id: string;
 	object_id: number;
 	start_date: string;
 	end_date: string;
@@ -10,7 +11,7 @@ interface BaseEntity {
 	labels: Array<Label>;
 }
 
-export type AnyEntity = Court | Event | Institution | Person | Place | Reference | Relation;
+export type AnyEntity = Court | Event | Institution | Person | Place | Relation;
 
 export interface Court extends BaseEntity {
 	owner: Array<CourtOwner>;
@@ -70,6 +71,7 @@ export interface Institution extends BaseEntity {}
 export interface Event extends BaseEntity {}
 
 export interface Relation {
+	id: string;
 	object_id: number;
 	start_date: string;
 	end_date: string;

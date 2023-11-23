@@ -40,7 +40,7 @@ const loadFacets = async (max = 500, query = "") => {
 		props.queryBy,
 	);
 
-	scopeFacet.value = results.facet_counts ? results.facet_counts[0] : {};
+	if (results.facet_counts) scopeFacet.value = results.facet_counts[0];
 
 	loading.value = false;
 };

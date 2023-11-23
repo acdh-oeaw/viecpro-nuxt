@@ -15,7 +15,7 @@ export default defineNuxtConfig({
 		locales: Object.keys(locales),
 		markdown: {
 			anchorLinks: false,
-			rehypePlugins: [["rehype-mermaidjs", { strategy: "img-svg" }]],
+			rehypePlugins: ["rehype-mermaid"],
 		},
 	},
 	css: [
