@@ -1,25 +1,22 @@
-import { type CollectionSchema } from "typesense/lib/Typesense/Collection";
-import { type SearchParams, type SearchResponse } from "typesense/lib/Typesense/Documents";
-import { type LocationQuery } from "vue-router";
+import type { CollectionSchema } from "typesense/lib/Typesense/Collection";
+import type { SearchParams, SearchResponse } from "typesense/lib/Typesense/Documents";
+import type { LocationQuery } from "vue-router";
 
 import { useDefaultClient } from "@/lib/get-ts-data";
-import { type AnyEntity, type Person, type PersonDetail, type Relation } from "@/lib/schema.types";
+import type { AnyDetail, AnyEntity } from "@/types/schema";
 
-export async function getDocuments<CollectionEntry extends AnyEntity>(
+export async function getDocuments<T extends AnyEntity>(
 	query: SearchParams,
 	collection: string,
-): Promise<SearchResponse<CollectionEntry>> {
-	return useDefaultClient().collections<CollectionEntry>(collection).documents().search(query);
+): Promise<SearchResponse<T>> {
+	return useDefaultClient().collections<T>(collection).documents().search(query);
 }
 
-export async function getDocument<CollectionEntry extends AnyEntity>(
-	collection: string,
-	id: string,
-): Promise<AnyEntity> {
-	return useDefaultClient().collections<CollectionEntry>(collection).documents(id).retrieve();
+export async function getDocument<T extends AnyEntity>(collection: string, id: string): Promise<T> {
+	return useDefaultClient().collections<T>(collection).documents(id).retrieve();
 }
 
-export async function getFacets<CollectionEntry extends AnyEntity>(
+export async function getFacets<T extends AnyEntity>(
 	facet: string,
 	max = 500,
 	query: LocationQuery = {},
@@ -27,9 +24,9 @@ export async function getFacets<CollectionEntry extends AnyEntity>(
 	collection: string,
 	query_by: string,
 	q = "*",
-): Promise<SearchResponse<CollectionEntry>> {
+): Promise<SearchResponse<T>> {
 	return useDefaultClient()
-		.collections<CollectionEntry>(collection)
+		.collections<T>(collection)
 		.documents()
 		.search({
 			q,
@@ -42,54 +39,11 @@ export async function getFacets<CollectionEntry extends AnyEntity>(
 		});
 }
 
-export async function getRelations<CollectionEntry extends Relation>(
-	sourceId: string,
-	query_by: string,
-	kind?: string,
-): Promise<SearchResponse<CollectionEntry>> {
-	const query: SearchParams = { q: sourceId, query_by };
-	if (kind != null) query.filter_by = `target.model := ${kind} || source.model := ${kind}`;
-	return getDocuments(query, `viecpro_relations`);
-}
-
-export async function getDocumentAndRelations(
-	prefix: string,
-	collection: string,
-	id: string,
-	kind?: string,
-): Promise<{
-	entity: AnyEntity;
-	source: SearchResponse<Relation>;
-	target: SearchResponse<Relation>;
-}> {
-	const [entity, source, target] = await Promise.all([
-		getDocument(collection, prefix + id),
-		getRelations(id, "source.object_id", kind),
-		getRelations(id, "target.object_id", kind),
-	]);
-	return { entity, source, target };
-}
-
-export async function getDetails(model: string, id: string): Promise<object> {
+export async function getDetails<T extends AnyDetail>(model: string, id: string): Promise<T> {
 	return useDefaultClient()
-		.collections(`viecpro_detail_${model}`)
+		.collections<T>(`viecpro_detail_${model}`)
 		.documents(`detail_${model}_${id}`)
 		.retrieve();
-}
-
-export async function getEntityAndDetails(
-	id: string,
-	prefix: string,
-	model: string,
-): Promise<{
-	entity: Person;
-	details: PersonDetail;
-}> {
-	const [entity, details] = await Promise.all([
-		getDocument(`viecpro_${model}s`, prefix + id),
-		getDetails(model, id),
-	]);
-	return { entity, details };
 }
 
 // Might be useful somedays

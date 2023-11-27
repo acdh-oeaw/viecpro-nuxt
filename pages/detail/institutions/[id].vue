@@ -1,23 +1,20 @@
 <script setup lang="ts">
+import { useQuery } from "@tanstack/vue-query";
 import { useRoute } from "vue-router";
 
-import DetailPage from "@/components/detail-page.vue";
-import { getDocumentAndRelations } from "@/composables/use-ts-data";
+import type { Institution } from "@/types/schema";
 import { definePageMeta, ref } from "#imports";
 
 const route = useRoute();
 const id = String(route.params.id);
 
-const loading = ref(true);
+const data = ref({
+	entity: useQuery({
+		queryKey: ["institution", id],
+		queryFn: () => getDocument<Institution>("viecpro_institutions", `Institution_${id}`),
+	}),
+});
 
-const data = await getDocumentAndRelations(
-	"Institution_",
-	`viecpro_institutions`,
-	id,
-	"Institution",
-);
-
-loading.value = false;
 console.log(data);
 
 definePageMeta({
@@ -30,11 +27,9 @@ definePageMeta({
 		<div>
 			{{ route.params.id }}
 		</div>
-		<DetailPage
-			:data="data.entity"
-			:source="data.source"
-			:target="data.target"
-			:loading="loading"
-		/>
+		<pre>
+			{{ data }}
+		</pre
+		>
 	</div>
 </template>

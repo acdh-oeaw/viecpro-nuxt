@@ -39,6 +39,7 @@ export default defineNuxtConfig({
 	nitro: {
 		compressPublicAssets: true,
 	},
+	plugins: ["@/plugins/query-client.ts"],
 	postcss: {
 		plugins: {
 			tailwindcss: {},

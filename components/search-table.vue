@@ -5,7 +5,7 @@ import { ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import type { LocationQuery, RouteLocationNormalized } from "vue-router";
 
-import type { AnyEntity } from "@/lib/schema.types";
+import type { AnyEntity } from "@/types/schema";
 
 const locale = useLocale();
 const t = useTranslations();

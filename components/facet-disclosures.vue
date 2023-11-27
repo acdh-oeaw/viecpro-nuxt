@@ -4,7 +4,7 @@ import { ChevronUp } from "lucide-vue-next";
 import type { SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
 
 import { facetObjectToTypesenseQuery, getFacetObjectFromURL } from "@/lib/facets";
-import type { AnyEntity } from "@/lib/schema.types";
+import type { AnyEntity } from "@/types/schema";
 
 const t = useTranslations();
 
