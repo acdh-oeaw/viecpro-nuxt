@@ -95,15 +95,16 @@ watch(
 	route,
 	(newRoute) => {
 		const query: LocationQuery = newRoute.query;
-
-		search(
-			props.collectionName,
-			String(query.q ?? ""),
-			String(query.facets ?? ""),
-			pageNum.value,
-			limitNum.value || pageLimit,
-			String(query.sort ?? ""),
-		);
+		if (String(newRoute.name).includes("search-")) {
+			search(
+				props.collectionName,
+				String(query.q ?? ""),
+				String(query.facets ?? ""),
+				pageNum.value,
+				limitNum.value || pageLimit,
+				String(query.sort ?? ""),
+			);
+		}
 	},
 	{
 		immediate: true,
