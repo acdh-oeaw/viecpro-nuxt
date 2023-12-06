@@ -1,8 +1,8 @@
-import { type FitEnum } from "sharp";
+import type { FitEnum } from "sharp";
 
-import { type Locale } from "~/config/i18n.config";
+import type { Locale } from "@/config/i18n.config";
 
-type Metadata = {
+interface Metadata {
 	locale: Locale;
 	title: string;
 	shortTitle: string;
@@ -24,7 +24,7 @@ type Metadata = {
 		shortName: string;
 		website: string;
 	};
-};
+}
 
 export const metadata: Record<Locale, Metadata> = {
 	de: {
