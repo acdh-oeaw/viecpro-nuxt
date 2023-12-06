@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useQuery, useQueryClient, type UseQueryReturnType } from "@tanstack/vue-query";
 import { useWindowSize } from "@vueuse/core";
 import get from "lodash.get";
 import { ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
@@ -22,15 +23,22 @@ const props = defineProps<{
 const pageLimit = 25;
 
 const route: RouteLocationNormalized = useRoute();
-const loading = ref(true);
 
 const input = ref(route.query.q === undefined ? "" : String(route.query.q));
 
-const docs: Ref<SearchResponse<AnyEntity> | null> = ref(null);
+const docs: Ref<UseQueryReturnType<SearchResponse<AnyEntity>, object> | null> = ref(null);
+const loading = computed(
+	() =>
+		docs.value === null ||
+		docs.value.isLoading.value ||
+		docs.value.isFetching.value ||
+		docs.value.isPending.value ||
+		docs.value.isRefetching,
+);
 
 const windowWidth = useWindowSize().width;
 
-const search = async (
+const search = (
 	collection: string,
 	terms = "",
 	facetQuery: string | undefined,
@@ -38,24 +46,35 @@ const search = async (
 	limit = pageLimit,
 	sortBy = "",
 ) => {
-	loading.value = true;
+	const query = {
+		q: terms,
+		query_by: props.queryBy,
+		per_page: limit,
+		page,
+		facet_by: props.facets ? props.facets.join(",") : "",
+		filter_by: facetQuery ?? "",
+		sort_by: sortBy,
+		// max_facet_values: 500,
+	};
 
-	const response = await getDocuments(
-		{
-			q: terms,
-			query_by: props.queryBy,
-			per_page: limit,
-			page,
-			facet_by: props.facets ? props.facets.join(",") : "",
-			filter_by: facetQuery ?? "",
-			sort_by: sortBy,
-			// max_facet_values: 500,
+	const queryClient = useQueryClient();
+	const response = useQuery({
+		queryKey: ["search", collection, JSON.stringify(query)] as const,
+		queryFn: async () => {
+			const response = await getDocuments(query, collection);
+			if (response.hits) {
+				response.hits.forEach((hit) => {
+					queryClient.setQueryData(
+						[props.collectionName, String(hit.document.object_id)],
+						hit.document,
+					);
+				});
+			}
+			return response;
 		},
-		collection,
-	);
+	});
 
 	docs.value = response;
-	loading.value = false;
 };
 
 // TODO: finde better solution
@@ -73,10 +92,10 @@ const limitNum: ComputedRef<number> = computed(() => {
 
 watch(
 	route,
-	async (newRoute) => {
+	(newRoute) => {
 		const query: LocationQuery = newRoute.query;
 
-		await search(
+		search(
 			props.collectionName,
 			String(query.q ?? ""),
 			String(query.facets ?? ""),
@@ -138,12 +157,12 @@ watch(
 			</div>
 			<slot />
 			<Pagination
-				v-if="docs != null"
-				:page="docs.page"
-				:limit="docs.request_params.per_page || pageLimit"
-				:all="docs.found"
+				v-if="docs != null && docs.data"
+				:page="docs.data.page"
+				:limit="docs.data.request_params.per_page || pageLimit"
+				:all="docs.data.found"
 			/>
-			<div v-if="!loading" class="w-full">
+			<div v-if="!loading && docs?.data" class="w-full">
 				<div class="mr-6 hidden md:grid" :class="cols">
 					<div v-for="key in koi" :key="key" class="m-2 font-semibold">
 						<SortableColumn v-if="sort && sort.includes(key)" :query="route.query" :col="key" />
@@ -154,7 +173,7 @@ watch(
 				</div>
 				<template v-if="docs !== null">
 					<div
-						v-for="hit in docs.hits"
+						v-for="hit in docs.data.hits"
 						:key="String(hit.document.id)"
 						class="border-b py-1 md:border-t"
 					>
@@ -200,21 +219,21 @@ watch(
 					</div>
 				</template>
 				<Pagination
-					v-if="docs != null && docs.found != 0"
+					v-if="docs != null && docs?.data && docs.data.found != 0"
 					class="mt-2"
-					:page="docs.page"
-					:limit="docs.request_params.per_page || pageLimit"
-					:all="docs.found"
+					:page="docs.data.page"
+					:limit="docs.data.request_params.per_page || pageLimit"
+					:all="docs.data.found"
 				/>
 			</div>
 			<Centered v-else>
 				<Loader2 class="h-8 w-8 animate-spin" />
 			</Centered>
 		</div>
-		<div v-if="docs && docs.found">
+		<div v-if="docs?.data && docs.data.found">
 			<FacetDisclosures
 				class="float-right m-4 w-96 max-w-full"
-				:facets="docs.facet_counts"
+				:facets="docs.data.facet_counts"
 				:loading="loading"
 				:collection="collectionName"
 				:query-by="queryBy"

@@ -16,17 +16,29 @@ const loading = ref(true);
 
 const data = ref({
 	entity: useQuery({
-		queryKey: ["person", id],
+		queryKey: ["viecpro_persons", id],
 		queryFn: () => getDocument<Person>("viecpro_persons", `Person_${id}`),
 	}),
 	details: useQuery({
-		queryKey: ["detail", "person", id],
+		queryKey: ["detail", "viecpro_persons", id],
 		queryFn: () => getDetails<PersonDetail>("person", id),
 	}),
 });
 
-const entityLoading = computed(() => data.value.entity.isLoading);
-const detailsLoading = computed(() => data.value.details.isLoading);
+const entityLoading = computed(
+	() =>
+		data.value.entity.isLoading ||
+		data.value.entity.isFetching ||
+		data.value.entity.isPending ||
+		data.value.entity.isRefetching,
+);
+const detailsLoading = computed(
+	() =>
+		data.value.details.isLoading ||
+		data.value.details.isFetching ||
+		data.value.details.isPending ||
+		data.value.details.isRefetching,
+);
 
 const labelCols = ["name", "start_date", "end_date"];
 const relCols = ["relation_type", "target.name", "start_date", "end_date"];
