@@ -11,6 +11,7 @@ import type { AnyEntity } from "@/types/schema";
 
 const locale = useLocale();
 const t = useTranslations();
+const queryClient = useQueryClient();
 
 const props = defineProps<{
 	queryBy: string;
@@ -58,7 +59,6 @@ const search = (
 		// max_facet_values: 500,
 	};
 
-	const queryClient = useQueryClient();
 	const response = useQuery({
 		queryKey: ["search", collection, JSON.stringify(query)] as const,
 		queryFn: async () => {
