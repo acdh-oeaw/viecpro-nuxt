@@ -2,7 +2,8 @@
 <script lang="ts" setup>
 import { ChevronDown, Search, XCircle } from "lucide-vue-next";
 import type { SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
-import type { RouteLocationNormalized } from "vue-router";
+import { computed, type ComputedRef, onMounted, type Ref, ref } from "vue";
+import { type RouteLocationNormalized, useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";
 

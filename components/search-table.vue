@@ -4,7 +4,8 @@ import { useWindowSize } from "@vueuse/core";
 import get from "lodash.get";
 import { ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
-import type { LocationQuery, RouteLocationNormalized } from "vue-router";
+import { computed, type ComputedRef, type Ref, ref, watch } from "vue";
+import { type LocationQuery, type RouteLocationNormalized, useRoute } from "vue-router";
 
 import type { AnyEntity } from "@/types/schema";
 
