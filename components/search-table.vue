@@ -93,9 +93,9 @@ const limitNum: ComputedRef<number> = computed(() => {
 
 watch(
 	route,
-	(newRoute) => {
+	(newRoute, oldRoute) => {
 		const query: LocationQuery = newRoute.query;
-		if (String(newRoute.name).includes("search-")) {
+		if (!oldRoute || String(newRoute.name) !== String(oldRoute.name)) {
 			search(
 				props.collectionName,
 				String(query.q ?? ""),
