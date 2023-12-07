@@ -4,8 +4,8 @@ import { useWindowSize } from "@vueuse/core";
 import get from "lodash.get";
 import { ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
-import { computed, type ComputedRef, type Ref, ref, watch } from "vue";
-import { type LocationQuery, type RouteLocationNormalized, useRoute } from "vue-router";
+import { computed, type ComputedRef, type Ref, ref } from "vue";
+import { type RouteLocationNormalized, useRoute } from "vue-router";
 
 import type { AnyEntity } from "@/types/schema";
 
@@ -40,50 +40,6 @@ const loading = computed(
 
 const windowWidth = useWindowSize().width;
 
-const search = (
-	collection: string,
-	terms = "",
-	facetQuery: string | undefined,
-	page = 1,
-	limit = pageLimit,
-	sortBy = "",
-) => {
-	const query = {
-		q: terms,
-		query_by: props.queryBy,
-		per_page: limit,
-		page,
-		facet_by: props.facets ? props.facets.join(",") : "",
-		filter_by: facetQuery ?? "",
-		sort_by: sortBy,
-		// max_facet_values: 500,
-	};
-
-	const response = useQuery({
-		queryKey: ["search", collection, JSON.stringify(query)] as const,
-		queryFn: async () => {
-			const response = await getDocuments(query, collection);
-			if (response.hits) {
-				response.hits.forEach((hit) => {
-					queryClient.setQueryData(
-						[props.collectionName, String(hit.document.object_id)],
-						hit.document,
-					);
-				});
-			}
-			return response;
-		},
-	});
-
-	docs.value = response;
-};
-
-// TODO: finde better solution
-const getDetailLink = (id: string) => {
-	const type = route.path.split("/")[3];
-	return `/${locale.value}/detail/${type}/${id}`;
-};
-
 const pageNum: ComputedRef<number> = computed(() => {
 	return Number(route.query.page) || 1;
 });
@@ -91,25 +47,41 @@ const limitNum: ComputedRef<number> = computed(() => {
 	return Number(route.query.limit) || pageLimit;
 });
 
-watch(
-	route,
-	(newRoute, oldRoute) => {
-		const query: LocationQuery = newRoute.query;
-		if (!oldRoute || String(newRoute.name) !== String(oldRoute.name)) {
-			search(
-				props.collectionName,
-				String(query.q ?? ""),
-				String(query.facets ?? ""),
-				pageNum.value,
-				limitNum.value || pageLimit,
-				String(query.sort ?? ""),
-			);
+const comQuery = computed(() => {
+	const query = route.query;
+	return {
+		q: String(query.q ?? ""),
+		query_by: props.queryBy,
+		facet_by: props.facets ? props.facets.join(",") : "",
+		filter_by: String(query.facets ?? ""),
+		page: pageNum.value,
+		per_page: limitNum.value || pageLimit,
+		sort_by: String(query.sort ?? ""),
+	};
+});
+docs.value = useQuery({
+	queryKey: ["search", props.collectionName, comQuery] as const,
+	queryFn: async ({ queryKey }) => {
+		const [, collection, q] = queryKey;
+		const response = await getDocuments(q, collection);
+		if (response.hits) {
+			response.hits.forEach((hit) => {
+				queryClient.setQueryData(
+					[props.collectionName, String(hit.document.object_id)],
+					hit.document,
+				);
+			});
 		}
+
+		return response;
 	},
-	{
-		immediate: true,
-	},
-);
+});
+
+// TODO: finde better solution
+const getDetailLink = (id: string) => {
+	const type = route.path.split("/")[3];
+	return `/${locale.value}/detail/${type}/${id}`;
+};
 </script>
 
 <template>
@@ -159,7 +131,7 @@ watch(
 			</div>
 			<slot />
 			<Pagination
-				v-if="docs != null && docs.data"
+				v-if="docs != null && docs.data && docs.data.page"
 				:page="docs.data.page"
 				:limit="docs.data.request_params.per_page || pageLimit"
 				:all="docs.data.found"
@@ -232,7 +204,7 @@ watch(
 				<Loader2 class="h-8 w-8 animate-spin" />
 			</Centered>
 		</div>
-		<div v-if="docs?.data && docs.data.found">
+		<div v-if="!loading && docs !== null && docs.data">
 			<FacetDisclosures
 				class="float-right m-4 w-96 max-w-full"
 				:facets="docs.data.facet_counts"

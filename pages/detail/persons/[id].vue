@@ -69,7 +69,9 @@ definePageMeta({
 							.join(" - ")
 					}}
 				</span>
-				<span v-if="data.details.data.court_functions.length > 3">
+				<span
+					v-if="data.details.data?.court_functions && data.details.data?.court_functions.length > 3"
+				>
 					+
 					{{ data.details.data.court_functions.length - 3 }}
 				</span>
@@ -85,16 +87,16 @@ definePageMeta({
 					<div v-if="!loading" class="grid grid-cols-2">
 						<div class="col-span-2 my-1 border-t"></div>
 						<span>Vorname/n:</span>
-						<span v-if="!entityLoading">{{ data.entity.data.first_name }}</span>
+						<span v-if="!entityLoading">{{ data.entity.data?.first_name }}</span>
 						<span v-else class="animate-pulse">loading...</span>
 						<div class="col-span-2 my-1 border-t"></div>
 						<template v-if="!entityLoading">
-							<template v-if="data.entity.data.name">
+							<template v-if="data.entity.data?.name">
 								<span v-if="data.entity.data.gender === 'male'">Name:</span>
 								<span v-else>Geburtsname:</span>
 							</template>
 
-							<span>{{ data.entity.data.name }}</span>
+							<span>{{ data.entity.data?.name }}</span>
 						</template>
 						<template v-else>
 							<span class="animate-pulse">loading...</span>
@@ -118,7 +120,7 @@ definePageMeta({
 						<span>Geboren:</span>
 						<template v-if="!entityLoading">
 							<span>
-								{{ data.entity.data.start_date }}
+								{{ data.entity.data?.start_date }}
 							</span>
 							<span v-if="!isEmpty(data.details.data?.place_of_birth)">
 								in {{ data.details.data?.place_of_birth.name }}
@@ -131,7 +133,7 @@ definePageMeta({
 						<span>
 							<template v-if="!detailsLoading && !entityLoading">
 								<span>
-									{{ data.entity.data.end_date }}
+									{{ data.entity.data?.end_date }}
 								</span>
 								<span v-if="!isEmpty(data.details.data?.place_of_death)">
 									in {{ data.details.data?.place_of_death.name }}
@@ -141,7 +143,7 @@ definePageMeta({
 						</span>
 						<div class="col-span-2 my-1 border-t"></div>
 						<span>Geschlecht:</span>
-						<span v-if="!entityLoading">{{ data.entity.data.gender }}</span>
+						<span v-if="!entityLoading">{{ data.entity.data?.gender }}</span>
 						<span v-else class="animate-pulse">loading...</span>
 					</div>
 				</div>
