@@ -1,8 +1,9 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
+import { useQuery } from "@tanstack/vue-query";
 import { ChevronDown, Search, XCircle } from "lucide-vue-next";
 import type { SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
-import { computed, type ComputedRef, onMounted, type Ref, ref } from "vue";
+import { computed, type ComputedRef, type Ref, ref } from "vue";
 import { type RouteLocationNormalized, useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";
@@ -20,9 +21,9 @@ const props = defineProps<{
 const route: RouteLocationNormalized = useRoute();
 
 const facetSearch: Ref<string> = ref("");
+const max = ref(1);
 
 let facetModel: Ref<Array<string> | undefined> = ref(props.selected ?? []);
-let loading: Ref<boolean> = ref(true);
 
 let scopeFacet: Ref<SearchResponseFacetCountSchema<any> | undefined> = ref({
 	field_name: props.fieldName,
@@ -30,62 +31,25 @@ let scopeFacet: Ref<SearchResponseFacetCountSchema<any> | undefined> = ref({
 	stats: {},
 });
 
-const loadFacets = async (max = 500, query = "") => {
-	loading.value = true;
-	const results = await getFacets(
-		props.fieldName,
-		max,
-		route.query,
-		query,
-		props.collection,
-		props.queryBy,
-	);
+const newQuery = computed(() => ({
+	facet: props.fieldName,
+	max: max.value,
+	query: route.query,
+	facetQuery: facetSearch,
+	collection: props.collection,
+	query_by: props.queryBy,
+}));
 
-	if (results.facet_counts) scopeFacet.value = results.facet_counts[0];
-
-	loading.value = false;
-};
-const addToFacets = async (name: string, max = 1) => {
-	loading.value = true;
-	const results = await getFacets(
-		props.fieldName,
-		max,
-		route.query,
-		name,
-		props.collection,
-		props.queryBy,
-	);
-	if (results.facet_counts && scopeFacet.value && results.facet_counts[0]?.counts[0]) {
-		scopeFacet.value.counts.unshift(results.facet_counts[0]?.counts[0]);
-	}
-	loading.value = false;
-};
-
-const addSelected = async (selected: Array<string>) => {
-	for (const sel of selected) {
-		if (
-			!(
-				scopeFacet.value?.counts.some((facet) => {
-					return facet.value === sel;
-				}) ?? false
-			)
-		) {
-			await addToFacets(sel);
-		}
-	}
-};
-
-const facetSearchInput = async (input: string) => {
-	await loadFacets(10, input);
-	if (props.selected && scopeFacet.value !== undefined) await addSelected(props.selected);
-};
-
-onMounted(async () => {
-	await loadFacets(10);
-	if (props.selected && scopeFacet.value !== undefined) {
-		await addSelected(props.selected);
-	}
+const newResponse = useQuery({
+	queryKey: ["facet", newQuery],
+	queryFn: ({ queryKey }) => {
+		const [, q] = queryKey;
+		if (q && typeof q !== "string")
+			return getFacets(q.facet, q.max, q.query, q.facetQuery, q.collection, q.query_by);
+		return;
+	},
 });
+let loading = ref(newResponse.isLoading);
 
 defineEmits(["facetChange"]);
 
@@ -109,7 +73,6 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 		<h1 class="flex items-center justify-between text-2xl">
 			{{ t(`collection-keys["${fieldName}"]`) }}
 		</h1>
-
 		<div
 			class="m-1 grid w-full grid-cols-[auto_1fr_auto] items-center rounded border bg-white shadow-sm"
 		>
@@ -124,43 +87,44 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 				class="p-1"
 				:name="`${fieldName}Search`"
 				:placeholder="t('ui.search-placeholder')"
-				@input="facetSearchInput(facetSearch)"
 			/>
-			<button v-if="facetSearch" @click="(facetSearch = ''), loadFacets(10)">
+			<button v-if="facetSearch" @click="facetSearch = ''">
 				<span class="sr-only">Delete Input</span>
 				<XCircle class="mx-2 h-5 w-5 text-gray-400" />
 			</button>
 		</div>
-		<div
-			v-for="count in facetsWithSelected"
-			:key="count.value"
-			class="flex items-center gap-2 rounded p-1 py-1.5 transition hover:bg-slate-200 active:bg-slate-300"
-		>
-			<input
-				:id="`${fieldName}:${count.value}`"
-				v-model="facetModel"
-				type="checkbox"
-				class="ml-1 h-5 w-5 cursor-pointer"
-				:value="count.value"
-				@change="$emit('facetChange', facetModel)"
-			/>
-			&nbsp;
-			<label
-				:for="`${fieldName}:${count.value}`"
-				class="flex w-full cursor-pointer items-center justify-between gap-1"
+		<div v-if="!loading">
+			<div
+				v-for="count in facetsWithSelected"
+				:key="count.value"
+				class="flex items-center gap-2 rounded p-1 py-1.5 transition hover:bg-slate-200 active:bg-slate-300"
 			>
-				<span>
-					{{ count.value }}
-				</span>
-				<Chip v-if="count.count" class="mx-1">
-					{{ count.count }}
-				</Chip>
-			</label>
+				<input
+					:id="`${fieldName}:${count.value}`"
+					v-model="facetModel"
+					type="checkbox"
+					class="ml-1 h-5 w-5 cursor-pointer"
+					:value="count.value"
+					@change="$emit('facetChange', facetModel)"
+				/>
+				&nbsp;
+				<label
+					:for="`${fieldName}:${count.value}`"
+					class="flex w-full cursor-pointer items-center justify-between gap-1"
+				>
+					<span>
+						{{ count.value }}
+					</span>
+					<Chip v-if="count.count" class="mx-1">
+						{{ count.count }}
+					</Chip>
+				</label>
+			</div>
 		</div>
 		<button
-			v-if="scopeFacet?.stats?.total_values != scopeFacet?.counts.length"
+			v-if="!loading && scopeFacet?.stats?.total_values != scopeFacet?.counts.length"
 			class="flex cursor-pointer items-center justify-center gap-2 rounded p-1 transition hover:bg-slate-200 active:bg-slate-300"
-			@click="loadFacets()"
+			@click="max = 500"
 		>
 			<span>{{ t("ui.show-all") }} ({{ scopeFacet?.stats.total_values }} total)</span>
 			<ChevronDown class="h-5 w-5" />
