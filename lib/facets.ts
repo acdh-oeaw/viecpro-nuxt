@@ -23,7 +23,7 @@ export const typesenseQueryToFacetObject = (
 	const retObject: FacetObject = {};
 	facetArray.forEach((facetString: string) => {
 		const [key, value] = facetString.split(":=");
-		if (key !== undefined) {
+		if (key !== undefined && value !== undefined) {
 			retObject[key] = JSON.parse(String(value).replaceAll("`", '"')) as Array<string>;
 		}
 	});
