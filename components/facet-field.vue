@@ -7,7 +7,6 @@ import { computed, type ComputedRef, type Ref, ref } from "vue";
 import { type RouteLocationNormalized, useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";
-import { removeDuplicates } from "@/lib/helpers";
 
 const t = useTranslations();
 const queryClient = useQueryClient();
@@ -71,31 +70,28 @@ const newQuery = computed(() => ({
 }));
 
 const newResponse = useQuery({
-	queryKey: ["facet", newQuery],
+	queryKey: ["facet", newQuery] as const,
 	queryFn: async ({ queryKey }) => {
 		const [, q] = queryKey;
-		if (q && typeof q !== "string") {
-			const results = await getFacets(
-				q.facet,
-				q.max,
-				q.query,
-				q.facetQuery,
-				q.collection,
-				q.query_by,
-			);
-			if (results.facet_counts === undefined) return;
-			else {
-				results.facet_counts[0]?.counts.forEach((count) => {
-					queryClient.setQueryData(
-						["single facet", { ...q, max: 1, facetQuery: count.value }],
-						count,
-					);
-				});
+		const results = await getFacets(
+			q.facet,
+			q.max,
+			q.query,
+			q.facetQuery,
+			q.collection,
+			q.query_by,
+		);
+		if (results.facet_counts === undefined) return;
+		else {
+			results.facet_counts[0]?.counts.forEach((count) => {
+				queryClient.setQueryData(
+					["single facet", { ...q, max: 1, facetQuery: count.value }],
+					count,
+				);
+			});
 
-				return results.facet_counts[0];
-			}
+			return results.facet_counts[0];
 		}
-		return;
 	},
 });
 
@@ -112,7 +108,10 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 	() => {
 		let retArray: SearchResponseFacetCountSchema<any>["counts"] = [];
 		if (!loading.value && newResponse.data.value) {
-			retArray = [...retArray, ...newResponse.data.value.counts];
+			retArray = [
+				...retArray,
+				...newResponse.data.value.counts.filter((count) => !props.selected?.includes(count.value)),
+			];
 		}
 		if (selectionQuery && !loading.value) {
 			retArray = [
@@ -122,17 +121,14 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 				) as SearchResponseFacetCountSchema<any>["counts"]),
 			];
 		}
-		return removeDuplicates(
-			retArray
-				.sort((a, b) => {
-					return b.count - a.count;
-				})
-				.sort((a) => {
-					if (facetModel.value.includes(a.value)) return -10;
-					return 0;
-				}),
-			"value",
-		) as SearchResponseFacetCountSchema<any>["counts"];
+		return retArray
+			.sort((a, b) => {
+				return b.count - a.count;
+			})
+			.sort((a) => {
+				if (facetModel.value.includes(a.value)) return -10;
+				return 0;
+			});
 	},
 );
 </script>
@@ -200,7 +196,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 			"
 			class="flex cursor-pointer items-center justify-center gap-2 rounded p-1 transition hover:bg-slate-200 active:bg-slate-300"
 			:class="newResponse.isRefetching.value && 'animate-pulse'"
-			@click="max = 500"
+			@click="max = 400"
 		>
 			<span>{{ t("ui.show-all") }} ({{ newResponse.data.value?.stats.total_values }} total)</span>
 			<ChevronDown class="h-5 w-5" />
