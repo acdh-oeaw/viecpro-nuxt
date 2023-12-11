@@ -32,7 +32,7 @@ const selectionQuery = !props.selected
 	: props.selected.map((selection) => {
 			const query = {
 				facet: props.fieldName,
-				max: 1,
+				max: 10, // In case one filter matches another perfectly
 				query: route.query,
 				facetQuery: selection,
 				collection: props.collection,
@@ -50,7 +50,12 @@ const selectionQuery = !props.selected
 						q.collection,
 						q.query_by,
 					);
-					if (result.facet_counts) return result.facet_counts[0]?.counts[0];
+
+					if (result.facet_counts?.[0]?.counts) {
+						return result.facet_counts[0]?.counts.filter(
+							(facet) => facet.value === q.facetQuery,
+						)[0];
+					}
 					return;
 				},
 			});
@@ -86,6 +91,7 @@ const newResponse = useQuery({
 						count,
 					);
 				});
+
 				return results.facet_counts[0];
 			}
 		}
@@ -108,7 +114,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 		if (!loading.value && newResponse.data.value) {
 			retArray = [...retArray, ...newResponse.data.value.counts];
 		}
-		if (selectionQuery) {
+		if (selectionQuery && !loading.value) {
 			retArray = [
 				...retArray,
 				...(selectionQuery.map(
