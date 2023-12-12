@@ -8,8 +8,10 @@ import { type RouteLocationNormalized, useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";
 
+defineEmits(["facetChange"]);
 const t = useTranslations();
 const queryClient = useQueryClient();
+const route: LocationNormalized = useRoute();
 
 const props = defineProps<{
 	fieldName: string;
@@ -19,48 +21,49 @@ const props = defineProps<{
 	queryBy: string;
 }>();
 
-const route: RouteLocationNormalized = useRoute();
-
 const facetSearch: Ref<string> = ref("");
 const max = ref(10);
 
 let facetModel: Ref<Array<string>> = ref(props.selected ?? []);
 
-const selectionQuery = !props.selected
-	? null
-	: props.selected.map((selection) => {
-			const query = {
-				facet: props.fieldName,
-				max: 10, // In case one filter matches another perfectly
-				query: route.query,
-				facetQuery: selection,
-				collection: props.collection,
-				query_by: props.queryBy,
-			};
-			return useQuery({
-				queryKey: ["single facet", query] as const,
-				queryFn: async ({ queryKey }) => {
-					const [, q] = queryKey;
-					const result = await getFacets(
-						q.facet,
-						q.max,
-						q.query,
-						q.facetQuery,
-						q.collection,
-						q.query_by,
-					);
+const selectionQueries =
+	!props.selected || props.selected.length === 0
+		? null
+		: computed(() =>
+				props.selected?.map((selection) => {
+					const query = {
+						facet: props.fieldName,
+						max: 10, // In case one filter matches another perfectly
+						query: route.query,
+						facetQuery: selection,
+						collection: props.collection,
+						query_by: props.queryBy,
+					};
+					return useQuery({
+						queryKey: ["single facet", query] as const,
+						queryFn: async ({ queryKey }) => {
+							const [, q] = queryKey;
+							const result = await getFacets(
+								q.facet,
+								q.max,
+								q.query,
+								q.facetQuery,
+								q.collection,
+								q.query_by,
+							);
 
-					if (result.facet_counts?.[0]?.counts) {
-						return result.facet_counts[0]?.counts.filter(
-							(facet) => facet.value === q.facetQuery,
-						)[0];
-					}
-					return;
-				},
-			});
-	  });
+							if (result.facet_counts?.[0]?.counts) {
+								return result.facet_counts[0]?.counts.filter(
+									(facet) => facet.value === q.facetQuery,
+								)[0];
+							}
+							return;
+						},
+					});
+				}),
+		  );
 
-const newQuery = computed(() => ({
+const query = computed(() => ({
 	facet: props.fieldName,
 	max: max.value,
 	query: route.query,
@@ -69,8 +72,8 @@ const newQuery = computed(() => ({
 	query_by: props.queryBy,
 }));
 
-const newResponse = useQuery({
-	queryKey: ["facet", newQuery] as const,
+const facetResponse = useQuery({
+	queryKey: ["facet", query] as const,
 	queryFn: async ({ queryKey }) => {
 		const [, q] = queryKey;
 		const results = await getFacets(
@@ -85,7 +88,7 @@ const newResponse = useQuery({
 		else {
 			results.facet_counts[0]?.counts.forEach((count) => {
 				queryClient.setQueryData(
-					["single facet", { ...q, max: 1, facetQuery: count.value }],
+					["single facet", { ...q, max: 10, facetQuery: count.value }],
 					count,
 				);
 			});
@@ -97,38 +100,34 @@ const newResponse = useQuery({
 
 const loading = computed(
 	() =>
-		newResponse.isLoading.value ||
-		selectionQuery?.some((selectionQuery) => selectionQuery.isLoading.value),
+		facetResponse.isFetching.value ||
+		selectionQueries?.value?.some((selectionQuery) => selectionQuery.isFetching.value),
 );
-
-defineEmits(["facetChange"]);
 
 // add selected facets to model
 const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["counts"]> = computed(
 	() => {
-		let retArray: SearchResponseFacetCountSchema<any>["counts"] = [];
-		if (!loading.value && newResponse.data.value) {
-			retArray = [
-				...retArray,
-				...newResponse.data.value.counts.filter((count) => !props.selected?.includes(count.value)),
-			];
+		if (loading.value) return [];
+
+		const retArray: SearchResponseFacetCountSchema<any>["counts"] = [];
+
+		if (selectionQueries?.value) {
+			retArray.push(
+				...(selectionQueries.value
+					.map((selects) => selects.data.value)
+					.sort(
+						(a, b) => (b?.count ?? 0) - (a?.count ?? 0),
+					) as SearchResponseFacetCountSchema<any>["counts"]),
+			);
 		}
-		if (selectionQuery && !loading.value) {
-			retArray = [
-				...retArray,
-				...(selectionQuery.map(
-					(selects) => selects.data.value,
-				) as SearchResponseFacetCountSchema<any>["counts"]),
-			];
+		if (facetResponse.data.value) {
+			retArray.push(
+				...facetResponse.data.value.counts
+					.filter((count) => !props.selected?.includes(count.value))
+					.sort((a, b) => b.count - a.count),
+			);
 		}
-		return retArray
-			.sort((a, b) => {
-				return b.count - a.count;
-			})
-			.sort((a) => {
-				if (facetModel.value.includes(a.value)) return -10;
-				return 0;
-			});
+		return retArray;
 	},
 );
 </script>
@@ -192,13 +191,13 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 		<button
 			v-if="
 				!loading &&
-				newResponse.data.value?.stats?.total_values != newResponse.data.value?.counts.length
+				facetResponse.data.value?.stats?.total_values != facetResponse.data.value?.counts.length
 			"
 			class="flex cursor-pointer items-center justify-center gap-2 rounded p-1 transition hover:bg-slate-200 active:bg-slate-300"
-			:class="newResponse.isRefetching.value && 'animate-pulse'"
+			:class="facetResponse.isRefetching.value && 'animate-pulse'"
 			@click="max = 400"
 		>
-			<span>{{ t("ui.show-all") }} ({{ newResponse.data.value?.stats.total_values }} total)</span>
+			<span>{{ t("ui.show-all") }} ({{ facetResponse.data.value?.stats.total_values }} total)</span>
 			<ChevronDown class="h-5 w-5" />
 		</button>
 	</div>
