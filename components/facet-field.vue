@@ -11,7 +11,7 @@ import Chip from "@/components/chip.vue";
 defineEmits(["facetChange"]);
 const t = useTranslations();
 const queryClient = useQueryClient();
-const route: RouteLocationNormalized = useRoute();
+const route: LocationNormalized = useRoute();
 
 const props = defineProps<{
 	fieldName: string;
