@@ -2,7 +2,7 @@
 import { useQuery, useQueryClient, type UseQueryReturnType } from "@tanstack/vue-query";
 import { useWindowSize } from "@vueuse/core";
 import get from "lodash.get";
-import { ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
+import { ChevronDown, ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { computed, type ComputedRef, type Ref, ref } from "vue";
 import { type RouteLocationNormalized, useRoute } from "vue-router";
@@ -140,6 +140,13 @@ const getDetailLink = (id: string) => {
 				<div class="mr-6 hidden md:grid" :class="cols">
 					<div v-for="key in koi" :key="key" class="m-2 font-semibold">
 						<SortableColumn v-if="sort && sort.includes(key)" :query="route.query" :col="key" />
+						<div
+							v-else-if="t(`collection-keys['${key}']`) === 'ID'"
+							class="flex items-center gap-2"
+						>
+							<span>ID</span>
+							<ChevronDown v-if="!route.query.sort" class="h-5 w-5 opacity-50" />
+						</div>
 						<span v-else>
 							{{ t(`collection-keys["${key}"]`) }}
 						</span>

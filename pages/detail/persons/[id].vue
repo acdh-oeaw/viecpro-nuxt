@@ -12,8 +12,6 @@ import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 const route = useRoute();
 const id = String(route.params.id);
 
-const loading = ref(true);
-
 const data = ref({
 	entity: useQuery({
 		queryKey: ["viecpro_persons", id],
@@ -25,25 +23,13 @@ const data = ref({
 	}),
 });
 
-const entityLoading = computed(
-	() =>
-		data.value.entity.isLoading ||
-		data.value.entity.isFetching ||
-		data.value.entity.isPending ||
-		data.value.entity.isRefetching,
-);
-const detailsLoading = computed(
-	() =>
-		data.value.details.isLoading ||
-		data.value.details.isFetching ||
-		data.value.details.isPending ||
-		data.value.details.isRefetching,
-);
+const loading = {
+	entity: computed(() => data.value.entity.isLoading),
+	details: computed(() => data.value.details.isLoading),
+};
 
 const labelCols = ["name", "start_date", "end_date"];
 const relCols = ["relation_type", "target.name", "start_date", "end_date"];
-
-loading.value = false;
 
 definePageMeta({
 	title: "pages.searchviews.people.title",
@@ -54,13 +40,13 @@ definePageMeta({
 	<div class="mx-auto h-full w-full max-w-container px-2 py-4 xl:px-0">
 		<h2 class="text-lg text-gray-500 lg:text-2xl">Datenblatt - Person</h2>
 		<h1 class="text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
-			<span v-if="!entityLoading">
+			<span v-if="!loading.entity.value">
 				{{ data.entity.data?.fullname }}
 			</span>
 			<span v-else class="animate-pulse">Loading...</span>
 		</h1>
 		<Chip class="my-1 text-sm lg:text-base" square>
-			<template v-if="!detailsLoading">
+			<template v-if="!loading.details.value">
 				<span v-if="data.details.data">
 					{{
 						data.details.data.court_functions
@@ -84,13 +70,13 @@ definePageMeta({
 			<div class="flex flex-col gap-8">
 				<div>
 					<h2 class="text-2xl text-gray-500">Stammdaten</h2>
-					<div v-if="!loading" class="grid grid-cols-2">
+					<div class="grid grid-cols-2">
 						<div class="col-span-2 my-1 border-t"></div>
 						<span>Vorname/n:</span>
-						<span v-if="!entityLoading">{{ data.entity.data?.first_name }}</span>
+						<span v-if="!loading.entity.value">{{ data.entity.data?.first_name }}</span>
 						<span v-else class="animate-pulse">loading...</span>
 						<div class="col-span-2 my-1 border-t"></div>
-						<template v-if="!entityLoading">
+						<template v-if="!loading.entity.value">
 							<template v-if="data.entity.data?.name">
 								<span v-if="data.entity.data.gender === 'male'">Name:</span>
 								<span v-else>Geburtsname:</span>
@@ -102,7 +88,7 @@ definePageMeta({
 							<span class="animate-pulse">loading...</span>
 							<div class="col-span-2 my-1 border-t"></div>
 						</template>
-						<template v-if="!detailsLoading">
+						<template v-if="!loading.details.value">
 							<template v-if="data.details.data?.married_names?.length">
 								<span>Ehename/n:</span>
 								<div>
@@ -118,7 +104,7 @@ definePageMeta({
 						</div>
 
 						<span>Geboren:</span>
-						<template v-if="!entityLoading">
+						<template v-if="!loading.entity.value">
 							<span>
 								{{ data.entity.data?.start_date }}
 							</span>
@@ -131,7 +117,7 @@ definePageMeta({
 
 						<span>Gestorben:</span>
 						<span>
-							<template v-if="!detailsLoading && !entityLoading">
+							<template v-if="!loading.details.value && !loading.entity.value">
 								<span>
 									{{ data.entity.data?.end_date }}
 								</span>
@@ -143,18 +129,18 @@ definePageMeta({
 						</span>
 						<div class="col-span-2 my-1 border-t"></div>
 						<span>Geschlecht:</span>
-						<span v-if="!entityLoading">{{ data.entity.data?.gender }}</span>
+						<span v-if="!loading.entity.value">{{ data.entity.data?.gender }}</span>
 						<span v-else class="animate-pulse">loading...</span>
 					</div>
 				</div>
-				<div v-if="!detailsLoading">
+				<div v-if="!loading.details.value">
 					<div v-if="data.details.data" class="flex flex-col gap-3">
 						<DetailDisclosure
 							title="Potenizelle Dubletten"
 							:rels="data.details.data?.duplicates || []"
 							:headers="['name']"
 							grid-class="grid-cols-1"
-							:loading="detailsLoading"
+							:loading="loading.details.value"
 						/>
 						<!-- dont judge me -->
 						<DetailDisclosure
@@ -222,7 +208,7 @@ definePageMeta({
 					<Loader2 class="h-8 w-8 animate-spin" />
 				</Centered>
 			</div>
-			<div v-if="!detailsLoading">
+			<div v-if="!loading.details.value">
 				<div v-if="data.details.data" class="flex flex-col gap-3">
 					<h2 class="text-2xl text-gray-500">Bezug zum Wiener Hof</h2>
 					<DetailDisclosure

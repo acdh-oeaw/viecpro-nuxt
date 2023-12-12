@@ -26,39 +26,42 @@ const max = ref(10);
 
 let facetModel: Ref<Array<string>> = ref(props.selected ?? []);
 
-const selectionQueries = !props.selected
-	? null
-	: props.selected.map((selection) => {
-			const query = {
-				facet: props.fieldName,
-				max: 10, // In case one filter matches another perfectly
-				query: route.query,
-				facetQuery: selection,
-				collection: props.collection,
-				query_by: props.queryBy,
-			};
-			return useQuery({
-				queryKey: ["single facet", query] as const,
-				queryFn: async ({ queryKey }) => {
-					const [, q] = queryKey;
-					const result = await getFacets(
-						q.facet,
-						q.max,
-						q.query,
-						q.facetQuery,
-						q.collection,
-						q.query_by,
-					);
+const selectionQueries =
+	!props.selected || props.selected.length === 0
+		? null
+		: computed(() =>
+				props.selected?.map((selection) => {
+					const query = {
+						facet: props.fieldName,
+						max: 10, // In case one filter matches another perfectly
+						query: route.query,
+						facetQuery: selection,
+						collection: props.collection,
+						query_by: props.queryBy,
+					};
+					return useQuery({
+						queryKey: ["single facet", query] as const,
+						queryFn: async ({ queryKey }) => {
+							const [, q] = queryKey;
+							const result = await getFacets(
+								q.facet,
+								q.max,
+								q.query,
+								q.facetQuery,
+								q.collection,
+								q.query_by,
+							);
 
-					if (result.facet_counts?.[0]?.counts) {
-						return result.facet_counts[0]?.counts.filter(
-							(facet) => facet.value === q.facetQuery,
-						)[0];
-					}
-					return;
-				},
-			});
-	  });
+							if (result.facet_counts?.[0]?.counts) {
+								return result.facet_counts[0]?.counts.filter(
+									(facet) => facet.value === q.facetQuery,
+								)[0];
+							}
+							return;
+						},
+					});
+				}),
+		  );
 
 const query = computed(() => ({
 	facet: props.fieldName,
@@ -85,7 +88,7 @@ const facetResponse = useQuery({
 		else {
 			results.facet_counts[0]?.counts.forEach((count) => {
 				queryClient.setQueryData(
-					["single facet", { ...q, max: 1, facetQuery: count.value }],
+					["single facet", { ...q, max: 10, facetQuery: count.value }],
 					count,
 				);
 			});
@@ -97,34 +100,34 @@ const facetResponse = useQuery({
 
 const loading = computed(
 	() =>
-		facetResponse.isLoading.value ||
-		selectionQueries?.some((selectionQuery) => selectionQuery.isLoading.value),
+		facetResponse.isFetching.value ||
+		selectionQueries?.value?.some((selectionQuery) => selectionQuery.isFetching.value),
 );
 
 // add selected facets to model
 const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["counts"]> = computed(
 	() => {
-		let retArray: SearchResponseFacetCountSchema<any>["counts"] = [];
-		if (!loading.value && facetResponse.data.value) {
-			retArray = [
-				...retArray,
-				...facetResponse.data.value.counts.filter(
-					(count) => !props.selected?.includes(count.value),
-				),
-			];
+		if (loading.value) return [];
+
+		const retArray: SearchResponseFacetCountSchema<any>["counts"] = [];
+
+		if (selectionQueries?.value) {
+			retArray.push(
+				...(selectionQueries.value
+					.map((selects) => selects.data.value)
+					.sort(
+						(a, b) => (b?.count ?? 0) - (a?.count ?? 0),
+					) as SearchResponseFacetCountSchema<any>["counts"]),
+			);
 		}
-		if (selectionQueries && !loading.value) {
-			retArray = [
-				...retArray,
-				...(selectionQueries.map(
-					(selects) => selects.data.value,
-				) as SearchResponseFacetCountSchema<any>["counts"]),
-			];
+		if (facetResponse.data.value) {
+			retArray.push(
+				...facetResponse.data.value.counts
+					.filter((count) => !props.selected?.includes(count.value))
+					.sort((a, b) => b.count - a.count),
+			);
 		}
-		return retArray.sort((a, b) => {
-			if (facetModel.value.includes(a.value)) return -1;
-			return b.count - a.count;
-		});
+		return retArray;
 	},
 );
 </script>
