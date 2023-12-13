@@ -29,14 +29,7 @@ const route: RouteLocationNormalized = useRoute();
 const input = ref(route.query.q === undefined ? "" : String(route.query.q));
 
 const docs: Ref<UseQueryReturnType<SearchResponse<AnyEntity>, object> | null> = ref(null);
-const loading = computed(
-	() =>
-		docs.value === null ||
-		docs.value.isLoading.value ||
-		docs.value.isFetching.value ||
-		docs.value.isPending.value ||
-		docs.value.isRefetching,
-);
+const loading = computed(() => docs.value === null || docs.value.isFetching);
 
 const windowWidth = useWindowSize().width;
 
