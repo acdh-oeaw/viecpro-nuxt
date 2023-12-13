@@ -1,17 +1,18 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
-import { useQuery, useQueryClient } from "@tanstack/vue-query";
+import { useQueries, useQuery, useQueryClient } from "@tanstack/vue-query";
 import { ChevronDown, Loader2, Search, XCircle } from "lucide-vue-next";
 import type { SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Documents";
 import { computed, type ComputedRef, type Ref, ref } from "vue";
 import { type RouteLocationNormalized, useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";
+import type { LocationQuery } from "#vue-router";
 
 defineEmits(["facetChange"]);
 const t = useTranslations();
 const queryClient = useQueryClient();
-const route: LocationNormalized = useRoute();
+const route: RouteLocationNormalized = useRoute();
 
 const props = defineProps<{
 	fieldName: string;
@@ -26,12 +27,19 @@ const max = ref(10);
 
 let facetModel: Ref<Array<string>> = ref(props.selected ?? []);
 
-const selectionQueries =
-	!props.selected || props.selected.length === 0
-		? null
-		: computed(() =>
-				props.selected?.map((selection) => {
-					const query = {
+const selectionQueries = useQueries({
+	queries: computed(() =>
+		props.selected
+			? props.selected.map((selection) => {
+					interface QueryObject {
+						facet: string;
+						max: number;
+						query: LocationQuery;
+						facetQuery: string;
+						collection: string;
+						query_by: string;
+					}
+					const query: QueryObject = {
 						facet: props.fieldName,
 						max: 10, // In case one filter matches another perfectly
 						query: route.query,
@@ -39,10 +47,11 @@ const selectionQueries =
 						collection: props.collection,
 						query_by: props.queryBy,
 					};
-					return useQuery({
+					return {
 						queryKey: ["single facet", query] as const,
-						queryFn: async ({ queryKey }) => {
+						queryFn: async ({ queryKey }: { queryKey: [string, QueryObject] }) => {
 							const [, q] = queryKey;
+
 							const result = await getFacets(
 								q.facet,
 								q.max,
@@ -57,11 +66,13 @@ const selectionQueries =
 									(facet) => facet.value === q.facetQuery,
 								)[0];
 							}
-							return;
+							return { count: 0, highlighted: "", value: "" };
 						},
-					});
-				}),
-		  );
+					};
+			  })
+			: [],
+	),
+});
 
 const query = computed(() => ({
 	facet: props.fieldName,
@@ -101,7 +112,7 @@ const facetResponse = useQuery({
 const loading = computed(
 	() =>
 		facetResponse.isFetching.value ||
-		selectionQueries?.value?.some((selectionQuery) => selectionQuery.isFetching.value),
+		selectionQueries.value.some((selectionQuery) => selectionQuery.isFetching),
 );
 
 // add selected facets to model
@@ -111,10 +122,10 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 
 		const retArray: SearchResponseFacetCountSchema<any>["counts"] = [];
 
-		if (selectionQueries?.value) {
+		if (selectionQueries.value.length !== 0) {
 			retArray.push(
 				...(selectionQueries.value
-					.map((selects) => selects.data.value)
+					.map((selects) => selects.data)
 					.sort(
 						(a, b) => (b?.count ?? 0) - (a?.count ?? 0),
 					) as SearchResponseFacetCountSchema<any>["counts"]),
