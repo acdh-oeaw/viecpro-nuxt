@@ -63,7 +63,19 @@
 		"lat": "Lat",
 		"long": "Long",
 		"folio": "Folio",
-		"shortTitle": "Short Title"
+		"shortTitle": "Short Title",
+		"category": "Category",
+		"resolution": "Resolution",
+		"alternative_names": "Alternative Names",
+		"sources": "Sources",
+		"personnel": "Personnel",
+		"locations": "Locations",
+		"hierarchy": "Hierarchy"
+	},
+	"detail-page": {
+		"basedata": "Base data",
+		"datasheet": "Data sheet",
+		"runtime": "Runtime"
 	},
 	"ui": {
 		"showing-results": "Showing {first} - {last} out of {all}",
@@ -76,6 +88,7 @@
 		"show-filters": "Show Filters...",
 		"hide-filters": "Hide Filters...",
 		"search-placeholder": "Search...",
-		"sort-by": "sort by this column"
+		"sort-by": "sort by this column",
+		"loading": "loading..."
 	}
 }

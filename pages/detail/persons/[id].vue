@@ -9,6 +9,8 @@ import DetailDisclosure from "@/components/detail-disclosure.vue";
 import type { Person, PersonDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
+const t = useTranslations();
+
 const route = useRoute();
 const id = String(route.params.id);
 
@@ -38,7 +40,7 @@ definePageMeta({
 
 <template>
 	<div class="mx-auto h-full w-full max-w-container px-2 py-4 xl:px-0">
-		<h2 class="text-lg text-gray-500 lg:text-2xl">Datenblatt - Person</h2>
+		<h2 class="text-lg text-gray-500 lg:text-2xl">{{ t("detail-page.basedata") }} - Person</h2>
 		<h1 class="text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
 			<span v-if="!loading.entity.value">
 				{{ data.entity.data?.fullname }}
@@ -73,7 +75,7 @@ definePageMeta({
 		<div class="mt-4 grid gap-16 md:grid-cols-[2fr_3fr]">
 			<div class="flex flex-col gap-8">
 				<div>
-					<h2 class="text-2xl text-gray-500">Stammdaten</h2>
+					<h2 class="text-2xl text-gray-500">{{ t("detail-page.basedata") }}</h2>
 					<div class="grid grid-cols-2">
 						<div class="col-span-2 my-1 border-t"></div>
 						<span>Vorname/n:</span>

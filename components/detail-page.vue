@@ -1,43 +1,26 @@
 <script lang="ts" setup>
-import { Loader2 } from "lucide-vue-next";
-
-import Centered from "@/components/centered.vue";
+const t = useTranslations();
 
 defineProps<{
-	loading: boolean;
-	data: object;
-	target?: object;
-	source?: object;
+	model: string;
 }>();
 </script>
 
 <template>
-	<div class="h-full">
-		<div v-if="!loading">
-			<div>
-				<h1 class="text-2xl">Entity:</h1>
-				<pre>
-					{{ data }}
-				</pre
-				>
+	<div class="mx-auto h-full w-full max-w-container px-2 py-4 xl:px-0">
+		<h2 class="text-lg text-gray-500 lg:text-2xl">{{ t("detail-page.basedata") }} - {{ model }}</h2>
+		<slot name="head" />
+		<div class="mt-4 grid gap-16 md:grid-cols-[2fr_3fr]">
+			<div class="flex flex-col gap-8">
+				<div>
+					<h2 class="text-2xl text-gray-500">{{ t("detail-page.basedata") }}</h2>
+					<div class="grid grid-cols-2">
+						<slot name="base" />
+					</div>
+				</div>
+				<slot name="left" />
 			</div>
-			<div v-if="source">
-				<h1 class="text-2xl">Relations with entity as source:</h1>
-				<pre>
-					{{ source }}
-				</pre
-				>
-			</div>
-			<div v-if="target">
-				<h1 class="text-2xl">Relations with entity as target:</h1>
-				<pre>
-					{{ target }}
-				</pre
-				>
-			</div>
+			<slot name="right" />
 		</div>
-		<Centered v-else>
-			<Loader2 class="h-8 w-8 animate-spin" />
-		</Centered>
 	</div>
 </template>

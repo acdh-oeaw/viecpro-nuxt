@@ -64,7 +64,19 @@
 		"lat": "Lat",
 		"long": "Long",
 		"folio": "Folio",
-		"shortTitle": "Titel (kurz)"
+		"shortTitle": "Titel (kurz)",
+		"category": "Kategorie",
+		"resolution": "Auflösung",
+		"alternative_names": "Alternative Bezeichnungen",
+		"sources": "Quellenbelege",
+		"personnel": "Personal",
+		"locations": "Standorte",
+		"hierarchy": "Hierarchie"
+	},
+	"detail-page": {
+		"basedata": "Stammdaten",
+		"datasheet": "Datenblatt",
+		"runtime": "Laufzeit"
 	},
 	"ui": {
 		"showing-results": "Zeige {first} - {last} von {all} Ergebnissen",
@@ -77,6 +89,7 @@
 		"show-filters": "Filter ausfahren...",
 		"hide-filters": "Filter verstecken...",
 		"search-placeholder": "Suche...",
-		"sort-by": "Sortiere nach dieser Spalte"
+		"sort-by": "Sortiere nach dieser Spalte",
+		"loading": "Wird geladen..."
 	}
 }
