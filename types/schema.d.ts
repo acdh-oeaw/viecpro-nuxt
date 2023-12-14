@@ -12,7 +12,7 @@ interface BaseEntity {
 }
 
 export type AnyEntity = Court | Event | Institution | Person | Place | Relation;
-export type AnyDetail = PersonDetail;
+export type AnyDetail = InstitutionDetail | PersonDetail;
 
 export interface Court extends BaseEntity {
 	owner: Array<CourtOwner>;
@@ -131,4 +131,40 @@ export interface PersonDetail {
 	marriages_and_family_relations: Array<DetailRelation>;
 	relations_to_church_and_orders: Array<DetailRelation>;
 	non_court_functions: Array<DetailRelation>;
+}
+
+export interface InstitutionRelation {
+	relation_type: string;
+	target: {
+		object_id: string;
+		model: string;
+		name: string;
+	};
+	end_date: string;
+	start_date: string;
+}
+
+export interface InstitutionDetail {
+	model: string;
+	object_id: string;
+	resolution: string;
+	category: string;
+	alternative_names: Array<DetailLabel>;
+	sources: Array<{
+		bibtext: {
+			id: Array<string>;
+			URL: Array<string>;
+			type: Array<string>;
+			title: Array<string>;
+			shortTitle: Array<string>;
+			issued: {
+				season: Array<string>;
+				"date-parts": Array<number>;
+			};
+		};
+		folio: Array<string>;
+	}>;
+	personnel: Array<InstitutionRelation>;
+	locations: Array<InstitutionRelation>;
+	hierarchy: Array<InstitutionRelation>;
 }

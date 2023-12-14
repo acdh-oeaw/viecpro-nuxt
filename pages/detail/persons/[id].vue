@@ -45,7 +45,11 @@ definePageMeta({
 			</span>
 			<span v-else class="animate-pulse">Loading...</span>
 		</h1>
-		<Chip class="my-1 text-sm lg:text-base" square>
+		<Chip
+			v-if="loading.details.value || data.details.data?.court_functions.length !== 0"
+			class="my-1 text-sm lg:text-base"
+			square
+		>
 			<template v-if="!loading.details.value">
 				<span v-if="data.details.data">
 					{{
