@@ -114,9 +114,9 @@ definePageMeta({
 			<template v-if="!loading.entity.value">
 				<span>
 					{{ data.entity.data?.start_date }}
-				</span>
-				<span v-if="!isEmpty(data.details.data?.place_of_birth)">
-					in {{ data.details.data?.place_of_birth.name }}
+					<span v-if="!isEmpty(data.details.data?.place_of_birth)">
+						in {{ data.details.data?.place_of_birth.name }}
+					</span>
 				</span>
 			</template>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
@@ -127,9 +127,9 @@ definePageMeta({
 				<template v-if="!loading.details.value && !loading.entity.value">
 					<span>
 						{{ data.entity.data?.end_date }}
-					</span>
-					<span v-if="!isEmpty(data.details.data?.place_of_death)">
-						in {{ data.details.data?.place_of_death.name }}
+						<span v-if="!isEmpty(data.details.data?.place_of_death)">
+							in {{ data.details.data?.place_of_death.name }}
+						</span>
 					</span>
 				</template>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
