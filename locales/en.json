@@ -53,6 +53,7 @@
 	},
 	"collection-keys": {
 		"object_id": "ID",
+		"id": "ID",
 		"name": "Name",
 		"kind": "Kind",
 		"start_date": "Start Date",
