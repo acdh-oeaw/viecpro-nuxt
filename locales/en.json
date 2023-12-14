@@ -70,12 +70,31 @@
 		"sources": "Sources",
 		"personnel": "Personnel",
 		"locations": "Locations",
-		"hierarchy": "Hierarchy"
+		"hierarchy": "Hierarchy",
+		"first_name": "First Name(s)",
+		"last_name": "Name",
+		"maiden_name": "Maiden Name",
+		"married_names": "Married Name(s)",
+		"born": "Born",
+		"died": "Died",
+		"duplicates": "Duplicates",
+		"alternative_last_names": "Alternative Names",
+		"honorary_titles": "Honorary Titles",
+		"academic_titles": "Academic Titles",
+		"download": "Download",
+		"court_functions": "Court Functions",
+		"person_relations_court": "Court Relations to People",
+		"other_relations_court": "Other Court Relations",
+		"marriages_and_family_relations": "Marriages and Family",
+		"relations_to_church_and_orders": "Relations to Church and Orders",
+		"non_court_functions": "Non Court Functions"
 	},
 	"detail-page": {
 		"basedata": "Base data",
 		"datasheet": "Data sheet",
-		"runtime": "Runtime"
+		"runtime": "Runtime",
+		"additional": "Additional Information",
+		"courtrelated": "Court Relations"
 	},
 	"ui": {
 		"showing-results": "Showing {first} - {last} out of {all}",
@@ -89,6 +108,7 @@
 		"hide-filters": "Hide Filters...",
 		"search-placeholder": "Search...",
 		"sort-by": "sort by this column",
-		"loading": "loading..."
+		"loading": "loading...",
+		"no-data": "No data"
 	}
 }

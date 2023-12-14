@@ -70,24 +70,24 @@ definePageMeta({
 		</template>
 		<template #base>
 			<div class="col-span-2 my-1 border-t"></div>
-			<span>{{ t("collection-keys.name") }}</span>
+			<span>{{ t("collection-keys.name") }}:</span>
 			<span v-if="!loading.entity.value">{{ data.entity.data?.name }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 
-			<span>{{ t("detail-page.runtime") }}</span>
+			<span>{{ t("detail-page.runtime") }}:</span>
 			<span v-if="!loading.entity.value">
 				{{ data.entity.data?.start_date }} - {{ data.entity.data?.end_date }}
 			</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 
-			<span>{{ t("collection-keys.category") }}</span>
+			<span>{{ t("collection-keys.category") }}:</span>
 			<span v-if="!loading.details.value">{{ data.details.data?.category }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 
-			<span>{{ t("collection-keys.resolution") }}</span>
+			<span>{{ t("collection-keys.resolution") }}:</span>
 			<span v-if="!loading.details.value">{{ data.details.data?.resolution }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
