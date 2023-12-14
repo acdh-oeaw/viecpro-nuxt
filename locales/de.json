@@ -64,7 +64,38 @@
 		"lat": "Lat",
 		"long": "Long",
 		"folio": "Folio",
-		"shortTitle": "Titel (kurz)"
+		"shortTitle": "Titel (kurz)",
+		"category": "Kategorie",
+		"resolution": "Auflösung",
+		"alternative_names": "Alternative Bezeichnungen",
+		"sources": "Quellenbelege",
+		"personnel": "Personal",
+		"locations": "Standorte",
+		"hierarchy": "Hierarchie",
+		"first_name": "Vorname(n)",
+		"last_name": "Name",
+		"maiden_name": "Geburtsname",
+		"married_names": "Ehenamen",
+		"born": "Geboren",
+		"died": "Gestorben",
+		"duplicates": "Potenizelle Dubletten",
+		"alternative_last_names": "Alternative Namensschreibweisen",
+		"honorary_titles": "Adelstand und Auszeichnungen",
+		"academic_titles": "Akademische Titel",
+		"download": "Download und Zitierweise",
+		"court_functions": "Funktionen am Hof",
+		"person_relations_court": "Personenbeziehungen am Hof",
+		"other_relations_court": "Sonstiger Bezug zum Hof",
+		"marriages_and_family_relations": "Ehe- und Verwandschaftsverhältnisse",
+		"relations_to_church_and_orders": "Bezug zu Kirche und Orden",
+		"non_court_functions": "Sonstige Tätigkeiten"
+	},
+	"detail-page": {
+		"basedata": "Stammdaten",
+		"datasheet": "Datenblatt",
+		"runtime": "Laufzeit",
+		"additional": "Weitere Informationen",
+		"courtrelated": "Bezug zum Wiener Hof"
 	},
 	"ui": {
 		"showing-results": "Zeige {first} - {last} von {all} Ergebnissen",
@@ -77,6 +108,8 @@
 		"show-filters": "Filter ausfahren...",
 		"hide-filters": "Filter verstecken...",
 		"search-placeholder": "Suche...",
-		"sort-by": "Sortiere nach dieser Spalte"
+		"sort-by": "Sortiere nach dieser Spalte",
+		"loading": "Wird geladen...",
+		"no-data": "Keine Daten"
 	}
 }
