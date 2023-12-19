@@ -40,7 +40,17 @@ definePageMeta({
 </script>
 
 <template>
-	<DetailPage model="Person" :details-loading="loading.details.value">
+	<div
+		v-if="
+			!loading.entity.value &&
+			!loading.details.value &&
+			(data.details.isLoadingError || data.entity.isLoadingError)
+		"
+	>
+		<div>{{ data.entity.error }}</div>
+		<div>{{ data.details.error }}</div>
+	</div>
+	<DetailPage v-else model="Person" :details-loading="loading.details.value">
 		<template #head>
 			<h1 class="text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
 				<span v-if="!loading.entity.value">
