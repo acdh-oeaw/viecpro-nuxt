@@ -1,8 +1,13 @@
 <script lang="ts" setup>
+import { Loader2 } from "lucide-vue-next";
+
+import Centered from "@/components/centered.vue";
+
 const t = useTranslations();
 
 defineProps<{
 	model: string;
+	detailsLoading: boolean;
 }>();
 </script>
 
@@ -18,9 +23,20 @@ defineProps<{
 						<slot name="base" />
 					</div>
 				</div>
-				<slot name="left" />
+
+				<div v-if="!detailsLoading">
+					<slot name="left" />
+				</div>
+				<Centered v-else>
+					<Loader2 class="h-8 w-8 animate-spin" />
+				</Centered>
 			</div>
-			<slot name="right" />
+			<div v-if="!detailsLoading">
+				<slot name="right" />
+			</div>
+			<Centered v-else>
+				<Loader2 class="h-8 w-8 animate-spin" />
+			</Centered>
 		</div>
 	</div>
 </template>

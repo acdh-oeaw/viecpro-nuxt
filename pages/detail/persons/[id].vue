@@ -40,7 +40,7 @@ definePageMeta({
 </script>
 
 <template>
-	<DetailPage model="Person">
+	<DetailPage model="Person" :details-loading="loading.details.value">
 		<template #head>
 			<h1 class="text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
 				<span v-if="!loading.entity.value">
@@ -140,129 +140,119 @@ definePageMeta({
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 		</template>
 		<template #left>
-			<div v-if="!loading.details.value">
-				<div v-if="data.details.data" class="flex flex-col gap-3">
-					<DetailDisclosure
-						:title="t('collection-keys.duplicates')"
-						:rels="data.details.data?.duplicates || []"
-						:headers="['name']"
-						grid-class="grid-cols-1"
-						:loading="loading.details.value"
-					/>
-					<!-- dont judge me -->
-					<DetailDisclosure
-						:title="t('collection-keys.alternative_last_names')"
-						:rels="[]"
-						:custom-slot="
-							!isEmpty([
-								...data.details.data?.alternative_first_names,
-								...data.details.data?.alternative_last_names,
-								...data.details.data?.married_names,
-							])
-						"
-						grid-class="grid-cols-3"
-					>
-						<div class="grid gap-2">
-							<div v-if="!isEmpty(data.details.data.alternative_first_names)">
-								<div class="font-semibold">alternative_first_names</div>
-								<div
-									v-for="name in data.details.data.alternative_first_names"
-									:key="name"
-									class="border-t"
-								>
-									{{ name }}
-								</div>
-							</div>
-							<div v-if="!isEmpty(data.details.data.alternative_last_names)">
-								<div class="font-semibold">alternative_last_names</div>
-								<div
-									v-for="name in data.details.data.alternative_last_names"
-									:key="name"
-									class="border-t"
-								>
-									{{ name }}
-								</div>
-							</div>
-							<div v-if="!isEmpty(data.details.data.married_names)">
-								<div class="font-semibold">married_names</div>
-								<div
-									v-for="name in data.details.data.married_names"
-									:key="name.name"
-									class="border-t"
-								>
-									{{ name.name }}
-								</div>
+			<div v-if="data.details.data" class="flex flex-col gap-3">
+				<DetailDisclosure
+					:title="t('collection-keys.duplicates')"
+					:rels="data.details.data?.duplicates || []"
+					:headers="['name']"
+					grid-class="grid-cols-1"
+					:loading="loading.details.value"
+				/>
+				<!-- dont judge me -->
+				<DetailDisclosure
+					:title="t('collection-keys.alternative_last_names')"
+					:rels="[]"
+					:custom-slot="
+						!isEmpty([
+							...data.details.data?.alternative_first_names,
+							...data.details.data?.alternative_last_names,
+							...data.details.data?.married_names,
+						])
+					"
+					grid-class="grid-cols-3"
+				>
+					<div class="grid gap-2">
+						<div v-if="!isEmpty(data.details.data.alternative_first_names)">
+							<div class="font-semibold">alternative_first_names</div>
+							<div
+								v-for="name in data.details.data.alternative_first_names"
+								:key="name"
+								class="border-t"
+							>
+								{{ name }}
 							</div>
 						</div>
-					</DetailDisclosure>
-					<DetailDisclosure
-						:title="t('collection-keys.honorary_titles')"
-						:rels="data.details.data.honorary_titles"
-						:headers="labelCols"
-						grid-class="grid-cols-3"
-					/>
-					<DetailDisclosure
-						:title="t('collection-keys.academic_titles')"
-						:rels="data.details.data.academic_titles"
-						:headers="labelCols"
-						grid-class="grid-cols-3"
-					/>
-					<DetailDisclosure title="Download und Zitierweise" :rels="[]" :headers="[]" />
-				</div>
-				<div v-else>{{ t("ui.no-data") }}.</div>
+						<div v-if="!isEmpty(data.details.data.alternative_last_names)">
+							<div class="font-semibold">alternative_last_names</div>
+							<div
+								v-for="name in data.details.data.alternative_last_names"
+								:key="name"
+								class="border-t"
+							>
+								{{ name }}
+							</div>
+						</div>
+						<div v-if="!isEmpty(data.details.data.married_names)">
+							<div class="font-semibold">married_names</div>
+							<div
+								v-for="name in data.details.data.married_names"
+								:key="name.name"
+								class="border-t"
+							>
+								{{ name.name }}
+							</div>
+						</div>
+					</div>
+				</DetailDisclosure>
+				<DetailDisclosure
+					:title="t('collection-keys.honorary_titles')"
+					:rels="data.details.data.honorary_titles"
+					:headers="labelCols"
+					grid-class="grid-cols-3"
+				/>
+				<DetailDisclosure
+					:title="t('collection-keys.academic_titles')"
+					:rels="data.details.data.academic_titles"
+					:headers="labelCols"
+					grid-class="grid-cols-3"
+				/>
+				<DetailDisclosure title="Download und Zitierweise" :rels="[]" :headers="[]" />
 			</div>
-			<Centered v-else>
-				<Loader2 class="h-8 w-8 animate-spin" />
-			</Centered>
+			<div v-else>{{ t("ui.no-data") }}.</div>
 		</template>
 		<template #right>
-			<div v-if="!loading.details.value">
-				<div v-if="data.details.data" class="flex flex-col gap-3">
-					<h2 class="text-2xl text-gray-500">{{ t("detail-page.courtrelated") }}</h2>
-					<DetailDisclosure
-						default-open
-						:title="t('collection-keys.court_functions')"
-						:headers="relCols"
-						:rels="data.details.data.court_functions"
-						grid-class="grid-cols-4"
-					/>
-					<DetailDisclosure
-						:title="t('collection-keys.person_relations_court')"
-						:rels="data.details.data.person_relations_court"
-						:headers="relCols"
-						grid-class="grid-cols-4"
-					/>
-					<DetailDisclosure
-						:title="t('collection-keys.other_relations_court')"
-						:rels="data.details.data.other_relations_court"
-						:headers="labelCols"
-						grid-class="grid-cols-3"
-					/>
-					<h2 class="text-2xl text-gray-500">{{ t("detail-page.additional") }}</h2>
-					<DetailDisclosure
-						:title="t('collection-keys.marriages_and_family_relations')"
-						:rels="data.details.data.marriages_and_family_relations"
-						:headers="relCols"
-						grid-class="grid-cols-4"
-					/>
-					<DetailDisclosure
-						:title="t('collection-keys.relations_to_church_and_orders')"
-						:rels="data.details.data.relations_to_church_and_orders"
-						:headers="relCols"
-						grid-class="grid-cols-4"
-					/>
-					<DetailDisclosure
-						:title="t('collection-keys.non_vourt_functions')"
-						:rels="data.details.data.non_court_functions"
-						:headers="relCols"
-						grid-class="grid-cols-4"
-					/>
-				</div>
-				<div v-else>{{ t("ui.no-data") }}.</div>
+			<div v-if="data.details.data" class="flex flex-col gap-3">
+				<h2 class="text-2xl text-gray-500">{{ t("detail-page.courtrelated") }}</h2>
+				<DetailDisclosure
+					default-open
+					:title="t('collection-keys.court_functions')"
+					:headers="relCols"
+					:rels="data.details.data.court_functions"
+					grid-class="grid-cols-4"
+				/>
+				<DetailDisclosure
+					:title="t('collection-keys.person_relations_court')"
+					:rels="data.details.data.person_relations_court"
+					:headers="relCols"
+					grid-class="grid-cols-4"
+				/>
+				<DetailDisclosure
+					:title="t('collection-keys.other_relations_court')"
+					:rels="data.details.data.other_relations_court"
+					:headers="labelCols"
+					grid-class="grid-cols-3"
+				/>
+				<h2 class="text-2xl text-gray-500">{{ t("detail-page.additional") }}</h2>
+				<DetailDisclosure
+					:title="t('collection-keys.marriages_and_family_relations')"
+					:rels="data.details.data.marriages_and_family_relations"
+					:headers="relCols"
+					grid-class="grid-cols-4"
+				/>
+				<DetailDisclosure
+					:title="t('collection-keys.relations_to_church_and_orders')"
+					:rels="data.details.data.relations_to_church_and_orders"
+					:headers="relCols"
+					grid-class="grid-cols-4"
+				/>
+				<DetailDisclosure
+					:title="t('collection-keys.non_vourt_functions')"
+					:rels="data.details.data.non_court_functions"
+					:headers="relCols"
+					grid-class="grid-cols-4"
+				/>
 			</div>
-			<Centered v-else>
-				<Loader2 class="h-8 w-8 animate-spin" />
-			</Centered>
+			<div v-else>{{ t("ui.no-data") }}.</div>
 		</template>
 	</DetailPage>
 </template>

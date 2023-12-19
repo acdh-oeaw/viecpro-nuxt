@@ -4,8 +4,8 @@ import { Loader2 } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";
+import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
-// import DetailDisclosure from "@/components/detail-disclosure.vue";
 import type { Institution, InstitutionDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
@@ -36,7 +36,7 @@ definePageMeta({
 </script>
 
 <template>
-	<DetailPage model="Institution">
+	<DetailPage model="Institution" :details-loading="loading.details.value">
 		<template #head>
 			<h1 class="text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
 				<span v-if="!loading.entity.value">
@@ -93,57 +93,48 @@ definePageMeta({
 			<div class="col-span-2 my-1 border-t"></div>
 		</template>
 		<template #left>
-			<div v-if="!loading.details.value">
-				<div v-if="data.details.data" class="flex flex-col gap-3">
-					<DetailDisclosure
-						:title="t('collection-keys.alternative_names')"
-						:rels="data.details.data.alternative_names"
-						:headers="['name', 'start_date', 'end_date']"
-						grid-class="grid-cols-3"
-						:loading="loading.details.value"
-					/>
-					<DetailDisclosure
-						:title="t('collection-keys.sources')"
-						:rels="data.details.data.sources"
-						:headers="['sources.bibtex.title', 'sources.bibtex.type', 'sources.folio']"
-						grid-class="grid-cols-3"
-						:loading="loading.details.value"
-					/>
-				</div>
-				<div v-else>No data.</div>
+			<div v-if="data.details.data" class="flex flex-col gap-3">
+				<DetailDisclosure
+					default-open
+					:title="t('collection-keys.alternative_names')"
+					:rels="data.details.data.alternative_names"
+					:headers="['name', 'start_date', 'end_date']"
+					grid-class="grid-cols-3"
+					:loading="loading.details.value"
+				/>
+				<DetailDisclosure
+					:title="t('collection-keys.sources')"
+					:rels="data.details.data.sources"
+					:headers="['sources.bibtex.title', 'sources.bibtex.type', 'sources.folio']"
+					grid-class="grid-cols-3"
+					:loading="loading.details.value"
+				/>
 			</div>
-			<Centered v-else>
-				<Loader2 class="h-8 w-8 animate-spin" />
-			</Centered>
+			<div v-else>No data.</div>
 		</template>
 		<template #right>
-			<div v-if="!loading.details.value">
-				<div v-if="data.details.data" class="flex flex-col gap-3">
-					<DetailDisclosure
-						default-open
-						:title="t('collection-keys.personnel')"
-						:headers="['relation_type', 'target.name']"
-						:rels="data.details.data.personnel"
-						grid-class="grid-cols-2"
-					/>
-					<DetailDisclosure
-						:title="t('collection-keys.locations')"
-						:headers="['relation_type', 'target.name']"
-						:rels="data.details.data.locations"
-						grid-class="grid-cols-2"
-					/>
-					<DetailDisclosure
-						:title="t('collection-keys.hierarchy')"
-						:headers="['relation_type', 'target.name']"
-						:rels="data.details.data.hierarchy"
-						grid-class="grid-cols-2"
-					/>
-				</div>
-				<div v-else>No data.</div>
+			<div v-if="data.details.data" class="flex flex-col gap-3">
+				<DetailDisclosure
+					default-open
+					:title="t('collection-keys.personnel')"
+					:headers="['relation_type', 'target.name']"
+					:rels="data.details.data.personnel"
+					grid-class="grid-cols-2"
+				/>
+				<DetailDisclosure
+					:title="t('collection-keys.locations')"
+					:headers="['relation_type', 'target.name']"
+					:rels="data.details.data.locations"
+					grid-class="grid-cols-2"
+				/>
+				<DetailDisclosure
+					:title="t('collection-keys.hierarchy')"
+					:headers="['relation_type', 'target.name']"
+					:rels="data.details.data.hierarchy"
+					grid-class="grid-cols-2"
+				/>
 			</div>
-			<Centered v-else>
-				<Loader2 class="h-8 w-8 animate-spin" />
-			</Centered>
+			<div v-else>No data.</div>
 		</template>
 	</DetailPage>
 </template>

@@ -32,5 +32,6 @@
 	"volar.inlayHints.eventArgumentInInlineHandlers": false,
 	"[markdown]": {
 		"editor.wordWrap": "on"
-	}
+	},
+	"i18n-ally.localesPaths": ["locales"]
 }
