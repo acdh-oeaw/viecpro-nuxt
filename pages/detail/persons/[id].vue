@@ -26,10 +26,10 @@ const data = ref({
 	}),
 });
 
-const loading = {
-	entity: computed(() => data.value.entity.isLoading),
-	details: computed(() => data.value.details.isLoading),
-};
+const loading = computed(() => ({
+	entity: data.value.entity.isLoading,
+	details: data.value.details.isLoading,
+}));
 
 const labelCols = ["name", "start_date", "end_date"];
 const relCols = ["relation_type", "target.name", "start_date", "end_date"];
@@ -42,28 +42,28 @@ definePageMeta({
 <template>
 	<div
 		v-if="
-			!loading.entity.value &&
-			!loading.details.value &&
+			!loading.entity &&
+			!loading.details &&
 			(data.details.isLoadingError || data.entity.isLoadingError)
 		"
 	>
 		<div>{{ data.entity.error }}</div>
 		<div>{{ data.details.error }}</div>
 	</div>
-	<DetailPage v-else model="Person" :details-loading="loading.details.value">
+	<DetailPage v-else model="Person" :details-loading="loading.details">
 		<template #head>
 			<h1 class="text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
-				<span v-if="!loading.entity.value">
+				<span v-if="!loading.entity">
 					{{ data.entity.data?.fullname }}
 				</span>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			</h1>
 			<Chip
-				v-if="loading.details.value || data.details.data?.court_functions.length !== 0"
+				v-if="loading.details || data.details.data?.court_functions.length !== 0"
 				class="my-1 text-sm lg:text-base"
 				square
 			>
-				<template v-if="!loading.details.value">
+				<template v-if="!loading.details">
 					<span v-if="data.details.data">
 						{{
 							data.details.data.court_functions
@@ -89,10 +89,10 @@ definePageMeta({
 		<template #base>
 			<div class="col-span-2 my-1 border-t"></div>
 			<span>{{ t("collection-keys.first_name") }}:</span>
-			<span v-if="!loading.entity.value">{{ data.entity.data?.first_name }}</span>
+			<span v-if="!loading.entity">{{ data.entity.data?.first_name }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
-			<template v-if="!loading.entity.value">
+			<template v-if="!loading.entity">
 				<template v-if="data.entity.data?.name">
 					<span v-if="data.entity.data.gender === 'male'">Name:</span>
 					<span v-else>{{ t("collection-keys.maiden_name") }}:</span>
@@ -104,7 +104,7 @@ definePageMeta({
 				<span class="animate-pulse">{{ t("ui.loading") }}</span>
 				<div class="col-span-2 my-1 border-t"></div>
 			</template>
-			<template v-if="!loading.details.value">
+			<template v-if="!loading.details">
 				<template v-if="data.details.data?.married_names?.length">
 					<span>{{ t("collection-keys.married_names") }}:</span>
 					<div>
@@ -121,7 +121,7 @@ definePageMeta({
 			<div class="col-span-2 my-1 border-t"></div>
 
 			<span>{{ t("collection-keys.born") }}:</span>
-			<template v-if="!loading.entity.value">
+			<template v-if="!loading.entity">
 				<span>
 					{{ data.entity.data?.start_date }}
 					<span v-if="!isEmpty(data.details.data?.place_of_birth)">
@@ -134,7 +134,7 @@ definePageMeta({
 
 			<span>{{ t("collection-keys.died") }}:</span>
 			<span>
-				<template v-if="!loading.details.value && !loading.entity.value">
+				<template v-if="!loading.details && !loading.entity">
 					<span>
 						{{ data.entity.data?.end_date }}
 						<span v-if="!isEmpty(data.details.data?.place_of_death)">
@@ -146,7 +146,7 @@ definePageMeta({
 			</span>
 			<div class="col-span-2 my-1 border-t"></div>
 			<span>{{ t("collection-keys.gender") }}:</span>
-			<span v-if="!loading.entity.value">{{ data.entity.data?.gender }}</span>
+			<span v-if="!loading.entity">{{ data.entity.data?.gender }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 		</template>
 		<template #left>
@@ -156,7 +156,7 @@ definePageMeta({
 					:rels="data.details.data?.duplicates || []"
 					:headers="['name']"
 					grid-class="grid-cols-1"
-					:loading="loading.details.value"
+					:loading="loading.details"
 				/>
 				<!-- dont judge me -->
 				<DetailDisclosure
@@ -173,7 +173,7 @@ definePageMeta({
 				>
 					<div class="grid gap-2">
 						<div v-if="!isEmpty(data.details.data.alternative_first_names)">
-							<div class="font-semibold">alternative_first_names</div>
+							<div class="font-semibold">{{ t("collection-keys.alternative_first_names") }}</div>
 							<div
 								v-for="name in data.details.data.alternative_first_names"
 								:key="name"
@@ -183,7 +183,7 @@ definePageMeta({
 							</div>
 						</div>
 						<div v-if="!isEmpty(data.details.data.alternative_last_names)">
-							<div class="font-semibold">alternative_last_names</div>
+							<div class="font-semibold">{{ t("collection-keys.alternative_last_names") }}</div>
 							<div
 								v-for="name in data.details.data.alternative_last_names"
 								:key="name"
@@ -193,7 +193,7 @@ definePageMeta({
 							</div>
 						</div>
 						<div v-if="!isEmpty(data.details.data.married_names)">
-							<div class="font-semibold">married_names</div>
+							<div class="font-semibold">{{ t("collection-keys.married_names") }}</div>
 							<div
 								v-for="name in data.details.data.married_names"
 								:key="name.name"
@@ -256,7 +256,7 @@ definePageMeta({
 					grid-class="grid-cols-4"
 				/>
 				<DetailDisclosure
-					:title="t('collection-keys.non_vourt_functions')"
+					:title="t('collection-keys.non_court_functions')"
 					:rels="data.details.data.non_court_functions"
 					:headers="relCols"
 					grid-class="grid-cols-4"

@@ -25,10 +25,10 @@ const data = ref({
 	}),
 });
 
-const loading = {
-	entity: computed(() => data.value.entity.isFetching),
-	details: computed(() => data.value.details.isFetching),
-};
+const loading = computed(() => ({
+	entity: data.value.entity.isFetching,
+	details: data.value.details.isFetching,
+}));
 
 definePageMeta({
 	title: "pages.searchviews.institutions.title",
@@ -38,28 +38,28 @@ definePageMeta({
 <template>
 	<div
 		v-if="
-			!loading.entity.value &&
-			!loading.details.value &&
+			!loading.entity &&
+			!loading.details &&
 			(data.details.isLoadingError || data.entity.isLoadingError)
 		"
 	>
 		<div>{{ data.entity.error }}</div>
 		<div>{{ data.details.error }}</div>
 	</div>
-	<DetailPage v-else model="Institution" :details-loading="loading.details.value">
+	<DetailPage v-else model="Institution" :details-loading="loading.details">
 		<template #head>
 			<h1 class="text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
-				<span v-if="!loading.entity.value">
+				<span v-if="!loading.entity">
 					{{ data.entity.data?.name }}
 				</span>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			</h1>
 			<Chip
-				v-if="loading.details.value || data.details.data?.locations.length !== 0"
+				v-if="loading.details || data.details.data?.locations.length !== 0"
 				class="my-1 text-sm lg:text-base"
 				square
 			>
-				<template v-if="!loading.details.value">
+				<template v-if="!loading.details">
 					<span v-if="data.details.data">
 						{{
 							data.details.data.locations
@@ -81,24 +81,24 @@ definePageMeta({
 		<template #base>
 			<div class="col-span-2 my-1 border-t"></div>
 			<span>{{ t("collection-keys.name") }}:</span>
-			<span v-if="!loading.entity.value">{{ data.entity.data?.name }}</span>
+			<span v-if="!loading.entity">{{ data.entity.data?.name }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 
 			<span>{{ t("detail-page.runtime") }}:</span>
-			<span v-if="!loading.entity.value">
+			<span v-if="!loading.entity">
 				{{ data.entity.data?.start_date }} - {{ data.entity.data?.end_date }}
 			</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 
 			<span>{{ t("collection-keys.category") }}:</span>
-			<span v-if="!loading.details.value">{{ data.details.data?.category }}</span>
+			<span v-if="!loading.details">{{ data.details.data?.category }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 
 			<span>{{ t("collection-keys.resolution") }}:</span>
-			<span v-if="!loading.details.value">{{ data.details.data?.resolution }}</span>
+			<span v-if="!loading.details">{{ data.details.data?.resolution }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 		</template>
@@ -110,14 +110,14 @@ definePageMeta({
 					:rels="data.details.data.alternative_names"
 					:headers="['name', 'start_date', 'end_date']"
 					grid-class="grid-cols-3"
-					:loading="loading.details.value"
+					:loading="loading.details"
 				/>
 				<DetailDisclosure
 					:title="t('collection-keys.sources')"
 					:rels="data.details.data.sources"
 					:headers="['sources.bibtex.title', 'sources.bibtex.type', 'sources.folio']"
 					grid-class="grid-cols-3"
-					:loading="loading.details.value"
+					:loading="loading.details"
 				/>
 			</div>
 			<div v-else>No data.</div>
