@@ -180,6 +180,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 					type="checkbox"
 					class="ml-1 h-5 w-5 cursor-pointer"
 					:value="count.value"
+					data-testid="facetInput"
 					@change="$emit('facetChange', facetModel)"
 				/>
 				&nbsp;
