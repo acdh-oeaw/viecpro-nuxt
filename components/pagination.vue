@@ -17,6 +17,7 @@ const t = useTranslations();
 	<div class="flex items-center justify-between">
 		<NuxtLink
 			v-if="page > 1"
+			data-testid="prevPage"
 			:to="{
 				query: {
 					...route.query,
@@ -47,6 +48,7 @@ const t = useTranslations();
 		<div v-else class="italic">{{ t("ui.no-results") }}</div>
 		<NuxtLink
 			v-if="page * limit < Number(all)"
+			data-testid="nextPage"
 			:to="{
 				query: {
 					...route.query,

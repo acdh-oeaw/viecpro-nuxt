@@ -36,3 +36,7 @@ dist
 
 # notes
 DEV_NOTES.md
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
