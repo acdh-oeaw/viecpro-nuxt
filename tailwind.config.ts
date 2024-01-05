@@ -1,12 +1,12 @@
-/** @typedef {import('tailwindcss').Config} TailwindConfig */
-
-const headlessui = require("@headlessui/tailwindcss");
-const typography = require("@tailwindcss/typography");
-const colors = require("tailwindcss/colors");
-const animate = require("tailwindcss-animate");
+import headlessui from "@headlessui/tailwindcss";
+import typography from "@tailwindcss/typography";
+import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
+import animate from "tailwindcss-animate";
 
 const neutral = colors.slate;
 const negative = colors.red;
+
 const primary = {
 	50: "#f5f8f6",
 	100: "#dee9e4",
@@ -43,8 +43,7 @@ const highlight = {
 	900: "#323500",
 };
 
-/** @type {TailwindConfig} */
-const config = {
+const config: Config = {
 	content: ["./**/*.@(css|ts|vue)"],
 	plugins: [animate, headlessui, typography],
 	theme: {
@@ -57,7 +56,7 @@ const config = {
 				highlight,
 			},
 			fontFamily: {
-				sans: ["Roboto FlexVariable", "ui-sans-serif", "system-ui", "sans-serif"],
+				sans: ["Roboto Flex Variable", "ui-sans-serif", "system-ui", "sans-serif"],
 			},
 			maxWidth: {
 				container: "80rem",
@@ -74,4 +73,4 @@ const config = {
 	},
 };
 
-module.exports = config;
+export default config;
