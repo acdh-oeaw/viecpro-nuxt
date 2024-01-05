@@ -19,7 +19,7 @@ jobs:
       APP_ROOT: "/"
       SERVICE_ID: ${{ vars.NUXT_PUBLIC_REDMINE_ID }}
       PUBLIC_URL: "https://viecpro-frontend.acdh-ch-dev.oeaw.ac.at" # Use GitHub environment variables for a stable custom public url
-      BUILDPACK_URL: https://github.com/unfold/heroku-buildpack-pnpm
+      BUILDPACK_URL: "https://github.com/unfold/heroku-buildpack-pnpm"
       # POSTGRES_ENABLED: "false" # needs to be set to true to enable a postgres db installed next to the deployed app
     # You should not need to have to change anything below this line
     #-----------------------------------------------------------------------------------------------------
