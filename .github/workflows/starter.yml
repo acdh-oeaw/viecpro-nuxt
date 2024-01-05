@@ -14,11 +14,12 @@ jobs:
       registry_root: ghcr.io/${{ github.repository }}/
       default_port: "3000"
       fetch-depth: 10
-      submodules: "true"
+      submodules: "false"
       APP_NAME: viecpro-frontend
       APP_ROOT: "/"
       SERVICE_ID: ${{ vars.NUXT_PUBLIC_REDMINE_ID }}
       PUBLIC_URL: "https://viecpro-frontend.acdh-ch-dev.oeaw.ac.at" # Use GitHub environment variables for a stable custom public url
+      BUILDPACK_URL: https://github.com/unfold/heroku-buildpack-pnpm
       # POSTGRES_ENABLED: "false" # needs to be set to true to enable a postgres db installed next to the deployed app
     # You should not need to have to change anything below this line
     #-----------------------------------------------------------------------------------------------------
@@ -62,7 +63,7 @@ jobs:
       environment: ${{ needs.setup_workflow_env.outputs.environment }}
       registry_root: ${{ needs.setup_workflow_env.outputs.registry_root }}
       image_name: ${{ needs.setup_workflow_env.outputs.image_name }}
-      source_image: ${{ needs.setup_workflow_env.outputs.source_image }}
+      BUILDPACK_URL: ${{ needs.setup_workflow_env.outputs.BUILDPACK_URL }}
       default_port: ${{ needs.setup_workflow_env.outputs.default_port }}
       PUBLIC_URL: ${{ needs.generate_workflow_vars.outputs.PUBLIC_URL }}
       fetch-depth: ${{ fromJson(needs.setup_workflow_env.outputs.fetch-depth) }}
