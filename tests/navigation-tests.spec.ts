@@ -39,3 +39,21 @@ test("searchinterface navigation", async ({ page }) => {
 	await page.getByRole("button", { name: "Filter verstecken..." }).click();
 	await expect(page).toHaveURL("http://localhost:3000/de/search/references");
 });
+
+test("Documentation", async ({ page }) => {
+	await page.goto("http://localhost:3000/de");
+	await page.getByLabel("Haupt").getByRole("link", { name: "Dokumentation" }).click();
+
+	await expect(page).toHaveURL(/.*documentation\/project/);
+	await expect(page.getByTestId("docNav").first()).toBeVisible();
+	await expect(page.getByRole("heading", { name: "Über das Projekt" }).first()).toBeVisible();
+
+	await page.getByRole("link", { name: "Daten", exact: true }).click();
+	await expect(page.getByRole("heading", { name: "Daten" }).first()).toBeVisible();
+
+	await page.goto("http://localhost:3000/en/documentation/data");
+	await expect(page.getByRole("heading", { name: "Data" }).first()).toBeVisible();
+
+	await page.getByRole("link", { name: "Project" }).click();
+	await expect(page.getByRole("heading", { name: "Project" }).first()).toBeVisible();
+});

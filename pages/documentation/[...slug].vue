@@ -19,7 +19,7 @@ const currentDoc = computed(() => {
 
 <template>
 	<div class="grid w-full lg:grid-cols-[1fr_3fr] lg:gap-10 2xl:grid-cols-[1fr_2fr_1fr]">
-		<nav class="lg:justify-self-end">
+		<nav class="lg:justify-self-end" data-testid="docNav">
 			<ContentNavigation v-slot="{ navigation }" :query="{ where: [{ _locale: locale }] }">
 				<!-- :where="{ _locale: locale }" -->
 				<ul class="m-4 rounded bg-gray-200 p-4 text-lg shadow">
