@@ -18,6 +18,10 @@
 			"label": "Documentation",
 			"contents": "Contents"
 		},
+		"imprint": {
+			"title": "Imprint",
+			"label": "Imprint"
+		},
 		"searchviews": {
 			"courts": {
 				"title": "Courts",
