@@ -42,6 +42,7 @@ export default defineNuxtConfig({
 	plugins: ["@/plugins/query-client.ts"],
 	postcss: {
 		plugins: {
+			"tailwindcss/nesting": {},
 			tailwindcss: {},
 			autoprefixer: {},
 		},

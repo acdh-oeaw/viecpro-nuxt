@@ -15,7 +15,7 @@ test("Switch locale", async ({ page }) => {
 	await expect(page).toHaveURL("http://localhost:3000/de");
 });
 
-test("searchinterface navigation", async ({ page }) => {
+test("Searchinterface navigation", async ({ page }) => {
 	await page.goto("http://localhost:3000/de/search/persons");
 	await page.getByTestId("nextPage").first().click();
 
@@ -56,4 +56,20 @@ test("Documentation", async ({ page }) => {
 
 	await page.getByRole("link", { name: "Project" }).click();
 	await expect(page.getByRole("heading", { name: "Project" }).first()).toBeVisible();
+});
+
+test("Imprint", async ({ page }) => {
+	await page.goto("http://localhost:3000/de");
+	await page.getByRole("link", { name: "Impressum" }).click();
+
+	await expect(
+		page.getByRole("heading", { name: "Offenlegung gemäß §§ 24, 25" }).first(),
+	).toBeVisible();
+
+	await page.getByTestId("localeButton").click();
+	await page.getByRole("option", { name: "EN" }).click();
+
+	await expect(
+		page.getByRole("heading", { name: "Legal disclosure according to" }).first(),
+	).toBeVisible();
 });

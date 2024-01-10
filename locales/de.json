@@ -18,6 +18,10 @@
 			"label": "Dokumentation",
 			"contents": "Inhalt"
 		},
+		"imprint": {
+			"title": "Impressum",
+			"label": "Impressum"
+		},
 		"searchviews": {
 			"courts": {
 				"title": "Hofstaaten",
