@@ -3,13 +3,12 @@ import { expect, test } from "@playwright/test";
 test("Switch locale", async ({ page }) => {
 	await page.goto("http://localhost:3000/de");
 	await page.getByTestId("localeButton").click();
-	await page.getByRole("option", { name: "EN" }).click();
-
+	await page.getByTestId("en").click();
 	await expect(page).toHaveTitle("Home - VieCPro");
 	await expect(page).toHaveURL("http://localhost:3000/en");
 
 	await page.getByTestId("localeButton").click();
-	await page.getByRole("option", { name: "DE" }).click();
+	await page.getByTestId("de").click();
 
 	await expect(page).toHaveTitle("Startseite - VieCPro");
 	await expect(page).toHaveURL("http://localhost:3000/de");
@@ -67,7 +66,7 @@ test("Imprint", async ({ page }) => {
 	).toBeVisible();
 
 	await page.getByTestId("localeButton").click();
-	await page.getByRole("option", { name: "EN" }).click();
+	await page.getByTestId("en").click();
 
 	await expect(
 		page.getByRole("heading", { name: "Legal disclosure according to" }).first(),

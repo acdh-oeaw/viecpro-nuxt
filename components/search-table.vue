@@ -1,13 +1,10 @@
 <script lang="ts" setup>
-import { useQuery, useQueryClient, type UseQueryReturnType } from "@tanstack/vue-query";
+import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { useWindowSize } from "@vueuse/core";
 import get from "lodash.get";
 import { ChevronDown, ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
-import type { SearchResponse } from "typesense/lib/Typesense/Documents";
-import { computed, type ComputedRef, type Ref, ref } from "vue";
-import { type RouteLocationNormalized, useRoute } from "vue-router";
-
-import type { AnyEntity } from "@/types/schema";
+import { computed, ref } from "vue";
+import { useRoute } from "vue-router";
 
 const locale = useLocale();
 const t = useTranslations();
@@ -24,19 +21,16 @@ const props = defineProps<{
 
 const pageLimit = 25;
 
-const route: RouteLocationNormalized = useRoute();
+const route = useRoute();
 
 const input = ref(route.query.q === undefined ? "" : String(route.query.q));
 
-const docs: Ref<UseQueryReturnType<SearchResponse<AnyEntity>, object> | null> = ref(null);
-const loading = computed(() => docs.value === null || docs.value.isFetching);
-
 const windowWidth = useWindowSize().width;
 
-const pageNum: ComputedRef<number> = computed(() => {
+const pageNum = computed(() => {
 	return Number(route.query.page) || 1;
 });
-const limitNum: ComputedRef<number> = computed(() => {
+const limitNum = computed(() => {
 	return Number(route.query.limit) || pageLimit;
 });
 
@@ -52,7 +46,7 @@ const comQuery = computed(() => {
 		sort_by: String(query.sort ?? ""),
 	};
 });
-docs.value = useQuery({
+const { data, isFetching: loading } = useQuery({
 	queryKey: ["search", props.collectionName, comQuery] as const,
 	queryFn: async ({ queryKey }) => {
 		const [, collection, q] = queryKey;
@@ -124,12 +118,12 @@ const getDetailLink = (id: string) => {
 			</div>
 			<slot />
 			<Pagination
-				v-if="docs != null && docs.data && docs.data.page"
-				:page="docs.data.page"
-				:limit="docs.data.request_params.per_page || pageLimit"
-				:all="docs.data.found"
+				v-if="data && data.page"
+				:page="data.page"
+				:limit="data.request_params.per_page || pageLimit"
+				:all="data.found"
 			/>
-			<div v-if="!loading && docs?.data" class="w-full">
+			<div v-if="!loading && data" class="w-full">
 				<div class="mr-6 hidden md:grid" :class="cols">
 					<div v-for="key in koi" :key="key" class="m-2 font-semibold">
 						<SortableColumn v-if="sort && sort.includes(key)" :query="route.query" :col="key" />
@@ -145,9 +139,9 @@ const getDetailLink = (id: string) => {
 						</span>
 					</div>
 				</div>
-				<template v-if="docs !== null">
+				<template v-if="data !== null">
 					<div
-						v-for="hit in docs.data.hits"
+						v-for="hit in data.hits"
 						:key="String(hit.document.id)"
 						class="border-b py-1 md:border-t"
 					>
@@ -193,21 +187,21 @@ const getDetailLink = (id: string) => {
 					</div>
 				</template>
 				<Pagination
-					v-if="docs != null && docs?.data && docs.data.found != 0"
+					v-if="data && data.found != 0"
 					class="mt-2"
-					:page="docs.data.page"
-					:limit="docs.data.request_params.per_page || pageLimit"
-					:all="docs.data.found"
+					:page="data.page"
+					:limit="data.request_params.per_page || pageLimit"
+					:all="data.found"
 				/>
 			</div>
 			<Centered v-else>
 				<Loader2 class="h-8 w-8 animate-spin" />
 			</Centered>
 		</div>
-		<div v-if="!loading && docs !== null && docs.data">
+		<div v-if="!loading && data">
 			<FacetDisclosures
 				class="float-right m-4 w-96 max-w-full"
-				:facets="docs.data.facet_counts"
+				:facets="data.facet_counts"
 				:loading="loading"
 				:collection="collectionName"
 				:query-by="queryBy"

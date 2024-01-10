@@ -1,14 +1,9 @@
 <script lang="ts" setup>
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/vue";
-import { computed } from "vue";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 
 import { locales } from "@/config/i18n.config";
 
 const { locale, setLocale } = useI18n();
-
-const selectedLocale = computed(() => {
-	return locales[locale.value];
-});
 
 defineProps<{
 	noSelect?: boolean;
@@ -20,13 +15,12 @@ defineProps<{
 		v-if="!noSelect"
 		class="mx-4 rounded bg-white text-black transition hover:bg-slate-200 active:bg-slate-300"
 	>
-		<Listbox
-			:model-value="selectedLocale"
-			@update:model-value="(selectedValue) => setLocale(selectedValue.code)"
-		>
-			<ListboxButton class="px-4 py-2" data-testid="localeButton">
-				{{ selectedLocale.code.toUpperCase() }}
-			</ListboxButton>
+		<Menu as="div">
+			<ClientOnly>
+				<MenuButton class="px-4 py-2" data-testid="localeButton" as="button">
+					{{ locale.toUpperCase() }}
+				</MenuButton>
+			</ClientOnly>
 			<Transition
 				enter-active-class="transition duration-100 ease-out"
 				enter-from-class="transform scale-95 -translate-y-8 opacity-0"
@@ -35,27 +29,27 @@ defineProps<{
 				leave-from-class="transform scale-100 opacity-100"
 				leave-to-class="transform scale-95 opacity-0"
 			>
-				<ListboxOptions
-					class="fixed ml-4 mt-4 flex -translate-x-4 flex-col rounded bg-white shadow-lg"
-				>
-					<ListboxOption
+				<MenuItems class="fixed ml-4 mt-4 flex -translate-x-4 flex-col rounded bg-white shadow-lg">
+					<MenuItem
 						v-for="loc in locales"
 						:key="loc.code"
 						as="button"
-						:value="loc"
 						class="min-w-[5rem] p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300 active:bg-gray-400"
+						:data-testid="loc.code"
+						@click="setLocale(loc.code)"
 					>
 						{{ loc.code.toUpperCase() }}
-					</ListboxOption>
-				</ListboxOptions>
+					</MenuItem>
+				</MenuItems>
 			</Transition>
-		</Listbox>
+		</Menu>
 	</div>
 	<div v-else class="flex w-full divide-x">
 		<button
 			v-for="loc in locales"
 			:key="loc.code"
 			class="grow p-4 text-gray-900 transition hover:bg-gray-300 active:bg-gray-400"
+			:data-testid="loc.code"
 			@click="setLocale(loc.code)"
 		>
 			{{ loc.code.toUpperCase() }}

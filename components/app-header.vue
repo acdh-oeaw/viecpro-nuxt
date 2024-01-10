@@ -45,10 +45,12 @@ const links = computed(() => {
 			</div>
 			<div class="md:hidden">
 				<Menu v-slot="{ open, close }" as="div" class="relative z-50 inline-block">
-					<MenuButton as="button" class="rounded border border-gray-300 p-2">
-						<X v-if="open" class="h-6 w-6 shrink-0" />
-						<MenuIcon v-else class="h-6 w-6 shrink-0" />
-					</MenuButton>
+					<ClientOnly>
+						<MenuButton as="button" class="rounded border border-gray-300 p-2">
+							<X v-if="open" class="h-6 w-6 shrink-0" />
+							<MenuIcon v-else class="h-6 w-6 shrink-0" />
+						</MenuButton>
+					</ClientOnly>
 					<Transition
 						enter-active-class="transition duration-100 ease-out"
 						enter-from-class="transform scale-95 -translate-y-8 opacity-0"
