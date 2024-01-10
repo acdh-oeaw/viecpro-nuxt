@@ -12,7 +12,6 @@ imprintQuery.value = useQuery({
 	queryFn: async ({ queryKey }) => {
 		const [, locale] = queryKey;
 		const ret = await (await getImprint(locale)).text();
-		console.log(ret);
 		return ret;
 	},
 });
