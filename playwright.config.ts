@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const port = 3000;
-const baseUrl = `http://localhost:${port}`;
+const baseURL = `http://localhost:${port}`;
 
 /**
  * Read environment variables from file.
@@ -27,7 +27,7 @@ export default defineConfig({
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
-		// baseURL: 'http://127.0.0.1:3000',
+		baseURL,
 
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: "on-first-retry",
@@ -72,7 +72,7 @@ export default defineConfig({
 	],
 	webServer: {
 		command: "pnpm run start",
-		url: baseUrl,
+		url: baseURL,
 		reuseExistingServer: !process.env.CI,
 	},
 });

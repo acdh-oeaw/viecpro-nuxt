@@ -3,6 +3,7 @@ import type { NavLink } from "@/types/misc";
 
 const t = useTranslations();
 const localePath = useLocalePath();
+const locale = useLocale();
 
 const links = computed(() => {
 	return {
@@ -45,6 +46,11 @@ definePageMeta({
 			</div>
 		</div>
 		<div class="mx-auto flex min-h-screen max-w-4xl flex-col gap-8 px-4 md:gap-16">
+			<ContentDoc v-slot="{ doc }" path="/index-page" :where="{ _locale: locale }">
+				<ContentRenderer v-if="doc" :value="doc">
+					<ContentRendererMarkdown :value="doc"
+				/></ContentRenderer>
+			</ContentDoc>
 			<div class="mx-auto flex flex-col gap-8">
 				<div class="flex flex-col gap-8">
 					<p>
