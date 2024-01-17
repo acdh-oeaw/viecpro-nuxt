@@ -1,9 +1,5 @@
 <script lang="ts" setup>
 const locale = useLocale();
-
-definePageMeta({
-	title: "pages.home.title",
-});
 </script>
 
 <template>
