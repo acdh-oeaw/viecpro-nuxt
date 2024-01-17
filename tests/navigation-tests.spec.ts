@@ -1,21 +1,21 @@
 import { expect, test } from "@playwright/test";
 
 test("Switch locale", async ({ page }) => {
-	await page.goto("http://localhost:3000/de");
+	await page.goto("/de");
 	await page.getByTestId("localeButton").click();
 	await page.getByTestId("en").click();
 	await expect(page).toHaveTitle("Home - VieCPro");
-	await expect(page).toHaveURL("http://localhost:3000/en");
+	await expect(page).toHaveURL("/en");
 
 	await page.getByTestId("localeButton").click();
 	await page.getByTestId("de").click();
 
 	await expect(page).toHaveTitle("Startseite - VieCPro");
-	await expect(page).toHaveURL("http://localhost:3000/de");
+	await expect(page).toHaveURL("/de");
 });
 
 test("Searchinterface navigation", async ({ page }) => {
-	await page.goto("http://localhost:3000/de/search/persons");
+	await page.goto("/de/search/persons");
 	await page.getByTestId("nextPage").first().click();
 
 	await expect(page).toHaveURL(/.*page=2/);
@@ -33,14 +33,14 @@ test("Searchinterface navigation", async ({ page }) => {
 	await expect(page.getByLabel("Suche...", { exact: true })).toContainText("");
 
 	await page.getByRole("link", { name: "Referenzen" }).click();
-	await expect(page).toHaveURL("http://localhost:3000/de/search/references");
+	await expect(page).toHaveURL("/de/search/references");
 
 	await page.getByRole("button", { name: "Filter verstecken..." }).click();
-	await expect(page).toHaveURL("http://localhost:3000/de/search/references");
+	await expect(page).toHaveURL("/de/search/references");
 });
 
 test("Documentation", async ({ page }) => {
-	await page.goto("http://localhost:3000/de");
+	await page.goto("/de");
 	await page.getByLabel("Haupt").getByRole("link", { name: "Dokumentation" }).click();
 
 	await expect(page).toHaveURL(/.*documentation\/project/);
@@ -50,7 +50,7 @@ test("Documentation", async ({ page }) => {
 	await page.getByRole("link", { name: "Daten", exact: true }).click();
 	await expect(page.getByRole("heading", { name: "Daten" }).first()).toBeVisible();
 
-	await page.goto("http://localhost:3000/en/documentation/data");
+	await page.goto("/en/documentation/data");
 	await expect(page.getByRole("heading", { name: "Data" }).first()).toBeVisible();
 
 	await page.getByRole("link", { name: "Project" }).click();
@@ -58,7 +58,7 @@ test("Documentation", async ({ page }) => {
 });
 
 test("Imprint", async ({ page }) => {
-	await page.goto("http://localhost:3000/de");
+	await page.goto("/de");
 	await page.getByRole("link", { name: "Impressum" }).click();
 
 	await expect(

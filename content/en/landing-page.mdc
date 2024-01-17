@@ -1,0 +1,65 @@
+---
+title: Home
+navigation: false # This will not appear with other documentation
+---
+
+
+::header-wrapper
+# [Der Wiener Hof .]{.text-primary-600.font-black.text-5xl} [Ein prosopographisches Portal]{.text-primary-600.text-5xl.font-extralight}
+::
+::header-wrapper
+	::divider
+	::
+::
+
+::content-wrapper
+	::section-wrapper
+		::paragraph-wrapper
+		VieCPro liefert erstmals **tausende prosopographische Profile** für die überwiegende **Mehrheit des Wiener Hofpersonals**. Gegenwärtig ermöglicht die Datenbank die Recherche des Personals beiderlei Geschlechts wie auch verschiedener sozialer Schichten des Wiener Haupthofstaats von **neun Kaisern und der Teilhofstaate von 14 Kaiserinnen, sechs Kaiserinwitwen, 70 Erzherzögen und Erzherzoginnen und weiterer Familienmitglieder** von der Mitte des 17. Jahrhunderts bis zum Ende des 18. Jahrhunderts.
+
+		&nbsp;
+
+		Für die **leopoldinische Zeit** umfasst der Personenbestand darüber hinaus erstens zahlreiche Funktionsträger:innen, die am Wiener Hof politisch-administrative Aufgaben und eine ökonomisch-kulturelle Rolle erfüllt haben, zweitens Personen an ausländischen Höfen, die von der Wiener Hofkammer Zahlungen erhalten haben, und drittens in einem verwandtschaftlichen Verhältnis zu Funktionsträger*innen standen.
+
+			::index-button
+			[DATABASE](search/persons)
+			::
+		[Die Datenbank befindet sich im Aufbau!]{.text-center.text-xl.font-black.text-primary-600.w-full.block}
+		::
+
+		::gray-box
+		## [**VieCPro**]{.mb-2.text-3xl.text-primary-600.block}
+
+		...ist ein **Gemeinschaftsprodukt zweier Forschungsteams**, die vom ÖAW-Innovationsfonds (09/2020–03/2023) und dem Wissenschaftsfonds FWF (09/2020–06/2024) in **einer ersten Pilotphase** gefördert wurde.
+		::
+	::
+	::divider
+	::
+	::parallel-content
+	#left-content
+	## [Datenbank]{.mb-2.text-3xl.text-primary-600.block.font-black}
+	Die Datenbank beinhaltet die prosopographischen Datensammlungen zweier abgeschlossener FWF-Projekte zum Wiener Hof von Kaiser Leopold I. (1657–1705) bis Leopold II. (1790–1792). Diese Sammlungen werden durch eine **Datenneuaufnahme** für die Hofgesellschaft unter Kaiser Franz II./I. (1792–1835) erweitert. In seiner technischen Umsetzung setzt das Team auf die am ACDH-CH der ÖAW entwickelte virtuelle Forschungsumgebung **Austrian Prosopographical Information System** (APIS).
+	#left-button
+		::index-button
+		[DATABASE](search/persons)
+		::
+	#right-content
+	## [Materialien und Dokumentation]{.mb-2.text-3xl.text-primary-600.block.font-black}
+	Unsere Dokumentation und Materialien zur Benutzung der VieCPro-Datenbank reichen von einer Erklärung der APIS-Funktionalitäten über die Darlegung der Bearbeitungsrichtlinien bis hin zu diversen Verzeichnissen (Projektpublikationen, Hofstaatslisten, Abkürzungsverzeichnis). **Der Inhalt befindet sich wie die Datenbank selber noch in Arbeit**.
+	#right-button
+		::index-button
+		[DOCUMENTATION](documentation/project)
+		::
+	::
+	::divider
+	::
+	::section-wrapper
+		::paragraph-wrapper
+			::gray-box
+			## [Kontaktaufnahme]{.mb-2.text-3xl.text-primary-600.block.font-black}
+
+			...zum VieCPro-Team ist stets herzlich willkommen. **Die Datenbank befindet sich im Aufbau**. Wir freuen uns über Ihre sachdienlichen Hinweise und Ergänzungsvorschläge. Falls Sie eine Idee für Anschlussprojekte haben oder an einer Kooperation interessiert sind, dann schreiben Sie uns an: [**viecpro@oeaw.ac.at**](mailto:viecpro@oeaw.ac.at).
+			::
+		::
+	::
+::

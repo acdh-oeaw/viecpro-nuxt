@@ -57,6 +57,7 @@
 		"@acdh-oeaw/stylelint-config": "^2.0.1",
 		"@acdh-oeaw/tsconfig": "^1.0.2",
 		"@headlessui/tailwindcss": "^0.2.0",
+		"@nuxtjs/mdc": "^0.3.0",
 		"@playwright/test": "^1.40.1",
 		"@tailwindcss/typography": "^0.5.10",
 		"@types/lodash.get": "^4.4.9",

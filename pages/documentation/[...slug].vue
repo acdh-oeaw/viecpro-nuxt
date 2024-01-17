@@ -15,6 +15,7 @@ const currentDoc = computed(() => {
 		return route.params.slug[0];
 	}
 });
+console.log(route.params.slug, locale.value);
 </script>
 
 <template>
