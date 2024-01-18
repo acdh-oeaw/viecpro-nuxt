@@ -12,7 +12,7 @@ interface BaseEntity {
 }
 
 export type AnyEntity = Court | Event | Institution | Person | Place | Relation;
-export type AnyDetail = InstitutionDetail | PersonDetail;
+export type AnyDetail = InstitutionDetail | PersonDetail | PlaceDetail;
 
 export interface Court extends BaseEntity {
 	owner: Array<CourtOwner>;
@@ -167,4 +167,13 @@ export interface InstitutionDetail {
 	personnel: Array<InstitutionRelation>;
 	locations: Array<InstitutionRelation>;
 	hierarchy: Array<InstitutionRelation>;
+}
+
+export interface PlaceDetail {
+	model: string;
+	object_id: string;
+	alternative_names: Array<string>;
+	person_relations: Array<InstitutionRelation>;
+	place_relations: Array<InstitutionRelation>;
+	institution_relations: Array<InstitutionRelation>;
 }
