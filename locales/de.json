@@ -36,11 +36,13 @@
 			"places": {
 				"title": "Orte",
 				"label": "Orte",
+				"sing": "Ort",
 				"detail": "{title} - Ort"
 			},
 			"people": {
 				"title": "Personen",
 				"label": "Personen",
+				"sing": "Person",
 				"detail": "{title} - Person"
 			},
 			"institutions": {
@@ -93,14 +95,19 @@
 		"other_relations_court": "Sonstiger Bezug zum Hof",
 		"marriages_and_family_relations": "Ehe- und Verwandschaftsverhältnisse",
 		"relations_to_church_and_orders": "Bezug zu Kirche und Orden",
-		"non_court_functions": "Sonstige Tätigkeiten"
+		"non_court_functions": "Sonstige Tätigkeiten",
+		"institution_relations": "Bezüge zu Institutionen",
+		"person_relations": "Bezüge zu Personen",
+		"place_relations": "Bezüge zu anderen Orten"
 	},
 	"detail-page": {
 		"basedata": "Stammdaten",
 		"datasheet": "Datenblatt",
 		"runtime": "Laufzeit",
 		"additional": "Weitere Informationen",
-		"courtrelated": "Bezug zum Wiener Hof"
+		"courtrelated": "Bezug zum Wiener Hof",
+		"relations": "Bezüge",
+		"coords": "Koordinaten"
 	},
 	"ui": {
 		"showing-results": "Zeige {first} - {last} von {all} Ergebnissen",

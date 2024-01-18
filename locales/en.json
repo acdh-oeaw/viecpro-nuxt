@@ -36,6 +36,7 @@
 			"places": {
 				"title": "Places",
 				"label": "Places",
+				"sing": "Place",
 				"detail": "{title} - Place"
 			},
 			"people": {
@@ -93,14 +94,19 @@
 		"other_relations_court": "Other Court Relations",
 		"marriages_and_family_relations": "Marriages and Family",
 		"relations_to_church_and_orders": "Relations to Church and Orders",
-		"non_court_functions": "Non Court Functions"
+		"non_court_functions": "Non Court Functions",
+		"institution_relations": "Relations to institutions",
+		"person_relations": "Relations to people",
+		"place_relations": "Relations to other places"
 	},
 	"detail-page": {
 		"basedata": "Base data",
 		"datasheet": "Data sheet",
 		"runtime": "Runtime",
 		"additional": "Additional Information",
-		"courtrelated": "Court Relations"
+		"courtrelated": "Court Relations",
+		"relations": "Relations",
+		"coords": "Coordinates"
 	},
 	"ui": {
 		"showing-results": "Showing {first} - {last} out of {all}",
