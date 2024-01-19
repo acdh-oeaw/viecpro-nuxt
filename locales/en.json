@@ -26,6 +26,7 @@
 			"courts": {
 				"title": "Courts",
 				"label": "Courts",
+				"sing": "Court",
 				"detail": "{title} - Court"
 			},
 			"references": {
@@ -52,6 +53,7 @@
 			"events": {
 				"title": "Events",
 				"label": "Events",
+				"sing": "Event",
 				"detail": "{title} - Event"
 			}
 		}
@@ -97,7 +99,8 @@
 		"non_court_functions": "Non Court Functions",
 		"institution_relations": "Relations to institutions",
 		"person_relations": "Relations to people",
-		"place_relations": "Relations to other places"
+		"place_relations": "Relations to other places",
+		"owners": "Owners"
 	},
 	"detail-page": {
 		"basedata": "Base data",

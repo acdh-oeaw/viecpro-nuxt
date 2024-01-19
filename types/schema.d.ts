@@ -12,7 +12,7 @@ interface BaseEntity {
 }
 
 export type AnyEntity = Court | Event | Institution | Person | Place | Relation;
-export type AnyDetail = InstitutionDetail | PersonDetail | PlaceDetail;
+export type AnyDetail = CourtDetail | InstitutionDetail | PersonDetail | PlaceDetail;
 
 export interface Court extends BaseEntity {
 	owner: Array<CourtOwner>;
@@ -133,13 +133,9 @@ export interface PersonDetail {
 	non_court_functions: Array<DetailRelation>;
 }
 
-export interface InstitutionRelation {
+export interface GenericRelation {
 	relation_type: string;
-	target: {
-		object_id: string;
-		model: string;
-		name: string;
-	};
+	target: RelationSourceTarget;
 	end_date: string;
 	start_date: string;
 }
@@ -164,16 +160,28 @@ export interface InstitutionDetail {
 		};
 		folio: Array<string>;
 	}>;
-	personnel: Array<InstitutionRelation>;
-	locations: Array<InstitutionRelation>;
-	hierarchy: Array<InstitutionRelation>;
+	personnel: Array<GenericRelation>;
+	locations: Array<GenericRelation>;
+	hierarchy: Array<GenericRelation>;
 }
 
 export interface PlaceDetail {
 	model: string;
 	object_id: string;
 	alternative_names: Array<string>;
-	person_relations: Array<InstitutionRelation>;
-	place_relations: Array<InstitutionRelation>;
-	institution_relations: Array<InstitutionRelation>;
+	person_relations: Array<GenericRelation>;
+	place_relations: Array<GenericRelation>;
+	institution_relations: Array<GenericRelation>;
+}
+export interface CourtDetail {
+	model: string;
+	object_id: string;
+	resolution: string;
+	category: string;
+	alternative_names: Array<object>;
+	owners: Array<GenericRelation>;
+	sources: Array<object>;
+	personnel: Array<GenericRelation>;
+	locations: Array<GenericRelation>;
+	hierarchy: Array<GenericRelation>;
 }
