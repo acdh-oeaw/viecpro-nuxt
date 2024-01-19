@@ -26,6 +26,7 @@
 			"courts": {
 				"title": "Hofstaaten",
 				"label": "Hofstaaten",
+				"sing": "Hofstaat",
 				"detail": "{title} - Hofstaat"
 			},
 			"references": {
@@ -53,6 +54,7 @@
 			"events": {
 				"title": "Ereignisse",
 				"label": "Ereignisse",
+				"sing": "Ereignis",
 				"detail": "{title} - Ereignis"
 			}
 		}
@@ -98,7 +100,8 @@
 		"non_court_functions": "Sonstige Tätigkeiten",
 		"institution_relations": "Bezüge zu Institutionen",
 		"person_relations": "Bezüge zu Personen",
-		"place_relations": "Bezüge zu anderen Orten"
+		"place_relations": "Bezüge zu anderen Orten",
+		"owners": "Besitzer"
 	},
 	"detail-page": {
 		"basedata": "Stammdaten",
