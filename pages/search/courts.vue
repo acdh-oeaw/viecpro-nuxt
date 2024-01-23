@@ -4,12 +4,12 @@ import { definePageMeta } from "#imports";
 
 const collectionName = "viecpro_courts";
 
-const queryBy = "name";
+const queryBy = ["name", "main_owner.name"];
 
-const koi = ["id", "name", "kind", "start_date", "end_date", "main_owner.name"];
+const koi = ["name", "main_owner.name", "start", "end"];
 const facets = ["main_owner.name", "kind"];
 const sortable = ["name", "main_owner.object_id"];
-const tableCols = "grid-cols-[2fr_2fr_2fr_2fr_2fr_3fr]";
+const tableCols = "grid-cols-[2fr_3fr_2fr_2fr]";
 
 definePageMeta({
 	title: "pages.searchviews.courts.title",

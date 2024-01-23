@@ -12,7 +12,7 @@ defineProps<{
 	facets: Array<SearchResponseFacetCountSchema<AnyEntity>> | undefined;
 	loading: boolean;
 	collection: string;
-	queryBy: string;
+	queryBy: Array<string> | string;
 	defaultOpen?: boolean;
 }>();
 

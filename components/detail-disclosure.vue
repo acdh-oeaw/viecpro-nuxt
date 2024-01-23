@@ -10,6 +10,7 @@ defineProps<{
 	defaultOpen?: boolean;
 	headers?: Array<string>;
 	customSlot?: boolean;
+	collectionName: string;
 }>();
 
 const t = useTranslations();
@@ -39,7 +40,7 @@ const t = useTranslations();
 			<slot>
 				<div class="grid gap-2" :class="gridClass">
 					<span v-for="header in headers" :key="header" class="font-bold">
-						{{ t(header) }}
+						{{ t(`collection-keys.${collectionName}["${header}"]`) }}
 					</span>
 				</div>
 				<div

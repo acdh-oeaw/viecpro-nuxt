@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { CalendarRange, FileText, MapPin, School2, User, Users } from "lucide-vue-next";
+import { CalendarRange, MapPin, School2, User, Users } from "lucide-vue-next";
 
 import type { NavLink } from "@/types/misc.d.ts";
 
@@ -31,11 +31,6 @@ const links = computed(() => {
 			href: { path: localePath("/search/places") },
 			label: t("pages.searchviews.places.label"),
 			icon: MapPin,
-		},
-		references: {
-			href: { path: localePath("/search/references") },
-			label: t("pages.searchviews.references.label"),
-			icon: FileText,
 		},
 	} satisfies Record<string, NavLink>;
 });

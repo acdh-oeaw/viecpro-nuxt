@@ -15,13 +15,15 @@ const t = useTranslations();
 const route = useRoute();
 const id = String(route.params.id);
 
+const collection = "viecpro_persons";
+
 const data = ref({
 	entity: useQuery({
-		queryKey: ["viecpro_persons", id],
-		queryFn: () => getDocument<Person>("viecpro_persons", `Person_${id}`),
+		queryKey: [collection, id],
+		queryFn: () => getDocument<Person>(collection, `Person_${id}`),
 	}),
 	details: useQuery({
-		queryKey: ["detail", "viecpro_persons", id],
+		queryKey: ["detail", collection, id],
 		queryFn: () => getDetails<PersonDetail>("person", id),
 	}),
 });
@@ -31,8 +33,8 @@ const loading = computed(() => ({
 	details: data.value.details.isLoading,
 }));
 
-const labelCols = ["name", "start_date", "end_date"];
-const relCols = ["relation_type", "target.name", "start_date", "end_date"];
+const labelCols = ["name", "start", "end"];
+const relCols = ["relation_type", "target.name", "start", "end"];
 
 definePageMeta({
 	title: "pages.searchviews.people.title",
@@ -88,14 +90,14 @@ definePageMeta({
 		</template>
 		<template #base>
 			<div class="col-span-2 my-1 border-t"></div>
-			<span>{{ t("collection-keys.first_name") }}:</span>
+			<span>{{ t("collection-keys.viecpro_persons.first_name") }}:</span>
 			<span v-if="!loading.entity">{{ data.entity.data?.first_name }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 			<template v-if="!loading.entity">
 				<template v-if="data.entity.data?.name">
 					<span v-if="data.entity.data.gender === 'male'">Name:</span>
-					<span v-else>{{ t("collection-keys.maiden_name") }}:</span>
+					<span v-else>{{ t("collection-keys.viecpro_persons.maiden_name") }}:</span>
 				</template>
 
 				<span>{{ data.entity.data?.name }}</span>
@@ -106,7 +108,7 @@ definePageMeta({
 			</template>
 			<template v-if="!loading.details">
 				<template v-if="data.details.data?.married_names?.length">
-					<span>{{ t("collection-keys.married_names") }}:</span>
+					<span>{{ t("collection-keys.viecpro_persons.married_names") }}:</span>
 					<div>
 						<div v-for="name in data.details.data.married_names" :key="name.name">
 							{{ name.name }}
@@ -120,7 +122,7 @@ definePageMeta({
 			</div>
 			<div class="col-span-2 my-1 border-t"></div>
 
-			<span>{{ t("collection-keys.born") }}:</span>
+			<span>{{ t("collection-keys.viecpro_persons.born") }}:</span>
 			<template v-if="!loading.entity">
 				<span>
 					{{ data.entity.data?.start_date }}
@@ -132,7 +134,7 @@ definePageMeta({
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 
-			<span>{{ t("collection-keys.died") }}:</span>
+			<span>{{ t("collection-keys.viecpro_persons.died") }}:</span>
 			<span>
 				<template v-if="!loading.details && !loading.entity">
 					<span>
@@ -145,22 +147,23 @@ definePageMeta({
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			</span>
 			<div class="col-span-2 my-1 border-t"></div>
-			<span>{{ t("collection-keys.gender") }}:</span>
+			<span>{{ t("collection-keys.viecpro_persons.gender") }}:</span>
 			<span v-if="!loading.entity">{{ data.entity.data?.gender }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 		</template>
 		<template #left>
 			<div v-if="data.details.data" class="flex flex-col gap-3">
 				<DetailDisclosure
-					:title="t('collection-keys.duplicates')"
+					:title="t('collection-keys.viecpro_persons.duplicates')"
 					:rels="data.details.data?.duplicates || []"
 					:headers="['name']"
 					grid-class="grid-cols-1"
 					:loading="loading.details"
+					:collection-name="collection"
 				/>
 				<!-- dont judge me -->
 				<DetailDisclosure
-					:title="t('collection-keys.alternative_last_names')"
+					:title="t('collection-keys.viecpro_persons.alternative_last_names')"
 					:rels="[]"
 					:custom-slot="
 						!isEmpty([
@@ -170,10 +173,13 @@ definePageMeta({
 						])
 					"
 					grid-class="grid-cols-3"
+					:collection-name="collection"
 				>
 					<div class="grid gap-2">
 						<div v-if="!isEmpty(data.details.data.alternative_first_names)">
-							<div class="font-semibold">{{ t("collection-keys.alternative_first_names") }}</div>
+							<div class="font-semibold">
+								{{ t("collection-keys.viecpro_persons.alternative_first_names") }}
+							</div>
 							<div
 								v-for="name in data.details.data.alternative_first_names"
 								:key="name"
@@ -183,7 +189,9 @@ definePageMeta({
 							</div>
 						</div>
 						<div v-if="!isEmpty(data.details.data.alternative_last_names)">
-							<div class="font-semibold">{{ t("collection-keys.alternative_last_names") }}</div>
+							<div class="font-semibold">
+								{{ t("collection-keys.viecpro_persons.alternative_last_names") }}
+							</div>
 							<div
 								v-for="name in data.details.data.alternative_last_names"
 								:key="name"
@@ -193,7 +201,9 @@ definePageMeta({
 							</div>
 						</div>
 						<div v-if="!isEmpty(data.details.data.married_names)">
-							<div class="font-semibold">{{ t("collection-keys.married_names") }}</div>
+							<div class="font-semibold">
+								{{ t("collection-keys.viecpro_persons.married_names") }}
+							</div>
 							<div
 								v-for="name in data.details.data.married_names"
 								:key="name.name"
@@ -205,18 +215,25 @@ definePageMeta({
 					</div>
 				</DetailDisclosure>
 				<DetailDisclosure
-					:title="t('collection-keys.honorary_titles')"
+					:title="t('collection-keys.viecpro_persons.honorary_titles')"
 					:rels="data.details.data.honorary_titles"
 					:headers="labelCols"
 					grid-class="grid-cols-3"
+					:collection-name="collection"
 				/>
 				<DetailDisclosure
-					:title="t('collection-keys.academic_titles')"
+					:title="t('collection-keys.viecpro_persons.academic_titles')"
 					:rels="data.details.data.academic_titles"
 					:headers="labelCols"
 					grid-class="grid-cols-3"
+					:collection-name="collection"
 				/>
-				<DetailDisclosure title="Download und Zitierweise" :rels="[]" :headers="[]" />
+				<DetailDisclosure
+					title="Download und Zitierweise"
+					:rels="[]"
+					:headers="[]"
+					:collection-name="collection"
+				/>
 			</div>
 			<div v-else>{{ t("ui.no-data") }}.</div>
 		</template>
@@ -225,41 +242,47 @@ definePageMeta({
 				<h2 class="text-2xl text-gray-500">{{ t("detail-page.courtrelated") }}</h2>
 				<DetailDisclosure
 					default-open
-					:title="t('collection-keys.court_functions')"
+					:title="t('collection-keys.viecpro_persons.court_functions')"
 					:headers="relCols"
 					:rels="data.details.data.court_functions"
 					grid-class="grid-cols-4"
+					:collection-name="collection"
 				/>
 				<DetailDisclosure
-					:title="t('collection-keys.person_relations_court')"
+					:title="t('collection-keys.viecpro_persons.person_relations_court')"
 					:rels="data.details.data.person_relations_court"
 					:headers="relCols"
 					grid-class="grid-cols-4"
+					:collection-name="collection"
 				/>
 				<DetailDisclosure
-					:title="t('collection-keys.other_relations_court')"
+					:title="t('collection-keys.viecpro_persons.other_relations_court')"
 					:rels="data.details.data.other_relations_court"
 					:headers="labelCols"
 					grid-class="grid-cols-3"
+					:collection-name="collection"
 				/>
 				<h2 class="text-2xl text-gray-500">{{ t("detail-page.additional") }}</h2>
 				<DetailDisclosure
-					:title="t('collection-keys.marriages_and_family_relations')"
+					:title="t('collection-keys.viecpro_persons.marriages_and_family_relations')"
 					:rels="data.details.data.marriages_and_family_relations"
 					:headers="relCols"
 					grid-class="grid-cols-4"
+					:collection-name="collection"
 				/>
 				<DetailDisclosure
-					:title="t('collection-keys.relations_to_church_and_orders')"
+					:title="t('collection-keys.viecpro_persons.relations_to_church_and_orders')"
 					:rels="data.details.data.relations_to_church_and_orders"
 					:headers="relCols"
 					grid-class="grid-cols-4"
+					:collection-name="collection"
 				/>
 				<DetailDisclosure
-					:title="t('collection-keys.non_court_functions')"
+					:title="t('collection-keys.viecpro_persons.non_court_functions')"
 					:rels="data.details.data.non_court_functions"
 					:headers="relCols"
 					grid-class="grid-cols-4"
+					:collection-name="collection"
 				/>
 			</div>
 			<div v-else>{{ t("ui.no-data") }}.</div>

@@ -22,7 +22,7 @@ export async function getFacets<T extends AnyEntity>(
 	query: LocationQuery = {},
 	facetQuery = "",
 	collection: string,
-	query_by: string,
+	query_by: Array<string> | string,
 	q = "*",
 ): Promise<SearchResponse<T>> {
 	return useDefaultClient()

@@ -11,7 +11,7 @@ const t = useTranslations();
 const queryClient = useQueryClient();
 
 const props = defineProps<{
-	queryBy: string;
+	queryBy: Array<string> | string;
 	collectionName: string;
 	koi: Array<string>;
 	facets?: Array<string>;
@@ -135,7 +135,7 @@ const getDetailLink = (id: string) => {
 							<ChevronDown v-if="!route.query.sort" class="h-5 w-5 opacity-50" />
 						</div>
 						<span v-else>
-							{{ t(`collection-keys["${key}"]`) }}
+							{{ t(`collection-keys["${collectionName}"]["${key}"]`) }}
 						</span>
 					</div>
 				</div>
@@ -160,7 +160,7 @@ const getDetailLink = (id: string) => {
 									class="m-2 self-center overflow-auto"
 								>
 									<span
-										v-if="key === queryBy && hit.highlight[key]?.snippet"
+										v-if="queryBy.includeskey && hit.highlight[key]?.snippet"
 										v-html="hit.highlight[key].snippet"
 									/>
 									<span v-else>
@@ -173,7 +173,7 @@ const getDetailLink = (id: string) => {
 									<div class="text-gray-500">{{ t(`collection-keys["${key}"]`) }}</div>
 									<div class="text-2xl">
 										<span
-											v-if="key === queryBy && hit.highlight[key]?.snippet"
+											v-if="queryBy.includes(key) && hit.highlight[key]?.snippet"
 											v-html="hit.highlight[key].snippet"
 										/>
 										<span v-else>

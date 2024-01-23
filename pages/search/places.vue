@@ -4,12 +4,12 @@ import { definePageMeta } from "#imports";
 
 const collectionName = "viecpro_places";
 const queryBy = "name";
-const koi = ["id", "name", "kind", "lat", "long", "start_date", "end_date"];
+const koi = ["name", "kind"];
 const facets = ["kind"];
-const tableCols = "grid-cols-[2fr_3fr_2fr_2fr_2fr_2fr_2fr]";
+const tableCols = "grid-cols-[3fr_2fr]";
 
 definePageMeta({
-	title: "pages.searchviews.courts.title",
+	title: "pages.searchviews.places.title",
 });
 </script>
 
