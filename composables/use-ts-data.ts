@@ -50,6 +50,10 @@ export async function getDetails<T extends AnyDetail>(
 		.retrieve();
 }
 
+export async function getSchema(collection: string): Promise<CollectionSchema> {
+	return useDefaultClient().collections(collection).retrieve();
+}
+
 // Might be useful somedays
 export async function getCollections(): Promise<Array<CollectionSchema>> {
 	return useDefaultClient().collections().retrieve();
