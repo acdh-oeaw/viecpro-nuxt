@@ -39,10 +39,14 @@ export async function getFacets<T extends AnyEntity>(
 		});
 }
 
-export async function getDetails<T extends AnyDetail>(model: string, id: string): Promise<T> {
+export async function getDetails<T extends AnyDetail>(
+	model: string,
+	id: string,
+	idName?: string,
+): Promise<T> {
 	return useDefaultClient()
 		.collections<T>(`viecpro_detail_${model}`)
-		.documents(`detail_${model}_${id}`)
+		.documents(`detail_${idName ?? model}_${id}`)
 		.retrieve();
 }
 

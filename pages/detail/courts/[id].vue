@@ -23,7 +23,7 @@ const data = ref({
 	}),
 	details: useQuery({
 		queryKey: ["detail", collection, id],
-		queryFn: () => getDetails<CourtDetail>("institution", id),
+		queryFn: () => getDetails<CourtDetail>("court", id, "institution"),
 	}),
 });
 
