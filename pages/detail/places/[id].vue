@@ -14,13 +14,15 @@ const t = useTranslations();
 const route = useRoute();
 const id = String(route.params.id);
 
+const collection = "viecpro_places";
+
 const data = ref({
 	entity: useQuery({
-		queryKey: ["viecpro_places", id],
-		queryFn: () => getDocument<Place>("viecpro_places", `Place_${id}`),
+		queryKey: [collection, id],
+		queryFn: () => getDocument<Place>(collection, `Place_${id}`),
 	}),
 	details: useQuery({
-		queryKey: ["detail", "viecpro_places", id],
+		queryKey: ["detail", collection, id],
 		queryFn: () => getDetails<PlaceDetail>("place", id),
 	}),
 });
@@ -30,7 +32,7 @@ const loading = computed(() => ({
 	details: data.value.details.isLoading,
 }));
 
-const relCols = ["relation_type", "target.name", "start_date", "end_date"];
+const relCols = ["relation_type", "target.name", "start", "end"];
 
 definePageMeta({
 	title: "pages.searchviews.places.title",
@@ -87,11 +89,11 @@ definePageMeta({
 		</template>
 		<template #base>
 			<div class="col-span-2 my-1 border-t"></div>
-			<span>{{ t("collection-keys.name") }}:</span>
+			<span>{{ t("collection-keys.viecpro_places.name") }}:</span>
 			<span v-if="!loading.entity">{{ data.entity.data?.name }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
-			<span>{{ t("collection-keys.kind") }}:</span>
+			<span>{{ t("collection-keys.viecpro_places.kind") }}:</span>
 			<span v-if="!loading.entity">{{ data.entity.data?.kind }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
@@ -103,11 +105,12 @@ definePageMeta({
 		<template #left>
 			<div v-if="data.details.data" class="flex flex-col gap-3">
 				<DetailDisclosure
-					:title="t('collection-keys.alternative_names')"
+					:title="t('collection-keys.viecpro_places.alternative_names')"
 					:rels="data.details.data?.alternative_names.map((name) => ({ name })) || []"
 					:headers="['name']"
 					grid-class="grid-cols-1"
 					:loading="loading.details"
+					:collection-name="collection"
 				/>
 			</div>
 			<div v-else>{{ t("ui.no-data") }}.</div>
@@ -117,22 +120,25 @@ definePageMeta({
 				<h2 class="text-2xl text-gray-500">{{ t("detail-page.relations") }}</h2>
 				<DetailDisclosure
 					default-open
-					:title="t('collection-keys.institution_relations')"
+					:title="t('collection-keys.viecpro_places.institution_relations')"
 					:headers="relCols"
 					:rels="data.details.data.institution_relations"
 					grid-class="grid-cols-4"
+					:collection-name="collection"
 				/>
 				<DetailDisclosure
-					:title="t('collection-keys.person_relations')"
+					:title="t('collection-keys.viecpro_places.person_relations')"
 					:rels="data.details.data.person_relations"
 					:headers="relCols"
 					grid-class="grid-cols-4"
+					:collection-name="collection"
 				/>
 				<DetailDisclosure
-					:title="t('collection-keys.place_relations')"
+					:title="t('collection-keys.viecpro_places.place_relations')"
 					:rels="data.details.data.place_relations"
 					:headers="relCols"
 					grid-class="grid-cols-4"
+					:collection-name="collection"
 				/>
 			</div>
 			<div v-else>{{ t("ui.no-data") }}.</div>

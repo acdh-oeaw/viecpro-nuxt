@@ -1,23 +1,45 @@
 <script lang="ts" setup>
+import { useQuery } from "@tanstack/vue-query";
+import { Loader2 } from "lucide-vue-next";
+
 import SearchTable from "@/components/search-table.vue";
+import { getSchema } from "@/composables/use-ts-data";
 import { definePageMeta } from "#imports";
 
 const collectionName = "viecpro_places";
 const queryBy = "name";
-const koi = ["id", "name", "kind", "lat", "long", "start_date", "end_date"];
-const facets = ["kind"];
-const tableCols = "grid-cols-[2fr_3fr_2fr_2fr_2fr_2fr_2fr]";
+const koi = ["name", "kind", "label:Bezeichnung, alternativ"];
+const tableCols = "grid-cols-[3fr_2fr_3fr]";
+
+const schema = ref(
+	useQuery({
+		queryKey: ["schema", collectionName] as const,
+		queryFn: ({ queryKey }) => getSchema(queryKey[1]),
+	}),
+);
+
+const facets = computed(
+	() => schema.value.data?.fields?.filter((field) => field.facet).map((field) => field.name),
+);
+const sortable = computed(
+	() => schema.value.data?.fields?.filter((field) => field.sort).map((field) => field.name),
+);
 
 definePageMeta({
-	title: "pages.searchviews.courts.title",
+	title: "pages.searchviews.places.title",
 });
 </script>
 
 <template>
+	<Centered v-if="schema.isFetching">
+		<Loader2 class="h-8 w-8 animate-spin" />
+	</Centered>
 	<SearchTable
+		v-else
 		:collection-name="collectionName"
 		:facets="facets"
 		:query-by="queryBy"
+		:sort="sortable"
 		:cols="tableCols"
 		:koi="koi"
 	/>

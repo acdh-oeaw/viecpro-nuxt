@@ -14,13 +14,15 @@ const t = useTranslations();
 const route = useRoute();
 const id = String(route.params.id);
 
+const collection = "viecpro_institutions";
+
 const data = ref({
 	entity: useQuery({
-		queryKey: ["viecpro_institutions", id],
-		queryFn: () => getDocument<Institution>("viecpro_institutions", `Institution_${id}`),
+		queryKey: [collection, id],
+		queryFn: () => getDocument<Institution>(collection, `Institution_${id}`),
 	}),
 	details: useQuery({
-		queryKey: ["detail", "viecpro_institutions", id],
+		queryKey: ["detail", collection, id],
 		queryFn: () => getDetails<InstitutionDetail>("institution", id),
 	}),
 });
@@ -80,7 +82,7 @@ definePageMeta({
 		</template>
 		<template #base>
 			<div class="col-span-2 my-1 border-t"></div>
-			<span>{{ t("collection-keys.name") }}:</span>
+			<span>{{ t("collection-keys.viecpro_institutions.name") }}:</span>
 			<span v-if="!loading.entity">{{ data.entity.data?.name }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
@@ -92,12 +94,12 @@ definePageMeta({
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 
-			<span>{{ t("collection-keys.category") }}:</span>
+			<span>{{ t("collection-keys.viecpro_institutions.category") }}:</span>
 			<span v-if="!loading.details">{{ data.details.data?.category }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 
-			<span>{{ t("collection-keys.resolution") }}:</span>
+			<span>{{ t("collection-keys.viecpro_institutions.resolution") }}:</span>
 			<span v-if="!loading.details">{{ data.details.data?.resolution }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
@@ -106,18 +108,20 @@ definePageMeta({
 			<div v-if="data.details.data" class="flex flex-col gap-3">
 				<DetailDisclosure
 					default-open
-					:title="t('collection-keys.alternative_names')"
+					:title="t('collection-keys.viecpro_institutions.alternative_names')"
 					:rels="data.details.data.alternative_names"
-					:headers="['name', 'start_date', 'end_date']"
+					:headers="['name', 'start', 'end']"
 					grid-class="grid-cols-3"
 					:loading="loading.details"
+					:collection-name="collection"
 				/>
 				<DetailDisclosure
-					:title="t('collection-keys.sources')"
+					:title="t('collection-keys.viecpro_institutions.sources')"
 					:rels="data.details.data.sources"
 					:headers="['sources.bibtex.title', 'sources.bibtex.type', 'sources.folio']"
 					grid-class="grid-cols-3"
 					:loading="loading.details"
+					:collection-name="collection"
 				/>
 			</div>
 			<div v-else>No data.</div>
@@ -126,22 +130,25 @@ definePageMeta({
 			<div v-if="data.details.data" class="flex flex-col gap-3">
 				<DetailDisclosure
 					default-open
-					:title="t('collection-keys.personnel')"
+					:title="t('collection-keys.viecpro_institutions.personnel')"
 					:headers="['relation_type', 'target.name']"
 					:rels="data.details.data.personnel"
 					grid-class="grid-cols-2"
+					:collection-name="collection"
 				/>
 				<DetailDisclosure
-					:title="t('collection-keys.locations')"
+					:title="t('collection-keys.viecpro_institutions.locations')"
 					:headers="['relation_type', 'target.name']"
 					:rels="data.details.data.locations"
 					grid-class="grid-cols-2"
+					:collection-name="collection"
 				/>
 				<DetailDisclosure
-					:title="t('collection-keys.hierarchy')"
+					:title="t('collection-keys.viecpro_institutions.hierarchy')"
 					:headers="['relation_type', 'target.name']"
 					:rels="data.details.data.hierarchy"
 					grid-class="grid-cols-2"
+					:collection-name="collection"
 				/>
 			</div>
 			<div v-else>No data.</div>

@@ -9,7 +9,7 @@ export function useDefaultClient(): Client {
 				protocol: "https",
 			},
 		],
-		apiKey: "GrG9AsDjS3Xe3eujXWNN1YDmoN2fmlqU", // read, get & retrieve only
+		apiKey: "catYoetXCv1rTfAp5LzcQ6TKI48gkB13", // read, get & retrieve only
 		connectionTimeoutSeconds: 3,
 	});
 

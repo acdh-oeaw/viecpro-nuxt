@@ -22,7 +22,7 @@ export async function getFacets<T extends AnyEntity>(
 	query: LocationQuery = {},
 	facetQuery = "",
 	collection: string,
-	query_by: string,
+	query_by: Array<string> | string,
 	q = "*",
 ): Promise<SearchResponse<T>> {
 	return useDefaultClient()
@@ -39,11 +39,19 @@ export async function getFacets<T extends AnyEntity>(
 		});
 }
 
-export async function getDetails<T extends AnyDetail>(model: string, id: string): Promise<T> {
+export async function getDetails<T extends AnyDetail>(
+	model: string,
+	id: string,
+	idName?: string,
+): Promise<T> {
 	return useDefaultClient()
 		.collections<T>(`viecpro_detail_${model}`)
-		.documents(`detail_${model}_${id}`)
+		.documents(`detail_${idName ?? model}_${id}`)
 		.retrieve();
+}
+
+export async function getSchema(collection: string): Promise<CollectionSchema> {
+	return useDefaultClient().collections(collection).retrieve();
 }
 
 // Might be useful somedays

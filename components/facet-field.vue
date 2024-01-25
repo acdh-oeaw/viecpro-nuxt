@@ -19,7 +19,7 @@ const props = defineProps<{
 	facets: Array<object>;
 	selected?: Array<string>;
 	collection: string;
-	queryBy: string;
+	queryBy: Array<string> | string;
 }>();
 
 const facetSearch: Ref<string> = ref("");
@@ -37,7 +37,7 @@ const selectionQueries = useQueries({
 						query: LocationQuery;
 						facetQuery: string;
 						collection: string;
-						query_by: string;
+						query_by: Array<string> | string;
 					}
 					const query: QueryObject = {
 						facet: props.fieldName,
@@ -69,7 +69,7 @@ const selectionQueries = useQueries({
 							return { count: 0, highlighted: "", value: "" };
 						},
 					};
-			  })
+				})
 			: [],
 	),
 });
@@ -145,8 +145,8 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 
 <template>
 	<div class="flex flex-col">
-		<h1 class="flex items-center justify-between text-2xl">
-			{{ t(`collection-keys["${fieldName}"]`) }}
+		<h1 class="flex cursor-auto items-center justify-between text-2xl">
+			{{ t(`collection-keys["${collection}"]["${fieldName}"]`) }}
 		</h1>
 		<div
 			class="m-1 grid w-full grid-cols-[auto_1fr_auto] items-center rounded border bg-white shadow-sm"

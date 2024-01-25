@@ -32,11 +32,11 @@ test("Searchinterface navigation", async ({ page }) => {
 	await page.getByRole("button", { name: "Delete Input" }).click();
 	await expect(page.getByLabel("Suche...", { exact: true })).toContainText("");
 
-	await page.getByRole("link", { name: "Referenzen" }).click();
-	await expect(page).toHaveURL("/de/search/references");
+	await page.getByRole("link", { name: "Orte" }).click();
+	await expect(page).toHaveURL("/de/search/places");
 
 	await page.getByRole("button", { name: "Filter verstecken..." }).click();
-	await expect(page).toHaveURL("/de/search/references");
+	await expect(page).toHaveURL("/de/search/places");
 });
 
 test("Documentation", async ({ page }) => {
