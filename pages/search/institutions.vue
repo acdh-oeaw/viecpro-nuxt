@@ -8,8 +8,8 @@ import { definePageMeta } from "#imports";
 
 const collectionName = "viecpro_institutions";
 const queryBy = "name";
-const koi = ["name", "kind", "start", "end"];
-const tableCols = "grid-cols-[3fr_3fr_2fr_2fr]";
+const koi = ["name", "start", "end", "label:Auflösung", "label:Kategorie"];
+const tableCols = "grid-cols-[3fr_2fr_2fr_3fr_2fr]";
 
 const schema = ref(
 	useQuery({

@@ -10,8 +10,8 @@ const collectionName = "viecpro_courts";
 
 const queryBy = ["name", "main_owner.name"];
 
-const koi = ["name", "main_owner.name", "start", "end"];
-const tableCols = "grid-cols-[2fr_3fr_2fr_2fr]";
+const koi = ["name", "main_owner.name", "start", "end", "label:Kategorie"];
+const tableCols = "grid-cols-[2fr_3fr_2fr_2fr_2fr]";
 
 const schema = ref(
 	useQuery({

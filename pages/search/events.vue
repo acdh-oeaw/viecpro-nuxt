@@ -10,8 +10,8 @@ const collectionName = "viecpro_events";
 
 const queryBy = "name";
 
-const koi = ["name", "start", "end", "kind"];
-const tableCols = "grid-cols-[4fr_2fr_2fr_2fr]";
+const koi = ["name", "start", "end", "kind", "label:Auflösung", "label:Kategorie"];
+const tableCols = "grid-cols-[4fr_2fr_2fr_2fr_2fr_2fr]";
 
 const schema = ref(
 	useQuery({

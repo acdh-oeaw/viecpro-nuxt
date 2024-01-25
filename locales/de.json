@@ -61,8 +61,8 @@
 	},
 	"collection-keys": {
 		"viecpro_persons": {
-			"end": "Tod",
-			"start": "Geburt",
+			"end": "Sterbedatum",
+			"start": "Geburtsdatum",
 			"gender": "Geschlecht",
 			"first_name": "Vorname(n)",
 			"name": "Nachname",
