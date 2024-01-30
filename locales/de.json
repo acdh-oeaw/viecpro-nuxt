@@ -85,7 +85,8 @@
 			"other_relations_court": "Sonstiger Bezug zum Hof",
 			"marriages_and_family_relations": "Ehe- und Verwandschaftsverhältnisse",
 			"relations_to_church_and_orders": "Bezug zu Kirche und Orden",
-			"non_court_functions": "Sonstige Tätigkeiten"
+			"non_court_functions": "Sonstige Tätigkeiten",
+			"model": "Modell"
 		},
 		"viecpro_courts": {
 			"name": "Name",
@@ -165,6 +166,7 @@
 		"search-placeholder": "Suche...",
 		"sort-by": "Sortiere nach dieser Spalte",
 		"loading": "Wird geladen...",
-		"no-data": "Keine Daten"
+		"no-data": "Keine Daten",
+		"timespan": "Zeitraum"
 	}
 }

@@ -84,7 +84,8 @@
 			"other_relations_court": "Other Court Relations",
 			"marriages_and_family_relations": "Marriages and Family",
 			"relations_to_church_and_orders": "Relations to Church and Orders",
-			"non_court_functions": "Non Court Functions"
+			"non_court_functions": "Non Court Functions",
+			"model": "Model"
 		},
 		"viecpro_courts": {
 			"name": "Name",
@@ -188,6 +189,7 @@
 		"search-placeholder": "Search...",
 		"sort-by": "sort by this column",
 		"loading": "loading...",
-		"no-data": "No data"
+		"no-data": "No data",
+		"timespan": "Time span"
 	}
 }
