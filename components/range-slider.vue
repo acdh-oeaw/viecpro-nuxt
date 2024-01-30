@@ -18,7 +18,7 @@ watch(range, (from, to) => {
 
 <template>
 	<Root v-model="range" :min="1700" :max="1900" class="flex flex-col gap-2">
-		<Sliderlabel>{{ t("ui.timespan") }}</Sliderlabel>
+		<Sliderlabel class="mt-2">{{ t("ui.timespan") }}</Sliderlabel>
 		<div class="my-1 flex justify-between">
 			<div>
 				<label for="start_year" class="sr-only">Select start year</label>
@@ -60,15 +60,19 @@ watch(range, (from, to) => {
 			<Thumb
 				:key="0"
 				:index="0"
-				class="absolute h-4 w-4 cursor-pointer rounded-l-full border border-primary-600 bg-white"
-			/>
+				class="absolute z-10 h-4 w-4 cursor-pointer rounded-l-full border border-primary-600 bg-white"
+			>
+				<div class="relative z-20 h-4 w-4 cursor-pointer rounded-r-full" />
+			</Thumb>
 			<Thumb
 				:key="1"
 				:index="1"
-				class="h-4 w-4 cursor-pointer rounded-r-full border border-primary-600 bg-white"
-			/>
+				class="absolute z-10 h-4 w-4 cursor-pointer rounded-r-full border border-primary-600 bg-white"
+			>
+				<div class="relative z-20 h-4 w-4 cursor-pointer rounded-r-full" />
+			</Thumb>
 		</Control>
-		<MarkerGroup class="h-40">
+		<MarkerGroup>
 			<Marker :value="1700" class="text-slate-400">1700</Marker>
 			<Marker :value="1750" class="text-slate-400">&#183;</Marker>
 			<Marker :value="1800" class="text-slate-400">1800</Marker>
