@@ -13,7 +13,7 @@ defineProps<{
 	<Disclosure :default-open="defaultOpen && !disabled" as="div">
 		<DisclosureButton
 			as="button"
-			class="flex w-full items-center justify-between rounded border-2 p-2 transition ui-open:rounded-b-none ui-open:border-primary-600 ui-open:bg-primary-500"
+			class="flex w-full items-center justify-between rounded border-2 p-2 transition ui-open:rounded-b-none ui-open:border-primary-600 ui-open:bg-primary-500 ui-open:text-white"
 			:disabled="disabled"
 			:class="
 				disabled
@@ -21,7 +21,7 @@ defineProps<{
 					: 'hover:border-primary-400 hover:bg-primary-300 border-primary-300 bg-primary-200 shadow-sm'
 			"
 		>
-			<span class="ui-open:text-white">{{ title }}</span>
+			<span>{{ title }}</span>
 			<ChevronDown class="h-5 w-5 transition ui-open:-rotate-180" />
 		</DisclosureButton>
 		<DisclosurePanel

@@ -10,8 +10,12 @@ const range: Ref<[number, number]> = ref([1700, 1900]);
 
 const { Root, Control, Thumb, MarkerGroup, Marker, Range, Track } = Slider; // important
 
+const debouncer = debounce((range: [number, number]) => {
+	emit("change", range);
+}, 500);
+
 watch(range, (from, to) => {
-	debounce(() => emit("change", to), 500);
+	debouncer(to);
 });
 </script>
 
