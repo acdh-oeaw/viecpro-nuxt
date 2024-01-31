@@ -88,6 +88,7 @@
 			"model": "Model"
 		},
 		"viecpro_courts": {
+			"model": "Model",
 			"name": "Name",
 			"kind": "Kind",
 			"start": "Start",
@@ -106,7 +107,9 @@
 			"target.name": "Name",
 			"id": "ID",
 			"owners": "Owners",
-			"download": "Download"
+			"owner": "Owner",
+			"download": "Download",
+			"label:Kategorie": "Category"
 		},
 		"viecpro_institutions": {
 			"name": "Name",

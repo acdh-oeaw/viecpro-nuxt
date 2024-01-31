@@ -126,16 +126,14 @@ const getDetailLink = (id: string) => {
 			<div v-if="!loading && data" class="w-full">
 				<div class="mr-6 hidden md:grid" :class="cols">
 					<div v-for="key in koi" :key="String(key)" class="m-2 font-semibold">
-						<div v-if="key.includes('label:')">
-							{{ key.replace("label:", "") }}
-						</div>
 						<SortableColumn
-							v-else-if="sort && sort.includes(key)"
+							v-if="sort && sort.includes(key)"
 							:query="route.query"
 							:col="key"
+							:collection-name="collectionName"
 						/>
 						<div
-							v-else-if="t(`collection-keys['${key}']`) === 'ID'"
+							v-else-if="t(`collection-keys['${collectionName}']['${key}']`) === 'ID'"
 							class="flex items-center gap-2"
 						>
 							<span>ID</span>
@@ -185,10 +183,20 @@ const getDetailLink = (id: string) => {
 							</div>
 							<div class="flex flex-col gap-1 p-1 md:hidden">
 								<div v-for="key in koi" :key="key + hit.document.id">
-									<div class="text-gray-500">{{ t(`collection-keys["${key}"]`) }}</div>
+									<div class="text-gray-500">
+										{{ t(`collection-keys["${collectionName}"]["${key}"]`) }}
+									</div>
 									<div class="text-2xl">
+										<span v-if="key.includes('label:')">
+											{{
+												hit.document.labels
+													.filter((label) => label.label_type === key.replace("label:", ""))
+													.map((label) => label.name)
+													.join("; ")
+											}}
+										</span>
 										<span
-											v-if="queryBy.includes(key) && hit.highlight[key]?.snippet"
+											v-else-if="queryBy.includes(key) && hit.highlight[key]?.snippet"
 											v-html="hit.highlight[key].snippet"
 										/>
 										<span v-else>

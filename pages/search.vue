@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { CalendarRange, MapPin, School2, User, Users } from "lucide-vue-next";
 
+import GenericDisclosure from "@/components/generic-disclosure.vue";
 import RangeSlider from "@/components/range-slider.vue";
 import type { NavLink } from "@/types/misc.d.ts";
 
@@ -63,10 +64,12 @@ definePageMeta({
 						{{ link.label }}
 					</NuxtLink>
 				</div>
-				<div class="px-4">
-					<ClientOnly>
-						<RangeSlider @change="(value) => console.log(value)" />
-					</ClientOnly>
+				<div class="mx-4 xl:max-w-sm">
+					<GenericDisclosure :title="t('ui.timespan')" default-open>
+						<ClientOnly>
+							<RangeSlider class="p-1" @change="(value) => console.log(value)" />
+						</ClientOnly>
+					</GenericDisclosure>
 				</div>
 			</div>
 			<NuxtPage />
