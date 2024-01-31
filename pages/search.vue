@@ -65,11 +65,11 @@ definePageMeta({
 					</NuxtLink>
 				</div>
 				<div class="mx-4 xl:max-w-sm">
-					<GenericDisclosure :title="t('ui.timespan')" default-open>
-						<ClientOnly>
+					<ClientOnly>
+						<GenericDisclosure :title="t('ui.timespan')" default-open>
 							<RangeSlider class="p-1" @change="(value) => console.log(value)" />
-						</ClientOnly>
-					</GenericDisclosure>
+						</GenericDisclosure>
+					</ClientOnly>
 				</div>
 			</div>
 			<NuxtPage />

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { debounce } from "@acdh-oeaw/lib";
 import { Slider } from "@ark-ui/vue";
 
 const emit = defineEmits<{
@@ -10,7 +11,7 @@ const range: Ref<[number, number]> = ref([1700, 1900]);
 const { Root, Control, Thumb, MarkerGroup, Marker, Range, Track } = Slider; // important
 
 watch(range, (from, to) => {
-	emit("change", to);
+	debounce(() => emit("change", to), 500);
 });
 </script>
 
