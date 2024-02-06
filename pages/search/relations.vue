@@ -42,5 +42,9 @@ definePageMeta({
 		:sort="sortable"
 		:cols="tableCols"
 		:koi="koi"
+		:custom-cols="{
+			'source.name': 'source',
+			'target.name': 'target',
+		}"
 	/>
 </template>

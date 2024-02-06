@@ -55,6 +55,12 @@
 				"label": "Events",
 				"sing": "Event",
 				"detail": "{title} - Event"
+			},
+			"relations": {
+				"title": "Relations",
+				"label": "Relations",
+				"sing": "Relation",
+				"detail": "{title} - Relation"
 			}
 		}
 	},
@@ -147,11 +153,13 @@
 			"person_relations": "Relations to people",
 			"place_relations": "Relations to other places"
 		},
-		"relations": {
-			"title": "Relations",
-			"label": "Relations",
-			"sing": "Relation",
-			"detail": "{title} - Relation"
+		"viecpro_relations": {
+			"source_kind": "Source: Kind",
+			"source.name": "Source: Name",
+			"relation_type": "Relation: Kind",
+			"target_kind": "Target: Kind",
+			"target.name": "Target: Name",
+			"model": "Model"
 		}
 	},
 	"detail-page": {
