@@ -44,5 +44,9 @@ definePageMeta({
 		:facets="facets"
 		:cols="tableCols"
 		:sort="sortable"
+		:custom-cols="{
+			'main_owner.name': 'main_owner',
+			name: 'default',
+		}"
 	/>
 </template>

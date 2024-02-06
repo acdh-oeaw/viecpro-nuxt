@@ -225,11 +225,23 @@ const getDetailLink = (id: string, entity?: string) => {
 										}}
 									</span>
 									<NuxtLink
-										v-else-if="customCols[key]"
-										class="flex items-center gap-2 text-clip rounded transition hover:bg-slate-200 active:bg-slate-300"
+										v-else-if="customCols[key] === 'default'"
+										class="flex items-center justify-between gap-2 text-clip rounded font-semibold transition hover:bg-slate-200 active:bg-slate-300"
+										:to="getDetailLink(String(hit.document.object_id))"
+									>
+										<span class="m-2">
+											{{ get(hit.document, key) }}
+										</span>
+										<ChevronRight class="h-6 w-6 shrink-0" />
+									</NuxtLink>
+									<NuxtLink
+										v-else-if="
+											customCols[key] && Object.keys(hit.document[customCols[key]]).length !== 0
+										"
+										class="flex items-center justify-between gap-2 text-clip rounded font-semibold transition hover:bg-slate-200 active:bg-slate-300"
 										:to="
 											getDetailLink(
-												hit.document[customCols[key]].object_id,
+												String(hit.document[customCols[key]].object_id),
 												hit.document[customCols[key]].model.toLowerCase() + 's', // dont worry about it ahaha
 											)
 										"
@@ -265,8 +277,20 @@ const getDetailLink = (id: string, entity?: string) => {
 										</span>
 
 										<NuxtLink
-											v-else-if="customCols[key]"
-											class="-ml-1 flex items-center gap-2 text-clip rounded transition hover:bg-slate-200 active:bg-slate-300"
+											v-else-if="customCols[key] === 'default'"
+											class="flex items-center justify-between gap-2 text-clip rounded font-semibold transition hover:bg-slate-200 active:bg-slate-300"
+											:to="getDetailLink(String(hit.document.object_id))"
+										>
+											<span class="m-2">
+												{{ get(hit.document, key) }}
+											</span>
+											<ChevronRight class="h-6 w-6 shrink-0" />
+										</NuxtLink>
+										<NuxtLink
+											v-else-if="
+												customCols[key] && Object.keys(hit.document[customCols[key]]).length !== 0
+											"
+											class="-ml-1 flex items-center gap-2 text-clip rounded font-semibold transition hover:bg-slate-200 active:bg-slate-300"
 											:to="
 												getDetailLink(
 													hit.document[customCols[key]].object_id,

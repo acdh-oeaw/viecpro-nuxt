@@ -73,6 +73,9 @@ definePageMeta({
 					<ClientOnly>
 						<GenericDisclosure :title="t('ui.timespan')" default-open>
 							<RangeSlider class="p-1" @change="(value) => console.log(value)" />
+							<div class="mt-1 text-xs text-gray-400">
+								note: as of now this component is purely cosmetic
+							</div>
 						</GenericDisclosure>
 					</ClientOnly>
 				</div>
