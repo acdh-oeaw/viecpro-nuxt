@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { CalendarRange, MapPin, School2, User, Users } from "lucide-vue-next";
+import { ArrowLeftRight, CalendarRange, MapPin, School2, User, Users } from "lucide-vue-next";
 
 import GenericDisclosure from "@/components/generic-disclosure.vue";
 import RangeSlider from "@/components/range-slider.vue";
@@ -33,6 +33,11 @@ const links = computed(() => {
 			href: { path: localePath("/search/places") },
 			label: t("pages.searchviews.places.label"),
 			icon: MapPin,
+		},
+		relations: {
+			href: { path: localePath("/search/relations") },
+			label: t("pages.searchviews.relations.label"),
+			icon: ArrowLeftRight,
 		},
 	} satisfies Record<string, NavLink>;
 });

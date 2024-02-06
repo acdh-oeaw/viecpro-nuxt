@@ -147,28 +147,12 @@
 			"person_relations": "Relations to people",
 			"place_relations": "Relations to other places"
 		},
-		"object_id": "ID",
-		"id": "ID",
-		"name": "Name",
-		"kind": "Kind",
-		"start_date": "Start Date",
-		"end_date": "End Date",
-		"main_owner.name": "Owner",
-		"fullname": "Full Name",
-		"gender": "Gender",
-		"lat": "Lat",
-		"long": "Long",
-		"folio": "Folio",
-		"shortTitle": "Short Title",
-		"category": "Category",
-		"resolution": "Resolution",
-		"alternative_names": "Alternative Names",
-		"sources": "Sources",
-		"personnel": "Personnel",
-		"locations": "Locations",
-		"hierarchy": "Hierarchy",
-		"first_name": "First Name(s)",
-		"owners": "Owners"
+		"relations": {
+			"title": "Relations",
+			"label": "Relations",
+			"sing": "Relation",
+			"detail": "{title} - Relation"
+		}
 	},
 	"detail-page": {
 		"basedata": "Base data",
