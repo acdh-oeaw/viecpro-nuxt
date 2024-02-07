@@ -6,12 +6,10 @@ import SearchTable from "@/components/search-table.vue";
 import { getSchema } from "@/composables/use-ts-data";
 import { definePageMeta } from "#imports";
 
-const collectionName = "viecpro_courts";
-
-const queryBy = ["name", "main_owner.name"];
-
-const koi = ["name", "main_owner.name", "start", "end", "label:Kategorie"];
-const tableCols = "grid-cols-[2fr_3fr_2fr_2fr_2fr]";
+const collectionName = "viecpro_relations";
+const queryBy = ["target.name", "source.name"];
+const koi = ["source_kind", "source.name", "relation_type", "target_kind", "target.name"];
+const tableCols = "grid-cols-[2fr_3fr_3fr_2fr_3fr]";
 
 const schema = ref(
 	useQuery({
@@ -28,7 +26,7 @@ const sortable = computed(
 );
 
 definePageMeta({
-	title: "pages.searchviews.courts.title",
+	title: "pages.searchviews.relations.title",
 });
 </script>
 
@@ -39,14 +37,14 @@ definePageMeta({
 	<SearchTable
 		v-else
 		:collection-name="collectionName"
-		:query-by="queryBy"
-		:koi="koi"
 		:facets="facets"
-		:cols="tableCols"
+		:query-by="queryBy"
 		:sort="sortable"
+		:cols="tableCols"
+		:koi="koi"
 		:custom-cols="{
-			'main_owner.name': 'main_owner',
-			name: 'default',
+			'source.name': 'source',
+			'target.name': 'target',
 		}"
 	/>
 </template>

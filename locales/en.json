@@ -55,6 +55,12 @@
 				"label": "Events",
 				"sing": "Event",
 				"detail": "{title} - Event"
+			},
+			"relations": {
+				"title": "Relations",
+				"label": "Relations",
+				"sing": "Relation",
+				"detail": "{title} - Relation"
 			}
 		}
 	},
@@ -84,9 +90,11 @@
 			"other_relations_court": "Other Court Relations",
 			"marriages_and_family_relations": "Marriages and Family",
 			"relations_to_church_and_orders": "Relations to Church and Orders",
-			"non_court_functions": "Non Court Functions"
+			"non_court_functions": "Non Court Functions",
+			"model": "Model"
 		},
 		"viecpro_courts": {
+			"model": "Model",
 			"name": "Name",
 			"kind": "Kind",
 			"start": "Start",
@@ -105,7 +113,9 @@
 			"target.name": "Name",
 			"id": "ID",
 			"owners": "Owners",
-			"download": "Download"
+			"owner": "Owner",
+			"download": "Download",
+			"label:Kategorie": "Category"
 		},
 		"viecpro_institutions": {
 			"name": "Name",
@@ -143,28 +153,14 @@
 			"person_relations": "Relations to people",
 			"place_relations": "Relations to other places"
 		},
-		"object_id": "ID",
-		"id": "ID",
-		"name": "Name",
-		"kind": "Kind",
-		"start_date": "Start Date",
-		"end_date": "End Date",
-		"main_owner.name": "Owner",
-		"fullname": "Full Name",
-		"gender": "Gender",
-		"lat": "Lat",
-		"long": "Long",
-		"folio": "Folio",
-		"shortTitle": "Short Title",
-		"category": "Category",
-		"resolution": "Resolution",
-		"alternative_names": "Alternative Names",
-		"sources": "Sources",
-		"personnel": "Personnel",
-		"locations": "Locations",
-		"hierarchy": "Hierarchy",
-		"first_name": "First Name(s)",
-		"owners": "Owners"
+		"viecpro_relations": {
+			"source_kind": "Source: Kind",
+			"source.name": "Source: Name",
+			"relation_type": "Relation: Kind",
+			"target_kind": "Target: Kind",
+			"target.name": "Target: Name",
+			"model": "Model"
+		}
 	},
 	"detail-page": {
 		"basedata": "Base data",
@@ -188,6 +184,7 @@
 		"search-placeholder": "Search...",
 		"sort-by": "sort by this column",
 		"loading": "loading...",
-		"no-data": "No data"
+		"no-data": "No data",
+		"timespan": "Time span"
 	}
 }

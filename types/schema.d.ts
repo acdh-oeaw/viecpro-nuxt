@@ -11,7 +11,7 @@ interface BaseEntity {
 	labels: Array<Label>;
 }
 
-export type AnyEntity = Court | Event | Institution | Person | Place | Relation;
+export type AnyEntity = Court | Event | Institution | Person | Place;
 export type AnyDetail = CourtDetail | InstitutionDetail | PersonDetail | PlaceDetail;
 
 export interface Court extends BaseEntity {

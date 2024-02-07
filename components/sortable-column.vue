@@ -6,6 +6,7 @@ const t = useTranslations();
 
 const props = defineProps<{
 	col: string;
+	collectionName: string;
 	query: LocationQuery;
 }>();
 
@@ -32,7 +33,7 @@ const getSortString = () => {
 			},
 		}"
 	>
-		{{ t(`collection-keys["${col}"]`) }}
+		{{ t(`collection-keys["${collectionName}"]["${col}"]`) }}
 		<ChevronUp
 			v-if="query.sort && query.sort.includes(col)"
 			:class="{

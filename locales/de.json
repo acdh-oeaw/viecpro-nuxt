@@ -56,6 +56,12 @@
 				"label": "Ereignisse",
 				"sing": "Ereignis",
 				"detail": "{title} - Ereignis"
+			},
+			"relations": {
+				"title": "Relationen",
+				"label": "Relationen",
+				"sing": "Relation",
+				"detail": "{title} - Relation"
 			}
 		}
 	},
@@ -85,9 +91,11 @@
 			"other_relations_court": "Sonstiger Bezug zum Hof",
 			"marriages_and_family_relations": "Ehe- und Verwandschaftsverhältnisse",
 			"relations_to_church_and_orders": "Bezug zu Kirche und Orden",
-			"non_court_functions": "Sonstige Tätigkeiten"
+			"non_court_functions": "Sonstige Tätigkeiten",
+			"model": "Modell"
 		},
 		"viecpro_courts": {
+			"model": "Modell",
 			"name": "Name",
 			"kind": "Art",
 			"start": "Beginn",
@@ -104,7 +112,9 @@
 			"target.name": "Name",
 			"id": "ID",
 			"owners": "Besitzer",
-			"download": "Download und Zitierweise"
+			"owner": "Besitzer",
+			"download": "Download und Zitierweise",
+			"label:Kategorie": "Kategorie"
 		},
 		"viecpro_institutions": {
 			"name": "Name",
@@ -141,6 +151,14 @@
 			"institution_relations": "Bezüge zu Institutionen",
 			"person_relations": "Bezüge zu Personen",
 			"place_relations": "Bezüge zu anderen Orten"
+		},
+		"viecpro_relations": {
+			"source_kind": "Quelle: Art",
+			"source.name": "Quelle: Name",
+			"relation_type": "Relation: Art",
+			"target_kind": "Ziel: Art",
+			"target.name": "Ziel: Name",
+			"model": "Modell"
 		}
 	},
 	"detail-page": {
@@ -165,6 +183,7 @@
 		"search-placeholder": "Suche...",
 		"sort-by": "Sortiere nach dieser Spalte",
 		"loading": "Wird geladen...",
-		"no-data": "Keine Daten"
+		"no-data": "Keine Daten",
+		"timespan": "Zeitraum"
 	}
 }
