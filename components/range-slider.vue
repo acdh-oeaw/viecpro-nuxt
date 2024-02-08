@@ -6,7 +6,10 @@ const emit = defineEmits<{
 	change: [value: [number, number]];
 }>();
 
-const range: Ref<[number, number]> = ref([1700, 1900]);
+const min = 1600;
+const max = 1900;
+
+const range: Ref<[number, number]> = ref([min, max]);
 
 const { Root, Control, Thumb, MarkerGroup, Marker, Range, Track } = Slider; // important
 
@@ -20,7 +23,7 @@ watch(range, (from, to) => {
 </script>
 
 <template>
-	<Root v-model="range" :min="1700" :max="1900" class="flex w-full flex-col gap-2">
+	<Root v-model="range" :min="min" :max="max" class="flex w-full flex-col gap-2">
 		<div class="my-1 flex justify-between">
 			<div>
 				<label for="start_year" class="sr-only">Select start year</label>
@@ -29,8 +32,8 @@ watch(range, (from, to) => {
 					v-model="range[0]"
 					class="w-16 rounded text-right shadow"
 					type="number"
-					:min="1700"
-					:max="1900"
+					:min="min"
+					:max="max"
 					name="start_year"
 					@input="
 						(event: Event) =>
@@ -45,8 +48,8 @@ watch(range, (from, to) => {
 					v-model="range[1]"
 					class="w-16 rounded text-right shadow"
 					type="number"
-					:min="1700"
-					:max="1900"
+					:min="min"
+					:max="max"
 					name="end_year"
 					@change="
 						(event: Event) =>
@@ -71,6 +74,8 @@ watch(range, (from, to) => {
 			/>
 		</Control>
 		<MarkerGroup class="mx-1 h-4">
+			<Marker :value="1600" class="text-slate-400">1600</Marker>
+			<Marker :value="1650" class="text-slate-400">&#183;</Marker>
 			<Marker :value="1700" class="text-slate-400">1700</Marker>
 			<Marker :value="1750" class="text-slate-400">&#183;</Marker>
 			<Marker :value="1800" class="text-slate-400">1800</Marker>

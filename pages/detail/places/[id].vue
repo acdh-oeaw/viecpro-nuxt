@@ -6,6 +6,7 @@ import { useRoute } from "vue-router";
 import Chip from "@/components/chip.vue";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
+import MapComponent from "@/components/map-component.vue";
 import type { Place, PlaceDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
@@ -112,6 +113,16 @@ definePageMeta({
 					:loading="loading.details"
 					:collection-name="collection"
 				/>
+				<GenericDisclosure title="Map">
+					<ClientOnly>
+						<MapComponent
+							v-if="!loading.entity && data.entity.data?.lat && data.entity.data?.long"
+							class="h-96 w-full"
+							name="test"
+							:points="{ lat: data.entity.data.lat, long: data.entity.data.long }"
+						/>
+					</ClientOnly>
+				</GenericDisclosure>
 			</div>
 			<div v-else>{{ t("ui.no-data") }}.</div>
 		</template>
