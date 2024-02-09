@@ -6,6 +6,7 @@ import { useRoute } from "vue-router";
 import Chip from "@/components/chip.vue";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
+import MapComponent from "@/components/map-component.vue";
 import type { Place, PlaceDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
@@ -103,8 +104,9 @@ definePageMeta({
 			<div class="col-span-2 my-1 border-t"></div>
 		</template>
 		<template #left>
-			<div v-if="data.details.data" class="flex flex-col gap-3">
+			<div v-if="data.details.data || data.entity.data" class="flex flex-col gap-3">
 				<DetailDisclosure
+					v-if="data.details.data"
 					:title="t('collection-keys.viecpro_places.alternative_names')"
 					:rels="data.details.data?.alternative_names.map((name) => ({ name })) || []"
 					:headers="['name']"
@@ -112,6 +114,19 @@ definePageMeta({
 					:loading="loading.details"
 					:collection-name="collection"
 				/>
+				<GenericDisclosure
+					title="Map"
+					default-open
+					:disabled="!data.entity.data?.lat || !data.entity.data?.long"
+				>
+					<ClientOnly>
+						<MapComponent
+							v-if="!loading.entity && data.entity.data?.lat && data.entity.data.long"
+							class="h-96 w-full"
+							:point="{ lat: data.entity.data.lat, long: data.entity.data.long }"
+						/>
+					</ClientOnly>
+				</GenericDisclosure>
 			</div>
 			<div v-else>{{ t("ui.no-data") }}.</div>
 		</template>

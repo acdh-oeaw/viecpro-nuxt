@@ -67,6 +67,7 @@
 		"eslint": "^8.56.0",
 		"eslint-plugin-tailwindcss": "^3.13.1",
 		"lint-staged": "^15.2.0",
+		"nuxt3-leaflet": "^1.0.12",
 		"postcss": "^8.4.33",
 		"prettier": "^3.1.1",
 		"rehype-mermaid": "^2.0.1",

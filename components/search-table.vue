@@ -330,7 +330,7 @@ const getDetailLink = (id: string, entity?: string) => {
 		</div>
 		<div v-if="!loading && data">
 			<FacetDisclosures
-				class="float-right m-4 w-96 max-w-full"
+				class="ml-2 w-full max-w-full pr-4 lg:float-right lg:mx-0 lg:mt-6 lg:w-96"
 				:facets="data.facet_counts"
 				:loading="loading"
 				:collection="collectionName"

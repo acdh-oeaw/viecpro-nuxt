@@ -23,18 +23,20 @@ const t = useTranslations();
 		:default-open="defaultOpen"
 	>
 		<slot>
-			<div class="grid gap-2" :class="gridClass">
-				<span v-for="header in headers" :key="header" class="font-bold">
-					{{ t(`collection-keys.${collectionName}["${header}"]`) }}
-				</span>
-			</div>
-			<div
-				v-for="hit in rels"
-				:key="String(hit)"
-				class="mt-1 grid gap-2 border-t pt-1"
-				:class="gridClass"
-			>
-				<span v-for="header in headers" :key="hit + header">{{ get(hit, header) }}</span>
+			<div class="p-2">
+				<div class="grid gap-2" :class="gridClass">
+					<span v-for="header in headers" :key="header" class="font-bold">
+						{{ t(`collection-keys.${collectionName}["${header}"]`) }}
+					</span>
+				</div>
+				<div
+					v-for="hit in rels"
+					:key="String(hit)"
+					class="mt-1 grid gap-2 border-t pt-1"
+					:class="gridClass"
+				>
+					<span v-for="header in headers" :key="hit + header">{{ get(hit, header) }}</span>
+				</div>
 			</div>
 		</slot>
 	</GenericDisclosure>

@@ -35,7 +35,7 @@ test("Searchinterface navigation", async ({ page }) => {
 	await page.getByRole("link", { name: "Orte" }).click();
 	await expect(page).toHaveURL("/de/search/places");
 
-	await page.getByRole("button", { name: "Filter verstecken..." }).click();
+	await page.getByRole("button", { name: "Facets" }).click();
 	await expect(page).toHaveURL("/de/search/places");
 });
 
