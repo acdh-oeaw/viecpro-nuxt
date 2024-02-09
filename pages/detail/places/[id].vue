@@ -119,13 +119,11 @@ definePageMeta({
 					default-open
 					:disabled="!data.entity.data?.lat || !data.entity.data?.long"
 				>
-					<ClientOnly>
-						<MapComponent
-							v-if="!loading.entity && data.entity.data?.lat && data.entity.data.long"
-							class="h-96 w-full"
-							:point="{ lat: data.entity.data.lat, long: data.entity.data.long }"
-						/>
-					</ClientOnly>
+					<MapComponent
+						v-if="!loading.entity && data.entity.data?.lat && data.entity.data.long"
+						class="h-96 w-full"
+						:point="{ lat: data.entity.data.lat, long: data.entity.data.long }"
+					/>
 				</GenericDisclosure>
 			</div>
 			<div v-else>{{ t("ui.no-data") }}.</div>

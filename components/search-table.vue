@@ -6,6 +6,9 @@ import { ChevronDown, ChevronRight, Loader2, Search, XCircle } from "lucide-vue-
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 
+import type { AnyEntity } from "@/types/schema";
+import { NuxtLink } from "#components";
+
 const locale = useLocale();
 const t = useTranslations();
 const queryClient = useQueryClient();
@@ -27,6 +30,15 @@ const route = useRoute();
 const input = ref(route.query.q === undefined ? "" : String(route.query.q));
 
 const windowWidth = useWindowSize().width;
+
+const isLinkCol = (key: string, document: AnyEntity) => {
+	return (
+		props.customCols?.[key] &&
+		(props.customCols[key] === "default" ||
+			(document[props.customCols[key]] &&
+				Object.keys(document[props.customCols[key]]).length !== 0))
+	);
+};
 
 const pageNum = computed(() => {
 	return Number(route.query.page) || 1;
@@ -125,7 +137,7 @@ const getDetailLink = (id: string, entity?: string) => {
 				:all="data.found"
 			/>
 			<div v-if="!loading && data" class="w-full">
-				<div class="hidden md:grid" :class="cols + ' ' + (!customCols && 'mr-6')">
+				<div class="grid" :class="cols + ' ' + (!customCols && 'mr-6')">
 					<div v-for="key in koi" :key="String(key)" class="m-2 font-semibold">
 						<SortableColumn
 							v-if="sort && sort.includes(key)"
@@ -140,7 +152,7 @@ const getDetailLink = (id: string, entity?: string) => {
 							<span>ID</span>
 							<ChevronDown v-if="!route.query.sort" class="h-5 w-5 opacity-50" />
 						</div>
-						<span v-else>
+						<span v-else class="hidden md:block">
 							{{ t(`collection-keys["${collectionName}"]["${key}"]`) }}
 						</span>
 					</div>
@@ -151,171 +163,69 @@ const getDetailLink = (id: string, entity?: string) => {
 						:key="String(hit.document.id)"
 						class="border-b py-1 md:border-t"
 					>
-						<NuxtLink
-							v-if="!customCols"
-							class="grid grid-cols-[1fr_auto] items-center text-clip rounded transition hover:bg-slate-200 active:bg-slate-300"
+						<component
+							:is="customCols ? 'div' : NuxtLink"
+							class="grid grid-cols-[1fr_auto] items-center text-clip"
+							:class="!customCols && 'rounded transition hover:bg-slate-200 active:bg-slate-300 '"
 							:to="
 								getDetailLink(
 									String(hit.document.object_id || String(hit.document.id)?.replace(/\D/g, '')),
 								)
 							"
 						>
-							<div class="hidden md:grid" :class="cols">
-								<div
-									v-for="key in koi"
-									:key="key + hit.document.id"
-									class="m-2 self-center overflow-auto"
-								>
-									<span v-if="key.includes('label:')">
-										{{
-											hit.document.labels
-												.filter((label) => label.label_type === key.replace("label:", ""))
-												.map((label) => label.name)
-												.join("; ")
-										}}
-									</span>
-									<span
-										v-else-if="queryBy.includes(key) && hit.highlight[key]?.snippet"
-										v-html="hit.highlight[key].snippet"
-									/>
-									<span v-else>
-										{{ get(hit.document, key) }}
-									</span>
-								</div>
-							</div>
-							<div class="flex flex-col gap-1 p-1 md:hidden">
-								<div v-for="key in koi" :key="key + hit.document.id">
-									<div class="text-gray-500">
-										{{ t(`collection-keys["${collectionName}"]["${key}"]`) }}
-									</div>
-									<div class="text-2xl">
-										<span v-if="key.includes('label:')">
-											{{
-												hit.document.labels
-													.filter((label) => label.label_type === key.replace("label:", ""))
-													.map((label) => label.name)
-													.join("; ")
-											}}
-										</span>
-										<span
-											v-else-if="queryBy.includes(key) && hit.highlight[key]?.snippet"
-											v-html="hit.highlight[key].snippet"
-										/>
-										<span v-else>
-											{{ get(hit.document, key) }}
-										</span>
-									</div>
-								</div>
-							</div>
-							<ChevronRight class="h-6 w-6 shrink-0" />
-						</NuxtLink>
-						<div v-else>
-							<div class="hidden md:grid" :class="cols">
+							<div class="md:grid" :class="cols">
 								<div
 									v-for="key in koi"
 									:key="key + hit.document.id"
 									class="self-center overflow-auto"
 								>
-									<span v-if="key.includes('label:')">
-										{{
-											hit.document.labels
-												.filter((label) => label.label_type === key.replace("label:", ""))
-												.map((label) => label.name)
-												.join("; ")
-										}}
-									</span>
-									<NuxtLink
-										v-else-if="customCols[key] === 'default'"
-										class="flex items-center justify-between gap-2 text-clip rounded font-semibold transition hover:bg-slate-200 active:bg-slate-300"
-										:to="getDetailLink(String(hit.document.object_id))"
-									>
-										<span class="m-2">
-											{{ get(hit.document, key) }}
-										</span>
-										<ChevronRight class="h-6 w-6 shrink-0" />
-									</NuxtLink>
-									<NuxtLink
-										v-else-if="
-											customCols[key] && Object.keys(hit.document[customCols[key]]).length !== 0
-										"
-										class="flex items-center justify-between gap-2 text-clip rounded font-semibold transition hover:bg-slate-200 active:bg-slate-300"
-										:to="
-											getDetailLink(
-												String(hit.document[customCols[key]].object_id),
-												hit.document[customCols[key]].model.toLowerCase() + 's', // dont worry about it ahaha
-											)
-										"
-									>
-										<span class="m-2">
-											{{ get(hit.document, key) }}
-										</span>
-										<ChevronRight class="h-6 w-6 shrink-0" />
-									</NuxtLink>
-									<span
-										v-else-if="queryBy.includes(key) && hit.highlight[key]?.snippet"
-										class="m-2"
-										v-html="hit.highlight[key].snippet"
-									/>
-									<span v-else class="m-2">
-										{{ get(hit.document, key) }}
-									</span>
-								</div>
-							</div>
-							<div class="flex flex-col gap-1 p-1 md:hidden">
-								<div v-for="key in koi" :key="key + hit.document.id">
-									<div class="text-gray-500">
+									<span class="ml-2 text-sm text-gray-600 md:hidden">
 										{{ t(`collection-keys["${collectionName}"]["${key}"]`) }}
-									</div>
-									<div class="text-2xl">
+									</span>
+									<component
+										:is="isLinkCol(key, hit.document) ? NuxtLink : 'span'"
+										class="flex items-center gap-2"
+										:class="
+											isLinkCol(key, hit.document) &&
+											'rounded transition hover:bg-slate-200 active:bg-slate-300 font-semibold'
+										"
+										:to="
+											customCols && isLinkCol(key, hit.document)
+												? customCols[key] === 'default'
+													? getDetailLink(String(hit.document.object_id))
+													: getDetailLink(
+															hit.document[customCols[key]].object_id,
+															String(hit.document[customCols[key]].model).toLowerCase() + 's',
+														)
+												: undefined
+										"
+									>
 										<span v-if="key.includes('label:')">
 											{{
 												hit.document.labels
-													.filter((label) => label.label_type === key.replace("label:", ""))
+													.filter((label) => label.label_type.includes(key.replace("label:", "")))
 													.map((label) => label.name)
 													.join("; ")
 											}}
 										</span>
-
-										<NuxtLink
-											v-else-if="customCols[key] === 'default'"
-											class="flex items-center justify-between gap-2 text-clip rounded font-semibold transition hover:bg-slate-200 active:bg-slate-300"
-											:to="getDetailLink(String(hit.document.object_id))"
-										>
-											<span class="m-2">
-												{{ get(hit.document, key) }}
-											</span>
-											<ChevronRight class="h-6 w-6 shrink-0" />
-										</NuxtLink>
-										<NuxtLink
-											v-else-if="
-												customCols[key] && Object.keys(hit.document[customCols[key]]).length !== 0
-											"
-											class="-ml-1 flex items-center gap-2 text-clip rounded font-semibold transition hover:bg-slate-200 active:bg-slate-300"
-											:to="
-												getDetailLink(
-													hit.document[customCols[key]].object_id,
-													hit.document[customCols[key]].model.toLowerCase() + 's', // dont worry about it ahaha
-												)
-											"
-										>
-											<span class="m-1">
-												{{ get(hit.document, key) }}
-											</span>
-											<ChevronRight class="h-6 w-6 shrink-0" />
-										</NuxtLink>
 										<span
-											v-else-if="queryBy.includes(key) && hit.highlight[key]?.snippet"
-											v-html="hit.highlight[key].snippet"
+											v-else-if="get(hit.highlight, key)?.snippet"
+											class="m-2"
+											v-html="get(hit.highlight, key).snippet"
 										/>
-										<span v-else>
+										<span v-else class="m-2">
 											{{ get(hit.document, key) }}
 										</span>
-									</div>
+										<ChevronRight v-if="isLinkCol(key, hit.document)" class="h-6 w-6 shrink-0" />
+									</component>
 								</div>
 							</div>
-						</div>
+
+							<ChevronRight v-if="!customCols" class="h-6 w-6 shrink-0" />
+						</component>
 					</div>
 				</template>
+
 				<Pagination
 					v-if="data && data.found != 0"
 					class="mt-2"
