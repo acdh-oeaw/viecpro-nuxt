@@ -32,7 +32,7 @@ const facetChange = async (facets: Array<string>, field: string) => {
 </script>
 
 <template>
-	<GenericDisclosure title="Facets" default-open>
+	<GenericDisclosure title="Facets" :default-open="defaultOpen">
 		<div class="p-2">
 			<FacetField
 				v-for="facet in facets"
