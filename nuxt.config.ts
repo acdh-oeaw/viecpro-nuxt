@@ -35,7 +35,7 @@ export default defineNuxtConfig({
 		strategy: "prefix",
 		vueI18n: "./i18n.config.ts",
 	},
-	modules: ["@nuxt/content", "@nuxt/image", "@nuxtjs/i18n"],
+	modules: ["@nuxt/content", "@nuxt/image", "@nuxtjs/i18n", "nuxt3-leaflet"],
 	nitro: {
 		compressPublicAssets: true,
 	},

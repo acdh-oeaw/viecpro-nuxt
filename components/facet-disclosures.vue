@@ -33,16 +33,18 @@ const facetChange = async (facets: Array<string>, field: string) => {
 
 <template>
 	<GenericDisclosure title="Facets" default-open>
-		<FacetField
-			v-for="facet in facets"
-			:key="facet.field_name"
-			class="p-2"
-			:field-name="String(facet.field_name)"
-			:facets="facet.counts"
-			:collection="collection"
-			:selected="facetObject[facet.field_name] || []"
-			:query-by="queryBy"
-			@facet-change="(model) => facetChange(model, facet.field_name)"
-		/>
+		<div class="p-2">
+			<FacetField
+				v-for="facet in facets"
+				:key="facet.field_name"
+				class="p-2"
+				:field-name="String(facet.field_name)"
+				:facets="facet.counts"
+				:collection="collection"
+				:selected="facetObject[facet.field_name] || []"
+				:query-by="queryBy"
+				@facet-change="(model) => facetChange(model, facet.field_name)"
+			/>
+		</div>
 	</GenericDisclosure>
 </template>
