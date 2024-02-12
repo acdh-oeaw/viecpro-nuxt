@@ -39,10 +39,10 @@ const t = useTranslations();
 						:to="`/${locale}/detail/${hit?.target?.model.toLowerCase() + 's'}/${
 							hit?.target?.object_id
 						}`"
-						class="grid grid-cols-[1fr_auto] gap-1"
+						class="grid grid-cols-[1fr_auto] items-center gap-1"
 						:class="linkTo && 'rounded transition hover:bg-slate-200 active:bg-slate-300 p-1 -ml-1'"
 					>
-						<div class="grid gap-2" :class="gridClass">
+						<div class="grid items-center gap-2" :class="gridClass">
 							<span v-for="header in headers" :key="hit + header">{{ get(hit, header) }}</span>
 						</div>
 						<ChevronRight v-if="linkTo" class="h-5 w-5 shrink-0" />
