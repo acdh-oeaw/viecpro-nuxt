@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { get } from "lodash";
+import { get } from "lodash-es";
 
 import GenericDisclosure from "@/components/generic-disclosure.vue";
 

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { useWindowSize } from "@vueuse/core";
-import { get } from "lodash";
+import { get } from "lodash-es";
 import { ChevronDown, ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";

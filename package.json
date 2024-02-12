@@ -42,6 +42,7 @@
 		"instantsearch.js": "^4.63.0",
 		"is-ci": "^3.0.1",
 		"lodash": "^4.17.21",
+		"lodash-es": "^4.17.21",
 		"lucide-vue-next": "^0.305.0",
 		"npm-run-all2": "^6.1.1",
 		"nuxt": "^3.9.1",

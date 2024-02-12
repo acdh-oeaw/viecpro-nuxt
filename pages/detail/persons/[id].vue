@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useQuery } from "@tanstack/vue-query";
-import { isEmpty } from "lodash";
+import { isEmpty } from "lodash-es";
 import { Loader2 } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 
