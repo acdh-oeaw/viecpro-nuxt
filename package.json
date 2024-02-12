@@ -41,7 +41,7 @@
 		"@vueuse/core": "^10.7.1",
 		"instantsearch.js": "^4.63.0",
 		"is-ci": "^3.0.1",
-		"lodash.get": "^4.4.2",
+		"lodash": "^4.17.21",
 		"lucide-vue-next": "^0.305.0",
 		"npm-run-all2": "^6.1.1",
 		"nuxt": "^3.9.1",

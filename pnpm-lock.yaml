@@ -38,9 +38,9 @@ dependencies:
   is-ci:
     specifier: ^3.0.1
     version: 3.0.1
-  lodash.get:
-    specifier: ^4.4.2
-    version: 4.4.2
+  lodash:
+    specifier: ^4.17.21
+    version: 4.17.21
   lucide-vue-next:
     specifier: ^0.305.0
     version: 0.305.0(vue@3.4.5)
@@ -7100,10 +7100,6 @@ packages:
 
   /lodash.defaults@4.2.0:
     resolution: {integrity: sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ==}
-    dev: false
-
-  /lodash.get@4.4.2:
-    resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
     dev: false
 
   /lodash.isarguments@3.1.0:
