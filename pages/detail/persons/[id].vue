@@ -33,7 +33,7 @@ const loading = computed(() => ({
 	details: data.value.details.isLoading,
 }));
 
-const labelCols = ["name", "start", "end"];
+const labelCols = ["name", "start_date", "end_date"];
 const relCols = ["relation_type", "target.name", "start", "end"];
 
 definePageMeta({
@@ -156,26 +156,24 @@ definePageMeta({
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_persons.duplicates')"
 					:rels="data.details.data?.duplicates || []"
-					:headers="['name']"
+					:headers="['target.name']"
 					grid-class="grid-cols-1"
 					:loading="loading.details"
 					:collection-name="collection"
+					link-to
 				/>
 				<!-- dont judge me -->
-				<DetailDisclosure
+				<GenericDisclosure
 					:title="t('collection-keys.viecpro_persons.alternative_last_names')"
-					:rels="[]"
-					:custom-slot="
-						!isEmpty([
+					:disabled="
+						isEmpty([
 							...data.details.data?.alternative_first_names,
 							...data.details.data?.alternative_last_names,
 							...data.details.data?.married_names,
 						])
 					"
-					grid-class="grid-cols-3"
-					:collection-name="collection"
 				>
-					<div class="grid gap-2">
+					<div class="grid gap-2 p-2">
 						<div v-if="!isEmpty(data.details.data.alternative_first_names)">
 							<div class="font-semibold">
 								{{ t("collection-keys.viecpro_persons.alternative_first_names") }}
@@ -183,7 +181,7 @@ definePageMeta({
 							<div
 								v-for="name in data.details.data.alternative_first_names"
 								:key="name"
-								class="border-t"
+								class="border-t p-1 pl-0"
 							>
 								{{ name }}
 							</div>
@@ -195,7 +193,7 @@ definePageMeta({
 							<div
 								v-for="name in data.details.data.alternative_last_names"
 								:key="name"
-								class="border-t"
+								class="border-t p-1 pl-0"
 							>
 								{{ name }}
 							</div>
@@ -207,13 +205,13 @@ definePageMeta({
 							<div
 								v-for="name in data.details.data.married_names"
 								:key="name.name"
-								class="border-t"
+								class="border-t p-1 pl-0"
 							>
 								{{ name.name }}
 							</div>
 						</div>
 					</div>
-				</DetailDisclosure>
+				</GenericDisclosure>
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_persons.honorary_titles')"
 					:rels="data.details.data.honorary_titles"
@@ -247,6 +245,7 @@ definePageMeta({
 					:rels="data.details.data.court_functions"
 					grid-class="grid-cols-4"
 					:collection-name="collection"
+					link-to
 				/>
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_persons.person_relations_court')"
@@ -254,6 +253,7 @@ definePageMeta({
 					:headers="relCols"
 					grid-class="grid-cols-4"
 					:collection-name="collection"
+					link-to
 				/>
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_persons.other_relations_court')"
@@ -269,11 +269,12 @@ definePageMeta({
 					:headers="relCols"
 					grid-class="grid-cols-4"
 					:collection-name="collection"
+					link-to
 				/>
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_persons.relations_to_church_and_orders')"
 					:rels="data.details.data.relations_to_church_and_orders"
-					:headers="relCols"
+					:headers="labelCols"
 					grid-class="grid-cols-4"
 					:collection-name="collection"
 				/>

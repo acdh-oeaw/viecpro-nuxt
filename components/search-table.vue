@@ -166,7 +166,7 @@ const getDetailLink = (id: string, entity?: string) => {
 						<component
 							:is="customCols ? 'div' : NuxtLink"
 							class="grid grid-cols-[1fr_auto] items-center text-clip"
-							:class="!customCols && 'rounded transition hover:bg-slate-200 active:bg-slate-300 '"
+							:class="!customCols && 'rounded transition hover:bg-slate-200 active:bg-slate-300'"
 							:to="
 								getDetailLink(
 									String(hit.document.object_id || String(hit.document.id)?.replace(/\D/g, '')),

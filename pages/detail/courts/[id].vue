@@ -149,6 +149,7 @@ definePageMeta({
 					grid-class="grid-cols-4"
 					:loading="loading.details"
 					:collection-name="collection"
+					link-to
 				/>
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_courts.personnel')"
@@ -157,6 +158,7 @@ definePageMeta({
 					grid-class="grid-cols-4"
 					:collection-name="collection"
 					:loading="loading.details"
+					link-to
 				/>
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_courts.locations')"
@@ -165,6 +167,7 @@ definePageMeta({
 					grid-class="grid-cols-4"
 					:loading="loading.details"
 					:collection-name="collection"
+					link-to
 				/>
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_courts.hierarchy')"
@@ -173,6 +176,7 @@ definePageMeta({
 					grid-class="grid-cols-4"
 					:loading="loading.details"
 					:collection-name="collection"
+					link-to
 				/>
 			</div>
 			<div v-else>{{ t("ui.no-data") }}.</div>
