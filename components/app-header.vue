@@ -49,6 +49,7 @@ const links = computed(() => {
 						<MenuButton as="button" class="rounded border border-gray-300 p-2">
 							<X v-if="open" class="h-6 w-6 shrink-0" />
 							<MenuIcon v-else class="h-6 w-6 shrink-0" />
+							<span class="sr-only">Open/Close Menu</span>
 						</MenuButton>
 					</ClientOnly>
 					<Transition

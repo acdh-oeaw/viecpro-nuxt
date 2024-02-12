@@ -138,6 +138,7 @@ definePageMeta({
 					:rels="data.details.data.institution_relations"
 					grid-class="grid-cols-4"
 					:collection-name="collection"
+					link-to
 				/>
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_places.person_relations')"
@@ -145,6 +146,7 @@ definePageMeta({
 					:headers="relCols"
 					grid-class="grid-cols-4"
 					:collection-name="collection"
+					link-to
 				/>
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_places.place_relations')"
@@ -152,6 +154,7 @@ definePageMeta({
 					:headers="relCols"
 					grid-class="grid-cols-4"
 					:collection-name="collection"
+					link-to
 				/>
 			</div>
 			<div v-else>{{ t("ui.no-data") }}.</div>

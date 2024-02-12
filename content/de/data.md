@@ -2,13 +2,6 @@
 
 ## 1. Grundsätzliches zu den Daten
 
-```mermaid
-graph TB
-	A[Stefan]
-	B[Robin]
-	A -- connection --> B
-```
-
 #### Vollständigkeit und Aktualität der Personendaten
 
 Das Ziel dieser Pilotphase war die **Überführung und Aufbereitung der Leopold- und
