@@ -66,6 +66,11 @@
 		}
 	},
 	"collection-keys": {
+		"generic": {
+			"name": "Name",
+			"start_date": "Start",
+			"end_date": "End"
+		},
 		"viecpro_persons": {
 			"end": "Sterbedatum",
 			"start": "Geburtsdatum",
@@ -117,6 +122,7 @@
 			"label:Kategorie": "Kategorie"
 		},
 		"viecpro_institutions": {
+			"model": "Modell",
 			"name": "Name",
 			"kind": "Art",
 			"start": "Beginn",
@@ -132,15 +138,21 @@
 			"target.name": "Name",
 			"sources.bibtex.title": "Text",
 			"sources.bibtex.type": "Typ",
-			"sources.folio": "Folio"
+			"sources.folio": "Folio",
+			"label:Auflösung": "Auflösung",
+			"label:Kategorie": "Kategorie"
 		},
 		"viecpro_events": {
+			"model": "Modell",
 			"name": "Name",
 			"kind": "Art",
 			"start": "Beginn",
-			"end": "Ende"
+			"end": "Ende",
+			"label:Auflösung": "Auflösung",
+			"label:Kategorie": "Kategorie"
 		},
 		"viecpro_places": {
+			"model": "Modell",
 			"name": "Name",
 			"kind": "Art",
 			"start": "Beginn",
@@ -150,7 +162,8 @@
 			"alternative_names": "Alternative Namen",
 			"institution_relations": "Bezüge zu Institutionen",
 			"person_relations": "Bezüge zu Personen",
-			"place_relations": "Bezüge zu anderen Orten"
+			"place_relations": "Bezüge zu anderen Orten",
+			"label:Bezeichnung, alternativ": "Alternative Bezeichnung"
 		},
 		"viecpro_relations": {
 			"source_kind": "Quelle: Art",

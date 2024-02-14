@@ -200,7 +200,7 @@ const getDetailLink = (id: string, entity?: string) => {
 												: undefined
 										"
 									>
-										<span v-if="key.includes('label:')">
+										<span v-if="key.includes('label:')" class="m-2">
 											{{
 												hit.document.labels
 													.filter((label) => label.label_type.includes(key.replace("label:", "")))

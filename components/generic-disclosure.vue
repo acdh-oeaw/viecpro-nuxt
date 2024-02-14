@@ -28,7 +28,7 @@ defineProps<{
 			v-if="!disabled"
 			static
 			as="div"
-			class="box-border overflow-hidden rounded rounded-t-none border-2 transition-[max-height,border,padding] ui-open:max-h-screen ui-open:border-t-0 ui-not-open:max-h-0 ui-not-open:border-transparent ui-not-open:py-0"
+			class="box-border overflow-hidden rounded rounded-t-none border-2 transition-[max-height,border,padding] ui-open:max-h-[10000000px] ui-open:border-t-0 ui-not-open:max-h-0 ui-not-open:border-transparent ui-not-open:py-0"
 		>
 			<slot />
 		</DisclosurePanel>

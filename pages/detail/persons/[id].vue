@@ -217,7 +217,7 @@ definePageMeta({
 					:rels="data.details.data.honorary_titles"
 					:headers="labelCols"
 					grid-class="grid-cols-3"
-					:collection-name="collection"
+					collection-name="generic"
 				/>
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_persons.academic_titles')"
@@ -244,7 +244,7 @@ definePageMeta({
 					:headers="relCols"
 					:rels="data.details.data.court_functions"
 					grid-class="grid-cols-4"
-					:collection-name="collection"
+					collection-name="viecpro_courts"
 					link-to
 				/>
 				<DetailDisclosure
