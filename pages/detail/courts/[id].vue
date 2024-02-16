@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useQuery } from "@tanstack/vue-query";
-import { Loader2 } from "lucide-vue-next";
+import { Download, Loader2 } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
+import { downloadAsJson } from "@/lib/helpers";
 import type { Court, CourtDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
@@ -52,10 +53,24 @@ definePageMeta({
 	</div>
 	<DetailPage v-else :model="t('pages.searchviews.courts.sing')" :details-loading="loading.details">
 		<template #head>
-			<h1 class="text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
-				<span v-if="!loading.entity">
-					{{ data.entity.data?.name }}
-				</span>
+			<h1 class="w-full text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
+				<div v-if="!loading.entity" class="flex items-center justify-between gap-8">
+					<span>
+						{{ data.entity.data?.name }}
+					</span>
+					<button
+						class="cursor-pointer rounded-full hover:bg-slate-200 active:bg-slate-300"
+						@click="
+							downloadAsJson(
+								{ entity: data.entity.data, details: data.details.data },
+								String(data.entity.data?.name),
+							)
+						"
+					>
+						<span class="sr-only">Download</span>
+						<Download class="m-2 h-6 w-6" />
+					</button>
+				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			</h1>
 			<h2>
@@ -121,12 +136,12 @@ definePageMeta({
 					:loading="loading.details"
 					:collection-name="collection"
 				/>
-				<DetailDisclosure
+				<!-- <DetailDisclosure
 					:title="t('collection-keys.viecpro_courts.download')"
 					:collection-name="collection"
 					:rels="[]"
 					:headers="[]"
-				/>
+				/> -->
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_courts.sources')"
 					:rels="[]"
