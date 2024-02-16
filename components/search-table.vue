@@ -91,7 +91,7 @@ const getDetailLink = (id: string, entity?: string) => {
 				class="mb-4 grid h-12 w-full shrink-0 grid-cols-[auto_1fr_auto] items-center rounded border bg-white shadow-md xl:my-4"
 			>
 				<label for="searchinput">
-					<Search class="mx-3 h-5 w-5 shrink-0 text-gray-400" />
+					<Search class="ml-3 mr-1 h-5 w-5 shrink-0 text-gray-400" />
 					<span class="sr-only">
 						{{ t("ui.search-placeholder") }}
 					</span>
@@ -100,7 +100,7 @@ const getDetailLink = (id: string, entity?: string) => {
 					id="searchinput"
 					v-model="input"
 					type="text"
-					class="h-full rounded"
+					class="h-full rounded pl-2"
 					:placeholder="t('ui.search-placeholder')"
 					@input="
 						$router.replace({
@@ -108,6 +108,7 @@ const getDetailLink = (id: string, entity?: string) => {
 								...route.query,
 								q: input,
 								page: 1,
+								collection,
 							},
 						})
 					"
