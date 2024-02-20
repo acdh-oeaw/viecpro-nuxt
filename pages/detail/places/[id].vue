@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { useQuery } from "@tanstack/vue-query";
+import { useQuery, useQueryClient } from "@tanstack/vue-query";
+import { isEmpty } from "lodash-es";
 import { Download, Loader2 } from "lucide-vue-next";
+import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";
@@ -8,12 +10,13 @@ import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import MapComponent from "@/components/map-component.vue";
 import { downloadAsJson } from "@/lib/helpers";
-import type { Place, PlaceDetail } from "@/types/schema";
+import type { Place, PlaceDetail, Reference } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
-
+const queryClient = useQueryClient();
 const route = useRoute();
+
 const id = String(route.params.id);
 
 const collection = "viecpro_places";
@@ -27,6 +30,28 @@ const data = ref({
 		queryKey: ["detail", collection, id],
 		queryFn: () => getDetails<PlaceDetail>("place", id),
 	}),
+	refs: useQuery({
+		queryKey: [
+			"search",
+			"viecpro_references",
+			{
+				q: "*",
+				query_by: "shortTitle",
+				filter_by: `related_doc.object_id:=${id} && related_doc.model:=Place`,
+				per_page: 250,
+			},
+		] as const,
+		queryFn: async ({ queryKey }) => {
+			const [, collection, query] = queryKey;
+			const response = await getDocuments(query, collection);
+			if (response.hits) {
+				response.hits.forEach((hit) => {
+					queryClient.setQueryData([collection, String(hit.document.object_id)], hit.document);
+				});
+			}
+			return response as SearchResponse<Reference>;
+		},
+	}),
 });
 
 const loading = computed(() => ({
@@ -34,7 +59,7 @@ const loading = computed(() => ({
 	details: data.value.details.isLoading,
 }));
 
-const relCols = ["relation_type", "target.name", "start", "end"];
+const relCols = ["relation_type", "target.name", "start_date", "end_date"];
 
 definePageMeta({
 	title: "pages.searchviews.places.title",
@@ -119,7 +144,10 @@ definePageMeta({
 			<div class="col-span-2 my-1 border-t"></div>
 		</template>
 		<template #left>
-			<div v-if="data.details.data || data.entity.data" class="flex flex-col gap-3">
+			<div
+				v-if="data.details.data && data.entity.data && data.refs.data"
+				class="flex flex-col gap-3"
+			>
 				<DetailDisclosure
 					v-if="data.details.data"
 					:title="t('collection-keys.viecpro_places.alternative_names')"
@@ -129,6 +157,26 @@ definePageMeta({
 					:loading="loading.details"
 					:collection-name="collection"
 				/>
+				<GenericDisclosure
+					:title="t('collection-keys.viecpro_courts.sources')"
+					:disabled="!data.refs.data || isEmpty(data.refs.data)"
+				>
+					<div>
+						<template
+							v-for="({ document: reference }, i) in data.refs.data.hits"
+							:key="reference.id"
+						>
+							<div v-if="i != 0" class="my-1 border" />
+							<div class="flex flex-col gap-1 p-2">
+								<h3 class="border-b">
+									{{ reference.title || reference.shortTitle }}
+								</h3>
+								<span>{{ reference.folio }}</span>
+								<span class="text-sm text-gray-400">{{ reference.id }}</span>
+							</div>
+						</template>
+					</div>
+				</GenericDisclosure>
 				<GenericDisclosure
 					title="Map"
 					default-open

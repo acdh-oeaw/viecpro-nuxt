@@ -3,14 +3,15 @@ import { get } from "lodash-es";
 import { ChevronRight } from "lucide-vue-next";
 
 import GenericDisclosure from "@/components/generic-disclosure.vue";
+import type { AnyEntity } from "@/types/schema";
 import { NuxtLink } from "#components";
 
 defineProps<{
-	rels: Array<object>;
+	rels: Array<AnyEntity>;
 	gridClass?: string;
 	title: string;
 	defaultOpen?: boolean;
-	headers?: Array<string>;
+	headers?: Array<string | [string, string]>;
 	customSlot?: boolean;
 	linkTo?: boolean;
 	collectionName: string;
@@ -29,9 +30,14 @@ const t = useTranslations();
 		<slot>
 			<div class="p-2">
 				<div class="grid gap-2" :class="linkTo ? 'mr-6 ' + gridClass : gridClass">
-					<span v-for="header in headers" :key="header" class="font-bold">
-						{{ t(`collection-keys.${collectionName}["${header}"]`) }}
-					</span>
+					<template v-for="header in headers" :key="header">
+						<span v-if="typeof header === 'string'">
+							{{ t(`collection-keys.${collectionName}["${header}"]`) }}
+						</span>
+						<span v-else class="font-bold">
+							{{ t(`collection-keys.${collectionName}["${header[0]}"]`) }}
+						</span>
+					</template>
 				</div>
 				<div v-for="hit in rels" :key="String(hit)" class="mt-1 border-t pt-1">
 					<component
@@ -43,7 +49,14 @@ const t = useTranslations();
 						:class="linkTo && 'rounded transition hover:bg-slate-200 active:bg-slate-300 p-1 -ml-1'"
 					>
 						<div class="grid items-center gap-2" :class="gridClass">
-							<span v-for="header in headers" :key="hit + header">{{ get(hit, header) }}</span>
+							<template v-for="header in headers" :key="hit + header">
+								<span v-if="typeof header === 'string'">
+									{{ get(hit, header) }}
+								</span>
+								<span v-else>
+									{{ get(hit, header[0]) || get(hit, header[1]) }}
+								</span>
+							</template>
 						</div>
 						<ChevronRight v-if="linkTo" class="h-5 w-5 shrink-0" />
 					</component>

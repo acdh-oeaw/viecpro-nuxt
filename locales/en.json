@@ -68,7 +68,11 @@
 		"generic": {
 			"name": "Name",
 			"start_date": "Start",
-			"end_date": "End"
+			"end_date": "End",
+			"folio": "Folio",
+			"kind": "Kind",
+			"shortTitle": "Title (short)",
+			"title": "Title"
 		},
 		"viecpro_persons": {
 			"end": "Death",
@@ -96,7 +100,9 @@
 			"marriages_and_family_relations": "Marriages and Family",
 			"relations_to_church_and_orders": "Relations to Church and Orders",
 			"non_court_functions": "Non Court Functions",
-			"model": "Model"
+			"model": "Model",
+			"functions": "Function",
+			"institutions": "Institution"
 		},
 		"viecpro_courts": {
 			"model": "Model",
@@ -155,7 +161,10 @@
 			"label:Auflösung": "Resolution",
 			"label:Kategorie": "Category",
 			"start_date": "Start",
-			"end_date": "End"
+			"end_date": "End",
+			"bibtex.title": "Title",
+			"bibtex.type": "Type",
+			"folio": "Folio"
 		},
 		"viecpro_events": {
 			"model": "Model",
@@ -205,6 +214,7 @@
 		"prev-page": "Previous Page",
 		"first-page": "You're already on the first page.",
 		"last-page": "You're already on the last page.",
+		"per-page": "per page",
 		"show-all": "show all...",
 		"show-filters": "Show Filters...",
 		"hide-filters": "Hide Filters...",
