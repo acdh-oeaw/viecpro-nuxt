@@ -267,7 +267,6 @@ definePageMeta({
 					grid-class="grid-cols-3"
 					:collection-name="collection"
 				/>
-
 				<GenericDisclosure
 					:title="t('collection-keys.viecpro_courts.sources')"
 					:disabled="!data.refs.data || isEmpty(data.refs.data.hits)"
