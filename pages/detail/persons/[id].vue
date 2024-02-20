@@ -1,19 +1,21 @@
 <script setup lang="ts">
-import { useQuery } from "@tanstack/vue-query";
+import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
 import { Download, Loader2 } from "lucide-vue-next";
+import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import { downloadAsJson } from "@/lib/helpers";
-import type { Person, PersonDetail } from "@/types/schema";
+import type { Person, PersonDetail, Reference } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
-
+const queryClient = useQueryClient();
 const route = useRoute();
+
 const id = String(route.params.id);
 
 const collection = "viecpro_persons";
@@ -27,15 +29,38 @@ const data = ref({
 		queryKey: ["detail", collection, id],
 		queryFn: () => getDetails<PersonDetail>("person", id),
 	}),
+	refs: useQuery({
+		queryKey: [
+			"search",
+			"viecpro_references",
+			{
+				q: "*",
+				query_by: "shortTitle",
+				filter_by: `related_doc.object_id:=${id} && related_doc.model:=Person`,
+				per_page: 250,
+			},
+		] as const,
+		queryFn: async ({ queryKey }) => {
+			const [, collection, query] = queryKey;
+			const response = await getDocuments(query, collection);
+			if (response.hits) {
+				response.hits.forEach((hit) => {
+					queryClient.setQueryData([collection, String(hit.document.object_id)], hit.document);
+				});
+			}
+			return response as SearchResponse<Reference>;
+		},
+	}),
 });
 
 const loading = computed(() => ({
-	entity: data.value.entity.isLoading,
-	details: data.value.details.isLoading,
+	entity: data.value.entity.isFetching,
+	details: data.value.details.isFetching,
+	refs: data.value.details.isFetching,
 }));
 
 const labelCols = ["name", "start_date", "end_date"];
-const relCols = ["relation_type", "target.name", "start", "end"];
+const relCols = ["relation_type", "target.name", "start_date", "end_date"];
 
 definePageMeta({
 	title: "pages.searchviews.people.title",
@@ -47,6 +72,7 @@ definePageMeta({
 		v-if="
 			!loading.entity &&
 			!loading.details &&
+			!loading.refs &&
 			(data.details.isLoadingError || data.entity.isLoadingError)
 		"
 	>
@@ -241,6 +267,26 @@ definePageMeta({
 					grid-class="grid-cols-3"
 					:collection-name="collection"
 				/>
+				<GenericDisclosure
+					:title="t('collection-keys.viecpro_courts.sources')"
+					:disabled="!data.refs.data || isEmpty(data.refs.data.hits)"
+				>
+					<div v-if="data.refs.data">
+						<template
+							v-for="({ document: reference }, i) in data.refs.data.hits"
+							:key="reference.id"
+						>
+							<div v-if="i !== 0" class="my-1 border" />
+							<div class="flex flex-col gap-1 p-2">
+								<h3 class="border-b">
+									{{ reference.title || reference.shortTitle }}
+								</h3>
+								<span>{{ reference.folio }}</span>
+								<span class="text-sm text-gray-400">{{ reference.id }}</span>
+							</div>
+						</template>
+					</div>
+				</GenericDisclosure>
 				<!-- <DetailDisclosure
 					title="Download und Zitierweise"
 					:rels="[]"
@@ -299,6 +345,7 @@ definePageMeta({
 					:headers="relCols"
 					grid-class="grid-cols-4"
 					:collection-name="collection"
+					link-to
 				/>
 			</div>
 			<div v-else>{{ t("ui.no-data") }}.</div>

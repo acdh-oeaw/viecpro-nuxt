@@ -17,7 +17,7 @@ defineProps<{
 			:disabled="disabled"
 			:class="
 				disabled
-					? 'opacity-50 cursor-not-allowed'
+					? 'opacity-50'
 					: 'hover:border-primary-400 hover:bg-primary-300 border-primary-300 bg-primary-200 shadow-sm'
 			"
 		>

@@ -24,8 +24,8 @@
 		},
 		"searchviews": {
 			"courts": {
-				"title": "Hofstaaten",
-				"label": "Hofstaaten",
+				"title": "Hofstaate",
+				"label": "Hofstaate",
 				"sing": "Hofstaat",
 				"detail": "{title} - Hofstaat"
 			},
@@ -69,13 +69,17 @@
 		"generic": {
 			"name": "Name",
 			"start_date": "Start",
-			"end_date": "End"
+			"end_date": "End",
+			"folio": "Folio",
+			"kind": "Art",
+			"shortTitle": "Titel (kurz)",
+			"title": "Titel"
 		},
 		"viecpro_persons": {
 			"end": "Sterbedatum",
 			"start": "Geburtsdatum",
 			"gender": "Geschlecht",
-			"first_name": "Vorname(n)",
+			"first_name": "Vorname",
 			"name": "Nachname",
 			"fullname": "Name",
 			"relation_type": "Art des Bezuges",
@@ -93,11 +97,13 @@
 			"download": "Download und Zitierweise",
 			"court_functions": "Funktionen am Hof",
 			"person_relations_court": "Personenbeziehungen am Hof",
-			"other_relations_court": "Sonstiger Bezug zum Hof",
+			"other_relations_court": "Sonstige Bezüge zum Hof",
 			"marriages_and_family_relations": "Ehe- und Verwandschaftsverhältnisse",
-			"relations_to_church_and_orders": "Bezug zu Kirche und Orden",
+			"relations_to_church_and_orders": "Bezüge zu Kirche und Orden",
 			"non_court_functions": "Sonstige Tätigkeiten",
-			"model": "Modell"
+			"model": "Modell",
+			"functions": "Funktion",
+			"institutions": "Institution"
 		},
 		"viecpro_courts": {
 			"model": "Modell",
@@ -111,7 +117,7 @@
 			"main_owner.start_date": "Geburtsjahr des Hauptinhabers",
 			"main_owner.model": "Modell des Hauptinhabers",
 			"main_owner.object_id": "ID des Hauptinhabers",
-			"main_owner.relation_type": "Bezug zum Hauptinhaber",
+			"main_owner.relation_type": "Bezüge zum Hauptinhaber",
 			"owner.start_date": "Geburtsjahr des Besitzers",
 			"owner.end_date": "Sterbejahr des Besitzers",
 			"owner.name": "Name des Besitzers",
@@ -154,7 +160,10 @@
 			"label:Auflösung": "Auflösung",
 			"label:Kategorie": "Kategorie",
 			"start_date": "Beginn",
-			"end_date": "Ende"
+			"end_date": "Ende",
+			"bibtex.title": "Titel",
+			"bibtex.type": "Art",
+			"folio": "Folio"
 		},
 		"viecpro_events": {
 			"model": "Modell",
@@ -193,7 +202,7 @@
 		"datasheet": "Datenblatt",
 		"runtime": "Laufzeit",
 		"additional": "Weitere Informationen",
-		"courtrelated": "Bezug zum Wiener Hof",
+		"courtrelated": "Bezüge zum Wiener Hof",
 		"relations": "Bezüge",
 		"coords": "Koordinaten"
 	},
@@ -204,6 +213,7 @@
 		"prev-page": "Vorherige Seite",
 		"first-page": "Es gibt keine Seite vor dieser.",
 		"last-page": "Das ist bereits die letzte Seite.",
+		"per-page": "pro Seite",
 		"show-all": "Zeige alle...",
 		"show-filters": "Filter ausfahren...",
 		"hide-filters": "Filter verstecken...",

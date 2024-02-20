@@ -37,6 +37,7 @@ export interface Reference {
 	shortTitle: string;
 	kind: string;
 	related_doc: ReferenceRelatedDoc;
+	id: string;
 }
 export interface ReferenceRelatedDoc {
 	object_id: string;
@@ -147,7 +148,7 @@ export interface InstitutionDetail {
 	category: string;
 	alternative_names: Array<DetailLabel>;
 	sources: Array<{
-		bibtext: {
+		bibtex: {
 			id: Array<string>;
 			URL: Array<string>;
 			type: Array<string>;

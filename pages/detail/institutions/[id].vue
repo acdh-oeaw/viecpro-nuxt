@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useQuery } from "@tanstack/vue-query";
+import { isEmpty } from "lodash-es";
 import { Download, Loader2 } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 
@@ -11,8 +12,8 @@ import type { Institution, InstitutionDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
-
 const route = useRoute();
+
 const id = String(route.params.id);
 
 const collection = "viecpro_institutions";
@@ -130,14 +131,23 @@ definePageMeta({
 					:loading="loading.details"
 					:collection-name="collection"
 				/>
-				<DetailDisclosure
-					:title="t('collection-keys.viecpro_institutions.sources')"
-					:rels="data.details.data.sources"
-					:headers="['sources.bibtex.title', 'sources.bibtex.type', 'sources.folio']"
-					grid-class="grid-cols-3"
-					:loading="loading.details"
-					:collection-name="collection"
-				/>
+				<GenericDisclosure
+					:title="t('collection-keys.viecpro_courts.sources')"
+					:disabled="isEmpty(data.details.data.sources)"
+				>
+					<div v-if="!isEmpty(data.details.data.sources)">
+						<template v-for="(source, i) in data.details.data.sources" :key="source.id">
+							<div v-if="i != 0" class="my-1 border" />
+							<div v-if="source" class="flex flex-col gap-1 p-2">
+								<h3 class="border-b">
+									{{ source.bibtex.title || source.bibtex.shortTitle }}
+								</h3>
+								<span>{{ source.folio }}</span>
+								<span class="text-sm text-gray-400">{{ source.bibtex.id }}</span>
+							</div>
+						</template>
+					</div>
+				</GenericDisclosure>
 			</div>
 			<div v-else>No data.</div>
 		</template>
