@@ -21,7 +21,7 @@ const locale = useLocale();
 const t = useTranslations();
 
 const page = ref(0);
-const limit = ref(10);
+const limit = 25;
 const all = props.rels.length;
 </script>
 
@@ -34,7 +34,11 @@ const all = props.rels.length;
 		<slot>
 			<div class="p-2">
 				<div v-if="all > limit" class="mb-4 flex justify-between">
-					<button v-if="page > 1" class="rounded border p-1" @click="page--">
+					<button
+						v-if="page > 1"
+						class="rounded border p-1 transition hover:bg-slate-300 active:bg-slate-400"
+						@click="page--"
+					>
 						<ChevronRight class="h-5 w-5 rotate-180" />
 					</button>
 					<div v-else class="flex items-center rounded border p-1 text-gray-300">
@@ -69,7 +73,7 @@ const all = props.rels.length;
 					</div>
 					<button
 						v-if="page < Math.ceil(all / limit) - 1"
-						class="rounded border p-1"
+						class="rounded border p-1 transition hover:bg-slate-300 active:bg-slate-400"
 						@click="page++"
 					>
 						<ChevronRight class="h-5 w-5" />
