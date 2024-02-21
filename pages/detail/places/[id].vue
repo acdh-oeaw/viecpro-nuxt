@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { Download, Loader2 } from "lucide-vue-next";
+import { Download, Info, Loader2 } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
@@ -84,18 +85,51 @@ definePageMeta({
 					<span>
 						{{ data.entity.data?.name }}
 					</span>
-					<button
-						class="cursor-pointer rounded-full hover:bg-slate-200 active:bg-slate-300"
-						@click="
-							downloadAsJson(
-								{ entity: data.entity.data, details: data.details.data },
-								String(data.entity.data?.name),
-							)
-						"
-					>
-						<span class="sr-only">Download</span>
-						<Download class="m-2 h-6 w-6" />
-					</button>
+					<div class="flex items-center gap-2 leading-none">
+						<Popover class="relative">
+							<PopoverButton
+								as="button"
+								class="rounded-full hover:bg-slate-200 active:bg-slate-300"
+							>
+								<span class="sr-only">Show Infos</span>
+								<Info class="m-2 h-6 w-6 shrink-0" />
+							</PopoverButton>
+							<Transition
+								enter-active-class="transition duration-200 ease-out"
+								enter-from-class="translate-y-1 opacity-0"
+								enter-to-class="translate-y-0 opacity-100"
+								leave-active-class="transition duration-150 ease-in"
+								leave-from-class="translate-y-0 opacity-100"
+								leave-to-class="translate-y-1 opacity-0"
+							>
+								<PopoverPanel class="absolute right-0 z-10">
+									<div
+										class="min-w-96 rounded border bg-white p-2 text-base font-normal text-black"
+									>
+										<div>
+											{{ t("detail-page.basedata") }} - {{ t("pages.searchviews.places.sing") }}
+										</div>
+										<div>
+											{{ data.entity.data?.name }}
+										</div>
+										<div>VieCPro-ID: {{ data.entity.data?.id }}</div>
+									</div>
+								</PopoverPanel>
+							</Transition>
+						</Popover>
+						<button
+							class="rounded-full hover:bg-slate-200 active:bg-slate-300"
+							@click="
+								downloadAsJson(
+									{ entity: data.entity.data, details: data.details.data },
+									String(data.entity.data?.name),
+								)
+							"
+						>
+							<span class="sr-only">Download</span>
+							<Download class="m-2 h-6 w-6 shrink-0" />
+						</button>
+					</div>
 				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			</h1>
