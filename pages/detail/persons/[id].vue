@@ -242,7 +242,7 @@ definePageMeta({
 				/>
 				<!-- dont judge me -->
 				<GenericDisclosure
-					:title="t('collection-keys.viecpro_persons.alternative_last_names')"
+					:title="t('collection-keys.viecpro_persons.alternativenames')"
 					:disabled="
 						isEmpty([
 							...data.details.data?.alternative_first_names,
