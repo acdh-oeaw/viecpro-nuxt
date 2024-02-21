@@ -243,6 +243,7 @@ const getDetailLink = (id: string, entity?: string) => {
 			<FacetDisclosures
 				class="ml-2 w-full max-w-full pr-4 lg:float-right lg:mx-0 lg:mt-6 lg:w-96"
 				:facets="data.facet_counts"
+				:filter-by="String(comQuery.filter_by)"
 				:loading="loading"
 				:collection="collectionName"
 				:query-by="queryBy"

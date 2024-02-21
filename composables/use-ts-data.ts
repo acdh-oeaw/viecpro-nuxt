@@ -24,6 +24,7 @@ export async function getFacets<T extends AnyEntity>(
 	collection: string,
 	query_by: Array<string> | string,
 	q = "*",
+	filter_by = "",
 ): Promise<SearchResponse<T>> {
 	return useDefaultClient()
 		.collections<T>(collection)
@@ -36,6 +37,7 @@ export async function getFacets<T extends AnyEntity>(
 			facet_by: facet,
 			facet_query: `${facet}:${facetQuery}`,
 			max_facet_values: max,
+			filter_by,
 		});
 }
 
