@@ -7,6 +7,7 @@ import { useRoute } from "vue-router";
 import Chip from "@/components/chip.vue";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
+import Indicator from "@/components/indicator.vue";
 import { downloadAsJson } from "@/lib/helpers";
 import type { Court, CourtDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
@@ -55,11 +56,15 @@ definePageMeta({
 	<DetailPage v-else :model="t('pages.searchviews.courts.sing')" :details-loading="loading.details">
 		<template #head>
 			<h1 class="w-full text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
-				<div v-if="!loading.entity" class="flex items-center justify-between gap-8">
+				<div
+					v-if="!loading.entity && data.entity.data"
+					class="flex items-center justify-between gap-8"
+				>
 					<span>
 						{{ data.entity.data?.name }}
 					</span>
 					<div class="flex items-center gap-2 leading-none">
+						<Indicator :status="data.entity.data?.ampel" />
 						<Popover class="relative">
 							<PopoverButton
 								as="button"

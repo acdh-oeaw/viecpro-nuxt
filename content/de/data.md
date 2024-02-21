@@ -143,7 +143,7 @@ Der Leopold-Datensatz umfasst **48.000 Zeilen teilstrukturierter Personendaten z
 beiderlei Geschlechts, verschiedener sozialer Schichten** – vom Kammerweib bis zum
 Obersthofmarschall, vom Kanzlist bis zum Hofkriegsratspräsidenten – wie auch **unterschiedlicher
 lokaler und (inter-)nationaler Herkunft**. Es wurden für jede Person – sofern bekannt – Funktion,
-Verwandschaftsverhältnisse und soziales Netzwerk, Hofzugehörigkeit, Zahlungen, Ämter, Wohnorte etc.
+Verwandtschaftsverhältnisse und soziales Netzwerk, Hofzugehörigkeit, Zahlungen, Ämter, Wohnorte etc.
 dokumentiert.
 
 Während **Gruppe 1** als **nahezu vollständig** betrachtet werden kann, liegen die
