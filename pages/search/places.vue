@@ -7,9 +7,9 @@ import { getSchema } from "@/composables/use-ts-data";
 import { definePageMeta } from "#imports";
 
 const collectionName = "viecpro_places";
-const queryBy = "name";
-const koi = ["name", "kind", "label:Bezeichnung, alternativ"];
-const tableCols = "grid-cols-[3fr_2fr_3fr]";
+const queryBy = ["name", "alternativenames"];
+const koi = ["name", "kind"];
+const tableCols = "grid-cols-[3fr_2fr]";
 
 const schema = ref(
 	useQuery({

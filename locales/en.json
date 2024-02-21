@@ -72,9 +72,30 @@
 			"folio": "Folio",
 			"kind": "Kind",
 			"shortTitle": "Title (short)",
-			"title": "Title"
+			"title": "Title",
+			"target.name": "Name",
+			"relation_type": "Type of Relation"
+		},
+		"functions": {
+			"relation_type": "Function",
+			"target.name": "Court",
+			"start_date": "Start",
+			"end_date": "End"
+		},
+		"personnel": {
+			"relation_type": "Function",
+			"target.name": "Name",
+			"start_date": "Start",
+			"end_date": "End"
+		},
+		"hierarchy": {
+			"relation_type": "Relation",
+			"target.name": "Court",
+			"start_date": "Start",
+			"end_date": "End"
 		},
 		"viecpro_persons": {
+			"ampel": "Processing status",
 			"end": "Death",
 			"start": "Birth",
 			"gender": "Gender",
@@ -91,6 +112,7 @@
 			"duplicates": "Duplicates",
 			"alternative_first_names": "Alternative First Names",
 			"alternative_last_names": "Alternative Names",
+			"alternativenames": "Alternative Names",
 			"honorary_titles": "Honorary Titles",
 			"academic_titles": "Academic Titles",
 			"download": "Download",
@@ -141,6 +163,8 @@
 			"label:Kategorie": "Category"
 		},
 		"viecpro_institutions": {
+			"ampel": "Processing status",
+			"alternativenames": "Alternative Names",
 			"model": "Model",
 			"name": "Name",
 			"kind": "Kind",
@@ -167,6 +191,8 @@
 			"folio": "Folio"
 		},
 		"viecpro_events": {
+			"ampel": "Processing status",
+			"alternativenames": "Alternative Names",
 			"model": "Model",
 			"name": "Name",
 			"kind": "Kind",
@@ -176,6 +202,8 @@
 			"label:Kategorie": "Category"
 		},
 		"viecpro_places": {
+			"ampel": "Processing status",
+			"alternativenames": "Alternative Names",
 			"model": "Model",
 			"name": "Name",
 			"kind": "Kind",

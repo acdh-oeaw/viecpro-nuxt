@@ -1,4 +1,6 @@
 interface BaseEntity {
+	ampel: string;
+	alternativenames: string;
 	id: string;
 	object_id: number;
 	start_date: string;

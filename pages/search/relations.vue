@@ -8,7 +8,7 @@ import { definePageMeta } from "#imports";
 
 const collectionName = "viecpro_relations";
 const queryBy = ["target.name", "source.name", "relation_type"];
-const koi = ["source_kind", "source.name", "relation_type", "target_kind", "target.name"];
+const koi = ["source_kind", "source.name", "relation_type", "target.name", "target_kind"];
 const tableCols = "grid-cols-[2fr_3fr_3fr_2fr_3fr]";
 
 const schema = ref(

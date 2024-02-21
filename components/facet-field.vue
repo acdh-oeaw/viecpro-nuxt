@@ -20,6 +20,7 @@ const props = defineProps<{
 	selected?: Array<string>;
 	collection: string;
 	queryBy: Array<string> | string;
+	filterBy: string;
 }>();
 
 const facetSearch: Ref<string> = ref("");
@@ -38,6 +39,7 @@ const selectionQueries = useQueries({
 						facetQuery: string;
 						collection: string;
 						query_by: Array<string> | string;
+						filter_by: string;
 					}
 					const query: QueryObject = {
 						facet: props.fieldName,
@@ -46,6 +48,7 @@ const selectionQueries = useQueries({
 						facetQuery: selection,
 						collection: props.collection,
 						query_by: props.queryBy,
+						filter_by: props.filterBy,
 					};
 					return {
 						queryKey: ["single facet", query] as const,
@@ -59,6 +62,8 @@ const selectionQueries = useQueries({
 								q.facetQuery,
 								q.collection,
 								q.query_by,
+								"*",
+								q.filter_by,
 							);
 
 							if (result.facet_counts?.[0]?.counts) {
@@ -81,6 +86,7 @@ const query = computed(() => ({
 	facetQuery: facetSearch,
 	collection: props.collection,
 	query_by: props.queryBy,
+	filter_by: props.filterBy,
 }));
 
 const facetResponse = useQuery({
@@ -94,6 +100,8 @@ const facetResponse = useQuery({
 			q.facetQuery,
 			q.collection,
 			q.query_by,
+			"*",
+			String(q.filter_by),
 		);
 		if (results.facet_counts === undefined) return;
 		else {

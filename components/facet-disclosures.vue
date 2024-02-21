@@ -11,6 +11,7 @@ defineProps<{
 	collection: string;
 	queryBy: Array<string> | string;
 	defaultOpen?: boolean;
+	filterBy: string;
 }>();
 
 const router = useRouter();
@@ -43,6 +44,7 @@ const facetChange = async (facets: Array<string>, field: string) => {
 				:collection="collection"
 				:selected="facetObject[facet.field_name] || []"
 				:query-by="queryBy"
+				:filter-by="filterBy"
 				@facet-change="(model) => facetChange(model, facet.field_name)"
 			/>
 		</div>
