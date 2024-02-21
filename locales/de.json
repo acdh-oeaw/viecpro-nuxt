@@ -73,12 +73,16 @@
 			"folio": "Folio",
 			"kind": "Art",
 			"shortTitle": "Titel (kurz)",
-			"title": "Titel"
+			"title": "Titel",
+			"target.name": "Name",
+			"relation_type": "Art des Bezuges"
 		},
 		"viecpro_persons": {
 			"ampel": "Bearbeitungsstatus",
 			"end": "Sterbedatum",
+			"end_date": "Sterbedatum",
 			"start": "Geburtsdatum",
+			"start_date": "Geburtsdatum",
 			"gender": "Geschlecht",
 			"first_name": "Vorname",
 			"name": "Nachname",

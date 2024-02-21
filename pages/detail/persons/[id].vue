@@ -361,7 +361,7 @@ definePageMeta({
 					:rels="data.details.data.marriages_and_family_relations"
 					:headers="relCols"
 					grid-class="grid-cols-4"
-					:collection-name="collection"
+					collection-name="generic"
 					link-to
 				/>
 				<DetailDisclosure

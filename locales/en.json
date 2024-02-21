@@ -72,7 +72,9 @@
 			"folio": "Folio",
 			"kind": "Kind",
 			"shortTitle": "Title (short)",
-			"title": "Title"
+			"title": "Title",
+			"target.name": "Name",
+			"relation_type": "Type of Relation"
 		},
 		"viecpro_persons": {
 			"ampel": "Processing status",
