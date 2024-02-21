@@ -3,11 +3,10 @@ import { get } from "lodash-es";
 import { ChevronRight } from "lucide-vue-next";
 
 import GenericDisclosure from "@/components/generic-disclosure.vue";
-import type { AnyEntity } from "@/types/schema";
 import { NuxtLink } from "#components";
 
 const props = defineProps<{
-	rels: Array<AnyEntity>;
+	rels: Array<object>;
 	gridClass?: string;
 	title: string;
 	defaultOpen?: boolean;

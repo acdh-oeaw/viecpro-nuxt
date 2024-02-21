@@ -2,10 +2,9 @@
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { useQuery } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { Download, Info, Loader2 } from "lucide-vue-next";
+import { Download, Info } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 
-import Chip from "@/components/chip.vue";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
@@ -54,12 +53,12 @@ definePageMeta({
 	</div>
 	<DetailPage v-else model="Institution" :details-loading="loading.details">
 		<template #head>
-			<h1 class="text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
+			<h1 class="font-bold text-primary-600 xl:my-2 xl:text-4xl">
 				<div
 					v-if="!loading.entity && data.entity.data"
 					class="flex items-center justify-between gap-8"
 				>
-					<span>
+					<span class="text-4xl">
 						{{ data.entity.data?.name }}
 					</span>
 					<div class="flex items-center gap-2 leading-none">
@@ -109,34 +108,11 @@ definePageMeta({
 				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			</h1>
-			<Chip
-				v-if="loading.details || data.details.data?.locations.length !== 0"
-				class="my-1 text-sm lg:text-base"
-				square
-			>
-				<template v-if="!loading.details">
-					<span v-if="data.details.data">
-						{{
-							data.details.data.locations
-								.map((func) => func.target.name)
-								.slice(0, 3)
-								.join(" - ")
-						}}
-					</span>
-					<span v-if="data.details.data?.locations && data.details.data?.locations.length > 3">
-						+
-						{{ data.details.data.locations.length - 3 }}
-					</span>
-				</template>
-				<span v-else>
-					<Loader2 class="h-5 w-5 animate-spin" />
-				</span>
-			</Chip>
 		</template>
 		<template #base>
 			<div class="col-span-2 my-1 border-t"></div>
-			<span>{{ t("collection-keys.viecpro_institutions.name") }}:</span>
-			<span v-if="!loading.entity">{{ data.entity.data?.name }}</span>
+			<span>{{ t("collection-keys.viecpro_institutions.resolution") }}:</span>
+			<span v-if="!loading.details">{{ data.details.data?.resolution }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 
@@ -149,11 +125,6 @@ definePageMeta({
 
 			<span>{{ t("collection-keys.viecpro_institutions.category") }}:</span>
 			<span v-if="!loading.details">{{ data.details.data?.category }}</span>
-			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
-			<div class="col-span-2 my-1 border-t"></div>
-
-			<span>{{ t("collection-keys.viecpro_institutions.resolution") }}:</span>
-			<span v-if="!loading.details">{{ data.details.data?.resolution }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 		</template>
@@ -192,18 +163,10 @@ definePageMeta({
 			<div v-if="data.details.data" class="flex flex-col gap-3">
 				<DetailDisclosure
 					default-open
-					:title="t('collection-keys.viecpro_institutions.personnel')"
-					:headers="['relation_type', 'target.name', 'start_date', 'end_date']"
-					:rels="data.details.data.personnel"
-					grid-class="grid-cols-4"
-					:collection-name="collection"
-					link-to
-				/>
-				<DetailDisclosure
 					:title="t('collection-keys.viecpro_institutions.locations')"
-					:headers="['relation_type', 'target.name']"
+					:headers="['target.name', 'start_date', 'end_date']"
+					grid-class="grid-cols-3"
 					:rels="data.details.data.locations"
-					grid-class="grid-cols-2"
 					:collection-name="collection"
 					link-to
 				/>
@@ -212,7 +175,15 @@ definePageMeta({
 					:headers="['relation_type', 'target.name']"
 					:rels="data.details.data.hierarchy"
 					grid-class="grid-cols-2"
-					:collection-name="collection"
+					collection-name="hierarchy"
+					link-to
+				/>
+				<DetailDisclosure
+					:title="t('collection-keys.viecpro_institutions.personnel')"
+					:headers="['relation_type', 'target.name', 'start_date', 'end_date']"
+					:rels="data.details.data.personnel"
+					grid-class="grid-cols-4"
+					collection-name="personnel"
 					link-to
 				/>
 			</div>

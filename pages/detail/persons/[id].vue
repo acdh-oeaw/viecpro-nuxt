@@ -83,12 +83,12 @@ definePageMeta({
 	</div>
 	<DetailPage v-else model="Person" :details-loading="loading.details">
 		<template #head>
-			<h1 class="text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
+			<h1 class="font-bold text-primary-600 xl:my-2 xl:text-4xl">
 				<div
 					v-if="!loading.entity && data.entity.data"
 					class="flex items-center justify-between gap-8"
 				>
-					<span>
+					<span class="text-4xl">
 						{{ data.entity.data?.fullname }}
 					</span>
 					<div class="flex items-center gap-2 leading-none">
@@ -302,7 +302,7 @@ definePageMeta({
 					:rels="data.details.data.academic_titles"
 					:headers="labelCols"
 					grid-class="grid-cols-3"
-					:collection-name="collection"
+					collection-name="generic"
 				/>
 				<GenericDisclosure
 					:title="t('collection-keys.viecpro_courts.sources')"
@@ -342,7 +342,7 @@ definePageMeta({
 					:headers="relCols"
 					:rels="data.details.data.court_functions"
 					grid-class="grid-cols-4"
-					collection-name="viecpro_courts"
+					collection-name="functions"
 					link-to
 				/>
 				<DetailDisclosure

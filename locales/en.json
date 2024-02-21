@@ -76,6 +76,24 @@
 			"target.name": "Name",
 			"relation_type": "Type of Relation"
 		},
+		"functions": {
+			"relation_type": "Function",
+			"target.name": "Court",
+			"start_date": "Start",
+			"end_date": "End"
+		},
+		"personnel": {
+			"relation_type": "Function",
+			"target.name": "Name",
+			"start_date": "Start",
+			"end_date": "End"
+		},
+		"hierarchy": {
+			"relation_type": "Relation",
+			"target.name": "Court",
+			"start_date": "Start",
+			"end_date": "End"
+		},
 		"viecpro_persons": {
 			"ampel": "Processing status",
 			"end": "Death",

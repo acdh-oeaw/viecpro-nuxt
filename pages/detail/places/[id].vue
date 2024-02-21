@@ -81,12 +81,12 @@ definePageMeta({
 	</div>
 	<DetailPage v-else :model="t('pages.searchviews.places.sing')" :details-loading="loading.details">
 		<template #head>
-			<h1 class="text-2xl font-bold text-primary-600 xl:my-2 xl:text-4xl">
+			<h1 class="font-bold text-primary-600 xl:my-2 xl:text-4xl">
 				<div
 					v-if="!loading.entity && data.entity.data"
 					class="flex items-center justify-between gap-8"
 				>
-					<span>
+					<span class="text-4xl">
 						{{ data.entity.data?.name }}
 					</span>
 					<div class="flex items-center gap-2 leading-none">
@@ -169,10 +169,6 @@ definePageMeta({
 		</template>
 		<template #base>
 			<div class="col-span-2 my-1 border-t"></div>
-			<span>{{ t("collection-keys.viecpro_places.name") }}:</span>
-			<span v-if="!loading.entity">{{ data.entity.data?.name }}</span>
-			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
-			<div class="col-span-2 my-1 border-t"></div>
 			<span>{{ t("collection-keys.viecpro_places.kind") }}:</span>
 			<span v-if="!loading.entity">{{ data.entity.data?.kind }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
@@ -198,9 +194,9 @@ definePageMeta({
 				/>
 				<GenericDisclosure
 					:title="t('collection-keys.viecpro_courts.sources')"
-					:disabled="!data.refs.data || isEmpty(data.refs.data)"
+					:disabled="!data.refs.data.hits || isEmpty(data.refs.data.hits)"
 				>
-					<div>
+					<div v-if="data.refs.data.hits && !isEmpty(data.refs.data.hits)">
 						<template
 							v-for="({ document: reference }, i) in data.refs.data.hits"
 							:key="reference.id"
@@ -247,7 +243,7 @@ definePageMeta({
 					:rels="data.details.data.person_relations"
 					:headers="relCols"
 					grid-class="grid-cols-4"
-					:collection-name="collection"
+					collection-name="place_person"
 					link-to
 				/>
 				<DetailDisclosure
@@ -255,7 +251,7 @@ definePageMeta({
 					:rels="data.details.data.place_relations"
 					:headers="relCols"
 					grid-class="grid-cols-4"
-					:collection-name="collection"
+					collection-name="place_place"
 					link-to
 				/>
 			</div>
