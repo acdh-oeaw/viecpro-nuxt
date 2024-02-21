@@ -76,6 +76,7 @@
 			"title": "Titel"
 		},
 		"viecpro_persons": {
+			"ampel": "Bearbeitungsstatus",
 			"end": "Sterbedatum",
 			"start": "Geburtsdatum",
 			"gender": "Geschlecht",
@@ -92,6 +93,7 @@
 			"duplicates": "Potenzielle Dubletten",
 			"alternative_first_names": "Alternative Vornamensschreibweisen",
 			"alternative_last_names": "Alternative Namensschreibweisen",
+			"alternativenames": "Alternative Namensschreibweisen",
 			"honorary_titles": "Adelstand und Auszeichnungen",
 			"academic_titles": "Akademische Titel",
 			"download": "Download und Zitierweise",
@@ -140,6 +142,8 @@
 			"label:Kategorie": "Kategorie"
 		},
 		"viecpro_institutions": {
+			"ampel": "Bearbeitungsstatus",
+			"alternativenames": "Alternative Namensschreibweisen",
 			"model": "Modell",
 			"name": "Name",
 			"kind": "Art",
@@ -166,6 +170,8 @@
 			"folio": "Folio"
 		},
 		"viecpro_events": {
+			"ampel": "Bearbeitungsstatus",
+			"alternativenames": "Alternative Namensschreibweisen",
 			"model": "Modell",
 			"name": "Name",
 			"kind": "Art",
@@ -175,6 +181,8 @@
 			"label:Kategorie": "Kategorie"
 		},
 		"viecpro_places": {
+			"ampel": "Bearbeitungsstatus",
+			"alternativenames": "Alternative Namensschreibweisen",
 			"model": "Modell",
 			"name": "Name",
 			"kind": "Art",
