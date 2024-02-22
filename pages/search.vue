@@ -3,6 +3,7 @@ import { ArrowLeftRight, CalendarRange, MapPin, School2, User, Users } from "luc
 
 import GenericDisclosure from "@/components/generic-disclosure.vue";
 import RangeSlider from "@/components/range-slider.vue";
+import { facetObjectToTypesenseQuery, typesenseQueryToFacetObject } from "@/lib/facets";
 import type { NavLink } from "@/types/misc.d.ts";
 
 const t = useTranslations();
@@ -42,6 +43,42 @@ const links = computed(() => {
 	} satisfies Record<string, NavLink>;
 });
 
+const addToFacets = async (range: [number, number]) => {
+	const { query } = useRoute();
+	const router = useRouter();
+	const facetObject = typesenseQueryToFacetObject(String(query.facets));
+	if (range[0] === 1600 && range[1] === 1900) {
+		delete facetObject.start_date_int;
+		delete facetObject.end_date_int;
+
+		await router.push({
+			query: {
+				...query,
+				facets: facetObjectToTypesenseQuery(facetObject),
+			},
+		});
+	} else {
+		await router.push({
+			query: {
+				...query,
+				facets: facetObjectToTypesenseQuery({
+					...facetObject,
+					start_date_int: range,
+					end_date_int: range,
+				}),
+			},
+		});
+	}
+};
+
+const queryRange = computed(() => {
+	const { query } = useRoute();
+
+	const facetObject = typesenseQueryToFacetObject(String(query.facets));
+
+	return facetObject.start_date_int as [number, number] | undefined;
+});
+
 definePageMeta({
 	title: "pages.search.title",
 });
@@ -73,9 +110,13 @@ definePageMeta({
 					<ClientOnly>
 						<GenericDisclosure :title="t('ui.timespan')" default-open>
 							<div class="p-2">
-								<RangeSlider class="p-1" @change="(value) => console.log(value)" />
+								<RangeSlider
+									:init="queryRange"
+									class="p-1"
+									@change="(value) => addToFacets(value)"
+								/>
 								<div class="mt-1 text-xs text-gray-400">
-									note: as of now this component is purely cosmetic
+									note: also includes entities without date information
 								</div>
 							</div>
 						</GenericDisclosure>

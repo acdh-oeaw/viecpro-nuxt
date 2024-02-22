@@ -175,7 +175,8 @@
 			"owners": "Besitzer",
 			"owner": "Besitzer Objekt",
 			"download": "Download und Zitierweise",
-			"label:Kategorie": "Kategorie"
+			"label:Kategorie": "Kategorie",
+			"kategorie": "Kategorie"
 		},
 		"viecpro_institutions": {
 			"ampel": "Bearbeitungsstatus",

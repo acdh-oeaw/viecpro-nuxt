@@ -38,6 +38,9 @@ dependencies:
   is-ci:
     specifier: ^3.0.1
     version: 3.0.1
+  json-as-xlsx:
+    specifier: ^2.5.6
+    version: 2.5.6
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -829,6 +832,12 @@ packages:
       postcss-selector-parser: ^6.0.13
     dependencies:
       postcss-selector-parser: 6.0.13
+
+  /@e965/xlsx@0.20.1:
+    resolution: {integrity: sha512-zRv8NLB1H6aqQyZt3/gLjd0xkZsH+/WIRi4YHAw1koESNTPPmzXJbPqO2HMN7DZB1vnF1USKxQ9ZvS0S9Lqmbg==}
+    engines: {node: '>=0.8'}
+    hasBin: true
+    dev: false
 
   /@emnapi/runtime@0.44.0:
     resolution: {integrity: sha512-ZX/etZEZw8DR7zAB1eVQT40lNo0jeqpb6dCgOvctB6FIQ5PoXfMuNY8+ayQfu8tNQbAB8gQWSSJupR8NxeiZXw==}
@@ -6873,6 +6882,12 @@ packages:
     resolution: {integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==}
     engines: {node: '>=4'}
     hasBin: true
+    dev: false
+
+  /json-as-xlsx@2.5.6:
+    resolution: {integrity: sha512-z7phlB+VgS9wZv2N4SBKlguC3C7uauSj2PYSZICCrPaiu1lu8zkCpzZ4sOHWi0/3Je0CJl87q+J+3mpZbxpOew==}
+    dependencies:
+      '@e965/xlsx': 0.20.1
     dev: false
 
   /json-buffer@3.0.1:
