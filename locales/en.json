@@ -162,7 +162,8 @@
 			"owners": "Owners",
 			"owner": "Owner",
 			"download": "Download",
-			"label:Kategorie": "Category"
+			"label:Kategorie": "Category",
+			"kategorie": "Category"
 		},
 		"viecpro_institutions": {
 			"ampel": "Processing status",

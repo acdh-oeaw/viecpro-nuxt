@@ -63,9 +63,9 @@ definePageMeta({
 					<span class="text-4xl">
 						{{ data.entity.data?.name }}
 					</span>
-					<div class="flex items-center gap-2 leading-none">
-						<Indicator :status="data.entity.data?.ampel" />
-						<Popover class="relative">
+					<div class="flex items-center gap-2">
+						<Indicator class="w-24" :status="data.entity.data?.ampel" />
+						<Popover class="relative leading-[0]">
 							<PopoverButton
 								as="button"
 								class="rounded-full hover:bg-slate-200 active:bg-slate-300"
@@ -108,6 +108,9 @@ definePageMeta({
 							<span class="sr-only">Download</span>
 							<Download class="m-2 h-6 w-6 shrink-0" />
 						</button>
+						<ClientOnly>
+							<XlsxButton :data="data" :collection="collection" />
+						</ClientOnly>
 					</div>
 				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>

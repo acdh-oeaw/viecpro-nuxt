@@ -8,7 +8,7 @@ import { definePageMeta } from "#imports";
 
 const collectionName = "viecpro_courts";
 
-const queryBy = ["name", "main_owner.name"];
+const queryBy = ["name", "main_owner.name", "kategorie"];
 
 const koi = ["name", "main_owner.name", "start", "end", "label:Kategorie"];
 const tableCols = "grid-cols-[2fr_3fr_2fr_2fr_2fr]";
