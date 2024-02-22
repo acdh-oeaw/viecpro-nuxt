@@ -2,6 +2,8 @@
 import { debounce } from "@acdh-oeaw/lib";
 import { Slider } from "@ark-ui/vue";
 
+const route = useRoute();
+
 const emit = defineEmits<{
 	change: [value: [number, number]];
 }>();
@@ -20,6 +22,13 @@ const { Root, Control, Thumb, MarkerGroup, Marker, Range, Track } = Slider; // i
 const debouncer = debounce((range: [number, number]) => {
 	emit("change", range);
 }, 500);
+
+watch(
+	() => route.name,
+	() => {
+		range.value = props.init ?? [min, max];
+	},
+);
 
 watch(range, (from, to) => {
 	debouncer(to);
