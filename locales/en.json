@@ -88,6 +88,18 @@
 			"start_date": "Start",
 			"end_date": "End"
 		},
+		"place_person": {
+			"relation_type": "Relation",
+			"target.name": "Name",
+			"start_date": "Start",
+			"end_date": "End"
+		},
+		"place_place": {
+			"relation_type": "Relation",
+			"target.name": "Place",
+			"start_date": "Start",
+			"end_date": "End"
+		},
 		"hierarchy": {
 			"relation_type": "Relation",
 			"target.name": "Court",

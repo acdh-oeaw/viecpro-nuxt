@@ -2,13 +2,12 @@
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { useQuery } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { Download, Info } from "lucide-vue-next";
+import { Info } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
-import { downloadAsJson } from "@/lib/helpers";
 import type { Institution, InstitutionDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
@@ -92,21 +91,7 @@ definePageMeta({
 								</PopoverPanel>
 							</Transition>
 						</Popover>
-						<button
-							class="rounded-full hover:bg-slate-200 active:bg-slate-300"
-							@click="
-								downloadAsJson(
-									{ entity: data.entity.data, details: data.details.data },
-									String(data.entity.data?.name),
-								)
-							"
-						>
-							<span class="sr-only">Download</span>
-							<Download class="m-2 h-6 w-6 shrink-0" />
-						</button>
-						<ClientOnly>
-							<XlsxButton :data="data" :collection="collection" />
-						</ClientOnly>
+						<DownloadMenu :data="data" :collection="collection" />
 					</div>
 				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>

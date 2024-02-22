@@ -20,10 +20,11 @@ const standardRelation = [
 	{ label: "Start", value: "start_date" },
 	{ label: "End", value: "end_date" },
 ];
+let xlsxData;
 
-const downloadXlsx = () => {
-	const xlsxData = {
-		viecpro_courts: {
+switch (props.collection) {
+	case "viecpro_courts":
+		xlsxData = {
 			sheets: [
 				{
 					sheet: "Base",
@@ -65,45 +66,10 @@ const downloadXlsx = () => {
 			options: {
 				fileName: `${props.data.entity.data.name} - Court`,
 			},
-		},
-		viecpro_places: {
-			sheets: [
-				{
-					sheet: "Base",
-					columns: [
-						{ label: "ID", value: "object_id" },
-						{ label: "Name", value: "name" },
-						{ label: "Model", value: "model" },
-						{ label: "Kind", value: "kind" },
-						{ label: "Latitude", value: "lat" },
-						{ label: "Longitude", value: "long" },
-						{ label: "Start", value: "start" },
-						{ label: "End", value: "end" },
-						{ label: "Status", value: "ampel" },
-					],
-					content: [{ ...props.data.details.data, ...props.data.entity.data }],
-				},
-				{
-					sheet: "Related Institutions",
-					columns: standardRelation,
-					content: props.data.details.data.institution_relations,
-				},
-				{
-					sheet: "Related People",
-					columns: standardRelation,
-					content: props.data.details.data.person_relations,
-				},
-				{
-					sheet: "Related Places",
-					columns: standardRelation,
-					content: props.data.details.data.place_relations,
-				},
-			],
-			options: {
-				fileName: `${props.data.entity.data.name} - Place`,
-			},
-		},
-		viecpro_institutions: {
+		};
+		break;
+	case "viecpro_institutions":
+		xlsxData = {
 			sheets: [
 				{
 					sheet: "Base",
@@ -154,9 +120,10 @@ const downloadXlsx = () => {
 			options: {
 				fileName: `${props.data.entity.data.name} - Institution`,
 			},
-		},
-
-		viecpro_persons: {
+		};
+		break;
+	case "viecpro_persons":
+		xlsxData = {
 			sheets: [
 				{
 					sheet: "Base",
@@ -264,16 +231,59 @@ const downloadXlsx = () => {
 			options: {
 				fileName: `${props.data.entity.data.fullname} - Person`,
 			},
-		},
-	};
+		};
+		break;
+	case "viecpro_places":
+		xlsxData = {
+			sheets: [
+				{
+					sheet: "Base",
+					columns: [
+						{ label: "ID", value: "object_id" },
+						{ label: "Name", value: "name" },
+						{ label: "Model", value: "model" },
+						{ label: "Kind", value: "kind" },
+						{ label: "Latitude", value: "lat" },
+						{ label: "Longitude", value: "long" },
+						{ label: "Start", value: "start" },
+						{ label: "End", value: "end" },
+						{ label: "Status", value: "ampel" },
+					],
+					content: [{ ...props.data.details.data, ...props.data.entity.data }],
+				},
+				{
+					sheet: "Related Institutions",
+					columns: standardRelation,
+					content: props.data.details.data.institution_relations,
+				},
+				{
+					sheet: "Related People",
+					columns: standardRelation,
+					content: props.data.details.data.person_relations,
+				},
+				{
+					sheet: "Related Places",
+					columns: standardRelation,
+					content: props.data.details.data.place_relations,
+				},
+			],
+			options: {
+				fileName: `${props.data.entity.data.name} - Place`,
+			},
+		};
+		break;
+	default:
+		break;
+}
 
-	dXlsx(xlsxData[props.collection].sheets, xlsxData[props.collection].options);
+const downloadXlsx = () => {
+	dXlsx(xlsxData.sheets, xlsxData.options);
 };
 </script>
 
 <template>
-	<button class="rounded-full hover:bg-slate-200 active:bg-slate-300" @click="downloadXlsx">
-		<span class="sr-only">Download</span>
+	<button @click="downloadXlsx">
+		<span class="sr-only">Download as .XLSX</span>
 		<FileSpreadsheet class="m-2 h-6 w-6 shrink-0" />
 	</button>
 </template>

@@ -29,7 +29,9 @@ defineProps<{
 				leave-from-class="transform scale-100 opacity-100"
 				leave-to-class="transform scale-95 opacity-0"
 			>
-				<MenuItems class="fixed ml-4 mt-4 flex -translate-x-4 flex-col rounded bg-white shadow-lg">
+				<MenuItems
+					class="fixed z-50 ml-4 mt-4 flex -translate-x-4 flex-col rounded bg-white shadow-lg"
+				>
 					<MenuItem
 						v-for="loc in locales"
 						:key="loc.code"

@@ -62,7 +62,7 @@ const links = computed(() => {
 					>
 						<MenuItems
 							as="div"
-							class="absolute right-0 mt-1 flex w-56 flex-col divide-y rounded bg-gray-50 shadow-lg ring"
+							class="absolute right-0 z-50 mt-1 flex w-56 flex-col divide-y rounded bg-gray-50 shadow-lg ring"
 						>
 							<MenuItem v-for="(link, key) of links" :key="key" class="flex" as="div">
 								<NuxtLink
