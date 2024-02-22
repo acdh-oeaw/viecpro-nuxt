@@ -4,7 +4,9 @@ interface BaseEntity {
 	id: string;
 	object_id: number;
 	start_date: string;
+	start_date_int: number;
 	end_date: string;
+	end_date_int: number;
 	start: string;
 	name: string;
 	end: string;

@@ -6,10 +6,14 @@ const emit = defineEmits<{
 	change: [value: [number, number]];
 }>();
 
+const props = defineProps<{
+	init?: [number, number];
+}>();
+
 const min = 1600;
 const max = 1900;
 
-const range: Ref<[number, number]> = ref([min, max]);
+const range: Ref<[number, number]> = ref(props.init ?? [min, max]);
 
 const { Root, Control, Thumb, MarkerGroup, Marker, Range, Track } = Slider; // important
 
