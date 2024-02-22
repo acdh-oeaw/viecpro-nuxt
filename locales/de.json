@@ -213,12 +213,14 @@
 			"kind": "Art",
 			"start": "Beginn",
 			"end": "Ende",
+			"start_date": "Beginn",
+			"end_date": "Ende",
 			"label:Auflösung": "Auflösung",
 			"label:Kategorie": "Kategorie"
 		},
 		"viecpro_places": {
 			"start_date": "Beginn",
-
+			"end_date": "Ende",
 			"ampel": "Bearbeitungsstatus",
 			"alternativenames": "Alternative Namensschreibweisen",
 			"model": "Modell",
@@ -237,6 +239,8 @@
 		"viecpro_relations": {
 			"source_kind": "Entität A",
 			"source.name": "Name A",
+			"start_date": "Beginn",
+			"end_date": "Ende",
 			"relation_type": "Beziehung",
 			"target_kind": "Entität B",
 			"target.name": "Name B",
