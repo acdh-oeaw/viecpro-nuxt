@@ -36,7 +36,7 @@ defineProps<{
 			>
 				<MenuItem>
 					<button
-						class="rounded border shadow hover:bg-slate-200 active:bg-slate-300"
+						class="flex h-fit flex-col gap-1 rounded border pb-1 shadow hover:bg-slate-200 active:bg-slate-300"
 						@click="
 							downloadAsJson(
 								{ entity: data.entity.data, details: data.details.data },
@@ -46,11 +46,12 @@ defineProps<{
 					>
 						<span class="sr-only">Download as .JSON</span>
 						<FileJson class="m-2 h-6 w-6 shrink-0" />
+						<span class="mx-auto text-xs text-gray-600">.json</span>
 					</button>
 				</MenuItem>
 				<MenuItem>
 					<XlsxButton
-						class="rounded border shadow hover:bg-slate-200 active:bg-slate-300"
+						class="flex h-fit flex-col gap-1 rounded border pb-1 shadow hover:bg-slate-200 active:bg-slate-300"
 						:data="data"
 						:collection="collection"
 					/>

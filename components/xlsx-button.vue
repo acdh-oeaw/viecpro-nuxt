@@ -285,5 +285,6 @@ const downloadXlsx = () => {
 	<button @click="downloadXlsx">
 		<span class="sr-only">Download as .XLSX</span>
 		<FileSpreadsheet class="m-2 h-6 w-6 shrink-0" />
+		<span class="mx-auto text-xs text-gray-600">.xlsx</span>
 	</button>
 </template>
