@@ -153,7 +153,7 @@ const getDetailLink = (id: string, entity?: string) => {
 							<span>ID</span>
 							<ChevronDown v-if="!route.query.sort" class="h-5 w-5 opacity-50" />
 						</div>
-						<span v-else class="hidden md:block">
+						<span v-else-if="key !== 'ampel'" class="hidden md:block">
 							{{ t(`collection-keys["${collectionName}"]["${key}"]`) }}
 						</span>
 					</div>
@@ -209,11 +209,19 @@ const getDetailLink = (id: string, entity?: string) => {
 													.join("; ")
 											}}
 										</span>
+										<span v-else-if="key === 'ampel'" class="mx-auto">
+											<Indicator class="h-5 w-5" :status="hit.document.ampel" small />
+										</span>
 										<span
 											v-else-if="get(hit.highlight, key)?.snippet"
 											class="m-2"
 											v-html="get(hit.highlight, key).snippet"
 										/>
+										<span
+											v-else-if="['kategorie', 'institutions', 'alternativenames'].includes(key)"
+										>
+											{{ get(hit.document, key).join(", ") }}
+										</span>
 										<span v-else class="m-2">
 											{{ get(hit.document, key) }}
 										</span>
