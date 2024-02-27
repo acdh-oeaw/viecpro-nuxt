@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import dXlsx from "json-as-xlsx";
+import dXlsx, { type IJsonSheet } from "json-as-xlsx";
 import { FileSpreadsheet } from "lucide-vue-next";
 
 import type { AnyEntity, Court, Person } from "@/types/schema";
@@ -110,7 +110,14 @@ const sheet = {
 	},
 };
 
-const xlsxData = {
+const xlsxData: {
+	sheets: Array<{
+		sheet: string;
+		columns: Array<{ label: string; value: string | ((row: AnyEntity) => string) }>;
+		content: Array<AnyEntity>;
+	}>;
+	options: { fileName: string };
+} = {
 	sheets: [sheet[props.collection]],
 	options: {
 		fileName: props.collection,
@@ -118,7 +125,7 @@ const xlsxData = {
 };
 
 const downloadXlsx = () => {
-	dXlsx(xlsxData.sheets, xlsxData.options);
+	dXlsx(xlsxData.sheets as Array<IJsonSheet>, xlsxData.options);
 };
 </script>
 

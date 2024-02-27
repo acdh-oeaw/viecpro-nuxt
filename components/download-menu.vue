@@ -2,8 +2,10 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { Download, X } from "lucide-vue-next";
 
+import type { AnyDetail, AnyEntity } from "@/types/schema";
+
 defineProps<{
-	data: { entity: { data: object }; details: { data: object } };
+	data: { entity: { data: AnyEntity }; details: { data: AnyDetail } };
 	collection: "viecpro_courts" | "viecpro_institutions" | "viecpro_persons" | "viecpro_places";
 }>();
 </script>

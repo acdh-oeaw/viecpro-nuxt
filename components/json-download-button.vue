@@ -3,9 +3,7 @@ import { FileJson } from "lucide-vue-next";
 
 import { downloadAsJson } from "@/lib/helpers";
 
-const props = defineProps<{ data: object; name: string }>();
-
-console.log(props.data);
+defineProps<{ data: object; name: string }>();
 </script>
 
 <template>

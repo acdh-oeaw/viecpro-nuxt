@@ -1,14 +1,23 @@
 <script lang="ts" setup>
-import type { UseQueryReturnType } from "@tanstack/vue-query";
-import dXlsx from "json-as-xlsx";
+import dXlsx, { type IJsonSheet } from "json-as-xlsx";
 import { FileSpreadsheet } from "lucide-vue-next";
 
-import type { AnyDetail, AnyEntity } from "@/types/schema";
+import type {
+	AnyDetail,
+	AnyEntity,
+	CourtDetail,
+	DetailLabel,
+	GenericRelation,
+	InstitutionDetail,
+	Person,
+	PersonDetail,
+	PlaceDetail,
+} from "@/types/schema";
 
 const props = defineProps<{
 	data: {
-		entity: UseQueryReturnType<AnyEntity, Error>;
-		details: UseQueryReturnType<AnyDetail, Error>;
+		entity: { data: AnyEntity };
+		details: { data: AnyDetail };
 	};
 	collection: "viecpro_courts" | "viecpro_institutions" | "viecpro_persons" | "viecpro_places";
 }>();
@@ -24,8 +33,9 @@ let xlsxData: {
 	sheets: Array<{
 		sheet: string;
 		columns: Array<{ label: string; value: string }>;
-		content: Array<AnyDetail | AnyEntity>;
+		content: Array<AnyDetail | AnyEntity | DetailLabel | GenericRelation | object>;
 	}>;
+	options: { fileName: string };
 };
 
 switch (props.collection) {
@@ -50,12 +60,12 @@ switch (props.collection) {
 				{
 					sheet: "Locations",
 					columns: standardRelation,
-					content: props.data.details.data.locations,
+					content: (props.data.details.data as CourtDetail).locations,
 				},
 				{
 					sheet: "Hierarchy",
 					columns: standardRelation,
-					content: props.data.details.data.hierarchy,
+					content: (props.data.details.data as CourtDetail).hierarchy,
 				},
 				{
 					sheet: "Personnel",
@@ -66,7 +76,7 @@ switch (props.collection) {
 						{ label: "Start", value: "start_date" },
 						{ label: "End", value: "end_date" },
 					],
-					content: props.data.details.data.personnel,
+					content: (props.data.details.data as CourtDetail).personnel,
 				},
 			],
 			options: {
@@ -99,17 +109,17 @@ switch (props.collection) {
 						{ label: "Start", value: "start_date" },
 						{ label: "End", value: "end_date" },
 					],
-					content: props.data.details.data.alternative_names,
+					content: (props.data.details.data as InstitutionDetail).alternative_names,
 				},
 				{
 					sheet: "Locations",
 					columns: standardRelation,
-					content: props.data.details.data.locations,
+					content: (props.data.details.data as InstitutionDetail).locations,
 				},
 				{
 					sheet: "Hierarchy",
 					columns: standardRelation,
-					content: props.data.details.data.hierarchy,
+					content: (props.data.details.data as InstitutionDetail).hierarchy,
 				},
 				{
 					sheet: "Personnel",
@@ -120,7 +130,7 @@ switch (props.collection) {
 						{ label: "Start", value: "start_date" },
 						{ label: "End", value: "end_date" },
 					],
-					content: props.data.details.data.personnel,
+					content: (props.data.details.data as InstitutionDetail).personnel,
 				},
 			],
 			options: {
@@ -151,7 +161,7 @@ switch (props.collection) {
 				{
 					sheet: "Duplicates",
 					columns: standardRelation,
-					content: props.data.details.data.duplicates,
+					content: (props.data.details.data as PersonDetail).duplicates,
 				},
 				{
 					sheet: "Alternative Names",
@@ -164,15 +174,15 @@ switch (props.collection) {
 						null,
 						Array(
 							Math.max(
-								props.data.details.data.alternative_last_names.length,
-								props.data.details.data.alternative_first_names.length,
-								props.data.details.data.married_names.length,
+								(props.data.details.data as PersonDetail).alternative_last_names.length,
+								(props.data.details.data as PersonDetail).alternative_first_names.length,
+								(props.data.details.data as PersonDetail).married_names.length,
 							),
 						),
 					).map((x, i) => ({
-						first_name: props.data.details.data.alternative_first_names[i],
-						name: props.data.details.data.alternative_last_names[i],
-						married_name: props.data.details.data.married_names[i],
+						first_name: (props.data.details.data as PersonDetail).alternative_first_names[i],
+						name: (props.data.details.data as PersonDetail).alternative_last_names[i],
+						married_name: (props.data.details.data as PersonDetail).married_names[i],
 					})),
 				},
 				{
@@ -182,7 +192,7 @@ switch (props.collection) {
 						{ label: "Start", value: "start_date" },
 						{ label: "End", value: "end_date" },
 					],
-					content: props.data.details.data.academic_titles,
+					content: (props.data.details.data as PersonDetail).academic_titles,
 				},
 				{
 					sheet: "Honorary Titles",
@@ -191,7 +201,7 @@ switch (props.collection) {
 						{ label: "Start", value: "start_date" },
 						{ label: "End", value: "end_date" },
 					],
-					content: props.data.details.data.honorary_titles,
+					content: (props.data.details.data as PersonDetail).honorary_titles,
 				},
 				{
 					sheet: "Court Functions",
@@ -202,12 +212,12 @@ switch (props.collection) {
 						{ label: "Start", value: "start_date" },
 						{ label: "End", value: "end_date" },
 					],
-					content: props.data.details.data.court_functions,
+					content: (props.data.details.data as PersonDetail).court_functions,
 				},
 				{
 					sheet: "Court Relations to People",
 					columns: standardRelation,
-					content: props.data.details.data.person_relations_court,
+					content: (props.data.details.data as PersonDetail).person_relations_court,
 				},
 				{
 					sheet: "Other Court Relations",
@@ -216,26 +226,26 @@ switch (props.collection) {
 						{ label: "Start", value: "start_date" },
 						{ label: "End", value: "end_date" },
 					],
-					content: props.data.details.data.other_relations_court,
+					content: (props.data.details.data as PersonDetail).other_relations_court,
 				},
 				{
 					sheet: "Marriages and Family",
 					columns: standardRelation,
-					content: props.data.details.data.marriages_and_family_relations,
+					content: (props.data.details.data as PersonDetail).marriages_and_family_relations,
 				},
 				{
 					sheet: "Relations to Church and Orders",
 					columns: standardRelation,
-					content: props.data.details.data.relations_to_church_and_orders,
+					content: (props.data.details.data as PersonDetail).relations_to_church_and_orders,
 				},
 				{
 					sheet: "Non Court Functions",
 					columns: standardRelation,
-					content: props.data.details.data.non_court_functions,
+					content: (props.data.details.data as PersonDetail).non_court_functions,
 				},
 			],
 			options: {
-				fileName: `${props.data.entity.data.fullname} - Person`,
+				fileName: `${(props.data.entity.data as Person).fullname} - Person`,
 			},
 		};
 		break;
@@ -260,17 +270,17 @@ switch (props.collection) {
 				{
 					sheet: "Related Institutions",
 					columns: standardRelation,
-					content: props.data.details.data.institution_relations,
+					content: (props.data.details.data as PlaceDetail).institution_relations,
 				},
 				{
 					sheet: "Related People",
 					columns: standardRelation,
-					content: props.data.details.data.person_relations,
+					content: (props.data.details.data as PlaceDetail).person_relations,
 				},
 				{
 					sheet: "Related Places",
 					columns: standardRelation,
-					content: props.data.details.data.place_relations,
+					content: (props.data.details.data as PlaceDetail).place_relations,
 				},
 			],
 			options: {
@@ -283,7 +293,7 @@ switch (props.collection) {
 }
 
 const downloadXlsx = () => {
-	dXlsx(xlsxData.sheets, xlsxData.options);
+	dXlsx(xlsxData.sheets as Array<IJsonSheet>, xlsxData.options);
 };
 </script>
 
