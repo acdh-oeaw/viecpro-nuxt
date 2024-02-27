@@ -1,11 +1,9 @@
 <script lang="ts" setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { Download, FileJson, X } from "lucide-vue-next";
-
-import { downloadAsJson } from "@/lib/helpers";
+import { Download, X } from "lucide-vue-next";
 
 defineProps<{
-	data: object;
+	data: { entity: { data: object }; details: { data: object } };
 	collection: "viecpro_courts" | "viecpro_institutions" | "viecpro_persons" | "viecpro_places";
 }>();
 </script>
@@ -35,21 +33,13 @@ defineProps<{
 				class="absolute right-0 mt-1 flex gap-2 divide-y rounded border bg-gray-50 p-2 shadow-lg"
 			>
 				<MenuItem>
-					<button
-						class="rounded border shadow hover:bg-slate-200 active:bg-slate-300"
-						@click="
-							downloadAsJson(
-								{ entity: data.entity.data, details: data.details.data },
-								String(data.entity.data?.name),
-							)
-						"
-					>
-						<span class="sr-only">Download as .JSON</span>
-						<FileJson class="m-2 h-6 w-6 shrink-0" />
-					</button>
+					<JsonDownloadButton
+						:name="String(data.entity.data?.name)"
+						:data="{ entity: data.entity.data, details: data.details.data }"
+					/>
 				</MenuItem>
 				<MenuItem>
-					<XlsxButton
+					<XlsxButtonDetail
 						class="rounded border shadow hover:bg-slate-200 active:bg-slate-300"
 						:data="data"
 						:collection="collection"

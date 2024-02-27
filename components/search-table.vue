@@ -15,7 +15,14 @@ const queryClient = useQueryClient();
 
 const props = defineProps<{
 	queryBy: Array<string> | string;
-	collectionName: string;
+	collectionName:
+		| "viecpro_courts"
+		| "viecpro_events"
+		| "viecpro_institutions"
+		| "viecpro_persons"
+		| "viecpro_places"
+		| "viecpro_references"
+		| "viecpro_relations";
 	koi: Array<string>;
 	facets?: Array<string>;
 	cols: string;
@@ -131,6 +138,12 @@ const getDetailLink = (id: string, entity?: string) => {
 				</button>
 			</div>
 			<slot />
+			<DownloadResultsWrapper
+				v-if="data && data.page"
+				:all="data.found"
+				:collection="collectionName"
+				:query="comQuery"
+			/>
 			<Pagination
 				v-if="data && data.page"
 				:page="data.page"

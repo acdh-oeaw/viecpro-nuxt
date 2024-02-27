@@ -1,6 +1,6 @@
 interface BaseEntity {
 	ampel: string;
-	alternativenames: string;
+	alternativenames: Array<string>;
 	id: string;
 	object_id: number;
 	start_date: string;
@@ -60,6 +60,8 @@ export interface Person extends BaseEntity {
 	fullname: string;
 	gender: string;
 	titles: Array<PersonTitle>;
+	functions: Array<string>;
+	institutions: Array<string>;
 }
 
 export interface Label {

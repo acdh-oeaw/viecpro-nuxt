@@ -20,7 +20,13 @@ const standardRelation = [
 	{ label: "Start", value: "start_date" },
 	{ label: "End", value: "end_date" },
 ];
-let xlsxData;
+let xlsxData: {
+	sheets: Array<{
+		sheet: string;
+		columns: Array<{ label: string; value: string }>;
+		content: Array<AnyDetail | AnyEntity>;
+	}>;
+};
 
 switch (props.collection) {
 	case "viecpro_courts":
