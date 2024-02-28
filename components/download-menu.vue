@@ -1,12 +1,29 @@
 <script lang="ts" setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
+import type { UseQueryReturnType } from "@tanstack/vue-query";
 import { Download, X } from "lucide-vue-next";
+import type { SearchParams } from "typesense/lib/Typesense/Documents";
 
 import type { AnyDetail, AnyEntity } from "@/types/schema";
 
+interface DetailData {
+	entity: UseQueryReturnType<AnyEntity, Error>;
+	details: { data: AnyDetail };
+}
+
 defineProps<{
-	data: { entity: { data: AnyEntity }; details: { data: AnyDetail } };
-	collection: "viecpro_courts" | "viecpro_institutions" | "viecpro_persons" | "viecpro_places";
+	data?: Array<AnyEntity> | DetailData;
+	collection:
+		| "viecpro_courts"
+		| "viecpro_events"
+		| "viecpro_institutions"
+		| "viecpro_persons"
+		| "viecpro_places"
+		| "viecpro_references"
+		| "viecpro_relations";
+	detail?: boolean;
+	all?: number;
+	query?: SearchParams;
 }>();
 </script>
 
@@ -34,18 +51,31 @@ defineProps<{
 				as="div"
 				class="absolute right-0 mt-1 flex gap-2 divide-y rounded border bg-gray-50 p-2 shadow-lg"
 			>
-				<MenuItem>
+				<MenuItem v-if="detail">
 					<JsonDownloadButton
-						:name="String(data.entity.data?.name)"
-						:data="{ entity: data.entity.data, details: data.details.data }"
-					/>
+						v-if="detail"
+						class="flex flex-col gap-1 rounded border p-2 pb-1 text-center shadow hover:bg-slate-200 active:bg-slate-300"
+						:name="String((data as DetailData).entity.data.name)"
+						:data="{
+							entity: (data as DetailData).entity.data,
+							details: (data as DetailData).details.data,
+						}"
+					>
+						<span class="text-xs">.json</span>
+					</JsonDownloadButton>
 				</MenuItem>
-				<MenuItem>
+				<MenuItem v-if="detail">
 					<XlsxButtonDetail
-						class="rounded border shadow hover:bg-slate-200 active:bg-slate-300"
-						:data="data"
+						v-if="detail"
+						class="flex flex-col gap-1 rounded border p-2 pb-1 text-center shadow hover:bg-slate-200 active:bg-slate-300"
+						:data="data as DetailData"
 						:collection="collection"
-					/>
+					>
+						<span class="text-xs">.xlsx</span>
+					</XlsxButtonDetail>
+				</MenuItem>
+				<MenuItem v-else-if="all && query">
+					<DownloadResultsButtons :collection="collection" :all="all" :query="query" />
 				</MenuItem>
 			</MenuItems>
 		</Transition>

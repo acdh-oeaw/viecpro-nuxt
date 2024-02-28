@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 defineProps<{
-	status: string;
+	status?: string;
 	small?: boolean;
 }>();
 </script>
@@ -14,7 +14,7 @@ defineProps<{
 				'bg-red-400': status === 'red',
 				'bg-yellow-400': status === 'yellow',
 				'bg-green-400': status === 'green',
-				'bg-slate-300': !['red', 'yellow', 'green'].includes(status),
+				'bg-slate-300': !['red', 'yellow', 'green'].includes(String(status)),
 			}"
 		/>
 		<template v-else>

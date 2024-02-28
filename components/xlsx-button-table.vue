@@ -12,6 +12,7 @@ const props = defineProps<{
 		| "viecpro_institutions"
 		| "viecpro_persons"
 		| "viecpro_places"
+		| "viecpro_references"
 		| "viecpro_relations";
 }>();
 
@@ -21,7 +22,6 @@ const sheet = {
 		columns: [
 			{ label: "ID", value: "object_id" },
 			{ label: "Name", value: "name" },
-			{ label: "Alternative Name", value: (row: Court) => row.alternativenames.join(", ") },
 			{ label: "Model", value: "model" },
 			{ label: "Kind", value: "kind" },
 			{ label: "Category", value: "kategorie" },
@@ -132,6 +132,7 @@ const downloadXlsx = () => {
 <template>
 	<button @click="downloadXlsx">
 		<span class="sr-only">Download as .XLSX</span>
-		<FileSpreadsheet class="m-2 h-6 w-6 shrink-0" />
+		<FileSpreadsheet class="w-full shrink-0" />
+		<slot />
 	</button>
 </template>

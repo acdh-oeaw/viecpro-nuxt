@@ -91,7 +91,7 @@ definePageMeta({
 								</PopoverPanel>
 							</Transition>
 						</Popover>
-						<DownloadMenu :data="data" :collection="collection" />
+						<DownloadMenu detail :data="data" :collection="collection" />
 					</div>
 				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>

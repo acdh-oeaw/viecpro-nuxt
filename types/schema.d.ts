@@ -181,6 +181,7 @@ export interface PlaceDetail {
 	institution_relations: Array<GenericRelation>;
 }
 export interface CourtDetail {
+	ampel: string;
 	model: string;
 	object_id: string;
 	resolution: string;

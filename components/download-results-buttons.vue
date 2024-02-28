@@ -15,6 +15,7 @@ const props = defineProps<{
 		| "viecpro_institutions"
 		| "viecpro_persons"
 		| "viecpro_places"
+		| "viecpro_references"
 		| "viecpro_relations";
 	query: SearchParams;
 	all: number;
@@ -59,25 +60,31 @@ const fetches = useQueries({
 				.map((hit) => hit?.document)
 				.filter((doc) => doc !== undefined) as Array<AnyEntity>,
 			fetching: results.some((result) => result.isFetching),
+			done: results.filter((result) => !result.isFetching).length,
 		};
 	},
 });
 </script>
 
 <template>
-	<div v-if="fetches.fetching" class="rounded border">
+	<div v-if="fetches.fetching" class="rounded border p-1">
+		{{ Math.floor(100 * (fetches.done / pages)) }}%
 		<Loader class="w-full animate-spin" />
 	</div>
 	<template v-else-if="!isEmpty(fetches.data)">
+		<JsonDownloadButton
+			class="rounded border p-2 pb-1 text-primary-600 shadow transition hover:bg-slate-200 active:bg-slate-300"
+			:data="fetches.data"
+			:name="collection"
+		>
+			<span class="text-xs font-semibold">.json</span>
+		</JsonDownloadButton>
 		<XlsxButtonTable
 			:data="fetches.data"
 			:collection="collection"
-			class="rounded border transition hover:bg-slate-200 active:bg-slate-300"
-		/>
-		<JsonDownloadButton
-			class="rounded border transition hover:bg-slate-200 active:bg-slate-300"
-			:data="fetches.data"
-			:name="collection"
-		/>
+			class="rounded border p-2 pb-1 text-primary-600 shadow transition hover:bg-slate-200 active:bg-slate-300"
+		>
+			<span class="text-xs font-semibold">.xlsx</span>
+		</XlsxButtonTable>
 	</template>
 </template>

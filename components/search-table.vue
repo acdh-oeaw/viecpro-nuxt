@@ -115,7 +115,6 @@ const getDetailLink = (id: string, entity?: string) => {
 								...route.query,
 								q: input,
 								page: 1,
-								collection,
 							},
 						})
 					"
@@ -138,12 +137,21 @@ const getDetailLink = (id: string, entity?: string) => {
 				</button>
 			</div>
 			<slot />
-			<DownloadResultsWrapper
+			<!-- <DownloadResultsWrapper
 				v-if="data && data.page"
 				:all="data.found"
 				:collection="collectionName"
 				:query="comQuery"
-			/>
+			/> -->
+			<div class="flex w-full justify-end">
+				<DownloadMenu
+					v-if="data && data.page"
+					class="float-right m-2"
+					:all="data.found"
+					:collection="collectionName"
+					:query="comQuery"
+				/>
+			</div>
 			<Pagination
 				v-if="data && data.page"
 				:page="data.page"
@@ -198,7 +206,7 @@ const getDetailLink = (id: string, entity?: string) => {
 									</span>
 									<component
 										:is="isLinkCol(key, hit.document) ? NuxtLink : 'span'"
-										class="flex items-center gap-2"
+										class="flex items-center justify-between gap-1"
 										:class="
 											isLinkCol(key, hit.document) &&
 											'rounded transition hover:bg-slate-200 active:bg-slate-300 font-semibold'

@@ -19,7 +19,14 @@ const props = defineProps<{
 		entity: { data: AnyEntity };
 		details: { data: AnyDetail };
 	};
-	collection: "viecpro_courts" | "viecpro_institutions" | "viecpro_persons" | "viecpro_places";
+	collection:
+		| "viecpro_courts"
+		| "viecpro_events"
+		| "viecpro_institutions"
+		| "viecpro_persons"
+		| "viecpro_places"
+		| "viecpro_references"
+		| "viecpro_relations";
 }>();
 
 const standardRelation = [
@@ -300,6 +307,7 @@ const downloadXlsx = () => {
 <template>
 	<button @click="downloadXlsx">
 		<span class="sr-only">Download as .XLSX</span>
-		<FileSpreadsheet class="m-2 h-6 w-6 shrink-0" />
+		<FileSpreadsheet class="mx-auto w-full shrink-0" />
+		<slot />
 	</button>
 </template>
