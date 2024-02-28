@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { isEmpty } from "lodash-es";
 import { ArrowLeftRight, CalendarRange, MapPin, School2, User, Users } from "lucide-vue-next";
 
 import GenericDisclosure from "@/components/generic-disclosure.vue";
@@ -47,10 +48,14 @@ const addToFacets = async (range: [number, number]) => {
 	const { query } = useRoute();
 	const router = useRouter();
 	const facetObject = typesenseQueryToFacetObject(String(query.facets));
-	if (range[0] === 1600 && range[1] === 1900) {
+	if (isEmpty(facetObject)) {
+		delete query.facets;
+		await router.push({
+			query,
+		});
+	} else if (range[0] === 1600 && range[1] === 1900) {
 		delete facetObject.start_date_int;
 		delete facetObject.end_date_int;
-
 		await router.push({
 			query: {
 				...query,

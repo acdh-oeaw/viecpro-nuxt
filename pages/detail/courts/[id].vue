@@ -63,7 +63,7 @@ definePageMeta({
 						{{ data.entity.data?.name }}
 					</span>
 					<div class="flex items-center gap-2">
-						<Indicator class="w-24" :status="data.entity.data?.ampel" />
+						<Indicator class="w-24" :status="data.details.data?.ampel" />
 						<Popover class="relative leading-[0]">
 							<PopoverButton
 								as="button"
@@ -95,7 +95,7 @@ definePageMeta({
 								</PopoverPanel>
 							</Transition>
 						</Popover>
-						<DownloadMenu :data="data" :collection="collection" />
+						<DownloadMenu detail :data="data" :collection="collection" />
 					</div>
 				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>

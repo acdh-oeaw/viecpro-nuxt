@@ -9,7 +9,7 @@ import { definePageMeta } from "#imports";
 const collectionName = "viecpro_persons";
 const queryBy = ["name", "first_name", "alternativenames", "functions", "institutions"];
 
-const koi = ["first_name", "name", "start", "end", "gender"];
+const koi = ["first_name", "name", "start", "end", "ampel"];
 const tableCols = "grid-cols-[3fr_3fr_2fr_2fr_2fr]";
 
 const schema = ref(
