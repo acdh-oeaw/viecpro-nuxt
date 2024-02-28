@@ -2,14 +2,18 @@ import { useRoute } from "vue-router";
 
 type FacetObject = Record<string, Array<string> | [number, number]>;
 
-export const facetObjectToTypesenseQuery = (facetObject: FacetObject, encode = false): string => {
+export const facetObjectToTypesenseQuery = (
+	facetObject: FacetObject,
+	encode = false,
+	includeDateless = true,
+): string => {
 	const retArray: Array<string> = [];
 	Object.entries(facetObject).forEach(([key, value]) => {
 		if (value.length !== 0) {
 			if (key === "start_date_int") {
-				retArray.push(`${key}:[${value[0]}..${value[1]},0]`);
+				retArray.push(`${key}:[${value[0]}..${value[1]}${includeDateless ? ",0" : ""}]`);
 			} else if (key === "end_date_int") {
-				retArray.push(`${key}:[${value[0]}..${value[1]},5000]`);
+				retArray.push(`${key}:[${value[0]}..${value[1]}${includeDateless ? ",5000" : ""}]`);
 			} else {
 				retArray.push(key + ":=[`" + value.join("`,`") + "`]");
 			}

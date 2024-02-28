@@ -48,20 +48,24 @@ const addToFacets = async (range: [number, number]) => {
 	const { query } = useRoute();
 	const router = useRouter();
 	const facetObject = typesenseQueryToFacetObject(String(query.facets));
-	if (isEmpty(facetObject)) {
-		delete query.facets;
-		await router.push({
-			query,
-		});
-	} else if (range[0] === 1600 && range[1] === 1900) {
+
+	if (range[0] === 1600 && range[1] === 1900) {
 		delete facetObject.start_date_int;
 		delete facetObject.end_date_int;
-		await router.push({
-			query: {
-				...query,
-				facets: facetObjectToTypesenseQuery(facetObject),
-			},
-		});
+
+		if (isEmpty(facetObject)) {
+			delete query.facets;
+			await router.push({
+				query,
+			});
+		} else {
+			await router.push({
+				query: {
+					...query,
+					facets: facetObjectToTypesenseQuery(facetObject),
+				},
+			});
+		}
 	} else {
 		await router.push({
 			query: {
