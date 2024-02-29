@@ -9,6 +9,9 @@ import type { NavLink } from "@/types/misc.d.ts";
 
 const t = useTranslations();
 const localePath = useLocalePath();
+
+const route = useRoute();
+
 const links = computed(() => {
 	return {
 		people: {
@@ -44,8 +47,16 @@ const links = computed(() => {
 	} satisfies Record<string, NavLink>;
 });
 
+const updateFacets = async () => {
+	const { query } = route;
+
+	if (query.facets?.start_date_int) {
+		await addToFacets(typesenseQueryToFacetObject(String(query.facets)).start_date_int);
+	} else await addToFacets([1600, 1900]);
+};
+
 const addToFacets = async (range: [number, number]) => {
-	const { query } = useRoute();
+	const { query } = route;
 	const router = useRouter();
 	const facetObject = typesenseQueryToFacetObject(String(query.facets));
 
@@ -85,14 +96,16 @@ const addToFacets = async (range: [number, number]) => {
 };
 
 const queryRange = computed(() => {
-	const { query } = useRoute();
+	const { query } = route;
 
 	const facetObject = typesenseQueryToFacetObject(String(query.facets));
 
-	return facetObject.start_date_int as [number, number] | undefined;
+	return facetObject.start_date_int as [number, number];
 });
 
 const includeDateless = ref(true);
+
+const slider: Ref<[number, number]> = ref(queryRange.value.map(Number) as [number, number]);
 
 definePageMeta({
 	title: "pages.search.title",
@@ -125,21 +138,39 @@ definePageMeta({
 					<ClientOnly>
 						<GenericDisclosure :title="t('ui.timespan')" default-open>
 							<div class="flex flex-col gap-1 p-2">
-								<RangeSlider
-									:init="queryRange"
-									class="p-1"
-									@change="(value) => addToFacets(value)"
-								/>
+								<RangeSlider v-model="slider" :min="1600" :max="1900" :n-marker="7" class="p-1" />
 								<div class="flex gap-1">
 									<input
 										id="dateCheck"
 										v-model="includeDateless"
 										type="checkbox"
 										class="accent-primary-500"
+										@change="updateFacets()"
 									/>
 									<label for="dateCheck" class="text-sm text-gray-600">
 										Include Entities without date information
 									</label>
+								</div>
+								<div class="mt-1 flex w-full justify-end">
+									<NuxtLink
+										class="rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
+										:to="{
+											query: {
+												...route.query,
+												facets: facetObjectToTypesenseQuery(
+													{
+														...typesenseQueryToFacetObject(String(route.query.facets)),
+														start_date_int: slider,
+														end_date_int: slider,
+													},
+													false,
+													includeDateless,
+												),
+											},
+										}"
+									>
+										Go!
+									</NuxtLink>
 								</div>
 							</div>
 						</GenericDisclosure>

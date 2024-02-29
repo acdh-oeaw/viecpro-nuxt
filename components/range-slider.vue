@@ -1,38 +1,33 @@
 <script lang="ts" setup>
-import { debounce } from "@acdh-oeaw/lib";
 import { Slider } from "@ark-ui/vue";
+import type { ModelRef } from "vue";
 
-const route = useRoute();
+defineProps({
+	min: {
+		type: Number,
+		default: 0,
+		validator(value: number, propsEnt: { min: number; max: number }) {
+			return value <= propsEnt.max;
+		},
+	},
+	max: {
+		type: Number,
+		default: 100,
+		validator(value: number, propsEnt: { min: number; max: number }) {
+			return value >= propsEnt.max;
+		},
+	},
+	nMarker: {
+		type: Number,
+		default: 7,
+	},
+});
 
-const emit = defineEmits<{
-	change: [value: [number, number]];
-}>();
-
-const props = defineProps<{
-	init?: [number, number];
-}>();
-
-const min = 1600;
-const max = 1900;
-
-const range: Ref<[number, number]> = ref(props.init ?? [min, max]);
+const range: ModelRef<[number, number]> = defineModel({
+	default: [0, 100] as [number, number],
+});
 
 const { Root, Control, Thumb, MarkerGroup, Marker, Range, Track } = Slider; // important
-
-const debouncer = debounce((range: [number, number]) => {
-	emit("change", range);
-}, 500);
-
-watch(
-	() => route.name,
-	() => {
-		range.value = props.init ?? [min, max];
-	},
-);
-
-watch(range, (from, to) => {
-	debouncer(to);
-});
 </script>
 
 <template>
@@ -48,10 +43,6 @@ watch(range, (from, to) => {
 					:min="min"
 					:max="max"
 					name="start_year"
-					@input="
-						(event: Event) =>
-							(range = [(event.target as HTMLInputElement).valueAsNumber, Number(range[1])])
-					"
 				/>
 			</div>
 			<div>
@@ -64,10 +55,6 @@ watch(range, (from, to) => {
 					:min="min"
 					:max="max"
 					name="end_year"
-					@change="
-						(event: Event) =>
-							(range = [Number(range[0]), (event.target as HTMLInputElement).valueAsNumber])
-					"
 				/>
 			</div>
 		</div>
@@ -87,13 +74,12 @@ watch(range, (from, to) => {
 			/>
 		</Control>
 		<MarkerGroup class="mx-1 h-4">
-			<Marker :value="1600" class="text-slate-400">1600</Marker>
-			<Marker :value="1650" class="text-slate-400">&#183;</Marker>
-			<Marker :value="1700" class="text-slate-400">1700</Marker>
-			<Marker :value="1750" class="text-slate-400">&#183;</Marker>
-			<Marker :value="1800" class="text-slate-400">1800</Marker>
-			<Marker :value="1850" class="text-slate-400">&#183;</Marker>
-			<Marker :value="1900" class="text-slate-400">1900</Marker>
+			<Marker v-for="(n, i) in nMarker" :key="n" :value="min + (i * (max - min)) / (nMarker - 1)">
+				<span v-if="i % 2">&#183;</span>
+				<span v-else>
+					{{ Math.floor(min + (i * (max - min)) / (nMarker - 1)) }}
+				</span>
+			</Marker>
 		</MarkerGroup>
 	</Root>
 </template>
