@@ -62,7 +62,7 @@ const addToFacets = async (range: [number, number]) => {
 			await router.push({
 				query: {
 					...query,
-					facets: facetObjectToTypesenseQuery(facetObject),
+					facets: facetObjectToTypesenseQuery(facetObject, false, includeDateless.value),
 				},
 			});
 		}
@@ -70,11 +70,15 @@ const addToFacets = async (range: [number, number]) => {
 		await router.push({
 			query: {
 				...query,
-				facets: facetObjectToTypesenseQuery({
-					...facetObject,
-					start_date_int: range,
-					end_date_int: range,
-				}),
+				facets: facetObjectToTypesenseQuery(
+					{
+						...facetObject,
+						start_date_int: range,
+						end_date_int: range,
+					},
+					false,
+					includeDateless.value,
+				),
 			},
 		});
 	}
@@ -87,6 +91,8 @@ const queryRange = computed(() => {
 
 	return facetObject.start_date_int as [number, number] | undefined;
 });
+
+const includeDateless = ref(true);
 
 definePageMeta({
 	title: "pages.search.title",
@@ -118,14 +124,22 @@ definePageMeta({
 				<div class="mx-4 xl:max-w-sm">
 					<ClientOnly>
 						<GenericDisclosure :title="t('ui.timespan')" default-open>
-							<div class="p-2">
+							<div class="flex flex-col gap-1 p-2">
 								<RangeSlider
 									:init="queryRange"
 									class="p-1"
 									@change="(value) => addToFacets(value)"
 								/>
-								<div class="mt-1 text-xs text-gray-400">
-									note: also includes entities without date information
+								<div class="flex gap-1">
+									<input
+										id="dateCheck"
+										v-model="includeDateless"
+										type="checkbox"
+										class="accent-primary-500"
+									/>
+									<label for="dateCheck" class="text-sm text-gray-600">
+										Include Entities without date information
+									</label>
 								</div>
 							</div>
 						</GenericDisclosure>

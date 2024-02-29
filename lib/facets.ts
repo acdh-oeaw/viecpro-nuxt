@@ -40,7 +40,7 @@ export const typesenseQueryToFacetObject = (
 		} else {
 			const [key, value] = facetString.split(":");
 			if (key !== undefined && value !== undefined) {
-				retObject[key] = value.replace(/\[(\d*)\.\.(\d*),\d*\]/, "$1;$2").split(";"); // converts format [yyyy..yyyy,y] to classic [yyyy,yyyy]
+				retObject[key] = value.replace(/\[(\d+)\.\.(\d+),?\d*\]/, "$1;$2").split(";"); // converts formats [yyyy..yyyy,y] and [yyyy..yyyy] to classic [yyyy,yyyy]
 			}
 		}
 	});
