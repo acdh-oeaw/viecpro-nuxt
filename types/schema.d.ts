@@ -138,6 +138,7 @@ export interface PersonDetail {
 	marriages_and_family_relations: Array<DetailRelation>;
 	relations_to_church_and_orders: Array<DetailRelation>;
 	non_court_functions: Array<DetailRelation>;
+	related_places: Array<DetailRelation>;
 }
 
 export interface GenericRelation {

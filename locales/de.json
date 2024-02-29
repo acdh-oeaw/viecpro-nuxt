@@ -255,7 +255,8 @@
 		"additional": "Weitere Informationen",
 		"courtrelated": "Bezüge zum Wiener Hof",
 		"relations": "Bezüge",
-		"coords": "Koordinaten"
+		"coords": "Koordinaten",
+		"related_places": "Bezüge zu Orten"
 	},
 	"ui": {
 		"showing-results": "Zeige {first} - {last} von {all} Ergebnissen",
