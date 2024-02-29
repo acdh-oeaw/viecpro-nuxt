@@ -91,6 +91,7 @@ definePageMeta({
 											{{ data.entity.data?.name }}
 										</div>
 										<div>VieCPro-ID: {{ data.entity.data?.id }}</div>
+										<div>URI: <CurrentUri link /></div>
 									</div>
 								</PopoverPanel>
 							</Transition>
