@@ -11,6 +11,7 @@ import type { Court, CourtDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
+const locale = useLocale();
 
 const route = useRoute();
 const id = String(route.params.id);
@@ -119,7 +120,23 @@ definePageMeta({
 		<template #base>
 			<div class="col-span-2 my-1 border-t"></div>
 			<span>{{ t("collection-keys.viecpro_courts.resolution") }}:</span>
-			<span v-if="!loading.details">{{ data.details.data?.resolution }}</span>
+			<template v-if="!loading.details">
+				<NuxtLink
+					v-if="
+						data.details.data?.resolution &&
+						data.details.data.owners &&
+						data.details.data.owners[0] &&
+						data.details.data.resolution.includes(String(data.details.data.owners[0].target.name))
+					"
+					:to="`/${locale}/detail/persons/${data.details.data.owners[0].target.object_id}`"
+					class="underline"
+				>
+					{{ data.details.data?.resolution }}
+				</NuxtLink>
+				<span v-else>
+					{{ data.details.data?.resolution }}
+				</span>
+			</template>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 			<span>{{ t("collection-keys.viecpro_courts.category") }}:</span>
