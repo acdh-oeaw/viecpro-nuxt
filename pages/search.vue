@@ -1,6 +1,14 @@
 <script lang="ts" setup>
 import { isEmpty } from "lodash-es";
-import { ArrowLeftRight, CalendarRange, MapPin, School2, User, Users } from "lucide-vue-next";
+import {
+	ArrowLeftRight,
+	CalendarRange,
+	CalendarSearch,
+	MapPin,
+	School2,
+	User,
+	Users,
+} from "lucide-vue-next";
 
 import GenericDisclosure from "@/components/generic-disclosure.vue";
 import RangeSlider from "@/components/range-slider.vue";
@@ -9,6 +17,9 @@ import type { NavLink } from "@/types/misc.d.ts";
 
 const t = useTranslations();
 const localePath = useLocalePath();
+
+const route = useRoute();
+
 const links = computed(() => {
 	return {
 		people: {
@@ -44,8 +55,16 @@ const links = computed(() => {
 	} satisfies Record<string, NavLink>;
 });
 
+const updateFacets = async () => {
+	const { query } = route;
+
+	if (query.facets?.start_date_int) {
+		await addToFacets(typesenseQueryToFacetObject(String(query.facets)).start_date_int);
+	} else await addToFacets([1600, 1900]);
+};
+
 const addToFacets = async (range: [number, number]) => {
-	const { query } = useRoute();
+	const { query } = route;
 	const router = useRouter();
 	const facetObject = typesenseQueryToFacetObject(String(query.facets));
 
@@ -62,7 +81,7 @@ const addToFacets = async (range: [number, number]) => {
 			await router.push({
 				query: {
 					...query,
-					facets: facetObjectToTypesenseQuery(facetObject),
+					facets: facetObjectToTypesenseQuery(facetObject, false, includeDateless.value),
 				},
 			});
 		}
@@ -70,23 +89,40 @@ const addToFacets = async (range: [number, number]) => {
 		await router.push({
 			query: {
 				...query,
-				facets: facetObjectToTypesenseQuery({
-					...facetObject,
-					start_date_int: range,
-					end_date_int: range,
-				}),
+				facets: facetObjectToTypesenseQuery(
+					{
+						...facetObject,
+						start_date_int: range,
+						end_date_int: range,
+					},
+					false,
+					includeDateless.value,
+				),
 			},
 		});
 	}
 };
 
 const queryRange = computed(() => {
-	const { query } = useRoute();
+	const { query } = route;
 
 	const facetObject = typesenseQueryToFacetObject(String(query.facets));
 
-	return facetObject.start_date_int as [number, number] | undefined;
+	return (facetObject.start_date_int ?? [1600, 1900]) as [number, number];
 });
+
+const includeDateless = ref(true);
+
+if (route.query.facets && /\[\d+..\d+\]/.test(String(route.query.facets))) {
+	includeDateless.value = false;
+}
+
+const slider: Ref<[number, number]> = ref(queryRange.value.map(Number) as [number, number]);
+
+watch(
+	() => route.name,
+	() => (slider.value = [1600, 1900]),
+);
 
 definePageMeta({
 	title: "pages.search.title",
@@ -118,14 +154,43 @@ definePageMeta({
 				<div class="mx-4 xl:max-w-sm">
 					<ClientOnly>
 						<GenericDisclosure :title="t('ui.timespan')" default-open>
-							<div class="p-2">
-								<RangeSlider
-									:init="queryRange"
-									class="p-1"
-									@change="(value) => addToFacets(value)"
-								/>
-								<div class="mt-1 text-xs text-gray-400">
-									note: also includes entities without date information
+							<div class="flex flex-col gap-1 p-2">
+								<RangeSlider v-model="slider" :min="1600" :max="1900" :n-marker="7" class="p-1" />
+								<div class="flex items-center justify-between gap-1">
+									<div class="flex gap-2">
+										<input
+											id="dateCheck"
+											v-model="includeDateless"
+											type="checkbox"
+											class="accent-primary-500"
+											@change="updateFacets()"
+										/>
+										<label for="dateCheck" class="text-sm text-gray-600">
+											Include Entities without date information
+										</label>
+									</div>
+									<div class="mt-1 flex">
+										<NuxtLink
+											class="rounded border bg-slate-100 p-2 shadow transition hover:bg-slate-200 active:bg-slate-300"
+											:to="{
+												query: {
+													...route.query,
+													facets: facetObjectToTypesenseQuery(
+														{
+															...typesenseQueryToFacetObject(String(route.query.facets)),
+															start_date_int: slider,
+															end_date_int: slider,
+														},
+														false,
+														includeDateless,
+													),
+												},
+											}"
+										>
+											<CalendarSearch class="h-5 w-5" />
+											<span class="sr-only">Apply time filters</span>
+										</NuxtLink>
+									</div>
 								</div>
 							</div>
 						</GenericDisclosure>

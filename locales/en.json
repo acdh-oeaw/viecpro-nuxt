@@ -254,7 +254,8 @@
 		"additional": "Additional Information",
 		"courtrelated": "Court Relations",
 		"relations": "Relations",
-		"coords": "Coordinates"
+		"coords": "Coordinates",
+		"related_places": "Place Relations"
 	},
 	"ui": {
 		"showing-results": "Showing {first} - {last} out of {all}",

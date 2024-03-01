@@ -348,6 +348,14 @@ definePageMeta({
 					grid-class="grid-cols-3"
 					:collection-name="collection"
 				/>
+				<DetailDisclosure
+					:title="t('detail-page.related_places')"
+					:rels="data.details.data.related_places"
+					:headers="relCols"
+					grid-class="grid-cols-4"
+					collection-name="place_person"
+					link-to
+				/>
 				<h2 class="text-2xl text-gray-500">{{ t("detail-page.additional") }}</h2>
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_persons.marriages_and_family_relations')"
