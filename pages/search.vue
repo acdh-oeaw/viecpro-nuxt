@@ -113,7 +113,16 @@ const queryRange = computed(() => {
 
 const includeDateless = ref(true);
 
+if (route.query.facets && /\[\d+..\d+\]/.test(String(route.query.facets))) {
+	includeDateless.value = false;
+}
+
 const slider: Ref<[number, number]> = ref(queryRange.value.map(Number) as [number, number]);
+
+watch(
+	() => route.name,
+	() => (slider.value = [1600, 1900]),
+);
 
 definePageMeta({
 	title: "pages.search.title",
