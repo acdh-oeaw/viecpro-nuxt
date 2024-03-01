@@ -1,6 +1,14 @@
 <script lang="ts" setup>
 import { isEmpty } from "lodash-es";
-import { ArrowLeftRight, CalendarRange, MapPin, School2, User, Users } from "lucide-vue-next";
+import {
+	ArrowLeftRight,
+	CalendarRange,
+	CalendarSearch,
+	MapPin,
+	School2,
+	User,
+	Users,
+} from "lucide-vue-next";
 
 import GenericDisclosure from "@/components/generic-disclosure.vue";
 import RangeSlider from "@/components/range-slider.vue";
@@ -100,7 +108,7 @@ const queryRange = computed(() => {
 
 	const facetObject = typesenseQueryToFacetObject(String(query.facets));
 
-	return facetObject.start_date_int as [number, number];
+	return (facetObject.start_date_int ?? [1600, 1900]) as [number, number];
 });
 
 const includeDateless = ref(true);
@@ -139,38 +147,41 @@ definePageMeta({
 						<GenericDisclosure :title="t('ui.timespan')" default-open>
 							<div class="flex flex-col gap-1 p-2">
 								<RangeSlider v-model="slider" :min="1600" :max="1900" :n-marker="7" class="p-1" />
-								<div class="flex gap-1">
-									<input
-										id="dateCheck"
-										v-model="includeDateless"
-										type="checkbox"
-										class="accent-primary-500"
-										@change="updateFacets()"
-									/>
-									<label for="dateCheck" class="text-sm text-gray-600">
-										Include Entities without date information
-									</label>
-								</div>
-								<div class="mt-1 flex w-full justify-end">
-									<NuxtLink
-										class="rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
-										:to="{
-											query: {
-												...route.query,
-												facets: facetObjectToTypesenseQuery(
-													{
-														...typesenseQueryToFacetObject(String(route.query.facets)),
-														start_date_int: slider,
-														end_date_int: slider,
-													},
-													false,
-													includeDateless,
-												),
-											},
-										}"
-									>
-										Go!
-									</NuxtLink>
+								<div class="flex items-center justify-between gap-1">
+									<div class="flex gap-2">
+										<input
+											id="dateCheck"
+											v-model="includeDateless"
+											type="checkbox"
+											class="accent-primary-500"
+											@change="updateFacets()"
+										/>
+										<label for="dateCheck" class="text-sm text-gray-600">
+											Include Entities without date information
+										</label>
+									</div>
+									<div class="mt-1 flex">
+										<NuxtLink
+											class="rounded border bg-slate-100 p-2 shadow transition hover:bg-slate-200 active:bg-slate-300"
+											:to="{
+												query: {
+													...route.query,
+													facets: facetObjectToTypesenseQuery(
+														{
+															...typesenseQueryToFacetObject(String(route.query.facets)),
+															start_date_int: slider,
+															end_date_int: slider,
+														},
+														false,
+														includeDateless,
+													),
+												},
+											}"
+										>
+											<CalendarSearch class="h-5 w-5" />
+											<span class="sr-only">Apply time filters</span>
+										</NuxtLink>
+									</div>
 								</div>
 							</div>
 						</GenericDisclosure>
