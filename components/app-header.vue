@@ -11,6 +11,7 @@ const links = computed(() => {
 	return {
 		home: { href: { path: localePath("/") }, label: t("pages.home.label") },
 		search: { href: { path: localePath("/search/persons") }, label: t("pages.search.label") },
+		hierarchy: { href: { path: localePath("/hierarchy") }, label: t("pages.hierarchy.label") },
 		documentation: {
 			href: { path: localePath("/documentation/project") },
 			label: t("pages.documentation.label"),

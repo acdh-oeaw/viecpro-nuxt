@@ -13,6 +13,10 @@
 			"title": "Database",
 			"label": "Database"
 		},
+		"hierarchy": {
+			"title": "Hierarchy",
+			"label": "Hierarchy"
+		},
 		"documentation": {
 			"title": "Documentation",
 			"label": "Documentation",
