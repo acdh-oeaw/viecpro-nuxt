@@ -183,7 +183,7 @@ const getDetailLink = (id: string, entity?: string) => {
 					<div
 						v-for="hit in data.hits"
 						:key="String(hit.document.id)"
-						class="border-b py-1 md:border-t"
+						class="hyphens-auto border-b py-1 md:border-t"
 					>
 						<component
 							:is="customCols ? 'div' : NuxtLink"
