@@ -3,6 +3,8 @@ import { hierarchy } from "d3";
 
 import { Tree } from "@/lib/tree";
 
+const locale = useLocale();
+
 const props = defineProps<{
 	data: object;
 }>();
@@ -10,15 +12,27 @@ const props = defineProps<{
 const hierarchyRef = ref<SVGElement | null>(null);
 
 onMounted(() => {
-	hierarchyRef.value = Tree(hierarchy(props.data));
+	updateTree(props.data);
 });
 watch(
 	() => props.data,
 	(to) => {
-		hierarchyRef.value = Tree(hierarchy(to));
+		updateTree(to);
 	},
 	{ deep: true },
 );
+
+function updateTree(data) {
+	const options = {
+		label: (d) => d.data.meta.label,
+		link: (d) =>
+			`/${locale.value}/detail/${d.data.meta.entity_type.toLowerCase()}s/${d.data.meta.pk}`,
+		width: 2000,
+		height: 500,
+	};
+
+	hierarchyRef.value = Tree(hierarchy(data), options);
+}
 </script>
 
 <template>

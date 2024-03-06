@@ -6,7 +6,6 @@
 		"esbenp.prettier-vscode",
 		"mikestead.dotenv",
 		"stylelint.vscode-stylelint",
-		"vue.volar",
-		"vue.vscode-typescript-vue-plugin"
+		"vue.volar"
 	]
 }
