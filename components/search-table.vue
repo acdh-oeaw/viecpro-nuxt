@@ -55,7 +55,7 @@ const limitNum = computed(() => {
 });
 
 const comQuery = computed(() => {
-	const query = route.query;
+	const { query } = route;
 	return {
 		q: String(query.q ?? ""),
 		query_by: props.queryBy,

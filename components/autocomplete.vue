@@ -1,0 +1,73 @@
+<script lang="ts" setup>
+import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from "@headlessui/vue";
+import { useQuery } from "@tanstack/vue-query";
+import type { ModelRef } from "vue";
+
+import type { HierarchyNode } from "@/lib/types";
+
+const query = ref(
+	useQuery({
+		queryKey: ["autocomplete"],
+		queryFn: async () => {
+			const data = await fetch(
+				"https://viecpro.acdh-dev.oeaw.ac.at/visualisations/entityautocomplete/",
+			);
+			const ret = await data.json();
+
+			return ret.context as Array<HierarchyNode>;
+		},
+	}),
+);
+
+const selection: ModelRef<HierarchyNode | null> = defineModel({
+	default: null,
+});
+const input = ref("");
+
+const filtered = computed(() => {
+	if (!query.value.data) return null;
+	return input.value === ""
+		? query.value.data
+		: query.value.data.filter((entity) => {
+				return entity.label.toLowerCase().includes(input.value.toLowerCase());
+			});
+});
+
+const emit = defineEmits(["change", "input"]);
+
+watch(selection, () => emit("change", selection));
+</script>
+
+<template>
+	<Combobox
+		v-model="selection"
+		as="div"
+		class="relative"
+		@change="$emit('change', 'event.target.value')"
+	>
+		<ComboboxInput
+			v-if="!query.isFetching"
+			class="m-2 w-96 rounded border p-2 shadow-lg"
+			:display-value="(entity) => (entity as HierarchyNode)?.label"
+			@change="
+				input = $event.target.value;
+				$emit('input', $event.target.value);
+			"
+		/>
+		<ComboboxOptions
+			v-if="filtered"
+			as="div"
+			class="absolute ml-2 flex flex-col gap-1 overflow-auto rounded border bg-white py-1 text-base shadow"
+		>
+			<ComboboxOption
+				v-for="entity in filtered.slice(0, 10)"
+				:key="entity.pk"
+				:value="entity"
+				as="div"
+				class="cursor-pointer px-2 ui-active:bg-primary-300"
+			>
+				{{ entity.label }}
+			</ComboboxOption>
+		</ComboboxOptions>
+	</Combobox>
+</template>

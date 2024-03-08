@@ -1,6 +1,6 @@
 interface TreeQuery {
 	mode?: "down" | "up";
-	show?: "normal";
+	show?: string;
 	model: string;
 	id: string;
 }
@@ -14,7 +14,7 @@ interface TreeMeta {
 	url: string;
 }
 
-interface TreeEntity {
+export interface TreeEntity {
 	name: string;
 	meta: TreeMeta;
 	children?: Array<TreeEntity>;
@@ -35,7 +35,6 @@ export async function getTreeData(q: TreeQuery) {
 		`,
 	);
 	const ret = (await data.json()) as ReturnTree;
-	console.log(ret);
 
 	return ret.tree_data;
 }
