@@ -33,9 +33,7 @@ const filtered = computed(() => {
 			});
 });
 
-const emit = defineEmits(["change", "input"]);
-
-watch(selection, () => emit("change", selection));
+defineEmits(["change", "input"]);
 </script>
 
 <template>
@@ -43,7 +41,7 @@ watch(selection, () => emit("change", selection));
 		v-model="selection"
 		as="div"
 		class="relative"
-		@change="$emit('change', 'event.target.value')"
+		@update:model-value="$emit('change', selection)"
 	>
 		<ComboboxInput
 			v-if="!query.isFetching"

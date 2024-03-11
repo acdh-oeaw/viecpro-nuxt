@@ -10,10 +10,11 @@ const model: ModelRef<string | null> = defineModel({
 defineProps<{
 	items: Array<string>;
 }>();
+defineEmits(["change"]);
 </script>
 
 <template>
-	<Listbox v-model="model" as="div" class="relative">
+	<Listbox v-model="model" as="div" class="relative" @update:model-value="$emit('change', model)">
 		<ListboxButton
 			class="m-2 flex h-11 min-w-24 items-center justify-between gap-2 rounded border bg-white p-2 shadow-lg"
 			as="button"

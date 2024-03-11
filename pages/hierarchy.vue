@@ -10,10 +10,8 @@ const route = useRoute();
 
 const comQuery = computed(() => {
 	const { label, id, model } = route.query;
-	console.log("YOLO", route.query);
 
 	if (!label || !id || !model) return null;
-	console.log(route.query);
 
 	return {
 		group: decodeURIComponent(String(model)),
