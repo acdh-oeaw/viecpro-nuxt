@@ -1,5 +1,5 @@
 interface TreeQuery {
-	mode?: "down" | "up";
+	direction?: "down" | "up";
 	show?: string;
 	model: string;
 	id: string;
@@ -31,7 +31,7 @@ export async function getTreeData(q: TreeQuery) {
 			${q.model}/
 			${q.id}/
 			${q.show ?? "normal"}/
-			${q.mode ?? "down"}
+			${q.direction ?? "down"}
 		`,
 	);
 	const ret = (await data.json()) as ReturnTree;

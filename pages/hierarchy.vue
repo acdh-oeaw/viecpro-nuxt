@@ -23,7 +23,10 @@ const comQuery = computed(() => {
 });
 
 const autocomplete = ref<HierarchyNode | null>(comQuery.value);
-const queryArgs = ref<{ show: string; mode: "down" | "up" }>({ show: "normal", mode: "down" });
+const queryArgs = ref<{ show: string; direction: "down" | "up" }>({
+	show: "normal",
+	direction: "down",
+});
 
 const query = ref(
 	useQuery({
@@ -35,7 +38,7 @@ const query = ref(
 
 			const data = await getTreeData({
 				show: q.show,
-				mode: q.mode,
+				direction: q.direction,
 				model: auto.group,
 				id: String(auto.pk),
 			});
@@ -45,6 +48,25 @@ const query = ref(
 	}),
 );
 
+const showArgs = computed(() => {
+	switch (autocomplete.value?.group) {
+		case "Institution": {
+			const instArgs = ["show only institutions", "add functions", "add functions and persons"];
+			if (!instArgs.includes(queryArgs.value.show)) queryArgs.value.show = String(instArgs[0]);
+			return instArgs;
+		}
+		case "Funktion": {
+			const funcArgs = ["show institution hierarchy", "show amt and persons"];
+			if (!funcArgs.includes(queryArgs.value.show)) queryArgs.value.show = String(funcArgs[0]);
+			return funcArgs;
+		}
+		default: {
+			queryArgs.value.show = "normal";
+			return ["normal"];
+		}
+	}
+});
+
 definePageMeta({
 	title: "pages.hierarchy.title",
 });
@@ -52,7 +74,7 @@ definePageMeta({
 
 <template>
 	<MainContent class="container mx-auto">
-		<div class="flex flex-col">
+		<div class="flex">
 			<Autocomplete
 				v-model="autocomplete"
 				@change="
@@ -68,54 +90,14 @@ definePageMeta({
 						: null
 				"
 			/>
+			<GenericListbox v-model="queryArgs.direction" :items="['down', 'up']" />
+			<GenericListbox v-model="queryArgs.show" :items="showArgs" />
 		</div>
 		<div>
 			<ClientOnly v-if="!query.isFetching">
 				<HierarchyWrapper v-if="query.data" :data="query.data" />
 			</ClientOnly>
 			<div v-else class="animate-pulse">Loading...</div>
-
-			<div>
-				<h1>show</h1>
-				<div>
-					<input id="normal" v-model="queryArgs.show" value="normal" type="radio" name="id" />
-					<label for="normal">normal</label>
-				</div>
-				<div>
-					<input
-						id="show%20only%20institutions"
-						v-model="queryArgs.show"
-						value="show%20only%20institutions"
-						type="radio"
-						name="id"
-					/>
-					<label for="show%20only%20institutions">show only institutions</label>
-				</div>
-				<div>
-					<input
-						id="add%20functions"
-						v-model="queryArgs.show"
-						value="add%20functions"
-						type="radio"
-						name="id"
-					/>
-					<label for="add%20functions">add functions</label>
-				</div>
-				<div>
-					<input
-						id="show%20institution%20hierarchy"
-						v-model="queryArgs.show"
-						value="show%20institution%20hierarchy"
-						type="radio"
-						name="id"
-					/>
-					<label for="show%20institution%20hierarchy">show institution hierarchy</label>
-				</div>
-			</div>
-			<pre>
-				{{ queryArgs }}
-			</pre
-			>
 		</div>
 	</MainContent>
 </template>

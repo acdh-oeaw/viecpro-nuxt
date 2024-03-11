@@ -47,27 +47,30 @@ watch(selection, () => emit("change", selection));
 	>
 		<ComboboxInput
 			v-if="!query.isFetching"
-			class="m-2 w-96 rounded border p-2 shadow-lg"
+			class="m-2 h-11 w-96 rounded border p-2 shadow-lg"
 			:display-value="(entity) => (entity as HierarchyNode)?.label"
 			@change="
 				input = $event.target.value;
 				$emit('input', $event.target.value);
 			"
 		/>
-		<ComboboxOptions
-			v-if="filtered"
-			as="div"
-			class="absolute ml-2 flex flex-col gap-1 overflow-auto rounded border bg-white py-1 text-base shadow"
-		>
-			<ComboboxOption
-				v-for="entity in filtered.slice(0, 10)"
-				:key="entity.pk"
-				:value="entity"
+		<div v-else class="m-2 h-11 w-96 animate-pulse rounded bg-gray-300 shadow-lg"></div>
+		<MenuTransition>
+			<ComboboxOptions
+				v-if="filtered"
 				as="div"
-				class="cursor-pointer px-2 ui-active:bg-primary-300"
+				class="absolute ml-2 flex flex-col divide-y overflow-auto rounded border bg-white text-base shadow"
 			>
-				{{ entity.label }}
-			</ComboboxOption>
-		</ComboboxOptions>
+				<ComboboxOption
+					v-for="entity in filtered.slice(0, 10)"
+					:key="entity.pk"
+					:value="entity"
+					as="div"
+					class="cursor-pointer p-2 ui-active:bg-primary-300"
+				>
+					{{ entity.label }}
+				</ComboboxOption>
+			</ComboboxOptions>
+		</MenuTransition>
 	</Combobox>
 </template>

@@ -21,14 +21,7 @@ defineProps<{
 					{{ locale.toUpperCase() }}
 				</MenuButton>
 			</ClientOnly>
-			<Transition
-				enter-active-class="transition duration-100 ease-out"
-				enter-from-class="transform scale-95 -translate-y-8 opacity-0"
-				enter-to-class="transform scale-100 translate-y-0 opacity-100"
-				leave-active-class="transition duration-75 ease-in"
-				leave-from-class="transform scale-100 opacity-100"
-				leave-to-class="transform scale-95 opacity-0"
-			>
+			<MenuTransition>
 				<MenuItems
 					class="fixed z-50 ml-4 mt-4 flex -translate-x-4 flex-col rounded bg-white shadow-lg"
 				>
@@ -43,7 +36,7 @@ defineProps<{
 						{{ loc.code.toUpperCase() }}
 					</MenuItem>
 				</MenuItems>
-			</Transition>
+			</MenuTransition>
 		</Menu>
 	</div>
 	<div v-else class="flex w-full divide-x">
