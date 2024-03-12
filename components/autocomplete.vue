@@ -52,21 +52,21 @@ defineEmits(["change", "input"]);
 	>
 		<div
 			v-if="!query.isFetching"
-			class="relative m-2 cursor-default overflow-hidden rounded border bg-white text-left shadow-lg"
+			class="relative m-2 flex cursor-default overflow-hidden rounded border bg-white text-left shadow-lg"
 		>
 			<ComboboxInput
-				class="w-96 p-2"
+				class="w-96 truncate p-2"
 				:display-value="(entity) => (entity as HierarchyNode)?.label"
 				@change="
 					input = $event.target.value;
 					$emit('input', $event.target.value);
 				"
 			/>
-			<ComboboxButton class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">
+			<ComboboxButton class="inset-y-0 right-0 flex items-center pr-3 text-gray-500">
 				<Search class="h-5 w-5" />
 			</ComboboxButton>
 		</div>
-		<div v-else class="m-2 h-11 w-96 animate-pulse rounded bg-gray-300 shadow-lg"></div>
+		<div v-else class="m-2 h-11 w-96 animate-pulse rounded bg-gray-300 shadow-lg" />
 		<MenuTransition>
 			<ComboboxOptions
 				v-if="filtered"

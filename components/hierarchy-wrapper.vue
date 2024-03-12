@@ -4,6 +4,8 @@ import { hierarchy } from "d3";
 import type { TreeEntity } from "@/lib/get-tree-data";
 import { Tree } from "@/lib/tree";
 
+const router = useRouter();
+
 const locale = useLocale();
 
 const props = defineProps<{
@@ -57,5 +59,13 @@ function updateTree(data: TreeEntity, width: number) {
 </script>
 
 <template>
-	<div v-html="hierarchyRef?.outerHTML"></div>
+	<!-- eslint-disable vuejs-accessibility/no-static-element-interactions -->
+	<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
+	<div
+		@click.prevent="
+			(event) =>
+				event.target?.parentNode?.href ? router.push(event.target.parentNode.href.baseVal) : null
+		"
+		v-html="hierarchyRef?.outerHTML"
+	/>
 </template>

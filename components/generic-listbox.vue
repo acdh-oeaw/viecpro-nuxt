@@ -36,7 +36,7 @@ defineEmits(["change"]);
 				<ListboxOption
 					v-for="item in items"
 					:key="item.value"
-					class="cursor-pointer list-none p-2 first-of-type:rounded-t last-of-type:rounded-b ui-active:bg-primary-300"
+					class="cursor-pointer list-none p-2 first-of-type:rounded-t last-of-type:rounded-b ui-selected:bg-primary-300 ui-active:bg-primary-300"
 					:value="item"
 				>
 					<span>{{ item.label }}</span>

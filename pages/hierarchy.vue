@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useQuery } from "@tanstack/vue-query";
+import { Loader2 } from "lucide-vue-next";
 
 import HierarchyWrapper from "@/components/hierarchy-wrapper.vue";
 import { getTreeData } from "@/lib/get-tree-data";
@@ -136,7 +137,7 @@ definePageMeta({
 				/>
 				<GenericListbox
 					v-model="options.show"
-					class="m-2 min-w-48"
+					class="m-2 min-w-56"
 					:items="showArgs"
 					@change="({ value }) => router.push({ query: { ...route.query, show: value } })"
 				/>
@@ -148,7 +149,9 @@ definePageMeta({
 					<HierarchyWrapper v-if="query.data" :data="query.data" :width="width" />
 				</VisContainer>
 			</ClientOnly>
-			<div v-else class="animate-pulse">Loading...</div>
+			<Centered v-else>
+				<Loader2 class="h-8 w-8 animate-spin" />
+			</Centered>
 		</div>
 	</MainContent>
 </template>
