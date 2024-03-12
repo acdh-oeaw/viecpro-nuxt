@@ -8,48 +8,54 @@ const locale = useLocale();
 
 const props = defineProps<{
 	data: TreeEntity;
+	width: number;
 }>();
 
 const hierarchyRef = ref<SVGElement | null>(null);
-const visContainer = ref<HTMLElement | null>(null);
-const dimensions = ref<DOMRect | null>(null);
 
 onMounted(() => {
-	if (visContainer.value == null) return;
-	updateTree(props.data);
-	observer.observe(visContainer.value);
+	updateTree(props.data, props.width);
 });
 watch(
 	() => props.data,
 	(to) => {
-		updateTree(to);
+		updateTree(to, props.width);
 	},
 	{ deep: true },
 );
 
-function updateTree(data: TreeEntity) {
+interface Node {
+	data: {
+		children: Array<Node>;
+		name: string;
+		meta: {
+			end: string;
+			entity_type: string;
+			label: string;
+			pk: number;
+			rel_end: string;
+			rel_start: string;
+			start: string;
+			url: string;
+		};
+	};
+	depth: number;
+	height: number;
+	parent?: Node;
+}
+
+function updateTree(data: TreeEntity, width: number) {
 	const options = {
-		label: (d) => d.data.meta.label,
-		link: (d) =>
-			`/${locale.value}/detail/${d.data.meta.entity_type.toLowerCase()}s/${d.data.meta.pk}`,
+		label: (d: Node) => d.data.meta.label,
+		link: (d: Node) =>
+			`/${locale.value}/hierarchy?id=${d.data.meta.pk}&model=${d.data.meta.entity_type}&label=${d.data.meta.label}`,
+		width,
 	};
 
 	hierarchyRef.value = Tree(hierarchy(data), options);
 }
-
-const observer = new ResizeObserver((entries) => {
-	const [entry] = entries;
-	if (entry == null) return;
-	dimensions.value = entry.contentRect;
-});
-
-onUnmounted(() => {
-	observer.disconnect();
-});
 </script>
 
 <template>
-	<div ref="visContainer" class="h-full min-h-96 w-full">
-		<div id="test" v-html="hierarchyRef?.outerHTML"></div>
-	</div>
+	<div v-html="hierarchyRef?.outerHTML"></div>
 </template>
