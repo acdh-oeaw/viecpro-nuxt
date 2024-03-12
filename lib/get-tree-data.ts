@@ -1,5 +1,5 @@
 interface TreeQuery {
-	direction?: "down" | "up";
+	direction?: string;
 	show?: string;
 	model: string;
 	id: string;

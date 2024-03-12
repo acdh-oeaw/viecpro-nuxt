@@ -3,12 +3,12 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headless
 import { ChevronsUpDown } from "lucide-vue-next";
 import type { ModelRef } from "vue";
 
-const model: ModelRef<string | null> = defineModel({
+const model: ModelRef<{ label: string; value: string } | null> = defineModel({
 	default: null,
 });
 
 defineProps<{
-	items: Array<string>;
+	items: Array<{ label: string; value: string }>;
 }>();
 defineEmits(["change"]);
 </script>
@@ -21,19 +21,25 @@ defineEmits(["change"]);
 		@update:model-value="(to) => $emit('change', to)"
 	>
 		<ListboxButton
-			class="m-2 flex h-11 min-w-24 items-center justify-between gap-2 rounded border bg-white p-2 shadow-lg"
+			class="flex h-11 w-full items-center justify-between gap-2 rounded border bg-white p-2 shadow-lg"
 			as="button"
 		>
-			<span>{{ model }}</span>
+			<span>{{ model?.label || model }}</span>
 			<ChevronsUpDown class="h-5 w-5 text-gray-500" />
 		</ListboxButton>
 		<MenuTransition>
 			<ListboxOptions
+				v-if="items.length != 0"
 				as="div"
-				class="absolute ml-2 flex w-full flex-col divide-y rounded border bg-white shadow-xl"
+				class="absolute mt-2 flex w-full flex-col divide-y rounded border bg-white shadow-xl"
 			>
-				<ListboxOption v-for="item in items" :key="item" class="list-none p-2" :value="item">
-					<span>{{ item }}</span>
+				<ListboxOption
+					v-for="item in items"
+					:key="item.value"
+					class="cursor-pointer list-none p-2 first-of-type:rounded-t last-of-type:rounded-b ui-active:bg-primary-300"
+					:value="item"
+				>
+					<span>{{ item.label }}</span>
 				</ListboxOption>
 			</ListboxOptions>
 		</MenuTransition>

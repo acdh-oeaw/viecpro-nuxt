@@ -1,6 +1,13 @@
 <script lang="ts" setup>
-import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from "@headlessui/vue";
+import {
+	Combobox,
+	ComboboxButton,
+	ComboboxInput,
+	ComboboxOption,
+	ComboboxOptions,
+} from "@headlessui/vue";
 import { useQuery } from "@tanstack/vue-query";
+import { Search } from "lucide-vue-next";
 import type { ModelRef } from "vue";
 
 import type { HierarchyNode } from "@/lib/types";
@@ -43,15 +50,22 @@ defineEmits(["change", "input"]);
 		class="relative"
 		@update:model-value="$emit('change', selection)"
 	>
-		<ComboboxInput
+		<div
 			v-if="!query.isFetching"
-			class="m-2 h-11 w-96 rounded border p-2 shadow-lg"
-			:display-value="(entity) => (entity as HierarchyNode)?.label"
-			@change="
-				input = $event.target.value;
-				$emit('input', $event.target.value);
-			"
-		/>
+			class="relative m-2 cursor-default overflow-hidden rounded border bg-white text-left shadow-lg"
+		>
+			<ComboboxInput
+				class="w-96 p-2"
+				:display-value="(entity) => (entity as HierarchyNode)?.label"
+				@change="
+					input = $event.target.value;
+					$emit('input', $event.target.value);
+				"
+			/>
+			<ComboboxButton class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500">
+				<Search class="h-5 w-5" />
+			</ComboboxButton>
+		</div>
 		<div v-else class="m-2 h-11 w-96 animate-pulse rounded bg-gray-300 shadow-lg"></div>
 		<MenuTransition>
 			<ComboboxOptions
