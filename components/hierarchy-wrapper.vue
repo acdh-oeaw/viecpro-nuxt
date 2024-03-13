@@ -19,9 +19,9 @@ onMounted(() => {
 	updateTree(props.data, props.width);
 });
 watch(
-	() => props.data,
-	(to) => {
-		updateTree(to, props.width);
+	() => [props.data, props.width],
+	([to, newWidth]) => {
+		updateTree(to as TreeEntity, newWidth as number);
 	},
 	{ deep: true },
 );
@@ -52,6 +52,9 @@ function updateTree(data: TreeEntity, width: number) {
 		link: (d: Node) =>
 			`/${locale.value}/hierarchy?id=${d.data.meta.pk}&model=${d.data.meta.entity_type}&label=${d.data.meta.label}`,
 		width,
+		r: 7,
+		fontSize: "medium",
+		padding: 2,
 	};
 
 	hierarchyRef.value = Tree(hierarchy(data), options);
@@ -62,6 +65,7 @@ function updateTree(data: TreeEntity, width: number) {
 	<!-- eslint-disable vuejs-accessibility/no-static-element-interactions -->
 	<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 	<div
+		class="w-full"
 		@click.prevent="
 			(event) =>
 				event.target?.parentNode?.href ? router.push(event.target.parentNode.href.baseVal) : null

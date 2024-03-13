@@ -4,42 +4,59 @@ import { Loader2 } from "lucide-vue-next";
 
 import HierarchyWrapper from "@/components/hierarchy-wrapper.vue";
 import { getTreeData } from "@/lib/get-tree-data";
-import type { HierarchyNode } from "@/lib/types";
 
 const router = useRouter();
 const route = useRoute();
 
 const t = useTranslations();
 
-const comQuery = computed(() => {
-	const { label, id, model } = route.query;
+const comQuery = computed({
+	get() {
+		const { label, id, model } = route.query;
 
-	if (!label || !id || !model) return null;
+		if (!label || !id || !model) return null;
 
-	return {
-		group: decodeURIComponent(String(model)),
-		pk: Number(id),
-		label: String(decodeURIComponent(String(label))),
-	};
+		return {
+			group: decodeURIComponent(String(model)),
+			pk: Number(id),
+			label: String(decodeURIComponent(String(label))),
+		};
+	},
+	set(to) {
+		if (to)
+			void router.push({
+				query: {
+					...route.query,
+					id: to.pk,
+					model: encodeURIComponent(to.group),
+					label: encodeURIComponent(to.label),
+				},
+			});
+	},
 });
 
-const comOptions = computed(() => {
-	const { direction, show } = route.query;
-	return {
-		direction: direction
-			? { value: String(direction), label: t(`pages.hierarchy.options.${String(direction)}`) }
-			: { label: t("pages.hierarchy.options.down"), value: "down" },
-		show: show
-			? { value: String(show), label: t(`pages.hierarchy.options.${String(show)}`) }
-			: { label: "Normal", value: "normal" },
-	};
+const comOptions = computed({
+	get() {
+		const { direction, show } = route.query;
+		return {
+			direction: direction
+				? { value: String(direction), label: t(`pages.hierarchy.options.${String(direction)}`) }
+				: { label: t("pages.hierarchy.options.down"), value: "down" },
+			show: show
+				? { value: String(show), label: t(`pages.hierarchy.options.${String(show)}`) }
+				: { label: showArgs.value[0]?.label, value: showArgs.value[0]?.label },
+		};
+	},
+	set(to) {
+		void router.push({
+			query: {
+				...route.query,
+				show: to.show.value,
+				direction: to.show.value,
+			},
+		});
+	},
 });
-
-const autocomplete = ref<HierarchyNode | null>(comQuery.value);
-const options = ref<{
-	show: { label: string; value: string };
-	direction: { label: string; value: string };
-}>(comOptions.value);
 
 const query = ref(
 	useQuery({
@@ -62,7 +79,7 @@ const query = ref(
 );
 
 const showArgs = computed(() => {
-	switch (autocomplete.value?.group) {
+	switch (route.query.model) {
 		case "Institution": {
 			const instArgs = [
 				{
@@ -75,8 +92,6 @@ const showArgs = computed(() => {
 					label: t("pages.hierarchy.options.add functions and persons"),
 				},
 			];
-			if (!instArgs.map((arg) => arg.label).includes(options.value.show.value) && instArgs[0])
-				options.value.show = instArgs[0];
 			return instArgs;
 		}
 		case "Funktion": {
@@ -87,12 +102,9 @@ const showArgs = computed(() => {
 				},
 				{ value: "show amt and persons", label: t("pages.hierarchy.options.show amt and persons") },
 			];
-			if (!funcArgs.map((arg) => arg.value).includes(options.value.show.value) && funcArgs[0])
-				options.value.show = funcArgs[0];
 			return funcArgs;
 		}
 		default: {
-			options.value.show = { value: "normal", label: t("pages.hierarchy.options.normal") };
 			return [{ value: "normal", label: t("pages.hierarchy.options.normal") }];
 		}
 	}
@@ -104,26 +116,18 @@ definePageMeta({
 </script>
 
 <template>
-	<MainContent class="container mx-auto grid grid-flow-row grid-rows-[auto_1fr]">
-		<div class="flex">
-			<Autocomplete
-				v-model="autocomplete"
-				@change="
-					autocomplete
-						? router.push({
-								query: {
-									...route.query,
-									id: autocomplete.pk,
-									model: encodeURIComponent(autocomplete.group),
-									label: encodeURIComponent(autocomplete.label),
-								},
-							})
-						: null
-				"
-			/>
+	<MainContent class="relative mx-auto grid w-full grid-flow-row grid-rows-[auto_1fr]">
+		<div class="container mx-auto flex flex-wrap">
+			<Autocomplete v-model="comQuery" />
 			<ClientOnly>
 				<GenericListbox
-					v-model="options.direction"
+					v-model="comOptions.show"
+					class="m-2 min-w-56"
+					:items="showArgs"
+					@change="({ value }) => router.push({ query: { ...route.query, show: value } })"
+				/>
+				<GenericListbox
+					v-model="comOptions.direction"
 					class="m-2 min-w-48"
 					:items="[
 						{ value: 'down', label: t('pages.hierarchy.options.down') },
@@ -135,15 +139,21 @@ definePageMeta({
 						}
 					"
 				/>
-				<GenericListbox
-					v-model="options.show"
-					class="m-2 min-w-56"
-					:items="showArgs"
-					@change="({ value }) => router.push({ query: { ...route.query, show: value } })"
-				/>
 			</ClientOnly>
+
+			<div class="m-2 h-11 w-fit self-end rounded border bg-white p-2 shadow-lg">
+				<div class="flex items-center gap-x-2">
+					<h3>{{ t("pages.hierarchy.legend.legend") }}:</h3>
+					<div class="h-4 w-4 rounded-full border bg-[tomato] shadow" />
+					<div>Institution</div>
+					<div class="h-4 w-4 rounded-full border bg-[yellowgreen] shadow" />
+					<div>{{ t("pages.hierarchy.legend.function") }}</div>
+					<div class="h-4 w-4 rounded-full border bg-[lightskyblue] shadow" />
+					<div>Person</div>
+				</div>
+			</div>
 		</div>
-		<div>
+		<div class="w-full">
 			<ClientOnly v-if="!query.isFetching">
 				<VisContainer v-slot="{ width }" class="my-4 flex items-center">
 					<HierarchyWrapper v-if="query.data" :data="query.data" :width="width" />

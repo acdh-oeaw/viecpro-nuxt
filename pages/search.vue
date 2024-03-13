@@ -55,15 +55,15 @@ const links = computed(() => {
 	} satisfies Record<string, NavLink>;
 });
 
-const updateFacets = async () => {
+const updateFacets = () => {
 	const { query } = route;
 
 	if (query.facets?.start_date_int) {
-		await addToFacets(typesenseQueryToFacetObject(String(query.facets)).start_date_int);
-	} else await addToFacets([1600, 1900]);
+		addToFacets(typesenseQueryToFacetObject(String(query.facets)).start_date_int);
+	} else addToFacets([1600, 1900]);
 };
 
-const addToFacets = async (range: [number, number]) => {
+const addToFacets = (range: [number, number]) => {
 	const { query } = route;
 	const router = useRouter();
 	const facetObject = typesenseQueryToFacetObject(String(query.facets));
@@ -74,11 +74,11 @@ const addToFacets = async (range: [number, number]) => {
 
 		if (isEmpty(facetObject)) {
 			delete query.facets;
-			await router.push({
+			void router.push({
 				query,
 			});
 		} else {
-			await router.push({
+			void router.push({
 				query: {
 					...query,
 					facets: facetObjectToTypesenseQuery(facetObject, false, includeDateless.value),
@@ -86,7 +86,7 @@ const addToFacets = async (range: [number, number]) => {
 			});
 		}
 	} else {
-		await router.push({
+		void router.push({
 			query: {
 				...query,
 				facets: facetObjectToTypesenseQuery(

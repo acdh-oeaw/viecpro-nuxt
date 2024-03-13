@@ -33,6 +33,7 @@ const input = ref("");
 
 const filtered = computed(() => {
 	if (!query.value.data) return null;
+
 	return input.value === ""
 		? query.value.data
 		: query.value.data.filter((entity) => {
@@ -58,11 +59,11 @@ defineEmits(["change", "input"]);
 				class="w-96 truncate p-2"
 				:display-value="(entity) => (entity as HierarchyNode)?.label"
 				@change="
-					input = $event.target.value;
 					$emit('input', $event.target.value);
+					input = $event.target.value;
 				"
 			/>
-			<ComboboxButton class="inset-y-0 right-0 flex items-center pr-3 text-gray-500">
+			<ComboboxButton class="inset-y-0 right-0 flex items-center px-3 text-gray-500">
 				<Search class="h-5 w-5" />
 			</ComboboxButton>
 		</div>

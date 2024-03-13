@@ -19,10 +19,10 @@ const route = useRoute();
 
 const facetObject: Record<string, Array<string>> = getFacetObjectFromURL(true);
 
-const facetChange = async (facets: Array<string>, field: string) => {
+const facetChange = (facets: Array<string>, field: string) => {
 	facetObject[field] = facets;
 
-	await router.push({
+	void router.push({
 		query: {
 			...route.query,
 			page: 1,

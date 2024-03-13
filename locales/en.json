@@ -25,6 +25,10 @@
 				"add functions and persons": "Institutions, functions and persons",
 				"show institution hierarchy": "Institutions hierarchy",
 				"show amt and persons": "Amt and persons"
+			},
+			"legend": {
+				"legend": "Legend",
+				"function": "Function"
 			}
 		},
 		"documentation": {
