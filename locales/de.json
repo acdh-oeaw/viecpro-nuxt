@@ -13,6 +13,24 @@
 			"title": "Datenbank",
 			"label": "Datenbank"
 		},
+		"hierarchy": {
+			"title": "Hierarchie",
+			"label": "Hierarchie",
+			"options": {
+				"up": "Nach Oben",
+				"down": "Nach Unten",
+				"normal": "Normal",
+				"show only institutions": "Institutionen",
+				"add functions": "Institutionen + Funktionen",
+				"add functions and persons": "Institutionen + Funktionen + Personen",
+				"show institution hierarchy": "Institutionshierarchie",
+				"show amt and persons": "Amt und Personen"
+			},
+			"legend": {
+				"legend": "Legende",
+				"function": "Funktion"
+			}
+		},
 		"documentation": {
 			"title": "Dokumentation",
 			"label": "Dokumentation",

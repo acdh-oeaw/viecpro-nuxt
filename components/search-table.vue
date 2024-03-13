@@ -55,7 +55,7 @@ const limitNum = computed(() => {
 });
 
 const comQuery = computed(() => {
-	const query = route.query;
+	const { query } = route;
 	return {
 		q: String(query.q ?? ""),
 		query_by: props.queryBy,
@@ -183,7 +183,7 @@ const getDetailLink = (id: string, entity?: string) => {
 					<div
 						v-for="hit in data.hits"
 						:key="String(hit.document.id)"
-						class="border-b py-1 md:border-t"
+						class="hyphens-auto border-b py-1 md:border-t"
 					>
 						<component
 							:is="customCols ? 'div' : NuxtLink"

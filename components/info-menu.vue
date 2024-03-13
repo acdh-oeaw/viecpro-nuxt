@@ -9,19 +9,12 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 				<slot name="button" />
 			</MenuButton>
 		</ClientOnly>
-		<Transition
-			enter-active-class="transition duration-100 ease-out"
-			enter-from-class="transform scale-95 -translate-y-8 opacity-0"
-			enter-to-class="transform scale-100 translate-y-0 opacity-100"
-			leave-active-class="transition duration-75 ease-in"
-			leave-from-class="transform scale-100 opacity-100"
-			leave-to-class="transform scale-95 opacity-0"
-		>
+		<MenuTransition>
 			<MenuItems as="div" class="absolute right-0 rounded border bg-gray-50 p-2 shadow-lg">
 				<MenuItem>
 					<slot name="content" />
 				</MenuItem>
 			</MenuItems>
-		</Transition>
+		</MenuTransition>
 	</Menu>
 </template>

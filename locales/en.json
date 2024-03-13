@@ -13,6 +13,24 @@
 			"title": "Database",
 			"label": "Database"
 		},
+		"hierarchy": {
+			"title": "Hierarchy",
+			"label": "Hierarchy",
+			"options": {
+				"up": "Up",
+				"down": "Down",
+				"normal": "Normal",
+				"show only institutions": "Institutions only",
+				"add functions": "Institutions and functions",
+				"add functions and persons": "Institutions, functions and persons",
+				"show institution hierarchy": "Institutions hierarchy",
+				"show amt and persons": "Amt and persons"
+			},
+			"legend": {
+				"legend": "Legend",
+				"function": "Function"
+			}
+		},
 		"documentation": {
 			"title": "Documentation",
 			"label": "Documentation",
