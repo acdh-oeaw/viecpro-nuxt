@@ -35,6 +35,38 @@ const comQuery = computed({
 	},
 });
 
+const showArgs = computed(() => {
+	switch (route.query.model) {
+		case "Institution": {
+			const instArgs = [
+				{
+					value: "show only institutions",
+					label: t("pages.hierarchy.options.show only institutions"),
+				},
+				{ value: "add functions", label: t("pages.hierarchy.options.add functions") },
+				{
+					value: "add functions and persons",
+					label: t("pages.hierarchy.options.add functions and persons"),
+				},
+			];
+			return instArgs;
+		}
+		case "Funktion": {
+			const funcArgs = [
+				{
+					value: "show institution hierarchy",
+					label: t("pages.hierarchy.options.show institution hierarchy"),
+				},
+				{ value: "show amt and persons", label: t("pages.hierarchy.options.show amt and persons") },
+			];
+			return funcArgs;
+		}
+		default: {
+			return [{ value: "normal", label: t("pages.hierarchy.options.normal") }];
+		}
+	}
+});
+
 const comOptions = computed({
 	get() {
 		const { direction, show } = route.query;
@@ -77,38 +109,6 @@ const query = ref(
 		},
 	}),
 );
-
-const showArgs = computed(() => {
-	switch (route.query.model) {
-		case "Institution": {
-			const instArgs = [
-				{
-					value: "show only institutions",
-					label: t("pages.hierarchy.options.show only institutions"),
-				},
-				{ value: "add functions", label: t("pages.hierarchy.options.add functions") },
-				{
-					value: "add functions and persons",
-					label: t("pages.hierarchy.options.add functions and persons"),
-				},
-			];
-			return instArgs;
-		}
-		case "Funktion": {
-			const funcArgs = [
-				{
-					value: "show institution hierarchy",
-					label: t("pages.hierarchy.options.show institution hierarchy"),
-				},
-				{ value: "show amt and persons", label: t("pages.hierarchy.options.show amt and persons") },
-			];
-			return funcArgs;
-		}
-		default: {
-			return [{ value: "normal", label: t("pages.hierarchy.options.normal") }];
-		}
-	}
-});
 
 definePageMeta({
 	title: "pages.hierarchy.title",

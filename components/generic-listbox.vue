@@ -7,19 +7,10 @@ const model: ModelRef<{ label: string; value: string } | null> = defineModel({
 	default: null,
 });
 
-const props = defineProps<{
+defineProps<{
 	items: Array<{ label: string; value: string }>;
 }>();
 defineEmits(["change"]);
-
-watch(
-	() => props.items,
-	(to) => {
-		console.log("items changed:", props.items, model.value);
-
-		model.value = to[0] ? to[0] : null;
-	},
-);
 </script>
 
 <template>
