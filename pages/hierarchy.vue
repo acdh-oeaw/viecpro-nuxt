@@ -17,7 +17,7 @@ const comQuery = computed({
 		if (!label || !id || !model) return null;
 
 		return {
-			group: decodeURIComponent(String(model)),
+			group: String(model),
 			pk: Number(id),
 			label: String(decodeURIComponent(String(label))),
 		};
@@ -28,14 +28,14 @@ const comQuery = computed({
 				query: {
 					...route.query,
 					id: to.pk,
-					model: encodeURIComponent(to.group),
-					label: encodeURIComponent(to.label),
+					model: to.group,
+					label: to.label,
 				},
 			});
 	},
 });
 
-const showArgs = computed(() => {
+const showItems = computed(() => {
 	switch (route.query.model) {
 		case "Institution": {
 			const instArgs = [
@@ -89,7 +89,7 @@ const show = computed({
 		const { show } = route.query;
 		return show
 			? { value: String(show), label: t(`pages.hierarchy.options.${String(show)}`) }
-			: { label: showArgs.value[0]?.label, value: showArgs.value[0]?.label };
+			: { label: showItems.value[0]?.label, value: showItems.value[0]?.label };
 	},
 	set(to) {
 		void router.push({
@@ -132,7 +132,7 @@ definePageMeta({
 			<div class="flex flex-wrap">
 				<Autocomplete v-model="comQuery" />
 				<ClientOnly>
-					<GenericListbox v-model="show" class="m-2 min-w-56" :items="showArgs" />
+					<GenericListbox v-model="show" class="m-2 min-w-56" :items="showItems" />
 					<GenericListbox
 						v-model="direction"
 						class="m-2 min-w-48"
