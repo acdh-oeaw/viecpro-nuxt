@@ -61,6 +61,11 @@ definePageMeta({
 					</span>
 					<div class="flex items-center gap-2">
 						<Indicator class="w-24" :status="data.entity.data?.ampel" />
+						<HierarchyLinkButton
+							:id="data.entity.data?.object_id"
+							model="Institution"
+							:label="data.entity.data?.name"
+						/>
 						<InfoMenu>
 							<template #button>
 								<button class="rounded-full hover:bg-slate-200 active:bg-slate-300">

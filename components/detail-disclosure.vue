@@ -16,7 +16,7 @@ const props = defineProps<{
 	collectionName: string;
 }>();
 
-const locale = useLocale();
+const localePath = useLocalePath();
 const t = useTranslations();
 
 const page = ref(0);
@@ -98,9 +98,11 @@ const all = props.rels.length;
 				>
 					<component
 						:is="linkTo ? NuxtLink : 'div'"
-						:to="`/${locale}/detail/${hit?.target?.model.toLowerCase() + 's'}/${
-							hit?.target?.object_id
-						}`"
+						:to="
+							localePath(
+								`/detail/${hit?.target?.model.toLowerCase() + 's'}/${hit?.target?.object_id}`,
+							)
+						"
 						class="grid grid-cols-[1fr_auto] items-center gap-1"
 						:class="linkTo && 'rounded transition hover:bg-slate-200 active:bg-slate-300 p-1 -ml-1'"
 					>

@@ -7,7 +7,7 @@ import {
 	ComboboxOptions,
 } from "@headlessui/vue";
 import { useQuery } from "@tanstack/vue-query";
-import { Search } from "lucide-vue-next";
+import { Loader2, Search } from "lucide-vue-next";
 import type { ModelRef } from "vue";
 
 import type { HierarchyNode } from "@/lib/types";
@@ -32,7 +32,7 @@ const selection: ModelRef<HierarchyNode | null> = defineModel({
 const input = ref("");
 
 const filtered = computed(() => {
-	if (!query.value.data) return null;
+	if (!query.value.data) return [];
 
 	return input.value === ""
 		? query.value.data
@@ -40,7 +40,6 @@ const filtered = computed(() => {
 				return entity.label.toLowerCase().includes(input.value.toLowerCase());
 			});
 });
-
 defineEmits(["change", "input"]);
 </script>
 
@@ -52,7 +51,6 @@ defineEmits(["change", "input"]);
 		@update:model-value="$emit('change', selection)"
 	>
 		<div
-			v-if="!query.isFetching"
 			class="relative m-2 flex cursor-default overflow-hidden rounded border bg-white text-left shadow-lg"
 		>
 			<ComboboxInput
@@ -67,22 +65,27 @@ defineEmits(["change", "input"]);
 				<Search class="h-5 w-5" />
 			</ComboboxButton>
 		</div>
-		<div v-else class="m-2 h-11 w-96 animate-pulse rounded bg-gray-300 shadow-lg" />
 		<MenuTransition>
 			<ComboboxOptions
-				v-if="filtered"
 				as="div"
-				class="absolute ml-2 flex flex-col divide-y overflow-auto rounded border bg-white text-base shadow"
+				class="absolute ml-2 flex w-full flex-col divide-y overflow-auto rounded border bg-white text-base shadow"
 			>
-				<ComboboxOption
-					v-for="entity in filtered.slice(0, 10)"
-					:key="entity.pk"
-					:value="entity"
-					as="div"
-					class="cursor-pointer p-2 ui-active:bg-primary-300"
-				>
-					{{ entity.label }}
-				</ComboboxOption>
+				<template v-if="!query.isFetching">
+					<ComboboxOption
+						v-for="entity in filtered.slice(0, 10)"
+						:key="entity.pk"
+						:value="entity"
+						as="div"
+						class="cursor-pointer p-2 ui-active:bg-primary-300"
+					>
+						{{ entity.label }}
+					</ComboboxOption>
+				</template>
+				<div v-else class="h-48">
+					<Centered>
+						<Loader2 class="h-5 w-5 shrink-0 animate-spin" />
+					</Centered>
+				</div>
 			</ComboboxOptions>
 		</MenuTransition>
 	</Combobox>

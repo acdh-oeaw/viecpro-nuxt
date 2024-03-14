@@ -3,13 +3,13 @@ import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { useWindowSize } from "@vueuse/core";
 import { get } from "lodash-es";
 import { ChevronDown, ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
 
 import type { AnyEntity } from "@/types/schema";
 import { NuxtLink } from "#components";
 
-const locale = useLocale();
+const localePath = useLocalePath();
 const t = useTranslations();
 const queryClient = useQueryClient();
 
@@ -33,8 +33,24 @@ const props = defineProps<{
 const pageLimit = 25;
 
 const route = useRoute();
+const router = useRouter();
 
-const input = ref(route.query.q === undefined ? "" : String(route.query.q));
+const input = computed({
+	get() {
+		const { q } = route.query;
+		if (q) return String(q);
+		return "";
+	},
+	set(to) {
+		void router.replace({
+			query: {
+				...route.query,
+				q: to,
+				page: 1,
+			},
+		});
+	},
+});
 
 const windowWidth = useWindowSize().width;
 
@@ -87,7 +103,7 @@ const { data, isFetching: loading } = useQuery({
 // TODO: finde better solution
 const getDetailLink = (id: string, entity?: string) => {
 	const type = entity ?? route.path.split("/")[3];
-	return `/${locale.value}/detail/${type}/${id}`;
+	return localePath(`/detail/${type}/${id}`);
 };
 </script>
 
@@ -109,15 +125,6 @@ const getDetailLink = (id: string, entity?: string) => {
 					type="text"
 					class="h-full rounded pl-2"
 					:placeholder="t('ui.search-placeholder')"
-					@input="
-						$router.replace({
-							query: {
-								...route.query,
-								q: input,
-								page: 1,
-							},
-						})
-					"
 				/>
 				<button
 					v-if="input"
@@ -230,7 +237,7 @@ const getDetailLink = (id: string, entity?: string) => {
 													.join("; ")
 											}}
 										</span>
-										<span v-else-if="key === 'ampel'" class="mx-auto">
+										<span v-else-if="key === 'ampel'" class="m-2 md:m-0 md:mx-auto">
 											<Indicator class="h-5 w-5" :status="hit.document.ampel" small />
 										</span>
 										<span
