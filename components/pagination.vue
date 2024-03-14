@@ -13,7 +13,7 @@ const t = useTranslations();
 </script>
 
 <template>
-	<div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+	<div class="grid grid-cols-2 items-center gap-2 lg:grid-cols-[1fr_auto_1fr]">
 		<div class="flex items-center gap-1">
 			<NuxtLink
 				v-if="page > 1"
@@ -60,7 +60,7 @@ const t = useTranslations();
 				</NuxtLink>
 			</div>
 		</div>
-		<div class="mx-auto">
+		<div class="mx-auto hidden lg:block">
 			<div v-if="all != 0">
 				<div>
 					{{

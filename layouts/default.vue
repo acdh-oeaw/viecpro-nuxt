@@ -25,7 +25,10 @@ useHead({
 	titleTemplate(title) {
 		return [title, meta.value.title].join(" - ");
 	},
-	meta: [{ name: "description", content: meta.value.description }],
+	meta: [
+		{ name: "description", content: meta.value.description },
+		{ name: "theme-color", content: "#3C5A50" },
+	],
 });
 </script>
 
