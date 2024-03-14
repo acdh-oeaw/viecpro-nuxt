@@ -11,7 +11,7 @@ import type { Court, CourtDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
-const locale = useLocale();
+const localePath = useLocalePath();
 
 const route = useRoute();
 const id = String(route.params.id);
@@ -64,6 +64,11 @@ definePageMeta({
 					</span>
 					<div class="flex items-center gap-2">
 						<Indicator class="w-24" :status="data.details.data?.ampel" />
+						<HierarchyLinkButton
+							:id="data.entity.data?.object_id"
+							model="Institution"
+							:label="data.entity.data?.name"
+						/>
 						<InfoMenu>
 							<template #button>
 								<button class="rounded-full hover:bg-slate-200 active:bg-slate-300">
@@ -128,7 +133,7 @@ definePageMeta({
 						data.details.data.owners[0] &&
 						data.details.data.resolution.includes(String(data.details.data.owners[0].target.name))
 					"
-					:to="`/${locale}/detail/persons/${data.details.data.owners[0].target.object_id}`"
+					:to="localePath(`/detail/persons/${data.details.data.owners[0].target.object_id}`)"
 					class="underline"
 				>
 					{{ data.details.data?.resolution }}

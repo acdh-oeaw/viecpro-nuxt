@@ -6,7 +6,7 @@ import { Tree } from "@/lib/tree";
 
 const router = useRouter();
 
-const locale = useLocale();
+const localePath = useLocalePath();
 
 const props = defineProps<{
 	data: TreeEntity;
@@ -50,7 +50,9 @@ function updateTree(data: TreeEntity, width: number) {
 	const options = {
 		label: (d: Node) => d.data.meta.label,
 		link: (d: Node) =>
-			`/${locale.value}/hierarchy?id=${d.data.meta.pk}&model=${d.data.meta.entity_type}&label=${d.data.meta.label}`,
+			localePath(
+				`/hierarchy?id=${d.data.meta.pk}&model=${d.data.meta.entity_type}&label=${d.data.meta.label}`,
+			),
 		width,
 		r: 7,
 		fontSize: "medium",

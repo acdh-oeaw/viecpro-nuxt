@@ -9,7 +9,7 @@ import { useRoute } from "vue-router";
 import type { AnyEntity } from "@/types/schema";
 import { NuxtLink } from "#components";
 
-const locale = useLocale();
+const localePath = useLocalePath();
 const t = useTranslations();
 const queryClient = useQueryClient();
 
@@ -103,7 +103,7 @@ const { data, isFetching: loading } = useQuery({
 // TODO: finde better solution
 const getDetailLink = (id: string, entity?: string) => {
 	const type = entity ?? route.path.split("/")[3];
-	return `/${locale.value}/detail/${type}/${id}`;
+	return localePath(`/detail/${type}/${id}`);
 };
 </script>
 
