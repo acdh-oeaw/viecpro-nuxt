@@ -67,24 +67,35 @@ const showArgs = computed(() => {
 	}
 });
 
-const comOptions = computed({
+const direction = computed({
 	get() {
-		const { direction, show } = route.query;
-		return {
-			direction: direction
-				? { value: String(direction), label: t(`pages.hierarchy.options.${String(direction)}`) }
-				: { label: t("pages.hierarchy.options.down"), value: "down" },
-			show: show
-				? { value: String(show), label: t(`pages.hierarchy.options.${String(show)}`) }
-				: { label: showArgs.value[0]?.label, value: showArgs.value[0]?.label },
-		};
+		const { direction } = route.query;
+		return direction
+			? { value: String(direction), label: t(`pages.hierarchy.options.${String(direction)}`) }
+			: { label: t("pages.hierarchy.options.down"), value: "down" };
 	},
 	set(to) {
 		void router.push({
 			query: {
 				...route.query,
-				show: to.show.value,
-				direction: to.show.value,
+				direction: to.value,
+			},
+		});
+	},
+});
+
+const show = computed({
+	get() {
+		const { show } = route.query;
+		return show
+			? { value: String(show), label: t(`pages.hierarchy.options.${String(show)}`) }
+			: { label: showArgs.value[0]?.label, value: showArgs.value[0]?.label };
+	},
+	set(to) {
+		void router.push({
+			query: {
+				...route.query,
+				show: to.value,
 			},
 		});
 	},
@@ -92,15 +103,15 @@ const comOptions = computed({
 
 const query = ref(
 	useQuery({
-		queryKey: ["hierarchy", comQuery, comOptions] as const,
+		queryKey: ["hierarchy", comQuery, direction, show] as const,
 		queryFn: async ({ queryKey }) => {
-			const [, auto, q] = queryKey;
+			const [, auto, dir, show] = queryKey;
 
 			if (!auto) return null;
 
 			const data = await getTreeData({
-				show: String(q.show.value),
-				direction: String(q.direction.value),
+				show: String(show.value),
+				direction: String(dir.value),
 				model: auto.group,
 				id: String(auto.pk),
 			});
@@ -117,30 +128,21 @@ definePageMeta({
 
 <template>
 	<MainContent class="relative mx-auto grid w-full grid-flow-row grid-rows-[auto_1fr]">
-		<div class="container mx-auto flex flex-wrap">
-			<Autocomplete v-model="comQuery" />
-			<ClientOnly>
-				<GenericListbox
-					v-model="comOptions.show"
-					class="m-2 min-w-56"
-					:items="showArgs"
-					@change="({ value }) => router.push({ query: { ...route.query, show: value } })"
-				/>
-				<GenericListbox
-					v-model="comOptions.direction"
-					class="m-2 min-w-48"
-					:items="[
-						{ value: 'down', label: t('pages.hierarchy.options.down') },
-						{ value: 'up', label: t('pages.hierarchy.options.up') },
-					]"
-					@change="
-						({ value }) => {
-							router.push({ query: { ...route.query, direction: value } });
-						}
-					"
-				/>
-			</ClientOnly>
-
+		<div class="container mx-auto flex flex-wrap justify-between">
+			<div class="flex flex-wrap">
+				<Autocomplete v-model="comQuery" />
+				<ClientOnly>
+					<GenericListbox v-model="show" class="m-2 min-w-56" :items="showArgs" />
+					<GenericListbox
+						v-model="direction"
+						class="m-2 min-w-48"
+						:items="[
+							{ value: 'down', label: t('pages.hierarchy.options.down') },
+							{ value: 'up', label: t('pages.hierarchy.options.up') },
+						]"
+					/>
+				</ClientOnly>
+			</div>
 			<div class="m-2 h-11 w-fit self-end rounded border bg-white p-2 shadow-lg">
 				<div class="flex items-center gap-x-2">
 					<h3>{{ t("pages.hierarchy.legend.legend") }}:</h3>

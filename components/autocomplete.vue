@@ -56,7 +56,7 @@ defineEmits(["change", "input"]);
 			class="relative m-2 flex cursor-default overflow-hidden rounded border bg-white text-left shadow-lg"
 		>
 			<ComboboxInput
-				class="w-96 truncate p-2"
+				class="w-80 truncate p-2"
 				:display-value="(entity) => (entity as HierarchyNode)?.label"
 				@change="
 					$emit('input', $event.target.value);
