@@ -39,6 +39,16 @@ const relCols = ["relation_type", "target.name", "start_date", "end_date"];
 definePageMeta({
 	title: "pages.searchviews.courts.title",
 });
+
+const title = computed(() => {
+	if (data.value.entity.data?.name)
+		return `${data.value.entity.data.name} - ${t("pages.searchviews.courts.sing")}`;
+	return t("pages.searchviews.courts.sing");
+});
+
+useHead({
+	title,
+});
 </script>
 
 <template>
@@ -65,7 +75,7 @@ definePageMeta({
 					<div class="flex items-center gap-2">
 						<Indicator class="w-24" :status="data.details.data?.ampel" />
 						<HierarchyLinkButton
-							:id="data.entity.data?.object_id"
+							:id="String(data.entity.data?.object_id)"
 							model="Institution"
 							:label="data.entity.data?.name"
 						/>

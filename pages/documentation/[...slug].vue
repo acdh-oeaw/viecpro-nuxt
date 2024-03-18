@@ -15,6 +15,10 @@ const currentDoc = computed(() => {
 		return route.params.slug[0];
 	}
 });
+
+useHead({
+	title: t("pages.documentation.title"),
+});
 console.log(route.params.slug, locale.value);
 </script>
 

@@ -5,6 +5,8 @@ import { useRoute } from "vue-router";
 import type { Event } from "@/types/schema";
 import { definePageMeta, ref } from "#imports";
 
+const t = useTranslations();
+
 const route = useRoute();
 const id = String(route.params.id);
 
@@ -17,6 +19,16 @@ const data = ref({
 
 definePageMeta({
 	title: "pages.searchviews.events.title",
+});
+
+const title = computed(() => {
+	if (data.value.entity.data?.name)
+		return `${data.value.entity.data.name} - ${t("pages.searchviews.events.sing")}`;
+	return t("pages.searchviews.events.sing");
+});
+
+useHead({
+	title,
 });
 </script>
 

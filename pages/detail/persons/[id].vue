@@ -65,6 +65,15 @@ const relCols = ["relation_type", "target.name", "start_date", "end_date"];
 definePageMeta({
 	title: "pages.searchviews.people.title",
 });
+
+const title = computed(() => {
+	if (data.value.entity.data?.name) return `${data.value.entity.data.fullname} - Person`;
+	return "Person";
+});
+
+useHead({
+	title,
+});
 </script>
 
 <template>
@@ -92,7 +101,7 @@ definePageMeta({
 					<div class="flex items-center gap-2">
 						<Indicator class="w-24" :status="data.entity.data?.ampel" />
 						<HierarchyLinkButton
-							:id="data.entity.data?.object_id"
+							:id="String(data.entity.data?.object_id)"
 							model="Person"
 							:label="data.entity.data?.fullname"
 						/>
