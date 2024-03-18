@@ -6,6 +6,8 @@ import SearchTable from "@/components/search-table.vue";
 import { getSchema } from "@/composables/use-ts-data";
 import { definePageMeta } from "#imports";
 
+const t = useTranslations();
+
 const collectionName = "viecpro_events";
 
 const queryBy = ["name", "alternativenames"];
@@ -29,6 +31,10 @@ const sortable = computed(
 
 definePageMeta({
 	title: "pages.searchviews.events.title",
+});
+
+useHead({
+	title: `${t("pages.searchviews.events.title")} ${t("pages.search.title")}`,
 });
 </script>
 

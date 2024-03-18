@@ -11,9 +11,11 @@ definePageMeta({
 		<div class="flex flex-col gap-16 md:gap-32">
 			<div>
 				<div class="h-2 w-full bg-primary-900" />
-				<img
+				<NuxtImg
+					:placeholder="[452, 128, 75]"
 					src="/assets/images/background-court-ship.jpeg"
 					alt=""
+					format="webp"
 					class="min-h-[20rem] w-full object-cover"
 				/>
 				<div class="h-2 w-full bg-primary-800" />

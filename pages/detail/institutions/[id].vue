@@ -36,6 +36,15 @@ const loading = computed(() => ({
 definePageMeta({
 	title: "pages.searchviews.institutions.title",
 });
+
+const title = computed(() => {
+	if (data.value.entity.data?.name) return `${data.value.entity.data.name} - Institution`;
+	return "Institution";
+});
+
+useHead({
+	title,
+});
 </script>
 
 <template>
@@ -62,7 +71,7 @@ definePageMeta({
 					<div class="flex items-center gap-2">
 						<Indicator class="w-24" :status="data.entity.data?.ampel" />
 						<HierarchyLinkButton
-							:id="data.entity.data?.object_id"
+							:id="String(data.entity.data?.object_id)"
 							model="Institution"
 							:label="data.entity.data?.name"
 						/>

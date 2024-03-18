@@ -127,6 +127,10 @@ watch(
 definePageMeta({
 	title: "pages.search.title",
 });
+
+useHead({
+	title: t("pages.search.title"),
+});
 </script>
 
 <template>

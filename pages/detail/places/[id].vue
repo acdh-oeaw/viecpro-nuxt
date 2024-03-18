@@ -64,6 +64,16 @@ const relCols = ["relation_type", "target.name", "start_date", "end_date"];
 definePageMeta({
 	title: "pages.searchviews.places.title",
 });
+
+const title = computed(() => {
+	if (data.value.entity.data?.name)
+		return `${data.value.entity.data.name} - ${t("pages.searchviews.places.sing")}`;
+	return t("pages.searchviews.places.sing");
+});
+
+useHead({
+	title,
+});
 </script>
 
 <template>

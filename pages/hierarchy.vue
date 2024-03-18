@@ -124,6 +124,9 @@ const query = ref(
 definePageMeta({
 	title: "pages.hierarchy.title",
 });
+useHead({
+	title: t("pages.hierarchy.label"),
+});
 </script>
 
 <template>
