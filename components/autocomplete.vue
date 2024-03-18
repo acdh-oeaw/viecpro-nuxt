@@ -12,6 +12,8 @@ import type { ModelRef } from "vue";
 
 import type { HierarchyNode } from "@/lib/types";
 
+const t = useTranslations();
+
 const query = ref(
 	useQuery({
 		queryKey: ["autocomplete"],
@@ -63,6 +65,7 @@ defineEmits(["change", "input"]);
 			/>
 			<ComboboxButton class="inset-y-0 right-0 flex items-center px-3 text-gray-500">
 				<Search class="h-5 w-5" />
+				<span class="sr-only">{{ t("ui.search-placeholder") }}</span>
 			</ComboboxButton>
 		</div>
 		<MenuTransition>

@@ -144,12 +144,6 @@ const getDetailLink = (id: string, entity?: string) => {
 				</button>
 			</div>
 			<slot />
-			<!-- <DownloadResultsWrapper
-				v-if="data && data.page"
-				:all="data.found"
-				:collection="collectionName"
-				:query="comQuery"
-			/> -->
 			<div class="flex w-full justify-end">
 				<DownloadMenu
 					v-if="data && data.page"
