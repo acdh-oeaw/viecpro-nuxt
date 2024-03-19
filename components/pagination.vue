@@ -13,7 +13,9 @@ const t = useTranslations();
 </script>
 
 <template>
-	<div class="grid grid-cols-2 items-center gap-2 lg:grid-cols-[1fr_auto_1fr]">
+	<div
+		class="grid grid-cols-[auto_1fr_auto] items-center justify-between gap-2 lg:grid-cols-[1fr_auto_1fr]"
+	>
 		<div class="flex items-center gap-1">
 			<NuxtLink
 				v-if="page > 1"
@@ -36,29 +38,12 @@ const t = useTranslations();
 				<ChevronUp class="h-5 w-5 -rotate-90" />
 				<span class="sr-only">{{ t("ui.first-page") }}</span>
 			</div>
-			<div class="flex flex-wrap justify-center gap-1">
-				<NuxtLink v-if="page > 3" class="underline" :to="{ query: { ...route.query, page: 1 } }"
-					>1</NuxtLink
-				>
-				<span v-if="page > 4">...</span>
-				<template v-for="n in 5" :key="n - 3 + page">
-					<NuxtLink
-						v-if="n - 3 + page >= 1 && n - 3 + page <= Math.ceil(all / limit)"
-						:class="n === 3 ? 'font-semibold' : 'underline'"
-						:to="{ query: { ...route.query, page: n - 3 + page } }"
-					>
-						{{ n - 3 + page }}
-					</NuxtLink>
-				</template>
-				<span v-if="page + 3 < Math.ceil(all / limit)">...</span>
-				<NuxtLink
-					v-if="page + 2 < Math.ceil(all / limit)"
-					class="underline"
-					:to="{ query: { ...route.query, page: Math.ceil(all / limit) } }"
-				>
-					{{ Math.ceil(all / limit) }}
-				</NuxtLink>
-			</div>
+			<PageIndicator
+				class="ml-1 hidden flex-wrap justify-center gap-1 md:flex"
+				:all="all"
+				:limit="limit"
+				:page="page"
+			/>
 		</div>
 		<div class="mx-auto hidden lg:block">
 			<div v-if="all != 0">
@@ -74,29 +59,12 @@ const t = useTranslations();
 			</div>
 			<div v-else class="italic">{{ t("ui.no-results") }}</div>
 		</div>
+		<div class="md:hidden">
+			<PageIndicator class="flex justify-center gap-1" :all="all" :limit="limit" :page="page" />
+			<PerPageSelector class="mx-auto flex justify-center gap-1" />
+		</div>
 		<div class="flex items-center justify-end gap-2">
-			<div class="flex items-center gap-1">
-				<span>{{ t("ui.per-page") }}:</span>
-				<NuxtLink
-					v-for="option in [10, 25, 50, 100]"
-					:key="option"
-					:class="
-						(!route.query.limit && option === 25) || option === Number(route.query.limit)
-							? 'font-semibold'
-							: 'underline'
-					"
-					:to="{
-						query: {
-							...route.query,
-							page: 1,
-							limit: option,
-						},
-					}"
-				>
-					{{ option }}
-				</NuxtLink>
-			</div>
-
+			<PerPageSelector class="mr-1 hidden items-center gap-1 md:flex" />
 			<NuxtLink
 				v-if="page * limit < Number(all)"
 				data-testid="nextPage"

@@ -66,6 +66,9 @@ const config: Config = {
 				DEFAULT: {
 					css: {
 						maxWidth: null,
+						h1: {
+							hyphens: "auto",
+						},
 					},
 				},
 			},

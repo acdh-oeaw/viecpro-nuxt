@@ -49,14 +49,14 @@ defineEmits(["change", "input"]);
 	<Combobox
 		v-model="selection"
 		as="div"
-		class="relative"
+		class="relative w-full md:w-auto"
 		@update:model-value="$emit('change', selection)"
 	>
 		<div
 			class="relative m-2 flex cursor-default overflow-hidden rounded border bg-white text-left shadow-lg"
 		>
 			<ComboboxInput
-				class="w-80 truncate p-2"
+				class="w-full truncate p-2 md:w-72"
 				:display-value="(entity) => (entity as HierarchyNode)?.label"
 				@change="
 					$emit('input', $event.target.value);

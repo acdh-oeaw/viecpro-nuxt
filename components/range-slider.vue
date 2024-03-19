@@ -38,7 +38,7 @@ const { Root, Control, Thumb, MarkerGroup, Marker, Range, Track } = Slider; // i
 				<input
 					id="start_year"
 					v-model="range[0]"
-					class="w-16 rounded text-right shadow"
+					class="w-16 rounded shadow md:text-right"
 					type="number"
 					:min="min"
 					:max="max"

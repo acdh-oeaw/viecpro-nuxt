@@ -135,10 +135,10 @@ useHead({
 			<div class="flex flex-wrap">
 				<Autocomplete v-model="comQuery" />
 				<ClientOnly>
-					<GenericListbox v-model="show" class="m-2 min-w-56" :items="showItems" />
+					<GenericListbox v-model="show" class="m-2 w-full min-w-56 md:w-auto" :items="showItems" />
 					<GenericListbox
 						v-model="direction"
-						class="m-2 min-w-48"
+						class="m-2 w-full min-w-48 md:w-auto"
 						:items="[
 							{ value: 'down', label: t('pages.hierarchy.options.down') },
 							{ value: 'up', label: t('pages.hierarchy.options.up') },
@@ -146,15 +146,23 @@ useHead({
 					/>
 				</ClientOnly>
 			</div>
-			<div class="m-2 h-11 w-fit self-end rounded border bg-white p-2 shadow-lg">
-				<div class="flex items-center gap-x-2">
+			<div class="m-2 min-h-11 w-full self-end rounded border bg-white p-2 shadow-lg md:w-fit">
+				<div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
 					<h3>{{ t("pages.hierarchy.legend.legend") }}:</h3>
-					<div class="h-4 w-4 rounded-full border bg-[tomato] shadow" />
-					<div>Institution</div>
-					<div class="h-4 w-4 rounded-full border bg-[yellowgreen] shadow" />
-					<div>{{ t("pages.hierarchy.legend.function") }}</div>
-					<div class="h-4 w-4 rounded-full border bg-[lightskyblue] shadow" />
-					<div>Person</div>
+					<div class="flex gap-x-3">
+						<div class="flex items-center gap-1">
+							<div class="h-4 w-4 rounded-full border bg-[tomato] shadow" />
+							<div>Institution</div>
+						</div>
+						<div class="flex items-center gap-1">
+							<div class="h-4 w-4 rounded-full border bg-[yellowgreen] shadow" />
+							<div>{{ t("pages.hierarchy.legend.function") }}</div>
+						</div>
+						<div class="flex items-center gap-1">
+							<div class="h-4 w-4 rounded-full border bg-[lightskyblue] shadow" />
+							<div>Person</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

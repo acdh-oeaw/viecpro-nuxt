@@ -22,16 +22,14 @@ const links = computed(() => {
 
 <template>
 	<header class="bg-primary-600 text-white">
-		<div
-			class="mx-auto flex w-full max-w-container items-center justify-between gap-x-4 gap-y-2 px-8 py-4"
-		>
+		<div class="mx-auto flex w-full max-w-container items-center justify-between gap-2 px-8 py-4">
 			<NuxtLink class="shrink-0 select-none" :href="links.home.href">
 				<span class="sr-only">{{ links.home.label }}</span>
 				<img alt="" class="h-20" src="@/assets/images/logo-white.png" />
 			</NuxtLink>
 			<div class="hidden items-center md:flex">
 				<nav :aria-label="t('common.main-navigation')">
-					<ul class="flex flex-wrap gap-x-4" role="list">
+					<ul class="flex flex-wrap gap-x-3" role="list">
 						<li v-for="(link, key) of links" :key="key" class="select-none">
 							<NuxtLink
 								class="rounded p-2 transition hover:bg-primary-800 active:bg-primary-900"
