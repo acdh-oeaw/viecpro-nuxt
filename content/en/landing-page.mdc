@@ -5,7 +5,7 @@ navigation: false # This will not appear with other documentation
 
 
 ::header-wrapper
-# [Der Wiener Hof .]{.text-primary-600.font-black.text-5xl} [Ein prosopographisches Portal]{.text-primary-600.text-5xl.font-extralight}
+# [Der Wiener Hof .]{.text-primary-600.font-black} [Ein prosopographisches Portal]{.text-primary-600.font-extralight}
 ::
 
 ::content-wrapper

@@ -8,7 +8,7 @@ definePageMeta({
 
 <template>
 	<MainContent class="mb-4 flex flex-col gap-8 md:mb-8">
-		<div class="flex flex-col gap-16 md:gap-32">
+		<div class="flex flex-col gap-8 md:gap-32">
 			<div>
 				<div class="h-2 w-full bg-primary-900" />
 				<NuxtImg
@@ -16,7 +16,7 @@ definePageMeta({
 					src="/assets/images/background-court-ship.jpeg"
 					alt=""
 					format="webp"
-					class="min-h-[20rem] w-full object-cover"
+					class="aspect-[3.84] min-h-[20rem] w-full object-cover"
 				/>
 				<div class="h-2 w-full bg-primary-800" />
 			</div>

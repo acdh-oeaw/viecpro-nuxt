@@ -3,7 +3,7 @@ import type { SearchParams, SearchResponse } from "typesense/lib/Typesense/Docum
 import type { LocationQuery } from "vue-router";
 
 import { useDefaultClient } from "@/lib/get-ts-data";
-import type { AnyDetail, AnyEntity } from "@/types/schema";
+import type { AnyDetail, AnyEntity, Reference } from "@/types/schema";
 
 export async function getDocuments<T extends AnyEntity>(
 	query: SearchParams,
@@ -12,7 +12,10 @@ export async function getDocuments<T extends AnyEntity>(
 	return useDefaultClient().collections<T>(collection).documents().search(query);
 }
 
-export async function getDocument<T extends AnyEntity>(collection: string, id: string): Promise<T> {
+export async function getDocument<T extends AnyEntity | Reference>(
+	collection: string,
+	id: string,
+): Promise<T> {
 	return useDefaultClient().collections<T>(collection).documents(id).retrieve();
 }
 

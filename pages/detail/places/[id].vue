@@ -92,7 +92,7 @@ useHead({
 			<h1 class="font-bold text-primary-600 xl:my-2 xl:text-4xl">
 				<div
 					v-if="!loading.entity && data.entity.data"
-					class="flex items-center justify-between gap-8"
+					class="mb-4 flex flex-col justify-between gap-4 md:m-0 md:flex-row md:items-center md:gap-8"
 				>
 					<span class="text-4xl">
 						{{ data.entity.data?.name }}

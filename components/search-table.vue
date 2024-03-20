@@ -108,7 +108,9 @@ const getDetailLink = (id: string, entity?: string) => {
 </script>
 
 <template>
-	<div class="mx-2 flex h-full flex-col-reverse gap-4 xl:grid xl:grid-cols-[4fr_2fr]">
+	<div
+		class="flex h-full w-screen flex-col-reverse gap-4 px-2 md:w-auto xl:grid xl:grid-cols-[4fr_2fr]"
+	>
 		<div class="mx-auto flex h-full w-full max-w-container flex-col p-2 xl:p-0">
 			<div
 				class="mb-4 grid h-12 w-full shrink-0 grid-cols-[auto_1fr_auto] items-center rounded border bg-white shadow-md xl:my-4"
@@ -202,7 +204,7 @@ const getDetailLink = (id: string, entity?: string) => {
 									:key="key + hit.document.id"
 									class="self-center overflow-auto"
 								>
-									<span class="ml-2 text-sm text-gray-600 md:hidden">
+									<span v-if="get(hit.document, key)" class="ml-2 text-sm text-gray-600 md:hidden">
 										{{ t(`collection-keys["${collectionName}"]["${key}"]`) }}
 									</span>
 									<component
@@ -241,10 +243,11 @@ const getDetailLink = (id: string, entity?: string) => {
 										/>
 										<span
 											v-else-if="['kategorie', 'institutions', 'alternativenames'].includes(key)"
+											class="m-2"
 										>
 											{{ get(hit.document, key).join(", ") }}
 										</span>
-										<span v-else class="m-2">
+										<span v-else-if="get(hit.document, key)" class="m-2">
 											{{ get(hit.document, key) }}
 										</span>
 										<ChevronRight v-if="isLinkCol(key, hit.document)" class="h-6 w-6 shrink-0" />

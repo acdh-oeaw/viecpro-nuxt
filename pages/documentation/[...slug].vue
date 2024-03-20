@@ -50,7 +50,7 @@ console.log(route.params.slug, locale.value);
 		<MainContent class="w-full px-6 py-4">
 			<ContentQuery v-slot="{ data }" :path="currentDoc" :where="{ _locale: locale }" find="one">
 				<ContentRenderer v-if="data" :value="data">
-					<ContentRendererMarkdown :value="data" class="prose" />
+					<ContentRendererMarkdown :value="data" class="prose prose-sm md:prose-base" />
 				</ContentRenderer>
 			</ContentQuery>
 		</MainContent>
