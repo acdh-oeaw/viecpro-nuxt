@@ -24,7 +24,8 @@
 				"add functions": "Institutionen + Funktionen",
 				"add functions and persons": "Institutionen + Funktionen + Personen",
 				"show institution hierarchy": "Institutionshierarchie",
-				"show amt and persons": "Amt und Personen"
+				"show amt and persons": "Amt und Personen",
+				"goto": "Zur Detail Seite"
 			},
 			"legend": {
 				"legend": "Legende",
@@ -157,7 +158,9 @@
 			"non_court_functions": " Sonstiger Bezug und Tätigkeiten",
 			"model": "Modell",
 			"functions": "Funktion",
-			"institutions": "Institution"
+			"institutions": "Institution",
+			"allowance": "Zahlungen",
+			"same_as": "Gleich wie"
 		},
 		"viecpro_courts": {
 			"model": "Modell",

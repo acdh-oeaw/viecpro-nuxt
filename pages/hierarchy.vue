@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useQuery } from "@tanstack/vue-query";
-import { Loader2 } from "lucide-vue-next";
+import { ArrowRight, Loader2 } from "lucide-vue-next";
 
 import HierarchyWrapper from "@/components/hierarchy-wrapper.vue";
 import { getTreeData } from "@/lib/get-tree-data";
@@ -9,6 +9,7 @@ const router = useRouter();
 const route = useRoute();
 
 const t = useTranslations();
+const localePath = useLocalePath();
 
 const comQuery = computed({
 	get() {
@@ -36,7 +37,7 @@ const comQuery = computed({
 });
 
 const showItems = computed(() => {
-	switch (route.query.model) {
+	switch (comQuery.value?.group) {
 		case "Institution": {
 			const instArgs = [
 				{
@@ -134,17 +135,27 @@ useHead({
 		<div class="container mx-auto flex flex-wrap justify-between">
 			<div class="flex flex-wrap">
 				<Autocomplete v-model="comQuery" />
-				<ClientOnly>
-					<GenericListbox v-model="show" class="m-2 w-full min-w-56 md:w-auto" :items="showItems" />
-					<GenericListbox
-						v-model="direction"
-						class="m-2 w-full min-w-48 md:w-auto"
-						:items="[
-							{ value: 'down', label: t('pages.hierarchy.options.down') },
-							{ value: 'up', label: t('pages.hierarchy.options.up') },
-						]"
-					/>
-				</ClientOnly>
+				<GenericListbox v-model="show" class="m-2 w-full min-w-56 md:w-auto" :items="showItems" />
+				<GenericListbox
+					v-if="comQuery?.group === 'Institution'"
+					v-model="direction"
+					class="m-2 w-full min-w-48 md:w-auto"
+					:items="[
+						{ value: 'down', label: t('pages.hierarchy.options.down') },
+						{ value: 'up', label: t('pages.hierarchy.options.up') },
+					]"
+				/>
+				<NuxtLink
+					v-if="comQuery && ['Person', 'Institution'].includes(comQuery.group)"
+					:href="localePath(`/detail/${comQuery.group.toLowerCase()}s/${comQuery.pk}`)"
+				>
+					<button
+						class="m-2 flex min-h-11 items-center gap-1 rounded border bg-white px-2 shadow-md transition hover:bg-slate-200 active:bg-slate-300"
+					>
+						<span>{{ t("pages.hierarchy.options.goto") }}</span>
+						<ArrowRight class="h-5 w-5 shrink-0" />
+					</button>
+				</NuxtLink>
 			</div>
 			<div class="m-2 min-h-11 w-full self-end rounded border bg-white p-2 shadow-lg md:w-fit">
 				<div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
