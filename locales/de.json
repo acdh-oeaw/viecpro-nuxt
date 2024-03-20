@@ -157,7 +157,8 @@
 			"non_court_functions": " Sonstiger Bezug und Tätigkeiten",
 			"model": "Modell",
 			"functions": "Funktion",
-			"institutions": "Institution"
+			"institutions": "Institution",
+			"allowance": "Zahlungen"
 		},
 		"viecpro_courts": {
 			"model": "Modell",
