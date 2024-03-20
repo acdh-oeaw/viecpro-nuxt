@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { Info, Loader2 } from "lucide-vue-next";
+import { Info, Link, Loader2 } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
@@ -320,6 +320,25 @@ useHead({
 					:headers="[]"
 					:collection-name="collection"
 				/> -->
+				<GenericDisclosure
+					:title="t('collection-keys.viecpro_persons.same_as')"
+					:disabled="isEmpty(data.details.data.sameAs)"
+				>
+					<div class="p-2">
+						<div
+							v-for="url in data.details.data.sameAs"
+							:key="url"
+							class="border-t p-1 pl-0 first:border-0"
+						>
+							<NuxtLink class="flex items-center gap-1 font-semibold underline" :href="url">
+								<span>
+									{{ url }}
+								</span>
+								<Link class="h-5 w-5 shrink-0" />
+							</NuxtLink>
+						</div>
+					</div>
+				</GenericDisclosure>
 			</div>
 			<div v-else>{{ t("ui.no-data") }}.</div>
 		</template>

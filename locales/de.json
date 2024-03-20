@@ -158,7 +158,8 @@
 			"model": "Modell",
 			"functions": "Funktion",
 			"institutions": "Institution",
-			"allowance": "Zahlungen"
+			"allowance": "Zahlungen",
+			"same_as": "Gleich wie"
 		},
 		"viecpro_courts": {
 			"model": "Modell",

@@ -157,7 +157,8 @@
 			"end_date": "End",
 			"functions": "Function",
 			"institutions": "Institution",
-			"allowance": "Allowance"
+			"allowance": "Allowance",
+			"same_as": "Same as"
 		},
 		"viecpro_courts": {
 			"model": "Model",
