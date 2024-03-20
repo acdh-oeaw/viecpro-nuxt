@@ -16,7 +16,7 @@ definePageMeta({
 					src="/assets/images/background-court-ship.jpeg"
 					alt=""
 					format="webp"
-					class="min-h-[20rem] w-full object-cover"
+					class="aspect-[3.84] min-h-[20rem] w-full object-cover"
 				/>
 				<div class="h-2 w-full bg-primary-800" />
 			</div>
