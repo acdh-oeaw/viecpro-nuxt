@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { Slider } from "@ark-ui/vue";
-import type { ModelRef } from "vue";
+import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from "radix-vue";
 
 defineProps({
 	min: {
@@ -23,21 +22,19 @@ defineProps({
 	},
 });
 
-const range: ModelRef<[number, number]> = defineModel({
-	default: [0, 100] as [number, number],
+const sliderValue = defineModel<[number, number]>({
+	default: [0, 100],
 });
-
-const { Root, Control, Thumb, MarkerGroup, Marker, Range, Track } = Slider; // important
 </script>
 
 <template>
-	<Root v-model="range" :min="min" :max="max" class="flex w-full flex-col gap-2">
+	<div class="flex flex-col gap-2">
 		<div class="my-1 flex justify-between">
 			<div>
 				<label for="start_year" class="sr-only">Select start year</label>
 				<input
 					id="start_year"
-					v-model="range[0]"
+					v-model="sliderValue[0]"
 					class="w-16 rounded shadow md:text-right"
 					type="number"
 					:min="min"
@@ -49,7 +46,7 @@ const { Root, Control, Thumb, MarkerGroup, Marker, Range, Track } = Slider; // i
 				<label for="end_year" class="sr-only">Select end year</label>
 				<input
 					id="end_year"
-					v-model="range[1]"
+					v-model="sliderValue[1]"
 					class="w-16 rounded text-right shadow"
 					type="number"
 					:min="min"
@@ -58,28 +55,27 @@ const { Root, Control, Thumb, MarkerGroup, Marker, Range, Track } = Slider; // i
 				/>
 			</div>
 		</div>
-		<Control class="relative flex items-center">
-			<Track class="h-1 flex-1 rounded bg-slate-200">
-				<Range class="h-1 rounded bg-primary-600" />
-			</Track>
-			<Thumb
-				:key="0"
-				:index="0"
-				class="absolute z-10 h-4 w-4 cursor-pointer rounded-l-full rounded-r border border-primary-600 bg-white shadow"
+		<SliderRoot
+			v-model="sliderValue"
+			class="relative flex h-5 w-full touch-none select-none items-center"
+			:max="max"
+			:min="min"
+		>
+			<SliderTrack class="relative h-1 grow rounded bg-slate-200">
+				<SliderRange class="absolute h-full rounded bg-primary-600" />
+			</SliderTrack>
+			<SliderThumb
+				class="block h-5 w-5 rounded-l-full border border-primary-600 bg-white shadow hover:bg-primary-200 active:bg-primary-300"
 			/>
-			<Thumb
-				:key="1"
-				:index="1"
-				class="absolute z-10 h-4 w-4 cursor-pointer rounded-l rounded-r-full border border-primary-600 bg-white shadow"
+			<SliderThumb
+				class="block h-5 w-5 rounded-r-full border border-primary-600 bg-white shadow hover:bg-primary-200 active:bg-primary-300"
 			/>
-		</Control>
-		<MarkerGroup class="mx-1 h-4">
-			<Marker v-for="(n, i) in nMarker" :key="n" :value="min + (i * (max - min)) / (nMarker - 1)">
-				<span v-if="i % 2">&#183;</span>
-				<span v-else>
-					{{ Math.floor(min + (i * (max - min)) / (nMarker - 1)) }}
-				</span>
-			</Marker>
-		</MarkerGroup>
-	</Root>
+		</SliderRoot>
+		<div class="flex justify-between">
+			<div v-for="n in nMarker" :key="n">
+				<span v-if="n % 2 === 0">&#183;</span>
+				<span v-else>{{ Math.floor(min + ((n - 1) * (max - min)) / (nMarker - 1)) }}</span>
+			</div>
+		</div>
+	</div>
 </template>
