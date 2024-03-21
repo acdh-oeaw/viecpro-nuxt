@@ -18,7 +18,7 @@ defineProps({
 	},
 	nMarker: {
 		type: Number,
-		default: 7,
+		default: 5,
 	},
 });
 
@@ -71,7 +71,7 @@ const sliderValue = defineModel<[number, number]>({
 				class="block h-5 w-5 rounded-r-full border border-primary-600 bg-white shadow hover:bg-primary-200 active:bg-primary-300"
 			/>
 		</SliderRoot>
-		<div class="flex justify-between">
+		<div v-if="nMarker" class="flex justify-between">
 			<div v-for="n in nMarker" :key="n">
 				<span v-if="n % 2 === 0">&#183;</span>
 				<span v-else>{{ Math.floor(min + ((n - 1) * (max - min)) / (nMarker - 1)) }}</span>
