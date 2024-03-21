@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 
-import SkipLink from "@/components/skip-link.vue";
 import { metadata } from "@/config/metadata.config";
 import { useHead, useRoute } from "#imports";
 
@@ -31,10 +30,9 @@ useHead({
 </script>
 
 <template>
-	<div class="grid min-h-full grid-rows-[auto_1fr_auto]">
+	<div class="grid min-h-screen grid-rows-[auto_1fr]">
 		<SkipLink />
-		<AppHeader />
+		<AppHeader compact />
 		<slot />
-		<AppFooter />
 	</div>
 </template>
