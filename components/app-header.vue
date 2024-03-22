@@ -1,6 +1,12 @@
 <script lang="ts" setup>
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { Menu as MenuIcon, X } from "lucide-vue-next";
+import {
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuPortal,
+	DropdownMenuRoot,
+	DropdownMenuTrigger,
+} from "radix-vue";
 
 import type { NavLink } from "@/lib/types";
 
@@ -18,6 +24,8 @@ const links = computed(() => {
 		},
 	} satisfies Record<string, NavLink>;
 });
+
+const open = ref(false);
 
 defineProps<{ compact?: boolean }>();
 </script>
@@ -45,34 +53,33 @@ defineProps<{ compact?: boolean }>();
 				<LocaleSwitch class="select-none" />
 			</div>
 			<div class="md:hidden">
-				<Menu v-slot="{ open, close }" as="div" class="relative z-50 inline-block">
-					<ClientOnly>
-						<MenuButton as="button" class="rounded border border-gray-300 p-2">
+				<DropdownMenuRoot v-model:open="open">
+					<DropdownMenuTrigger class="group">
+						<button class="rounded border border-gray-300 p-2">
 							<X v-if="open" class="h-6 w-6 shrink-0" />
 							<MenuIcon v-else class="h-6 w-6 shrink-0" />
 							<span class="sr-only">Open/Close Menu</span>
-						</MenuButton>
-					</ClientOnly>
-					<MenuTransition>
-						<MenuItems
+						</button>
+					</DropdownMenuTrigger>
+					<DropdownMenuPortal>
+						<DropdownMenuContent
 							as="div"
-							class="absolute right-0 z-50 mt-1 flex w-56 flex-col divide-y rounded bg-gray-50 shadow-lg ring"
+							class="absolute -right-5 z-50 mt-1 flex w-56 flex-col divide-y rounded bg-gray-50 shadow-lg ring data-[side=bottom]:animate-slideUpAndFade"
 						>
-							<MenuItem v-for="(link, key) of links" :key="key" class="flex" as="div">
+							<DropdownMenuItem v-for="(link, key) of links" :key="key" class="flex" as="div">
 								<NuxtLink
 									class="w-full p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300 active:bg-gray-400"
 									:href="link.href"
-									@click="close"
 								>
 									{{ link.label }}
 								</NuxtLink>
-							</MenuItem>
-							<MenuItem>
+							</DropdownMenuItem>
+							<DropdownMenuItem>
 								<LocaleSwitch no-select />
-							</MenuItem>
-						</MenuItems>
-					</MenuTransition>
-				</Menu>
+							</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenuPortal>
+				</DropdownMenuRoot>
 			</div>
 		</div>
 	</header>

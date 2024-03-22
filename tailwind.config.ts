@@ -71,8 +71,18 @@ const config: Config = {
 					from: { height: "var(--radix-accordion-content-height)" },
 					to: { height: "0px" },
 				},
+				slideDownAndFade: {
+					from: { opacity: "0%", transform: "translateY(-10px)" },
+					to: { opacity: "100%", transform: "translateY(0)" },
+				},
+				slideUpAndFade: {
+					from: { opacity: "0", transform: "translateY(10px)" },
+					to: { opacity: "1", transform: "translateY(0)" },
+				},
 			},
 			animation: {
+				slideUpAndFade: "slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
+				slideDownAndFade: "slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
 				slideDown: "slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)",
 				slideUp: "slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)",
 			},
