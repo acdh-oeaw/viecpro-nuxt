@@ -39,7 +39,7 @@ defineProps<{ compact?: boolean }>();
 			</NuxtLink>
 			<div class="hidden items-center md:flex">
 				<nav :aria-label="t('common.main-navigation')">
-					<ul class="flex flex-wrap gap-x-3" role="list">
+					<ul class="flex flex-wrap justify-end gap-3" role="list">
 						<li v-for="(link, key) of links" :key="key" class="select-none">
 							<NuxtLink
 								class="rounded p-2 transition hover:bg-primary-800 active:bg-primary-900"
