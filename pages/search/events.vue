@@ -50,5 +50,8 @@ useHead({
 		:query-by="queryBy"
 		:cols="tableCols"
 		:koi="koi"
+		:custom-cols="{
+			context: 'this is a workaround, dont tell anybody 🤫',
+		}"
 	/>
 </template>
