@@ -6,8 +6,7 @@ defineProps<{
 }>();
 
 const path = useRoute().fullPath;
-
-const prefix = process.env.NODE_ENV !== "production" ? "http://" : "https://";
+const router = useRouter();
 
 let host: string;
 if (process.client) {
@@ -16,7 +15,11 @@ if (process.client) {
 </script>
 
 <template>
-	<component :is="link ? NuxtLink : 'span'" :class="link && 'underline'" :to="prefix + host + path">
+	<component
+		:is="link ? NuxtLink : 'span'"
+		:class="link && 'underline'"
+		:to="router.currentRoute.value.fullPath"
+	>
 		{{ host }}{{ path }}
 	</component>
 </template>
