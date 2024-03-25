@@ -1,6 +1,12 @@
 <script lang="ts" setup>
-import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { ChevronDown } from "lucide-vue-next";
+import {
+	AccordionContent,
+	AccordionHeader,
+	AccordionItem,
+	AccordionRoot,
+	AccordionTrigger,
+} from "radix-vue";
 
 defineProps<{
 	disabled?: boolean;
@@ -10,27 +16,30 @@ defineProps<{
 </script>
 
 <template>
-	<Disclosure :default-open="defaultOpen && !disabled" as="div">
-		<DisclosureButton
-			as="button"
-			class="flex w-full items-center justify-between rounded border-2 p-2 transition ui-open:rounded-b-none ui-open:border-primary-600 ui-open:bg-primary-500 ui-open:text-white"
-			:disabled="disabled"
-			:class="
-				disabled
-					? 'opacity-50'
-					: 'hover:border-primary-400 hover:bg-primary-300 border-primary-300 bg-primary-200 shadow-sm'
-			"
-		>
-			<span>{{ title }}</span>
-			<ChevronDown class="h-5 w-5 transition ui-open:-rotate-180" />
-		</DisclosureButton>
-		<DisclosurePanel
-			v-if="!disabled"
-			static
-			as="div"
-			class="box-border overflow-hidden rounded rounded-t-none border-2 transition-[max-height,border,padding] ui-open:max-h-[10000000px] ui-open:border-t-0 ui-not-open:max-h-0 ui-not-open:border-transparent ui-not-open:py-0"
-		>
-			<slot />
-		</DisclosurePanel>
-	</Disclosure>
+	<AccordionRoot type="single" collapsible :default-value="String(defaultOpen && title)">
+		<AccordionItem :value="title">
+			<AccordionHeader>
+				<AccordionTrigger
+					as="button"
+					class="group flex w-full items-center justify-between rounded border-2 p-2 transition data-[state=open]:rounded-b-none data-[state=open]:border-primary-600 data-[state=open]:bg-primary-500 data-[state=open]:text-white ui-open:rounded-b-none ui-open:border-primary-600 ui-open:bg-primary-500 ui-open:text-white"
+					:disabled="disabled"
+					:class="
+						disabled
+							? 'opacity-50'
+							: 'hover:border-primary-400 hover:bg-primary-300 border-primary-300 bg-primary-200 shadow-sm'
+					"
+				>
+					<span>{{ title }}</span>
+					<ChevronDown class="h-5 w-5 transition group-data-[state=open]:rotate-180" />
+				</AccordionTrigger>
+			</AccordionHeader>
+			<AccordionContent
+				static
+				as="div"
+				class="overflow-hidden rounded rounded-t-none border-2 border-t-0 data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown"
+			>
+				<slot />
+			</AccordionContent>
+		</AccordionItem>
+	</AccordionRoot>
 </template>

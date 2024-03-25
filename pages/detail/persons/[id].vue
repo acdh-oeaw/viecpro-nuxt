@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { Info, Link, Loader2 } from "lucide-vue-next";
+import { ExternalLink, Info, Loader2 } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
@@ -334,7 +334,7 @@ useHead({
 								<span>
 									{{ url }}
 								</span>
-								<Link class="h-5 w-5 shrink-0" />
+								<ExternalLink class="h-4 w-4 shrink-0" />
 							</NuxtLink>
 						</div>
 					</div>

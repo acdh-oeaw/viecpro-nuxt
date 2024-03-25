@@ -124,6 +124,7 @@ const query = ref(
 
 definePageMeta({
 	title: "pages.hierarchy.title",
+	layout: "max-content",
 });
 useHead({
 	title: t("pages.hierarchy.label"),
@@ -133,7 +134,7 @@ useHead({
 <template>
 	<MainContent class="relative mx-auto grid w-full grid-flow-row grid-rows-[auto_1fr]">
 		<div class="container mx-auto flex flex-wrap justify-between">
-			<div class="flex flex-wrap">
+			<div class="flex flex-wrap justify-end md:justify-normal">
 				<Autocomplete v-model="comQuery" />
 				<GenericListbox v-model="show" class="m-2 w-full min-w-56 md:w-auto" :items="showItems" />
 				<GenericListbox
@@ -148,9 +149,10 @@ useHead({
 				<NuxtLink
 					v-if="comQuery && ['Person', 'Institution'].includes(comQuery.group)"
 					:href="localePath(`/detail/${comQuery.group.toLowerCase()}s/${comQuery.pk}`)"
+					class="mr-4 md:m-0"
 				>
 					<button
-						class="m-2 flex min-h-11 items-center gap-1 rounded border bg-white px-2 shadow-md transition hover:bg-slate-200 active:bg-slate-300"
+						class="m-2 flex min-h-11 w-full items-center gap-1 rounded border bg-white px-2 shadow-md transition hover:bg-slate-200 active:bg-slate-300"
 					>
 						<span>{{ t("pages.hierarchy.options.goto") }}</span>
 						<ArrowRight class="h-5 w-5 shrink-0" />
@@ -179,7 +181,7 @@ useHead({
 		</div>
 		<div class="w-full">
 			<ClientOnly v-if="!query.isFetching">
-				<VisContainer v-slot="{ width }" class="my-4 flex items-center">
+				<VisContainer v-slot="{ width }" class="flex items-center">
 					<HierarchyWrapper v-if="query.data" :data="query.data" :width="width" />
 				</VisContainer>
 			</ClientOnly>

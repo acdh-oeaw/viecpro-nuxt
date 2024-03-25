@@ -31,7 +31,6 @@
 	},
 	"dependencies": {
 		"@acdh-oeaw/lib": "^0.1.6",
-		"@ark-ui/vue": "^0.10.0",
 		"@fontsource-variable/roboto-flex": "^5.0.8",
 		"@headlessui/vue": "^1.7.16",
 		"@nuxt/content": "^2.8.5",
@@ -49,6 +48,7 @@
 		"npm-run-all2": "^6.1.1",
 		"nuxt": "^3.9.1",
 		"nuxt3-leaflet": "^1.0.12",
+		"radix-vue": "^1.5.3",
 		"simple-git-hooks": "^2.9.0",
 		"typesense-instantsearch-adapter": "^2.7.1",
 		"vue-instantsearch": "^4.13.2",

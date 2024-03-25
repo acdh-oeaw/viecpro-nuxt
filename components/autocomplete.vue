@@ -7,8 +7,7 @@ import {
 	ComboboxOptions,
 } from "@headlessui/vue";
 import { useQuery } from "@tanstack/vue-query";
-import { Loader2, Search } from "lucide-vue-next";
-import type { ModelRef } from "vue";
+import { ChevronsUpDown, Loader2 } from "lucide-vue-next";
 
 import type { HierarchyNode } from "@/lib/types";
 
@@ -28,7 +27,7 @@ const query = ref(
 	}),
 );
 
-const selection: ModelRef<HierarchyNode | null> = defineModel({
+const selection = defineModel<HierarchyNode | null>({
 	default: null,
 });
 const input = ref("");
@@ -64,14 +63,14 @@ defineEmits(["change", "input"]);
 				"
 			/>
 			<ComboboxButton class="inset-y-0 right-0 flex items-center px-3 text-gray-500">
-				<Search class="h-5 w-5" />
+				<ChevronsUpDown class="h-5 w-5" />
 				<span class="sr-only">{{ t("ui.search-placeholder") }}</span>
 			</ComboboxButton>
 		</div>
 		<MenuTransition>
 			<ComboboxOptions
 				as="div"
-				class="absolute ml-2 flex w-full flex-col divide-y overflow-auto rounded border bg-white text-base shadow"
+				class="absolute z-10 ml-2 flex w-full flex-col divide-y overflow-auto rounded border bg-white text-base shadow"
 			>
 				<template v-if="!query.isFetching">
 					<ComboboxOption
