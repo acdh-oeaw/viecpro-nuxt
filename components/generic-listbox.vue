@@ -31,7 +31,7 @@ defineEmits(["change"]);
 			<ListboxOptions
 				v-if="items.length != 0"
 				as="div"
-				class="absolute mt-2 flex w-full flex-col divide-y rounded border bg-white shadow-xl"
+				class="absolute z-10 mt-2 flex w-full flex-col divide-y rounded border bg-white shadow-xl"
 			>
 				<ListboxOption
 					v-for="item in items"
