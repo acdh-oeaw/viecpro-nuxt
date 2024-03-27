@@ -115,9 +115,7 @@ export interface DetailRelation extends DetailLabel {
 	target: RelationSourceTarget;
 }
 
-export interface PersonDetail {
-	model: string;
-	object_id: string;
+export interface PersonDetail extends GenericDetail {
 	had_courts: Array<RelationSourceTarget>;
 	place_of_birth: RelationSourceTarget;
 	place_of_death: RelationSourceTarget;
@@ -139,7 +137,6 @@ export interface PersonDetail {
 	relations_to_church_and_orders: Array<DetailRelation>;
 	non_court_functions: Array<DetailRelation>;
 	related_places: Array<DetailRelation>;
-	sameAs: Array<string>;
 	allowance: Array<string>;
 }
 
@@ -150,9 +147,14 @@ export interface GenericRelation {
 	start_date: string;
 }
 
-export interface InstitutionDetail {
+export interface GenericDetail {
 	model: string;
 	object_id: string;
+	sameAs: Array<string>;
+	ampel: "green" | "red" | "yellow";
+}
+
+export interface InstitutionDetail extends GenericDetail {
 	resolution: string;
 	category: string;
 	alternative_names: Array<DetailLabel>;
@@ -175,18 +177,13 @@ export interface InstitutionDetail {
 	hierarchy: Array<GenericRelation>;
 }
 
-export interface PlaceDetail {
-	model: string;
-	object_id: string;
+export interface PlaceDetail extends GenericDetail {
 	alternative_names: Array<string>;
 	person_relations: Array<GenericRelation>;
 	place_relations: Array<GenericRelation>;
 	institution_relations: Array<GenericRelation>;
 }
-export interface CourtDetail {
-	ampel: string;
-	model: string;
-	object_id: string;
+export interface CourtDetail extends GenericDetail {
 	resolution: string;
 	category: string;
 	alternative_names: Array<object>;

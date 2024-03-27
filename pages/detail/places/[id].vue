@@ -210,6 +210,25 @@ useHead({
 						:point="{ lat: data.entity.data.lat, long: data.entity.data.long }"
 					/>
 				</GenericDisclosure>
+				<GenericDisclosure
+					:title="t('collection-keys.viecpro_persons.same_as')"
+					:disabled="isEmpty(data.details.data.sameAs)"
+				>
+					<div class="p-2">
+						<div
+							v-for="url in data.details.data.sameAs"
+							:key="url"
+							class="border-t p-1 pl-0 first:border-0"
+						>
+							<NuxtLink class="flex items-center gap-1 font-semibold underline" :href="url">
+								<span>
+									{{ url }}
+								</span>
+								<ExternalLink class="h-4 w-4 shrink-0" />
+							</NuxtLink>
+						</div>
+					</div>
+				</GenericDisclosure>
 			</div>
 			<div v-else>{{ t("ui.no-data") }}.</div>
 		</template>
