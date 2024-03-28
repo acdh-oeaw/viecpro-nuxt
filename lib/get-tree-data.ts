@@ -27,7 +27,7 @@ interface ReturnTree {
 
 export async function getTreeData(q: TreeQuery) {
 	const data = await fetch(
-		`https://viecpro.acdh-dev.oeaw.ac.at/visualisations/api/
+		`https://viecpro-backend.acdh-ch-dev.oeaw.ac.at/visualisations/api/
 			${q.model}/
 			${q.id}/
 			${q.show ?? "normal"}/

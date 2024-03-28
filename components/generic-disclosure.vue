@@ -16,7 +16,11 @@ defineProps<{
 </script>
 
 <template>
-	<AccordionRoot type="single" collapsible :default-value="String(defaultOpen && title)">
+	<AccordionRoot
+		type="single"
+		collapsible
+		:default-value="String(!disabled && defaultOpen && title)"
+	>
 		<AccordionItem :value="title">
 			<AccordionHeader>
 				<AccordionTrigger

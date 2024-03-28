@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQuery } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { Info, Loader2 } from "lucide-vue-next";
+import { ExternalLink, Info, Loader2 } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";

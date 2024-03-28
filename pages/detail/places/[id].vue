@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { Info, Loader2 } from "lucide-vue-next";
+import { ExternalLink, Info, Loader2 } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 

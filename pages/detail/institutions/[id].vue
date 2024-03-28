@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useQuery } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { Info } from "lucide-vue-next";
+import { ExternalLink, Info } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
-import type { Institution, InstitutionDetail } from "@/types/schema";
+import type { Court, CourtDetail, Institution, InstitutionDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
@@ -21,12 +21,53 @@ const data = ref({
 	entity: useQuery({
 		queryKey: [collection, id],
 		queryFn: () => getDocument<Institution>(collection, `Institution_${id}`),
+		retry: 2,
 	}),
 	details: useQuery({
 		queryKey: ["detail", collection, id],
 		queryFn: () => getDetails<InstitutionDetail>("institution", id),
+		retry: 2,
 	}),
 });
+
+// The following code is hopefully just a placeholder until there is a clearer distinction between courts and institutions: If there are no results, this app will try to fetch the same ID in the courts table and redirect the use
+
+const fetchCourts = computed(() => {
+	if (
+		data.value.details.error?.httpStatus &&
+		data.value.details.error.httpStatus === 404 &&
+		data.value.entity.error?.httpStatus &&
+		data.value.entity.error.httpStatus === 404
+	)
+		return true;
+	return false;
+});
+
+const altData = ref({
+	entity: useQuery({
+		queryKey: ["viecpro_courts", id],
+		queryFn: () => getDocument<Court>("viecpro_courts", `Hofstaat_${id}`),
+		enabled: fetchCourts,
+	}),
+	details: useQuery({
+		queryKey: ["detail", "viecpro_courts", id],
+		queryFn: () => getDetails<CourtDetail>("court", id, "institution"),
+		enabled: fetchCourts,
+	}),
+});
+
+watch(
+	() => [altData.value.details.isSuccess, altData.value.entity.isSuccess],
+	(to) => {
+		const router = useRouter();
+		if (to.every(Boolean)) {
+			void router.replace(route.fullPath.replace("institution", "court"));
+		}
+	},
+	{ immediate: true },
+);
+
+// thanks for understanding
 
 const loading = computed(() => ({
 	entity: data.value.entity.isFetching,
@@ -52,11 +93,14 @@ useHead({
 		v-if="
 			!loading.entity &&
 			!loading.details &&
-			(data.details.isLoadingError || data.entity.isLoadingError)
+			(data.details.isLoadingError || data.entity.isLoadingError) &&
+			(altData.details.isLoadingError || altData.entity.isLoadingError)
 		"
 	>
 		<div>{{ data.entity.error }}</div>
 		<div>{{ data.details.error }}</div>
+		<div>{{ altData.entity.error }}</div>
+		<div>{{ altData.details.error }}</div>
 	</div>
 	<DetailPage v-else model="Institution" :details-loading="loading.details">
 		<template #head>
