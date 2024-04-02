@@ -154,7 +154,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 <template>
 	<div class="flex flex-col">
 		<h1 class="flex cursor-auto items-center justify-between text-2xl">
-			{{ t(`collection-keys["${collection}"]["${fieldName}"]`) }}
+			{{ t(`collection-keys.${collection}.${fieldName}`) }}
 		</h1>
 		<div
 			class="m-1 grid w-full grid-cols-[auto_1fr_auto] items-center rounded border bg-white shadow-sm"

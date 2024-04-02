@@ -178,7 +178,7 @@ const getDetailLink = (id: string, entity?: string) => {
 							<ChevronDown v-if="!route.query.sort" class="h-5 w-5 opacity-50" />
 						</div>
 						<span v-else-if="key !== 'ampel'" class="hidden md:block">
-							{{ t(`collection-keys["${collectionName}"]["${key}"]`) }}
+							{{ t(`collection-keys.${collectionName}.${key}`) }}
 						</span>
 					</div>
 				</div>
@@ -205,7 +205,7 @@ const getDetailLink = (id: string, entity?: string) => {
 									class="self-center overflow-auto"
 								>
 									<span v-if="get(hit.document, key)" class="ml-2 text-sm text-gray-600 md:hidden">
-										{{ t(`collection-keys["${collectionName}"]["${key}"]`) }}
+										{{ t(`collection-keys.${collectionName}.${key}`) }}
 									</span>
 									<component
 										:is="isLinkCol(key, hit.document) ? NuxtLink : 'span'"

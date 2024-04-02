@@ -84,10 +84,10 @@ const all = props.rels.length;
 				<div class="grid gap-2" :class="linkTo ? 'mr-6 ' + gridClass : gridClass">
 					<template v-for="header in headers" :key="header">
 						<span v-if="typeof header === 'string'">
-							{{ t(`collection-keys.${collectionName}["${header}"]`) }}
+							{{ t(`collection-keys.${collectionName}.${header}`) }}
 						</span>
 						<span v-else class="font-bold">
-							{{ t(`collection-keys.${collectionName}["${header[0]}"]`) }}
+							{{ t(`collection-keys.${collectionName}.${header[0]}`) }}
 						</span>
 					</template>
 				</div>

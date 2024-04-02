@@ -92,36 +92,36 @@
 			"kind": "Kind",
 			"shortTitle": "Title (short)",
 			"title": "Title",
-			"target.name": "Name",
+			"target": { "name": "Name" },
 			"relation_type": "Type of Relation"
 		},
 		"functions": {
 			"relation_type": "Function",
-			"target.name": "Court",
+			"target": { "name": "Court" },
 			"start_date": "Start",
 			"end_date": "End"
 		},
 		"personnel": {
 			"relation_type": "Function",
-			"target.name": "Name",
+			"target": { "name": "Name" },
 			"start_date": "Start",
 			"end_date": "End"
 		},
 		"place_person": {
 			"relation_type": "Relation",
-			"target.name": "Name",
+			"target": { "name": "Name" },
 			"start_date": "Start",
 			"end_date": "End"
 		},
 		"place_place": {
 			"relation_type": "Relation",
-			"target.name": "Place",
+			"target": { "name": "Place" },
 			"start_date": "Start",
 			"end_date": "End"
 		},
 		"hierarchy": {
 			"relation_type": "Relation",
-			"target.name": "Court",
+			"target": { "name": "Court" },
 			"start_date": "Start",
 			"end_date": "End"
 		},
@@ -134,7 +134,7 @@
 			"name": "Surname",
 			"fullname": "Full name",
 			"relation_type": "Type of Relation",
-			"target.name": "Name",
+			"target": { "name": "Name" },
 			"last_name": "Name",
 			"maiden_name": "Maiden Name",
 			"married_names": "Married Name(s)",
@@ -169,19 +169,22 @@
 			"start_date": "Start",
 			"end": "End",
 			"end_date": "End",
-			"main_owner": "Owner Object",
-			"main_owner.end_date": "Death of Main Owner",
-			"main_owner.start_date": "Birth of Main Owner",
-			"main_owner.model": "Model of Main Owner",
-			"main_owner.object_id": "ID of Main Owner",
-			"main_owner.relation_type": "Relation to Main Owner",
-			"main_owner.name": "Main Owner",
-			"owner.start_date": "Birth of Owner",
-			"owner.end_date": "Death of Owner",
-			"owner.name": "Name of Owner",
-			"owner.model": "Model of Owner",
-			"owner.object_id": "ID of Owner",
-			"owner.relation_type": "Relation to Owner",
+			"main_owner": {
+				"end_date": "Death of Main Owner",
+				"start_date": "Birth of Main Owner",
+				"model": "Model of Main Owner",
+				"object_id": "ID of Main Owner",
+				"relation_type": "Relation to Main Owner",
+				"name": "Main Owner"
+			},
+			"owner": {
+				"start_date": "Birth of Owner",
+				"end_date": "Death of Owner",
+				"name": "Name of Owner",
+				"model": "Model of Owner",
+				"object_id": "ID of Owner",
+				"relation_type": "Relation to Owner"
+			},
 			"category": "Category",
 			"resolution": "Resolution",
 			"alternative_names": "Alternative Names",
@@ -190,10 +193,9 @@
 			"hierarchy": "Hierarchy",
 			"locations": "Locations",
 			"relation_type": "Type of Relation",
-			"target.name": "Name",
+			"target": { "name": "Name" },
 			"id": "ID",
 			"owners": "Owners",
-			"owner": "Owner",
 			"download": "Download",
 			"label:Kategorie": "Category",
 			"kategorie": "Category"
@@ -209,21 +211,26 @@
 			"category": "Category",
 			"resolution": "Resolution",
 			"alternative_names": "Alternative Names",
-			"sources": "Sources",
 			"personnel": "Personnel",
 			"hierarchy": "Hierarchy",
 			"locations": "Locations",
 			"relation_type": "Type of Relation",
-			"target.name": "Name",
-			"sources.bibtex.title": "Text",
-			"sources.bibtex.type": "Type",
-			"sources.folio": "Folio",
+			"target": { "name": "Name" },
+			"sources": {
+				"bibtex": {
+					"title": "Title",
+					"type": "Type"
+				},
+				"folio": "Folio"
+			},
 			"label:Auflösung": "Resolution",
 			"label:Kategorie": "Category",
 			"start_date": "Start",
 			"end_date": "End",
-			"bibtex.title": "Title",
-			"bibtex.type": "Type",
+			"bibtex": {
+				"title": "Title",
+				"type": "Type"
+			},
 			"folio": "Folio"
 		},
 		"viecpro_events": {
@@ -250,7 +257,7 @@
 			"start": "Start",
 			"end": "End",
 			"relation_type": "Type of Relation",
-			"target.name": "Name",
+			"target": { "name": "Name" },
 			"alternative_names": "Alternative Names",
 			"institution_relations": "Relations to institutions",
 			"person_relations": "Relations to people",
@@ -259,12 +266,12 @@
 		},
 		"viecpro_relations": {
 			"source_kind": "Source: Kind",
-			"source.name": "Source: Name",
+			"source": { "name": "Source: Name" },
 			"start_date": "Start",
 			"end_date": "End",
 			"relation_type": "Relation: Kind",
 			"target_kind": "Target: Kind",
-			"target.name": "Target: Name",
+			"target": { "name": "Target: Name" },
 			"model": "Model"
 		}
 	},

@@ -87,31 +87,31 @@
 	"collection-keys": {
 		"functions": {
 			"relation_type": "Funktion",
-			"target.name": "Amt/Hofstaat",
+			"target": { "name": "Amt/Hofstaat" },
 			"start_date": "Beginn",
 			"end_date": "Ende"
 		},
 		"personnel": {
 			"relation_type": "Funktion",
-			"target.name": "Name",
+			"target": { "name": "Name" },
 			"start_date": "Beginn",
 			"end_date": "Ende"
 		},
 		"hierarchy": {
 			"relation_type": "Beziehung",
-			"target.name": "Amt/Hofstaat",
+			"target": { "name": "Amt/Hofstaat" },
 			"start_date": "Beginn",
 			"end_date": "Ende"
 		},
 		"place_person": {
 			"relation_type": "Beziehung",
-			"target.name": "Name",
+			"target": { "name": "Name" },
 			"start_date": "Beginn",
 			"end_date": "Ende"
 		},
 		"place_place": {
 			"relation_type": "Beziehung",
-			"target.name": "Ort",
+			"target": { "name": "Ort" },
 			"start_date": "Beginn",
 			"end_date": "Ende"
 		},
@@ -123,7 +123,7 @@
 			"kind": "Art",
 			"shortTitle": "Titel (kurz)",
 			"title": "Titel",
-			"target.name": "Name",
+			"target": { "name": "Name" },
 			"relation_type": "Art des Bezuges"
 		},
 		"viecpro_persons": {
@@ -137,7 +137,7 @@
 			"name": "Nachname",
 			"fullname": "Name",
 			"relation_type": "Art des Bezuges",
-			"target.name": "Name",
+			"target": { "name": "Name" },
 			"last_name": "Name",
 			"maiden_name": "Geburtsname",
 			"married_names": "Ehenamen",
@@ -170,19 +170,22 @@
 			"start_date": "Beginn",
 			"end": "Ende",
 			"end_date": "Ende",
-			"main_owner.name": "Hauptinhaber*in",
-			"main_owner": "Hauptinhaber*in Objekt",
-			"main_owner.end_date": "Sterbejahr des/der Hauptinhaber*in",
-			"main_owner.start_date": "Geburtsjahr des/der Hauptinhaber*in",
-			"main_owner.model": "Modell desder Hauptinhaber*in",
-			"main_owner.object_id": "ID des/der Hauptinhaber*in",
-			"main_owner.relation_type": "Bezüge zum/zur Hauptinhaber*in",
-			"owner.start_date": "Geburtsjahr des/der Besitzer*in",
-			"owner.end_date": "Sterbejahr des/der Besitzer*in",
-			"owner.name": "Name des/der Besitzer*in",
-			"owner.model": "Modell des/der Besitzer*in",
-			"owner.object_id": "ID des/der Besitzer*in",
-			"owner.relation_type": "Bezug zum/zur Besitzer*in",
+			"main_owner": {
+				"name": "Hauptinhaber*in",
+				"end_date": "Sterbejahr des/der Hauptinhaber*in",
+				"start_date": "Geburtsjahr des/der Hauptinhaber*in",
+				"model": "Modell desder Hauptinhaber*in",
+				"object_id": "ID des/der Hauptinhaber*in",
+				"relation_type": "Bezüge zum/zur Hauptinhaber*in"
+			},
+			"owner": {
+				"start_date": "Geburtsjahr des/der Besitzer*in",
+				"end_date": "Sterbejahr des/der Besitzer*in",
+				"name": "Name des/der Besitzer*in",
+				"model": "Modell des/der Besitzer*in",
+				"object_id": "ID des/der Besitzer*in",
+				"relation_type": "Bezug zum/zur Besitzer*in"
+			},
 			"category": "Kategorie",
 			"resolution": "Auflösung",
 			"alternative_names": "Alternative Namen",
@@ -191,10 +194,9 @@
 			"hierarchy": "Hierarchie",
 			"locations": "Standorte",
 			"relation_type": "Art des Bezuges",
-			"target.name": "Name",
+			"target": { "name": "Name" },
 			"id": "ID",
 			"owners": "Besitzer",
-			"owner": "Besitzer Objekt",
 			"download": "Download und Zitierweise",
 			"label:Kategorie": "Kategorie",
 			"kategorie": "Kategorie"
@@ -210,21 +212,26 @@
 			"category": "Kategorie",
 			"resolution": "Auflösung",
 			"alternative_names": "Alternative Bezeichnungen",
-			"sources": "Quellenbelege",
 			"personnel": "Personal",
 			"hierarchy": "Hierarchie",
 			"locations": "Standorte",
 			"relation_type": "Art des Bezuges",
-			"target.name": "Name",
-			"sources.bibtex.title": "Text",
-			"sources.bibtex.type": "Typ",
-			"sources.folio": "Folio",
+			"target": { "name": "Name" },
+			"sources": {
+				"bibtext": {
+					"title": "Titel",
+					"type": "Art"
+				},
+				"folio": "Folio"
+			},
 			"label:Auflösung": "Auflösung",
 			"label:Kategorie": "Kategorie",
 			"start_date": "Beginn",
 			"end_date": "Ende",
-			"bibtex.title": "Titel",
-			"bibtex.type": "Art",
+			"bibtext": {
+				"title": "Titel",
+				"type": "Art"
+			},
 			"folio": "Folio"
 		},
 		"viecpro_events": {
@@ -251,7 +258,7 @@
 			"start": "Beginn",
 			"end": "Ende",
 			"relation_type": "Art des Bezuges",
-			"target.name": "Name",
+			"target": { "name": "Name" },
 			"alternative_names": "Alternative Bezeichnungen",
 			"institution_relations": "Bezüge zu Institutionen",
 			"person_relations": "Bezüge zu Personen",
@@ -260,12 +267,12 @@
 		},
 		"viecpro_relations": {
 			"source_kind": "Entität A",
-			"source.name": "Name A",
+			"source": { "name": "Name A" },
 			"start_date": "Beginn",
 			"end_date": "Ende",
 			"relation_type": "Beziehung",
 			"target_kind": "Entität B",
-			"target.name": "Name B",
+			"target": { "name": "Name B" },
 			"model": "Modell"
 		}
 	},

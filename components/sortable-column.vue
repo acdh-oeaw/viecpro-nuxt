@@ -33,7 +33,7 @@ const getSortString = () => {
 			},
 		}"
 	>
-		{{ t(`collection-keys["${collectionName}"]["${col}"]`) }}
+		{{ t(`collection-keys.${collectionName}.${col}`) }}
 		<ChevronUp
 			v-if="query.sort && query.sort.includes(col)"
 			:class="{
