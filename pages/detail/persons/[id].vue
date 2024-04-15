@@ -331,7 +331,7 @@ useHead({
 					:rels="data.details.data.person_relations_court"
 					:headers="relCols"
 					grid-class="grid-cols-4"
-					:collection-name="collection"
+					collection-name="generic"
 					link-to
 				/>
 				<DetailDisclosure
