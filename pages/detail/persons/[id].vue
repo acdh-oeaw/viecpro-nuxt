@@ -5,7 +5,6 @@ import { ExternalLink, Info, Loader2 } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
-import Chip from "@/components/chip.vue";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
@@ -128,33 +127,6 @@ useHead({
 				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			</h1>
-			<Chip
-				v-if="loading.details || data.details.data?.court_functions.length !== 0"
-				class="my-1 text-sm lg:text-base"
-				square
-			>
-				<template v-if="!loading.details">
-					<span v-if="data.details.data">
-						{{
-							data.details.data.court_functions
-								.map((func) => func.relation_type)
-								.slice(0, 3)
-								.join(" - ")
-						}}
-					</span>
-					<span
-						v-if="
-							data.details.data?.court_functions && data.details.data?.court_functions.length > 3
-						"
-					>
-						+
-						{{ data.details.data.court_functions.length - 3 }}
-					</span>
-				</template>
-				<span v-else>
-					<Loader2 class="h-5 w-5 animate-spin" />
-				</span>
-			</Chip>
 		</template>
 		<template #base>
 			<div class="col-span-2 my-1 border-t"></div>
@@ -359,7 +331,7 @@ useHead({
 					:rels="data.details.data.person_relations_court"
 					:headers="relCols"
 					grid-class="grid-cols-4"
-					:collection-name="collection"
+					collection-name="generic"
 					link-to
 				/>
 				<DetailDisclosure

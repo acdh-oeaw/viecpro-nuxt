@@ -30,7 +30,7 @@ const props = defineProps<{
 	customCols?: Record<string, string>;
 }>();
 
-const pageLimit = 25;
+const defaultPageLimit = 25;
 
 const route = useRoute();
 const router = useRouter();
@@ -67,7 +67,7 @@ const pageNum = computed(() => {
 	return Number(route.query.page) || 1;
 });
 const limitNum = computed(() => {
-	return Number(route.query.limit) || pageLimit;
+	return Number(route.query.limit) || defaultPageLimit;
 });
 
 const comQuery = computed(() => {
@@ -78,7 +78,7 @@ const comQuery = computed(() => {
 		facet_by: props.facets ? props.facets.join(",") : "",
 		filter_by: String(query.facets ?? ""),
 		page: pageNum.value,
-		per_page: limitNum.value || pageLimit,
+		per_page: limitNum.value,
 		sort_by: String(query.sort ?? ""),
 	};
 });
@@ -158,7 +158,7 @@ const getDetailLink = (id: string, entity?: string) => {
 			<Pagination
 				v-if="data && data.page"
 				:page="data.page"
-				:limit="data.request_params.per_page || pageLimit"
+				:limit="data.request_params.per_page || defaultPageLimit"
 				:all="data.found"
 			/>
 			<div v-if="!loading && data" class="w-full">
@@ -264,7 +264,7 @@ const getDetailLink = (id: string, entity?: string) => {
 					v-if="data && data.found != 0"
 					class="mt-2"
 					:page="data.page"
-					:limit="data.request_params.per_page || pageLimit"
+					:limit="data.request_params.per_page || defaultPageLimit"
 					:all="data.found"
 				/>
 			</div>
