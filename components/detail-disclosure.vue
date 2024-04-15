@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { get } from "lodash-es";
-import { ChevronRight } from "lucide-vue-next";
+import { ChevronRight, ChevronsUpDown } from "lucide-vue-next";
 
 import GenericDisclosure from "@/components/generic-disclosure.vue";
 import { NuxtLink } from "#components";
@@ -22,6 +22,25 @@ const t = useTranslations();
 const page = ref(0);
 const limit = 25;
 const all = props.rels.length;
+
+const sortBy = ref("start_date");
+
+const changeSort = (col: string) => {
+	if (sortBy.value === col) sortBy.value = col + ":rev";
+	else sortBy.value = col;
+};
+
+const currentRels = computed(() => {
+	let retRels = [...props.rels];
+	if (sortBy.value.includes(":rev")) {
+		retRels = retRels.sort((a, b) =>
+			String(a[sortBy.value.split(":")[0]]) < String(b[sortBy.value.split(":")[0]]) ? 1 : -1,
+		);
+	} else {
+		retRels = retRels.sort((a, b) => (String(a[sortBy.value]) < String(b[sortBy.value]) ? -1 : 1));
+	}
+	return retRels.slice(page.value * limit, (page.value + 1) * limit);
+});
 </script>
 
 <template>
@@ -82,20 +101,24 @@ const all = props.rels.length;
 					</div>
 				</div>
 				<div class="grid gap-2" :class="linkTo ? 'mr-6 ' + gridClass : gridClass">
-					<template v-for="header in headers" :key="header">
-						<span v-if="typeof header === 'string'">
-							{{ t(`collection-keys.${collectionName}.${header}`) }}
-						</span>
-						<span v-else class="font-bold">
-							{{ t(`collection-keys.${collectionName}.${header[0]}`) }}
-						</span>
+					<template v-for="header in headers" :key="String(header)">
+						<button
+							class="-m-0.5 -mx-1 flex items-center gap-2 rounded p-0.5 px-1 transition hover:bg-slate-200 active:bg-slate-300"
+							@click="typeof header === 'string' ? changeSort(header) : changeSort(header[0])"
+						>
+							<button v-if="typeof header === 'string'" class="text-left">
+								{{ t(`collection-keys.${collectionName}.${header}`) }}
+							</button>
+							<button v-else class="text-left font-bold">
+								{{ t(`collection-keys.${collectionName}.${header[0]}`) }}
+							</button>
+							<ChevronRight v-if="header === sortBy" class="h-4 w-4 rotate-90" />
+							<ChevronRight v-else-if="header + ':rev' === sortBy" class="h-4 w-4 -rotate-90" />
+							<ChevronsUpDown v-else class="h-4 w-4 text-gray-500" />
+						</button>
 					</template>
 				</div>
-				<div
-					v-for="hit in rels.slice(page * limit, (page + 1) * limit)"
-					:key="String(hit)"
-					class="mt-1 border-t pt-1"
-				>
+				<div v-for="hit in currentRels" :key="String(hit)" class="mt-1 border-t pt-1">
 					<component
 						:is="linkTo ? NuxtLink : 'div'"
 						:to="
