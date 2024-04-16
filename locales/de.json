@@ -139,7 +139,7 @@
 			"relation_type": "Art des Bezuges",
 			"target": { "name": "Name" },
 			"last_name": "Name",
-			"maiden_name": "Geburtsname",
+			"maiden_name": "Nachname",
 			"married_names": "Ehenamen",
 			"born": "Geboren",
 			"died": "Gestorben",
