@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { ExternalLink, Info, Loader2 } from "lucide-vue-next";
+import { ExternalLink, Info } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
@@ -148,18 +148,16 @@ useHead({
 			</template>
 			<template v-if="!loading.details">
 				<template v-if="data.details.data?.married_names?.length">
+					<div class="col-span-2 my-1 border-t"></div>
 					<span>{{ t("collection-keys.viecpro_persons.married_names") }}:</span>
 					<div>
 						<div v-for="name in data.details.data.married_names" :key="name.name">
 							{{ name.name }}
 						</div>
 					</div>
-					<div class="col-span-2 my-1 border-t"></div>
 				</template>
 			</template>
-			<div v-else class="col-span-2 flex justify-center border-b pb-1">
-				<Loader2 class="h-5 w-5 animate-spin" />
-			</div>
+			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 
 			<span>{{ t("collection-keys.viecpro_persons.born") }}:</span>
@@ -343,7 +341,9 @@ useHead({
 				/>
 				<GenericDisclosure
 					:title="t('collection-keys.viecpro_persons.allowance')"
-					:disabled="isEmpty(data.details.data.allowance)"
+					:disabled="
+						isEmpty(data.details.data.allowance) || isEmpty(data.details.data.allowance[0])
+					"
 				>
 					<div class="p-2">
 						<div
@@ -376,8 +376,8 @@ useHead({
 					:title="t('collection-keys.viecpro_persons.relations_to_church_and_orders')"
 					:rels="data.details.data.relations_to_church_and_orders"
 					:headers="labelCols"
-					grid-class="grid-cols-4"
-					:collection-name="collection"
+					grid-class="grid-cols-3"
+					collection-name="generic"
 				/>
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_persons.non_court_functions')"

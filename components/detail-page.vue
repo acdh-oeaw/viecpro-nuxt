@@ -27,7 +27,7 @@ defineProps<{
 				<div v-if="!detailsLoading">
 					<slot name="left" />
 				</div>
-				<Centered v-else>
+				<Centered v-else class="min-h-60">
 					<Loader2 class="h-8 w-8 animate-spin" />
 				</Centered>
 			</div>
