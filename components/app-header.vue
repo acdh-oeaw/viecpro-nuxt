@@ -35,7 +35,7 @@ defineProps<{ compact?: boolean }>();
 		<div class="mx-auto flex w-full max-w-container items-center justify-between gap-2 px-8 py-4">
 			<NuxtLink class="shrink-0 select-none" :href="links.home.href">
 				<span class="sr-only">{{ links.home.label }}</span>
-				<img alt="" :class="compact ? 'h-12' : 'h-20'" src="@/assets/images/logo-white.png" />
+				<img alt="" :class="compact ? 'h-12' : 'h-20'" src="/assets/images/logo-white.png" />
 			</NuxtLink>
 			<div class="hidden items-center md:flex">
 				<nav :aria-label="t('common.main-navigation')">

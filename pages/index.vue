@@ -13,7 +13,7 @@ definePageMeta({
 				<div class="h-2 w-full bg-primary-900" />
 				<NuxtImg
 					:placeholder="[452, 128, 75]"
-					src="/assets/images/background-court-ship.jpeg"
+					src="/assets/images/background-court-ship.jpg"
 					alt=""
 					format="webp"
 					class="aspect-[3.84] min-h-[20rem] w-full object-cover"
