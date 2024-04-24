@@ -16,11 +16,9 @@ defineProps<{
 		class="mx-4 rounded bg-white text-black transition hover:bg-slate-200 active:bg-slate-300"
 	>
 		<Menu as="div">
-			<ClientOnly>
-				<MenuButton class="px-4 py-2" data-testid="localeButton" as="button">
-					{{ locale.toUpperCase() }}
-				</MenuButton>
-			</ClientOnly>
+			<MenuButton class="px-4 py-2" data-testid="localeButton" as="button">
+				{{ locale.toUpperCase() }}
+			</MenuButton>
 			<MenuTransition>
 				<MenuItems
 					class="fixed z-50 ml-4 mt-4 flex -translate-x-4 flex-col rounded bg-white shadow-lg"
