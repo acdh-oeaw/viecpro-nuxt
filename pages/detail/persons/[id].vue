@@ -207,7 +207,6 @@ useHead({
 						isEmpty([
 							...data.details.data?.alternative_first_names,
 							...data.details.data?.alternative_last_names,
-							...data.details.data?.married_names,
 						])
 					"
 				>
@@ -234,18 +233,6 @@ useHead({
 								class="border-t p-1 pl-0"
 							>
 								{{ name }}
-							</div>
-						</div>
-						<div v-if="!isEmpty(data.details.data.married_names)">
-							<div class="font-semibold">
-								{{ t("collection-keys.viecpro_persons.married_names") }}
-							</div>
-							<div
-								v-for="name in data.details.data.married_names"
-								:key="name.name"
-								class="border-t p-1 pl-0"
-							>
-								{{ name.name }}
 							</div>
 						</div>
 					</div>
