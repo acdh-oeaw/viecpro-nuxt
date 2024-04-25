@@ -10,7 +10,10 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 			</MenuButton>
 		</ClientOnly>
 		<MenuTransition>
-			<MenuItems as="div" class="absolute right-0 rounded border bg-gray-50 p-2 shadow-lg">
+			<MenuItems
+				as="div"
+				class="absolute w-max max-w-[270px] translate-x-[-45%] rounded border bg-gray-50 p-2 shadow-lg md:right-0 md:max-w-screen-lg md:translate-x-0"
+			>
 				<MenuItem>
 					<slot name="content" />
 				</MenuItem>
