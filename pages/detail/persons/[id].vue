@@ -384,7 +384,7 @@ useHead({
 					:rels="data.details.data.non_court_functions"
 					:headers="relCols"
 					grid-class="grid-cols-4"
-					:collection-name="collection"
+					collection-name="generic"
 					link-to
 				/>
 			</div>
