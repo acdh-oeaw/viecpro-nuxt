@@ -332,7 +332,7 @@ useHead({
 					:rels="data.details.data.other_relations_court"
 					:headers="labelCols"
 					grid-class="grid-cols-3"
-					:collection-name="collection"
+					collection-name="generic"
 				/>
 				<GenericDisclosure
 					:title="t('collection-keys.viecpro_persons.allowance')"

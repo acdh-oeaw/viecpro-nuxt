@@ -117,7 +117,7 @@
 		},
 		"generic": {
 			"name": "Name",
-			"start_date": "Start",
+			"start_date": "Beginn",
 			"end_date": "Ende",
 			"folio": "Folio",
 			"kind": "Art",
