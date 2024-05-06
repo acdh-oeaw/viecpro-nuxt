@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { ExternalLink, Info } from "lucide-vue-next";
+import { BookOpenText, ExternalLink, Info } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
@@ -106,7 +106,7 @@ useHead({
 						/>
 						<InfoMenu>
 							<template #button>
-								<button class="rounded-full hover:bg-slate-200 active:bg-slate-300">
+								<button class="rounded-full transition hover:bg-slate-200 active:bg-slate-300">
 									<span class="sr-only">Show Infos</span>
 									<Info class="m-2 h-6 w-6 shrink-0" />
 								</button>
@@ -119,6 +119,31 @@ useHead({
 									</div>
 									<div>VieCPro-ID: {{ data.entity.data?.id }}</div>
 									<div>URI: <CurrentUri link /></div>
+								</div>
+							</template>
+						</InfoMenu>
+						<InfoMenu>
+							<template #button>
+								<button class="rounded-full transition hover:bg-slate-200 active:bg-slate-300">
+									<span class="sr-only">{{ t("collection-keys.viecpro_courts.sources") }}</span>
+									<BookOpenText class="m-2 h-6 w-6 shrink-0" />
+								</button>
+							</template>
+							<template #content>
+								<div v-if="data.refs.data" class="w-fit text-base">
+									<template
+										v-for="({ document: reference }, i) in data.refs.data.hits"
+										:key="reference.id"
+									>
+										<div v-if="i !== 0" class="my-1 border" />
+										<div class="flex flex-col gap-1 p-2">
+											<h3 class="border-b">
+												{{ reference.title || reference.shortTitle }}
+											</h3>
+											<span>{{ reference.folio }}</span>
+											<span class="text-sm text-gray-400">{{ reference.id }}</span>
+										</div>
+									</template>
 								</div>
 							</template>
 						</InfoMenu>
@@ -259,26 +284,6 @@ useHead({
 					grid-class="grid-cols-3"
 					collection-name="generic"
 				/>
-				<GenericDisclosure
-					:title="t('collection-keys.viecpro_courts.sources')"
-					:disabled="!data.refs.data || isEmpty(data.refs.data.hits)"
-				>
-					<div v-if="data.refs.data">
-						<template
-							v-for="({ document: reference }, i) in data.refs.data.hits"
-							:key="reference.id"
-						>
-							<div v-if="i !== 0" class="my-1 border" />
-							<div class="flex flex-col gap-1 p-2">
-								<h3 class="border-b">
-									{{ reference.title || reference.shortTitle }}
-								</h3>
-								<span>{{ reference.folio }}</span>
-								<span class="text-sm text-gray-400">{{ reference.id }}</span>
-							</div>
-						</template>
-					</div>
-				</GenericDisclosure>
 				<!-- <DetailDisclosure
 					title="Download und Zitierweise"
 					:rels="[]"
