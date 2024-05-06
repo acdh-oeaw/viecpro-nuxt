@@ -188,6 +188,14 @@ useHead({
 			<span>{{ t("collection-keys.viecpro_persons.gender") }}:</span>
 			<span v-if="!loading.entity">{{ data.entity.data?.gender }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
+			<div class="col-span-2 my-1 border-t"></div>
+			<span>{{ t("collection-keys.viecpro_persons.confession") }}:</span>
+			<span v-if="!loading.details">
+				<div v-for="confession in data.details.data?.confession" :key="confession">
+					{{ confession }}
+				</div>
+			</span>
+			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 		</template>
 		<template #left>
 			<div v-if="data.details.data" class="flex flex-col gap-3">
