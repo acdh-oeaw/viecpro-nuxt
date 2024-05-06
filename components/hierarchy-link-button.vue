@@ -13,7 +13,7 @@ defineProps<{
 <template>
 	<NuxtLink
 		:to="{ path: localePath('hierarchy'), query: { id, label, model } }"
-		class="rounded-full hover:bg-slate-200 active:bg-slate-300"
+		class="rounded-full transition hover:bg-slate-200 active:bg-slate-300"
 	>
 		<span class="sr-only">Go to Hierarchy view</span>
 		<Network class="m-2 h-6 w-6 shrink-0" />

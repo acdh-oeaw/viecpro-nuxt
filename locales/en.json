@@ -159,7 +159,8 @@
 			"functions": "Function",
 			"institutions": "Institution",
 			"allowance": "Allowance",
-			"same_as": "Online resources"
+			"same_as": "Online resources",
+			"confession": "Confession"
 		},
 		"viecpro_courts": {
 			"model": "Model",
