@@ -93,7 +93,9 @@
 			"shortTitle": "Title (short)",
 			"title": "Title",
 			"target": { "name": "Name" },
-			"relation_type": "Type of Relation"
+			"relation_type": "Type of Relation",
+			"asc": "Ascending",
+			"desc": "Descending"
 		},
 		"functions": {
 			"relation_type": "Function",
