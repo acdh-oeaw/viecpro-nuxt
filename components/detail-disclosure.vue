@@ -51,16 +51,45 @@ const currentRels = computed(() => {
 	>
 		<slot>
 			<div class="p-2">
+				<GenericListbox
+					v-if="headers && all <= limit"
+					button-class="shadow-none"
+					:items="
+						headers.map((header) => ({
+							value: header,
+							label: t(`collection-keys.${collectionName}.${header}`),
+						}))
+					"
+					class="mb-2 w-fit"
+					:default-label="t('ui.sort-by-short')"
+					@change="(to) => changeSort(to.value)"
+				/>
 				<div v-if="all > limit" class="mb-4 flex justify-between">
-					<button
-						v-if="page > 0"
-						class="rounded border p-1 transition hover:bg-slate-300 active:bg-slate-400"
-						@click="page--"
-					>
-						<ChevronRight class="h-5 w-5 rotate-180" />
-					</button>
-					<div v-else class="flex items-center rounded border p-1 text-gray-300">
-						<ChevronRight class="h-5 w-5 rotate-180" />
+					<div class="flex items-center gap-2">
+						<button
+							v-if="page > 0"
+							class="rounded border p-1 transition hover:bg-slate-300 active:bg-slate-400"
+							@click="page--"
+						>
+							<ChevronRight class="h-5 w-5 rotate-180" />
+						</button>
+						<div v-else class="flex items-center rounded border p-1 text-gray-300">
+							<ChevronRight class="h-5 w-5 rotate-180" />
+						</div>
+
+						<GenericListbox
+							v-if="headers"
+							button-class="shadow-none h-full"
+							:default-label="t('ui.sort-by-short')"
+							:items="
+								headers.map((header) => ({
+									value: header,
+									label: t(`collection-keys.${collectionName}.${header}`),
+								}))
+							"
+							class="mb-2"
+							@change="(to) => changeSort(to.value)"
+						/>
 					</div>
 					<div>
 						<div class="flex flex-wrap justify-center gap-1">
