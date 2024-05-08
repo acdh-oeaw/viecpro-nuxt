@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/vue";
+import { ArrowDownNarrowWide, ArrowDownWideNarrow } from "lucide-vue-next";
 
-defineProps<{
+const props = defineProps<{
 	cols: Array<string>;
 	collection: string;
 }>();
@@ -13,14 +13,16 @@ const t = useTranslations();
 const sortedCol = computed({
 	get() {
 		if (route.query.sort) {
-			return String(route.query.sort).split(":")[0];
+			const col = String(route.query.sort).split(":")[0];
+
+			return { value: col, label: t(`collection-keys.${props.collection}.${col}`) };
 		}
-		return "";
+		return null;
 	},
 	set(to) {
 		void router.push({
 			query: {
-				sort: to + ":asc",
+				sort: to?.value + ":asc",
 			},
 		});
 	},
@@ -28,14 +30,19 @@ const sortedCol = computed({
 const direction = computed({
 	get() {
 		if (route.query.sort) {
-			return String(route.query.sort).split(":")[1];
+			const dir = String(route.query.sort).split(":")[1] as "asc" | "desc" | undefined;
+			const labels = {
+				asc: t("collection-keys.generic.asc"),
+				desc: t("collection-keys.generic.desc"),
+			};
+			if (dir) return { value: dir, label: labels[dir] };
 		}
-		return "asc";
+		return { value: "asc", label: t("collection-keys.generic.asc") };
 	},
 	set(to) {
 		void router.push({
 			query: {
-				sort: `${sortedCol.value}:${to}`,
+				sort: `${sortedCol.value?.value}:${to.value}`,
 			},
 		});
 	},
@@ -43,48 +50,24 @@ const direction = computed({
 </script>
 
 <template>
-	<div v-if="cols.length" class="flex gap-2">
-		<Listbox v-model="sortedCol" as="div" class="relative">
-			<ListboxButton
-				as="button"
-				class="flex rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
-				>{{ sortedCol || "sortieren nach" }}</ListboxButton
-			>
-			<MenuTransition>
-				<ListboxOptions
-					class="absolute z-10 mt-1 overflow-auto rounded bg-white py-1 text-base shadow-lg ring-1"
-				>
-					<ListboxOption
-						v-for="col in cols"
-						:key="col"
-						as="button"
-						:value="col"
-						class="w-full p-2 text-left transition hover:bg-slate-200 active:bg-slate-300"
-					>
-						{{ col }}
-					</ListboxOption>
-				</ListboxOptions>
-			</MenuTransition>
-		</Listbox>
-
-		<Listbox v-model="direction" as="div" class="relative">
-			<ListboxButton
-				as="button"
-				class="flex rounded border p-2 transition hover:bg-slate-200 active:bg-slate-300"
-			>
-				{{ direction }}
-			</ListboxButton>
-			<MenuTransition>
-				<ListboxOptions>
-					<ListboxOption value="asc"> Ascend </ListboxOption>
-					<ListboxOption value="desc"> Descend </ListboxOption>
-				</ListboxOptions>
-			</MenuTransition>
-		</Listbox>
+	<div v-if="cols.length" class="flex items-center gap-2">
 		<GenericListbox
+			v-model="sortedCol"
+			button-class="shadow-none"
+			:default-label="t('ui.sort-by-short')"
 			:items="cols.map((col) => ({ value: col, label: t(`collection-keys.${collection}.${col}`) }))"
-		/>
+		>
+			<template #label>
+				<div>
+					<span class="sr-only">{{ t("ui.sort-by-short") }}</span>
+					<ArrowDownNarrowWide v-if="direction.value === 'desc'" class="h-6 w-6" />
+					<ArrowDownWideNarrow v-else class="h-6 w-6" />
+				</div>
+			</template>
+		</GenericListbox>
 		<GenericListbox
+			v-model="direction"
+			button-class="shadow-none"
 			:items="[
 				{ value: 'asc', label: t('collection-keys.generic.asc') },
 				{ value: 'desc', label: t('collection-keys.generic.desc') },

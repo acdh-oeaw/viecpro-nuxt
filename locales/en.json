@@ -301,8 +301,10 @@
 		"hide-filters": "Hide Filters...",
 		"search-placeholder": "Search...",
 		"sort-by": "sort by this column",
+		"sort-by-short": "Sort by...",
 		"loading": "loading...",
 		"no-data": "No data",
-		"timespan": "Time span"
+		"timespan": "Time span",
+		"include-dates": "Include Entities without date information"
 	}
 }

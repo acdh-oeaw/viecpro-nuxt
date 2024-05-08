@@ -170,7 +170,7 @@ useHead({
 											@change="updateFacets()"
 										/>
 										<label for="dateCheck" class="text-sm text-gray-600">
-											Include Entities without date information
+											{{ t("ui.include-dates") }}
 										</label>
 									</div>
 									<div class="mt-1 flex">

@@ -302,8 +302,10 @@
 		"hide-filters": "Filter verstecken...",
 		"search-placeholder": "Suche...",
 		"sort-by": "Sortiere nach dieser Spalte",
+		"sort-by-short": "Sortieren nach...",
 		"loading": "Wird geladen...",
 		"no-data": "Keine Daten",
-		"timespan": "Zeitraum"
+		"timespan": "Zeitraum",
+		"include-dates": "Ergebnisse ohne Zeitinformation inkludieren"
 	}
 }
