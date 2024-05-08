@@ -53,7 +53,7 @@ const currentRels = computed(() => {
 			<div class="p-2">
 				<div v-if="all > limit" class="mb-4 flex justify-between">
 					<button
-						v-if="page > 1"
+						v-if="page > 0"
 						class="rounded border p-1 transition hover:bg-slate-300 active:bg-slate-400"
 						@click="page--"
 					>

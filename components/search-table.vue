@@ -146,7 +146,8 @@ const getDetailLink = (id: string, entity?: string) => {
 				</button>
 			</div>
 			<slot />
-			<div class="flex w-full justify-end">
+			<div class="flex w-full items-center justify-between">
+				<SortMenu :collection="collectionName" class="m-2" :cols="sort ?? []" />
 				<DownloadMenu
 					v-if="data && data.page"
 					class="float-right m-2"

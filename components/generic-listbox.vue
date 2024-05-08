@@ -1,5 +1,11 @@
 <script lang="ts" setup>
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/vue";
+import {
+	Listbox,
+	ListboxButton,
+	ListboxLabel,
+	ListboxOption,
+	ListboxOptions,
+} from "@headlessui/vue";
 import { ChevronsUpDown } from "lucide-vue-next";
 import type { ModelRef } from "vue";
 
@@ -9,6 +15,8 @@ const model: ModelRef<{ label: string; value: string } | null> = defineModel({
 
 defineProps<{
 	items: Array<{ label: string; value: string }>;
+	defaultLabel?: string;
+	buttonClass?: string;
 }>();
 defineEmits(["change"]);
 </script>
@@ -20,18 +28,24 @@ defineEmits(["change"]);
 		class="relative"
 		@update:model-value="(to) => $emit('change', to)"
 	>
-		<ListboxButton
-			class="flex h-11 w-full items-center justify-between gap-2 rounded border bg-white p-2 shadow-lg"
-			as="button"
-		>
-			<span>{{ model?.label || model }}</span>
-			<ChevronsUpDown class="h-5 w-5 text-gray-500" />
-		</ListboxButton>
+		<div class="flex items-center gap-4">
+			<ListboxLabel>
+				<slot name="label" />
+			</ListboxLabel>
+			<ListboxButton
+				class="flex h-11 w-full items-center justify-between gap-2 rounded border bg-white p-2 shadow-lg"
+				:class="buttonClass"
+				as="button"
+			>
+				<span>{{ model?.label || model || defaultLabel }}</span>
+				<ChevronsUpDown class="h-5 w-5 text-gray-500" />
+			</ListboxButton>
+		</div>
 		<MenuTransition>
 			<ListboxOptions
 				v-if="items.length != 0"
 				as="div"
-				class="absolute z-10 mt-2 flex w-full flex-col divide-y rounded border bg-white shadow-xl"
+				class="absolute z-10 mt-2 flex w-auto min-w-[-webkit-fill-available] flex-col divide-y rounded border bg-white shadow-xl"
 			>
 				<ListboxOption
 					v-for="item in items"

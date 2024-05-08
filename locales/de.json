@@ -124,7 +124,9 @@
 			"shortTitle": "Titel (kurz)",
 			"title": "Titel",
 			"target": { "name": "Name" },
-			"relation_type": "Art des Bezuges"
+			"relation_type": "Art des Bezuges",
+			"asc": "Aufsteigend",
+			"desc": "Absteigend"
 		},
 		"viecpro_persons": {
 			"ampel": "Bearbeitungsstatus",
@@ -300,8 +302,10 @@
 		"hide-filters": "Filter verstecken...",
 		"search-placeholder": "Suche...",
 		"sort-by": "Sortiere nach dieser Spalte",
+		"sort-by-short": "Sortieren nach...",
 		"loading": "Wird geladen...",
 		"no-data": "Keine Daten",
-		"timespan": "Zeitraum"
+		"timespan": "Zeitraum",
+		"include-dates": "Ergebnisse ohne Zeitinformation inkludieren"
 	}
 }
