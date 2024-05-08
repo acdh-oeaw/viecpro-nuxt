@@ -29,7 +29,7 @@ defineEmits(["change"]);
 		@update:model-value="(to) => $emit('change', to)"
 	>
 		<div class="flex items-center gap-4">
-			<ListboxLabel>
+			<ListboxLabel v-if="$slots.label">
 				<slot name="label" />
 			</ListboxLabel>
 			<ListboxButton
