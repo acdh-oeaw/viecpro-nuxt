@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useQuery, useQueryClient } from "@tanstack/vue-query";
+import { keepPreviousData, useQuery, useQueryClient } from "@tanstack/vue-query";
 import { useWindowSize } from "@vueuse/core";
 import { get } from "lodash-es";
 import { ChevronDown, ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
@@ -82,7 +82,11 @@ const comQuery = computed(() => {
 		sort_by: String(query.sort ?? ""),
 	};
 });
-const { data, isFetching: loading } = useQuery({
+const {
+	data,
+	isFetching: loading,
+	isPlaceholderData,
+} = useQuery({
 	queryKey: ["search", props.collectionName, comQuery] as const,
 	queryFn: async ({ queryKey }) => {
 		const [, collection, q] = queryKey;
@@ -98,6 +102,7 @@ const { data, isFetching: loading } = useQuery({
 
 		return response;
 	},
+	placeholderData: keepPreviousData,
 });
 
 // TODO: finde better solution
@@ -162,7 +167,12 @@ const getDetailLink = (id: string, entity?: string) => {
 				:limit="data.request_params.per_page || defaultPageLimit"
 				:all="data.found"
 			/>
-			<div v-if="!loading && data" class="w-full">
+			<LoadingBar color="#3C5A50" :disabled="!isPlaceholderData" class="mt-2 h-1" />
+			<div
+				v-if="data"
+				class="w-full transition duration-75"
+				:class="isPlaceholderData && 'opacity-50'"
+			>
 				<div class="grid" :class="cols + ' ' + (!customCols && 'mr-6')">
 					<div v-for="key in koi" :key="String(key)" class="m-2 font-semibold">
 						<SortableColumn
@@ -269,11 +279,15 @@ const getDetailLink = (id: string, entity?: string) => {
 					:all="data.found"
 				/>
 			</div>
-			<Centered v-else>
+			<Centered v-else-if="loading && !isPlaceholderData">
 				<Loader2 class="h-8 w-8 animate-spin" />
 			</Centered>
 		</div>
-		<div v-if="!loading && data">
+		<div
+			v-if="(!loading || isPlaceholderData) && data"
+			:class="isPlaceholderData && 'opacity-50'"
+			class="duration-75"
+		>
 			<FacetDisclosures
 				class="ml-2 w-full max-w-full pr-4 lg:float-right lg:mx-0 lg:mt-6 lg:w-96"
 				:facets="data.facet_counts"
