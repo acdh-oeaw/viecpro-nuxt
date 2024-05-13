@@ -46,6 +46,7 @@ defineEmits(["change"]);
 				v-if="items.length != 0"
 				as="div"
 				class="absolute z-10 mt-2 flex w-auto min-w-[-webkit-fill-available] flex-col divide-y rounded border bg-white shadow-xl"
+				:class="$slots.label && 'ml-10'"
 			>
 				<ListboxOption
 					v-for="item in items"

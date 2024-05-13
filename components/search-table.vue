@@ -167,7 +167,7 @@ const getDetailLink = (id: string, entity?: string) => {
 				:limit="data.request_params.per_page || defaultPageLimit"
 				:all="data.found"
 			/>
-			<LoadingBar color="#3C5A50" :disabled="!isPlaceholderData" class="mt-2 h-1" />
+			<LoadingBar color="#3C5A50" :disabled="!isPlaceholderData && !loading" class="mt-2 h-1" />
 			<div
 				v-if="data"
 				class="w-full transition duration-75"
