@@ -186,7 +186,7 @@ export interface PlaceDetail extends GenericDetail {
 export interface CourtDetail extends GenericDetail {
 	resolution: string;
 	category: string;
-	alternative_names: Array<object>;
+	alternative_names: Array<DetailLabel>;
 	owners: Array<GenericRelation>;
 	sources: Array<object>;
 	personnel: Array<GenericRelation>;

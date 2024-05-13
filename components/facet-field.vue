@@ -44,7 +44,7 @@ const selectionQueries = useQueries({
 					const query: QueryObject = {
 						facet: props.fieldName,
 						max: 10, // In case one filter matches another perfectly
-						query: route.query,
+						query: { ...route.query, page: 0 },
 						facetQuery: selection,
 						collection: props.collection,
 						query_by: props.queryBy,
@@ -82,7 +82,7 @@ const selectionQueries = useQueries({
 const query = computed(() => ({
 	facet: props.fieldName,
 	max: max.value,
-	query: route.query,
+	query: { ...route.query, page: 0 },
 	facetQuery: facetSearch,
 	collection: props.collection,
 	query_by: props.queryBy,
@@ -93,6 +93,7 @@ const facetResponse = useQuery({
 	queryKey: ["facet", query] as const,
 	queryFn: async ({ queryKey }) => {
 		const [, q] = queryKey;
+
 		const results = await getFacets(
 			q.facet,
 			q.max,
