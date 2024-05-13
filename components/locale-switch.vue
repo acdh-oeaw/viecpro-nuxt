@@ -4,17 +4,10 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { locales } from "@/config/i18n.config";
 
 const { locale, setLocale } = useI18n();
-
-defineProps<{
-	noSelect?: boolean;
-}>();
 </script>
 
 <template>
-	<div
-		v-if="!noSelect"
-		class="mx-4 rounded bg-white text-black transition hover:bg-slate-200 active:bg-slate-300"
-	>
+	<div class="mx-4 rounded bg-white text-black transition hover:bg-slate-200 active:bg-slate-300">
 		<Menu as="div">
 			<ClientOnly>
 				<MenuButton class="px-4 py-2" data-testid="localeButton" as="button">
@@ -42,16 +35,5 @@ defineProps<{
 				</MenuItems>
 			</MenuTransition>
 		</Menu>
-	</div>
-	<div v-else class="flex w-full divide-x">
-		<button
-			v-for="loc in locales"
-			:key="loc.code"
-			class="grow p-4 text-gray-900 transition hover:bg-gray-300 focus:bg-red-50 active:bg-gray-400"
-			:data-testid="loc.code"
-			@click="setLocale(loc.code)"
-		>
-			{{ loc.code.toUpperCase() }}
-		</button>
 	</div>
 </template>

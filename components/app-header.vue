@@ -13,6 +13,8 @@ import type { NavLink } from "@/lib/types";
 const t = useTranslations();
 const localePath = useLocalePath();
 
+const switchLocalePath = useSwitchLocalePath();
+
 const links = computed(() => {
 	return {
 		home: { href: { path: localePath("/") }, label: t("pages.home.label") },
@@ -64,18 +66,33 @@ defineProps<{ compact?: boolean }>();
 					<DropdownMenuPortal>
 						<DropdownMenuContent
 							as="div"
-							class="absolute -right-5 z-50 mt-1 flex w-56 flex-col divide-y rounded bg-gray-50 shadow-lg ring data-[side=bottom]:animate-slideUpAndFade"
+							class="absolute -right-5 z-50 mt-1 grid w-56 grid-cols-2 divide-y rounded bg-gray-50 shadow-lg ring data-[side=bottom]:animate-slideUpAndFade"
 						>
-							<DropdownMenuItem v-for="(link, key) of links" :key="key" class="flex" as="div">
+							<DropdownMenuItem
+								v-for="(link, key) of links"
+								:key="key"
+								class="col-span-2 flex overflow-hidden first:rounded-t"
+								as="div"
+							>
 								<NuxtLink
-									class="w-full p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300 active:bg-gray-400"
+									class="w-full p-4 text-gray-900 transition hover:bg-gray-300 active:bg-gray-400"
 									:href="link.href"
 								>
 									{{ link.label }}
 								</NuxtLink>
 							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<LocaleSwitch no-select />
+							<DropdownMenuItem
+								v-for="loc in ['de', 'en']"
+								:key="loc"
+								class="flex overflow-hidden rounded-bl text-center last:rounded-l-none last:rounded-br last:border-l"
+								as="div"
+							>
+								<NuxtLink
+									class="w-full p-4 text-gray-900 transition hover:bg-gray-300 active:bg-gray-400"
+									:href="switchLocalePath(loc)"
+								>
+									{{ loc.toUpperCase() }}
+								</NuxtLink>
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenuPortal>
