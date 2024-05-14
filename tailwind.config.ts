@@ -48,6 +48,9 @@ const config: Config = {
 	plugins: [animate, headlessui, typography],
 	theme: {
 		extend: {
+			animationDelay: {
+				"2s": "2s",
+			},
 			colors: {
 				neutral,
 				negative,
@@ -63,6 +66,16 @@ const config: Config = {
 				content: "64rem",
 			},
 			keyframes: {
+				loadingBar: {
+					"0%, 60%": {
+						left: "-90%",
+						right: "100%",
+					},
+					"100%": {
+						left: "100%",
+						right: "-35%",
+					},
+				},
 				slideDown: {
 					from: { height: "0px" },
 					to: { height: "var(--radix-accordion-content-height)" },
@@ -85,6 +98,7 @@ const config: Config = {
 				slideDownAndFade: "slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
 				slideDown: "slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)",
 				slideUp: "slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)",
+				loadingBar: "loadingBar 4s cubic-bezier(0.87, 0, 0.13, 1) infinite",
 			},
 
 			typography: {
