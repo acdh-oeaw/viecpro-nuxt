@@ -116,7 +116,12 @@ useHead({
 			>
 				<template v-if="!loading.details">
 					<span v-if="data.details.data">
-						{{ data.details.data.alternative_names.slice(0, 3).join(" - ") }}
+						{{
+							data.details.data.alternative_names
+								.map((name) => name.name)
+								.slice(0, 3)
+								.join(" - ")
+						}}
 					</span>
 					<span
 						v-if="
