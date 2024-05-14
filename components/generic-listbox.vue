@@ -22,6 +22,7 @@ defineEmits(["change"]);
 </script>
 
 <template>
+	<!-- eslint-disable tailwindcss/no-contradicting-classname -->
 	<Listbox
 		v-model="model"
 		as="div"
@@ -45,7 +46,7 @@ defineEmits(["change"]);
 			<ListboxOptions
 				v-if="items.length != 0"
 				as="div"
-				class="absolute z-10 mt-2 flex w-auto min-w-[-webkit-fill-available] flex-col divide-y rounded border bg-white shadow-xl"
+				class="absolute z-10 mt-2 flex w-auto min-w-[-moz-available] min-w-[-webkit-fill-available] flex-col divide-y rounded border bg-white shadow-xl"
 				:class="$slots.label && 'ml-10'"
 			>
 				<ListboxOption
