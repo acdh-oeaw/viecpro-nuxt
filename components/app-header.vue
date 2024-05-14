@@ -1,12 +1,6 @@
 <script lang="ts" setup>
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { Menu as MenuIcon, X } from "lucide-vue-next";
-import {
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuPortal,
-	DropdownMenuRoot,
-	DropdownMenuTrigger,
-} from "radix-vue";
 
 import type { NavLink } from "@/lib/types";
 
@@ -26,8 +20,6 @@ const links = computed(() => {
 		},
 	} satisfies Record<string, NavLink>;
 });
-
-const open = ref(false);
 
 defineProps<{ compact?: boolean }>();
 </script>
@@ -55,48 +47,49 @@ defineProps<{ compact?: boolean }>();
 				<LocaleSwitch class="select-none" />
 			</div>
 			<div class="md:hidden">
-				<DropdownMenuRoot v-model:open="open">
-					<DropdownMenuTrigger class="group">
-						<button class="rounded border border-gray-300 p-2">
-							<X v-if="open" class="h-6 w-6 shrink-0" />
-							<MenuIcon v-else class="h-6 w-6 shrink-0" />
-							<span class="sr-only">Open/Close Menu</span>
-						</button>
-					</DropdownMenuTrigger>
-					<DropdownMenuPortal>
-						<DropdownMenuContent
+				<Menu v-slot="{ open, close }" as="div" class="relative z-50 inline-block">
+					<MenuButton as="button" class="rounded border border-gray-300 p-2">
+						<X v-if="open" class="h-6 w-6 shrink-0" />
+						<MenuIcon v-else class="h-6 w-6 shrink-0" />
+						<span class="sr-only">Open/Close Menu</span>
+					</MenuButton>
+					<MenuTransition>
+						<MenuItems
 							as="div"
-							class="absolute -right-5 z-50 mt-1 grid w-56 grid-cols-2 divide-y rounded bg-gray-50 shadow-lg ring data-[side=bottom]:animate-slideUpAndFade"
+							class="absolute right-0 z-50 mt-1 grid w-56 grid-cols-2 divide-y rounded bg-gray-50 shadow-lg ring"
+							@click="close"
 						>
-							<DropdownMenuItem
+							<MenuItem
 								v-for="(link, key) of links"
 								:key="key"
-								class="col-span-2 flex overflow-hidden first:rounded-t"
-								as="div"
+								v-slot="{ active }"
+								class="col-span-2 flex"
 							>
 								<NuxtLink
-									class="w-full p-4 text-gray-900 transition hover:bg-gray-300 active:bg-gray-400"
+									class="w-full p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300"
+									:class="active && 'bg-gray-400'"
 									:href="link.href"
 								>
 									{{ link.label }}
 								</NuxtLink>
-							</DropdownMenuItem>
-							<DropdownMenuItem
+							</MenuItem>
+							<MenuItem
 								v-for="loc in ['de', 'en']"
+								v-slot="{ active }"
 								:key="loc"
-								class="flex overflow-hidden rounded-bl text-center last:rounded-l-none last:rounded-br last:border-l"
-								as="div"
+								class="flex justify-around overflow-hidden rounded-bl text-center last:rounded-l-none last:rounded-br last:border-l"
 							>
 								<NuxtLink
-									class="w-full p-4 text-gray-900 transition hover:bg-gray-300 active:bg-gray-400"
+									class="w-full p-4 text-gray-900 transition hover:bg-gray-300"
+									:class="active && 'bg-gray-400'"
 									:href="switchLocalePath(loc)"
 								>
 									{{ loc.toUpperCase() }}
 								</NuxtLink>
-							</DropdownMenuItem>
-						</DropdownMenuContent>
-					</DropdownMenuPortal>
-				</DropdownMenuRoot>
+							</MenuItem>
+						</MenuItems>
+					</MenuTransition>
+				</Menu>
 			</div>
 		</div>
 	</header>
