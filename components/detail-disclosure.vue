@@ -10,7 +10,7 @@ const props = defineProps<{
 	gridClass?: string;
 	title: string;
 	defaultOpen?: boolean;
-	headers?: Array<string | [string, string]>;
+	headers?: Array<string>;
 	customSlot?: boolean;
 	linkTo?: boolean;
 	collectionName: string;
@@ -48,6 +48,7 @@ const currentRels = computed(() => {
 		:title="title"
 		:disabled="rels.length === 0 && !customSlot"
 		:default-open="defaultOpen"
+		class="overflow-hidden"
 	>
 		<slot>
 			<div class="p-2">
@@ -64,17 +65,17 @@ const currentRels = computed(() => {
 					:default-label="t('ui.sort-by-short')"
 					@change="(to) => changeSort(to.value)"
 				/>
-				<div v-if="all > limit" class="mb-4 flex justify-between">
+				<div v-if="all > limit" class="mb-4 grid grid-cols-[1fr_auto_1fr]">
 					<div class="flex items-center gap-2">
 						<button
 							v-if="page > 0"
-							class="rounded border p-1 transition hover:bg-slate-300 active:bg-slate-400"
+							class="h-full rounded border p-1 transition hover:bg-slate-300 active:bg-slate-400"
 							@click="page--"
 						>
-							<ChevronRight class="h-5 w-5 rotate-180" />
+							<ChevronRight class="h-full w-5 rotate-180" />
 						</button>
-						<div v-else class="flex items-center rounded border p-1 text-gray-300">
-							<ChevronRight class="h-5 w-5 rotate-180" />
+						<div v-else class="flex h-full items-center rounded border p-1 text-gray-300">
+							<ChevronRight class="h-full w-5 rotate-180" />
 						</div>
 
 						<GenericListbox
@@ -87,7 +88,6 @@ const currentRels = computed(() => {
 									label: t(`collection-keys.${collectionName}.${header}`),
 								}))
 							"
-							class="mb-2"
 							@change="(to) => changeSort(to.value)"
 						/>
 					</div>
@@ -120,12 +120,12 @@ const currentRels = computed(() => {
 					</div>
 					<button
 						v-if="page < Math.ceil(all / limit) - 1"
-						class="rounded border p-1 transition hover:bg-slate-300 active:bg-slate-400"
+						class="w-fit justify-self-end rounded border p-1 transition hover:bg-slate-300 active:bg-slate-400"
 						@click="page++"
 					>
 						<ChevronRight class="h-5 w-5" />
 					</button>
-					<div v-else class="flex items-center rounded border p-1 text-gray-300">
+					<div v-else class="flex items-center justify-self-end rounded border p-1 text-gray-300">
 						<ChevronRight class="h-5 w-5" />
 					</div>
 				</div>
