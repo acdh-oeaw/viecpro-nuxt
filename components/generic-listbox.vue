@@ -25,7 +25,6 @@ defineEmits(["change"]);
 </script>
 
 <template>
-	<!-- eslint-disable tailwindcss/no-contradicting-classname -->
 	<Listbox
 		v-model="model"
 		:disabled="disabled"
