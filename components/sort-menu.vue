@@ -67,6 +67,7 @@ const direction = computed({
 		</GenericListbox>
 		<GenericListbox
 			v-model="direction"
+			:disabled="!sortedCol"
 			button-class="shadow-none"
 			:items="[
 				{ value: 'asc', label: t('collection-keys.generic.asc') },

@@ -18,6 +18,7 @@ defineProps<{
 	items: Array<{ label: string; value: string }>;
 	defaultLabel?: string;
 	buttonClass?: string;
+	disabled?: boolean;
 }>();
 
 defineEmits(["change"]);
@@ -27,6 +28,7 @@ defineEmits(["change"]);
 	<!-- eslint-disable tailwindcss/no-contradicting-classname -->
 	<Listbox
 		v-model="model"
+		:disabled="disabled"
 		as="div"
 		class="relative"
 		@update:model-value="(to) => $emit('change', to)"
@@ -41,7 +43,7 @@ defineEmits(["change"]);
 			portal
 			adaptive-width
 		>
-			<div class="flex w-full items-center gap-4">
+			<div class="flex w-full items-center gap-4" :class="disabled && 'opacity-50'">
 				<ListboxLabel v-if="$slots.label">
 					<slot name="label" />
 				</ListboxLabel>
