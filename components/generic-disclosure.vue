@@ -40,7 +40,7 @@ defineProps<{
 			<AccordionContent
 				static
 				as="div"
-				class="overflow-hidden rounded rounded-t-none border-2 border-t-0 data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown"
+				class="rounded rounded-t-none border-2 border-t-0 data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown"
 			>
 				<slot />
 			</AccordionContent>
