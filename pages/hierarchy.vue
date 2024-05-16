@@ -135,6 +135,7 @@ useHead({
 	<MainContent class="relative mx-auto grid w-full grid-flow-row grid-rows-[auto_1fr]">
 		<div class="container mx-auto flex flex-wrap justify-between">
 			<div class="flex flex-wrap justify-end md:justify-normal">
+				<h1 class="sr-only">{{ t("pages.hierarchy.label") }}</h1>
 				<Autocomplete v-model="comQuery" />
 				<GenericListbox v-model="show" class="m-2 w-full min-w-56 md:w-auto" :items="showItems" />
 				<GenericListbox

@@ -65,14 +65,14 @@ useHead({
 	</div>
 	<DetailPage v-else :model="t('pages.searchviews.courts.sing')" :details-loading="loading.details">
 		<template #head>
-			<h1 class="w-full font-bold text-primary-600 xl:my-2 xl:text-4xl">
+			<div class="w-full font-bold text-primary-600 xl:my-2 xl:text-4xl">
 				<div
 					v-if="!loading.entity && data.entity.data"
 					class="mb-4 flex flex-col justify-between gap-4 md:m-0 md:flex-row md:items-center md:gap-8"
 				>
-					<span class="text-4xl">
+					<h1 class="text-4xl">
 						{{ data.entity.data?.name }}
-					</span>
+					</h1>
 					<div class="flex items-center gap-2">
 						<Indicator class="w-24" :status="data.details.data?.ampel" />
 						<HierarchyLinkButton
@@ -104,7 +104,7 @@ useHead({
 					</div>
 				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
-			</h1>
+			</div>
 			<h2>
 				{{ data.entity.data?.kind }}
 				<span v-if="data.details.data?.category">- {{ data.details.data.category }}</span>

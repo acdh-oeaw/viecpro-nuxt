@@ -116,6 +116,9 @@ const getDetailLink = (id: string, entity?: string) => {
 	<div
 		class="flex h-full w-screen flex-col-reverse gap-4 px-2 md:w-auto xl:grid xl:grid-cols-[4fr_2fr]"
 	>
+		<h1 class="sr-only">
+			{{ t("pages.search.title") }}
+		</h1>
 		<div class="mx-auto flex h-full w-full max-w-container flex-col p-2 xl:p-0">
 			<div
 				class="mb-4 grid h-12 w-full shrink-0 grid-cols-[auto_1fr_auto] items-center rounded border bg-white shadow-md xl:my-4"

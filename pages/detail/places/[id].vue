@@ -89,14 +89,14 @@ useHead({
 	</div>
 	<DetailPage v-else :model="t('pages.searchviews.places.sing')" :details-loading="loading.details">
 		<template #head>
-			<h1 class="font-bold text-primary-600 xl:my-2 xl:text-4xl">
+			<div class="font-bold text-primary-600 xl:my-2 xl:text-4xl">
 				<div
 					v-if="!loading.entity && data.entity.data"
 					class="mb-4 flex flex-col justify-between gap-4 md:m-0 md:flex-row md:items-center md:gap-8"
 				>
-					<span class="text-4xl">
+					<h1 class="text-4xl">
 						{{ data.entity.data?.name }}
-					</span>
+					</h1>
 					<div class="flex items-center gap-2">
 						<Indicator class="w-24" :status="data.entity.data?.ampel" />
 						<InfoMenu>
@@ -124,7 +124,7 @@ useHead({
 					</div>
 				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
-			</h1>
+			</div>
 			<Chip
 				v-if="loading.details || data.details.data?.institution_relations.length !== 0"
 				class="my-1 text-sm lg:text-base"

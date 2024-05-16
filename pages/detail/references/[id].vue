@@ -29,5 +29,6 @@ definePageMeta({
 			{{ data }}
 		</pre
 		>
+		<p>You should not be able to see this page, it is but a remnant of a long forgotten time.</p>
 	</div>
 </template>
