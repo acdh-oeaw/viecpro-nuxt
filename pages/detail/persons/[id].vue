@@ -8,6 +8,7 @@ import { useRoute } from "vue-router";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
+import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Person, PersonDetail, Reference } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
@@ -122,31 +123,17 @@ useHead({
 								</div>
 							</template>
 						</InfoMenu>
-						<InfoMenu>
+
+						<BookOpenText class="m-2 h-6 w-6 shrink-0 cursor-not-allowed opacity-50" />
+						<!-- <InfoMenu>
 							<template #button>
 								<button class="rounded-full transition hover:bg-slate-200 active:bg-slate-300">
 									<span class="sr-only">{{ t("collection-keys.viecpro_courts.sources") }}</span>
 									<BookOpenText class="m-2 h-6 w-6 shrink-0" />
 								</button>
 							</template>
-							<template #content>
-								<div v-if="data.refs.data" class="w-fit text-base">
-									<template
-										v-for="({ document: reference }, i) in data.refs.data.hits"
-										:key="reference.id"
-									>
-										<div v-if="i !== 0" class="my-1 border" />
-										<div class="flex flex-col gap-1 p-2">
-											<h3 class="border-b">
-												{{ reference.title || reference.shortTitle }}
-											</h3>
-											<span>{{ reference.folio }}</span>
-											<span class="text-sm text-gray-400">{{ reference.id }}</span>
-										</div>
-									</template>
-								</div>
-							</template>
-						</InfoMenu>
+							<template #content> hehehehe </template>
+						</InfoMenu> -->
 						<DownloadMenu detail :data="data" :collection="collection" />
 					</div>
 				</div>
@@ -284,6 +271,38 @@ useHead({
 					grid-class="grid-cols-3"
 					collection-name="generic"
 				/>
+				<GenericDisclosure
+					:title="t('collection-keys.viecpro_courts.sources')"
+					:disabled="!data.refs.data || isEmpty(data.refs.data.hits)"
+				>
+					<div v-if="data.refs.data" class="flex flex-col divide-y-2">
+						<div
+							v-for="tag in [...new Set(data.refs.data.hits?.map((hit) => hit.document.tag))]"
+							:key="tag"
+							class="p-2"
+						>
+							<h2 class="mb-2 text-xl font-semibold">
+								{{ tag }}
+							</h2>
+							<template
+								v-for="({ document: reference }, i) in data.refs.data.hits.filter(
+									(hit) => hit.document.tag === tag,
+								)"
+								:key="reference.id"
+							>
+								<div v-if="i !== 0" class="my-1 border" />
+								<div class="flex flex-col gap-1">
+									<h3
+										class="border-b"
+										v-html="detectURLsAddLinks(reference.title || reference.shortTitle)"
+									/>
+									<span v-html="detectURLsAddLinks(reference.folio)" />
+									<span class="text-sm text-gray-400">{{ reference.id }}</span>
+								</div>
+							</template>
+						</div>
+					</div>
+				</GenericDisclosure>
 				<!-- <DetailDisclosure
 					title="Download und Zitierweise"
 					:rels="[]"
