@@ -293,7 +293,7 @@ useHead({
 								<div v-if="i !== 0" class="my-1 border" />
 								<div>
 									<span
-										:class="reference.folio && 'after:content-[\',_\']'"
+										:class="reference.folio && `after:content-[',_']`"
 										v-html="detectURLsAddLinks(reference.title || reference.shortTitle)"
 									/>
 									<span
