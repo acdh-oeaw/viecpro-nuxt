@@ -42,6 +42,7 @@ export interface Reference {
 	kind: string;
 	related_doc: ReferenceRelatedDoc;
 	id: string;
+	tag: string;
 }
 export interface ReferenceRelatedDoc {
 	object_id: string;
