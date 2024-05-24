@@ -291,9 +291,13 @@ useHead({
 								:key="reference.id"
 							>
 								<div v-if="i !== 0" class="my-1 border" />
-								<div class="flex flex-col gap-0.5">
-									<h3 v-html="detectURLsAddLinks(reference.title || reference.shortTitle)" />
+								<div>
 									<span
+										:class="reference.folio && 'after:content-[\',_\']'"
+										v-html="detectURLsAddLinks(reference.title || reference.shortTitle)"
+									/>
+									<span
+										v-if="reference.folio"
 										class="text-sm text-gray-600"
 										v-html="detectURLsAddLinks(reference.folio)"
 									/>
