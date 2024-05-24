@@ -291,13 +291,12 @@ useHead({
 								:key="reference.id"
 							>
 								<div v-if="i !== 0" class="my-1 border" />
-								<div class="flex flex-col gap-1">
-									<h3
-										class="border-b"
-										v-html="detectURLsAddLinks(reference.title || reference.shortTitle)"
+								<div class="flex flex-col gap-0.5">
+									<h3 v-html="detectURLsAddLinks(reference.title || reference.shortTitle)" />
+									<span
+										class="text-sm text-gray-600"
+										v-html="detectURLsAddLinks(reference.folio)"
 									/>
-									<span v-html="detectURLsAddLinks(reference.folio)" />
-									<span class="text-sm text-gray-400">{{ reference.id }}</span>
 								</div>
 							</template>
 						</div>
