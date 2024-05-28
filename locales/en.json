@@ -162,7 +162,8 @@
 			"institutions": "Institution",
 			"allowance": "Allowance",
 			"same_as": "Online resources",
-			"confession": "Confession"
+			"confession": "Confession",
+			"no-notes": "No notes provided."
 		},
 		"viecpro_courts": {
 			"model": "Model",

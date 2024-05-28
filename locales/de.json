@@ -163,7 +163,8 @@
 			"institutions": "Institution",
 			"allowance": "Zahlungen",
 			"same_as": "Onlineressourcen",
-			"confession": "Konfession"
+			"confession": "Konfession",
+			"no-notes": "Keine Notizen vorhanden."
 		},
 		"viecpro_courts": {
 			"model": "Modell",
