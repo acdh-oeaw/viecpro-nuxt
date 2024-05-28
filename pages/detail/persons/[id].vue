@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { BookOpenText, ExternalLink, Info } from "lucide-vue-next";
+import { ExternalLink, Info, StickyNote } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
@@ -67,7 +67,7 @@ definePageMeta({
 });
 
 const title = computed(() => {
-	if (data.value.entity.data?.name) return `${data.value.entity.data.fullname} - Person`;
+	if (!loading.value.entity) return `${data.value.entity.data.fullname} - Person`;
 	return "Person";
 });
 
@@ -124,16 +124,22 @@ useHead({
 							</template>
 						</InfoMenu>
 
-						<BookOpenText class="m-2 h-6 w-6 shrink-0 cursor-not-allowed opacity-50" />
-						<!-- <InfoMenu>
+						<InfoMenu class="text-base font-normal">
 							<template #button>
 								<button class="rounded-full transition hover:bg-slate-200 active:bg-slate-300">
 									<span class="sr-only">{{ t("collection-keys.viecpro_courts.sources") }}</span>
-									<BookOpenText class="m-2 h-6 w-6 shrink-0" />
+									<StickyNote class="m-2 h-6 w-6 shrink-0" />
 								</button>
 							</template>
-							<template #content> hehehehe </template>
-						</InfoMenu> -->
+							<template #content>
+								<div v-if="data.details.data.notes">
+									{{ data.details.data.notes }}
+								</div>
+								<div v-else class="italic">
+									{{ t("collection-keys.viecpro_persons.no-notes") }}
+								</div>
+							</template>
+						</InfoMenu>
 						<DownloadMenu detail :data="data" :collection="collection" />
 					</div>
 				</div>

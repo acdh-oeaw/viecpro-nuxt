@@ -139,6 +139,8 @@ export interface PersonDetail extends GenericDetail {
 	non_court_functions: Array<DetailRelation>;
 	related_places: Array<DetailRelation>;
 	allowance: Array<string>;
+	notes: string;
+	sameAs: Array<string>;
 }
 
 export interface GenericRelation {
