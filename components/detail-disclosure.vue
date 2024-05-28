@@ -32,12 +32,13 @@ const changeSort = (col: string) => {
 
 const currentRels = computed(() => {
 	let retRels = [...props.rels];
-	if (sortBy.value.includes(":rev")) {
+	const adjValue = sortBy.value.replace(/((?:start|end)_date)/g, "$1_iso");
+	if (adjValue.includes(":rev")) {
 		retRels = retRels.sort((a, b) =>
-			String(a[sortBy.value.split(":")[0]]) < String(b[sortBy.value.split(":")[0]]) ? 1 : -1,
+			String(a[adjValue.split(":")[0]]) < String(b[adjValue.split(":")[0]]) ? 1 : -1,
 		);
 	} else {
-		retRels = retRels.sort((a, b) => (String(a[sortBy.value]) < String(b[sortBy.value]) ? -1 : 1));
+		retRels = retRels.sort((a, b) => (String(a[adjValue]) < String(b[adjValue]) ? -1 : 1));
 	}
 	return retRels.slice(page.value * limit, (page.value + 1) * limit);
 });
