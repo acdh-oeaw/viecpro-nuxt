@@ -54,9 +54,9 @@ const data = ref({
 });
 
 const loading = computed(() => ({
-	entity: data.value.entity.isFetching,
-	details: data.value.details.isFetching,
-	refs: data.value.details.isFetching,
+	entity: data.value.entity.isFetching.value,
+	details: data.value.details.isFetching.value,
+	refs: data.value.details.isFetching.value,
 }));
 
 const labelCols = ["name", "start_date", "end_date"];
@@ -67,12 +67,12 @@ definePageMeta({
 });
 
 const title = computed(() => {
-	if (!loading.value.entity) return `${data.value.entity.data.fullname} - Person`;
+	if (!loading.value.entity) return `${data.value.entity.data.value?.fullname} - Person`;
 	return "Person";
 });
 
 useHead({
-	title,
+	title: title.value,
 });
 </script>
 
@@ -100,6 +100,22 @@ useHead({
 					</h1>
 					<div class="flex items-center gap-2">
 						<Indicator class="w-24" :status="data.entity.data?.ampel" />
+						<InfoMenu class="text-base font-normal">
+							<template #button>
+								<button class="rounded-full transition hover:bg-slate-200 active:bg-slate-300">
+									<span class="sr-only">{{ t("collection-keys.viecpro_courts.sources") }}</span>
+									<StickyNote class="m-2 h-6 w-6 shrink-0" />
+								</button>
+							</template>
+							<template #content>
+								<div v-if="data.details.data.notes">
+									{{ data.details.data.notes }}
+								</div>
+								<div v-else class="italic">
+									{{ t("collection-keys.viecpro_persons.no-notes") }}
+								</div>
+							</template>
+						</InfoMenu>
 						<HierarchyLinkButton
 							:id="String(data.entity.data?.object_id)"
 							model="Person"
@@ -124,22 +140,6 @@ useHead({
 							</template>
 						</InfoMenu>
 
-						<InfoMenu class="text-base font-normal">
-							<template #button>
-								<button class="rounded-full transition hover:bg-slate-200 active:bg-slate-300">
-									<span class="sr-only">{{ t("collection-keys.viecpro_courts.sources") }}</span>
-									<StickyNote class="m-2 h-6 w-6 shrink-0" />
-								</button>
-							</template>
-							<template #content>
-								<div v-if="data.details.data.notes">
-									{{ data.details.data.notes }}
-								</div>
-								<div v-else class="italic">
-									{{ t("collection-keys.viecpro_persons.no-notes") }}
-								</div>
-							</template>
-						</InfoMenu>
 						<DownloadMenu detail :data="data" :collection="collection" />
 					</div>
 				</div>

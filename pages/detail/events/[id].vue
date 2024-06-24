@@ -22,13 +22,13 @@ definePageMeta({
 });
 
 const title = computed(() => {
-	if (data.value.entity.data?.name)
-		return `${data.value.entity.data.name} - ${t("pages.searchviews.events.sing")}`;
+	if (data.value.entity.data.value?.name)
+		return `${data.value.entity.data.value.name} - ${t("pages.searchviews.events.sing")}`;
 	return t("pages.searchviews.events.sing");
 });
 
 useHead({
-	title,
+	title: title.value,
 });
 </script>
 
