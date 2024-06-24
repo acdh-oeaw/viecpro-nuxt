@@ -54,9 +54,9 @@ const data = ref({
 });
 
 const loading = computed(() => ({
-	entity: data.value.entity.isFetching,
-	details: data.value.details.isFetching,
-	refs: data.value.details.isFetching,
+	entity: data.value.entity.isFetching.value,
+	details: data.value.details.isFetching.value,
+	refs: data.value.details.isFetching.value,
 }));
 
 const labelCols = ["name", "start_date", "end_date"];
@@ -67,12 +67,12 @@ definePageMeta({
 });
 
 const title = computed(() => {
-	if (!loading.value.entity) return `${data.value.entity.data.fullname} - Person`;
+	if (!loading.value.entity) return `${data.value.entity.data.value?.fullname} - Person`;
 	return "Person";
 });
 
 useHead({
-	title,
+	title: title.value,
 });
 </script>
 
