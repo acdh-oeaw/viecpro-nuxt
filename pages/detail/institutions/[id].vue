@@ -81,7 +81,7 @@ definePageMeta({
 });
 
 const title = computed(() => {
-	if (data.value.entity.data.name) return `${data.value.entity.data.name} - Institution`;
+	if (data.value.entity.data?.name) return `${data.value.entity.data.name} - Institution`;
 	return "Institution";
 });
 

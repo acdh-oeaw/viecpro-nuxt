@@ -66,7 +66,7 @@ definePageMeta({
 });
 
 const title = computed(() => {
-	if (data.value.entity.data.name)
+	if (data.value.entity.data?.name)
 		return `${data.value.entity.data.name} - ${t("pages.searchviews.places.sing")}`;
 	return t("pages.searchviews.places.sing");
 });

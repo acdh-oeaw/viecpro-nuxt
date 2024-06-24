@@ -42,7 +42,7 @@ definePageMeta({
 });
 
 const title = computed(() => {
-	if (data.value.entity.data.name)
+	if (data.value.entity.data?.name)
 		return `${data.value.entity.data.name} - ${t("pages.searchviews.courts.sing")}`;
 	return t("pages.searchviews.courts.sing");
 });
