@@ -297,7 +297,7 @@ useHead({
 							:key="String(tag)"
 							class="p-2"
 						>
-							<h2 class="mb-2 text-lg font-semibold">
+							<h2 class="mb-2 font-semibold">
 								{{ tag }}
 							</h2>
 							<template
