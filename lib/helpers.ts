@@ -11,8 +11,5 @@ export function downloadAsJson(content: object, title: string) {
 export function detectURLsAddLinks(content: string) {
 	const urlRegex =
 		/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
-	return content.replace(
-		urlRegex,
-		'<a style="text-decoration: underline; font-weight: 600" href="$1" target="_blank">$1</a>',
-	);
+	return content.replace(urlRegex, '<a class="underline" href="$1" target="_blank">$1</a>');
 }
