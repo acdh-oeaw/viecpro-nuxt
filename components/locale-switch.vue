@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 
-import { locales } from "@/config/i18n.config";
+import { localesMap } from "@/config/i18n.config";
 
 const { locale, setLocale } = useI18n();
 </script>
@@ -19,7 +19,7 @@ const { locale, setLocale } = useI18n();
 					class="fixed z-50 ml-4 mt-4 flex -translate-x-4 flex-col rounded bg-white shadow-lg"
 				>
 					<MenuItem
-						v-for="loc in locales"
+						v-for="loc in localesMap"
 						v-slot="{ active }"
 						:key="loc.code"
 						:data-testid="loc.code"
@@ -27,7 +27,7 @@ const { locale, setLocale } = useI18n();
 					>
 						<button
 							:class="active && 'bg-gray-400'"
-							class="min-w-[5rem] p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300"
+							class="min-w-20 p-4 text-gray-900 transition first:rounded-t last:rounded-b hover:bg-gray-300"
 						>
 							{{ loc.code.toUpperCase() }}
 						</button>
