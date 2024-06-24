@@ -2,8 +2,7 @@
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"extends": ["./.nuxt/tsconfig.json", "@acdh-oeaw/tsconfig"],
 	"compilerOptions": {
-		/** `vue-tsc` does not currently work with `incremental` */
-		// @see https://github.com/vuejs/language-tools/issues/2622
-		"incremental": false
+		// @see https://github.com/microsoft/TypeScript/issues/58975
+		"module": "esnext"
 	}
 }
