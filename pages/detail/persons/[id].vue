@@ -413,8 +413,8 @@ useHead({
 				<DetailDisclosure
 					:title="t('collection-keys.viecpro_persons.non_court_functions')"
 					:rels="data.details.data.non_court_functions"
-					:headers="relCols"
-					grid-class="grid-cols-4"
+					:headers="['relation_type', 'start_date', 'end_date']"
+					grid-class="grid-cols-3"
 					collection-name="generic"
 					link-to
 				/>
