@@ -67,7 +67,7 @@ definePageMeta({
 });
 
 const title = computed(() => {
-	if (!loading.value.entity) return `${data.value.entity.data.fullname} - Person`;
+	if (!loading.value.entity) return `${String(data.value.entity.data?.fullname)} - Person`;
 	return "Person";
 });
 
@@ -111,11 +111,11 @@ useHead({
 									class="rounded-full transition hover:bg-slate-200 active:bg-slate-300"
 								>
 									<span class="sr-only">{{ t("collection-keys.viecpro_courts.sources") }}</span>
-									<StickyNote class="m-2 h-6 w-6 shrink-0" />
+									<StickyNote class="m-2 size-6 shrink-0" />
 								</button>
 							</template>
 							<template #content>
-								<div v-if="data.details.data.notes">
+								<div v-if="data.details.data?.notes">
 									{{ data.details.data.notes }}
 								</div>
 								<div v-else class="italic">
@@ -136,7 +136,7 @@ useHead({
 									:title="t('collection-keys.viecpro_persons.citations')"
 								>
 									<span class="sr-only">Show Infos</span>
-									<Info class="m-2 h-6 w-6 shrink-0" />
+									<Info class="m-2 size-6 shrink-0" />
 								</button>
 							</template>
 							<template #content>
@@ -346,7 +346,7 @@ useHead({
 								<span>
 									{{ url }}
 								</span>
-								<ExternalLink class="h-4 w-4 shrink-0" />
+								<ExternalLink class="size-4 shrink-0" />
 							</NuxtLink>
 						</div>
 					</div>

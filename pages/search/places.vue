@@ -20,11 +20,11 @@ const schema = ref(
 	}),
 );
 
-const facets = computed(
-	() => schema.value.data?.fields?.filter((field) => field.facet).map((field) => field.name),
+const facets = computed(() =>
+	schema.value.data?.fields?.filter((field) => field.facet).map((field) => field.name),
 );
-const sortable = computed(
-	() => schema.value.data?.fields?.filter((field) => field.sort).map((field) => field.name),
+const sortable = computed(() =>
+	schema.value.data?.fields?.filter((field) => field.sort).map((field) => field.name),
 );
 
 definePageMeta({
@@ -38,7 +38,7 @@ useHead({
 
 <template>
 	<Centered v-if="schema.isFetching">
-		<Loader2 class="h-8 w-8 animate-spin" />
+		<Loader2 class="size-8 animate-spin" />
 	</Centered>
 	<SearchTable
 		v-else

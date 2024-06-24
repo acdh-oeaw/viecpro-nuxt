@@ -4,6 +4,10 @@ import { Loader2 } from "lucide-vue-next";
 
 import { getImprint } from "@/lib/get-imprint";
 
+defineRouteRules({
+	prerender: true,
+});
+
 const t = useTranslations();
 const { locale } = useI18n();
 
@@ -25,8 +29,9 @@ definePageMeta({
 	<MainContent class="mx-auto w-full max-w-container p-2">
 		<div v-if="!isFetching" class="prose prose-sm md:prose-base">
 			<h1>{{ t("pages.imprint.title") }}</h1>
+			<!-- eslint-disable-next-line vue/no-v-html -->
 			<p v-if="html" v-html="html" />
 		</div>
-		<Centered v-else><Loader2 class="h-8 w-8 animate-spin" /></Centered>
+		<Centered v-else><Loader2 class="size-8 animate-spin" /></Centered>
 	</MainContent>
 </template>

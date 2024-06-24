@@ -225,7 +225,7 @@
 			"relation_type": "Art des Bezuges",
 			"target": { "name": "Name" },
 			"sources": {
-				"bibtext": {
+				"bibtex": {
 					"title": "Titel",
 					"type": "Art"
 				},
@@ -235,7 +235,7 @@
 			"label:Kategorie": "Kategorie",
 			"start_date": "Beginn",
 			"end_date": "Ende",
-			"bibtext": {
+			"bibtex": {
 				"title": "Titel",
 				"type": "Art"
 			},
@@ -311,5 +311,15 @@
 		"no-data": "Keine Daten",
 		"timespan": "Zeitraum",
 		"include-dates": "Ergebnisse ohne Zeitinformation inkludieren"
+	},
+	"Manifest": {
+		"name": "Der Wiener Hof. Ein prosopographisches Portal",
+		"short-name": "VieCPro",
+		"description": "Der Wiener Hof. Ein prosopographisches Portal"
+	},
+	"Metadata": {
+		"description": "Der Wiener Hof. Ein prosopographisches Portal",
+		"title": "Der Wiener Hof. Ein prosopographisches Portal",
+		"twitter": "{'@acdh_oeaw'}"
 	}
 }

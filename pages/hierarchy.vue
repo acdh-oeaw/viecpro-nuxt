@@ -156,7 +156,7 @@ useHead({
 						class="m-2 flex min-h-11 w-full items-center gap-1 rounded border bg-white px-2 shadow-md transition hover:bg-slate-200 active:bg-slate-300"
 					>
 						<span>{{ t("pages.hierarchy.options.goto") }}</span>
-						<ArrowRight class="h-5 w-5 shrink-0" />
+						<ArrowRight class="size-5 shrink-0" />
 					</button>
 				</NuxtLink>
 			</div>
@@ -165,15 +165,15 @@ useHead({
 					<h3>{{ t("pages.hierarchy.legend.legend") }}:</h3>
 					<div class="flex gap-x-3">
 						<div class="flex items-center gap-1">
-							<div class="h-4 w-4 rounded-full border bg-[tomato] shadow" />
+							<div class="size-4 rounded-full border bg-[tomato] shadow" />
 							<div>Institution</div>
 						</div>
 						<div class="flex items-center gap-1">
-							<div class="h-4 w-4 rounded-full border bg-[yellowgreen] shadow" />
+							<div class="size-4 rounded-full border bg-[yellowgreen] shadow" />
 							<div>{{ t("pages.hierarchy.legend.function") }}</div>
 						</div>
 						<div class="flex items-center gap-1">
-							<div class="h-4 w-4 rounded-full border bg-[lightskyblue] shadow" />
+							<div class="size-4 rounded-full border bg-[lightskyblue] shadow" />
 							<div>Person</div>
 						</div>
 					</div>
@@ -187,7 +187,7 @@ useHead({
 				</VisContainer>
 			</ClientOnly>
 			<Centered v-else>
-				<Loader2 class="h-8 w-8 animate-spin" />
+				<Loader2 class="size-8 animate-spin" />
 			</Centered>
 		</div>
 	</MainContent>

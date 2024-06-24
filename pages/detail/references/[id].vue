@@ -21,7 +21,7 @@ definePageMeta({
 </script>
 
 <template>
-	<div class="mx-auto h-full w-full max-w-container">
+	<div class="mx-auto size-full max-w-container">
 		<div>
 			{{ route.params.id }}
 		</div>

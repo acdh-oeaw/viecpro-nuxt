@@ -133,7 +133,7 @@ useHead({
 									:title="t('collection-keys.viecpro_persons.citations')"
 								>
 									<span class="sr-only">Show Infos</span>
-									<Info class="m-2 h-6 w-6 shrink-0" />
+									<Info class="m-2 size-6 shrink-0" />
 								</button>
 							</template>
 							<template #content>
@@ -215,7 +215,7 @@ useHead({
 								<span>
 									{{ url }}
 								</span>
-								<ExternalLink class="h-4 w-4 shrink-0" />
+								<ExternalLink class="size-4 shrink-0" />
 							</NuxtLink>
 						</div>
 					</div>

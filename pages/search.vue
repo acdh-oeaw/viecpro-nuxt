@@ -191,7 +191,7 @@ useHead({
 												},
 											}"
 										>
-											<CalendarSearch class="h-5 w-5" />
+											<CalendarSearch class="size-5" />
 											<span class="sr-only">Apply time filters</span>
 										</NuxtLink>
 									</div>
