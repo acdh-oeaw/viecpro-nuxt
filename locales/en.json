@@ -163,7 +163,10 @@
 			"allowance": "Allowance",
 			"same_as": "Online resources",
 			"confession": "Confession",
-			"no-notes": "No notes provided."
+			"no-notes": "No notes provided.",
+			"notes": "Editor's note",
+			"hierarchy": "Hierarchy visualisation",
+			"citations": "Proposal for citation "
 		},
 		"viecpro_courts": {
 			"model": "Model",

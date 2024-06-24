@@ -99,15 +99,42 @@ useHead({
 						{{ data.entity.data?.fullname }}
 					</h1>
 					<div class="flex items-center gap-2">
-						<Indicator class="w-24" :status="data.entity.data?.ampel" />
+						<Indicator
+							class="w-24"
+							:status="data.entity.data?.ampel"
+							:title="t('collection-keys.viecpro_persons.ampel')"
+						/>
+						<InfoMenu class="text-base font-normal">
+							<template #button>
+								<button
+									:title="t('collection-keys.viecpro_persons.notes')"
+									class="rounded-full transition hover:bg-slate-200 active:bg-slate-300"
+								>
+									<span class="sr-only">{{ t("collection-keys.viecpro_courts.sources") }}</span>
+									<StickyNote class="m-2 h-6 w-6 shrink-0" />
+								</button>
+							</template>
+							<template #content>
+								<div v-if="data.details.data.notes">
+									{{ data.details.data.notes }}
+								</div>
+								<div v-else class="italic">
+									{{ t("collection-keys.viecpro_persons.no-notes") }}
+								</div>
+							</template>
+						</InfoMenu>
 						<HierarchyLinkButton
 							:id="String(data.entity.data?.object_id)"
 							model="Person"
 							:label="data.entity.data?.fullname"
+							:title="t('collection-keys.viecpro_persons.hierarchy')"
 						/>
 						<InfoMenu>
 							<template #button>
-								<button class="rounded-full transition hover:bg-slate-200 active:bg-slate-300">
+								<button
+									class="rounded-full transition hover:bg-slate-200 active:bg-slate-300"
+									:title="t('collection-keys.viecpro_persons.citations')"
+								>
 									<span class="sr-only">Show Infos</span>
 									<Info class="m-2 h-6 w-6 shrink-0" />
 								</button>
@@ -124,23 +151,7 @@ useHead({
 							</template>
 						</InfoMenu>
 
-						<InfoMenu class="text-base font-normal">
-							<template #button>
-								<button class="rounded-full transition hover:bg-slate-200 active:bg-slate-300">
-									<span class="sr-only">{{ t("collection-keys.viecpro_courts.sources") }}</span>
-									<StickyNote class="m-2 h-6 w-6 shrink-0" />
-								</button>
-							</template>
-							<template #content>
-								<div v-if="data.details.data.notes">
-									{{ data.details.data.notes }}
-								</div>
-								<div v-else class="italic">
-									{{ t("collection-keys.viecpro_persons.no-notes") }}
-								</div>
-							</template>
-						</InfoMenu>
-						<DownloadMenu detail :data="data" :collection="collection" />
+						<DownloadMenu detail :data="data" :collection="collection" title="Download" />
 					</div>
 				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
@@ -283,11 +294,21 @@ useHead({
 				>
 					<div v-if="data.refs.data" class="flex flex-col divide-y-2">
 						<div
-							v-for="tag in [...new Set(data.refs.data.hits?.map((hit) => hit.document.tag))]"
-							:key="tag"
+							v-for="tag in [...new Set(data.refs.data.hits?.map((hit) => hit.document.tag))].sort(
+								(a, b) => {
+									const standard = [
+										'Primärquellen',
+										'Sekundärliteratur',
+										'Datenbanken',
+										'Projekte',
+									];
+									return standard.indexOf(a) - standard.indexOf(b);
+								},
+							)"
+							:key="String(tag)"
 							class="p-2"
 						>
-							<h2 class="mb-2 text-xl font-semibold">
+							<h2 class="mb-2 font-semibold">
 								{{ tag }}
 							</h2>
 							<template
@@ -297,16 +318,9 @@ useHead({
 								:key="reference.id"
 							>
 								<div v-if="i !== 0" class="my-1 border" />
-								<div>
-									<span
-										:class="reference.folio && `after:content-[',_']`"
-										v-html="detectURLsAddLinks(reference.title || reference.shortTitle)"
-									/>
-									<span
-										v-if="reference.folio"
-										class="text-sm text-gray-600"
-										v-html="detectURLsAddLinks(reference.folio)"
-									/>
+								<div class="flex flex-col gap-0.5">
+									<span v-html="detectURLsAddLinks(reference.title || reference.shortTitle)" />
+									<span v-if="reference.folio" v-html="detectURLsAddLinks(reference.folio)" />
 								</div>
 							</template>
 						</div>
