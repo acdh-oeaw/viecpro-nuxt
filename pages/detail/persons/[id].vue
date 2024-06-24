@@ -99,10 +99,17 @@ useHead({
 						{{ data.entity.data?.fullname }}
 					</h1>
 					<div class="flex items-center gap-2">
-						<Indicator class="w-24" :status="data.entity.data?.ampel" />
+						<Indicator
+							class="w-24"
+							:status="data.entity.data?.ampel"
+							:title="t('collection-keys.viecpro_persons.ampel')"
+						/>
 						<InfoMenu class="text-base font-normal">
 							<template #button>
-								<button class="rounded-full transition hover:bg-slate-200 active:bg-slate-300">
+								<button
+									:title="t('collection-keys.viecpro_persons.notes')"
+									class="rounded-full transition hover:bg-slate-200 active:bg-slate-300"
+								>
 									<span class="sr-only">{{ t("collection-keys.viecpro_courts.sources") }}</span>
 									<StickyNote class="m-2 h-6 w-6 shrink-0" />
 								</button>
@@ -120,10 +127,14 @@ useHead({
 							:id="String(data.entity.data?.object_id)"
 							model="Person"
 							:label="data.entity.data?.fullname"
+							:title="t('collection-keys.viecpro_persons.hierarchy')"
 						/>
 						<InfoMenu>
 							<template #button>
-								<button class="rounded-full transition hover:bg-slate-200 active:bg-slate-300">
+								<button
+									class="rounded-full transition hover:bg-slate-200 active:bg-slate-300"
+									:title="t('collection-keys.viecpro_persons.citations')"
+								>
 									<span class="sr-only">Show Infos</span>
 									<Info class="m-2 h-6 w-6 shrink-0" />
 								</button>
@@ -140,7 +151,7 @@ useHead({
 							</template>
 						</InfoMenu>
 
-						<DownloadMenu detail :data="data" :collection="collection" />
+						<DownloadMenu detail :data="data" :collection="collection" title="Download" />
 					</div>
 				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>

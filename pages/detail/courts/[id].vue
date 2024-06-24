@@ -42,7 +42,7 @@ definePageMeta({
 });
 
 const title = computed(() => {
-	if (data.value.entity.data?.name)
+	if (data.value.entity.data.name)
 		return `${data.value.entity.data.name} - ${t("pages.searchviews.courts.sing")}`;
 	return t("pages.searchviews.courts.sing");
 });
@@ -74,15 +74,23 @@ useHead({
 						{{ data.entity.data?.name }}
 					</h1>
 					<div class="flex items-center gap-2">
-						<Indicator class="w-24" :status="data.details.data?.ampel" />
+						<Indicator
+							class="w-24"
+							:status="data.details.data?.ampel"
+							:title="t('collection-keys.viecpro_persons.ampel')"
+						/>
 						<HierarchyLinkButton
 							:id="String(data.entity.data?.object_id)"
 							model="Institution"
 							:label="data.entity.data?.name"
+							:title="t('collection-keys.viecpro_persons.hierarchy')"
 						/>
 						<InfoMenu>
 							<template #button>
-								<button class="rounded-full hover:bg-slate-200 active:bg-slate-300">
+								<button
+									class="rounded-full hover:bg-slate-200 active:bg-slate-300"
+									:title="t('collection-keys.viecpro_persons.citations')"
+								>
 									<span class="sr-only">Show Infos</span>
 									<Info class="m-2 h-6 w-6 shrink-0" />
 								</button>
@@ -100,7 +108,7 @@ useHead({
 								</div>
 							</template>
 						</InfoMenu>
-						<DownloadMenu detail :data="data" :collection="collection" />
+						<DownloadMenu detail :data="data" :collection="collection" title="Download" />
 					</div>
 				</div>
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
