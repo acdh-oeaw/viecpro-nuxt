@@ -53,5 +53,6 @@ useHead({
 		:custom-cols="{
 			context: 'this is a workaround, dont tell anybody 🤫',
 		}"
+		:default-sorting="schema.data?.default_sorting_field"
 	/>
 </template>

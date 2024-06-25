@@ -44,6 +44,7 @@ useHead({
 	</Centered>
 	<SearchTable
 		v-else
+		:default-sorting="schema.data?.default_sorting_field"
 		:collection-name="collectionName"
 		:query-by="queryBy"
 		:koi="koi"

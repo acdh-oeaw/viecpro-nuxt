@@ -49,5 +49,6 @@ useHead({
 		:cols="tableCols"
 		:sort="sortable"
 		:koi="koi"
+		:default-sorting="schema.data?.default_sorting_field"
 	/>
 </template>

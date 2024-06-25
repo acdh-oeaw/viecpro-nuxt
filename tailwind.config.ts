@@ -44,7 +44,16 @@ const highlight = {
 };
 
 const config: Config = {
-	content: ["./**/*.@(css|ts|vue)"],
+	content: [
+		"./app.vue",
+		"./error.vue",
+		"./components/**/*.@(css|ts|vue)",
+		"./content/**/*.@(md|mdc)",
+		"./layouts/**/*.@(css|ts|vue)",
+		"./lib/**/*.ts",
+		"./pages/**/*.@(css|ts|vue)",
+		"./styles/**/*.@(css|ts|vue)",
+	],
 	plugins: [animate, headlessui, typography],
 	theme: {
 		extend: {

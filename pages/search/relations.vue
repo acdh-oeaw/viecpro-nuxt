@@ -52,5 +52,6 @@ useHead({
 			'source.name': 'source',
 			'target.name': 'target',
 		}"
+		:default-sorting="schema.data?.default_sorting_field"
 	/>
 </template>

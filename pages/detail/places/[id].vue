@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { ExternalLink, Info, Loader2 } from "lucide-vue-next";
+import { Info, Loader2 } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
@@ -10,6 +10,7 @@ import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
 import MapComponent from "@/components/map-component.vue";
+import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Place, PlaceDetail, Reference } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
@@ -188,22 +189,41 @@ useHead({
 				/>
 				<GenericDisclosure
 					:title="t('collection-keys.viecpro_courts.sources')"
-					:disabled="!data.refs.data.hits || isEmpty(data.refs.data.hits)"
+					:disabled="!data.refs.data || isEmpty(data.refs.data.hits)"
 				>
-					<div v-if="data.refs.data.hits && !isEmpty(data.refs.data.hits)">
-						<template
-							v-for="({ document: reference }, i) in data.refs.data.hits"
-							:key="reference.id"
+					<div v-if="data.refs.data" class="flex flex-col divide-y-2">
+						<div
+							v-for="tag in [...new Set(data.refs.data.hits?.map((hit) => hit.document.tag))].sort(
+								(a, b) => {
+									const standard = [
+										'Primärquellen',
+										'Sekundärliteratur',
+										'Datenbanken',
+										'Projekte',
+									];
+									return standard.indexOf(a) - standard.indexOf(b);
+								},
+							)"
+							:key="String(tag)"
+							class="p-2"
 						>
-							<div v-if="i != 0" class="my-1 border" />
-							<div class="flex flex-col gap-1 p-2">
-								<h3 class="border-b">
-									{{ reference.title || reference.shortTitle }}
-								</h3>
-								<span>{{ reference.folio }}</span>
-								<span class="text-sm text-gray-400">{{ reference.id }}</span>
-							</div>
-						</template>
+							<h2 class="mb-2 font-semibold">
+								{{ tag }}
+							</h2>
+							<template
+								v-for="({ document: reference }, i) in data.refs.data.hits.filter(
+									(hit) => hit.document.tag === tag,
+								)"
+								:key="reference.id"
+							>
+								<div v-if="i !== 0" class="my-1 border" />
+								<span
+									:class="reference.folio && `after:content-[',_']`"
+									v-html="detectURLsAddLinks(reference.title || reference.shortTitle)"
+								/>
+								<span v-if="reference.folio" v-html="detectURLsAddLinks(reference.folio)" />
+							</template>
+						</div>
 					</div>
 				</GenericDisclosure>
 				<GenericDisclosure
@@ -227,11 +247,9 @@ useHead({
 							:key="url"
 							class="border-t p-1 pl-0 first:border-0"
 						>
-							<NuxtLink class="flex items-center gap-1 font-semibold underline" :href="url">
-								<span>
-									{{ url }}
-								</span>
-								<ExternalLink class="size-4 shrink-0" />
+							<NuxtLink class="font-semibold" :href="url" target="_blank">
+								<span class="underline"> {{ url }}</span>
+								<span>&nbsp;&#8599;</span>
 							</NuxtLink>
 						</div>
 					</div>
