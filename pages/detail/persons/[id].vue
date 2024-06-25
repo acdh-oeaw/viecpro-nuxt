@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { ExternalLink, Info, StickyNote } from "lucide-vue-next";
+import { Info, StickyNote } from "lucide-vue-next";
 import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
@@ -318,10 +318,11 @@ useHead({
 								:key="reference.id"
 							>
 								<div v-if="i !== 0" class="my-1 border" />
-								<div class="flex flex-col gap-0.5">
-									<span v-html="detectURLsAddLinks(reference.title || reference.shortTitle)" />
-									<span v-if="reference.folio" v-html="detectURLsAddLinks(reference.folio)" />
-								</div>
+								<span
+									:class="reference.folio && `after:content-[',_']`"
+									v-html="detectURLsAddLinks(reference.title || reference.shortTitle)"
+								/>
+								<span v-if="reference.folio" v-html="detectURLsAddLinks(reference.folio)" />
 							</template>
 						</div>
 					</div>
@@ -342,11 +343,9 @@ useHead({
 							:key="url"
 							class="border-t p-1 pl-0 first:border-0"
 						>
-							<NuxtLink class="flex items-center gap-1 font-semibold underline" :href="url">
-								<span>
-									{{ url }}
-								</span>
-								<ExternalLink class="h-4 w-4 shrink-0" />
+							<NuxtLink class="font-semibold" :href="url" target="_blank">
+								<span class="underline"> {{ url }}</span>
+								<span>&nbsp;&#8599;</span>
 							</NuxtLink>
 						</div>
 					</div>

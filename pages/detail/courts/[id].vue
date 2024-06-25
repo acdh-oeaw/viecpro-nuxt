@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { useQuery } from "@tanstack/vue-query";
+import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { ExternalLink, Info, Loader2 } from "lucide-vue-next";
+import { Info, Loader2 } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
+import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Court, CourtDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
 const localePath = useLocalePath();
+const queryClient = useQueryClient();
 
 const route = useRoute();
 const id = String(route.params.id);
@@ -28,11 +30,34 @@ const data = ref({
 		queryKey: ["detail", collection, id],
 		queryFn: () => getDetails<CourtDetail>("court", id, "institution"),
 	}),
+	refs: useQuery({
+		queryKey: [
+			"search",
+			"viecpro_references",
+			{
+				q: "*",
+				query_by: "shortTitle",
+				filter_by: `related_doc.object_id:=${id} && related_doc.model:=Institution`,
+				per_page: 250,
+			},
+		] as const,
+		queryFn: async ({ queryKey }) => {
+			const [, collection, query] = queryKey;
+			const response = await getDocuments(query, collection);
+			if (response.hits) {
+				response.hits.forEach((hit) => {
+					queryClient.setQueryData([collection, String(hit.document.object_id)], hit.document);
+				});
+			}
+			return response as SearchResponse<Reference>;
+		},
+	}),
 });
 
 const loading = computed(() => ({
-	entity: data.value.entity.isLoading,
-	details: data.value.details.isLoading,
+	entity: data.value.entity.isFetching,
+	details: data.value.details.isFetching,
+	refs: data.value.refs.isFetching,
 }));
 
 const relCols = ["relation_type", "target.name", "start_date", "end_date"];
@@ -57,11 +82,13 @@ useHead({
 		v-if="
 			!loading.entity &&
 			!loading.details &&
-			(data.details.isLoadingError || data.entity.isLoadingError)
+			!loading.refs &&
+			(data.details.isLoadingError || data.entity.isLoadingError|| data.refs.isLoadingError)
 		"
 	>
 		<div>{{ data.entity.error }}</div>
 		<div>{{ data.details.error }}</div>
+		<div>{{ data.refs.error }}</div>
 	</div>
 	<DetailPage v-else :model="t('pages.searchviews.courts.sing')" :details-loading="loading.details">
 		<template #head>
@@ -191,14 +218,45 @@ useHead({
 					:rels="[]"
 					:headers="[]"
 				/> -->
-				<DetailDisclosure
+				<GenericDisclosure
 					:title="t('collection-keys.viecpro_courts.sources')"
-					:rels="[]"
-					:headers="[]"
-					grid-class="grid-cols-1"
-					:loading="loading.details"
-					:collection-name="collection"
-				/>
+					:disabled="!data.refs.data || isEmpty(data.refs.data.hits)"
+				>
+					<div v-if="data.refs.data" class="flex flex-col divide-y-2">
+						<div
+							v-for="tag in [...new Set(data.refs.data.hits?.map((hit) => hit.document.tag))].sort(
+								(a, b) => {
+									const standard = [
+										'Primärquellen',
+										'Sekundärliteratur',
+										'Datenbanken',
+										'Projekte',
+									];
+									return standard.indexOf(a) - standard.indexOf(b);
+								},
+							)"
+							:key="String(tag)"
+							class="p-2"
+						>
+							<h2 class="mb-2 font-semibold">
+								{{ tag }}
+							</h2>
+							<template
+								v-for="({ document: reference }, i) in data.refs.data.hits.filter(
+									(hit) => hit.document.tag === tag,
+								)"
+								:key="reference.id"
+							>
+								<div v-if="i !== 0" class="my-1 border" />
+								<span
+									:class="reference.folio && `after:content-[',_']`"
+									v-html="detectURLsAddLinks(reference.title || reference.shortTitle)"
+								/>
+								<span v-if="reference.folio" v-html="detectURLsAddLinks(reference.folio)" />
+							</template>
+						</div>
+					</div>
+				</GenericDisclosure>
 				<GenericDisclosure
 					:title="t('collection-keys.viecpro_persons.same_as')"
 					:disabled="isEmpty(data.details.data.sameAs)"
@@ -209,11 +267,9 @@ useHead({
 							:key="url"
 							class="border-t p-1 pl-0 first:border-0"
 						>
-							<NuxtLink class="flex items-center gap-1 font-semibold underline" :href="url">
-								<span>
-									{{ url }}
-								</span>
-								<ExternalLink class="h-4 w-4 shrink-0" />
+							<NuxtLink class="font-semibold" :href="url" target="_blank">
+								<span class="underline"> {{ url }}</span>
+								<span>&nbsp;&#8599;</span>
 							</NuxtLink>
 						</div>
 					</div>
