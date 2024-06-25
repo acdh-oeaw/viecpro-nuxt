@@ -117,6 +117,7 @@ useHead({
 	<div
 		v-if="
 			!loading.entity &&
+			!loading.details &&
 			!loading.refs &&
 			(data.details.isLoadingError || data.entity.isLoadingError || data.refs.isLoadingError) &&
 			(altData.details.isLoadingError || altData.entity.isLoadingError)
