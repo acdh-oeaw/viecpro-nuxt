@@ -28,6 +28,7 @@ const props = defineProps<{
 	cols: string;
 	sort?: Array<string>;
 	customCols?: Record<string, string>;
+	defaultSorting?: string;
 }>();
 
 const defaultPageLimit = 25;
@@ -110,6 +111,17 @@ const getDetailLink = (id: string, entity?: string) => {
 	const type = entity ?? route.path.split("/")[3];
 	return localePath(`/detail/${type}/${id}`);
 };
+
+onMounted(() => {
+	if (!route.query.sort && props.defaultSorting) {
+		void router.replace({
+			query: {
+				...route.query,
+				sort: props.defaultSorting + ":asc",
+			},
+		});
+	}
+});
 </script>
 
 <template>

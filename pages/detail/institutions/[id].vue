@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useQuery } from "@tanstack/vue-query";
+import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
 import { ExternalLink, Info } from "lucide-vue-next";
 import { useRoute } from "vue-router";
@@ -7,11 +7,13 @@ import { useRoute } from "vue-router";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
+import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Court, CourtDetail, Institution, InstitutionDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
 const route = useRoute();
+const queryClient = useQueryClient();
 
 const id = String(route.params.id);
 
@@ -28,18 +30,38 @@ const data = ref({
 		queryFn: () => getDetails<InstitutionDetail>("institution", id),
 		retry: 2,
 	}),
+	refs: useQuery({
+		queryKey: [
+			"search",
+			"viecpro_references",
+			{
+				q: "*",
+				query_by: "shortTitle",
+				filter_by: `related_doc.object_id:=${id} && related_doc.model:=Institution`,
+				per_page: 250,
+			},
+		] as const,
+		queryFn: async ({ queryKey }) => {
+			const [, collection, query] = queryKey;
+			const response = await getDocuments(query, collection);
+			if (response.hits) {
+				response.hits.forEach((hit) => {
+					queryClient.setQueryData([collection, String(hit.document.object_id)], hit.document);
+				});
+			}
+			return response as SearchResponse<Reference>;
+		},
+	}),
 });
 
 // The following code is hopefully just a placeholder until there is a clearer distinction between courts and institutions: If there are no results, this app will try to fetch the same ID in the courts table and redirect the use
 
 const fetchCourts = computed(() => {
 	if (
-		data.value.details.error &&
-		data.value.entity.error &&
-		data.value.details.error.httpStatus &&
-		data.value.details.error.httpStatus === 404 &&
-		data.value.entity.error.httpStatus &&
-		data.value.entity.error.httpStatus === 404
+		data.value.details.error?.httpStatus &&
+		data.value.details.error?.httpStatus === 404 &&
+		data.value.entity.error?.httpStatus &&
+		data.value.entity.error?.httpStatus === 404
 	)
 		return true;
 	return false;
@@ -74,6 +96,7 @@ watch(
 const loading = computed(() => ({
 	entity: data.value.entity.isFetching,
 	details: data.value.details.isFetching,
+	refs: data.value.refs.isFetching,
 }));
 
 definePageMeta({
@@ -95,12 +118,14 @@ useHead({
 		v-if="
 			!loading.entity &&
 			!loading.details &&
-			(data.details.isLoadingError || data.entity.isLoadingError) &&
+			!loading.refs &&
+			(data.details.isLoadingError || data.entity.isLoadingError || data.refs.isLoadingError) &&
 			(altData.details.isLoadingError || altData.entity.isLoadingError)
 		"
 	>
 		<div>{{ data.entity.error }}</div>
 		<div>{{ data.details.error }}</div>
+		<div>{{ data.refs.error }}</div>
 		<div>{{ altData.entity.error }}</div>
 		<div>{{ altData.details.error }}</div>
 	</div>
@@ -186,19 +211,41 @@ useHead({
 				/>
 				<GenericDisclosure
 					:title="t('collection-keys.viecpro_courts.sources')"
-					:disabled="isEmpty(data.details.data.sources)"
+					:disabled="!data.refs?.data || isEmpty(data.refs.data.hits)"
 				>
-					<div v-if="!isEmpty(data.details.data.sources)">
-						<template v-for="(source, i) in data.details.data.sources" :key="source.id">
-							<div v-if="i != 0" class="my-1 border" />
-							<div v-if="source" class="flex flex-col gap-1 p-2">
-								<h3 class="border-b">
-									{{ source.bibtex.title || source.bibtex.shortTitle }}
-								</h3>
-								<span>{{ source.folio }}</span>
-								<span class="text-sm text-gray-400">{{ source.bibtex.id }}</span>
-							</div>
-						</template>
+					<div v-if="data.refs?.data" class="flex flex-col divide-y-2">
+						<div
+							v-for="tag in [...new Set(data.refs.data.hits?.map((hit) => hit.document.tag))].sort(
+								(a, b) => {
+									const standard = [
+										'Primärquellen',
+										'Sekundärliteratur',
+										'Datenbanken',
+										'Projekte',
+									];
+									return standard.indexOf(a) - standard.indexOf(b);
+								},
+							)"
+							:key="String(tag)"
+							class="p-2"
+						>
+							<h2 class="mb-2 font-semibold">
+								{{ tag }}
+							</h2>
+							<template
+								v-for="({ document: reference }, i) in data.refs.data.hits.filter(
+									(hit) => hit.document.tag === tag,
+								)"
+								:key="reference.id"
+							>
+								<div v-if="i !== 0" class="my-1 border" />
+								<span
+									:class="reference.folio && `after:content-[',_']`"
+									v-html="detectURLsAddLinks(reference.title || reference.shortTitle)"
+								/>
+								<span v-if="reference.folio" v-html="detectURLsAddLinks(reference.folio)" />
+							</template>
+						</div>
 					</div>
 				</GenericDisclosure>
 				<GenericDisclosure
@@ -211,11 +258,9 @@ useHead({
 							:key="url"
 							class="border-t p-1 pl-0 first:border-0"
 						>
-							<NuxtLink class="flex items-center gap-1 font-semibold underline" :href="url">
-								<span>
-									{{ url }}
-								</span>
-								<ExternalLink class="h-4 w-4 shrink-0" />
+							<NuxtLink class="font-semibold" :href="url" target="_blank">
+								<span class="underline"> {{ url }}</span>
+								<span>&nbsp;&#8599;</span>
 							</NuxtLink>
 						</div>
 					</div>
