@@ -310,5 +310,15 @@
 		"no-data": "No data",
 		"timespan": "Time span",
 		"include-dates": "Include Entities without date information"
+	},
+	"Manifest": {
+		"name": "The Viennese Court. A prosopographical portal",
+		"short-name": "VieCPro",
+		"description": "The Viennese Court. A prosopographical portal"
+	},
+	"Metadata": {
+		"description": "The Viennese Court. A prosopographical portal",
+		"title": "The Viennese Court. A prosopographical portal",
+		"twitter": "{'@acdh_oeaw'}"
 	}
 }

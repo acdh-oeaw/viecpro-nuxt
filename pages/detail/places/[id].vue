@@ -9,8 +9,8 @@ import Chip from "@/components/chip.vue";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
-import { detectURLsAddLinks } from "@/lib/helpers";
 import MapComponent from "@/components/map-component.vue";
+import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Place, PlaceDetail, Reference } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
@@ -111,7 +111,7 @@ useHead({
 									:title="t('collection-keys.viecpro_persons.citations')"
 								>
 									<span class="sr-only">Show Infos</span>
-									<Info class="m-2 h-6 w-6 shrink-0" />
+									<Info class="m-2 size-6 shrink-0" />
 								</button>
 							</template>
 							<template #content>
@@ -158,7 +158,7 @@ useHead({
 					</span>
 				</template>
 				<span v-else>
-					<Loader2 class="h-5 w-5 animate-spin" />
+					<Loader2 class="size-5 animate-spin" />
 				</span>
 			</Chip>
 		</template>

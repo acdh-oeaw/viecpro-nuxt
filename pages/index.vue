@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+defineRouteRules({
+	prerender: true,
+});
+
 const locale = useLocale();
 
 definePageMeta({
@@ -16,7 +20,7 @@ definePageMeta({
 					src="/assets/images/background-court-ship.jpg"
 					alt=""
 					format="webp"
-					class="aspect-[3.84] min-h-[20rem] w-full object-cover"
+					class="aspect-[3.84] min-h-80 w-full object-cover"
 				/>
 				<div class="h-2 w-full bg-primary-800" />
 			</div>

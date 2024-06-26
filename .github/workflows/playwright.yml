@@ -9,21 +9,27 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - name: Install dependencies
-        run: npm install -g pnpm@8 && pnpm install
+        run: npm install -g pnpm@9 && pnpm install
+
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
+
       - name: Build app
         run: pnpm run build
         env:
           NUXT_PUBLIC_APP_BASE_URL: "http://localhost:3000"
           NUXT_PUBLIC_REDMINE_ID: "${{ vars.NUXT_PUBLIC_REDMINE_ID }}"
+
       - name: Run Playwright tests
         run: pnpm exec playwright test
+
       - uses: actions/upload-artifact@v3
         if: always()
         with:

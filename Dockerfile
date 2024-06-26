@@ -1,39 +1,44 @@
 # syntax=docker/dockerfile:1
 
+# using alpine base image to avoid `sharp` memory leaks.
+# @see https://sharp.pixelplumbing.com/install#linux-memory-allocator
+
 # build
-FROM node:18-slim AS build
+FROM node:20-alpine AS build
+
+RUN corepack enable
 
 RUN mkdir /app && chown -R node:node /app
 WORKDIR /app
 
 USER node
 
+COPY --chown=node:node .npmrc package.json pnpm-lock.yaml ./
+
+RUN pnpm fetch
+
+COPY --chown=node:node ./ ./
+
 ARG NUXT_PUBLIC_APP_BASE_URL
+ARG NUXT_PUBLIC_BOTS
+ARG NUXT_PUBLIC_GOOGLE_SITE_VERIFICATION
 ARG NUXT_PUBLIC_MATOMO_BASE_URL
 ARG NUXT_PUBLIC_MATOMO_ID
 ARG NUXT_PUBLIC_REDMINE_ID
 ARG NUXT_PUBLIC_TYPESENSE_API_KEY
+ARG NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX
+ARG NUXT_PUBLIC_TYPESENSE_HOST
 ARG NUXT_PUBLIC_TYPESENSE_PORT
 ARG NUXT_PUBLIC_TYPESENSE_PROTOCOL
-ARG NUXT_PUBLIC_TYPESENSE_HOST
-ARG NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX
 
-COPY --chown=node:node .npmrc package.json package-lock.json ./
-COPY --chown=node:node nuxt.config.ts tailwind.config.cjs tsconfig.json ./
-COPY --chown=node:node scripts ./scripts
-COPY --chown=node:node config ./config
-COPY --chown=node:node public ./public
-COPY --chown=node:node src ./
-COPY --chown=node:node patches ./patches
-
-RUN npm install --ci --no-audit --no-fund
+RUN pnpm install --frozen-lockfile --offline
 
 ENV NODE_ENV=production
 
-RUN npm run build
+RUN pnpm run build
 
 # serve
-FROM node:18-slim AS serve
+FROM node:20-alpine AS serve
 
 RUN mkdir /app && chown -R node:node /app
 WORKDIR /app

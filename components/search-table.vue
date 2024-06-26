@@ -131,12 +131,12 @@ onMounted(() => {
 		<h1 class="sr-only">
 			{{ t("pages.search.title") }}
 		</h1>
-		<div class="mx-auto flex h-full w-full max-w-container flex-col p-2 xl:p-0">
+		<div class="mx-auto flex size-full max-w-container flex-col p-2 xl:p-0">
 			<div
 				class="mb-4 grid h-12 w-full shrink-0 grid-cols-[auto_1fr_auto] items-center rounded border bg-white shadow-md xl:my-4"
 			>
 				<label for="searchinput">
-					<Search class="ml-3 mr-1 h-5 w-5 shrink-0 text-gray-400" />
+					<Search class="ml-3 mr-1 size-5 shrink-0 text-gray-400" />
 					<span class="sr-only">
 						{{ t("ui.search-placeholder") }}
 					</span>
@@ -162,7 +162,7 @@ onMounted(() => {
 					"
 				>
 					<span class="sr-only">Delete Input</span>
-					<XCircle class="mx-2 h-6 w-6 text-gray-400" />
+					<XCircle class="mx-2 size-6 text-gray-400" />
 				</button>
 			</div>
 			<slot />
@@ -201,7 +201,7 @@ onMounted(() => {
 							class="flex items-center gap-2"
 						>
 							<span>ID</span>
-							<ChevronDown v-if="!route.query.sort" class="h-5 w-5 opacity-50" />
+							<ChevronDown v-if="!route.query.sort" class="size-5 opacity-50" />
 						</div>
 						<span v-else-if="key !== 'ampel'" class="hidden md:block">
 							{{ t(`collection-keys.${collectionName}.${key}`) }}
@@ -260,7 +260,7 @@ onMounted(() => {
 											}}
 										</span>
 										<span v-else-if="key === 'ampel'" class="m-2 md:m-0 md:mx-auto">
-											<Indicator class="h-5 w-5" :status="hit.document.ampel" small />
+											<Indicator class="size-5" :status="hit.document.ampel" small />
 										</span>
 										<span
 											v-else-if="get(hit.highlight, key)?.snippet"
@@ -276,12 +276,12 @@ onMounted(() => {
 										<span v-else-if="get(hit.document, key)" class="m-2">
 											{{ get(hit.document, key) }}
 										</span>
-										<ChevronRight v-if="isLinkCol(key, hit.document)" class="h-6 w-6 shrink-0" />
+										<ChevronRight v-if="isLinkCol(key, hit.document)" class="size-6 shrink-0" />
 									</component>
 								</div>
 							</div>
 
-							<ChevronRight v-if="!customCols" class="h-6 w-6 shrink-0" />
+							<ChevronRight v-if="!customCols" class="size-6 shrink-0" />
 						</component>
 					</div>
 				</template>
@@ -295,7 +295,7 @@ onMounted(() => {
 				/>
 			</div>
 			<Centered v-else-if="loading && !isPlaceholderData">
-				<Loader2 class="h-8 w-8 animate-spin" />
+				<Loader2 class="size-8 animate-spin" />
 			</Centered>
 		</div>
 		<div

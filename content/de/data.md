@@ -2,14 +2,14 @@
 
 ## 1. Grundsätzliches zu den Daten
 
-#### Vollständigkeit und Aktualität der Personendaten
+### Vollständigkeit und Aktualität der Personendaten
 
 Das Ziel dieser Pilotphase war die **Überführung und Aufbereitung der Leopold- und
 Access-Datensätze** in die APIS-Infrastruktur. Auf eine Aktualisierung der erfassten Daten um
 Informationen aus der Sekundärliteratur musste weitestgehend aufgrund der zeitlichen Begrenzung des
 Pilotprojektes auf 2,5 bzw. 3 Jahre verzichtet werden.
 
-#### Personenkreis der Datensätze
+### Personenkreis der Datensätze
 
 Prosopographie bedeutet, Personendaten über die systematische Auswertung von historischen Quellen zu
 sammeln, um ein möglichst vollständiges Bild einer bestimmten Bevölkerungsgruppe zu bekommen.
@@ -18,7 +18,7 @@ Kaiser Leopold I. (1657–1705)** erfasste, fokussiert sich der Access-Datensatz
 **Gesamtpersonal der Wiener Hofstaate zwischen 1711 und 1806**, die Datenneuaufnahme hingegen auf
 den **Zeitraum von 1807 bis 1835**.
 
-#### Begrifflichkeiten _Wiener Hofstaat_ und _Wiener Hof_
+### Begrifflichkeiten _Wiener Hofstaat_ und _Wiener Hof_
 
 Der Begriff des **„Wiener Hofstaats“** bezeichnet die Gesamtheit des Hofpersonals, das für die
 persönliche Versorgung des Herrschers/der Herrscherin („Haupthofstaat“) oder eines seiner
@@ -40,13 +40,13 @@ In VieCPro gründet sich ein **Bezug zum Wiener Hof** nicht nur in der Ausübung
 sondern auch über verwandtschaftliche Beziehungen zu Funktionsträger:innen und/oder monetäre Bezüge
 aus der Wiener Hofkammer.
 
-#### Vereinheitlichungen in den Datensätzen
+### Vereinheitlichungen in den Datensätzen
 
 Personennamen, Funktionsbezeichnungen und Institutionsbezeichnungen wurden unter Berücksichtigung
 der zeitgenössisch jeweils vorherrschenden Variante bei gleichzeitiger Dokumentation alternativer
 Schreibweisen vereinheitlicht (_➔ Funktionsregister_ [in Arbeit]).
 
-#### Deduplizierung und Merging
+### Deduplizierung und Merging
 
 Der Leopold-Datensatz wurde im Wesentlichen aus drei verschiedenen Ressourcen – Hofzahlamtsbüchern,
 Hofstaatsverzeichnissen und Trauungsmatriken / Totenbeschauprotokollen – generiert, in denen viele
@@ -55,7 +55,7 @@ unzureichender Datenlage keine eindeutige Entscheidung zugunsten einer Zusammenf
 werden konnte, wurden Personen nicht gemergt. Stattdessen wurde zwischen beiden
 Personendatenblättern **potenzielle VieCPro-Doubletten** ausgewiesen.
 
-#### Hierarchisierungen:
+### Hierarchisierungen:
 
 Die in dieser Datenbank angelegte Hierarchisierung kann aufgrund der Natur schematischer
 Darstellungen allzu oft nur unzulänglich die Feinheiten des institutionellen und auch persönlichen
@@ -70,7 +70,7 @@ nicht möglich. Stattdessen wurden bislang LOD-Referenzen zu 690 Personen in lei
 manuell recherchiert und in VieCPro angelegt. Im Zuge fortschreitender redaktioneller Arbeit werden
 weitere LOD-Referenzen eingespeist.
 
-#### Gendern & Diskriminierung:
+### Gendern & Diskriminierung:
 
 Für jede Funktionsbezeichnung – sofern es einen weiblichen und männlichen Funktionsträger gab –
 werden geschlechtsspezifische Bezeichnungen verwendet. Heute negativ konnotierte

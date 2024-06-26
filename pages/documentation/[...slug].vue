@@ -19,7 +19,6 @@ const currentDoc = computed(() => {
 useHead({
 	title: t("pages.documentation.title"),
 });
-console.log(route.params.slug, locale.value);
 </script>
 
 <template>
@@ -37,7 +36,7 @@ console.log(route.params.slug, locale.value);
 								:to="`/${locale}/documentation${link._path}`"
 								class="flex w-full items-center gap-1 rounded px-2 transition hover:bg-gray-300 active:bg-gray-400"
 							>
-								<ChevronRight class="h-4 w-4" />
+								<ChevronRight class="size-4" />
 								<span>
 									{{ link.title }}
 								</span>

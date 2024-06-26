@@ -9,7 +9,7 @@ const pathname = "/acdh-common-assets/api/imprint.php";
 export function createImprintUrl(locale: Locale): URL {
 	const env = useRuntimeConfig();
 
-	const redmineId = env.public.NUXT_PUBLIC_APP_BASE_URL;
+	const redmineId = env.public.redmineId;
 
 	return createUrl({
 		baseUrl,

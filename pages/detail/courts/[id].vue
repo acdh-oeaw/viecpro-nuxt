@@ -83,7 +83,7 @@ useHead({
 			!loading.entity &&
 			!loading.details &&
 			!loading.refs &&
-			(data.details.isLoadingError || data.entity.isLoadingError|| data.refs.isLoadingError)
+			(data.details.isLoadingError || data.entity.isLoadingError || data.refs.isLoadingError)
 		"
 	>
 		<div>{{ data.entity.error }}</div>
@@ -119,7 +119,7 @@ useHead({
 									:title="t('collection-keys.viecpro_persons.citations')"
 								>
 									<span class="sr-only">Show Infos</span>
-									<Info class="m-2 h-6 w-6 shrink-0" />
+									<Info class="m-2 size-6 shrink-0" />
 								</button>
 							</template>
 							<template #content>
@@ -169,7 +169,7 @@ useHead({
 					</span>
 				</template>
 				<span v-else>
-					<Loader2 class="h-5 w-5 animate-spin" />
+					<Loader2 class="size-5 animate-spin" />
 				</span>
 			</Chip>
 		</template>
