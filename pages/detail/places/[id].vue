@@ -9,7 +9,6 @@ import Chip from "@/components/chip.vue";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
-import { detectURLsAddLinks } from "@/lib/helpers";
 import MapComponent from "@/components/map-component.vue";
 import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Place, PlaceDetail, Reference } from "@/types/schema";

@@ -20,7 +20,7 @@ Für die technische Realisierung der gemeinsam entwickelten Datenbank waren Greg
 Matthias Schlögl vom Austrian Center for Digital Humanities and Cultural Heritage (ACDH-CH) unter
 Mitarbeiter von Sabine Laszakovits (ACDH-CH) und Stefan Ebner (IHB) verantwortlich.
 
-# Forschungsdaten
+## Forschungsdaten
 
 Im Fokus der Pilotphase (2020–2024) stand die Wiener Hofgesellschaft zwischen 1657 und ca. 1835.
 Basis der Datenbank stellen die prosopographischen Datensammlungen zweier abgeschlossener
@@ -45,7 +45,7 @@ Forschungsprojekte dar:
   auf Basis von Werken der Sekundärliteratur, von Nachschlagewerken oder von genealogischen
   Datenbanken.
 
-# Forschungsinfrastruktur
+## Forschungsinfrastruktur
 
 Für die Erfassung prosopographischer Daten über das Personal am Wiener Hof wurde die am ACDH-CH
 entwickelte virtuelle Forschungsumgebung

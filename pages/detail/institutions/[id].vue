@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
-import { ExternalLink, Info } from "lucide-vue-next";
+import { Info } from "lucide-vue-next";
+import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
 import { detectURLsAddLinks } from "@/lib/helpers";
-import type { Court, CourtDetail, Institution, InstitutionDetail } from "@/types/schema";
+import type { Court, CourtDetail, Institution, InstitutionDetail, Reference } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
@@ -233,7 +234,7 @@ useHead({
 								{{ tag }}
 							</h2>
 							<template
-								v-for="({ document: reference }, i) in data.refs.data.hits.filter(
+								v-for="({ document: reference }, i) in data.refs.data.hits?.filter(
 									(hit) => hit.document.tag === tag,
 								)"
 								:key="reference.id"
