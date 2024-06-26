@@ -1,17 +1,21 @@
 <script setup lang="ts">
+import markdownParser from "@nuxt/content/transformers/markdown";
 import { useQuery } from "@tanstack/vue-query";
 import { Loader2 } from "lucide-vue-next";
 
 import { getImprint } from "@/lib/get-imprint";
 
+const parseMarkdown = (md: string) => markdownParser.parse("imprint.md", md);
+
 const t = useTranslations();
 const { locale } = useI18n();
 
-const { data: html, isFetching } = useQuery({
+const { data: imprintMd, isFetching } = useQuery({
 	queryKey: ["imprint", locale] as const,
 	queryFn: async ({ queryKey }) => {
 		const [, locale] = queryKey;
-		const ret = await (await getImprint(locale)).text();
+		const ret = await parseMarkdown(await (await getImprint(locale)).text());
+
 		return ret;
 	},
 });
@@ -25,7 +29,7 @@ definePageMeta({
 	<MainContent class="mx-auto w-full max-w-container p-2">
 		<div v-if="!isFetching" class="prose prose-sm md:prose-base">
 			<h1>{{ t("pages.imprint.title") }}</h1>
-			<p v-if="html" v-html="html" />
+			<ContentRendererMarkdown :value="imprintMd" />
 		</div>
 		<Centered v-else><Loader2 class="h-8 w-8 animate-spin" /></Centered>
 	</MainContent>
