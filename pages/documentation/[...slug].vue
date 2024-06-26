@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ChevronRight } from "lucide-vue-next";
 
+import { queryContent } from "#imports";
+
 const t = useTranslations();
 const locale = useLocale();
 definePageMeta({
@@ -19,22 +21,23 @@ const currentDoc = computed(() => {
 useHead({
 	title: t("pages.documentation.title"),
 });
-console.log(route.params.slug, locale.value);
 </script>
 
 <template>
 	<div class="grid w-full lg:grid-cols-[1fr_3fr] lg:gap-10 2xl:grid-cols-[1fr_2fr_1fr]">
 		<nav class="lg:justify-self-end" data-testid="docNav">
-			<ContentNavigation v-slot="{ navigation }" :query="{ where: [{ _locale: locale }] }">
-				<!-- :where="{ _locale: locale }" -->
+			<ContentNavigation
+				v-slot="{ navigation }"
+				:query="queryContent().where({ _locale: locale, _path: /\/documentation/ })"
+			>
 				<div class="m-4 rounded bg-gray-200 p-4 text-lg shadow">
 					<h2 class="mb-2 text-xl font-black">
 						{{ t("pages.documentation.contents") }}
 					</h2>
 					<ul>
-						<li v-for="link of navigation" :key="link._path">
+						<li v-for="link of navigation[0]?.children" :key="link._path">
 							<NuxtLink
-								:to="`/${locale}/documentation${link._path}`"
+								:to="`/${locale}${link._path}`"
 								class="flex w-full items-center gap-1 rounded px-2 transition hover:bg-gray-300 active:bg-gray-400"
 							>
 								<ChevronRight class="h-4 w-4" />
@@ -48,7 +51,12 @@ console.log(route.params.slug, locale.value);
 			</ContentNavigation>
 		</nav>
 		<MainContent class="w-full px-6 py-4">
-			<ContentQuery v-slot="{ data }" :path="currentDoc" :where="{ _locale: locale }" find="one">
+			<ContentQuery
+				v-slot="{ data }"
+				:path="`documentation/${currentDoc}`"
+				:where="{ _locale: locale }"
+				find="one"
+			>
 				<ContentRenderer v-if="data" :value="data">
 					<ContentRendererMarkdown :value="data" class="prose prose-sm md:prose-base" />
 				</ContentRenderer>

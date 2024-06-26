@@ -18,7 +18,7 @@ Kooperation interessiert sind, dann schreiben Sie uns an:
 - Gregor Pirgie BA, ACDH-CH | Hauptprogrammierer, 02/2021 – 12/2023
 - Mag. Stefan Ebner BA MA, ÖAW-IHB | Techn. Mitarbeiter des ÖAW-Projektes, 12/2022 – 04/2023
 - Robin Kaggl, ACDH-CH | Webentwickler 04/2023 - 06/2024
-- Mag. phil. Stefan Probst, ACDH-CH |  Zusätzlicher Webentwickler 04/2023 - 06/2024
+- Mag. phil. Stefan Probst, ACDH-CH | Zusätzlicher Webentwickler 04/2023 - 06/2024
 
 ## Ehemalige Mitarbeiter\*innen:
 
