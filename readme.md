@@ -7,7 +7,7 @@ There is a live build available at [viecpro-frontend.acdh-ch-dev.oeaw.ac.at](htt
 
 ## How to run
 
-Prerequisites: [Node.js v20](https://nodejs.org/en/download) and [pnpm v8](https://pnpm.io/installation) 
+Prerequisites: [Node.js v22](https://nodejs.org/en/download) and [pnpm v9](https://pnpm.io/installation) 
 
 Set required environment variables in `.env`:
 
