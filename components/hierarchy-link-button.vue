@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { Network } from "lucide-vue-next";
 
-const localePath = useLocalePath();
-
 defineProps<{
 	model: string;
 	id: string;
@@ -12,7 +10,7 @@ defineProps<{
 
 <template>
 	<NuxtLink
-		:to="{ path: localePath('hierarchy'), query: { id, label, model } }"
+		:to="{ path: 'hierarchy', query: { id, label, model } }"
 		class="rounded-full transition hover:bg-slate-200 active:bg-slate-300"
 	>
 		<span class="sr-only">Go to Hierarchy view</span>

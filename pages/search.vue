@@ -16,29 +16,28 @@ import RangeSlider from "@/components/range-slider.vue";
 import { facetObjectToTypesenseQuery, typesenseQueryToFacetObject } from "@/lib/facets";
 
 const t = useTranslations();
-const localePath = useLocalePath();
 
 const route = useRoute();
 
 const links = computed(() => {
 	return {
 		people: {
-			href: { path: localePath("/search/persons") },
+			href: { path: "/search/persons" },
 			label: t("pages.searchviews.people.label"),
 			icon: User,
 		},
 		courts: {
-			href: { path: localePath("/search/courts") },
+			href: { path: "/search/courts" },
 			label: t("pages.searchviews.courts.label"),
 			icon: Users,
 		},
 		institutions: {
-			href: { path: localePath("/search/institutions") },
+			href: { path: "/search/institutions" },
 			label: t("pages.searchviews.institutions.label"),
 			icon: School2,
 		},
 		places: {
-			href: { path: localePath("/search/places") },
+			href: { path: "/search/places" },
 			label: t("pages.searchviews.places.label"),
 			icon: MapPin,
 		},
@@ -48,7 +47,7 @@ const links = computed(() => {
 const inactiveLinks = computed(() => {
 	return {
 		events: {
-			// href: { path: localePath("/search/events") },
+			// href: { path: ("/search/events") },
 			label: t("pages.searchviews.events.label"),
 			icon: CalendarRange,
 		},

@@ -1,5 +1,0 @@
-# Team
-
-# Dummy
-
-English Document

@@ -2,23 +2,18 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { Menu as MenuIcon, X } from "lucide-vue-next";
 
-import type { NavLink } from "@/lib/types";
-
 const t = useTranslations();
-const localePath = useLocalePath();
-
-const switchLocalePath = useSwitchLocalePath();
 
 const links = computed(() => {
 	return {
-		home: { href: { path: localePath("/") }, label: t("pages.home.label") },
-		search: { href: { path: localePath("/search/persons") }, label: t("pages.search.label") },
-		hierarchy: { href: { path: localePath("/hierarchy") }, label: t("pages.hierarchy.label") },
+		home: { href: { path: "/" }, label: t("pages.home.label") },
+		search: { href: { path: "/search/persons" }, label: t("pages.search.label") },
+		hierarchy: { href: { path: "/hierarchy" }, label: t("pages.hierarchy.label") },
 		documentation: {
-			href: { path: localePath("/documentation/project") },
+			href: { path: "/documentation/project" },
 			label: t("pages.documentation.label"),
 		},
-	} satisfies Record<string, NavLink>;
+	};
 });
 
 defineProps<{ compact?: boolean }>();
@@ -44,7 +39,6 @@ defineProps<{ compact?: boolean }>();
 						</li>
 					</ul>
 				</nav>
-				<LocaleSwitch class="select-none" />
 			</div>
 			<div class="md:hidden">
 				<Menu v-slot="{ open, close }" as="div" class="relative z-50 inline-block">
@@ -71,20 +65,6 @@ defineProps<{ compact?: boolean }>();
 									:href="link.href"
 								>
 									{{ link.label }}
-								</NuxtLink>
-							</MenuItem>
-							<MenuItem
-								v-for="loc in ['de', 'en']"
-								v-slot="{ active }"
-								:key="loc"
-								class="flex justify-around overflow-hidden rounded-bl text-center last:rounded-l-none last:rounded-br last:border-l"
-							>
-								<NuxtLink
-									class="w-full p-4 text-gray-900 transition hover:bg-gray-300"
-									:class="active && 'bg-gray-400'"
-									:href="switchLocalePath(loc)"
-								>
-									{{ loc.toUpperCase() }}
 								</NuxtLink>
 							</MenuItem>
 						</MenuItems>

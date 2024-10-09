@@ -10,19 +10,17 @@ export default defineNuxtConfig({
 	},
 	components: [{ path: "@/components", extensions: [".vue"], pathPrefix: false }],
 	content: {
-		// defaultLocale,
-		// documentDriven: true,
+		defaultLocale,
 		locales: Object.keys(locales),
-		markdown: {
-			anchorLinks: false,
-			rehypePlugins: ["rehype-mermaid"],
-		},
 	},
 	css: [
 		"@fontsource-variable/roboto-flex/standard.css",
 		"tailwindcss/tailwind.css",
 		"@/styles/index.css",
 	],
+	experimental: {
+		inlineRouteRules: true,
+	},
 	i18n: {
 		baseUrl: process.env.NUXT_PUBLIC_APP_BASE_URL,
 		defaultLocale,
@@ -32,7 +30,7 @@ export default defineNuxtConfig({
 		langDir: "./locales",
 		lazy: true,
 		locales: Object.values(locales),
-		strategy: "prefix",
+		strategy: "no_prefix",
 		vueI18n: "./i18n.config.ts",
 	},
 	modules: ["@nuxt/content", "@nuxt/image", "@nuxtjs/i18n", "nuxt3-leaflet"],
@@ -46,10 +44,6 @@ export default defineNuxtConfig({
 			tailwindcss: {},
 			autoprefixer: {},
 		},
-	},
-	routeRules: {
-		"/": { static: true },
-		"/imprint": { static: true },
 	},
 	runtimeConfig: {
 		public: {
