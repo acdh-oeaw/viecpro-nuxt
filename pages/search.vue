@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { isEmpty } from "lodash-es";
 import {
-	ArrowLeftRight,
+	BookTextIcon,
 	CalendarRange,
 	CalendarSearch,
 	MapPin,
+	MedalIcon,
 	School2,
 	User,
 	Users,
@@ -13,7 +14,6 @@ import {
 import GenericDisclosure from "@/components/generic-disclosure.vue";
 import RangeSlider from "@/components/range-slider.vue";
 import { facetObjectToTypesenseQuery, typesenseQueryToFacetObject } from "@/lib/facets";
-import type { NavLink } from "@/types/misc.d.ts";
 
 const t = useTranslations();
 const localePath = useLocalePath();
@@ -47,7 +47,20 @@ const links = computed(() => {
 			label: t("pages.searchviews.places.label"),
 			icon: MapPin,
 		},
-	} satisfies Record<string, NavLink>;
+	};
+});
+
+const inactiveLinks = computed(() => {
+	return {
+		bibliography: {
+			label: t("pages.searchviews.bibliography.label"),
+			icon: BookTextIcon,
+		},
+		register: {
+			label: t("pages.searchviews.register.label"),
+			icon: MedalIcon,
+		},
+	};
 });
 
 const updateFacets = () => {
@@ -149,7 +162,18 @@ useHead({
 						/>
 						{{ link.label }}
 					</NuxtLink>
+
+					<NuxtLink
+						v-for="link of inactiveLinks"
+						:key="link.label"
+						aria-disabled
+						class="pointer-events-none m-2 flex h-fit items-center gap-4 rounded border p-2 opacity-50 shadow transition xl:mx-0"
+					>
+						<component :is="link.icon" v-if="link.icon" />
+						{{ link.label }}
+					</NuxtLink>
 				</div>
+
 				<div class="mx-4 xl:max-w-sm">
 					<ClientOnly>
 						<GenericDisclosure :title="t('ui.timespan')" default-open>

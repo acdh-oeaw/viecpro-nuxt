@@ -76,11 +76,11 @@
 				"sing": "Ereignis",
 				"detail": "{title} - Ereignis"
 			},
-			"relations": {
-				"title": "Relationen",
-				"label": "Relationen",
-				"sing": "Relation",
-				"detail": "{title} - Relation"
+			"bibliography": {
+				"label": "Literaturverzeichnis"
+			},
+			"register": {
+				"label": "Funktionsregister"
 			}
 		}
 	},

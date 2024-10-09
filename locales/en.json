@@ -75,11 +75,11 @@
 				"sing": "Event",
 				"detail": "{title} - Event"
 			},
-			"relations": {
-				"title": "Relations",
-				"label": "Relations",
-				"sing": "Relation",
-				"detail": "{title} - Relation"
+			"bibliography": {
+				"label": "Bibliography"
+			},
+			"register": {
+				"label": "Register"
 			}
 		}
 	},
