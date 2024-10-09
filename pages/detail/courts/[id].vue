@@ -83,7 +83,7 @@ useHead({
 			!loading.entity &&
 			!loading.details &&
 			!loading.refs &&
-			(data.details.isLoadingError || data.entity.isLoadingError|| data.refs.isLoadingError)
+			(data.details.isLoadingError || data.entity.isLoadingError || data.refs.isLoadingError)
 		"
 	>
 		<div>{{ data.entity.error }}</div>
