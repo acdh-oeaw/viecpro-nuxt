@@ -37,11 +37,6 @@ const links = computed(() => {
 			label: t("pages.searchviews.institutions.label"),
 			icon: School2,
 		},
-		events: {
-			href: { path: localePath("/search/events") },
-			label: t("pages.searchviews.events.label"),
-			icon: CalendarRange,
-		},
 		places: {
 			href: { path: localePath("/search/places") },
 			label: t("pages.searchviews.places.label"),
@@ -52,6 +47,11 @@ const links = computed(() => {
 
 const inactiveLinks = computed(() => {
 	return {
+		events: {
+			// href: { path: localePath("/search/events") },
+			label: t("pages.searchviews.events.label"),
+			icon: CalendarRange,
+		},
 		bibliography: {
 			label: t("pages.searchviews.bibliography.label"),
 			icon: BookTextIcon,
