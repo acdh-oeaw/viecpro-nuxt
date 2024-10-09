@@ -9,19 +9,19 @@ importers:
   .:
     dependencies:
       '@acdh-oeaw/lib':
-        specifier: ^0.1.6
+        specifier: ^0.1.12
         version: 0.1.12
       '@fontsource-variable/roboto-flex':
-        specifier: ^5.0.8
+        specifier: ^5.1.0
         version: 5.1.0
       '@headlessui-float/vue':
         specifier: ^0.13.3
         version: 0.13.3(@headlessui/vue@1.7.23(vue@3.5.11(typescript@5.6.3)))(vue@3.5.11(typescript@5.6.3))
       '@headlessui/vue':
-        specifier: ^1.7.16
+        specifier: ^1.7.23
         version: 1.7.23(vue@3.5.11(typescript@5.6.3))
       '@nuxt/content':
-        specifier: ^2.8.5
+        specifier: ^2.13.2
         version: 2.13.2(ioredis@5.4.1)(magicast@0.3.5)(nuxt@3.13.2(@parcel/watcher@2.4.1)(@types/node@22.7.5)(eslint@8.57.1)(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.24.0)(stylelint@16.9.0(typescript@5.6.3))(terser@5.34.1)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.34.1))(vue-tsc@2.1.6(typescript@5.6.3)))(rollup@4.24.0)(vue@3.5.11(typescript@5.6.3))
       '@nuxt/image':
         specifier: 1.8.1
@@ -30,16 +30,16 @@ importers:
         specifier: ^8.5.5
         version: 8.5.5(magicast@0.3.5)(rollup@4.24.0)(vue@3.5.11(typescript@5.6.3))
       '@tanstack/vue-query':
-        specifier: ^5.17.2
-        version: 5.59.1(vue@3.5.11(typescript@5.6.3))
+        specifier: ^5.59.4
+        version: 5.59.4(vue@3.5.11(typescript@5.6.3))
       '@vueuse/core':
-        specifier: ^10.7.1
+        specifier: ^10.11.1
         version: 10.11.1(vue@3.5.11(typescript@5.6.3))
       d3:
-        specifier: ^7.8.5
+        specifier: ^7.9.0
         version: 7.9.0
       instantsearch.js:
-        specifier: ^4.63.0
+        specifier: ^4.75.0
         version: 4.75.0(algoliasearch@5.8.0)
       is-ci:
         specifier: ^3.0.1
@@ -57,68 +57,68 @@ importers:
         specifier: ^0.305.0
         version: 0.305.0(vue@3.5.11(typescript@5.6.3))
       npm-run-all2:
-        specifier: ^6.1.1
+        specifier: ^6.2.3
         version: 6.2.3
       nuxt:
         specifier: ^3.13.2
         version: 3.13.2(@parcel/watcher@2.4.1)(@types/node@22.7.5)(eslint@8.57.1)(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.24.0)(stylelint@16.9.0(typescript@5.6.3))(terser@5.34.1)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.34.1))(vue-tsc@2.1.6(typescript@5.6.3))
       nuxt3-leaflet:
-        specifier: ^1.0.12
+        specifier: ^1.0.13
         version: 1.0.13(typescript@5.6.3)
       radix-vue:
-        specifier: ^1.5.3
+        specifier: ^1.9.7
         version: 1.9.7(vue@3.5.11(typescript@5.6.3))
       simple-git-hooks:
-        specifier: ^2.9.0
+        specifier: ^2.11.1
         version: 2.11.1
       typesense-instantsearch-adapter:
-        specifier: ^2.7.1
+        specifier: ^2.8.0
         version: 2.8.0(@babel/runtime@7.25.7)
       vue:
         specifier: ^3.5.11
         version: 3.5.11(typescript@5.6.3)
       vue-i18n:
-        specifier: ^9.14.0
+        specifier: ^9.14.1
         version: 9.14.1(vue@3.5.11(typescript@5.6.3))
       vue-i18n-routing:
         specifier: ^1.2.0
         version: 1.2.0(vue-i18n@9.14.1(vue@3.5.11(typescript@5.6.3)))(vue-router@4.4.5(vue@3.5.11(typescript@5.6.3)))(vue@3.5.11(typescript@5.6.3))
       vue-instantsearch:
-        specifier: ^4.13.2
+        specifier: ^4.19.6
         version: 4.19.6(@vue/server-renderer@3.5.11(vue@3.5.11(typescript@5.6.3)))(algoliasearch@5.8.0)(vue@3.5.11(typescript@5.6.3))
       vue-router:
         specifier: ^4.4.5
         version: 4.4.5(vue@3.5.11(typescript@5.6.3))
       zod:
-        specifier: ^3.22.4
+        specifier: ^3.23.8
         version: 3.23.8
     devDependencies:
       '@acdh-oeaw/eslint-config':
-        specifier: ^1.0.5
+        specifier: ^1.0.10
         version: 1.0.10(eslint@8.57.1)(typescript@5.6.3)
       '@acdh-oeaw/eslint-config-nuxt':
-        specifier: ^1.0.11
+        specifier: ^1.0.16
         version: 1.0.16(@acdh-oeaw/eslint-config-vue@1.0.15(@acdh-oeaw/eslint-config@1.0.10(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(@acdh-oeaw/eslint-config@1.0.10(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)
       '@acdh-oeaw/eslint-config-vue':
-        specifier: ^1.0.10
+        specifier: ^1.0.15
         version: 1.0.15(@acdh-oeaw/eslint-config@1.0.10(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)
       '@acdh-oeaw/prettier-config':
         specifier: ^2.0.0
         version: 2.0.0(prettier@3.3.3)
       '@acdh-oeaw/stylelint-config':
-        specifier: ^2.0.1
+        specifier: ^2.0.4
         version: 2.0.4(postcss-html@1.7.0)(stylelint-order@6.0.4(stylelint@16.9.0(typescript@5.6.3)))(stylelint@16.9.0(typescript@5.6.3))
       '@acdh-oeaw/tsconfig':
-        specifier: ^1.0.2
+        specifier: ^1.2.0
         version: 1.2.0(typescript@5.6.3)
       '@headlessui/tailwindcss':
-        specifier: ^0.2.0
+        specifier: ^0.2.1
         version: 0.2.1(tailwindcss@3.4.13)
       '@playwright/test':
-        specifier: ^1.40.1
+        specifier: ^1.48.0
         version: 1.48.0
       '@tailwindcss/typography':
-        specifier: ^0.5.10
+        specifier: ^0.5.15
         version: 0.5.15(tailwindcss@3.4.13)
       '@types/d3':
         specifier: ^7.4.3
@@ -130,40 +130,40 @@ importers:
         specifier: ^22.7.5
         version: 22.7.5
       autoprefixer:
-        specifier: ^10.4.16
+        specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.47)
       dotenv-cli:
-        specifier: ^7.3.0
+        specifier: ^7.4.2
         version: 7.4.2
       eslint:
-        specifier: ^8.56.0
+        specifier: ^8.57.1
         version: 8.57.1
       eslint-plugin-tailwindcss:
-        specifier: ^3.13.1
+        specifier: ^3.17.4
         version: 3.17.4(tailwindcss@3.4.13)
       lint-staged:
-        specifier: ^15.2.0
+        specifier: ^15.2.10
         version: 15.2.10
       postcss:
-        specifier: ^8.4.33
+        specifier: ^8.4.47
         version: 8.4.47
       prettier:
-        specifier: ^3.1.1
+        specifier: ^3.3.3
         version: 3.3.3
       rehype-mermaid:
-        specifier: ^2.0.1
+        specifier: ^2.1.0
         version: 2.1.0
       sharp:
-        specifier: ^0.33.1
+        specifier: ^0.33.5
         version: 0.33.5
       stylelint:
-        specifier: ^16.1.0
+        specifier: ^16.9.0
         version: 16.9.0(typescript@5.6.3)
       tailwind-merge:
-        specifier: ^2.2.0
+        specifier: ^2.5.3
         version: 2.5.3
       tailwindcss:
-        specifier: ^3.4.0
+        specifier: ^3.4.13
         version: 3.4.13
       tailwindcss-animate:
         specifier: ^1.0.7
@@ -1564,14 +1564,14 @@ packages:
     resolution: {integrity: sha512-Wo1iKt2b9OT7d+YGhvEPD3DXvPv2etTusIMhMUoG7fbhmxcXCtIjJDEygy91Y2JFlwGyjqiBPRozme7UD8hoqg==}
     engines: {node: '>=12'}
 
-  '@tanstack/query-core@5.59.0':
-    resolution: {integrity: sha512-WGD8uIhX6/deH/tkZqPNcRyAhDUqs729bWKoByYHSogcshXfFbppOdTER5+qY7mFvu8KEFJwT0nxr8RfPTVh0Q==}
+  '@tanstack/query-core@5.59.4':
+    resolution: {integrity: sha512-bpdWtA61/xMUCdjD8EJon9Qd6DHEF8Kp47I/pV/ZzlLQSyy+l0FSILhoLbNbz9m9w5RpTDSDzxyYNzDFV9k6ZQ==}
 
   '@tanstack/virtual-core@3.10.8':
     resolution: {integrity: sha512-PBu00mtt95jbKFi6Llk9aik8bnR3tR/oQP1o3TSi+iG//+Q2RTIzCEgKkHG8BB86kxMNW6O8wku+Lmi+QFR6jA==}
 
-  '@tanstack/vue-query@5.59.1':
-    resolution: {integrity: sha512-ZxEwI9oVQs+/mdIGOQb0l6QKUe/E08b0bPSC6X7oIE5s2O8VItNXY8F/uiUUtIv41q478gUjpGnf0QYs4WY3Ng==}
+  '@tanstack/vue-query@5.59.4':
+    resolution: {integrity: sha512-F+xRify7RR22ufJ+ZX8TDVp0xip9mTS+Gq7x3ieramt11P8H2Oq9Ie6WMtxoTP88j4eL69egdPt3hBwJQf27dw==}
     peerDependencies:
       '@vue/composition-api': ^1.1.2
       vue: ^2.6.0 || ^3.3.0
@@ -2826,8 +2826,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.33:
-    resolution: {integrity: sha512-+cYTcFB1QqD4j4LegwLfpCNxifb6dDFUAwk6RsLusCwIaZI6or2f+q8rs5tTB2YC53HhOlIbEaqHMAAC8IOIwA==}
+  electron-to-chromium@1.5.34:
+    resolution: {integrity: sha512-/TZAiChbAflBNjCg+VvstbcwAtIL/VdMFO3NgRFIzBjpvPzWOTIbbO8kNb6RwU4bt9TP7K+3KqBKw/lOU+Y+GA==}
 
   elkjs@0.9.3:
     resolution: {integrity: sha512-f/ZeWvW/BCXbhGEf1Ujp29EASo/lk1FDnETgNKwJrsVvGZhUWCZyg3xLJjAsxfOmt8KjswHmI5EwCQcPMpOYhQ==}
@@ -7435,14 +7435,14 @@ snapshots:
     dependencies:
       remove-accents: 0.5.0
 
-  '@tanstack/query-core@5.59.0': {}
+  '@tanstack/query-core@5.59.4': {}
 
   '@tanstack/virtual-core@3.10.8': {}
 
-  '@tanstack/vue-query@5.59.1(vue@3.5.11(typescript@5.6.3))':
+  '@tanstack/vue-query@5.59.4(vue@3.5.11(typescript@5.6.3))':
     dependencies:
       '@tanstack/match-sorter-utils': 8.19.4
-      '@tanstack/query-core': 5.59.0
+      '@tanstack/query-core': 5.59.4
       '@vue/devtools-api': 6.6.4
       vue: 3.5.11(typescript@5.6.3)
       vue-demi: 0.14.10(vue@3.5.11(typescript@5.6.3))
@@ -8204,7 +8204,7 @@ snapshots:
   browserslist@4.24.0:
     dependencies:
       caniuse-lite: 1.0.30001667
-      electron-to-chromium: 1.5.33
+      electron-to-chromium: 1.5.34
       node-releases: 2.0.18
       update-browserslist-db: 1.1.1(browserslist@4.24.0)
 
@@ -8844,7 +8844,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.33: {}
+  electron-to-chromium@1.5.34: {}
 
   elkjs@0.9.3: {}
 

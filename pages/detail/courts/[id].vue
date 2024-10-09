@@ -13,7 +13,6 @@ import type { Court, CourtDetail } from "@/types/schema";
 import { definePageMeta, getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
-const localePath = useLocalePath();
 const queryClient = useQueryClient();
 
 const route = useRoute();
@@ -184,7 +183,7 @@ useHead({
 						data.details.data.owners[0] &&
 						data.details.data.resolution.includes(String(data.details.data.owners[0].target.name))
 					"
-					:to="localePath(`/detail/persons/${data.details.data.owners[0].target.object_id}`)"
+					:to="`/detail/persons/${data.details.data.owners[0].target.object_id}`"
 					class="underline"
 				>
 					{{ data.details.data?.resolution }}

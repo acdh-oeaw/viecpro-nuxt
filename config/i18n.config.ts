@@ -1,18 +1,16 @@
 import type { LocaleObject } from "vue-i18n-routing";
 
 import type de from "@/locales/de.json";
-import type en from "@/locales/en.json";
 
 export const locales = {
-	de: { code: "de", iso: "de-AT", file: "de.json" },
-	en: { code: "en", iso: "en-GB", file: "en.json" },
+	de: { code: "de", language: "de-AT", file: "de.json" },
 } satisfies Record<string, LocaleObject>;
 
 export type Locale = keyof typeof locales;
 
-export const defaultLocale: Locale = "en";
+export const defaultLocale: Locale = "de";
 
-export type Messages = typeof en;
+export type Messages = typeof de;
 
 export interface Schema {
 	message: Messages;
@@ -24,5 +22,4 @@ export function isValidLocale(value: string): value is Locale {
 
 export interface Translations extends Record<Locale, Messages> {
 	de: typeof de;
-	en: typeof en;
 }

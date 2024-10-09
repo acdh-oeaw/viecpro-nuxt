@@ -9,7 +9,6 @@ const router = useRouter();
 const route = useRoute();
 
 const t = useTranslations();
-const localePath = useLocalePath();
 
 const comQuery = computed({
 	get() {
@@ -149,7 +148,7 @@ useHead({
 				/>
 				<NuxtLink
 					v-if="comQuery && ['Person', 'Institution'].includes(comQuery.group)"
-					:href="localePath(`/detail/${comQuery.group.toLowerCase()}s/${comQuery.pk}`)"
+					:href="`/detail/${comQuery.group.toLowerCase()}s/${comQuery.pk}`"
 					class="mr-4 md:m-0"
 				>
 					<button

@@ -1,21 +1,7 @@
 import { expect, test } from "@playwright/test";
 
-test("Switch locale", async ({ page }) => {
-	await page.goto("/de");
-	await page.getByTestId("localeButton").click();
-	await page.getByTestId("en").click();
-	await expect(page).toHaveTitle("Home - VieCPro");
-	await expect(page).toHaveURL("/en");
-
-	await page.getByTestId("localeButton").click();
-	await page.getByTestId("de").click();
-
-	await expect(page).toHaveTitle("Startseite - VieCPro");
-	await expect(page).toHaveURL("/de");
-});
-
 test("Searchinterface navigation", async ({ page }) => {
-	await page.goto("/de/search/persons");
+	await page.goto("/search/persons");
 	await page.getByTestId("nextPage").first().click();
 
 	await expect(page).toHaveURL(/.*page=2/);
@@ -33,14 +19,14 @@ test("Searchinterface navigation", async ({ page }) => {
 	await expect(page.getByLabel("Suche...", { exact: true })).toContainText("");
 
 	await page.getByRole("link", { name: "Orte" }).click();
-	await expect(page).toHaveURL("/de/search/places");
+	await expect(page).toHaveURL("/search/places");
 
 	await page.getByRole("button", { name: "Facets" }).click();
-	await expect(page).toHaveURL("/de/search/places");
+	await expect(page).toHaveURL("/search/places");
 });
 
 test("Documentation", async ({ page }) => {
-	await page.goto("/de");
+	await page.goto("/");
 	await page.getByLabel("Haupt").getByRole("link", { name: "Dokumentation" }).click();
 
 	await expect(page).toHaveURL(/.*documentation\/project/);
@@ -50,7 +36,7 @@ test("Documentation", async ({ page }) => {
 	await page.getByRole("link", { name: "Daten", exact: true }).click();
 	await expect(page.getByRole("heading", { name: "Daten" }).first()).toBeVisible();
 
-	await page.goto("/en/documentation/data");
+	await page.goto("/documentation/data");
 	await expect(page.getByRole("heading", { name: "Data" }).first()).toBeVisible();
 
 	await page.getByRole("link", { name: "Project" }).click();
@@ -58,17 +44,10 @@ test("Documentation", async ({ page }) => {
 });
 
 test("Imprint", async ({ page }) => {
-	await page.goto("/de");
+	await page.goto("/");
 	await page.getByRole("link", { name: "Impressum" }).click();
 
 	await expect(
 		page.getByRole("heading", { name: "Offenlegung gemäß §§ 24, 25" }).first(),
-	).toBeVisible();
-
-	await page.getByTestId("localeButton").click();
-	await page.getByTestId("en").click();
-
-	await expect(
-		page.getByRole("heading", { name: "Legal disclosure according to" }).first(),
 	).toBeVisible();
 });

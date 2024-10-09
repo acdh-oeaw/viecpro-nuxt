@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 const t = useTranslations();
-const localePath = useLocalePath();
 </script>
 
 <template>
@@ -27,7 +26,7 @@ const localePath = useLocalePath();
 				<img class="mx-auto" src="/assets/images/logo-fwf.svg" alt="" />
 			</div>
 			<div>
-				<NuxtLink class="text-lg hover:underline" :href="localePath('/imprint')">
+				<NuxtLink class="text-lg hover:underline" href="/imprint">
 					{{ t("common.imprint") }}
 				</NuxtLink>
 			</div>

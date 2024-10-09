@@ -5,6 +5,10 @@ import { Loader2 } from "lucide-vue-next";
 
 import { getImprint } from "@/lib/get-imprint";
 
+defineRouteRules({
+	prerender: true,
+});
+
 const parseMarkdown = (md: string) => markdownParser.parse("imprint.md", md);
 
 const t = useTranslations();
@@ -31,6 +35,6 @@ definePageMeta({
 			<h1>{{ t("pages.imprint.title") }}</h1>
 			<ContentRendererMarkdown :value="imprintMd" />
 		</div>
-		<Centered v-else><Loader2 class="h-8 w-8 animate-spin" /></Centered>
+		<Centered v-else><Loader2 class="size-8 animate-spin" /></Centered>
 	</MainContent>
 </template>
