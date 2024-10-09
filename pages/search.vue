@@ -47,11 +47,6 @@ const links = computed(() => {
 			label: t("pages.searchviews.places.label"),
 			icon: MapPin,
 		},
-		relations: {
-			href: { path: localePath("/search/relations") },
-			label: t("pages.searchviews.relations.label"),
-			icon: ArrowLeftRight,
-		},
 	} satisfies Record<string, NavLink>;
 });
 
