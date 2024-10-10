@@ -1,45 +1,41 @@
-# VieCPro Frontend
+# VieCPro frontend
 
-Frontend for the [APIS-Instance](https://viecpro-dev.acdh-dev.oeaw.ac.at/) of the
+frontend for the [APIS-instance](https://viecpro-dev.acdh-dev.oeaw.ac.at/) of the
 [VieCPro project](https://viecpro.oeaw.ac.at/).
 
-There is a live build available at
-[viecpro-frontend.acdh-ch-dev.oeaw.ac.at](https://viecpro-frontend.acdh-ch-dev.oeaw.ac.at/)
+deployed at <https://viecpro-frontend.acdh-ch-dev.oeaw.ac.at>.
 
-## How to run
+## how to run
 
-Prerequisites: [Node.js v22](https://nodejs.org/en/download) and
-[pnpm v9](https://pnpm.io/installation)
+prerequisites:
 
-Set required environment variables in `.env`:
+- [node.js 22.x](https://nodejs.org/en/download)
+- [pnpm 9.x](https://pnpm.io/installation)
+
+set required environment variables in `.env.local`:
 
 ```bash
 # Unix
-cp .env.example .env
+cp .env.local.example .env.local
 
 # Windows
-copy .env.example .env
+copy .env.local.example .env.local
 ```
 
-Install dependencies:
+install dependencies:
 
 ```bash
-pnpm i
+pnpm install
 ```
 
-Run a development server on [http://localhost:3000](http://localhost:3000):
+run a development server on <http://localhost:3000>:
 
 ```bash
 pnpm run dev
 ```
 
-Build for production:
+build for production:
 
 ```bash
 pnpm run build
 ```
-
-## How to deploy
-
-Commits pushed to the `main` branch will automatically be deployed to the ACDH-CH cluster via GitHub
-Actions.

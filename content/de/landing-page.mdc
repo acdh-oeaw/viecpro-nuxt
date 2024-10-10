@@ -43,7 +43,7 @@ navigation: false # This will not appear with other documentation
 	## [Materialien und Dokumentation]{.mb-2.text-3xl.text-primary-600.block.font-black}
 	Unsere Dokumentation und Materialien zur Benutzung der VieCPro-Datenbank reichen von einer Erklärung der APIS-Funktionalitäten über die Darlegung der Bearbeitungsrichtlinien bis hin zu diversen Verzeichnissen (Projektpublikationen, Hofstaatslisten, Abkürzungsverzeichnis). **Der Inhalt befindet sich wie die Datenbank selber noch in Arbeit**.
 	#right-button
-		::index-button{href="de/documentation/project"}
+		::index-button{href="/documentation/project"}
 		DOKUMENTATION
 		::
 	::

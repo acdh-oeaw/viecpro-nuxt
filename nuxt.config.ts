@@ -1,61 +1,96 @@
 import { fileURLToPath } from "node:url";
 
-import { defineNuxtConfig } from "nuxt/config";
+import { defaultLocale, localesMap } from "./app/config/i18n.config";
 
-import { defaultLocale, locales } from "./config/i18n.config";
+const baseUrl = process.env.NUXT_PUBLIC_APP_BASE_URL!;
 
 export default defineNuxtConfig({
 	alias: {
-		"@": fileURLToPath(new URL("./", import.meta.url)),
+		"@": fileURLToPath(new URL("./app/", import.meta.url)),
+		"~": fileURLToPath(new URL("./", import.meta.url)),
 	},
-	components: [{ path: "@/components", extensions: [".vue"], pathPrefix: false }],
+	app: {
+		layoutTransition: false,
+		pageTransition: false,
+	},
+	components: [{ extensions: [".vue"], path: "@/components", pathPrefix: false }],
 	content: {
 		defaultLocale,
-		locales: Object.keys(locales),
+		locales: Object.keys(localesMap),
+		markdown: {
+			anchorLinks: false,
+		},
 	},
 	css: [
 		"@fontsource-variable/roboto-flex/standard.css",
 		"tailwindcss/tailwind.css",
 		"@/styles/index.css",
 	],
+	devtools: {
+		enabled: true,
+	},
+	eslint: {
+		config: {
+			autoInit: false,
+			standalone: true,
+		},
+	},
 	experimental: {
 		inlineRouteRules: true,
 	},
+	features: {
+		/** @see https://github.com/nuxt/nuxt/issues/21821 */
+		inlineStyles: false,
+	},
+	future: {
+		compatibilityVersion: 4,
+	},
 	i18n: {
-		baseUrl: process.env.NUXT_PUBLIC_APP_BASE_URL,
+		baseUrl,
 		defaultLocale,
 		detectBrowserLanguage: {
 			redirectOn: "root",
 		},
-		langDir: "./locales",
+		langDir: "messages",
 		lazy: true,
-		locales: Object.values(locales),
+		locales: Object.values(localesMap),
 		strategy: "no_prefix",
-		vueI18n: "./i18n.config.ts",
 	},
-	modules: ["@nuxt/content", "@nuxt/image", "@nuxtjs/i18n", "nuxt3-leaflet"],
+	imports: {
+		dirs: ["./config/"],
+	},
+	modules: [
+		"@nuxt/content",
+		"@nuxt/eslint",
+		"@nuxt/image",
+		"@nuxtjs/i18n",
+		"@vueuse/nuxt",
+		"nuxt3-leaflet",
+	],
 	nitro: {
 		compressPublicAssets: true,
+		prerender: {
+			routes: ["/manifest.webmanifest", "/robots.txt", "/sitemap.xml"],
+		},
 	},
-	plugins: ["@/plugins/query-client.ts"],
 	postcss: {
 		plugins: {
-			"tailwindcss/nesting": {},
 			tailwindcss: {},
-			autoprefixer: {},
 		},
 	},
 	runtimeConfig: {
 		public: {
-			NUXT_PUBLIC_APP_BASE_URL: process.env.NUXT_PUBLIC_APP_BASE_URL,
-			NUXT_PUBLIC_MATOMO_BASE_URL: process.env.NUXT_PUBLIC_MATOMO_BASE_URL,
-			NUXT_PUBLIC_MATOMO_ID: process.env.NUXT_PUBLIC_MATOMO_ID,
-			NUXT_PUBLIC_REDMINE_ID: process.env.NUXT_PUBLIC_REDMINE_ID,
-			NUXT_PUBLIC_TYPESENSE_API_KEY: process.env.NUXT_PUBLIC_TYPESENSE_API_KEY,
-			NUXT_PUBLIC_TYPESENSE_PORT: process.env.NUXT_PUBLIC_TYPESENSE_PORT,
-			NUXT_PUBLIC_TYPESENSE_PROTOCOL: process.env.NUXT_PUBLIC_TYPESENSE_PROTOCOL,
-			NUXT_PUBLIC_TYPESENSE_HOST: process.env.NUXT_PUBLIC_TYPESENSE_HOST,
-			NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX: process.env.NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX,
+			appBaseUrl: process.env.NUXT_PUBLIC_APP_BASE_URL,
+			bots: process.env.NUXT_PUBLIC_BOTS,
+			googleSiteVerification: process.env.NUXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+			matomoBaseUrl: process.env.NUXT_PUBLIC_MATOMO_BASE_URL,
+			matomoId: process.env.NUXT_PUBLIC_MATOMO_ID,
+			redmineId: process.env.NUXT_PUBLIC_REDMINE_ID,
+			typesenseApiKey: process.env.NUXT_PUBLIC_TYPESENSE_API_KEY,
+			typesenseCollectionPrefix: process.env.NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX,
+			typesenseHost: process.env.NUXT_PUBLIC_TYPESENSE_HOST,
+			typesensePort: process.env.NUXT_PUBLIC_TYPESENSE_PORT,
+			typesenseProtocol: process.env.NUXT_PUBLIC_TYPESENSE_PROTOCOL,
 		},
 	},
 	typescript: {
@@ -64,8 +99,10 @@ export default defineNuxtConfig({
 		// https://github.com/nuxt/nuxt/issues/14816#issuecomment-1484918081
 		tsConfig: {
 			compilerOptions: {
+				baseUrl: ".",
 				paths: {
-					"@/*": ["./*"],
+					"@/*": ["./app/*"],
+					"~/*": ["./*"],
 				},
 			},
 		},
