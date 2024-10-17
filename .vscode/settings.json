@@ -1,5 +1,6 @@
 {
 	"css.validate": false,
+	"debug.toolBarLocation": "docked",
 	"editor.codeActionsOnSave": {
 		"source.fixAll": "explicit"
 	},
@@ -11,6 +12,7 @@
 		"strings": true
 	},
 	"editor.rulers": [100],
+	"editor.stickyScroll.enabled": true,
 	"eslint.enable": true,
 	"eslint.validate": ["javascript", "typescript", "vue"],
 	"files.associations": {
@@ -18,7 +20,15 @@
 	},
 	"files.eol": "\n",
 	"html.autoCreateQuotes": false,
+	"i18n-ally.annotations": false,
+	"i18n-ally.keepFulfilled": true,
+	"i18n-ally.keystyle": "nested",
+	"i18n-ally.localesPaths": ["./messages"],
+	"i18n-ally.review.enabled": false,
+	"i18n-ally.sortKeys": true,
+	"i18n-ally.tabStyle": "tab",
 	"less.validate": false,
+	"prettier.ignorePath": ".gitignore",
 	"scss.validate": false,
 	"stylelint.enable": true,
 	"stylelint.snippet": ["css", "postcss", "tailwindcss", "vue"],
@@ -28,14 +38,14 @@
 	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"typescript.inlayHints.parameterNames.enabled": "all",
 	"typescript.preferences.importModuleSpecifier": "non-relative",
+	"typescript.preferences.preferTypeOnlyAutoImports": true,
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"volar.inlayHints.eventArgumentInInlineHandlers": false,
+	"workbench.editor.labelFormat": "medium",
+	"workbench.tree.enableStickyScroll": true,
 	"[markdown]": {
 		"editor.wordWrap": "on"
 	},
 	"[mdc]": {
-		"editor.defaultFormatter": null
-	},
-	"i18n-ally.localesPaths": ["locales"],
-	"i18n-ally.keystyle": "nested"
+		"editor.wordWrap": "on"
+	}
 }
