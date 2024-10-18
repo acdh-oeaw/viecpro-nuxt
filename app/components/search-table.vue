@@ -113,7 +113,7 @@ onMounted(() => {
 		void router.replace({
 			query: {
 				...route.query,
-				sort: props.defaultSorting + ":asc",
+				sort: `${props.defaultSorting}:asc`,
 			},
 		});
 	}

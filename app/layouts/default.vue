@@ -80,7 +80,7 @@ useHead({
 			scripts.push({
 				type: "",
 				innerHTML: createAnalyticsScript(
-					baseUrl.endsWith("/") ? baseUrl : baseUrl + "/",
+					baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`,
 					env.public.matomoId,
 				),
 			});

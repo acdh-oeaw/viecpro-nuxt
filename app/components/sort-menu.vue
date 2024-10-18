@@ -22,7 +22,7 @@ const sortedCol = computed({
 	set(to) {
 		void router.push({
 			query: {
-				sort: to?.value + ":asc",
+				sort: `${to?.value}:asc`,
 			},
 		});
 	},

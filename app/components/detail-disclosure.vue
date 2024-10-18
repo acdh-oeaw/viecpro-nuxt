@@ -6,7 +6,7 @@ import GenericDisclosure from "@/components/generic-disclosure.vue";
 import { NuxtLink } from "#components";
 
 const props = defineProps<{
-	rels: Array<object>;
+	rels: Array<{ start_date_iso: number; end_date_iso: number }>;
 	gridClass?: string;
 	title: string;
 	defaultOpen?: boolean;
@@ -25,20 +25,22 @@ const all = props.rels.length;
 const sortBy = ref("start_date");
 
 const changeSort = (col: string) => {
-	if (sortBy.value === col) sortBy.value = col + ":rev";
+	if (sortBy.value === col) sortBy.value = `${col}:rev`;
 	else sortBy.value = col;
 };
 
 const currentRels = computed(() => {
-	let retRels = [...props.rels];
+	const retRels = [...props.rels];
 	const adjValue = sortBy.value.replace(/((?:start|end)_date)/g, "$1_iso");
 	if (adjValue.includes(":rev")) {
-		retRels = retRels.sort((a, b) => {
-			return String(a[adjValue.split(":")[0]]) < String(b[adjValue.split(":")[0]]) ? 1 : -1;
+		retRels.sort((a, b) => {
+			const key = adjValue.split(":")[0] as "start_date_iso" | "end_date_iso";
+			return a[key] < b[key] ? 1 : -1;
 		});
 	} else {
-		retRels = retRels.sort((a, b) => {
-			return String(a[adjValue]) < String(b[adjValue]) ? -1 : 1;
+		retRels.sort((a, b) => {
+			const key = adjValue as "start_date_iso" | "end_date_iso";
+			return a[key] < b[key] ? -1 : 1;
 		});
 	}
 	return retRels.slice(page.value * limit, (page.value + 1) * limit);

@@ -19,7 +19,7 @@ export const facetObjectToTypesenseQuery = (
 					`${key}:[${String(value[0])}..${String(value[1])}${includeDateless ? ",5000" : ""}]`,
 				);
 			} else {
-				retArray.push(key + ":=[`" + value.join("`,`") + "`]");
+				retArray.push(`${key}:=[\`${value.join("`,`")}\`]`);
 			}
 		}
 	});
