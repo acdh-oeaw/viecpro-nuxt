@@ -6,6 +6,7 @@ import { isEmpty } from "lodash-es";
 import { Loader } from "lucide-vue-next";
 import type { SearchParams, SearchResponse } from "typesense/lib/Typesense/Documents";
 
+import { getDocuments } from "@/composables/use-ts-data";
 import type { AnyEntity } from "@/types/schema";
 
 const props = defineProps<{

@@ -10,6 +10,7 @@ import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
 import MapComponent from "@/components/map-component.vue";
+import { getDocuments } from "@/composables/use-ts-data";
 import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Place, PlaceDetail, Reference } from "@/types/schema";
 

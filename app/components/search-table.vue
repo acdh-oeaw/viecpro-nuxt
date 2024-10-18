@@ -3,6 +3,7 @@ import { keepPreviousData, useQuery, useQueryClient } from "@tanstack/vue-query"
 import { get } from "lodash-es";
 import { ChevronDown, ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
 
+import { getDocuments } from "@/composables/use-ts-data";
 import type { AnyEntity } from "@/types/schema";
 import { NuxtLink } from "#components";
 

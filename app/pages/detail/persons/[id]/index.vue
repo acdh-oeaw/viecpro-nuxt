@@ -8,6 +8,7 @@ import { useRoute } from "vue-router";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
+import { getDocuments } from "@/composables/use-ts-data";
 import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Person, PersonDetail, Reference } from "@/types/schema";
 
