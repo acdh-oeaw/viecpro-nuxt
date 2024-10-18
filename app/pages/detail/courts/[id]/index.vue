@@ -10,7 +10,6 @@ import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
 import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Court, CourtDetail } from "@/types/schema";
-import { getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
 const queryClient = useQueryClient();

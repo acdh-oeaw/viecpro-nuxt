@@ -12,7 +12,6 @@ import Indicator from "@/components/indicator.vue";
 import MapComponent from "@/components/map-component.vue";
 import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Place, PlaceDetail, Reference } from "@/types/schema";
-import { getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
 const queryClient = useQueryClient();

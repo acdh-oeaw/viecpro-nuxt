@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { ChevronRight } from "lucide-vue-next";
 
-import { queryContent } from "#imports";
-
 defineRouteRules({
 	prerender: true,
 });
