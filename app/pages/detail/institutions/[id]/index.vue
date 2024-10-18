@@ -9,7 +9,7 @@ import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
 import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Court, CourtDetail, Institution, InstitutionDetail } from "@/types/schema";
-import { definePageMeta, getDetails, getDocument, ref } from "#imports";
+import { getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
 const route = useRoute();
@@ -111,16 +111,15 @@ const loading = computed(() => {
 	};
 });
 
-definePageMeta({
-	title: "pages.searchviews.institutions.title",
-});
-
 const title = computed(() => {
-	if (data.value.entity.data?.name) return `${data.value.entity.data.name} - Institution`;
-	return "Institution";
+	if (data.value.entity.data?.name) {
+		return `${data.value.entity.data.name} - ${t("pages.searchviews.institutions.sing")}`;
+	}
+
+	return t("pages.searchviews.institutions.sing");
 });
 
-useHead({
+usePageMetadata({
 	title,
 });
 </script>

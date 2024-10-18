@@ -12,7 +12,7 @@ import Indicator from "@/components/indicator.vue";
 import MapComponent from "@/components/map-component.vue";
 import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Place, PlaceDetail, Reference } from "@/types/schema";
-import { definePageMeta, getDetails, getDocument, ref } from "#imports";
+import { getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
 const queryClient = useQueryClient();
@@ -68,17 +68,15 @@ const loading = computed(() => {
 
 const relCols = ["relation_type", "target.name", "start_date", "end_date"];
 
-definePageMeta({
-	title: "pages.searchviews.places.title",
-});
-
 const title = computed(() => {
-	if (data.value.entity.data?.name)
+	if (data.value.entity.data?.name) {
 		return `${data.value.entity.data.name} - ${t("pages.searchviews.places.sing")}`;
+	}
+
 	return t("pages.searchviews.places.sing");
 });
 
-useHead({
+usePageMetadata({
 	title,
 });
 </script>

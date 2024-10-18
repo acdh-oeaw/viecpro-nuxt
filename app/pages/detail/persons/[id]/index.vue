@@ -10,7 +10,7 @@ import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
 import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Person, PersonDetail, Reference } from "@/types/schema";
-import { definePageMeta, getDetails, getDocument, ref } from "#imports";
+import { getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
 const queryClient = useQueryClient();
@@ -68,16 +68,15 @@ const loading = computed(() => {
 const labelCols = ["name", "start_date", "end_date"];
 const relCols = ["relation_type", "target.name", "start_date", "end_date"];
 
-definePageMeta({
-	title: "pages.searchviews.people.title",
-});
-
 const title = computed(() => {
-	if (!loading.value.entity) return `${data.value.entity.data.fullname} - Person`;
-	return "Person";
+	if (!loading.value.entity) {
+		return `${data.value.entity.data.fullname} - ${t("pages.searchviews.people.sing")}`;
+	}
+
+	return t("pages.searchviews.people.sing");
 });
 
-useHead({
+usePageMetadata({
 	title,
 });
 </script>

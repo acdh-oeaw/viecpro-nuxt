@@ -4,7 +4,6 @@ import { Loader2 } from "lucide-vue-next";
 
 import SearchTable from "@/components/search-table.vue";
 import { getSchema } from "@/composables/use-ts-data";
-import { definePageMeta } from "#imports";
 
 const t = useTranslations();
 
@@ -41,11 +40,7 @@ const sortable = computed(() => {
 		});
 });
 
-definePageMeta({
-	title: "pages.searchviews.places.title",
-});
-
-useHead({
+usePageMetadata({
 	title: `${t("pages.searchviews.places.title")} ${t("pages.search.title")}`,
 });
 </script>

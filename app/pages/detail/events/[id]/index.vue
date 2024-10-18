@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/vue-query";
 import { useRoute } from "vue-router";
 
 import type { Event } from "@/types/schema";
-import { definePageMeta, ref } from "#imports";
 
 const t = useTranslations();
 
@@ -19,17 +18,15 @@ const data = ref({
 	}),
 });
 
-definePageMeta({
-	title: "pages.searchviews.events.title",
-});
-
 const title = computed(() => {
-	if (data.value.entity.data?.name)
+	if (data.value.entity.data?.name) {
 		return `${data.value.entity.data.name} - ${t("pages.searchviews.events.sing")}`;
+	}
+
 	return t("pages.searchviews.events.sing");
 });
 
-useHead({
+usePageMetadata({
 	title,
 });
 </script>

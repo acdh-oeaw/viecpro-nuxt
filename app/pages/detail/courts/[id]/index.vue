@@ -10,7 +10,7 @@ import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
 import { detectURLsAddLinks } from "@/lib/helpers";
 import type { Court, CourtDetail } from "@/types/schema";
-import { definePageMeta, getDetails, getDocument, ref } from "#imports";
+import { getDetails, getDocument, ref } from "#imports";
 
 const t = useTranslations();
 const queryClient = useQueryClient();
@@ -67,17 +67,15 @@ const loading = computed(() => {
 
 const relCols = ["relation_type", "target.name", "start_date", "end_date"];
 
-definePageMeta({
-	title: "pages.searchviews.courts.title",
-});
-
 const title = computed(() => {
-	if (data.value.entity.data?.name)
+	if (data.value.entity.data?.name) {
 		return `${data.value.entity.data.name} - ${t("pages.searchviews.courts.sing")}`;
+	}
+
 	return t("pages.searchviews.courts.sing");
 });
 
-useHead({
+usePageMetadata({
 	title,
 });
 </script>

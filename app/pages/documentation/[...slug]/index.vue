@@ -9,8 +9,8 @@ defineRouteRules({
 
 const t = useTranslations();
 
-definePageMeta({
-	title: "pages.documentation.title",
+usePageMetadata({
+	title: t("pages.documentation.title"),
 });
 
 const route = useRoute();
@@ -20,10 +20,6 @@ const currentDoc = computed(() => {
 	} else {
 		return route.params.slug[0];
 	}
-});
-
-useHead({
-	title: t("pages.documentation.title"),
 });
 </script>
 

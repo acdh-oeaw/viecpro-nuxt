@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/vue-query";
 import { useRoute } from "vue-router";
 
 import type { Reference } from "@/types/schema";
-import { definePageMeta, ref } from "#imports";
 
 const route = useRoute();
 const id = String(route.params.id);
@@ -17,8 +16,8 @@ const data = ref({
 	}),
 });
 
-definePageMeta({
-	title: "pages.searchviews.references.title",
+usePageMetadata({
+	title: t("pages.searchviews.references.title"),
 });
 </script>
 
