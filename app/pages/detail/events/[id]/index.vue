@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { useQuery } from "@tanstack/vue-query";
 import { useRoute } from "vue-router";
 
-import type { Event } from "@/types/schema";
+import { useGetDocument } from "@/composables/use-get-document";
 
 const t = useTranslations();
 
@@ -10,12 +9,11 @@ const route = useRoute();
 const id = String(route.params.id);
 
 const data = ref({
-	entity: useQuery({
-		queryKey: ["event", id],
-		queryFn: () => {
-			return getDocument<Event>("viecpro_events", `Event_${id}`);
-		},
-	}),
+	entity: useGetDocument(
+		computed(() => {
+			return { collection: "viecpro_events", id: `Event_${id}` };
+		}),
+	),
 });
 
 const title = computed(() => {

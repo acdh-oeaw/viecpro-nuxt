@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { hierarchy } from "d3";
 
-import type { TreeEntity } from "@/lib/get-tree-data";
+import type { TreeEntity } from "@/composables/use-api-client";
 import { Tree } from "@/lib/tree";
 
 const router = useRouter();

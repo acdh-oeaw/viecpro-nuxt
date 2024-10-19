@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
 import { Info } from "lucide-vue-next";
 import { useRoute } from "vue-router";
@@ -7,58 +6,48 @@ import { useRoute } from "vue-router";
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
-import { getDocuments } from "@/composables/use-ts-data";
+import { useGetDetails } from "@/composables/use-get-details";
+import { useGetDocument } from "@/composables/use-get-document";
+import { useGetDocuments } from "@/composables/use-get-documents";
 import { detectURLsAddLinks } from "@/lib/helpers";
-import type { Court, CourtDetail, Institution, InstitutionDetail } from "@/types/schema";
 
 const t = useTranslations();
 const route = useRoute();
-const queryClient = useQueryClient();
 
 const id = String(route.params.id);
 
 const collection = "viecpro_institutions";
 
 const data = ref({
-	entity: useQuery({
-		queryKey: [collection, id],
-		queryFn: () => {
-			return getDocument<Institution>(collection, `Institution_${id}`);
-		},
-		retry: 2,
-	}),
-	details: useQuery({
-		queryKey: ["detail", collection, id],
-		queryFn: () => {
-			return getDetails<InstitutionDetail>("institution", id);
-		},
-		retry: 2,
-	}),
-	refs: useQuery({
-		queryKey: [
-			"search",
-			"viecpro_references",
-			{
-				q: "*",
-				query_by: "shortTitle",
-				filter_by: `related_doc.object_id:=${id} && related_doc.model:=Institution`,
-				per_page: 250,
-			},
-		] as const,
-		queryFn: async ({ queryKey }) => {
-			const [, collection, query] = queryKey;
-			const response = await getDocuments(query, collection);
-			if (response.hits) {
-				response.hits.forEach((hit) => {
-					queryClient.setQueryData([collection, String(hit.document.object_id)], hit.document);
-				});
-			}
-			return response as SearchResponse<Reference>;
+	entity: useGetDocument(
+		computed(() => {
+			return { collection, id: `Institution_${id}` };
+		}),
+		{ retry: 2 }, // FIXME:
+	),
+
+	details: useGetDetails(
+		computed(() => {
+			return { model: "institution", id };
+		}),
+		{ retry: 2 }, // FIXME:
+	),
+
+	refs: useGetDocuments({
+		collection: "viecpro_references",
+		query: {
+			q: "*",
+			query_by: "shortTitle",
+			filter_by: `related_doc.object_id:=${id} && related_doc.model:=Institution`,
+			per_page: 250,
 		},
 	}),
 });
 
-// The following code is hopefully just a placeholder until there is a clearer distinction between courts and institutions: If there are no results, this app will try to fetch the same ID in the courts table and redirect the use
+// FIXME:
+// The following code is hopefully just a placeholder until there is a clearer distinction between
+// courts and institutions: If there are no results, this app will try to fetch the same ID
+// in the courts table and redirect the use.
 
 const fetchCourts = computed(() => {
 	if (
@@ -66,26 +55,27 @@ const fetchCourts = computed(() => {
 		data.value.details.error?.httpStatus === 404 &&
 		data.value.entity.error?.httpStatus &&
 		data.value.entity.error?.httpStatus === 404
-	)
+	) {
 		return true;
+	}
+
 	return false;
 });
 
 const altData = ref({
-	entity: useQuery({
-		queryKey: ["viecpro_courts", id],
-		queryFn: () => {
-			return getDocument<Court>("viecpro_courts", `Hofstaat_${id}`);
-		},
-		enabled: fetchCourts,
-	}),
-	details: useQuery({
-		queryKey: ["detail", "viecpro_courts", id],
-		queryFn: () => {
-			return getDetails<CourtDetail>("court", id, "institution");
-		},
-		enabled: fetchCourts,
-	}),
+	entity: useGetDocument(
+		computed(() => {
+			return { collection: "viecpro_courts", id: `Hofstaat_${id}` };
+		}),
+		{ enabled: fetchCourts }, // FIXME:
+	),
+
+	details: useGetDetails(
+		computed(() => {
+			return { model: "court", id, idName: "institution" };
+		}),
+		{ enabled: fetchCourts }, // FIXME:
+	),
 });
 
 watch(

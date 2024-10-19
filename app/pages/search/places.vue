@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import { useQuery } from "@tanstack/vue-query";
 import { Loader2 } from "lucide-vue-next";
 
 import SearchTable from "@/components/search-table.vue";
-import { getSchema } from "@/composables/use-ts-data";
+import { useGetSchema } from "@/composables/use-get-schema";
 
 const t = useTranslations();
 
@@ -12,17 +11,14 @@ const queryBy = ["name", "alternativenames"];
 const koi = ["name", "kind", "ampel"];
 const tableCols = "grid-cols-[3fr_2fr_2fr]";
 
-const schema = ref(
-	useQuery({
-		queryKey: ["schema", collectionName] as const,
-		queryFn: ({ queryKey }) => {
-			return getSchema(queryKey[1]);
-		},
+const { data, isFetching } = useGetSchema(
+	computed(() => {
+		return { collection: collectionName };
 	}),
 );
 
 const facets = computed(() => {
-	return schema.value.data?.fields
+	return data.value?.fields
 		?.filter((field) => {
 			return field.facet;
 		})
@@ -31,7 +27,7 @@ const facets = computed(() => {
 		});
 });
 const sortable = computed(() => {
-	return schema.value.data?.fields
+	return data.value?.fields
 		?.filter((field) => {
 			return field.sort;
 		})
@@ -46,14 +42,14 @@ usePageMetadata({
 </script>
 
 <template>
-	<Centered v-if="schema.isFetching">
+	<Centered v-if="isFetching">
 		<Loader2 class="size-8 animate-spin" />
 	</Centered>
 	<SearchTable
 		v-else
 		:collection-name="collectionName"
 		:cols="tableCols"
-		:default-sorting="schema.data?.default_sorting_field"
+		:default-sorting="data?.default_sorting_field"
 		:facets="facets"
 		:koi="koi"
 		:query-by="queryBy"

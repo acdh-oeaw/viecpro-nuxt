@@ -1,14 +1,12 @@
 <script lang="ts" setup>
-import { keepPreviousData, useQuery, useQueryClient } from "@tanstack/vue-query";
 import { get } from "lodash-es";
 import { ChevronDown, ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
 
-import { getDocuments } from "@/composables/use-ts-data";
+import { useGetDocuments } from "@/composables/use-get-documents";
 import type { AnyEntity } from "@/types/schema";
 import { NuxtLink } from "#components";
 
 const t = useTranslations();
-const queryClient = useQueryClient();
 
 const props = defineProps<{
 	queryBy: Array<string> | string;
@@ -68,8 +66,9 @@ const limitNum = computed(() => {
 	return Number(route.query.limit) || defaultPageLimit;
 });
 
-const comQuery = computed(() => {
+const query = computed(() => {
 	const { query } = route;
+
 	return {
 		q: String(query.q ?? ""),
 		query_by: props.queryBy,
@@ -80,28 +79,16 @@ const comQuery = computed(() => {
 		sort_by: String(query.sort ?? ""),
 	};
 });
+
 const {
 	data,
 	isFetching: loading,
 	isPlaceholderData,
-} = useQuery({
-	queryKey: ["search", props.collectionName, comQuery] as const,
-	queryFn: async ({ queryKey }) => {
-		const [, collection, q] = queryKey;
-		const response = await getDocuments(q, collection);
-		if (response.hits) {
-			response.hits.forEach((hit) => {
-				queryClient.setQueryData(
-					[props.collectionName, String(hit.document.object_id)],
-					hit.document,
-				);
-			});
-		}
-
-		return response;
-	},
-	placeholderData: keepPreviousData,
-});
+} = useGetDocuments(
+	computed(() => {
+		return { collection: props.collectionName, query: query.value };
+	}),
+);
 
 // TODO: find better solution
 const getDetailLink = (id: string, entity?: string) => {
@@ -170,7 +157,7 @@ onMounted(() => {
 					:all="data.found"
 					class="float-right m-2"
 					:collection="collectionName"
-					:query="comQuery"
+					:query="query"
 				/>
 			</div>
 			<Pagination
@@ -305,7 +292,7 @@ onMounted(() => {
 				:collection="collectionName"
 				:default-open="windowWidth >= 1280"
 				:facets="data.facet_counts"
-				:filter-by="String(comQuery.filter_by)"
+				:filter-by="String(query.filter_by)"
 				:loading="loading"
 				:query-by="queryBy"
 			/>

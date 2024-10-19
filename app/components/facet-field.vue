@@ -7,11 +7,13 @@ import { computed, type ComputedRef, type Ref, ref } from "vue";
 import { type LocationQuery, type RouteLocationNormalized, useRoute } from "vue-router";
 
 import Chip from "@/components/chip.vue";
+import { useApiClient } from "@/composables/use-api-client";
 
 defineEmits(["facetChange"]);
 const t = useTranslations();
 const queryClient = useQueryClient();
 const route: RouteLocationNormalized = useRoute();
+const client = useApiClient();
 
 const props = defineProps<{
 	fieldName: string;
@@ -51,25 +53,25 @@ const selectionQueries = useQueries({
 					};
 					return {
 						queryKey: ["single facet", query] as const,
-						queryFn: async ({ queryKey }: { queryKey: [string, QueryObject] }) => {
+						async queryFn({ queryKey }: { queryKey: [string, QueryObject] }) {
 							const [, q] = queryKey;
 
-							const result = await getFacets(
-								q.facet,
-								q.max,
-								q.query,
-								q.facetQuery,
-								q.collection,
-								q.query_by,
-								"*",
-								q.filter_by,
-							);
+							const result = await client.getFacets(q.collection, {
+								facet: q.facet,
+								max: q.max,
+								query: q.query,
+								facetQuery: q.facetQuery,
+								query_by: q.query_by,
+								q: "*",
+								filter_by: q.filter_by,
+							});
 
 							if (result.facet_counts?.[0]?.counts) {
 								return result.facet_counts[0]?.counts.filter((facet) => {
 									return facet.value === q.facetQuery;
 								})[0];
 							}
+
 							return { count: 0, highlighted: "", value: "" };
 						},
 					};
@@ -95,18 +97,19 @@ const facetResponse = useQuery({
 	queryFn: async ({ queryKey }) => {
 		const [, q] = queryKey;
 
-		const results = await getFacets(
-			q.facet,
-			q.max,
-			q.query,
-			q.facetQuery,
-			q.collection,
-			q.query_by,
-			"*",
-			String(q.filter_by),
-		);
-		if (results.facet_counts === undefined) return;
-		else {
+		const results = await client.getFacets(q.collection, {
+			facet: q.facet,
+			max: q.max,
+			query: q.query,
+			facetQuery: q.facetQuery,
+			query_by: q.query_by,
+			q: "*",
+			filter_by: String(q.filter_by),
+		});
+
+		if (results.facet_counts === undefined) {
+			return;
+		} else {
 			results.facet_counts[0]?.counts.forEach((count) => {
 				queryClient.setQueryData(
 					["single facet", { ...q, max: 10, facetQuery: count.value }],
@@ -233,4 +236,3 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 		</button>
 	</div>
 </template>
-@/lib/helpers.c

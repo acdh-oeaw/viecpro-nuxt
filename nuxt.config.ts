@@ -80,6 +80,7 @@ export default defineNuxtConfig({
 	},
 	runtimeConfig: {
 		public: {
+			apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
 			appBaseUrl: process.env.NUXT_PUBLIC_APP_BASE_URL,
 			bots: process.env.NUXT_PUBLIC_BOTS,
 			googleSiteVerification: process.env.NUXT_PUBLIC_GOOGLE_SITE_VERIFICATION,

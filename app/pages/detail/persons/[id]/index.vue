@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import { useQuery, useQueryClient } from "@tanstack/vue-query";
 import { isEmpty } from "lodash-es";
 import { Info, StickyNote } from "lucide-vue-next";
-import type { SearchResponse } from "typesense/lib/Typesense/Documents";
 import { useRoute } from "vue-router";
 
 import DetailDisclosure from "@/components/detail-disclosure.vue";
 import DetailPage from "@/components/detail-page.vue";
 import Indicator from "@/components/indicator.vue";
-import { getDocuments } from "@/composables/use-ts-data";
+import { useGetDetails } from "@/composables/use-get-details";
+import { useGetDocument } from "@/composables/use-get-document";
+import { useGetDocuments } from "@/composables/use-get-documents";
 import { detectURLsAddLinks } from "@/lib/helpers";
-import type { Person, PersonDetail, Reference } from "@/types/schema";
 
 const t = useTranslations();
-const queryClient = useQueryClient();
 const route = useRoute();
 
 const id = String(route.params.id);
@@ -21,38 +19,25 @@ const id = String(route.params.id);
 const collection = "viecpro_persons";
 
 const data = ref({
-	entity: useQuery({
-		queryKey: [collection, id],
-		queryFn: () => {
-			return getDocument<Person>(collection, `Person_${id}`);
-		},
-	}),
-	details: useQuery({
-		queryKey: ["detail", collection, id],
-		queryFn: () => {
-			return getDetails<PersonDetail>("person", id);
-		},
-	}),
-	refs: useQuery({
-		queryKey: [
-			"search",
-			"viecpro_references",
-			{
-				q: "*",
-				query_by: "shortTitle",
-				filter_by: `related_doc.object_id:=${id} && related_doc.model:=Person`,
-				per_page: 250,
-			},
-		] as const,
-		queryFn: async ({ queryKey }) => {
-			const [, collection, query] = queryKey;
-			const response = await getDocuments(query, collection);
-			if (response.hits) {
-				response.hits.forEach((hit) => {
-					queryClient.setQueryData([collection, String(hit.document.object_id)], hit.document);
-				});
-			}
-			return response as SearchResponse<Reference>;
+	entity: useGetDocument(
+		computed(() => {
+			return { collection, id: `Person_${id}` };
+		}),
+	),
+
+	details: useGetDetails(
+		computed(() => {
+			return { model: "person", id };
+		}),
+	),
+
+	refs: useGetDocuments({
+		collection: "viecpro_references",
+		query: {
+			q: "*",
+			query_by: "shortTitle",
+			filter_by: `related_doc.object_id:=${id} && related_doc.model:=Person`,
+			per_page: 250,
 		},
 	}),
 });

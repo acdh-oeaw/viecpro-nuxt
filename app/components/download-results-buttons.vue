@@ -6,7 +6,7 @@ import { isEmpty } from "lodash-es";
 import { Loader } from "lucide-vue-next";
 import type { SearchParams, SearchResponse } from "typesense/lib/Typesense/Documents";
 
-import { getDocuments } from "@/composables/use-ts-data";
+import { useApiClient } from "@/composables/use-api-client";
 import type { AnyEntity } from "@/types/schema";
 
 const props = defineProps<{
@@ -23,6 +23,8 @@ const props = defineProps<{
 }>();
 
 type QueryKey = [string, string, SearchParams];
+
+const client = useApiClient();
 
 const limit = 250;
 const pages = Math.ceil(props.all / limit);
@@ -44,9 +46,9 @@ for (let i = 1; i <= pages; i++) {
 				page: i,
 			},
 		] as const,
-		queryFn: async ({ queryKey }) => {
+		queryFn({ queryKey }) {
 			const [, collection, q] = queryKey;
-			return await getDocuments(q, collection);
+			return client.getDocuments(collection, q);
 		},
 	});
 }

@@ -9,20 +9,17 @@ import {
 import { useQuery } from "@tanstack/vue-query";
 import { ChevronsUpDown, Loader2 } from "lucide-vue-next";
 
+import { useApiClient } from "@/composables/use-api-client";
 import type { HierarchyNode } from "@/lib/types";
 
 const t = useTranslations();
+const client = useApiClient();
 
 const query = ref(
 	useQuery({
 		queryKey: ["autocomplete"],
-		queryFn: async () => {
-			const data = await fetch(
-				"https://viecpro.acdh-dev.oeaw.ac.at/visualisations/entityautocomplete/",
-			);
-			const ret = await data.json();
-
-			return ret.context as Array<HierarchyNode>;
+		queryFn() {
+			return client.getAutocomplete();
 		},
 	}),
 );

@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { useQuery } from "@tanstack/vue-query";
 import { useRoute } from "vue-router";
 
-import type { Reference } from "@/types/schema";
+import { useGetDocument } from "@/composables/use-get-document";
+
+const t = useTranslations();
 
 const route = useRoute();
 const id = String(route.params.id);
 
 const data = ref({
-	entity: useQuery({
-		queryKey: ["court", id],
-		queryFn: () => {
-			return getDocument<Reference>("viecpro_references", `Reference_${id}`);
-		},
-	}),
+	entity: useGetDocument(
+		computed(() => {
+			return { collection: "viecpro_references", id: `Reference_${id}` };
+		}),
+	),
 });
 
 usePageMetadata({
