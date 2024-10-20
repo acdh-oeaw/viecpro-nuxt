@@ -6,29 +6,24 @@ import {
 	ComboboxOption,
 	ComboboxOptions,
 } from "@headlessui/vue";
-import { useQuery } from "@tanstack/vue-query";
 import { ChevronsUpDown, Loader2 } from "lucide-vue-next";
 
-import { useApiClient } from "@/composables/use-api-client";
+import { useAutoComplete } from "@/composables/use-autocomplete";
 import type { HierarchyNode } from "@/lib/types";
 
-const t = useTranslations();
-const client = useApiClient();
+defineEmits(["change", "input"]);
 
-const query = ref(
-	useQuery({
-		queryKey: ["autocomplete"],
-		queryFn() {
-			return client.getAutocomplete();
-		},
-	}),
-);
+const t = useTranslations();
+
+const query = ref(useAutoComplete());
 
 const selection = defineModel<HierarchyNode | null>({
 	default: null,
 });
+
 const input = ref("");
 
+// FIXME: why filter client-side?
 const filtered = computed(() => {
 	if (!query.value.data) return [];
 
@@ -38,7 +33,6 @@ const filtered = computed(() => {
 				return entity.label.toLowerCase().includes(input.value.toLowerCase());
 			});
 });
-defineEmits(["change", "input"]);
 </script>
 
 <template>

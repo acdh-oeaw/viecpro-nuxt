@@ -1,15 +1,13 @@
 <script lang="ts" setup>
-import { useQuery } from "@tanstack/vue-query";
 import { ArrowRight, Loader2 } from "lucide-vue-next";
 
 import HierarchyWrapper from "@/components/hierarchy-wrapper.vue";
-import { useApiClient } from "@/composables/use-api-client";
+import { useHierarchy } from "@/composables/use-hierarchy";
 
 const router = useRouter();
 const route = useRoute();
 
 const t = useTranslations();
-const client = useApiClient();
 
 usePageMetadata({
 	title: t("pages.hierarchy.title"),
@@ -107,23 +105,11 @@ const show = computed({
 });
 
 const query = ref(
-	useQuery({
-		queryKey: ["hierarchy", comQuery, direction, show] as const,
-		async queryFn({ queryKey }) {
-			const [, auto, dir, show] = queryKey;
-
-			if (!auto) return null;
-
-			const data = await client.getTreeData(
-				auto.group,
-				String(auto.pk),
-				String(show.value),
-				String(dir.value),
-			);
-
-			return data;
-		},
-	}),
+	useHierarchy(
+		computed(() => {
+			return { auto: comQuery.value, direction: direction.value.value, show: show.value.value };
+		}),
+	),
 );
 </script>
 

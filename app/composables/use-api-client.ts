@@ -46,6 +46,7 @@ export function useApiClient() {
 			return data.tree_data;
 		},
 
+		// FIXME: why do we need `idName`?
 		getDetails(model: string, id: string, idName?: string) {
 			return client
 				.collections(`viecpro_detail_${model}`)
