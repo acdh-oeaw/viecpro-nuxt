@@ -28,7 +28,7 @@ const data = ref({
 
 	details: useGetDetails(
 		computed(() => {
-			return { model: "court", id, idName: "institution" };
+			return { model: "court", id };
 		}),
 	),
 

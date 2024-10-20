@@ -46,12 +46,15 @@ export function useApiClient() {
 			return data.tree_data;
 		},
 
-		// FIXME: why do we need `idName`?
-		getDetails(model: string, id: string, idName?: string) {
-			return client
-				.collections(`viecpro_detail_${model}`)
-				.documents(`detail_${idName ?? model}_${id}`)
-				.retrieve();
+		getDetails(model: string, id: string) {
+			return (
+				client
+					.collections(`viecpro_detail_${model}`)
+					// FIXME: typesense collection for court details uses "institution"
+					// why are the model names even part of the id? they already are in separate collections
+					.documents(`detail_${model === "court" ? "institution" : model}_${id}`)
+					.retrieve()
+			);
 		},
 		getDocument(collection: string, id: string) {
 			return client.collections(collection).documents(id).retrieve();
