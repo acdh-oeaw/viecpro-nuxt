@@ -56,6 +56,7 @@ const fetchCourts = computed(() => {
 		data.value.entity.error?.httpStatus &&
 		data.value.entity.error?.httpStatus === 404
 	) {
+		throw new Error("Invalid institutio id.");
 		return true;
 	}
 
