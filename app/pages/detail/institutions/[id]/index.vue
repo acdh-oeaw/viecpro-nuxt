@@ -23,14 +23,12 @@ const data = ref({
 		computed(() => {
 			return { collection, id: `Institution_${id}` };
 		}),
-		{ retry: 2 }, // FIXME:
 	),
 
 	details: useGetDetails(
 		computed(() => {
 			return { model: "institution", id };
 		}),
-		{ retry: 2 }, // FIXME:
 	),
 
 	refs: useGetDocuments({
@@ -43,56 +41,6 @@ const data = ref({
 		},
 	}),
 });
-
-// FIXME:
-// The following code is hopefully just a placeholder until there is a clearer distinction between
-// courts and institutions: If there are no results, this app will try to fetch the same ID
-// in the courts table and redirect the use.
-
-const fetchCourts = computed(() => {
-	if (
-		data.value.details.error?.httpStatus &&
-		data.value.details.error?.httpStatus === 404 &&
-		data.value.entity.error?.httpStatus &&
-		data.value.entity.error?.httpStatus === 404
-	) {
-		throw new Error("Invalid institutio id.");
-		return true;
-	}
-
-	return false;
-});
-
-const altData = ref({
-	entity: useGetDocument(
-		computed(() => {
-			return { collection: "viecpro_courts", id: `Hofstaat_${id}` };
-		}),
-		{ enabled: fetchCourts }, // FIXME:
-	),
-
-	details: useGetDetails(
-		computed(() => {
-			return { model: "court", id, idName: "institution" };
-		}),
-		{ enabled: fetchCourts }, // FIXME:
-	),
-});
-
-watch(
-	() => {
-		return [altData.value.details.isSuccess, altData.value.entity.isSuccess];
-	},
-	(to) => {
-		const router = useRouter();
-		if (to.every(Boolean)) {
-			void router.replace(route.fullPath.replace("institution", "court"));
-		}
-	},
-	{ immediate: true },
-);
-
-// thanks for understanding
 
 const loading = computed(() => {
 	return {
@@ -121,15 +69,12 @@ usePageMetadata({
 			!loading.entity &&
 			!loading.details &&
 			!loading.refs &&
-			(data.details.isLoadingError || data.entity.isLoadingError || data.refs.isLoadingError) &&
-			(altData.details.isLoadingError || altData.entity.isLoadingError)
+			(data.details.isLoadingError || data.entity.isLoadingError || data.refs.isLoadingError)
 		"
 	>
 		<div>{{ data.entity.error }}</div>
 		<div>{{ data.details.error }}</div>
 		<div>{{ data.refs.error }}</div>
-		<div>{{ altData.entity.error }}</div>
-		<div>{{ altData.details.error }}</div>
 	</div>
 	<DetailPage v-else :details-loading="loading.details" model="Institution">
 		<template #head>

@@ -8,10 +8,7 @@ interface UseGetDetailsParams {
 	model: string;
 }
 
-export function useGetDetails(
-	params: MaybeRef<UseGetDetailsParams>,
-	options?: { enabled?: MaybeRef<boolean>; retry?: MaybeRef<number> },
-) {
+export function useGetDetails(params: MaybeRef<UseGetDetailsParams>) {
 	const client = useApiClient();
 
 	return useQuery({
@@ -21,6 +18,5 @@ export function useGetDetails(
 
 			return client.getDetails(model, id, idName);
 		},
-		...options,
 	});
 }

@@ -7,10 +7,7 @@ interface UseGetDocumentParams {
 	id: string;
 }
 
-export function useGetDocument(
-	params: MaybeRef<UseGetDocumentParams>,
-	options?: { enabled?: MaybeRef<boolean>; retry?: MaybeRef<number> },
-) {
+export function useGetDocument(params: MaybeRef<UseGetDocumentParams>) {
 	const client = useApiClient();
 
 	return useQuery({
@@ -20,6 +17,5 @@ export function useGetDocument(
 
 			return client.getDocument(collection, id);
 		},
-		...options,
 	});
 }
