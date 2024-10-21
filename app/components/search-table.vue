@@ -3,7 +3,7 @@ import { get } from "lodash-es";
 import { ChevronDown, ChevronRight, Loader2, Search, XCircle } from "lucide-vue-next";
 
 import { useGetDocuments } from "@/composables/use-get-documents";
-import type { AnyEntity } from "@/types/schema";
+import type { AnyEntity } from "@/types/api";
 import { NuxtLink } from "#components";
 
 const t = useTranslations();

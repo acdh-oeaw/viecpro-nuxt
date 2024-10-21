@@ -8,8 +8,8 @@ import {
 } from "@headlessui/vue";
 import { ChevronsUpDown, Loader2 } from "lucide-vue-next";
 
+import type { HierarchyNode } from "@/composables/use-api-client";
 import { useAutoComplete } from "@/composables/use-autocomplete";
-import type { HierarchyNode } from "@/lib/types";
 
 defineEmits(["change", "input"]);
 

@@ -7,17 +7,10 @@ import { Loader } from "lucide-vue-next";
 import type { SearchParams, SearchResponse } from "typesense/lib/Typesense/Documents";
 
 import { useApiClient } from "@/composables/use-api-client";
-import type { AnyEntity } from "@/types/schema";
+import type { AnyEntity, Reference } from "@/types/api";
 
 const props = defineProps<{
-	collection:
-		| "viecpro_courts"
-		| "viecpro_events"
-		| "viecpro_institutions"
-		| "viecpro_persons"
-		| "viecpro_places"
-		| "viecpro_references"
-		| "viecpro_relations";
+	collection: "courts" | "events" | "institutions" | "persons" | "places" | "references";
 	query: SearchParams;
 	all: number;
 }>();
@@ -31,7 +24,7 @@ const pages = Math.ceil(props.all / limit);
 
 const queries: Array<{
 	queryKey: QueryKey;
-	queryFn: ({ queryKey }: { queryKey: QueryKey }) => Promise<SearchResponse<AnyEntity>>;
+	queryFn: ({ queryKey }: { queryKey: QueryKey }) => Promise<SearchResponse<AnyEntity | Reference>>;
 	enabled?: boolean;
 }> = [];
 
@@ -48,7 +41,7 @@ for (let i = 1; i <= pages; i++) {
 		] as const,
 		queryFn({ queryKey }) {
 			const [, collection, q] = queryKey;
-			return client.getDocuments(collection, q);
+			return client.getDocuments(props.collection, q);
 		},
 	});
 }

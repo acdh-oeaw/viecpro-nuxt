@@ -1,16 +1,16 @@
-import { keepPreviousData, useQuery } from "@tanstack/vue-query";
+import { keepPreviousData, useQuery, useQueryClient } from "@tanstack/vue-query";
 import type { SearchParams } from "typesense/lib/Typesense/Documents";
 
 import { useApiClient } from "@/composables/use-api-client";
 
 interface UseGetDocumentsParams {
-	collection: string;
+	collection: "courts" | "events" | "institutions" | "persons" | "places" | "references";
 	query: SearchParams;
 }
 
 export function useGetDocuments(params: MaybeRef<UseGetDocumentsParams>) {
 	const client = useApiClient();
-	// const queryClient = useQueryClient();
+	const queryClient = useQueryClient();
 
 	return useQuery({
 		queryKey: ["get-documents", params] as const,
@@ -19,15 +19,14 @@ export function useGetDocuments(params: MaybeRef<UseGetDocumentsParams>) {
 
 			const response = await client.getDocuments(collection, query);
 
-			// TODO:
-			// if (response.hits) {
-			// 	response.hits.forEach((hit) => {
-			// 		queryClient.setQueryData(
-			// 			[collection, String(hit.document.object_id)],
-			// 			hit.document,
-			// 		);
-			// 	});
-			// }
+			response.hits?.forEach((hit) => {
+				if ("object_id" in hit.document) {
+					queryClient.setQueryData(
+						["get-document", { collection, id: hit.document.object_id }],
+						hit.document,
+					);
+				}
+			});
 
 			return response;
 		},

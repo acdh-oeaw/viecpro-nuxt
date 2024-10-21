@@ -2,22 +2,22 @@
 import dXlsx, { type IJsonSheet } from "json-as-xlsx";
 import { FileSpreadsheet } from "lucide-vue-next";
 
-import type { AnyEntity, Court, Person } from "@/types/schema";
+import type { AnyEntity, Court, Person } from "@/types/api";
 
 const props = defineProps<{
 	data: Array<AnyEntity>;
 	collection:
-		| "viecpro_courts"
-		| "viecpro_events"
-		| "viecpro_institutions"
-		| "viecpro_persons"
-		| "viecpro_places"
-		| "viecpro_references"
-		| "viecpro_relations";
+		| "courts"
+		| "events"
+		| "institutions"
+		| "persons"
+		| "places"
+		| "references"
+		| "relations";
 }>();
 
 const sheet = {
-	viecpro_courts: {
+	courts: {
 		sheet: "Courts",
 		columns: [
 			{ label: "ID", value: "object_id" },
@@ -30,7 +30,7 @@ const sheet = {
 		],
 		content: props.data,
 	},
-	viecpro_institutions: {
+	institutions: {
 		sheet: "Institutions",
 		columns: [
 			{ label: "ID", value: "object_id" },
@@ -49,7 +49,7 @@ const sheet = {
 		],
 		content: props.data,
 	},
-	viecpro_events: {
+	events: {
 		sheet: "Events",
 		columns: [
 			{ label: "ID", value: "object_id" },
@@ -68,7 +68,7 @@ const sheet = {
 		],
 		content: props.data,
 	},
-	viecpro_persons: {
+	persons: {
 		sheet: "People",
 		columns: [
 			{ label: "ID", value: "object_id" },
@@ -101,7 +101,7 @@ const sheet = {
 		],
 		content: props.data,
 	},
-	viecpro_places: {
+	places: {
 		sheet: "Places",
 		columns: [
 			{ label: "ID", value: "object_id" },
@@ -121,7 +121,11 @@ const sheet = {
 		],
 		content: props.data,
 	},
-	viecpro_relations: {
+	references: {
+		sheet: "References",
+		columns: [],
+	},
+	relations: {
 		sheet: "Relations",
 		columns: [
 			{ label: "Relation ID", value: "object_id" },

@@ -12,7 +12,7 @@ import type {
 	Person,
 	PersonDetail,
 	PlaceDetail,
-} from "@/types/schema";
+} from "@/types/api";
 
 const props = defineProps<{
 	data: {

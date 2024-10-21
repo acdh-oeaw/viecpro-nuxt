@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/vue-query";
 import { useApiClient } from "@/composables/use-api-client";
 
 interface UseGetDocumentParams {
-	collection: string;
-	id: string;
+	collection: "courts" | "events" | "institutions" | "persons" | "places" | "references";
+	id: number;
 }
 
 export function useGetDocument(params: MaybeRef<UseGetDocumentParams>) {

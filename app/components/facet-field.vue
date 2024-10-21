@@ -42,6 +42,7 @@ const selectionQueries = useQueries({
 						query_by: Array<string> | string;
 						filter_by: string;
 					}
+
 					const query: QueryObject = {
 						facet: props.fieldName,
 						max: 10, // In case one filter matches another perfectly
@@ -51,6 +52,7 @@ const selectionQueries = useQueries({
 						query_by: props.queryBy,
 						filter_by: props.filterBy,
 					};
+
 					return {
 						queryKey: ["single facet", query] as const,
 						async queryFn({ queryKey }: { queryKey: [string, QueryObject] }) {
@@ -149,6 +151,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 					}) as SearchResponseFacetCountSchema<any>["counts"]),
 			);
 		}
+
 		if (facetResponse.data.value) {
 			retArray.push(
 				...facetResponse.data.value.counts
@@ -160,6 +163,7 @@ const facetsWithSelected: ComputedRef<SearchResponseFacetCountSchema<any>["count
 					}),
 			);
 		}
+
 		return retArray;
 	},
 );

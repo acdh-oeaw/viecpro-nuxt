@@ -1,7 +1,8 @@
 {
 	"common": {
 		"imprint": "Impressum",
-		"main-navigation": "Haupt"
+		"main-navigation": "Haupt",
+		"query-error": "Konnte Daten nicht laden."
 	},
 	"pages": {
 		"home": {
@@ -318,6 +319,12 @@
 			"hierarchy": "Hierarchie",
 			"documentation": "Dokumentation"
 		}
+	},
+	"CourtDetailsPage": {
+		"meta": {
+			"title": "Hofstaat"
+		},
+		"title": "Hofstaat"
 	},
 	"DefaultLayout": {
 		"meta": {

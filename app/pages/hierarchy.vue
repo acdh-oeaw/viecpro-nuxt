@@ -104,12 +104,10 @@ const show = computed({
 	},
 });
 
-const query = ref(
-	useHierarchy(
-		computed(() => {
-			return { auto: comQuery.value, direction: direction.value.value, show: show.value.value };
-		}),
-	),
+const query = useHierarchy(
+	computed(() => {
+		return { auto: comQuery.value, direction: direction.value.value, show: show.value.value };
+	}),
 );
 </script>
 
@@ -163,9 +161,9 @@ const query = ref(
 			</div>
 		</div>
 		<div class="w-full">
-			<ClientOnly v-if="!query.isFetching">
+			<ClientOnly v-if="!query.isFetching.value">
 				<VisContainer v-slot="{ width }" class="flex items-center">
-					<HierarchyWrapper v-if="query.data" :data="query.data" :width="width" />
+					<HierarchyWrapper v-if="query.data.value" :data="query.data.value" :width="width" />
 				</VisContainer>
 			</ClientOnly>
 			<Centered v-else>

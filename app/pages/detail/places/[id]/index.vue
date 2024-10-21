@@ -20,42 +20,37 @@ const id = String(route.params.id);
 
 const collection = "viecpro_places";
 
-const data = ref({
-	entity: useGetDocument(
-		computed(() => {
-			return { collection, id: `Place_${id}` };
-		}),
-	),
-
-	details: useGetDetails(
-		computed(() => {
-			return { model: "place", id };
-		}),
-	),
-
-	refs: useGetDocuments({
-		collection: "viecpro_references",
-		query: {
-			q: "*",
-			query_by: "shortTitle",
-			filter_by: `related_doc.object_id:=${id} && related_doc.model:=Place`,
-			per_page: 250,
-		},
+const entity = useGetDocument(
+	computed(() => {
+		return { collection, id: `Place_${id}` };
 	}),
+);
+
+const details = useGetDetails(
+	computed(() => {
+		return { model: "place", id };
+	}),
+);
+
+const refs = useGetDocuments({
+	collection: "viecpro_references",
+	query: {
+		q: "*",
+		query_by: "shortTitle",
+		filter_by: `related_doc.object_id:=${id} && related_doc.model:=Place`,
+		per_page: 250,
+	},
 });
 
-const loading = computed(() => {
-	return {
-		entity: data.value.entity.isLoading,
-		details: data.value.details.isLoading,
-	};
+const data = computed(() => {
+	return { entity, details, refs };
 });
 
 const relCols = ["relation_type", "target.name", "start_date", "end_date"];
 
 const title = computed(() => {
-	if (data.value.entity.data?.name) {
-		return `${data.value.entity.data.name} - ${t("pages.searchviews.places.sing")}`;
+	if (entity.data.value?.name) {
+		return `${entity.data.value.name} - ${t("pages.searchviews.places.sing")}`;
 	}
 
 	return t("pages.searchviews.places.sing");
@@ -69,28 +64,33 @@ usePageMetadata({
 <template>
 	<div
 		v-if="
-			!loading.entity &&
-			!loading.details &&
-			(data.details.isLoadingError || data.entity.isLoadingError)
+			!entity.isLoading.value &&
+			!details.isLoading.value &&
+			(details.isLoadingError.value || entity.isLoadingError.value)
 		"
 	>
-		<div>{{ data.entity.error }}</div>
-		<div>{{ data.details.error }}</div>
+		<div>{{ entity.error.value }}</div>
+		<div>{{ details.error.value }}</div>
 	</div>
-	<DetailPage v-else :details-loading="loading.details" :model="t('pages.searchviews.places.sing')">
+
+	<DetailPage
+		v-else
+		:details-loading="details.isLoading.value"
+		:title="t('pages.searchviews.places.sing')"
+	>
 		<template #head>
 			<div class="font-bold text-primary-600 xl:my-2 xl:text-4xl">
 				<div
-					v-if="!loading.entity && data.entity.data"
+					v-if="!entity.isLoading.value && entity.data.value"
 					class="mb-4 flex flex-col justify-between gap-4 md:m-0 md:flex-row md:items-center md:gap-8"
 				>
 					<h1 class="text-4xl">
-						{{ data.entity.data?.name }}
+						{{ entity.data.value.name }}
 					</h1>
 					<div class="flex items-center gap-2">
 						<Indicator
 							class="w-24"
-							:status="data.entity.data?.ampel"
+							:status="entity.data.value.ampel"
 							:title="t('collection-keys.viecpro_persons.ampel')"
 						/>
 						<InfoMenu>
@@ -109,9 +109,9 @@ usePageMetadata({
 										{{ t("detail-page.basedata") }} - {{ t("pages.searchviews.places.sing") }}
 									</div>
 									<div>
-										{{ data.entity.data?.name }}
+										{{ entity.data.value.name }}
 									</div>
-									<div>VieCPro-ID: {{ data.entity.data?.id }}</div>
+									<div>VieCPro-ID: {{ entity.data.value.id }}</div>
 									<div>URI: <CurrentUri link /></div>
 								</div>
 							</template>
@@ -123,27 +123,27 @@ usePageMetadata({
 				<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			</div>
 			<Chip
-				v-if="loading.details || data.details.data?.institution_relations.length !== 0"
+				v-if="details.isLoading.value || details.data.value?.institution_relations.length !== 0"
 				class="my-1 text-sm lg:text-base"
 				square
 			>
-				<template v-if="!loading.details">
-					<span v-if="data.details.data">
+				<template v-if="!details.isLoading.value">
+					<span v-if="details.data.value">
 						{{
-							data.details.data.institution_relations
-								.map((func) => func.target.name)
+							details.data.value.institution_relations
+								.map((r) => r.target.name)
 								.slice(0, 3)
 								.join(" - ")
 						}}
 					</span>
 					<span
 						v-if="
-							data.details.data?.institution_relations &&
-							data.details.data?.institution_relations.length > 3
+							details.data.value.institution_relations &&
+							details.data.value.institution_relations.length > 3
 						"
 					>
 						+
-						{{ data.details.data.institution_relations.length - 3 }}
+						{{ details.data.value.institution_relations.length - 3 }}
 					</span>
 				</template>
 				<span v-else>
@@ -154,7 +154,7 @@ usePageMetadata({
 		<template #base>
 			<div class="col-span-2 my-1 border-t"></div>
 			<span>{{ t("collection-keys.viecpro_places.kind") }}:</span>
-			<span v-if="!loading.entity">{{ data.entity.data?.kind }}</span>
+			<span v-if="!entity.isLoading.value">{{ entity.data.value?.kind }}</span>
 			<span v-else class="animate-pulse">{{ t("ui.loading") }}</span>
 			<div class="col-span-2 my-1 border-t"></div>
 			<span>{{ t("detail-page.coords") }}:</span>

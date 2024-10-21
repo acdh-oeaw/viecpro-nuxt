@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/vue-query";
 import { useApiClient } from "@/composables/use-api-client";
 
 interface UseGetDetailsParams {
-	id: string;
-	model: string;
+	id: number;
+	model: "courts" | "institutions" | "persons" | "places";
 }
 
 export function useGetDetails(params: MaybeRef<UseGetDetailsParams>) {

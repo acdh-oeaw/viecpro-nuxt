@@ -28,6 +28,7 @@ const facets = computed(() => {
 			return field.name;
 		});
 });
+
 const sortable = computed(() => {
 	return data.value?.fields
 		?.filter((field) => {

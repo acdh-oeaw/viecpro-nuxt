@@ -3,18 +3,22 @@ import { Loader2 } from "lucide-vue-next";
 
 import Centered from "@/components/centered.vue";
 
-const t = useTranslations();
-
-defineProps<{
-	model: string;
+const props = defineProps<{
 	detailsLoading: boolean;
+	title: string;
 }>();
+
+const t = useTranslations();
 </script>
 
 <template>
 	<div class="mx-auto size-full max-w-container px-2 py-4 xl:px-0">
-		<h2 class="text-lg text-gray-500 lg:text-2xl">{{ t("detail-page.basedata") }} - {{ model }}</h2>
+		<h2 class="text-lg text-gray-500 lg:text-2xl">
+			{{ t("detail-page.basedata") }} - {{ props.title }}
+		</h2>
+
 		<slot name="head" />
+
 		<div class="mt-4 grid gap-16 md:grid-cols-[2fr_3fr]">
 			<div class="flex flex-col gap-8">
 				<div>
@@ -24,16 +28,19 @@ defineProps<{
 					</div>
 				</div>
 
-				<div v-if="!detailsLoading">
+				<div v-if="!props.detailsLoading">
 					<slot name="left" />
 				</div>
+
 				<Centered v-else class="min-h-60">
 					<Loader2 class="size-8 animate-spin" />
 				</Centered>
 			</div>
-			<div v-if="!detailsLoading">
+
+			<div v-if="!props.detailsLoading">
 				<slot name="right" />
 			</div>
+
 			<Centered v-else>
 				<Loader2 class="size-8 animate-spin" />
 			</Centered>

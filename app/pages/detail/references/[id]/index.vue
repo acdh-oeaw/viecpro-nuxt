@@ -8,12 +8,14 @@ const t = useTranslations();
 const route = useRoute();
 const id = String(route.params.id);
 
-const data = ref({
-	entity: useGetDocument(
-		computed(() => {
-			return { collection: "viecpro_references", id: `Reference_${id}` };
-		}),
-	),
+const entity = useGetDocument(
+	computed(() => {
+		return { collection: "viecpro_references", id: `Reference_${id}` };
+	}),
+);
+
+const data = computed(() => {
+	return { entity };
 });
 
 usePageMetadata({

@@ -8,12 +8,14 @@ const t = useTranslations();
 const route = useRoute();
 const id = String(route.params.id);
 
-const data = ref({
-	entity: useGetDocument(
-		computed(() => {
-			return { collection: "viecpro_events", id: `Event_${id}` };
-		}),
-	),
+const entity = useGetDocument(
+	computed(() => {
+		return { collection: "viecpro_events", id: `Event_${id}` };
+	}),
+);
+
+const data = computed(() => {
+	return { entity };
 });
 
 const title = computed(() => {
@@ -34,9 +36,6 @@ usePageMetadata({
 		<div>
 			{{ route.params.id }}
 		</div>
-		<pre>
-			{{ data }}
-		</pre
-		>
+		<pre>{{ data }}</pre>
 	</div>
 </template>

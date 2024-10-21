@@ -3,7 +3,7 @@ import type { SearchResponseFacetCountSchema } from "typesense/lib/Typesense/Doc
 
 import GenericDisclosure from "@/components/generic-disclosure.vue";
 import { facetObjectToTypesenseQuery, getFacetObjectFromURL } from "@/lib/facets";
-import type { AnyEntity } from "@/types/schema";
+import type { AnyEntity } from "@/types/api";
 
 defineProps<{
 	facets: Array<SearchResponseFacetCountSchema<AnyEntity>> | undefined;

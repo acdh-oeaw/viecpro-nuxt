@@ -4,7 +4,7 @@ import type { UseQueryReturnType } from "@tanstack/vue-query";
 import { Download, X } from "lucide-vue-next";
 import type { SearchParams } from "typesense/lib/Typesense/Documents";
 
-import type { AnyDetail, AnyEntity } from "@/types/schema";
+import type { AnyDetail, AnyEntity } from "@/types/api";
 
 interface DetailData {
 	entity: UseQueryReturnType<AnyEntity, Error>;

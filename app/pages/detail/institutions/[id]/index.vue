@@ -18,28 +18,30 @@ const id = String(route.params.id);
 
 const collection = "viecpro_institutions";
 
-const data = ref({
-	entity: useGetDocument(
-		computed(() => {
-			return { collection, id: `Institution_${id}` };
-		}),
-	),
-
-	details: useGetDetails(
-		computed(() => {
-			return { model: "institution", id };
-		}),
-	),
-
-	refs: useGetDocuments({
-		collection: "viecpro_references",
-		query: {
-			q: "*",
-			query_by: "shortTitle",
-			filter_by: `related_doc.object_id:=${id} && related_doc.model:=Institution`,
-			per_page: 250,
-		},
+const entity = useGetDocument(
+	computed(() => {
+		return { collection, id: `Institution_${id}` };
 	}),
+);
+
+const details = useGetDetails(
+	computed(() => {
+		return { model: "institution", id };
+	}),
+);
+
+const refs = useGetDocuments({
+	collection: "viecpro_references",
+	query: {
+		q: "*",
+		query_by: "shortTitle",
+		filter_by: `related_doc.object_id:=${id} && related_doc.model:=Institution`,
+		per_page: 250,
+	},
+});
+
+const data = computed(() => {
+	return { entity, details, refs };
 });
 
 const loading = computed(() => {
@@ -76,7 +78,8 @@ usePageMetadata({
 		<div>{{ data.details.error }}</div>
 		<div>{{ data.refs.error }}</div>
 	</div>
-	<DetailPage v-else :details-loading="loading.details" model="Institution">
+
+	<DetailPage v-else :details-loading="loading.details" title="Institution">
 		<template #head>
 			<div class="font-bold text-primary-600 xl:my-2 xl:text-4xl">
 				<div

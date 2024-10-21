@@ -4,7 +4,7 @@ import type { LocationQuery } from "vue-router";
 import { useApiClient } from "@/composables/use-api-client";
 
 interface UseGetFacetsParams {
-	collection: string;
+	collection: "courts" | "events" | "institutions" | "persons" | "places" | "references";
 	facet: string;
 	facetQuery?: string;
 	filter_by?: string;

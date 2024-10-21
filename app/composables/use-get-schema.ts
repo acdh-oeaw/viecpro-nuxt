@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/vue-query";
 import { useApiClient } from "@/composables/use-api-client";
 
 interface UseGetSchemaParams {
-	collection: string;
+	collection: "courts" | "events" | "institutions" | "persons" | "places" | "references";
 }
 
 export function useGetSchema(params: MaybeRef<UseGetSchemaParams>) {

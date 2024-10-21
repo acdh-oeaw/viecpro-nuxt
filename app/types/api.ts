@@ -15,9 +15,6 @@ interface BaseEntity {
 	labels: Array<Label>;
 }
 
-export type AnyEntity = Court | Event | Institution | Person | Place;
-export type AnyDetail = CourtDetail | InstitutionDetail | PersonDetail | PlaceDetail;
-
 export interface Court extends BaseEntity {
 	owner: Array<CourtOwner>;
 	main_owner: CourtOwner;
@@ -96,6 +93,7 @@ export interface Relation {
 	relation_type_hierarchy: string;
 	relation_reverse: string;
 }
+
 export interface BasicLabel {
 	object_id: string;
 	name: string;
@@ -103,6 +101,7 @@ export interface BasicLabel {
 }
 
 export interface PersonTitle extends BasicLabel {}
+
 export interface RelationSourceTarget extends BasicLabel {}
 
 export interface DetailLabel {
@@ -186,6 +185,7 @@ export interface PlaceDetail extends GenericDetail {
 	place_relations: Array<GenericRelation>;
 	institution_relations: Array<GenericRelation>;
 }
+
 export interface CourtDetail extends GenericDetail {
 	resolution: string;
 	category: string;
@@ -195,4 +195,25 @@ export interface CourtDetail extends GenericDetail {
 	personnel: Array<GenericRelation>;
 	locations: Array<GenericRelation>;
 	hierarchy: Array<GenericRelation>;
+}
+
+export type AnyEntity = Court | Event | Institution | Person | Place;
+
+export type AnyDetail = CourtDetail | InstitutionDetail | PersonDetail | PlaceDetail;
+
+export interface AnyEntityMap {
+	courts: Court;
+	events: Event;
+	institutions: Institution;
+	persons: Person;
+	places: Place;
+	references: Reference;
+	// relations: ?
+}
+
+export interface AnyDetailMap {
+	courts: CourtDetail;
+	institutions: InstitutionDetail;
+	persons: PersonDetail;
+	places: PlaceDetail;
 }

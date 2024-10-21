@@ -3,7 +3,7 @@ import type { UseQueryReturnType } from "@tanstack/vue-query";
 import dXlsx from "json-as-xlsx";
 import { FileSpreadsheet } from "lucide-vue-next";
 
-import type { AnyDetail, AnyEntity } from "@/types/schema";
+import type { AnyDetail, AnyEntity } from "@/types/api";
 
 const props = defineProps<{
 	data: {
