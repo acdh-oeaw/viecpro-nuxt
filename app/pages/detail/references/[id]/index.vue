@@ -6,11 +6,11 @@ import { useGetDocument } from "@/composables/use-get-document";
 const t = useTranslations();
 
 const route = useRoute();
-const id = String(route.params.id);
+const id = Number(route.params.id);
 
 const entity = useGetDocument(
 	computed(() => {
-		return { collection: "viecpro_references", id: `Reference_${id}` };
+		return { collection: "references", id };
 	}),
 );
 

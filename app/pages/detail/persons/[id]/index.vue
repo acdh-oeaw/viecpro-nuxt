@@ -14,24 +14,24 @@ import { detectURLsAddLinks } from "@/lib/helpers";
 const t = useTranslations();
 const route = useRoute();
 
-const id = String(route.params.id);
+const id = Number(route.params.id);
 
-const collection = "viecpro_persons";
+const collection = "persons";
 
 const entity = useGetDocument(
 	computed(() => {
-		return { collection, id: `Person_${id}` };
+		return { collection, id };
 	}),
 );
 
 const details = useGetDetails(
 	computed(() => {
-		return { model: "person", id };
+		return { model: "persons", id };
 	}),
 );
 
 const refs = useGetDocuments({
-	collection: "viecpro_references",
+	collection: "references",
 	query: {
 		q: "*",
 		query_by: "shortTitle",

@@ -11,13 +11,13 @@ const t = useTranslations();
 const props = defineProps<{
 	queryBy: Array<string> | string;
 	collectionName:
-		| "viecpro_courts"
-		| "viecpro_events"
-		| "viecpro_institutions"
-		| "viecpro_persons"
-		| "viecpro_places"
-		| "viecpro_references"
-		| "viecpro_relations";
+		| "courts"
+		| "events"
+		| "institutions"
+		| "persons"
+		| "places"
+		| "references"
+		| "relations";
 	koi: Array<string>;
 	facets?: Array<string>;
 	cols: string;

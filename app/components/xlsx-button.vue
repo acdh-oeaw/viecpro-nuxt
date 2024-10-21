@@ -10,7 +10,7 @@ const props = defineProps<{
 		entity: UseQueryReturnType<AnyEntity, Error>;
 		details: UseQueryReturnType<AnyDetail, Error>;
 	};
-	collection: "viecpro_courts" | "viecpro_institutions" | "viecpro_persons" | "viecpro_places";
+	collection: "courts" | "institutions" | "persons" | "places";
 }>();
 
 const standardRelation = [
@@ -23,7 +23,7 @@ const standardRelation = [
 let xlsxData;
 
 switch (props.collection) {
-	case "viecpro_courts":
+	case "courts":
 		xlsxData = {
 			sheets: [
 				{
@@ -68,7 +68,7 @@ switch (props.collection) {
 			},
 		};
 		break;
-	case "viecpro_institutions":
+	case "institutions":
 		xlsxData = {
 			sheets: [
 				{
@@ -122,7 +122,7 @@ switch (props.collection) {
 			},
 		};
 		break;
-	case "viecpro_persons":
+	case "persons":
 		xlsxData = {
 			sheets: [
 				{
@@ -236,7 +236,7 @@ switch (props.collection) {
 			},
 		};
 		break;
-	case "viecpro_places":
+	case "places":
 		xlsxData = {
 			sheets: [
 				{

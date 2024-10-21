@@ -106,11 +106,11 @@ export function useApiClient() {
 
 			const prefixes = {
 				courts: "Hofstaat",
-				events: "",
+				events: "Event",
 				institutions: "Institution",
 				persons: "Person",
 				places: "Place",
-				references: "",
+				references: "Reference",
 			};
 
 			return client

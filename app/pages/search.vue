@@ -45,6 +45,11 @@ const links = computed(() => {
 			label: t("pages.searchviews.places.label"),
 			icon: MapPin,
 		},
+		bibliography: {
+			href: { path: "/bibliography" },
+			label: t("pages.searchviews.bibliography.label"),
+			icon: BookTextIcon,
+		},
 	};
 });
 
@@ -54,10 +59,6 @@ const inactiveLinks = computed(() => {
 			// href: { path: ("/search/events") },
 			label: t("pages.searchviews.events.label"),
 			icon: CalendarRange,
-		},
-		bibliography: {
-			label: t("pages.searchviews.bibliography.label"),
-			icon: BookTextIcon,
 		},
 		register: {
 			label: t("pages.searchviews.register.label"),

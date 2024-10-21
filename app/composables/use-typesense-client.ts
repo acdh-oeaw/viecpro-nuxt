@@ -5,7 +5,7 @@ export function useTypesenseClient(): Client {
 	const env = useRuntimeConfig();
 
 	assert(isNonEmptyString(env.public.typesenseHost), "Missing typesense host.");
-	assert(isNonEmptyString(env.public.typesensePort), "Missing typesense port.");
+	assert(!Number.isNaN(Number(env.public.typesensePort)), "Missing typesense port.");
 	assert(isNonEmptyString(env.public.typesenseProtocol), "Missing typesense protocol.");
 	assert(isNonEmptyString(env.public.typesenseApiKey), "Missing typesense api key.");
 

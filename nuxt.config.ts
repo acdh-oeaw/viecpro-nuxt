@@ -32,6 +32,9 @@ export default defineNuxtConfig({
 	eslint: {
 		config: {
 			autoInit: false,
+			nuxt: {
+				sortConfigKeys: false,
+			},
 			standalone: true,
 		},
 	},

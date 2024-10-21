@@ -6,7 +6,7 @@ import { useGetSchema } from "@/composables/use-get-schema";
 
 const t = useTranslations();
 
-const collectionName = "viecpro_courts";
+const collectionName = "courts";
 
 const queryBy = ["name", "main_owner.name", "kategorie"];
 

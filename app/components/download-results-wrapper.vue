@@ -7,13 +7,7 @@ import DownloadResultsButtons from "@/components/download-results-buttons.vue";
 const enabled = ref(false);
 
 defineProps<{
-	collection:
-		| "viecpro_courts"
-		| "viecpro_events"
-		| "viecpro_institutions"
-		| "viecpro_persons"
-		| "viecpro_places"
-		| "viecpro_relations";
+	collection: "courts" | "events" | "institutions" | "persons" | "places" | "relations";
 	query: SearchParams;
 	all: number;
 }>();

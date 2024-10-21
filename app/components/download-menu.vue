@@ -14,13 +14,13 @@ interface DetailData {
 defineProps<{
 	data?: Array<AnyEntity> | DetailData;
 	collection:
-		| "viecpro_courts"
-		| "viecpro_events"
-		| "viecpro_institutions"
-		| "viecpro_persons"
-		| "viecpro_places"
-		| "viecpro_references"
-		| "viecpro_relations";
+		| "courts"
+		| "events"
+		| "institutions"
+		| "persons"
+		| "places"
+		| "references"
+		| "relations";
 	detail?: boolean;
 	all?: number;
 	query?: SearchParams;

@@ -10,7 +10,7 @@ const id = String(route.params.id);
 
 const entity = useGetDocument(
 	computed(() => {
-		return { collection: "viecpro_events", id: `Event_${id}` };
+		return { collection: "events", id: `Event_${id}` };
 	}),
 );
 

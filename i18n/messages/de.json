@@ -128,7 +128,7 @@
 			"asc": "Aufsteigend",
 			"desc": "Absteigend"
 		},
-		"viecpro_persons": {
+		"persons": {
 			"ampel": "Bearbeitungsstatus",
 			"end": "Sterbedatum",
 			"end_date": "Sterbedatum",
@@ -169,7 +169,7 @@
 			"hierarchy": "Hierarchievisualisierung",
 			"citations": "Zitationsvorschlag"
 		},
-		"viecpro_courts": {
+		"courts": {
 			"model": "Modell",
 			"name": "Kürzel",
 			"kind": "Art",
@@ -208,7 +208,7 @@
 			"label:Kategorie": "Kategorie",
 			"kategorie": "Kategorie"
 		},
-		"viecpro_institutions": {
+		"institutions": {
 			"ampel": "Bearbeitungsstatus",
 			"alternativenames": "Alternative Namensschreibweisen",
 			"model": "Modell",
@@ -241,7 +241,7 @@
 			},
 			"folio": "Folio"
 		},
-		"viecpro_events": {
+		"events": {
 			"ampel": "Bearbeitungsstatus",
 			"alternativenames": "Alternative Namensschreibweisen",
 			"model": "Modell",
@@ -254,7 +254,7 @@
 			"label:Auflösung": "Auflösung",
 			"label:Kategorie": "Kategorie"
 		},
-		"viecpro_places": {
+		"places": {
 			"start_date": "Beginn",
 			"end_date": "Ende",
 			"ampel": "Bearbeitungsstatus",
@@ -272,7 +272,7 @@
 			"place_relations": "Bezüge zu anderen Orten",
 			"label:Bezeichnung, alternativ": "Alternative Bezeichnung"
 		},
-		"viecpro_relations": {
+		"relations": {
 			"source_kind": "Entität A",
 			"source": { "name": "Name A" },
 			"start_date": "Beginn",
@@ -319,6 +319,12 @@
 			"hierarchy": "Hierarchie",
 			"documentation": "Dokumentation"
 		}
+	},
+	"BibliographyPage": {
+		"meta": {
+			"title": "Literaturverzeichnis"
+		},
+		"title": "Literaturverzeichnis"
 	},
 	"CourtDetailsPage": {
 		"meta": {

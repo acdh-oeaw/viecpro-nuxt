@@ -6,7 +6,7 @@ import { useGetSchema } from "@/composables/use-get-schema";
 
 const t = useTranslations();
 
-const collectionName = "viecpro_persons";
+const collectionName = "persons";
 const queryBy = ["name", "first_name", "alternativenames", "functions", "institutions"];
 
 const koi = ["first_name", "name", "start", "end", "ampel"];

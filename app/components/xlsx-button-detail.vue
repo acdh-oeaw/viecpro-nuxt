@@ -20,13 +20,13 @@ const props = defineProps<{
 		details: { data: AnyDetail };
 	};
 	collection:
-		| "viecpro_courts"
-		| "viecpro_events"
-		| "viecpro_institutions"
-		| "viecpro_persons"
-		| "viecpro_places"
-		| "viecpro_references"
-		| "viecpro_relations";
+		| "courts"
+		| "events"
+		| "institutions"
+		| "persons"
+		| "places"
+		| "references"
+		| "relations";
 }>();
 
 const standardRelation = [
@@ -46,7 +46,7 @@ let xlsxData: {
 };
 
 switch (props.collection) {
-	case "viecpro_courts":
+	case "courts":
 		xlsxData = {
 			sheets: [
 				{
@@ -91,7 +91,7 @@ switch (props.collection) {
 			},
 		};
 		break;
-	case "viecpro_institutions":
+	case "institutions":
 		xlsxData = {
 			sheets: [
 				{
@@ -145,7 +145,7 @@ switch (props.collection) {
 			},
 		};
 		break;
-	case "viecpro_persons":
+	case "persons":
 		xlsxData = {
 			sheets: [
 				{
@@ -259,7 +259,7 @@ switch (props.collection) {
 			},
 		};
 		break;
-	case "viecpro_places":
+	case "places":
 		xlsxData = {
 			sheets: [
 				{
