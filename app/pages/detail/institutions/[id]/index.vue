@@ -82,7 +82,7 @@ const altData = ref({
 	details: useQuery({
 		queryKey: ["detail", "viecpro_courts", id],
 		queryFn: () => {
-			return getDetails<CourtDetail>("court", id, "institution");
+			return getDetails<CourtDetail>("court", id);
 		},
 		enabled: fetchCourts,
 	}),

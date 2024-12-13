@@ -30,7 +30,7 @@ const data = ref({
 	details: useQuery({
 		queryKey: ["detail", collection, id],
 		queryFn: () => {
-			return getDetails<CourtDetail>("court", id, "institution");
+			return getDetails<CourtDetail>("court", id);
 		},
 	}),
 	refs: useQuery({
