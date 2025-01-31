@@ -6,7 +6,7 @@ export function createClient(): Client {
 	const client = new Client({
 		apiKey: env.NEXT_PUBLIC_TYPESENSE_SEARCH_API_KEY,
 		// cacheSearchResultsForSeconds: 2 * 60,
-		// connectionTimeoutSeconds: 3,
+		connectionTimeoutSeconds: 10,
 		nodes: [
 			{
 				host: env.NEXT_PUBLIC_TYPESENSE_HOST,
