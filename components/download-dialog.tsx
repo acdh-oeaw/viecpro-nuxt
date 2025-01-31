@@ -19,18 +19,22 @@ import { useOverlayTriggerState } from "react-stately";
 
 import {
 	downloadCollection as downloadCourts,
+	isDownloadUnsupported as isCourtsDownloadUnsupported,
 	type SearchFilters as CourtSearchFilters,
 } from "@/app/(app)/search/courts/_lib/search";
 import {
 	downloadCollection as downloadInstitutions,
+	isDownloadUnsupported as isInstitutionsDownloadUnsupported,
 	type SearchFilters as InstitutionSearchFilters,
 } from "@/app/(app)/search/institutions/_lib/search";
 import {
 	downloadCollection as downloadPersons,
+	isDownloadUnsupported as isPersonsDownloadUnsupported,
 	type SearchFilters as PersonSearchFilters,
 } from "@/app/(app)/search/persons/_lib/search";
 import {
 	downloadCollection as downloadPlaces,
+	isDownloadUnsupported as isPlacesDownloadUnsupported,
 	type SearchFilters as PlaceSearchFilters,
 } from "@/app/(app)/search/places/_lib/search";
 import { downloadJson } from "@/lib/download-json";
@@ -39,6 +43,7 @@ type DownloadDialogProps = {
 	cancelLabel: ReactNode;
 	children: ReactNode;
 	columns: Array<{ label: string; value: string }>;
+	count: number;
 	fileName: string;
 	jsonLabel: string;
 	jsonShortLabel: string;
@@ -46,7 +51,7 @@ type DownloadDialogProps = {
 	needsConfirmation: boolean;
 	submitLabel: ReactNode;
 	title: ReactNode;
-	total: number;
+	unsupportedLabel: ReactNode;
 	xlsxLabel: string;
 	xlsxShortLabel: string;
 } & (
@@ -73,6 +78,7 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 		cancelLabel,
 		children,
 		columns,
+		count,
 		fileName,
 		jsonLabel,
 		jsonShortLabel,
@@ -82,7 +88,7 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 		searchFilters,
 		submitLabel,
 		title,
-		total,
+		unsupportedLabel,
 		xlsxLabel,
 		xlsxShortLabel,
 	} = props;
@@ -90,22 +96,42 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 	const state = useOverlayTriggerState({});
 	const [action, setAction] = useState<"json" | "xlsx" | null>(null);
 
-	async function getSearchResults() {
+	function isDownloadUnsupported() {
 		switch (kind) {
 			case "court": {
-				return downloadCourts(searchFilters, total);
+				return isCourtsDownloadUnsupported(count);
 			}
 
 			case "institution": {
-				return downloadInstitutions(searchFilters, total);
+				return isInstitutionsDownloadUnsupported(count);
 			}
 
 			case "person": {
-				return downloadPersons(searchFilters, total);
+				return isPersonsDownloadUnsupported(count);
 			}
 
 			case "place": {
-				return downloadPlaces(searchFilters, total);
+				return isPlacesDownloadUnsupported(count);
+			}
+		}
+	}
+
+	async function getSearchResults() {
+		switch (kind) {
+			case "court": {
+				return downloadCourts(searchFilters, count);
+			}
+
+			case "institution": {
+				return downloadInstitutions(searchFilters, count);
+			}
+
+			case "person": {
+				return downloadPersons(searchFilters, count);
+			}
+
+			case "place": {
+				return downloadPlaces(searchFilters, count);
 			}
 		}
 	}
@@ -232,14 +258,18 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 											className="size-5 text-brand-500 hover:text-brand-600 pressed:text-brand-700"
 										/>
 									</Button>
-									<div className="text-brand-600">{children}</div>
+									<div className="text-brand-600">
+										{!isDownloadUnsupported() ? children : unsupportedLabel}
+									</div>
 									<footer className="mt-2 flex justify-end gap-x-2">
-										<Button
-											className="inline-flex items-center gap-x-2 rounded-md border border-brand-600 bg-brand-600 p-2 text-sm font-medium text-white transition hover:border-brand-700 hover:bg-brand-700 pressed:border-brand-800 pressed:bg-brand-800"
-											onPress={chain(onSubmit, close)}
-										>
-											{submitLabel}
-										</Button>
+										{!isDownloadUnsupported() ? (
+											<Button
+												className="inline-flex items-center gap-x-2 rounded-md border border-brand-600 bg-brand-600 p-2 text-sm font-medium text-white transition hover:border-brand-700 hover:bg-brand-700 pressed:border-brand-800 pressed:bg-brand-800"
+												onPress={chain(onSubmit, close)}
+											>
+												{submitLabel}
+											</Button>
+										) : null}
 										<Button
 											className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200"
 											slot="close"

@@ -87,6 +87,7 @@ export default async function SearchInstitutionsPage(
 									{ label: t("end-date"), value: "endDateWritten" },
 									{ label: t("status"), value: "status" },
 								]}
+								count={searchResults.count}
 								fileName={`viecpro-${isodate(new Date())}`}
 								jsonLabel={t("download-json")}
 								jsonShortLabel={t("file-json")}
@@ -96,7 +97,9 @@ export default async function SearchInstitutionsPage(
 								searchFilters={searchFilters}
 								submitLabel={t("download-submit")}
 								title={t("download-title")}
-								total={searchResults.total}
+								unsupportedLabel={t("download-too-big", {
+									count: format.number(searchResults.count),
+								})}
 								xlsxLabel={t("download-xlsx")}
 								xlsxShortLabel={t("file-xlsx")}
 							>

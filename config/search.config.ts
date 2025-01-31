@@ -12,3 +12,5 @@ export const emptyDate = convertYearToTimestamp(5000);
 
 export const defaultFacets = 10;
 export const maxFacets = 25;
+
+export const perPageDownloadLimit = 250;

@@ -1,13 +1,22 @@
 import { log, range } from "@acdh-oeaw/lib";
+import { getFormatter, getTranslations } from "next-intl/server";
 import type { SearchResponseHit } from "typesense/lib/Typesense/Documents";
 import type { MultiSearchRequestSchema } from "typesense/lib/Typesense/MultiSearch";
 import * as v from "valibot";
 
 import { env } from "@/config/env.config";
-import { emptyDate, limit, maxDate, maxFacetValues, minDate } from "@/config/search.config";
+import {
+	emptyDate,
+	limit,
+	maxDate,
+	maxFacetValues,
+	minDate,
+	perPageDownloadLimit,
+} from "@/config/search.config";
 import { ensureArray } from "@/lib/ensure-array";
 import { convertYearToTimestamp } from "@/lib/timestamp";
 import { client } from "@/lib/typesense/client";
+import { UnsupportedError } from "@/lib/typesense/errors";
 
 export interface Place {
 	kind: "place";
@@ -351,9 +360,6 @@ export async function downloadCollection(
 	// 	// q: searchFilters.q,
 	// });
 
-	const limit = 250;
-	const pages = Math.ceil(count / limit);
-
 	/**
 	 * Second-best option: fetch all pages of search results in a single multi-search request.
 	 *
@@ -363,6 +369,18 @@ export async function downloadCollection(
 	 *
 	 * Note that we cannot just set `limit_multi_searches: pages` because we run into timeout errors after 5000ms.
 	 */
+
+	const pages = Math.ceil(count / perPageDownloadLimit);
+
+	if (isDownloadUnsupported(count)) {
+		const format = await getFormatter();
+		const t = await getTranslations("SearchPlacesPage");
+
+		throw new UnsupportedError(
+			t("download-too-big", { count: format.number(50 * perPageDownloadLimit) }),
+		);
+	}
+
 	const searchResponse = await client.multiSearch.perform<Array<Place>>(
 		{
 			searches: range(1, pages).map((page) => {
@@ -373,7 +391,7 @@ export async function downloadCollection(
 			collection,
 			query_by: queryFields.join(","),
 			q: searchFilters.q || "*",
-			per_page: limit,
+			per_page: perPageDownloadLimit,
 			sort_by: `${searchFilters.sort}:${searchFilters["sort-direction"]}`,
 			filter_by: createFilter(),
 			// limit_multi_searches: pages,
@@ -389,4 +407,10 @@ export async function downloadCollection(
 	});
 
 	return hits;
+}
+
+export function isDownloadUnsupported(count: number) {
+	const pages = Math.ceil(count / perPageDownloadLimit);
+
+	return pages > 50;
 }

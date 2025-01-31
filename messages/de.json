@@ -276,6 +276,7 @@
 		"download-submit": "Herunterladen",
 		"download-confirm": "Sind Sie sicher, dass Sie {count} Suchergebnisse herunterladen wollen?",
 		"download-title": "Suchergebnisse herunterladen",
+		"download-too-big": "Mehr als 12.500 Suchergebnisse ({count}) können derzeit nicht heruntergeladen werden.",
 		"facets": {
 			"category": "Kategorien",
 			"status": "Bearbeitungsstatus",
@@ -323,6 +324,7 @@
 		"download-submit": "Herunterladen",
 		"download-confirm": "Sind Sie sicher, dass Sie {count} Suchergebnisse herunterladen wollen?",
 		"download-title": "Suchergebnisse herunterladen",
+		"download-too-big": "Mehr als 12.500 Suchergebnisse ({count}) können derzeit nicht heruntergeladen werden.",
 		"facets": {
 			"category": "Kategorien",
 			"status": "Bearbeitungsstatus",
@@ -373,6 +375,7 @@
 		"download-submit": "Herunterladen",
 		"download-confirm": "Sind Sie sicher, dass Sie {count} Suchergebnisse herunterladen wollen?",
 		"download-title": "Suchergebnisse herunterladen",
+		"download-too-big": "Mehr als 12.500 Suchergebnisse ({count}) können derzeit nicht heruntergeladen werden.",
 		"facets": {
 			"gender": "Geschlecht",
 			"functions": "Funktionen",
@@ -426,6 +429,7 @@
 		"download-submit": "Herunterladen",
 		"download-confirm": "Sind Sie sicher, dass Sie {count} Suchergebnisse herunterladen wollen?",
 		"download-title": "Suchergebnisse herunterladen",
+		"download-too-big": "Mehr als 12.500 Suchergebnisse ({count}) können derzeit nicht heruntergeladen werden.",
 		"facets": {
 			"category": "Kategorien",
 			"status": "Bearbeitungsstatus",
