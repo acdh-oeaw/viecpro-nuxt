@@ -40,6 +40,7 @@ export default async function IndexPage(_props: Readonly<IndexPageProps>): Promi
 				<Image
 					alt=""
 					className="aspect-video max-h-[480px] min-h-[320px] w-full object-cover"
+					priority={true}
 					src={hero}
 				/>
 			</div>
