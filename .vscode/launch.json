@@ -1,8 +1,7 @@
 {
 	"configurations": [
 		{
-			"cwd": "${workspaceFolder}",
-			"name": "App: Web (server-side)",
+			"name": "Apps: Web (server-side)",
 			"request": "launch",
 			"runtimeArgs": ["run", "dev"],
 			"runtimeExecutable": "pnpm",
@@ -10,7 +9,7 @@
 			"type": "node"
 		},
 		{
-			"name": "App: Web (client-side)",
+			"name": "Apps: Web (client-side)",
 			"type": "chrome",
 			"request": "launch",
 			"url": "http://localhost:3000"
@@ -18,8 +17,8 @@
 	],
 	"compounds": [
 		{
-			"name": "App: Web",
-			"configurations": ["App: Web (server-side)", "App: Web (client-side)"]
+			"name": "Apps: Web",
+			"configurations": ["Apps: Web (server-side)", "Apps: Web (client-side)"]
 		}
 	]
 }

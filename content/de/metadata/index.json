@@ -1,0 +1,13 @@
+{
+	"description": "Der Wiener Hof. Ein prosopographisches Portal.",
+	"title": "VieCPro",
+	"twitter": {
+		"creator": "@acdh_oeaw",
+		"site": "@acdh_oeaw"
+	},
+	"manifest": {
+		"description": "Der Wiener Hof. Ein prosopographisches Portal.",
+		"name": "VieCPro",
+		"short-name": "VieCPro"
+	}
+}

@@ -1,10 +1,10 @@
 import { createUrl } from "@acdh-oeaw/lib";
 import { test as setup } from "@playwright/test";
 
-if (process.env.NUXT_PUBLIC_MATOMO_BASE_URL) {
-	const baseUrl = String(
-		createUrl({ baseUrl: process.env.NUXT_PUBLIC_MATOMO_BASE_URL, pathname: "/**" }),
-	);
+import { env } from "@/config/env.config";
+
+if (env.NEXT_PUBLIC_MATOMO_BASE_URL != null) {
+	const baseUrl = String(createUrl({ baseUrl: env.NEXT_PUBLIC_MATOMO_BASE_URL, pathname: "/**" }));
 
 	setup.beforeEach("should block requests to analytics service", async ({ context }) => {
 		await context.route(baseUrl, (route) => {

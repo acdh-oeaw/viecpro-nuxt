@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer base {
+	*,
+	*::after,
+	*::before {
+		margin: 0;
+		padding: 0;
+	}
+
+	:root,
+	body {
+		block-size: 100%;
+	}
+
+	:root {
+		@apply bg-white text-brand-950 font-body;
+
+		overflow-wrap: break-word;
+		font-synthesis: none;
+		text-rendering: optimizeLegibility;
+		text-size-adjust: none;
+		-webkit-tap-highlight-color: transparent;
+		interpolate-size: allow-keywords;
+	}
+
+	:focus {
+		/** Transparent outline. */
+		@apply outline-none;
+	}
+
+	:focus-visible {
+		@apply outline outline-2 outline-brand-600 outline-offset-2;
+	}
+
+	/** Let react aria components handle focus state. */
+	[data-rac]:where(:focus, :focus-visible) {
+		@apply outline-none;
+	}
+
+	blockquote {
+		text-wrap: balance;
+	}
+
+	:is(h1, h2, h3, h4, h5, h6) {
+		font-family: var(--font-family-heading);
+		text-wrap: balance;
+	}
+
+	iframe {
+		border: 0;
+	}
+
+	p {
+		text-wrap: pretty;
+	}
+
+	table {
+		font-variant-numeric: tabular-nums;
+	}
+
+	textarea {
+		field-sizing: content;
+		min-block-size: 3lh;
+	}
+
+	[id] {
+		scroll-margin-block-start: 2ex;
+	}
+
+	[inert] ::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* stylelint-disable-next-line order/order */
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::after,
+		*::before {
+			transition-duration: 0.01ms !important;
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			scroll-behavior: auto !important;
+		}
+	}
+
+	/** Scale up hit targets on high resolution mobile devices. */
+	@media (resolution >= 200dpi) {
+		:root {
+			font-size: 18px;
+		}
+	}
+}
+
+@layer utilities {
+	/** Interaction states. */
+
+	.focus-outline {
+		@apply outline outline-2 outline-brand-600 outline-offset-2;
+	}
+
+	.focus-outline-inverse {
+		@apply outline-white;
+	}
+
+	.focus-outline-offset-0 {
+		@apply outline-offset-0;
+	}
+
+	/* stylelint-disable-next-line selector-class-pattern */
+	.-focus-outline-offset-2 {
+		@apply -outline-offset-2;
+	}
+
+	.interactive {
+		@apply relative overflow-clip;
+		@apply after:absolute after:inset-0 after:transition;
+	}
+
+	.hover-overlay {
+		@apply after:bg-brand-950/10;
+	}
+
+	.select-overlay {
+		@apply after:border-white after:border-l-2;
+	}
+
+	.select-overlay-border-bottom {
+		@apply after:border-l-0 after:border-b-2;
+	}
+
+	.press-overlay {
+		@apply after:bg-brand-950/15;
+	}
+
+	.target-area {
+		@apply before:absolute before:min-w-[48px] before:min-h-[48px] before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2;
+	}
+}

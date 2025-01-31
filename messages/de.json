@@ -1,0 +1,460 @@
+{
+	"mdx": {
+		"footnote-back-label": "Zurück zu Verweis {reference}",
+		"footnotes": "Fußnoten",
+		"table-of-contents": "Inhaltsverzeichnis"
+	},
+	"AppFooter": {
+		"links": {
+			"contact": "Kontakt",
+			"imprint": "Impressum"
+		},
+		"navigation-secondary": "Sekundär",
+		"navigation-social-media": "Social media",
+		"social-media": {
+			"bluesky": "Bluesky",
+			"mastodon": "Mastodon",
+			"twitter": "Twitter",
+			"youtube": "YouTube"
+		}
+	},
+	"AppHeader": {
+		"links": {
+			"documentation": "Dokumentation",
+			"hierarchy": "Hierarchie",
+			"home": "Startseite",
+			"search": "Datenbank"
+		},
+		"navigation-menu": "Navigationsmenü",
+		"navigation-menu-close": "Navigationsmenü schließen",
+		"navigation-menu-open": "Navigationsmenü öffnen",
+		"navigation-primary": "Primär"
+	},
+	"BibliographyPage": {
+		"meta": {
+			"title": "Bibliographie"
+		},
+		"title": "Bibliographie"
+	},
+	"CourtPage": {
+		"base-data": "Stammdaten",
+		"category": "Kategorie",
+		"citation": "Zitationsvorschlag",
+		"court": "Hofstaat",
+		"date-range": "Laufzeit",
+		"download": "Herunterladen",
+		"download-json": "Als JSON-Datei herunterladen",
+		"download-xlsx": "Als Excel-Datei herunterladen",
+		"end-date": "Ende",
+		"expanded-name": "Auflösung",
+		"file-json": "JSON-Datei",
+		"file-xlsx": "Excel-Datei",
+		"function": "Funktion",
+		"hierarchy": "Hierarchie",
+		"hierarchy-visualisation": "Hierarchie-Visualisierung",
+		"kind": "Entität",
+		"locations": "Standorte",
+		"name": "Name",
+		"notes": "Redaktioneller Hinweis",
+		"owner": "Inhaber*in",
+		"personnel": "Personal",
+		"references": "Quellen und Referenzen",
+		"relation-type": "Art des Bezuges",
+		"same-as": "Online-Ressourcen",
+		"section-data": "Stammdaten",
+		"section-relations": "Bezüge",
+		"start-date": "Beginn",
+		"status": "Bearbeitungsstatus",
+		"type": "Art"
+	},
+	"DocumentationNavigation": {
+		"contents": "Inhalt",
+		"documentation": "Dokumentation"
+	},
+	"Error": {
+		"something-went-wrong": "Etwas ist schief gelaufen!",
+		"try-again": "Erneut versuchen"
+	},
+	"HierarchyPage": {
+		"direction": {
+			"down": "Nach unten",
+			"label": "Hierarchie",
+			"up": "Nach oben"
+		},
+		"entity-combobox": {
+			"clear": "Zurücksetzen",
+			"label": "Entität",
+			"open": "Öffnen"
+		},
+		"graph": {
+			"function-default": "Institutionshierarchie",
+			"function-with-persons": "Amt und Personen",
+			"institution-default": "Institutionen",
+			"institution-with-functions": "Institutionen mit Funktionen",
+			"institution-with-functions-persons": "Institutionen mit Funktionen und Personen",
+			"label": "Graph",
+			"none": "Nichts ausgewählt",
+			"person-default": "Personen mit Funktionen und Institutionen"
+		},
+		"legend": {
+			"function": "Funktion",
+			"institution": "Institution",
+			"person": "Person",
+			"title": "Legende"
+		},
+		"meta": {
+			"title": "Hierarchie"
+		},
+		"nothing-selected": "Bitte wählen Sie eine Entität aus.",
+		"title": "Hierarchie",
+		"view-details": "Zur Detail-Seite"
+	},
+	"ImprintPage": {
+		"meta": {
+			"title": "Impressum"
+		},
+		"title": "Impressum"
+	},
+	"IndexPage": {
+		"subtitle": "Ein prosopographisches Portal",
+		"title": "Der Wiener Hof"
+	},
+	"InstitutionPage": {
+		"alternative-names": "Alternative Bezeichnungen",
+		"base-data": "Stammdaten",
+		"category": "Kategorie",
+		"citation": "Zitationsvorschlag",
+		"date-range": "Laufzeit",
+		"designation": "Bezeichnung",
+		"download": "Herunterladen",
+		"download-json": "Als JSON-Datei herunterladen",
+		"download-xlsx": "Als Excel-Datei herunterladen",
+		"end-date": "Ende",
+		"expanded-name": "Auflösung",
+		"file-json": "JSON-Datei",
+		"file-xlsx": "Excel-Datei",
+		"function": "Funktion",
+		"hierarchy": "Hierarchie",
+		"hierarchy-visualisation": "Hierarchie-Visualisierung",
+		"institution": "Institution",
+		"kind": "Entität",
+		"locations": "Standorte",
+		"name": "Name",
+		"notes": "Redaktioneller Hinweis",
+		"personnel": "Personal",
+		"references": "Quellen und Referenzen",
+		"relation": "Beziehung",
+		"relation-type": "Art des Bezuges",
+		"same-as": "Online-Ressourcen",
+		"section-data": "Stammdaten",
+		"section-relations": "Bezüge",
+		"start-date": "Beginn",
+		"status": "Bearbeitungsstatus",
+		"type": "Art"
+	},
+	"Loading": {
+		"loading": "Laden"
+	},
+	"LocaleLayout": {
+		"skip-to-main-content": "Zum Hauptinhalt springen"
+	},
+	"NotFoundPage": {
+		"meta": {
+			"title": "Seite nicht gefunden"
+		},
+		"title": "Seite nicht gefunden"
+	},
+	"PersonPage": {
+		"academic-titles": "Akademische Titel",
+		"allowance": "Zahlungen",
+		"alternative-first-names": "Vornamen",
+		"alternative-last-names": "Nachnamen",
+		"alternative-names": "Alternative Namensschreibweisen",
+		"base-data": "Stammdaten",
+		"birth": "Geboren",
+		"birth-date": "Geburtsdatum",
+		"birth-place": "Geburtsort",
+		"citation": "Zitationsvorschlag",
+		"confession": "Konfession",
+		"court": "Amt/Hofstaat",
+		"court-functions": "Funktionen am Hof",
+		"death": "Gestorben",
+		"death-cause": "Todesursache",
+		"death-date": "Sterbedatum",
+		"death-place": "Sterbeort",
+		"download": "Herunterladen",
+		"download-json": "Als JSON-Datei herunterladen",
+		"download-xlsx": "Als Excel-Datei herunterladen",
+		"duplicates": "Potenzielle Doubletten",
+		"end-date": "Ende",
+		"file-json": "JSON-Datei",
+		"file-xlsx": "Excel-Datei",
+		"first-name": "Vorname",
+		"function": "Funktion",
+		"gender": "Geschlecht",
+		"hierarchy-visualisation": "Hierarchie-Visualisierung",
+		"honorary-titles": "Adelsstand und Auszeichnungen",
+		"in-place": "in <place></place>",
+		"kind": "Entität",
+		"marriages-and-family-relations": "Ehe- und Verwandtschaftsverhältnisse",
+		"married-names": "Ehenamen",
+		"name": "Name",
+		"non-court-functions": "Sonstiger Bezug und Tätigkeiten",
+		"notes": "Redaktioneller Hinweis",
+		"other-relations-court": "Sonstige Bezüge zum Hof",
+		"person": "Person",
+		"person-relations-court": "Personenbeziehungen am Hof",
+		"references": "Quellen und Referenzen",
+		"related-places": "Bezüge zu Orten",
+		"relation": "Beziehung",
+		"relation-type": "Art des Bezuges",
+		"relations-to-church-and-orders": "Bezüge zu Kirche und geistl. Orden",
+		"same-as": "Online-Ressourcen",
+		"section-additional-info": "Weitere Informationen",
+		"section-court-related": "Bezüge zum Wiener Hof",
+		"section-data": "Stammdaten",
+		"start-date": "Beginn",
+		"status": "Bearbeitungsstatus"
+	},
+	"PlacePage": {
+		"alternative-names": "Alternative Bezeichnungen",
+		"base-data": "Stammdaten",
+		"category": "Kategorie",
+		"citation": "Zitationsvorschlag",
+		"coordinates": "Koordinaten",
+		"designation": "Bezeichnung",
+		"download": "Herunterladen",
+		"download-json": "Als JSON-Datei herunterladen",
+		"download-xlsx": "Als Excel-Datei herunterladen",
+		"end-date": "Ende",
+		"file-json": "JSON-Datei",
+		"file-xlsx": "Excel-Datei",
+		"function": "Funktion",
+		"hierarchy-visualisation": "Hierarchie-Visualisierung",
+		"institution-relations": "Bezüge zu Institutionen",
+		"kind": "Entität",
+		"latitude": "Breitengrad",
+		"longitude": "Längengrad",
+		"map": "Karte",
+		"name": "Name",
+		"notes": "Redaktioneller Hinweis",
+		"person-relations": "Bezüge zu Personen",
+		"place": "Ort",
+		"place-relations": "Bezüge zu anderen Orten",
+		"references": "Quellen und Referenzen",
+		"relation": "Beziehung",
+		"relation-type": "Art des Bezuges",
+		"same-as": "Online-Ressourcen",
+		"section-data": "Stammdaten",
+		"section-relations": "Bezüge",
+		"start-date": "Beginn",
+		"status": "Bearbeitungsstatus"
+	},
+	"SearchLayout": {
+		"bibliography": "Bibliographie",
+		"courts": "Hofstaate",
+		"events": "Ereignisse",
+		"functions": "Funktionen",
+		"institutions": "Institutionen",
+		"persons": "Personen",
+		"places": "Orte",
+		"search": "Suche"
+	},
+	"SearchCourtsPage": {
+		"clear": "Zurücksetzen",
+		"courts": "Hofstaate",
+		"date-range": {
+			"empty-date-label": "Ergebnisse ohne Zeitinformation inkludieren",
+			"end": "Ende",
+			"label": "Zeitraum",
+			"start": "Beginn"
+		},
+		"download": "Herunterladen",
+		"download-json": "Als JSON-Datei herunterladen",
+		"download-xlsx": "Als Excel-Datei herunterladen",
+		"download-cancel": "Abbrechen",
+		"download-submit": "Herunterladen",
+		"download-confirm": "Sind Sie sicher, dass Sie {count} Suchergebnisse herunterladen wollen?",
+		"download-title": "Suchergebnisse herunterladen",
+		"facets": {
+			"category": "Kategorien",
+			"status": "Bearbeitungsstatus",
+			"filter": {
+				"category": "Kategorien durchsuchen",
+				"status": "Bearbeitungsstatus durchsuchen"
+			}
+		},
+		"file-json": "JSON-Datei",
+		"file-xlsx": "Excel-Datei",
+		"meta": {
+			"title": "Hofstaate-Datenbank"
+		},
+		"search": "Suche",
+		"search-filters": "Suchfilter",
+		"search-results-count": "{count, plural, =0 {Nichts gefunden} =1 {1 Suchergebnis} other {# Suchergebnisse}}",
+		"search-results": {
+			"count": "{count, plural, =0 {Nichts gefunden} =1 {1 Suchergebnis} other {# Suchergebnisse}}, Seite {page} von {pages}",
+			"next-page": "Nächste Seite",
+			"previous-page": "Vorherige Seite"
+		},
+		"title": "Hofstaate-Datenbank",
+		"toggle-sidepanel": "Seitenleiste umschalten",
+		"name": "Name",
+		"expanded-name": "Auflösung",
+		"kind": "Entität",
+		"category": "Kategorie",
+		"type": "Art",
+		"start-date": "Beginn",
+		"end-date": "Ende",
+		"status": "Bearbeitungsstatus"
+	},
+	"SearchInstitutionsPage": {
+		"clear": "Zurücksetzen",
+		"date-range": {
+			"empty-date-label": "Ergebnisse ohne Zeitinformation inkludieren",
+			"end": "Ende",
+			"label": "Zeitraum",
+			"start": "Beginn"
+		},
+		"download": "Herunterladen",
+		"download-json": "Als JSON-Datei herunterladen",
+		"download-xlsx": "Als Excel-Datei herunterladen",
+		"download-cancel": "Abbrechen",
+		"download-submit": "Herunterladen",
+		"download-confirm": "Sind Sie sicher, dass Sie {count} Suchergebnisse herunterladen wollen?",
+		"download-title": "Suchergebnisse herunterladen",
+		"facets": {
+			"category": "Kategorien",
+			"status": "Bearbeitungsstatus",
+			"type": "Art",
+			"filter": {
+				"category": "Kategorien durchsuchen",
+				"status": "Bearbeitungsstatus durchsuchen",
+				"type": "Art durchsuchen"
+			}
+		},
+		"file-json": "JSON-Datei",
+		"file-xlsx": "Excel-Datei",
+		"institutions": "Institutionen",
+		"meta": {
+			"title": "Institutionen-Datenbank"
+		},
+		"search": "Suche",
+		"search-filters": "Suchfilter",
+		"search-results-count": "{count, plural, =0 {Nichts gefunden} =1 {1 Suchergebnis} other {# Suchergebnisse}}",
+		"search-results": {
+			"count": "{count, plural, =0 {Nichts gefunden} =1 {1 Suchergebnis} other {# Suchergebnisse}}, Seite {page} von {pages}",
+			"next-page": "Nächste Seite",
+			"previous-page": "Vorherige Seite"
+		},
+		"title": "Institutionen-Datenbank",
+		"toggle-sidepanel": "Seitenleiste umschalten",
+		"name": "Name",
+		"expanded-name": "Auflösung",
+		"kind": "Entität",
+		"category": "Kategorie",
+		"type": "Art",
+		"start-date": "Beginn",
+		"end-date": "Ende",
+		"status": "Bearbeitungsstatus"
+	},
+	"SearchPersonsPage": {
+		"clear": "Zurücksetzen",
+		"date-range": {
+			"empty-date-label": "Ergebnisse ohne Zeitinformation inkludieren",
+			"end": "Sterbedatum",
+			"label": "Zeitraum",
+			"start": "Geburtsdatum"
+		},
+		"download": "Herunterladen",
+		"download-json": "Als JSON-Datei herunterladen",
+		"download-xlsx": "Als Excel-Datei herunterladen",
+		"download-cancel": "Abbrechen",
+		"download-submit": "Herunterladen",
+		"download-confirm": "Sind Sie sicher, dass Sie {count} Suchergebnisse herunterladen wollen?",
+		"download-title": "Suchergebnisse herunterladen",
+		"facets": {
+			"gender": "Geschlecht",
+			"functions": "Funktionen",
+			"institutions": "Institutionen",
+			"status": "Bearbeitungsstatus",
+			"filter": {
+				"gender": "Geschlecht durchsuchen",
+				"functions": "Funktionen durchsuchen",
+				"institutions": "Institutionen durchsuchen",
+				"status": "Bearbeitungsstatus durchsuchen"
+			}
+		},
+		"file-json": "JSON-Datei",
+		"file-xlsx": "Excel-Datei",
+		"meta": {
+			"title": "Personen-Datenbank"
+		},
+		"persons": "Personen",
+		"search": "Suche",
+		"search-filters": "Suchfilter",
+		"search-results-count": "{count, plural, =0 {Nichts gefunden} =1 {1 Suchergebnis} other {# Suchergebnisse}}",
+		"search-results": {
+			"count": "{count, plural, =0 {Nichts gefunden} =1 {1 Suchergebnis} other {# Suchergebnisse}}, Seite {page} von {pages}",
+			"next-page": "Nächste Seite",
+			"previous-page": "Vorherige Seite"
+		},
+		"title": "Personen-Datenbank",
+		"toggle-sidepanel": "Seitenleiste umschalten",
+		"first-name": "Vorname",
+		"name": "Name",
+		"kind": "Entität",
+		"gender": "Geschlecht",
+		"birth-date": "Geburtsdatum",
+		"birth-place": "Geburtsort",
+		"death-date": "Sterbedatum",
+		"death-place": "Sterbeort",
+		"status": "Bearbeitungsstatus"
+	},
+	"SearchPlacesPage": {
+		"clear": "Zurücksetzen",
+		"date-range": {
+			"empty-date-label": "Ergebnisse ohne Zeitinformation inkludieren",
+			"end": "Ende",
+			"label": "Zeitraum",
+			"start": "Beginn"
+		},
+		"download": "Herunterladen",
+		"download-json": "Als JSON-Datei herunterladen",
+		"download-xlsx": "Als Excel-Datei herunterladen",
+		"download-cancel": "Abbrechen",
+		"download-submit": "Herunterladen",
+		"download-confirm": "Sind Sie sicher, dass Sie {count} Suchergebnisse herunterladen wollen?",
+		"download-title": "Suchergebnisse herunterladen",
+		"facets": {
+			"category": "Kategorien",
+			"status": "Bearbeitungsstatus",
+			"filter": {
+				"category": "Kategorien",
+				"status": "Bearbeitungsstatus"
+			}
+		},
+		"file-json": "JSON-Datei",
+		"file-xlsx": "Excel-Datei",
+		"meta": {
+			"title": "Orts-Datenbank"
+		},
+		"places": "Orte",
+		"search": "Suche",
+		"search-filters": "Suchfilter",
+		"search-results-count": "{count, plural, =0 {Nichts gefunden} =1 {1 Suchergebnis} other {# Suchergebnisse}}",
+		"search-results": {
+			"count": "{count, plural, =0 {Nichts gefunden} =1 {1 Suchergebnis} other {# Suchergebnisse}}, Seite {page} von {pages}",
+			"next-page": "Nächste Seite",
+			"previous-page": "Vorherige Seite"
+		},
+		"title": "Orts-Datenbank",
+		"toggle-sidepanel": "Seitenleiste umschalten",
+		"name": "Name",
+		"kind": "Entität",
+		"category": "Kategorie",
+		"latitude": "Breitengrad",
+		"longitude": "Längengrad",
+		"status": "Bearbeitungsstatus"
+	}
+}

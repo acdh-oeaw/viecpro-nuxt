@@ -1,10 +1,11 @@
 name: Validate
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-validate
+  group: "${{ github.workflow }}-${{ github.ref }}-validate"
   cancel-in-progress: true
 
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - main
@@ -13,8 +14,28 @@ on:
       - main
 
 jobs:
+  changes:
+    name: Check changed files
+    runs-on: ubuntu-22.04
+
+    outputs:
+      src: ${{ steps.filter.outputs.src }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            src:
+              - '!(content|public)/**'
+
   validate:
     name: Validate
+    needs: [changes]
+    if: ${{ needs.changes.outputs.src == 'true' }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
 
@@ -22,7 +43,7 @@ jobs:
       fail-fast: true
       matrix:
         node-version: [22.x]
-        os: [ubuntu-latest]
+        os: [ubuntu-22.04]
 
     steps:
       - name: Checkout repository
@@ -48,8 +69,8 @@ jobs:
       - name: Lint
         run: pnpm run lint:check
 
-      # - name: Typecheck
-      #   run: pnpm run types:check
+      - name: Typecheck
+        run: pnpm run types:check
 
       - name: Test
         run: pnpm run test
@@ -64,42 +85,57 @@ jobs:
         id: cache-playwright-browsers
         with:
           path: "~/.cache/ms-playwright"
-          key: ${{ matrix.os }}-playwright-browsers-${{ env.PLAYWRIGHT_VERSION }}
+          key: "${{ matrix.os }}-playwright-browsers-${{ env.PLAYWRIGHT_VERSION }}"
 
       - name: Install playwright browsers
         if: steps.cache-playwright-browsers.outputs.cache-hit != 'true'
         run: pnpm exec playwright install --with-deps
-      - name: Install playwright browsers (os dependencies)
+      - name: Install playwright browsers (operating system dependencies)
         if: steps.cache-playwright-browsers.outputs.cache-hit == 'true'
         run: pnpm exec playwright install-deps
+
+      # https://nextjs.org/docs/pages/building-your-application/deploying/ci-build-caching#github-actions
+      - name: Cache Next.js build output
+        uses: actions/cache@v4
+        with:
+          path: "${{ github.workspace }}/.next/cache"
+          key: "${{ matrix.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}"
 
       - name: Build app
         run: pnpm run build
         env:
-          NUXT_PUBLIC_APP_BASE_URL: "http://localhost:3000"
-          NUXT_PUBLIC_REDMINE_ID: "${{ vars.SERVICE_ID }}"
-          NUXT_PUBLIC_TYPESENSE_API_KEY: "${{ vars.NUXT_PUBLIC_TYPESENSE_API_KEY }}"
-          NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX:
-            "${{ vars.NUXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX }}"
-          NUXT_PUBLIC_TYPESENSE_HOST: "${{ vars.NUXT_PUBLIC_TYPESENSE_HOST }}"
-          NUXT_PUBLIC_TYPESENSE_PORT: "${{ vars.NUXT_PUBLIC_TYPESENSE_PORT }}"
-          NUXT_PUBLIC_TYPESENSE_PROTOCOL: "${{ vars.NUXT_PUBLIC_TYPESENSE_PROTOCOL }}"
+          NEXT_PUBLIC_API_BASE_URL: "${{ vars.NEXT_PUBLIC_API_BASE_URL }}"
+          NEXT_PUBLIC_APP_BASE_URL: "http://localhost:3000"
+          NEXT_PUBLIC_MATOMO_BASE_URL: "${{ vars.NEXT_PUBLIC_MATOMO_BASE_URL }}"
+          NEXT_PUBLIC_REDMINE_ID: "${{ vars.SERVICE_ID }}"
+          NEXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX:
+            "${{ vars.NEXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX }}"
+          NEXT_PUBLIC_TYPESENSE_HOST: "${{ vars.NEXT_PUBLIC_TYPESENSE_HOST }}"
+          NEXT_PUBLIC_TYPESENSE_PORT: "${{ vars.NEXT_PUBLIC_TYPESENSE_PORT }}"
+          NEXT_PUBLIC_TYPESENSE_PROTOCOL: "${{ vars.NEXT_PUBLIC_TYPESENSE_PROTOCOL }}"
+          NEXT_PUBLIC_TYPESENSE_SEARCH_API_KEY:
+            "${{ secrets.NEXT_PUBLIC_TYPESENSE_SEARCH_API_KEY }}"
 
       - name: Run e2e tests
         run: pnpm run test:e2e
         env:
-          NUXT_PUBLIC_APP_BASE_URL: "http://localhost:3000"
+          ENV_VALIDATION: "disabled"
+          NEXT_PUBLIC_APP_BASE_URL: "http://localhost:3000"
+          NEXT_PUBLIC_MATOMO_BASE_URL: "${{ vars.NEXT_PUBLIC_MATOMO_BASE_URL }}"
+          NEXT_PUBLIC_REDMINE_ID: "${{ vars.SERVICE_ID }}"
 
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: ${{ !cancelled() }}
         with:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
 
   build-deploy:
-    if: ${{ github.event_name == 'push' }}
+    name: Build and deploy
     needs: [validate]
+    # @see https://github.com/orgs/community/discussions/45058
+    if: ${{ github.event_name == 'push' && !failure() && !cancelled() }}
     uses: ./.github/workflows/build-deploy.yml
     secrets: inherit
     # https://docs.github.com/en/actions/using-workflows/reusing-workflows#access-and-permissions

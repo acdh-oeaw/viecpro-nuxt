@@ -5,6 +5,10 @@ import { isCI } from "ci-info";
 import { config as dotenv } from "dotenv";
 import { expand } from "dotenv-expand";
 
+/**
+ * Reading `.env` files here instead of using `dotenv-cli` so environment variables are
+ * available to the vs code plugin as well.
+ */
 for (const envFilePath of [".env.test.local", ".env.local", ".env.test", ".env"]) {
 	expand(dotenv({ path: join(process.cwd(), envFilePath) }));
 }
@@ -20,9 +24,10 @@ export default defineConfig({
 	retries: isCI ? 2 : 0,
 	maxFailures: 10,
 	workers: isCI ? 1 : undefined,
-	reporter: isCI ? "github" : "html",
+	reporter: isCI ? [["github"], ["html", { open: "never" }]] : [["html"]],
 	use: {
 		baseURL: baseUrl,
+		screenshot: "on-first-failure",
 		trace: "on-first-retry",
 	},
 	projects: [
@@ -32,40 +37,40 @@ export default defineConfig({
 		},
 		{
 			name: "chromium",
-			use: { ...devices["Desktop Chrome"] },
+			use: { ...devices["Desktop Chrome"], channel: "chromium" },
 			dependencies: ["setup"],
 		},
-		// {
-		// 	name: "firefox",
-		// 	use: { ...devices["Desktop Firefox"] },
-		// 	dependencies: ["setup"],
-		// },
-		// {
-		// 	name: "webkit",
-		// 	use: { ...devices["Desktop Safari"] },
-		// 	dependencies: ["setup"],
-		// },
+		{
+			name: "firefox",
+			use: { ...devices["Desktop Firefox"] },
+			dependencies: ["setup"],
+		},
+		{
+			name: "webkit",
+			use: { ...devices["Desktop Safari"] },
+			dependencies: ["setup"],
+		},
 		/** Test against mobile viewports. */
 		// {
-		//      name: "Mobile Chrome",
-		//      use: { ...devices["Pixel 5"] },
-		//      dependencies: ["setup"],
+		// 	name: "Mobile Chrome",
+		// 	use: { ...devices["Pixel 5"] },
+		// 	dependencies: ["setup"],
 		// },
 		// {
-		//      name: "Mobile Safari",
-		//      use: { ...devices["iPhone 12"] },
-		//      dependencies: ["setup"],
+		// 	name: "Mobile Safari",
+		// 	use: { ...devices["iPhone 12"] },
+		// 	dependencies: ["setup"],
 		// },
 		/** Test against branded browsers. */
 		// {
-		//      name: "Microsoft Edge",
-		//      use: { ...devices["Desktop Edge"], channel: "msedge" },
-		//      dependencies: ["setup"],
+		// 	name: "Microsoft Edge",
+		// 	use: { ...devices["Desktop Edge"], channel: "msedge" },
+		// 	dependencies: ["setup"],
 		// },
 		// {
-		//      name: "Google Chrome",
-		//      use: { ...devices["Desktop Chrome"], channel: "chrome" },
-		//      dependencies: ["setup"],
+		// 	name: "Google Chrome",
+		// 	use: { ...devices["Desktop Chrome"], channel: "chrome" },
+		// 	dependencies: ["setup"],
 		// },
 	],
 	webServer: {
