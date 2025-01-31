@@ -6,7 +6,6 @@ import type { ReactNode } from "react";
 import { Button, Menu, MenuItem, MenuTrigger, Popover } from "react-aria-components";
 
 import { downloadJson } from "@/lib/download-json";
-import { downloadXlsx } from "@/lib/download-xlsx";
 
 interface DownloadMenuProps {
 	columns: Array<{ label: string; value: string }>;
@@ -23,6 +22,32 @@ export function DownloadMenu(props: DownloadMenuProps): ReactNode {
 	const { columns, data, fileName, jsonLabel, jsonShortLabel, label, xlsxLabel, xlsxShortLabel } =
 		props;
 
+	async function onAction(key: "json" | "xlsx") {
+		switch (key) {
+			case "json": {
+				downloadJson(data, `${fileName}.json`);
+
+				break;
+			}
+
+			case "xlsx": {
+				const { downloadXlsx } = await import("@/lib/download-xlsx");
+
+				downloadXlsx(
+					[
+						{
+							columns,
+							content: [data as IContent],
+						},
+					],
+					fileName,
+				);
+
+				break;
+			}
+		}
+	}
+
 	return (
 		<MenuTrigger>
 			<Button className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 disabled:cursor-not-allowed disabled:opacity-50">
@@ -34,7 +59,7 @@ export function DownloadMenu(props: DownloadMenuProps): ReactNode {
 					<MenuItem
 						className="flex cursor-default gap-x-2 rounded px-3 py-2 transition hover:bg-brand-50"
 						onAction={() => {
-							downloadJson(data, `${fileName}.json`);
+							void onAction("json");
 						}}
 					>
 						<FileJsonIcon aria-hidden={true} className="size-5 shrink-0" />
@@ -44,15 +69,7 @@ export function DownloadMenu(props: DownloadMenuProps): ReactNode {
 					<MenuItem
 						className="flex cursor-default gap-x-2 rounded px-3 py-2 transition hover:bg-brand-50"
 						onAction={() => {
-							downloadXlsx(
-								[
-									{
-										columns,
-										content: [data as IContent],
-									},
-								],
-								fileName,
-							);
+							void onAction("xlsx");
 						}}
 					>
 						<FileSpreadsheetIcon aria-hidden={true} className="size-5 shrink-0" />

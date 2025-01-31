@@ -34,7 +34,6 @@ import {
 	type SearchFilters as PlaceSearchFilters,
 } from "@/app/(app)/search/places/_lib/search";
 import { downloadJson } from "@/lib/download-json";
-import { downloadXlsx } from "@/lib/download-xlsx";
 
 type DownloadDialogProps = {
 	cancelLabel: ReactNode;
@@ -126,6 +125,8 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 				}
 
 				case "xlsx": {
+					const { downloadXlsx } = await import("@/lib/download-xlsx");
+
 					downloadXlsx(
 						[
 							{
