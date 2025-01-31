@@ -1,16 +1,9 @@
-import { assert, createUrl } from "@acdh-oeaw/lib";
+import { createUrl } from "@acdh-oeaw/lib";
+import { jsonLdScriptProps } from "react-schemaorg";
 
-import { locales } from "@/config/i18n.config";
-import { escape } from "@/utils/safe-json-ld-replacer";
-import { sliceTrailingSlash } from "@/utils/slice-trailing-slash";
-import { expect, test } from "~/e2e/lib/test";
-
-assert(
-	process.env.NUXT_PUBLIC_APP_BASE_URL,
-	"Missing NUXT_PUBLIC_APP_BASE_URL environment variable.",
-);
-
-const baseUrl = process.env.NUXT_PUBLIC_APP_BASE_URL;
+import { env } from "@/config/env.config";
+import { defaultLocale, locales } from "@/config/i18n.config";
+import { expect, test } from "@/e2e/lib/test";
 
 test("should set a canonical url", async ({ createIndexPage }) => {
 	for (const locale of locales) {
@@ -20,21 +13,21 @@ test("should set a canonical url", async ({ createIndexPage }) => {
 		const canonicalUrl = indexPage.page.locator('link[rel="canonical"]');
 		await expect(canonicalUrl).toHaveAttribute(
 			"href",
-			sliceTrailingSlash(String(createUrl({ baseUrl, pathname: "/" }))),
+			dropTrailingSlash(createUrl({ baseUrl: env.NEXT_PUBLIC_APP_BASE_URL, pathname: "/" })),
 		);
 	}
 });
 
-test("should set document title on not-found page", async ({ createI18n, page }) => {
-	const i18nEn = await createI18n("de");
+/** FIXME: @see https://github.com/vercel/next.js/issues/45620 */
+test.fixme("should set document title on not-found page", async ({ createI18n, page }) => {
+	const { t } = await createI18n(defaultLocale);
 	await page.goto("/unknown");
-	await expect(page).toHaveTitle(
-		[i18nEn.t("NotFoundPage.meta.title"), i18nEn.t("DefaultLayout.meta.title")].join(" | "),
-	);
+	await expect(page).toHaveTitle([t("NotFoundPage.meta.title"), t("metadata.title")].join(" | "));
 });
 
-test("should disallow indexing of not-found page", async ({ page }) => {
-	for (const pathname of ["/unknown", "/de/unknown"]) {
+/** FIXME: @see https://github.com/vercel/next.js/issues/45620 */
+test.fixme("should disallow indexing of not-found page", async ({ page }) => {
+	for (const pathname of ["/unknown"]) {
 		await page.goto(pathname);
 
 		const ogTitle = page.locator('meta[name="robots"]');
@@ -48,8 +41,8 @@ test("should set page metadata", async ({ createIndexPage }) => {
 		await indexPage.goto();
 		const { page } = indexPage;
 
-		expect(i18n.t("DefaultLayout.meta.title")).toBeTruthy();
-		expect(i18n.t("DefaultLayout.meta.description")).toBeTruthy();
+		expect(i18n.t("metadata.title")).toBeTruthy();
+		expect(i18n.t("metadata.description")).toBeTruthy();
 
 		const ogType = page.locator('meta[property="og:type"]');
 		await expect(ogType).toHaveAttribute("content", "website");
@@ -58,37 +51,29 @@ test("should set page metadata", async ({ createIndexPage }) => {
 		await expect(twCard).toHaveAttribute("content", "summary_large_image");
 
 		const twCreator = page.locator('meta[name="twitter:creator"]');
-		await expect(twCreator).toHaveAttribute("content", i18n.t("DefaultLayout.meta.twitter"));
+		await expect(twCreator).toHaveAttribute("content", i18n.t("metadata.twitter.creator"));
 
 		const twSite = page.locator('meta[name="twitter:site"]');
-		await expect(twSite).toHaveAttribute("content", i18n.t("DefaultLayout.meta.twitter"));
+		await expect(twSite).toHaveAttribute("content", i18n.t("metadata.twitter.site"));
 
 		// const googleSiteVerification = page.locator('meta[name="google-site-verification"]');
 		// await expect(googleSiteVerification).toHaveAttribute("content", "");
 
-		await expect(page).toHaveTitle(
-			[i18n.t("IndexPage.meta.title"), i18n.t("DefaultLayout.meta.title")].join(" | "),
-		);
+		await expect(page).toHaveTitle(i18n.t("metadata.title"));
 
 		const metaDescription = page.locator('meta[name="description"]');
-		await expect(metaDescription).toHaveAttribute(
-			"content",
-			i18n.t("DefaultLayout.meta.description"),
-		);
+		await expect(metaDescription).toHaveAttribute("content", i18n.t("metadata.description"));
 
 		const ogTitle = page.locator('meta[property="og:title"]');
-		await expect(ogTitle).toHaveAttribute("content", i18n.t("IndexPage.meta.title"));
+		await expect(ogTitle).toHaveAttribute("content", i18n.t("metadata.title"));
 
 		const ogDescription = page.locator('meta[property="og:description"]');
-		await expect(ogDescription).toHaveAttribute(
-			"content",
-			i18n.t("DefaultLayout.meta.description"),
-		);
+		await expect(ogDescription).toHaveAttribute("content", i18n.t("metadata.description"));
 
 		const ogUrl = page.locator('meta[property="og:url"]');
 		await expect(ogUrl).toHaveAttribute(
 			"content",
-			sliceTrailingSlash(String(createUrl({ baseUrl, pathname: "/" }))),
+			dropTrailingSlash(createUrl({ baseUrl: env.NEXT_PUBLIC_APP_BASE_URL, pathname: "/" })),
 		);
 
 		const ogLocale = page.locator('meta[property="og:locale"]');
@@ -107,31 +92,25 @@ test("should add json+ld metadata", async ({ createIndexPage }) => {
 
 		// eslint-disable-next-line playwright/prefer-web-first-assertions
 		expect(metadata).toBe(
-			JSON.stringify({
+			jsonLdScriptProps({
 				"@context": "https://schema.org",
 				"@type": "WebSite",
-				name: escape(i18n.t("DefaultLayout.meta.title")),
-				description: escape(i18n.t("DefaultLayout.meta.description")),
-			}),
+				name: i18n.t("metadata.title"),
+				description: i18n.t("metadata.description"),
+			}).dangerouslySetInnerHTML?.__html,
 		);
 	}
 });
 
 test("should serve an open-graph image", async ({ createIndexPage, request }) => {
 	for (const locale of locales) {
-		// FIXME: serve og image per locale
-		// const imagePath = `/${locale}/opengraph-image.png`;
-		const imagePath = "/opengraph-image.png";
-
 		const { indexPage } = await createIndexPage(locale);
 		await indexPage.goto();
 
-		await expect(indexPage.page.locator('meta[property="og:image"]')).toHaveAttribute(
-			"content",
-			expect.stringContaining(String(createUrl({ baseUrl, pathname: imagePath }))),
-		);
+		const url = await indexPage.page.locator('meta[property="og:image"]').getAttribute("content");
+		expect(url).toContain("/opengraph-image");
 
-		const response = await request.get(imagePath);
+		const response = await request.get(String(url));
 		const status = response.status();
 		const contentType = response.headers()["content-type"];
 
@@ -139,3 +118,7 @@ test("should serve an open-graph image", async ({ createIndexPage, request }) =>
 		expect(contentType).toBe("image/png");
 	}
 });
+
+function dropTrailingSlash(url: URL): string {
+	return String(url).replace(/\/$/, "");
+}

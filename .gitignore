@@ -6,6 +6,7 @@ node_modules/
 *.log
 
 # non-public environment variables
+.env.keys
 .env.local
 .env.*.local
 
@@ -15,6 +16,11 @@ node_modules/
 .stylelintcache
 *.tsbuildinfo
 
+# performance profiles
+*.cpuprofile
+*.heapprofile
+*.heapsnapshot
+
 # vercel
 .vercel
 
@@ -22,15 +28,19 @@ node_modules/
 .DS_Store
 .idea/
 
-# nuxt.js
-dist
-.data/
-.nuxt/
-.nitro/
-.output/
+# next.js
+.next/
+next-env.d.ts
+out/
+
+# test
+/coverage/
 
 # playwright
 /blob-report/
 /playwright/.cache/
 /playwright-report/
 /test-results/
+
+# i18n
+/messages/*.d.json.ts

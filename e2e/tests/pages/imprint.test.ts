@@ -1,5 +1,5 @@
 import { locales } from "@/config/i18n.config";
-import { expect, test } from "~/e2e/lib/test";
+import { expect, test } from "@/e2e/lib/test";
 
 test.describe("imprint page", () => {
 	test("should have document title", async ({ createImprintPage }) => {
@@ -8,7 +8,7 @@ test.describe("imprint page", () => {
 			await imprintPage.goto();
 
 			await expect(imprintPage.page).toHaveTitle(
-				[i18n.t("ImprintPage.meta.title"), i18n.t("DefaultLayout.meta.title")].join(" | "),
+				[i18n.t("ImprintPage.meta.title"), i18n.t("metadata.title")].join(" | "),
 			);
 		}
 	});
@@ -40,12 +40,16 @@ test.describe("imprint page", () => {
 		}
 	});
 
-	test("should not have visible changes", async ({ createImprintPage }) => {
-		for (const locale of locales) {
-			const { imprintPage } = await createImprintPage(locale);
-			await imprintPage.goto();
+	test.describe("should not have visible changes", () => {
+		test.use({ colorScheme: "light" });
 
-			await expect(imprintPage.page).toHaveScreenshot();
-		}
+		test("in light mode", async ({ createImprintPage }) => {
+			for (const locale of locales) {
+				const { imprintPage } = await createImprintPage(locale);
+				await imprintPage.goto();
+
+				await expect(imprintPage.page).toHaveScreenshot();
+			}
+		});
 	});
 });

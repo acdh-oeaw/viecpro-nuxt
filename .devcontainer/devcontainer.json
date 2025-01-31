@@ -1,5 +1,5 @@
 {
-	"name": "Nuxt",
+	"name": "Next.js",
 	"image": "ghcr.io/acdh-oeaw/devcontainer-frontend:22",
 	"customizations": {
 		"vscode": {
@@ -11,9 +11,8 @@
 				"lokalise.i18n-ally",
 				"mikestead.dotenv",
 				"ms-playwright.playwright",
-				"nuxt.mdc",
 				"stylelint.vscode-stylelint",
-				"vue.volar"
+				"unifiedjs.vscode-mdx"
 			]
 		}
 	}

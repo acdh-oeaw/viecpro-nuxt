@@ -1,0 +1,32 @@
+{
+  "links": [
+    {
+      "label": "Über das Projekt",
+      "id": "project"
+    },
+    {
+      "label": "Daten",
+      "id": "data"
+    },
+    {
+      "label": "Materialien",
+      "id": "materials"
+    },
+    {
+      "label": "Bibliographie",
+      "id": "bibliography"
+    },
+    {
+      "label": "Forschungsinfrastruktur",
+      "id": "technical"
+    },
+    {
+      "label": "Kooperationspartner",
+      "id": "partners"
+    },
+    {
+      "label": "Kontaktaufnahme",
+      "id": "team"
+    }
+  ]
+}
