@@ -53,9 +53,9 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 	const hasNextPage = searchResults.page < searchResults.pages;
 
 	return (
-		<div>
+		<div className="w-full">
 			<div className="w-full overflow-x-auto px-4 pb-4">
-				<table className="w-full table-fixed text-sm text-brand-950">
+				<table className="min-w-full text-sm text-brand-950">
 					<thead>
 						<tr className="sticky top-0 border-b border-brand-100 bg-white text-left text-xs font-bold tracking-wider text-brand-600">
 							{columns.map((column) => {
@@ -123,7 +123,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 								<tr key={searchResult.id} className="relative odd:bg-brand-50">
 									{columns.map((column) => {
 										return (
-											<td key={column.field} className="px-4 py-2.5">
+											<td key={column.field} className="whitespace-nowrap px-4 py-2.5">
 												{column.field === "status" ? (
 													<StatusIndicator status={searchResult[column.field]} />
 												) : column.field === linkField ? (
@@ -147,9 +147,9 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 			</div>
 
 			<footer className="flex items-center justify-between gap-x-8 border-t border-brand-100 px-6 py-4 text-sm text-brand-600">
-				<span>{countLabel}</span>
+				<span className="hidden sm:block">{countLabel}</span>
 				{hasPreviousPage || hasNextPage ? (
-					<span className="inline-flex items-center gap-x-6">
+					<span className="ml-auto inline-flex items-center gap-x-6">
 						<Link
 							className="inline-flex items-center gap-x-1.5 hover:underline disabled:opacity-50"
 							href={createHref({
