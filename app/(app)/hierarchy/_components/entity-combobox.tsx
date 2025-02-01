@@ -74,7 +74,7 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 				{label}
 			</Label>
 
-			<div className="relative inline-flex w-full min-w-96 items-center justify-between overflow-hidden rounded-md border border-brand-100 bg-white has-[disabled]:cursor-not-allowed">
+			<div className="relative inline-flex w-full items-center justify-between overflow-hidden rounded-md border border-brand-100 bg-white has-[disabled]:cursor-not-allowed sm:min-w-96">
 				<Input className="flex-1 py-2.5 pl-4 pr-9 leading-none outline-none disabled:pointer-events-none" />
 				<Button
 					aria-label={triggerLabel}
@@ -85,7 +85,7 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 			</div>
 
 			<Popover className="absolute z-10 min-w-[--trigger-width] overflow-hidden rounded-md border border-neutral-200 bg-white text-brand-900 shadow-lg animate-in fade-in slide-in-from-top-2">
-				<ListBox className="max-h-96 overflow-y-auto py-2 outline-none">
+				<ListBox className="max-h-[32rem] overflow-y-auto py-2 outline-none">
 					{(item: AutocompleteItem) => {
 						return (
 							<ListBoxItem

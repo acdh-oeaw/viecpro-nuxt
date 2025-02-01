@@ -39,7 +39,7 @@ export function GraphTypeSelect(props: GraphTypeSelectProps): ReactNode {
 				{label}
 			</Label>
 
-			<Button className="inline-flex w-full min-w-96 items-center justify-between gap-x-2.5 rounded-md border border-brand-100 bg-white py-2.5 pl-4 pr-3 leading-none disabled:cursor-not-allowed disabled:opacity-50">
+			<Button className="inline-flex w-full items-center justify-between gap-x-2.5 rounded-md border border-brand-100 bg-white py-2.5 pl-4 pr-3 leading-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-w-96">
 				<SelectValue className="placeholder-shown:text-neutral-500" />
 				<ChevronDownIcon aria-hidden={true} className="size-5 shrink-0 text-brand-500" />
 			</Button>
