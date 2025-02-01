@@ -1,7 +1,9 @@
+import { ArrowRightIcon } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 
+import { LinkButton } from "@/components/content/link-button";
 import { Image } from "@/components/image";
 import { MainContent } from "@/components/main-content";
 import { createSingletonResource } from "@/lib/keystatic/resources";
@@ -60,7 +62,7 @@ export default async function IndexPage(_props: Readonly<IndexPageProps>): Promi
 				</section>
 
 				{sections.map(async (section, index) => {
-					const { content, title } = section;
+					const { content, title, links } = section;
 
 					const { default: Content } = await page.compile(content);
 
@@ -70,6 +72,16 @@ export default async function IndexPage(_props: Readonly<IndexPageProps>): Promi
 								{title}
 							</h2>
 							<Content />
+							<div>
+								{links.map((link, index) => {
+									return (
+										<LinkButton key={index} link={{ discriminant: "external", value: link.href }}>
+											{link.label}
+											<ArrowRightIcon aria-hidden={true} className="size-4 shrink-0" />
+										</LinkButton>
+									);
+								})}
+							</div>
 						</section>
 					);
 				})}
