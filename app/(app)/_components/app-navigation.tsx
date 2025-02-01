@@ -104,7 +104,7 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 				className="fixed left-0 top-0 isolate z-20 h-[var(--visual-viewport-height)] w-full bg-brand-950/15"
 				isDismissable={true}
 			>
-				<Modal className="mr-12 size-full max-h-full max-w-sm bg-white shadow-lg forced-colors:bg-[Canvas]">
+				<Modal className="mr-12 size-full max-h-full max-w-xs bg-white shadow-lg animate-in slide-in-from-left fill-mode-both forced-colors:bg-[Canvas]">
 					<Dialog className="relative h-full max-h-[inherit] overflow-auto">
 						{({ close }) => {
 							return (

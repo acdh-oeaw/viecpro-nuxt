@@ -51,11 +51,13 @@ export default async function IndexPage(_props: Readonly<IndexPageProps>): Promi
 
 			<div className="mx-auto grid w-full max-w-4xl gap-y-12 px-8 py-16 xs:py-24">
 				<div>
-					<h1 className="border-b-2 border-brand-100 pb-6 text-4xl text-brand-600 sm:text-5xl lg:text-6xl">
+					<h1 className="border-b-2 border-brand-100 pb-6 text-4xl text-brand-600 xs:text-5xl md:text-6xl">
 						<span className="font-black">{title}</span>
 						<span className="font-black">. </span>
 						<br />
-						<span className="font-extralight">{subtitle}</span>
+						<span className="text-3xl font-extralight xs:text-4xl sm:text-5xl md:text-6xl">
+							{subtitle}
+						</span>
 					</h1>
 				</div>
 

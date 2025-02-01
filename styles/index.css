@@ -86,13 +86,6 @@
 			scroll-behavior: auto !important;
 		}
 	}
-
-	/** Scale up hit targets on high resolution mobile devices. */
-	@media (resolution >= 200dpi) {
-		:root {
-			font-size: 18px;
-		}
-	}
 }
 
 @layer utilities {
