@@ -12,6 +12,7 @@ import type { FC, ReactNode } from "react";
 
 import { SidePanelProvider } from "@/app/(app)/search/_components/side-panel-provider";
 import { NavLink, type NavLinkProps } from "@/components/nav-link";
+import { Tooltip, TooltipTrigger } from "@/components/tooltip";
 import { createHref } from "@/lib/create-href";
 
 interface SearchLayoutProps {
@@ -82,15 +83,17 @@ export default async function SearchLayout(props: Readonly<SearchLayoutProps>): 
 
 								return (
 									<li key={id} className="flex">
-										<NavLink
-											className="focus-visible:focus-outline focus-visible:-focus-outline-offset-2 inline-block aspect-square p-4 transition aria-[current]:bg-brand-100 hover:bg-brand-100 disabled:opacity-50"
-											href={link.href}
-											isDisabled={link.isDisabled}
-											title={link.label}
-										>
-											<Icon aria-hidden={true} className="size-6 shrink-0" />
-											<span className="sr-only">{link.label}</span>
-										</NavLink>
+										<TooltipTrigger>
+											<NavLink
+												className="focus-visible:focus-outline focus-visible:-focus-outline-offset-2 inline-block aspect-square p-4 transition aria-[current]:bg-brand-100 hover:bg-brand-100 disabled:opacity-50"
+												href={link.href}
+												isDisabled={link.isDisabled}
+											>
+												<Icon aria-hidden={true} className="size-6 shrink-0" />
+												<span className="sr-only">{link.label}</span>
+											</NavLink>
+											<Tooltip placement="right">{link.label}</Tooltip>
+										</TooltipTrigger>
 									</li>
 								);
 							})}
