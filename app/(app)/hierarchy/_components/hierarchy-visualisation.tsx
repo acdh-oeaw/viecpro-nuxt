@@ -2,14 +2,14 @@
 
 import { createUrlSearchParams } from "@acdh-oeaw/lib";
 import * as d3 from "d3";
-import { type MouseEvent, type ReactNode, use, useMemo } from "react";
+import { type ReactNode, use, useMemo } from "react";
 
 import { groups } from "@/app/(app)/hierarchy/_lib/autocomplete";
 import type { GraphNode } from "@/app/(app)/hierarchy/_lib/hierarchy";
 import { useElementRef } from "@/app/(app)/hierarchy/_lib/use-element-ref";
 import { useVisualisationDimensions } from "@/app/(app)/hierarchy/_lib/use-visualisation-dimensions";
+import { Link } from "@/components/link";
 import { colors } from "@/config/visualisation.config";
-import { useRouter } from "@/lib/i18n/navigation";
 
 interface HierarchyVisualisationProps {
 	data: Promise<GraphNode>;
@@ -19,8 +19,6 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 	const { data: dataPromise } = props;
 
 	const data = use(dataPromise);
-
-	const router = useRouter();
 
 	const tree = useMemo(() => {
 		const root = d3.hierarchy(data);
@@ -82,14 +80,6 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 		}
 	}
 
-	function onNodeClick(event: MouseEvent<HTMLAnchorElement>) {
-		event.preventDefault();
-		const href = event.currentTarget.getAttribute("href");
-		if (href) {
-			router.push(href);
-		}
-	}
-
 	return (
 		<div
 			ref={setContainerRef}
@@ -118,7 +108,7 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 					<g strokeLinejoin="round" strokeWidth={3}>
 						{(tree.descendants() as Array<d3.HierarchyPointNode<GraphNode>>).map((node, index) => {
 							return (
-								<a
+								<Link
 									key={[node.data.meta.pk, index].join("+")}
 									href={`/hierarchy?${String(
 										createUrlSearchParams({
@@ -126,14 +116,12 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 											id: node.data.meta.pk,
 										}),
 									)}`}
-									onClick={onNodeClick}
 									// @ts-expect-error `transform` is valid on SVGAElement (but not HTMLAnchorElement)
 									transform={`translate(${String(node.y * dimensions.boundedWidth)},${String(node.x * dimensions.boundedHeight)})`}
 								>
 									<circle fill={getNodeColor(node)} r={3} />
 									<title>{node.data.meta.label}</title>
 									<text
-										cursor="default"
 										dominantBaseline="middle"
 										fill={colors.text}
 										paintOrder="stroke"
@@ -142,7 +130,7 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 									>
 										{node.data.meta.label}
 									</text>
-								</a>
+								</Link>
 							);
 						})}
 					</g>
