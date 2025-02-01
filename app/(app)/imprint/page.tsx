@@ -32,7 +32,7 @@ export default async function ImprintPage(_props: Readonly<ImprintPageProps>): P
 	return (
 		<MainContent className="flex flex-col">
 			<section className="grid gap-y-6 border-b border-brand-100 bg-brand-50 py-16 xs:py-20">
-				<div className="mx-auto grid w-full max-w-4xl gap-y-4">
+				<div className="mx-auto grid w-full max-w-4xl gap-y-4 px-8">
 					<h1 className="text-balance font-heading text-4xl font-bold text-brand-600 md:text-5xl">
 						{t("title")}
 					</h1>
