@@ -41,7 +41,7 @@ export function SearchFilterPanel(props: SearchFilterPanelProps): ReactNode {
 
 	const router = useRouter();
 
-	const [_isPending, startTransition] = useTransition();
+	const [isPending, startTransition] = useTransition();
 	const [optimisticSearchFilters, updateOptimisticSearchFilters] = useOptimistic(
 		searchFilters,
 		(_state, searchFilters: SearchFilters) => {
@@ -52,6 +52,7 @@ export function SearchFilterPanel(props: SearchFilterPanelProps): ReactNode {
 	return (
 		<div
 			className="flex flex-col flex-wrap gap-x-6 gap-y-4 sm:flex-row sm:items-baseline"
+			data-pending={isPending || undefined}
 			role="search"
 		>
 			<EntityComboBox
@@ -69,7 +70,7 @@ export function SearchFilterPanel(props: SearchFilterPanelProps): ReactNode {
 					const graph = includes(graphs[kind], optimisticSearchFilters.graph)
 						? optimisticSearchFilters.graph
 						: "default";
-					const nextSearchFilters = { ...optimisticSearchFilters, id: id, kind, graph };
+					const nextSearchFilters = { ...optimisticSearchFilters, id, kind, graph };
 
 					startTransition(() => {
 						updateOptimisticSearchFilters(nextSearchFilters);

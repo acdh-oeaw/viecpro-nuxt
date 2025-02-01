@@ -8,15 +8,16 @@ import { useSidePanel } from "@/app/(app)/search/_components/side-panel-provider
 interface SidePanelProps {
 	children: ReactNode;
 	className?: string;
+	isPending: boolean;
 }
 
 export function SidePanel(props: SidePanelProps): ReactNode {
-	const { children, className } = props;
+	const { children, className, isPending } = props;
 
 	const { id, isOpen } = useSidePanel();
 
 	return (
-		<div>
+		<div data-pending={isPending || undefined}>
 			<aside className={cn("hidden h-full lg:block", className)}>{children}</aside>
 			<aside
 				className={cn(
