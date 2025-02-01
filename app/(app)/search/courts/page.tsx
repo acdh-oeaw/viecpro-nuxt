@@ -61,8 +61,8 @@ export default async function SearchCourtsPage(
 				<header>
 					<h1 className="sr-only">{t("title")}</h1>
 
-					<div className="flex items-center gap-x-8 border-b border-brand-100 px-6 py-4 text-sm text-brand-600">
-						<SidePanelToggle className="block lg:hidden" label={t("toggle-sidepanel")} />
+					<div className="flex min-h-14 items-center gap-x-8 border-b border-brand-100 px-6 py-2 text-sm text-brand-600">
+						<SidePanelToggle className="block  lg:hidden" label={t("toggle-sidepanel")} />
 
 						<div className="flex items-center gap-x-1.5 text-brand-600">
 							<span>{t("search")}</span>
