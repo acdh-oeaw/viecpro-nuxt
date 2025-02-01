@@ -41,7 +41,7 @@ export default async function ImprintPage(_props: Readonly<ImprintPageProps>): P
 
 			<section
 				dangerouslySetInnerHTML={{ __html: html }}
-				className="prose mx-auto w-full max-w-4xl py-16 xs:py-20"
+				className="prose mx-auto w-full max-w-4xl px-8 py-16 xs:py-20"
 			/>
 		</MainContent>
 	);
