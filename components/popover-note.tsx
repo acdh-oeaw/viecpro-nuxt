@@ -25,7 +25,7 @@ export function PopoverNote(props: PopoverNoteProps): ReactNode {
 				</Button>
 				<Tooltip placement="bottom">{label}</Tooltip>
 			</TooltipTrigger>
-			<Popover className="group min-w-[--trigger-width] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2 placement-top:mb-2 placement-bottom:mt-2">
+			<Popover className="group min-w-[var(--trigger-width)] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2 placement-top:mb-2 placement-bottom:mt-2">
 				<OverlayArrow>
 					<svg
 						className="block size-4 fill-white stroke-brand-100 stroke-1 group-placement-bottom:rotate-180"

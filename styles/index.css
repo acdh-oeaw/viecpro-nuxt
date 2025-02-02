@@ -1,7 +1,79 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
+/* stylelint-disable color-no-hex */
+/* stylelint-disable custom-property-empty-line-before */
+
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+@plugin "tailwindcss-animate";
+@plugin "tailwindcss-react-aria-components";
+
+@theme {
+	/** mineral-green */
+	--color-brand-50: #f5f8f6;
+	--color-brand-100: #dee9e5;
+	--color-brand-200: #bdd2c9;
+	--color-brand-300: #94b4a8;
+	--color-brand-400: #6d9486;
+	--color-brand-500: #53796d;
+	--color-brand-600: #3c5950;
+	--color-brand-700: #374e48;
+	--color-brand-800: #2f403b;
+	--color-brand-900: #2a3733;
+	--color-brand-950: #151e1c;
+
+	--font-body: var(--_font-body, ui-sans-serif), system-ui, sans-serif;
+	--font-heading: var(--_font-heading, var(--font-body));
+
+	--breakpoint-xs: 30rem;
+	--breakpoint-sm: 40rem;
+	--breakpoint-md: 48rem;
+	--breakpoint-lg: 64rem;
+	--breakpoint-xl: 80rem;
+	--breakpoint-2xl: 96rem;
+	--breakpoint-3xl: 120rem;
+}
+
+@utility focus-outline {
+	@apply outline-solid outline-2 outline-brand-600 outline-offset-2;
+}
+
+@utility focus-outline-inverse {
+	@apply outline-white;
+}
+
+@utility focus-outline-offset-0 {
+	@apply outline-offset-0;
+}
+
+@utility -focus-outline-offset-2 {
+	@apply -outline-offset-2;
+}
+
+@utility interactive {
+	@apply relative overflow-clip after:absolute after:inset-0 after:transition;
+}
+
+@utility hover-overlay {
+	@apply after:bg-brand-950/10;
+}
+
+@utility select-overlay {
+	@apply after:border-white after:border-b-2;
+}
+
+@utility press-overlay {
+	@apply after:bg-brand-950/15;
+}
+
+@utility target-area {
+	@apply before:absolute before:min-w-[48px] before:min-h-[48px] before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2;
+}
+
+@layer utilities {
+	.prose {
+		max-width: unset;
+	}
+}
 
 @layer base {
 	*,
@@ -29,16 +101,16 @@
 
 	:focus {
 		/** Transparent outline. */
-		@apply outline-none;
+		@apply outline-hidden;
 	}
 
 	:focus-visible {
-		@apply outline outline-2 outline-brand-600 outline-offset-2;
+		@apply outline-solid outline-2 outline-brand-600 outline-offset-2;
 	}
 
 	/** Let react aria components handle focus state. */
 	[data-rac]:where(:focus, :focus-visible) {
-		@apply outline-none;
+		@apply outline-hidden;
 	}
 
 	blockquote {
@@ -85,51 +157,5 @@
 			animation-iteration-count: 1 !important;
 			scroll-behavior: auto !important;
 		}
-	}
-}
-
-@layer utilities {
-	/** Interaction states. */
-
-	.focus-outline {
-		@apply outline outline-2 outline-brand-600 outline-offset-2;
-	}
-
-	.focus-outline-inverse {
-		@apply outline-white;
-	}
-
-	.focus-outline-offset-0 {
-		@apply outline-offset-0;
-	}
-
-	/* stylelint-disable-next-line selector-class-pattern */
-	.-focus-outline-offset-2 {
-		@apply -outline-offset-2;
-	}
-
-	.interactive {
-		@apply relative overflow-clip;
-		@apply after:absolute after:inset-0 after:transition;
-	}
-
-	.hover-overlay {
-		@apply after:bg-brand-950/10;
-	}
-
-	.select-overlay {
-		@apply after:border-white after:border-l-2;
-	}
-
-	.select-overlay-border-bottom {
-		@apply after:border-l-0 after:border-b-2;
-	}
-
-	.press-overlay {
-		@apply after:bg-brand-950/15;
-	}
-
-	.target-area {
-		@apply before:absolute before:min-w-[48px] before:min-h-[48px] before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2;
 	}
 }

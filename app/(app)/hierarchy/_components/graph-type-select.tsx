@@ -44,7 +44,7 @@ export function GraphTypeSelect(props: GraphTypeSelectProps): ReactNode {
 				<ChevronDownIcon aria-hidden={true} className="size-5 shrink-0 text-brand-500" />
 			</Button>
 
-			<Popover className="absolute z-10 min-w-[--trigger-width] overflow-hidden rounded-md border border-neutral-200 bg-white text-brand-900 shadow-lg animate-in fade-in slide-in-from-top-2">
+			<Popover className="absolute z-10 w-[var(--trigger-width)] overflow-hidden rounded-md border border-neutral-200 bg-white text-brand-900 shadow-lg animate-in fade-in slide-in-from-top-2">
 				<ListBox className="py-2 outline-none" items={options}>
 					{(item) => {
 						return (

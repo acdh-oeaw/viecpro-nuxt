@@ -209,7 +209,7 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 					<Tooltip placement="left">{label}</Tooltip>
 				</TooltipTrigger>
 				<Popover
-					className="group min-w-[--trigger-width] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2"
+					className="group min-w-[var(--trigger-width)] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2"
 					placement="bottom right"
 				>
 					<Menu className="py-2 text-sm outline-none">

@@ -5,7 +5,7 @@ export const body = Roboto_Flex({
 	display: "swap",
 	style: ["normal"],
 	subsets: ["latin", "latin-ext"],
-	variable: "--font-body",
+	variable: "--_font-body",
 });
 
 export const heading = Roboto_Flex({
@@ -13,5 +13,5 @@ export const heading = Roboto_Flex({
 	display: "swap",
 	style: ["normal"],
 	subsets: ["latin", "latin-ext"],
-	variable: "--font-heading",
+	variable: "--_font-heading",
 });

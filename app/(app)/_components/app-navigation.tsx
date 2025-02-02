@@ -58,7 +58,7 @@ export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
 										className={cn(
 											"relative inline-flex px-4 py-6 text-white transition",
 											"interactive focus-visible:focus-outline focus-visible:focus-outline-inverse focus-visible:-focus-outline-offset-2 hover:bg-brand-700 pressed:bg-brand-800",
-											"aria-[current]:select-overlay aria-[current]:select-overlay-border-bottom",
+											"aria-[current]:select-overlay",
 										)}
 										href={item.href}
 									>
