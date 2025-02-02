@@ -242,7 +242,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 
 						<Collapsible
 							/** Needs to be expanded initially because leaflet does not seem to properly initialize when rendered in a hidden container. */
-							defaultExpanded={true}
+							defaultExpanded={data.latitude != null && data.longitude != null}
 							isDisabled={data.latitude == null || data.longitude == null}
 							label={t("map")}
 						>
