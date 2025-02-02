@@ -21,11 +21,9 @@ cp .env.local.example .env.local
 
 also, set environment variables required by [validation](./.github/workflows/validate.yml) and
 [deployment](./.github/workflows/build-deploy.yml) github actions. use
-["variables"](https://github.com/acdh-oeaw/template-app-next/settings/variables/actions) for every
+["variables"](https://github.com/acdh-oeaw/viecpro-nuxt/settings/variables/actions) for every
 environment variable prefixed with `NEXT_PUBLIC_`, and
-["secrets"](https://github.com/acdh-oeaw/template-app-next/settings/secrets/actions) for all others.
-
-the default template accepts the following variables:
+["secrets"](https://github.com/acdh-oeaw/viecpro-nuxt/settings/secrets/actions) for all others.
 
 - `NEXT_PUBLIC_REDMINE_ID` (required): service issue for this application in the acdh-ch
   [redmine](https://redmine.acdh.oeaw.ac.at) issue tracker.
@@ -37,8 +35,13 @@ the default template accepts the following variables:
   client-side analytics with matomo.
 - `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` (optional): set this to verify site ownership for google
   search console.
+- `ENV_VALIDATION` (optional): whether to validate environment variables. supported values are
+  "disabled", "enabled", and "public". defaults to "enabled". "public" only validates build-args
+  prefixed with `NEXT_PUBLIC_`, which can make sense in a docker build context.
 
-when adding new environment variables, don't forget to add them to `.env.local.example` as well.
+when adding new environment variables, don't forget to add them to
+[`.env.local.example`](./.env.local.example) and [`config/env.config.ts`](./config/env.config.ts) as
+well.
 
 install dependencies:
 
@@ -54,7 +57,7 @@ pnpm run dev
 
 > [!TIP]
 >
-> this template supports developing in containers. when opening the project in your editor, you
+> this repository supports developing in containers. when opening the project in your editor, you
 > should be prompted to re-open it in a devcontainer.
 
 ## how to test
@@ -66,8 +69,8 @@ pnpm run build
 pnpm run test:e2e
 ```
 
-visual snapshot tests should be run in the template's devcontainer - or a comparable debian bookworm
-based linux environment -, and can be updated with:
+visual snapshot tests should be run in the repository's devcontainer - or a comparable debian
+bookworm based linux environment -, and can be updated with:
 
 ```bash
 pnpm run test:e2e:update-snapshots
