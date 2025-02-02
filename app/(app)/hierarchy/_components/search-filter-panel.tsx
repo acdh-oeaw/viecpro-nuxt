@@ -78,7 +78,7 @@ export function SearchFilterPanel(props: SearchFilterPanelProps): ReactNode {
 					});
 				}}
 				options={entities}
-				selectedKey={optimisticSearchFilters.id}
+				selectedKey={optimisticSearchFilters.id ?? null}
 				triggerLabel={entitiesComboBoxTriggerLabel}
 			/>
 

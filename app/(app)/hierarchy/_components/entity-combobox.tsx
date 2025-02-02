@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
-import { Fragment, type ReactNode, useMemo, useState } from "react";
+import { Fragment, type ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import {
 	Button,
 	ComboBox,
@@ -11,17 +11,18 @@ import {
 	ListBox,
 	ListBoxItem,
 	Popover,
+	useFilter,
 } from "react-aria-components";
 
 import type { AutocompleteItem } from "@/app/(app)/hierarchy/_lib/autocomplete";
 
 interface EntityComboBoxProps {
-	selectedKey: number | undefined;
 	label: ReactNode;
 	legendLabels: Record<"function" | "institution" | "person", string>;
 	name: string;
 	options: Map<number, AutocompleteItem>;
 	onSelectionChange: (key: Key | null) => void;
+	selectedKey: number | null;
 	triggerLabel: string;
 }
 
@@ -29,45 +30,59 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 	const { selectedKey, label, legendLabels, name, onSelectionChange, options, triggerLabel } =
 		props;
 
-	const [searchTerm, setSearchTerm] = useState(
-		selectedKey ? (options.get(selectedKey)?.label ?? "") : "",
+	const getLabel = useCallback(
+		function getLabel(id: number | null): string {
+			if (id == null) return "";
+			return options.get(id)?.label ?? "";
+		},
+		[options],
 	);
+
+	const [searchTerm, setSearchTerm] = useState(getLabel(selectedKey));
+	const [menuTrigger, setMenuTrigger] = useState<"focus" | "input" | "manual" | null>(null);
+	// eslint-disable-next-line @typescript-eslint/unbound-method
+	const { contains } = useFilter({ sensitivity: "base" });
 
 	// FIXME: autocomplete should filter server-side, i.e. in typesense
 	const filteredOptions = useMemo(() => {
-		const segments = searchTerm.trim().split(/\s+/);
-
-		const max = 10;
-
-		const filtered = [];
+		const filteredOptions = [];
 
 		for (const option of options.values()) {
-			if (
-				segments.length === 0 ||
-				segments.some((segment) => {
-					return option.label.toLowerCase().includes(segment.toLowerCase());
-				})
-			) {
-				filtered.push(option);
-			}
-
-			if (filtered.length === max) {
-				break;
+			if (contains(option.label, searchTerm)) {
+				filteredOptions.push(option);
+				if (filteredOptions.length === 10) break;
 			}
 		}
 
-		return filtered;
-	}, [searchTerm, options]);
+		return filteredOptions;
+	}, [options, searchTerm, contains]);
+
+	/**
+	 * When a user clicks a node in the visualisation, the selectedKey will change and we need to
+	 * sync the input value of the controlled combobox.
+	 */
+	useEffect(() => {
+		setSearchTerm(getLabel(selectedKey));
+	}, [selectedKey, getLabel]);
 
 	return (
 		<ComboBox
 			allowsCustomValue={false}
 			className="grid gap-y-1"
 			inputValue={searchTerm}
-			items={filteredOptions}
+			items={menuTrigger === "manual" ? Array.from(options.values()).slice(0, 10) : filteredOptions}
 			name={name}
-			onInputChange={setSearchTerm}
-			onSelectionChange={onSelectionChange}
+			onInputChange={(searchTerm) => {
+				setSearchTerm(searchTerm);
+				setMenuTrigger("input");
+			}}
+			onOpenChange={(_isOpen, menuTrigger) => {
+				setMenuTrigger(menuTrigger ?? null);
+			}}
+			onSelectionChange={(id: Key | null) => {
+				onSelectionChange(id);
+				setSearchTerm(getLabel(id as number | null));
+			}}
 			selectedKey={selectedKey}
 		>
 			<Label className="cursor-default text-xs font-bold uppercase tracking-wider text-brand-600">
