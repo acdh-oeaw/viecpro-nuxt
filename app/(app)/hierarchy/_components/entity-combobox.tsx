@@ -10,8 +10,8 @@ import {
 	Label,
 	ListBox,
 	ListBoxItem,
-	UNSTABLE_ListLayout as ListLayout,
 	Popover,
+	UNSTABLE_ListLayout as ListLayout,
 	UNSTABLE_Virtualizer as Virtualizer,
 } from "react-aria-components";
 
