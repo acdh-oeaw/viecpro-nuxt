@@ -248,8 +248,8 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 						<h2 className="text-2xl text-brand-600">{t("section-relations")}</h2>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.personnel)} label={t("personnel")}>
-							<div className="overflow-x-auto">
-								<table className="w-full table-fixed text-sm">
+							<div className="w-full overflow-x-auto">
+								<table className="min-w-full text-sm text-brand-950">
 									<thead>
 										<tr className="border-b border-brand-100">
 											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -290,8 +290,8 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 						</Collapsible>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.locations)} label={t("locations")}>
-							<div className="overflow-x-auto">
-								<table className="w-full table-fixed text-sm">
+							<div className="w-full overflow-x-auto">
+								<table className="min-w-full text-sm text-brand-950">
 									<thead>
 										<tr className="border-b border-brand-100">
 											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -332,8 +332,8 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 						</Collapsible>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.hierarchy)} label={t("hierarchy")}>
-							<div className="overflow-x-auto">
-								<table className="w-full table-fixed text-sm">
+							<div className="w-full overflow-x-auto">
+								<table className="min-w-full text-sm text-brand-950">
 									<thead>
 										<tr className="border-b border-brand-100">
 											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">

@@ -246,8 +246,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 						</dl>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.duplicates)} label={t("duplicates")}>
-							<div className="overflow-x-auto">
-								<table className="w-full table-fixed text-sm">
+							<div className="w-full overflow-x-auto">
+								<table className="min-w-full text-brand-950 text-sm">
 									<thead>
 										<tr className="border-b border-brand-100">
 											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -265,7 +265,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 										{data.duplicates?.map((row, index) => {
 											return (
 												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">
+													<td className="px-3 py-2.5 whitespace-nowrap">
 														<Link
 															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
 															href={`/${row.target.kind}s/${String(row.target.id)}`}
@@ -273,8 +273,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 															{row.target.name}
 														</Link>
 													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 												</tr>
 											);
 										})}
@@ -315,8 +315,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 							isDisabled={!isNonEmptyArray(data.honoraryTitles)}
 							label={t("honorary-titles")}
 						>
-							<div className="overflow-x-auto">
-								<table className="w-full table-fixed text-sm">
+							<div className="w-full overflow-x-auto">
+								<table className="min-w-full text-brand-950 text-sm">
 									<thead>
 										<tr className="border-b border-brand-100">
 											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -334,9 +334,9 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 										{data.honoraryTitles?.map((row, index) => {
 											return (
 												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 												</tr>
 											);
 										})}
@@ -349,8 +349,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 							isDisabled={!isNonEmptyArray(data.academicTitles)}
 							label={t("academic-titles")}
 						>
-							<div className="overflow-x-auto">
-								<table className="w-full table-fixed text-sm">
+							<div className="w-full overflow-x-auto">
+								<table className="min-w-full text-brand-950 text-sm">
 									<thead>
 										<tr className="border-b border-brand-100">
 											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -368,9 +368,9 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 										{data.academicTitles?.map((row, index) => {
 											return (
 												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 												</tr>
 											);
 										})}
@@ -437,8 +437,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								isDisabled={!isNonEmptyArray(data.courtFunctions)}
 								label={t("court-functions")}
 							>
-								<div className="overflow-x-auto">
-									<table className="w-full table-fixed text-sm">
+								<div className="w-full overflow-x-auto">
+									<table className="min-w-full text-brand-950 text-sm">
 										<thead>
 											<tr className="border-b border-brand-100">
 												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -459,8 +459,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 											{data.courtFunctions?.map((row, index) => {
 												return (
 													<tr key={index} className="relative">
-														<td className="px-3 py-2.5">{row.relationType}</td>
-														<td className="px-3 py-2.5">
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">
 															<Link
 																className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
 																href={`/${row.target.kind}s/${String(row.target.id)}`}
@@ -468,8 +468,10 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 																{row.target.name}
 															</Link>
 														</td>
-														<td className="px-3 py-2.5">{row.startDateWritten}</td>
-														<td className="px-3 py-2.5">{row.endDateWritten}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">
+															{row.startDateWritten}
+														</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 													</tr>
 												);
 											})}
@@ -482,8 +484,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								isDisabled={!isNonEmptyArray(data.personRelationsCourt)}
 								label={t("person-relations-court")}
 							>
-								<div className="overflow-x-auto">
-									<table className="w-full table-fixed text-sm">
+								<div className="w-full overflow-x-auto">
+									<table className="min-w-full text-brand-950 text-sm">
 										<thead>
 											<tr className="border-b border-brand-100">
 												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -504,8 +506,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 											{data.personRelationsCourt?.map((row, index) => {
 												return (
 													<tr key={index} className="relative">
-														<td className="px-3 py-2.5">{row.relationType}</td>
-														<td className="px-3 py-2.5">
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">
 															<Link
 																className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
 																href={`/${row.target.kind}s/${String(row.target.id)}`}
@@ -513,8 +515,10 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 																{row.target.name}
 															</Link>
 														</td>
-														<td className="px-3 py-2.5">{row.startDateWritten}</td>
-														<td className="px-3 py-2.5">{row.endDateWritten}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">
+															{row.startDateWritten}
+														</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 													</tr>
 												);
 											})}
@@ -527,8 +531,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								isDisabled={!isNonEmptyArray(data.otherRelationsCourt)}
 								label={t("other-relations-court")}
 							>
-								<div className="overflow-x-auto">
-									<table className="w-full table-fixed text-sm">
+								<div className="w-full overflow-x-auto">
+									<table className="min-w-full text-brand-950 text-sm">
 										<thead>
 											<tr className="border-b border-brand-100">
 												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -546,9 +550,11 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 											{data.otherRelationsCourt?.map((row, index) => {
 												return (
 													<tr key={index} className="relative">
-														<td className="px-3 py-2.5">{row.relationType}</td>
-														<td className="px-3 py-2.5">{row.startDateWritten}</td>
-														<td className="px-3 py-2.5">{row.endDateWritten}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">
+															{row.startDateWritten}
+														</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 													</tr>
 												);
 											})}
@@ -573,8 +579,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								isDisabled={!isNonEmptyArray(data.relatedPlaces)}
 								label={t("related-places")}
 							>
-								<div className="overflow-x-auto">
-									<table className="w-full table-fixed text-sm">
+								<div className="w-full overflow-x-auto">
+									<table className="min-w-full text-brand-950 text-sm">
 										<thead>
 											<tr className="border-b border-brand-100">
 												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -595,8 +601,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 											{data.relatedPlaces?.map((row, index) => {
 												return (
 													<tr key={index} className="relative">
-														<td className="px-3 py-2.5">{row.relationType}</td>
-														<td className="px-3 py-2.5">
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">
 															<Link
 																className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
 																href={`/${row.target.kind}s/${String(row.target.id)}`}
@@ -604,8 +610,10 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 																{row.target.name}
 															</Link>
 														</td>
-														<td className="px-3 py-2.5">{row.startDateWritten}</td>
-														<td className="px-3 py-2.5">{row.endDateWritten}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">
+															{row.startDateWritten}
+														</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 													</tr>
 												);
 											})}
@@ -618,8 +626,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								isDisabled={!isNonEmptyArray(data.marriagesAndFamilyRelations)}
 								label={t("marriages-and-family-relations")}
 							>
-								<div className="overflow-x-auto">
-									<table className="w-full table-fixed text-sm">
+								<div className="w-full overflow-x-auto">
+									<table className="min-w-full text-brand-950 text-sm">
 										<thead>
 											<tr className="border-b border-brand-100">
 												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -640,8 +648,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 											{data.marriagesAndFamilyRelations?.map((row, index) => {
 												return (
 													<tr key={index} className="relative">
-														<td className="px-3 py-2.5">{row.relationType}</td>
-														<td className="px-3 py-2.5">
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">
 															<Link
 																className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
 																href={`/${row.target.kind}s/${String(row.target.id)}`}
@@ -649,8 +657,10 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 																{row.target.name}
 															</Link>
 														</td>
-														<td className="px-3 py-2.5">{row.startDateWritten}</td>
-														<td className="px-3 py-2.5">{row.endDateWritten}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">
+															{row.startDateWritten}
+														</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 													</tr>
 												);
 											})}
@@ -663,8 +673,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								isDisabled={!isNonEmptyArray(data.relationsToChurchAndOrders)}
 								label={t("relations-to-church-and-orders")}
 							>
-								<div className="overflow-x-auto">
-									<table className="w-full table-fixed text-sm">
+								<div className="w-full overflow-x-auto">
+									<table className="min-w-full text-brand-950 text-sm">
 										<thead>
 											<tr className="border-b border-brand-100">
 												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -682,9 +692,11 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 											{data.relationsToChurchAndOrders?.map((row, index) => {
 												return (
 													<tr key={index} className="relative">
-														<td className="px-3 py-2.5">{row.relationType}</td>
-														<td className="px-3 py-2.5">{row.startDateWritten}</td>
-														<td className="px-3 py-2.5">{row.endDateWritten}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">
+															{row.startDateWritten}
+														</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 													</tr>
 												);
 											})}
@@ -697,8 +709,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								isDisabled={!isNonEmptyArray(data.nonCourtFunctions)}
 								label={t("non-court-functions")}
 							>
-								<div className="overflow-x-auto">
-									<table className="w-full table-fixed text-sm">
+								<div className="w-full overflow-x-auto">
+									<table className="min-w-full text-brand-950 text-sm">
 										<thead>
 											<tr className="border-b border-brand-100">
 												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -716,9 +728,11 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 											{data.nonCourtFunctions?.map((row, index) => {
 												return (
 													<tr key={index} className="relative">
-														<td className="px-3 py-2.5">{row.relationType}</td>
-														<td className="px-3 py-2.5">{row.startDateWritten}</td>
-														<td className="px-3 py-2.5">{row.endDateWritten}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">
+															{row.startDateWritten}
+														</td>
+														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 													</tr>
 												);
 											})}

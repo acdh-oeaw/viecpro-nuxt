@@ -161,8 +161,8 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 							isDisabled={!isNonEmptyArray(data.alternativeNames)}
 							label={t("alternative-names")}
 						>
-							<div className="overflow-x-auto">
-								<table className="w-full table-fixed text-sm">
+							<div className="w-full overflow-x-auto">
+								<table className="min-w-full text-brand-950 text-sm">
 									<thead>
 										<tr className="border-b border-brand-100">
 											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -259,8 +259,8 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 							isDisabled={!isNonEmptyArray(data.institutionRelations)}
 							label={t("institution-relations")}
 						>
-							<div className="overflow-x-auto">
-								<table className="w-full table-fixed text-sm">
+							<div className="w-full overflow-x-auto">
+								<table className="min-w-full text-brand-950 text-sm">
 									<thead>
 										<tr className="border-b border-brand-100">
 											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -304,8 +304,8 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 							isDisabled={!isNonEmptyArray(data.personRelations)}
 							label={t("person-relations")}
 						>
-							<div className="overflow-x-auto">
-								<table className="w-full table-fixed text-sm">
+							<div className="w-full overflow-x-auto">
+								<table className="min-w-full text-brand-950 text-sm">
 									<thead>
 										<tr className="border-b border-brand-100">
 											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -349,8 +349,8 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 							isDisabled={!isNonEmptyArray(data.placeRelations)}
 							label={t("place-relations")}
 						>
-							<div className="overflow-x-auto">
-								<table className="w-full table-fixed text-sm">
+							<div className="w-full overflow-x-auto">
+								<table className="min-w-full text-brand-950 text-sm">
 									<thead>
 										<tr className="border-b border-brand-100">
 											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
