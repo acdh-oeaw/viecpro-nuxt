@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@acdh-oeaw/style-variants";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 import { useSidePanel } from "@/app/(app)/search/_components/side-panel-provider";
 
@@ -17,18 +17,24 @@ export function SidePanel(props: SidePanelProps): ReactNode {
 	const { id, isOpen } = useSidePanel();
 
 	return (
-		<div data-pending={isPending || undefined}>
-			<aside className={cn("hidden h-full lg:block", className)}>{children}</aside>
+		<Fragment>
+			<aside
+				className={cn("hidden h-full lg:block", className)}
+				data-pending={isPending || undefined}
+			>
+				{children}
+			</aside>
 			<aside
 				className={cn(
 					"absolute inset-y-0 z-10 h-full shadow-lg data-[state=collapsed]:hidden lg:hidden",
 					className,
 				)}
+				data-pending={isPending || undefined}
 				data-state={isOpen ? "expanded" : "collapsed"}
 				id={id}
 			>
 				{children}
 			</aside>
-		</div>
+		</Fragment>
 	);
 }

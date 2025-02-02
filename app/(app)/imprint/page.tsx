@@ -31,18 +31,20 @@ export default async function ImprintPage(_props: Readonly<ImprintPageProps>): P
 
 	return (
 		<MainContent className="flex flex-col">
-			<section className="grid gap-y-6 border-b border-brand-100 bg-brand-50 py-16 xs:py-20">
-				<div className="mx-auto grid w-full max-w-4xl gap-y-4 px-4 xs:px-8">
-					<h1 className="text-balance font-heading text-4xl font-bold text-brand-600 md:text-5xl">
+			<section className="border-b border-brand-100 bg-brand-50 py-16 xs:py-20">
+				<div className="mx-auto grid w-full max-w-7xl gap-y-4 px-4 xs:px-8">
+					<h1 className="text-balance font-heading text-3xl font-bold text-brand-600 xs:text-4xl md:text-5xl">
 						{t("title")}
 					</h1>
 				</div>
 			</section>
 
-			<section
-				dangerouslySetInnerHTML={{ __html: html }}
-				className="prose mx-auto w-full max-w-4xl px-4 py-16 xs:px-8 xs:py-20"
-			/>
+			<div className="mx-auto w-full max-w-7xl xs:px-8 px-4">
+				<section
+					dangerouslySetInnerHTML={{ __html: html }}
+					className="prose w-full max-w-4xl py-16 xs:py-20"
+				/>
+			</div>
 		</MainContent>
 	);
 }
