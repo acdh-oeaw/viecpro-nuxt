@@ -20,6 +20,7 @@ import { DownloadMenu } from "@/components/download-menu";
 import { Link } from "@/components/link";
 import { MainContent } from "@/components/main-content";
 import { PopoverNote } from "@/components/popover-note";
+import { Tooltip, TooltipTrigger } from "@/components/tooltip";
 import { env } from "@/config/env.config";
 import { parseLinks } from "@/lib/parse-links";
 
@@ -79,7 +80,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 
 	return (
 		<MainContent className="flex flex-col">
-			<div className="mx-auto grid w-full max-w-7xl content-start gap-y-16 px-4 py-16 xs:px-8">
+			<div className="mx-auto grid w-full max-w-7xl content-start gap-y-12 px-4 py-16 xs:gap-y-16 xs:px-8">
 				<div className="grid content-start gap-y-4">
 					<div>
 						<span className="inline-flex items-center gap-x-2 text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -94,32 +95,35 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 						</h1>
 					</div>
 
-					<div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-2">
+					<div className="order-first flex flex-wrap items-center justify-end gap-x-3 gap-y-2">
 						<PopoverNote
 							isDisabled={!isNonEmptyString(data.notes)}
 							label={
 								<Fragment>
 									<StickyNoteIcon className="size-5 shrink-0 text-brand-500" />
-									<span>{t("notes")}</span>
+									<span className="sr-only">{t("notes")}</span>
 								</Fragment>
 							}
 						>
 							{data.notes}
 						</PopoverNote>
 
-						<Link
-							className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200"
-							href={`/hierarchy?${String(createUrlSearchParams({ kind: "person", id }))}`}
-						>
-							<NetworkIcon className="size-5 shrink-0 text-brand-500" />
-							<span>{t("hierarchy-visualisation")}</span>
-						</Link>
+						<TooltipTrigger>
+							<Link
+								className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200"
+								href={`/hierarchy?${String(createUrlSearchParams({ kind: "person", id }))}`}
+							>
+								<NetworkIcon className="size-5 shrink-0 text-brand-500" />
+								<span className="sr-only">{t("hierarchy-visualisation")}</span>
+							</Link>
+							<Tooltip placement="bottom">{t("hierarchy-visualisation")}</Tooltip>
+						</TooltipTrigger>
 
 						<PopoverNote
 							label={
 								<Fragment>
 									<InfoIcon className="size-5 shrink-0 text-brand-500" />
-									<span>{t("citation")}</span>
+									<span className="sr-only">{t("citation")}</span>
 								</Fragment>
 							}
 						>

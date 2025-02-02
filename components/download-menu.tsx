@@ -5,6 +5,7 @@ import { DownloadIcon, FileJsonIcon, FileSpreadsheetIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { Button, Menu, MenuItem, MenuTrigger, Popover } from "react-aria-components";
 
+import { Tooltip, TooltipTrigger } from "@/components/tooltip";
 import { downloadJson } from "@/lib/download-json";
 
 interface DownloadMenuProps {
@@ -50,10 +51,13 @@ export function DownloadMenu(props: DownloadMenuProps): ReactNode {
 
 	return (
 		<MenuTrigger>
-			<Button className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 disabled:cursor-not-allowed disabled:opacity-50">
-				<DownloadIcon className="size-5 shrink-0 text-brand-500" />
-				<span>{label}</span>
-			</Button>
+			<TooltipTrigger>
+				<Button className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 disabled:cursor-not-allowed disabled:opacity-50">
+					<DownloadIcon className="size-5 shrink-0 text-brand-500" />
+					<span className="sr-only">{label}</span>
+				</Button>
+				<Tooltip placement="bottom">{label}</Tooltip>
+			</TooltipTrigger>
 			<Popover className="group min-w-[--trigger-width] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2">
 				<Menu className="py-2 text-sm outline-none">
 					<MenuItem

@@ -73,7 +73,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 
 	return (
 		<MainContent className="flex flex-col">
-			<div className="mx-auto grid w-full max-w-7xl content-start gap-y-16 px-4 py-16 xs:px-8">
+			<div className="mx-auto grid w-full max-w-7xl content-start gap-y-12 px-4 py-16 xs:gap-y-16 xs:px-8">
 				<div className="grid content-start gap-y-4">
 					<div>
 						<span className="inline-flex items-center gap-x-2 text-xs font-bold uppercase tracking-wider text-brand-600">
@@ -86,13 +86,13 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 						<h1 className="text-4xl font-bold tracking-tight text-brand-600">{data.name}</h1>
 					</div>
 
-					<div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-2">
+					<div className="order-1 flex flex-wrap items-center justify-end gap-x-3 gap-y-2">
 						<PopoverNote
 							isDisabled={!isNonEmptyString(data.notes)}
 							label={
 								<Fragment>
 									<StickyNoteIcon className="size-5 shrink-0 text-brand-500" />
-									<span>{t("notes")}</span>
+									<span className="sr-only">{t("notes")}</span>
 								</Fragment>
 							}
 						>
@@ -103,7 +103,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 							label={
 								<Fragment>
 									<InfoIcon className="size-5 shrink-0 text-brand-500" />
-									<span>{t("citation")}</span>
+									<span className="sr-only">{t("citation")}</span>
 								</Fragment>
 							}
 						>

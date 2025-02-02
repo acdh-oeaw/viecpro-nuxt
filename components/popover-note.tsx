@@ -3,6 +3,8 @@
 import type { ReactNode } from "react";
 import { Button, Dialog, DialogTrigger, OverlayArrow, Popover } from "react-aria-components";
 
+import { Tooltip, TooltipTrigger } from "@/components/tooltip";
+
 interface PopoverNoteProps {
 	children: ReactNode;
 	isDisabled?: boolean;
@@ -14,12 +16,15 @@ export function PopoverNote(props: PopoverNoteProps): ReactNode {
 
 	return (
 		<DialogTrigger>
-			<Button
-				className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 disabled:cursor-not-allowed disabled:opacity-50"
-				isDisabled={isDisabled}
-			>
-				{label}
-			</Button>
+			<TooltipTrigger>
+				<Button
+					className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 disabled:cursor-not-allowed disabled:opacity-50"
+					isDisabled={isDisabled}
+				>
+					{label}
+				</Button>
+				<Tooltip placement="bottom">{label}</Tooltip>
+			</TooltipTrigger>
 			<Popover className="group min-w-[--trigger-width] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2 placement-top:mb-2 placement-bottom:mt-2">
 				<OverlayArrow>
 					<svg
