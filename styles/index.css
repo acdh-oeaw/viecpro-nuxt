@@ -69,12 +69,6 @@
 	@apply before:absolute before:min-w-[48px] before:min-h-[48px] before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2;
 }
 
-@layer utilities {
-	.prose {
-		max-width: unset;
-	}
-}
-
 @layer base {
 	*,
 	*::after,

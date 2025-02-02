@@ -61,7 +61,7 @@ export default async function IndexPage(_props: Readonly<IndexPageProps>): Promi
 					</h1>
 				</div>
 
-				<section className="prose">
+				<section className="prose max-w-none">
 					<Content />
 				</section>
 
@@ -71,7 +71,7 @@ export default async function IndexPage(_props: Readonly<IndexPageProps>): Promi
 					const { default: Content } = await page.compile(content);
 
 					return (
-						<section key={index} className="prose">
+						<section key={index} className="prose max-w-none">
 							<h2 className="border-b border-brand-100 text-2xl font-bold text-brand-600">
 								{title}
 							</h2>

@@ -42,7 +42,7 @@ export default async function BibliographyPage(
 				</aside>
 
 				<div className="w-full max-w-3xl px-4 xs:px-8">
-					<section className="prose py-16 xs:py-20">
+					<section className="prose max-w-none py-16 xs:py-20">
 						<ul role="list">
 							{bibliography.map((item) => {
 								return (
