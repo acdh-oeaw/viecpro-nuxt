@@ -85,11 +85,11 @@ export default async function SearchLayout(props: Readonly<SearchLayoutProps>): 
 									<li key={id} className="flex">
 										<TooltipTrigger>
 											<NavLink
-												className="focus-visible:focus-outline focus-visible:-focus-outline-offset-2 inline-block aspect-square p-4 transition aria-[current]:bg-brand-100 hover:bg-brand-100 disabled:opacity-50"
+												className="focus-visible:focus-outline focus-visible:-focus-outline-offset-2 inline-block aspect-square border border-transparent p-3 transition aria-[current]:border-brand-100 aria-[current]:bg-brand-100 hover:border-brand-100 hover:bg-brand-100 disabled:opacity-50 xs:p-4"
 												href={link.href}
 												isDisabled={link.isDisabled}
 											>
-												<Icon aria-hidden={true} className="size-6 shrink-0" />
+												<Icon aria-hidden={true} className="size-5 shrink-0 xs:size-6" />
 												<span className="sr-only">{link.label}</span>
 											</NavLink>
 											<Tooltip placement="right">{link.label}</Tooltip>

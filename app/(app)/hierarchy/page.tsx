@@ -124,7 +124,7 @@ async function SearchPanel(props: SearchPanelProps): Promise<ReactNode> {
 
 	return (
 		<aside className="border-b border-brand-100 bg-brand-50 text-brand-900">
-			<div className="container flex flex-col flex-wrap gap-x-6 gap-y-4 px-8 py-4 sm:flex-row sm:items-center sm:justify-between">
+			<div className="container flex flex-col flex-wrap gap-x-6 gap-y-4 p-4 xs:px-8 sm:flex-row sm:items-center sm:justify-between">
 				<SearchFilterPanel
 					directionOptions={directionOptions}
 					directionSelectLabel={t("direction.label")}
@@ -165,7 +165,7 @@ function Legend(): ReactNode {
 	return (
 		<aside
 			aria-label={t("legend.title")}
-			className="absolute bottom-3 right-8 flex items-center gap-x-4 rounded-md border border-brand-100 bg-brand-50 px-3 py-0.5 text-sm"
+			className="absolute bottom-3 right-8 flex items-center gap-x-4 rounded-md border border-brand-100 bg-brand-50 px-3 py-0.5 text-sm font-medium"
 		>
 			{types.map((type) => {
 				return (

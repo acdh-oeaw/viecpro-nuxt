@@ -42,7 +42,7 @@ export function AppHeader(): ReactNode {
 
 	return (
 		<header className="border-b-4 border-brand-900 bg-brand-600 text-white">
-			<div className="flex justify-between gap-x-12 px-8">
+			<div className="flex justify-between gap-x-12 px-4 xs:px-8">
 				<AppNavigation label={label} navigation={navigation} />
 				<AppNavigationMobile
 					label={label}

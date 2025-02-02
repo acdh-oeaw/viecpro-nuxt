@@ -63,6 +63,18 @@ export function SearchFilterPanel(props: SearchFilterPanelProps): ReactNode {
 					const id = _id as number | null;
 
 					if (id == null) {
+						const nextSearchFilters = {
+							...optimisticSearchFilters,
+							id: undefined,
+							kind: undefined,
+							graph: "default",
+						};
+
+						startTransition(() => {
+							updateOptimisticSearchFilters(nextSearchFilters);
+							router.push(`?${createUrlSearchParams(nextSearchFilters)}`);
+						});
+
 						return;
 					}
 

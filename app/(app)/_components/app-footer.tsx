@@ -74,7 +74,7 @@ export function AppFooter(): ReactNode {
 
 	return (
 		<footer className="z-10 grid gap-y-6 border-t border-brand-100 bg-brand-50 py-12">
-			<div className="grid gap-y-8 px-8 xs:flex xs:items-center xs:justify-between">
+			<div className="grid gap-y-8 px-4 xs:flex xs:items-center xs:justify-between xs:px-8">
 				<Image alt="" className="h-8 w-auto shrink-0 invert" src={logo} />
 
 				{/* <nav aria-label="navigation-social-media">
@@ -98,7 +98,7 @@ export function AppFooter(): ReactNode {
 				</nav> */}
 			</div>
 
-			<div className="px-8 py-6">
+			<div className="px-4 py-6 xs:px-8">
 				<ul className="flex flex-wrap items-center gap-x-16 gap-y-8" role="list">
 					{Object.entries(organisations).map(([id, link]) => {
 						return (
@@ -119,7 +119,7 @@ export function AppFooter(): ReactNode {
 				</ul>
 			</div>
 
-			<div className="grid gap-y-8 px-8 text-brand-600">
+			<div className="grid gap-y-8 px-4 text-brand-600 xs:px-8">
 				<nav aria-label={t("navigation-secondary")}>
 					<ul className="flex items-center gap-x-6" role="list">
 						{Object.entries(links).map(([id, link]) => {

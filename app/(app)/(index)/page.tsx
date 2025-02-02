@@ -49,7 +49,7 @@ export default async function IndexPage(_props: Readonly<IndexPageProps>): Promi
 				/>
 			</div>
 
-			<div className="mx-auto grid w-full max-w-4xl gap-y-12 px-8 py-16 xs:py-24">
+			<div className="mx-auto grid w-full max-w-4xl gap-y-12 px-4 py-16 xs:px-8 xs:py-24">
 				<div>
 					<h1 className="border-b-2 border-brand-100 pb-6 text-4xl text-brand-600 xs:text-5xl md:text-6xl">
 						<span className="font-black">{title}</span>

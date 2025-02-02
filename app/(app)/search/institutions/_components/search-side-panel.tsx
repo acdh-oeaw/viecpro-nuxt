@@ -86,13 +86,13 @@ export function SearchSidePanel(props: SearchSidePanelProps): ReactNode {
 			isPending={isPending}
 		>
 			<header className="flex min-h-14 items-center justify-between gap-x-4 border-b border-brand-100 px-8 py-4 text-brand-600">
-				<h2 className="inline-flex items-center gap-x-1.5 text-sm">
+				<h2 className="inline-flex items-center gap-x-1.5 text-xs font-bold uppercase tracking-wider">
 					{label}
 					{isPending ? (
 						<Loader2Icon aria-hidden={true} className="size-4 shrink-0 animate-spin" />
 					) : null}
 				</h2>
-				<SidePanelToggle className="block lg:hidden" label={toggleLabel} />
+				<SidePanelToggle className="-mr-2 block lg:hidden" label={toggleLabel} />
 			</header>
 
 			<div className="grid gap-y-6 px-8 py-4" role="search">

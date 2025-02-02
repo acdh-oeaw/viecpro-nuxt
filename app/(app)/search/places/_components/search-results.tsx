@@ -54,7 +54,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 
 	return (
 		<div className="w-full">
-			<div className="w-full overflow-x-auto px-4 pb-4">
+			<div className="w-full overflow-x-auto xs:px-4 xs:pb-4">
 				<table className="min-w-full text-sm text-brand-950">
 					<thead>
 						<tr className="sticky top-0 border-b border-brand-100 bg-white text-left text-xs font-bold tracking-wider text-brand-600">
@@ -146,10 +146,10 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 				</table>
 			</div>
 
-			<footer className="flex items-center justify-between gap-x-8 border-t border-brand-100 px-6 py-4 text-sm text-brand-600">
-				<span className="hidden sm:block">{countLabel}</span>
+			<footer className="flex flex-col items-center justify-center gap-x-6 gap-y-4 border-t border-brand-100 px-2.5 py-4 text-sm text-brand-600 xs:px-6 sm:flex-row sm:justify-between">
+				<span>{countLabel}</span>
 				{hasPreviousPage || hasNextPage ? (
-					<span className="ml-auto inline-flex items-center gap-x-6">
+					<span className="inline-flex items-center gap-x-6 sm:ml-auto">
 						<Link
 							className="inline-flex items-center gap-x-1.5 hover:underline disabled:opacity-50"
 							href={createHref({
@@ -161,7 +161,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 							{previousPageLabel}
 						</Link>
 						<Link
-							className="inline-flex items-center gap-x-1.5 hover:underline disabled:opacity-50"
+							className="inline-flex items-center gap-x-1.5 text-right hover:underline disabled:opacity-50"
 							href={createHref({
 								searchParams: { ...optimisticSearchFilters, page: searchResults.page + 1 },
 							})}

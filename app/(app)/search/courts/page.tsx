@@ -61,17 +61,21 @@ export default async function SearchCourtsPage(
 				<header>
 					<h1 className="sr-only">{t("title")}</h1>
 
-					<div className="flex min-h-14 items-center gap-x-8 border-b border-brand-100 px-6 py-2 text-sm text-brand-600">
-						<SidePanelToggle className="block  lg:hidden" label={t("toggle-sidepanel")} />
+					<div className="flex min-h-14 items-center gap-x-6 border-b border-brand-100 px-2.5 py-2 text-brand-600 xs:px-6">
+						<div className="inline-flex items-center gap-x-4 text-xs font-medium sm:text-sm">
+							<SidePanelToggle className="block lg:hidden" label={t("toggle-sidepanel")} />
 
-						<div className="hidden items-center gap-x-1.5 text-brand-600 sm:flex">
-							<span>{t("search")}</span>
-							<ChevronRightIcon aria-hidden={true} className="size-4 shrink-0" />
-							<span>{t("courts")}</span>
+							<div className="flex items-center gap-x-1.5 text-brand-600">
+								<span>{t("search")}</span>
+								<ChevronRightIcon aria-hidden={true} className="size-3 shrink-0 sm:size-4" />
+								<span>{t("courts")}</span>
+							</div>
 						</div>
 
 						<span className="ml-auto inline-flex items-center gap-x-4 text-xs font-medium">
-							{t("search-results-count", { count: searchResults.count })}
+							<span className="hidden text-right xs:block">
+								{t("search-results-count", { count: searchResults.count })}
+							</span>
 							<DownloadDialog
 								cancelLabel={t("download-cancel")}
 								columns={[

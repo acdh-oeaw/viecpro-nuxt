@@ -64,7 +64,7 @@ export default async function DocumentationPage(
 	return (
 		<MainContent className="flex flex-col">
 			<section className="border-b border-brand-100 bg-brand-50 py-16 xs:py-20">
-				<div className="mx-auto grid w-full max-w-7xl gap-y-4 px-8">
+				<div className="mx-auto grid w-full max-w-7xl gap-y-4 px-4 xs:px-8">
 					<h1 className="text-balance font-heading text-3xl font-bold text-brand-600 xs:text-4xl md:text-5xl">
 						{title}
 					</h1>
@@ -77,13 +77,13 @@ export default async function DocumentationPage(
 					<DocumentationNavigation />
 				</aside>
 
-				<div className="w-full max-w-3xl px-8">
+				<div className="w-full max-w-3xl px-4 xs:px-8">
 					<section className="prose py-16 xs:py-20">
 						<Content />
 					</section>
 				</div>
 
-				<aside className="hidden px-8 py-16 xs:py-20 lg:block">
+				<aside className="hidden px-4 py-16 xs:px-8 xs:py-20 lg:block">
 					<DocumentationNavigation />
 				</aside>
 			</div>
