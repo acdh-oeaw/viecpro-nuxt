@@ -73,7 +73,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 
 	return (
 		<MainContent className="flex flex-col">
-			<div className="mx-auto grid w-full max-w-7xl content-start gap-y-12 px-4 py-16 xs:gap-y-16 xs:px-8">
+			<div className="mx-auto grid w-full max-w-7xl content-start gap-y-12 px-4 pt-8 pb-16 xs:gap-y-16 xs:px-8">
 				<div className="grid content-start gap-y-4">
 					<div>
 						<span className="inline-flex items-center gap-x-2 text-xs font-bold uppercase tracking-wider text-brand-600">
