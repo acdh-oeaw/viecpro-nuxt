@@ -58,7 +58,10 @@ export function DownloadMenu(props: DownloadMenuProps): ReactNode {
 				</Button>
 				<Tooltip placement="bottom">{label}</Tooltip>
 			</TooltipTrigger>
-			<Popover className="group min-w-[var(--trigger-width)] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2">
+			<Popover
+				className="group min-w-[var(--trigger-width)] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2"
+				placement="bottom right"
+			>
 				<Menu className="py-2 text-sm outline-none">
 					<MenuItem
 						className="flex cursor-default gap-x-2 rounded px-3 py-2 transition hover:bg-brand-50"
