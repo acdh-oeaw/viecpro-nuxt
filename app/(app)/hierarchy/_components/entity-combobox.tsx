@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
-import { Fragment, type ReactNode, useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, type ReactNode, useMemo } from "react";
 import {
 	Button,
 	ComboBox,
@@ -10,9 +10,8 @@ import {
 	Label,
 	ListBox,
 	ListBoxItem,
-	Popover,
-	useFilter,
 	UNSTABLE_ListLayout as ListLayout,
+	Popover,
 	UNSTABLE_Virtualizer as Virtualizer,
 } from "react-aria-components";
 
@@ -32,44 +31,9 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 	const { selectedKey, label, legendLabels, name, onSelectionChange, options, triggerLabel } =
 		props;
 
-	const getLabel = useCallback(
-		function getLabel(id: number | null): string {
-			if (id == null) return "";
-			return options.get(id)?.label ?? "";
-		},
-		[options],
-	);
-
-	const [searchTerm, setSearchTerm] = useState(getLabel(selectedKey));
-	const [menuTrigger, setMenuTrigger] = useState<"focus" | "input" | "manual" | null>(null);
-	// eslint-disable-next-line @typescript-eslint/unbound-method
-	const { contains } = useFilter({ sensitivity: "base" });
-
 	const allOptions = useMemo(() => {
 		return Array.from(options.values()).slice(0, 2500);
 	}, [options]);
-
-	// FIXME: autocomplete should filter server-side, i.e. in typesense
-	const filteredOptions = useMemo(() => {
-		const filteredOptions = [];
-
-		for (const option of options.values()) {
-			if (contains(option.label, searchTerm)) {
-				filteredOptions.push(option);
-				if (filteredOptions.length === 100) break;
-			}
-		}
-
-		return filteredOptions;
-	}, [options, searchTerm, contains]);
-
-	/**
-	 * When a user clicks a node in the visualisation, the selectedKey will change and we need to
-	 * sync the input value of the controlled combobox.
-	 */
-	useEffect(() => {
-		setSearchTerm(getLabel(selectedKey));
-	}, [selectedKey, getLabel]);
 
 	const layout = useMemo(() => {
 		return new ListLayout({ rowHeight: 52 });
@@ -79,20 +43,9 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 		<ComboBox
 			allowsCustomValue={false}
 			className="grid gap-y-1"
-			inputValue={searchTerm}
-			items={menuTrigger === "manual" ? allOptions : filteredOptions}
+			defaultItems={allOptions}
 			name={name}
-			onInputChange={(searchTerm) => {
-				setSearchTerm(searchTerm);
-				setMenuTrigger("input");
-			}}
-			onOpenChange={(_isOpen, menuTrigger) => {
-				setMenuTrigger(menuTrigger ?? null);
-			}}
-			onSelectionChange={(id: Key | null) => {
-				onSelectionChange(id);
-				setSearchTerm(getLabel(id as number | null));
-			}}
+			onSelectionChange={onSelectionChange}
 			selectedKey={selectedKey}
 		>
 			<Label className="cursor-default text-xs font-bold uppercase tracking-wider text-brand-600">
