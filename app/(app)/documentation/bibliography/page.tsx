@@ -48,7 +48,11 @@ export default async function BibliographyPage(
 								return (
 									<li key={item.key}>
 										<div>{item.citation}</div>
-										{item.url ? <a href={item.url}>{item.url}</a> : null}
+										{item.url ? (
+											<a className="break-all" href={item.url}>
+												{item.url}
+											</a>
+										) : null}
 									</li>
 								);
 							})}
