@@ -299,7 +299,8 @@
 			"previous-page": "Vorherige Seite"
 		},
 		"title": "Hofstaate-Datenbank",
-		"toggle-sidepanel": "Seitenleiste umschalten",
+		"open-search-filter-panel": "Suchfilter anzeigen",
+		"close-search-filter-panel": "Suchfilter verbergen",
 		"name": "Name",
 		"expanded-name": "Auflösung",
 		"kind": "Entität",
@@ -350,7 +351,8 @@
 			"previous-page": "Vorherige Seite"
 		},
 		"title": "Institutionen-Datenbank",
-		"toggle-sidepanel": "Seitenleiste umschalten",
+		"open-search-filter-panel": "Suchfilter anzeigen",
+		"close-search-filter-panel": "Suchfilter verbergen",
 		"name": "Name",
 		"expanded-name": "Auflösung",
 		"kind": "Entität",
@@ -403,7 +405,8 @@
 			"previous-page": "Vorherige Seite"
 		},
 		"title": "Personen-Datenbank",
-		"toggle-sidepanel": "Seitenleiste umschalten",
+		"open-search-filter-panel": "Suchfilter anzeigen",
+		"close-search-filter-panel": "Suchfilter verbergen",
 		"first-name": "Vorname",
 		"name": "Name",
 		"kind": "Entität",
@@ -453,7 +456,8 @@
 			"previous-page": "Vorherige Seite"
 		},
 		"title": "Orts-Datenbank",
-		"toggle-sidepanel": "Seitenleiste umschalten",
+		"open-search-filter-panel": "Suchfilter anzeigen",
+		"close-search-filter-panel": "Suchfilter verbergen",
 		"name": "Name",
 		"kind": "Entität",
 		"category": "Kategorie",

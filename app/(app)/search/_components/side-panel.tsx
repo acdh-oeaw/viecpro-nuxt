@@ -16,6 +16,8 @@ export function SidePanel(props: SidePanelProps): ReactNode {
 
 	const { id, isOpen } = useSidePanel();
 
+	// TODO: add data-entering and data-exiting
+
 	return (
 		<Fragment>
 			<aside
