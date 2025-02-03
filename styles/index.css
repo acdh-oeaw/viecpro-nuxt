@@ -8,7 +8,25 @@
 @plugin "tailwindcss-react-aria-components";
 
 @theme {
-	/** mineral-green */
+	--color-*: initial;
+	--font-*: initial;
+
+	--color-white: #fff;
+	--color-black: #000;
+
+	--color-neutral-50: oklch(98.5% 0 0deg);
+	--color-neutral-100: oklch(97% 0 0deg);
+	--color-neutral-200: oklch(92.2% 0 0deg);
+	--color-neutral-300: oklch(87% 0 0deg);
+	--color-neutral-400: oklch(70.8% 0 0deg);
+	--color-neutral-500: oklch(55.6% 0 0deg);
+	--color-neutral-600: oklch(43.9% 0 0deg);
+	--color-neutral-700: oklch(37.1% 0 0deg);
+	--color-neutral-800: oklch(26.9% 0 0deg);
+	--color-neutral-900: oklch(20.5% 0 0deg);
+	--color-neutral-950: oklch(14.5% 0 0deg);
+
+	/** Mineral-green. */
 	--color-brand-50: #f5f8f6;
 	--color-brand-100: #dee9e5;
 	--color-brand-200: #bdd2c9;
