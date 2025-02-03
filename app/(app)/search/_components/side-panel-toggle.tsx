@@ -33,9 +33,19 @@ export function SidePanelToggle(props: SidePanelToggleProps): ReactNode {
 				onPress={toggle}
 			>
 				<Icon aria-hidden={true} className="size-5" />
-				<span className="sr-only">{isOpen ? closeLabel : openLabel}</span>
+				<span className="sr-only">
+					{/* eslint-disable-next-line react/jsx-no-literals */}
+					{isOpen ? closeLabel : openLabel} <kbd>⌘+K</kbd>
+				</span>
 			</Button>
-			<Tooltip placement="left">{isOpen ? closeLabel : openLabel}</Tooltip>
+			<Tooltip placement="right">
+				<span className="inline-flex gap-x-2 items-center">
+					{isOpen ? closeLabel : openLabel} {/* eslint-disable-next-line react/jsx-no-literals */}
+					<kbd className="font-body font-medium text-xs rounded-sm border border-white px-1 leading-4 opacity-75">
+						⌘+K
+					</kbd>
+				</span>
+			</Tooltip>
 		</TooltipTrigger>
 	);
 }
