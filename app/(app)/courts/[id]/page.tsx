@@ -270,8 +270,8 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 										{data.personnel?.map((row, index) => {
 											return (
 												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">
 														<Link
 															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
 															href={`/${row.target.kind}s/${String(row.target.id)}`}
@@ -279,8 +279,8 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 															{row.target.name}
 														</Link>
 													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 												</tr>
 											);
 										})}
@@ -312,8 +312,8 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 										{data.locations?.map((row, index) => {
 											return (
 												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">
 														<Link
 															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
 															href={`/${row.target.kind}s/${String(row.target.id)}`}
@@ -321,8 +321,8 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 															{row.target.name}
 														</Link>
 													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 												</tr>
 											);
 										})}
@@ -354,8 +354,8 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 										{data.hierarchy?.map((row, index) => {
 											return (
 												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">
 														<Link
 															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
 															href={`/${row.target.kind}s/${String(row.target.id)}`}
@@ -363,8 +363,8 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 															{row.target.name}
 														</Link>
 													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 												</tr>
 											);
 										})}

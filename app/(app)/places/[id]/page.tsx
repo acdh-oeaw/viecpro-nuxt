@@ -180,9 +180,9 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 										{data.alternativeNames?.map((row, index) => {
 											return (
 												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 												</tr>
 											);
 										})}
@@ -281,8 +281,8 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 										{data.institutionRelations?.map((row, index) => {
 											return (
 												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">
 														<Link
 															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
 															href={`/${row.target.kind}s/${String(row.target.id)}`}
@@ -290,8 +290,8 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 															{row.target.name}
 														</Link>
 													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 												</tr>
 											);
 										})}
@@ -326,8 +326,8 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 										{data.personRelations?.map((row, index) => {
 											return (
 												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">
 														<Link
 															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
 															href={`/${row.target.kind}s/${String(row.target.id)}`}
@@ -335,8 +335,8 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 															{row.target.name}
 														</Link>
 													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 												</tr>
 											);
 										})}
@@ -371,8 +371,8 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 										{data.placeRelations?.map((row, index) => {
 											return (
 												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">
 														<Link
 															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
 															href={`/${row.target.kind}s/${String(row.target.id)}`}
@@ -380,8 +380,8 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 															{row.target.name}
 														</Link>
 													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
+													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
 												</tr>
 											);
 										})}
