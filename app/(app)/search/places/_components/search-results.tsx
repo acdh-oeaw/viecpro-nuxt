@@ -151,7 +151,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 				{hasPreviousPage || hasNextPage ? (
 					<span className="inline-flex items-center gap-x-6 sm:ml-auto">
 						<Link
-							className="inline-flex items-center gap-x-1.5 hover:underline disabled:opacity-50"
+							className="inline-flex items-center gap-x-1.5 hover:underline disabled:opacity-50 focus-visible:focus-outline"
 							href={createHref({
 								searchParams: { ...optimisticSearchFilters, page: searchResults.page - 1 },
 							})}
@@ -161,7 +161,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 							{previousPageLabel}
 						</Link>
 						<Link
-							className="inline-flex items-center gap-x-1.5 text-right hover:underline disabled:opacity-50"
+							className="inline-flex items-center gap-x-1.5 text-right hover:underline disabled:opacity-50 focus-visible:focus-outline"
 							href={createHref({
 								searchParams: { ...optimisticSearchFilters, page: searchResults.page + 1 },
 							})}
