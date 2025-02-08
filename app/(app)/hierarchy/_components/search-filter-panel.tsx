@@ -62,6 +62,10 @@ export function SearchFilterPanel(props: SearchFilterPanelProps): ReactNode {
 				onSelectionChange={(_id) => {
 					const id = _id as number | null;
 
+					if (id === (optimisticSearchFilters.id ?? null)) {
+						return;
+					}
+
 					if (id == null) {
 						const nextSearchFilters = {
 							...optimisticSearchFilters,

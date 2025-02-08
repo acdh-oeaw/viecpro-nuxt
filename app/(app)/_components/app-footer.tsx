@@ -85,7 +85,7 @@ export function AppFooter(): ReactNode {
 							return (
 								<li key={id} className="shrink-0">
 									<NavLink
-										className="focus-visible:focus-outline inline-block rounded-0.5"
+										className="focus-visible:focus-outline inline-block"
 										href={link.href}
 									>
 										<Icon className="size-6 text-neutral-400 transition hover:text-brand-600" />
@@ -103,7 +103,10 @@ export function AppFooter(): ReactNode {
 					{Object.entries(organisations).map(([id, link]) => {
 						return (
 							<li key={id} className="shrink-0">
-								<NavLink href={link.href}>
+								<NavLink
+									className="focus-visible:focus-outline focus-visible:outline-offset-4"
+									href={link.href}
+								>
 									<Image
 										alt=""
 										className={cn("w-auto object-contain", link.className)}
@@ -125,10 +128,7 @@ export function AppFooter(): ReactNode {
 						{Object.entries(links).map(([id, link]) => {
 							return (
 								<li key={id}>
-									<NavLink
-										className="focus-visible:focus-outline rounded-sm hover:underline"
-										href={link.href}
-									>
+									<NavLink className="focus-visible:focus-outline hover:underline" href={link.href}>
 										{link.label}
 									</NavLink>
 								</li>
@@ -139,10 +139,7 @@ export function AppFooter(): ReactNode {
 
 				<small className="text-sm">
 					&copy; {new Date().getUTCFullYear()}{" "}
-					<a
-						className="focus-visible:focus-outline rounded-sm hover:underline"
-						href={acdhLinks[locale].href}
-					>
+					<a className="focus-visible:focus-outline hover:underline" href={acdhLinks[locale].href}>
 						{acdhLinks[locale].label}
 					</a>
 				</small>

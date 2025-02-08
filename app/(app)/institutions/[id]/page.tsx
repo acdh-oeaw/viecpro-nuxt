@@ -109,7 +109,7 @@ export default async function InstitutionPage(
 
 						<TooltipTrigger>
 							<Link
-								className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200"
+								className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 focus-visible:focus-outline focus-visible:focus-outline-offset-0"
 								href={`/hierarchy?${String(createUrlSearchParams({ kind: "institution", id }))}`}
 							>
 								<NetworkIcon className="size-5 shrink-0 text-brand-500" />

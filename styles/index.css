@@ -170,4 +170,8 @@
 			scroll-behavior: auto !important;
 		}
 	}
+
+	.prose a:focus-visible {
+		@apply focus-outline;
+	}
 }

@@ -27,7 +27,7 @@ export function SidePanelToggle(props: SidePanelToggleProps): ReactNode {
 				aria-controls={id}
 				aria-expanded={isOpen}
 				className={cn(
-					"rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-500 transition hover:bg-brand-100 pressed:bg-brand-200",
+					"rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-500 transition hover:bg-brand-100 pressed:bg-brand-200 focus-visible:focus-outline focus-visible:focus-outline-offset-0",
 					className,
 				)}
 				onPress={toggle}

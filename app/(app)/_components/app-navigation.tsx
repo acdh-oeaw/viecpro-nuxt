@@ -105,7 +105,7 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 					<Button
 						className={cn(
 							"-mr-3 grid place-content-center rounded-lg p-3 transition",
-							"interactive focus-visible:focus-outline focus-visible:focus-outline-offset-0 hover:bg-brand-700 pressed:bg-brand-800",
+							"interactive focus-visible:focus-outline focus-visible:focus-outline-inverse focus-visible:focus-outline-offset-0 hover:bg-brand-700 pressed:bg-brand-800",
 						)}
 					>
 						<MenuIcon aria-hidden={true} className="size-6 shrink-0 text-white" />
