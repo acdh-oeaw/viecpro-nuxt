@@ -267,7 +267,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 												<tr key={index} className="relative">
 													<td className="px-3 py-2.5 whitespace-nowrap">
 														<Link
-															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
+															className="after:absolute after:inset-0 hover:after:bg-brand-600/5 focus-visible:after:focus-outline focus-visible:after:-focus-outline-offset-2"
 															href={`/${row.target.kind}s/${String(row.target.id)}`}
 														>
 															{row.target.name}
@@ -462,7 +462,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
 														<td className="px-3 py-2.5 whitespace-nowrap">
 															<Link
-																className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
+																className="after:absolute after:inset-0 hover:after:bg-brand-600/5 focus-visible:after:focus-outline focus-visible:after:-focus-outline-offset-2"
 																href={`/${row.target.kind}s/${String(row.target.id)}`}
 															>
 																{row.target.name}
@@ -509,7 +509,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
 														<td className="px-3 py-2.5 whitespace-nowrap">
 															<Link
-																className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
+																className="after:absolute after:inset-0 hover:after:bg-brand-600/5 focus-visible:after:focus-outline focus-visible:after:-focus-outline-offset-2"
 																href={`/${row.target.kind}s/${String(row.target.id)}`}
 															>
 																{row.target.name}
@@ -604,7 +604,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
 														<td className="px-3 py-2.5 whitespace-nowrap">
 															<Link
-																className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
+																className="after:absolute after:inset-0 hover:after:bg-brand-600/5 focus-visible:after:focus-outline focus-visible:after:-focus-outline-offset-2"
 																href={`/${row.target.kind}s/${String(row.target.id)}`}
 															>
 																{row.target.name}
@@ -651,7 +651,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
 														<td className="px-3 py-2.5 whitespace-nowrap">
 															<Link
-																className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
+																className="after:absolute after:inset-0 hover:after:bg-brand-600/5 focus-visible:after:focus-outline focus-visible:after:-focus-outline-offset-2"
 																href={`/${row.target.kind}s/${String(row.target.id)}`}
 															>
 																{row.target.name}
