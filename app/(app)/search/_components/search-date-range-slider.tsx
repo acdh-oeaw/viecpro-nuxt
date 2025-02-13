@@ -21,7 +21,7 @@ export function SearchDateRangeSlider(props: SearchDateRangeSliderProps): ReactN
 	return (
 		<Slider
 			defaultValue={defaultValue}
-			formatOptions={{ style: "decimal" }}
+			formatOptions={{ notation: "compact" }}
 			maxValue={maxValue}
 			minValue={minValue}
 			onChangeEnd={onChange}
