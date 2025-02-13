@@ -2,8 +2,8 @@
 
 import "leaflet/dist/leaflet.css";
 
-import type { LatLngExpression } from "leaflet";
-import type { ReactNode } from "react";
+import type { LatLngExpression, Map as LeafletMap } from "leaflet";
+import { type ReactNode, useEffect, useRef } from "react";
 import { CircleMarker, MapContainer, TileLayer } from "react-leaflet";
 
 interface PointMapProps {
@@ -16,9 +16,18 @@ export function PointMap(props: PointMapProps): ReactNode {
 
 	const position: LatLngExpression = [latitude, longitude];
 
+	const mapRef = useRef<LeafletMap | null>(null);
+
+	useEffect(() => {
+		/** Attempt at fixing https://github.com/acdh-oeaw/viecpro-nuxt/issues/178. */
+		mapRef.current?.invalidateSize();
+	}, []);
+
 	return (
 		<div className="relative h-96 w-full overflow-hidden rounded-md border border-brand-100">
 			<MapContainer
+				key={position.join(",")}
+				ref={mapRef}
 				center={position}
 				className="absolute inset-0"
 				// scrollWheelZoom={false}
