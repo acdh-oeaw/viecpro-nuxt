@@ -146,21 +146,25 @@ export default async function InstitutionPage(
 
 						<DownloadMenu
 							columns={[
-								{ label: "ID", value: "id" },
-								{ label: t("name"), value: "name" },
-								{ label: t("expanded-name"), value: "expandedName" },
-								{ label: t("kind"), value: "kind" },
-								{ label: t("category"), value: "category" },
-								{ label: t("type"), value: "type" },
-								{ label: t("start-date"), value: "startDateWritten" },
-								{ label: t("end-date"), value: "endDateWritten" },
-								{ label: t("status"), value: "status" },
+								t("base-data"),
+								[
+									{ label: "ID", value: "id" },
+									{ label: t("name"), value: "name" },
+									{ label: t("expanded-name"), value: "expandedName" },
+									{ label: t("kind"), value: "kind" },
+									{ label: t("category"), value: "category" },
+									{ label: t("type"), value: "type" },
+									{ label: t("start-date"), value: "startDateWritten" },
+									{ label: t("end-date"), value: "endDateWritten" },
+									{ label: t("status"), value: "status" },
+								],
 							]}
 							data={data}
 							fileName={slugify(data.name)}
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
+							relations={[]}
 							xlsxLabel={t("download-xlsx")}
 							xlsxShortLabel={t("file-xlsx")}
 						/>

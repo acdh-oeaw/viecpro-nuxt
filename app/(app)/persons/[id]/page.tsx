@@ -147,22 +147,52 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 
 						<DownloadMenu
 							columns={[
-								{ label: "ID", value: "id" },
-								{ label: t("first-name"), value: "firstName" },
-								{ label: t("name"), value: "name" },
-								{ label: t("kind"), value: "kind" },
-								{ label: t("gender"), value: "gender" },
-								{ label: t("birth-date"), value: "startDateWritten" },
-								{ label: t("birth-place"), value: "placeOfBirth" },
-								{ label: t("death-date"), value: "endDateWritten" },
-								{ label: t("death-place"), value: "placeOfDeath" },
-								{ label: t("status"), value: "status" },
+								t("base-data"),
+								[
+									{ label: "ID", value: "id" },
+									{ label: t("first-name"), value: "firstName" },
+									{ label: t("name"), value: "name" },
+									{ label: t("kind"), value: "kind" },
+									{ label: t("gender"), value: "gender" },
+									{ label: t("birth-date"), value: "startDateWritten" },
+									{ label: t("birth-place"), value: "placeOfBirth" },
+									{ label: t("death-date"), value: "endDateWritten" },
+									{ label: t("death-place"), value: "placeOfDeath" },
+									{ label: t("status"), value: "status" },
+								],
 							]}
 							data={data}
 							fileName={slugify(data.name)}
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
+							relations={[
+								[
+									{ value: "academicTitles", label: t("academic-titles") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "courtFunctions", label: t("court-functions") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "otherRelationsCourt", label: t("other-relations-court") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+							]}
 							xlsxLabel={t("download-xlsx")}
 							xlsxShortLabel={t("file-xlsx")}
 						/>

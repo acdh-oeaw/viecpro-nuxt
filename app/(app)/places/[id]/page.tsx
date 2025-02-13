@@ -126,19 +126,23 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 
 						<DownloadMenu
 							columns={[
-								{ label: "ID", value: "id" },
-								{ label: t("name"), value: "name" },
-								{ label: t("kind"), value: "kind" },
-								{ label: t("category"), value: "category" },
-								{ label: t("latitude"), value: "latitude" },
-								{ label: t("longitude"), value: "longitude" },
-								{ label: t("status"), value: "status" },
+								t("base-data"),
+								[
+									{ label: "ID", value: "id" },
+									{ label: t("name"), value: "name" },
+									{ label: t("kind"), value: "kind" },
+									{ label: t("category"), value: "category" },
+									{ label: t("latitude"), value: "latitude" },
+									{ label: t("longitude"), value: "longitude" },
+									{ label: t("status"), value: "status" },
+								],
 							]}
 							data={data}
 							fileName={slugify(data.name)}
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
+							relations={[]}
 							xlsxLabel={t("download-xlsx")}
 							xlsxShortLabel={t("file-xlsx")}
 						/>
