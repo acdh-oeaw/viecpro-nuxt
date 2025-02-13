@@ -142,6 +142,15 @@
 		border: 0;
 	}
 
+	input[type="search"]:is(
+			::-webkit-search-cancel-button,
+			::-webkit-search-decoration,
+			::-webkit-search-results-button,
+			::-webkit-search-results-decoration
+		) {
+		display: none;
+	}
+
 	p {
 		text-wrap: pretty;
 	}
