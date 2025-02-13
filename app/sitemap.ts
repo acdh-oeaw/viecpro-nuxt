@@ -10,7 +10,7 @@ import { locales } from "@/config/i18n.config";
 const baseUrl = env.NEXT_PUBLIC_APP_BASE_URL;
 
 /**
- * Google supports up to 50.000 entries per sitemap file. Apps which need more that that can use
+ * Google supports up to 50.000 entries per sitemap file. Apps which need more than that can use
  * `generateSitemaps` to generate multiple sitemap files.
  *
  * @see https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap#generating-a-sitemap-using-code-js-ts

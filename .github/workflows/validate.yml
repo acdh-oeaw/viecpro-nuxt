@@ -107,6 +107,7 @@ jobs:
           NEXT_PUBLIC_API_BASE_URL: "${{ vars.NEXT_PUBLIC_API_BASE_URL }}"
           NEXT_PUBLIC_APP_BASE_URL: "http://localhost:3000"
           NEXT_PUBLIC_MATOMO_BASE_URL: "${{ vars.NEXT_PUBLIC_MATOMO_BASE_URL }}"
+          NEXT_PUBLIC_MATOMO_ID: "${{ vars.NEXT_PUBLIC_MATOMO_ID }}"
           NEXT_PUBLIC_REDMINE_ID: "${{ vars.SERVICE_ID }}"
           NEXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX:
             "${{ vars.NEXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX }}"
@@ -122,6 +123,7 @@ jobs:
           ENV_VALIDATION: "disabled"
           NEXT_PUBLIC_APP_BASE_URL: "http://localhost:3000"
           NEXT_PUBLIC_MATOMO_BASE_URL: "${{ vars.NEXT_PUBLIC_MATOMO_BASE_URL }}"
+          NEXT_PUBLIC_MATOMO_ID: "${{ vars.NEXT_PUBLIC_MATOMO_ID }}"
           NEXT_PUBLIC_REDMINE_ID: "${{ vars.SERVICE_ID }}"
 
       - uses: actions/upload-artifact@v4
