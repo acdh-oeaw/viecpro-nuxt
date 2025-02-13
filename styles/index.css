@@ -142,7 +142,8 @@
 		border: 0;
 	}
 
-	input[type="search"]:is(
+	input[type="search"]
+		:is(
 			::-webkit-search-cancel-button,
 			::-webkit-search-decoration,
 			::-webkit-search-results-button,
