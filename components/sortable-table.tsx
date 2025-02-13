@@ -125,7 +125,12 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 											const value = row[column.field] as { kind: string; id: string; name: string };
 
 											return (
-												<td key={column.field} className="px-3 py-2.5 whitespace-nowrap">
+												<td
+													key={column.field}
+													className="px-3 py-2.5 whitespace-nowrap truncate max-w-sm"
+													// @ts-expect-error TODO: fix a11y
+													title={value}
+												>
 													<Link
 														className="after:absolute after:inset-0 hover:after:bg-brand-600/5 focus-visible:after:focus-outline focus-visible:after:-focus-outline-offset-2"
 														href={`/${value.kind}s/${String(value.id)}`}
@@ -139,7 +144,12 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 										const value = row[column.field] as string | number | null;
 
 										return (
-											<td key={column.field} className="px-3 py-2.5 whitespace-nowrap">
+											<td
+												key={column.field}
+												className="px-3 py-2.5 whitespace-nowrap truncate max-w-sm"
+												// @ts-expect-error TODO: fix a11y
+												title={value}
+											>
 												{value}
 											</td>
 										);
