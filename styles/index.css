@@ -39,6 +39,10 @@
 	--color-brand-900: #2a3733;
 	--color-brand-950: #151e1c;
 
+	--color-status-green: oklch(63% 0.194 149.214deg);
+	--color-status-yellow: oklch(68% 0.162 75.834deg);
+	--color-status-red: oklch(58% 0.245 27.325deg);
+
 	--font-body: var(--_font-body, ui-sans-serif), system-ui, sans-serif;
 	--font-heading: var(--_font-heading, var(--font-body));
 
