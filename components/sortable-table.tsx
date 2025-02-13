@@ -96,7 +96,7 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 											}}
 											type="button"
 										>
-											<span className="uppercase">{column.label}</span>
+											<span className="uppercase whitespace-nowrap">{column.label}</span>
 											{column.sort === currentSortColumn.sort ? (
 												currentSortDirection === "desc" ? (
 													<SortDescIcon
