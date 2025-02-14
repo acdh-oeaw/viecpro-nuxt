@@ -159,23 +159,24 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 									{ label: t("death-date"), value: "endDateWritten" },
 									{ label: t("death-place"), value: "placeOfDeath" },
 									{ label: t("status"), value: "status" },
+									// { label: t("first-marriage"), value: "firstMarriage" },
+									{ label: t("confession"), value: "confession" },
+									// { label: t("alternative-birth-dates"), value: "alternativeBirthDates" },
+									// { label: t("alternative-death-dates"), value: "alternativeDeathDates" },
+									{ label: t("alternative-first-names"), value: "alternativeFirstNames" },
+									{ label: t("alternative-last-names"), value: "alternativeLastNames" },
 								],
 							]}
-							data={data}
+							data={{
+								...data,
+								allowance: data.allowance?.map((value) => {
+									return { value };
+								}),
+							}}
 							fileName={slugify(data.name)}
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
-							// allowance?: Array<string>;
-							// alternativeBirthDates?: Array<string>;
-							// alternativeDeathDates?: Array<string>;
-							// alternativeFirstNames?: Array<string>;
-							// alternativeLastNames?: Array<string>;
-							// confession?: Array<string>;
-							// firstMarriage?: string;
-							// hadCourts: Array<Entity<"institution">> | null;
-							// placeOfBirth: Entity<"place"> | null;
-							// placeOfDeath: Entity<"place"> | null;
 							relations={[
 								[
 									{ value: "academicTitles", label: t("academic-titles") },
@@ -276,6 +277,14 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
 									],
+								],
+								// [
+								// 	{ value: "hadCourts", label: t("had-courts") },
+								// 	[{ value: "name", label: t("name") }],
+								// ],
+								[
+									{ value: "allowance", label: t("allowance") },
+									[{ value: "value", label: t("value") }],
 								],
 							]}
 							xlsxLabel={t("download-xlsx")}

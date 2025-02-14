@@ -221,7 +221,8 @@
 		"section-court-related": "Bezüge zum Wiener Hof",
 		"section-data": "Stammdaten",
 		"start-date": "Beginn",
-		"status": "Bearbeitungsstatus"
+		"status": "Bearbeitungsstatus",
+		"value": "Betrag"
 	},
 	"PlacePage": {
 		"alternative-names": "Alternative Bezeichnungen",
