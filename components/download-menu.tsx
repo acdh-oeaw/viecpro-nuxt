@@ -52,7 +52,7 @@ export function DownloadMenu<T extends object>(props: DownloadMenuProps<T>): Rea
 					const content = data[value] as Array<IContent> | undefined;
 
 					if (content != null) {
-						sheets.push({ columns, content, sheet: label });
+						sheets.push({ columns, content, sheet: label.slice(0, 31) });
 					}
 				});
 
