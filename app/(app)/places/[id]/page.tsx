@@ -142,7 +142,43 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
-							relations={[]}
+							relations={[
+								[
+									{ value: "alternativeNames", label: t("alternative-names") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "institutionRelations", label: t("institution-relations") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "personRelations", label: t("person-relations") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "placeRelations", label: t("place-relations") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+							]}
 							xlsxLabel={t("download-xlsx")}
 							xlsxShortLabel={t("file-xlsx")}
 						/>

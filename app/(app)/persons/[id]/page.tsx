@@ -166,6 +166,16 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
+							// allowance?: Array<string>;
+							// alternativeBirthDates?: Array<string>;
+							// alternativeDeathDates?: Array<string>;
+							// alternativeFirstNames?: Array<string>;
+							// alternativeLastNames?: Array<string>;
+							// confession?: Array<string>;
+							// firstMarriage?: string;
+							// hadCourts: Array<Entity<"institution">> | null;
+							// placeOfBirth: Entity<"place"> | null;
+							// placeOfDeath: Entity<"place"> | null;
 							relations={[
 								[
 									{ value: "academicTitles", label: t("academic-titles") },
@@ -176,10 +186,85 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 									],
 								],
 								[
+									{ value: "honoraryTitles", label: t("honorary-titles") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "marriedNames", label: t("married-names") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{
+										value: "marriagesAndFamilyRelations",
+										label: t("marriages-and-family-relations"),
+									},
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "duplicates", label: t("duplicates") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
 									{ value: "courtFunctions", label: t("court-functions") },
 									[
 										{ value: "relationType", label: t("relation-type") },
 										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "personRelationsCourt", label: t("person-relations-court") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "relatedPlaces", label: t("related-places") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{
+										value: "relationsToChurchAndOrders",
+										label: t("relations-to-church-and-orders"),
+									},
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "nonCourtFunctions", label: t("non-court-functions") },
+									[
+										{ value: "relationType", label: t("relation-type") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
 									],

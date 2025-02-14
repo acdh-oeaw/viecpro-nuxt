@@ -164,7 +164,43 @@ export default async function InstitutionPage(
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
-							relations={[]}
+							relations={[
+								[
+									{ value: "alternativeNames", label: t("alternative-names") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "hierarchy", label: t("hierarchy") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "locations", label: t("locations") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "personnel", label: t("personnel") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+							]}
 							xlsxLabel={t("download-xlsx")}
 							xlsxShortLabel={t("file-xlsx")}
 						/>
