@@ -20,7 +20,7 @@ export function PointMap(props: PointMapProps): ReactNode {
 	const mapRef = useRef<LeafletMap | null>(null);
 
 	const context = use(DisclosureStateContext);
-	const isExpanded = context?.isExpanded ?? false
+	const isExpanded = context?.isExpanded ?? false;
 
 	useEffect(() => {
 		if (isExpanded) {
