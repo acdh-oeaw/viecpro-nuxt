@@ -146,7 +146,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 								[
 									{ value: "alternativeNames", label: t("alternative-names") },
 									[
-										{ value: "relationType", label: t("relation-type") },
+										{ value: "relationType", label: t("designation") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
 									],
@@ -154,7 +154,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 								[
 									{ value: "institutionRelations", label: t("institution-relations") },
 									[
-										{ value: "relationType", label: t("relation-type") },
+										{ value: "relationType", label: t("relation") },
 										{ value: "target.name", label: t("name") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
@@ -163,7 +163,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 								[
 									{ value: "personRelations", label: t("person-relations") },
 									[
-										{ value: "relationType", label: t("relation-type") },
+										{ value: "relationType", label: t("relation") },
 										{ value: "target.name", label: t("name") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
@@ -172,8 +172,8 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 								[
 									{ value: "placeRelations", label: t("place-relations") },
 									[
-										{ value: "relationType", label: t("relation-type") },
-										{ value: "target.name", label: t("name") },
+										{ value: "relationType", label: t("relation") },
+										{ value: "target.name", label: t("place") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
 									],

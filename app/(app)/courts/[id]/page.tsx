@@ -164,14 +164,14 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
 							relations={[
-								[
-									{ value: "alternativeNames", label: t("alternative-names") },
-									[
-										{ value: "relationType", label: t("relation-type") },
-										{ value: "startDateWritten", label: t("start-date") },
-										{ value: "endDateWritten", label: t("end-date") },
-									],
-								],
+								// [
+								// 	{ value: "alternativeNames", label: t("alternative-names") },
+								// 	[
+								// 		{ value: "relationType", label: t("relation-type") },
+								// 		{ value: "startDateWritten", label: t("start-date") },
+								// 		{ value: "endDateWritten", label: t("end-date") },
+								// 	],
+								// ],
 								[
 									{ value: "hierarchy", label: t("hierarchy") },
 									[
@@ -193,7 +193,7 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 								[
 									{ value: "personnel", label: t("personnel") },
 									[
-										{ value: "relationType", label: t("relation-type") },
+										{ value: "relationType", label: t("function") },
 										{ value: "target.name", label: t("name") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },

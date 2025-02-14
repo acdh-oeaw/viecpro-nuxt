@@ -168,7 +168,7 @@ export default async function InstitutionPage(
 								[
 									{ value: "alternativeNames", label: t("alternative-names") },
 									[
-										{ value: "relationType", label: t("relation-type") },
+										{ value: "relationType", label: t("designation") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
 									],
@@ -194,7 +194,7 @@ export default async function InstitutionPage(
 								[
 									{ value: "personnel", label: t("personnel") },
 									[
-										{ value: "relationType", label: t("relation-type") },
+										{ value: "relationType", label: t("function") },
 										{ value: "target.name", label: t("name") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },

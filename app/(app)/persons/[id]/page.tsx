@@ -181,7 +181,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								[
 									{ value: "academicTitles", label: t("academic-titles") },
 									[
-										{ value: "relationType", label: t("relation-type") },
+										{ value: "relationType", label: t("name") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
 									],
@@ -189,7 +189,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								[
 									{ value: "honoraryTitles", label: t("honorary-titles") },
 									[
-										{ value: "relationType", label: t("relation-type") },
+										{ value: "relationType", label: t("name") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
 									],
@@ -217,17 +217,16 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								[
 									{ value: "duplicates", label: t("duplicates") },
 									[
-										{ value: "relationType", label: t("relation-type") },
 										{ value: "target.name", label: t("name") },
-										{ value: "startDateWritten", label: t("start-date") },
-										{ value: "endDateWritten", label: t("end-date") },
+										{ value: "startDateWritten", label: t("birth-date") },
+										{ value: "endDateWritten", label: t("death-date") },
 									],
 								],
 								[
 									{ value: "courtFunctions", label: t("court-functions") },
 									[
-										{ value: "relationType", label: t("relation-type") },
-										{ value: "target.name", label: t("name") },
+										{ value: "relationType", label: t("function") },
+										{ value: "target.name", label: t("court") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
 									],
@@ -244,7 +243,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								[
 									{ value: "relatedPlaces", label: t("related-places") },
 									[
-										{ value: "relationType", label: t("relation-type") },
+										{ value: "relationType", label: t("relation") },
 										{ value: "target.name", label: t("name") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
@@ -257,7 +256,6 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 									},
 									[
 										{ value: "relationType", label: t("relation-type") },
-										{ value: "target.name", label: t("name") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
 									],
@@ -273,7 +271,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								[
 									{ value: "otherRelationsCourt", label: t("other-relations-court") },
 									[
-										{ value: "relationType", label: t("relation-type") },
+										{ value: "relationType", label: t("name") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
 									],
