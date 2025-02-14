@@ -37,6 +37,7 @@
 		"title": "Bibliographie"
 	},
 	"CourtPage": {
+		"alternative-names": "Alternative Bezeichnungen",
 		"base-data": "Stammdaten",
 		"category": "Kategorie",
 		"citation": "Zitationsvorschlag",
