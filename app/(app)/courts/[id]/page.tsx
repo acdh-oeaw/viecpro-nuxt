@@ -144,22 +144,62 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 
 						<DownloadMenu
 							columns={[
-								{ label: "ID", value: "id" },
-								{ label: t("name"), value: "name" },
-								// { label: t("expanded-name"), value: "expandedName" },
-								{ label: t("owner"), value: "owner" },
-								{ label: t("kind"), value: "kind" },
-								{ label: t("category"), value: "category" },
-								{ label: t("type"), value: "type" },
-								{ label: t("start-date"), value: "startDateWritten" },
-								{ label: t("end-date"), value: "endDateWritten" },
-								{ label: t("status"), value: "status" },
+								t("base-data"),
+								[
+									{ label: "ID", value: "id" },
+									{ label: t("name"), value: "name" },
+									{ label: t("expanded-name"), value: "expandedName" },
+									{ label: t("owner"), value: "owner" },
+									{ label: t("kind"), value: "kind" },
+									{ label: t("category"), value: "category" },
+									{ label: t("type"), value: "type" },
+									{ label: t("start-date"), value: "startDateWritten" },
+									{ label: t("end-date"), value: "endDateWritten" },
+									{ label: t("status"), value: "status" },
+								],
 							]}
 							data={data}
 							fileName={slugify(data.name)}
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
+							relations={[
+								// [
+								// 	{ value: "alternativeNames", label: t("alternative-names") },
+								// 	[
+								// 		{ value: "relationType", label: t("relation-type") },
+								// 		{ value: "startDateWritten", label: t("start-date") },
+								// 		{ value: "endDateWritten", label: t("end-date") },
+								// 	],
+								// ],
+								[
+									{ value: "hierarchy", label: t("hierarchy") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "locations", label: t("locations") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "personnel", label: t("personnel") },
+									[
+										{ value: "relationType", label: t("function") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+							]}
 							xlsxLabel={t("download-xlsx")}
 							xlsxShortLabel={t("file-xlsx")}
 						/>

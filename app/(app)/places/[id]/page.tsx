@@ -127,19 +127,59 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 
 						<DownloadMenu
 							columns={[
-								{ label: "ID", value: "id" },
-								{ label: t("name"), value: "name" },
-								{ label: t("kind"), value: "kind" },
-								{ label: t("category"), value: "category" },
-								{ label: t("latitude"), value: "latitude" },
-								{ label: t("longitude"), value: "longitude" },
-								{ label: t("status"), value: "status" },
+								t("base-data"),
+								[
+									{ label: "ID", value: "id" },
+									{ label: t("name"), value: "name" },
+									{ label: t("kind"), value: "kind" },
+									{ label: t("category"), value: "category" },
+									{ label: t("latitude"), value: "latitude" },
+									{ label: t("longitude"), value: "longitude" },
+									{ label: t("status"), value: "status" },
+								],
 							]}
 							data={data}
 							fileName={slugify(data.name)}
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
+							relations={[
+								[
+									{ value: "alternativeNames", label: t("alternative-names") },
+									[
+										{ value: "relationType", label: t("designation") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "institutionRelations", label: t("institution-relations") },
+									[
+										{ value: "relationType", label: t("relation") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "personRelations", label: t("person-relations") },
+									[
+										{ value: "relationType", label: t("relation") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "placeRelations", label: t("place-relations") },
+									[
+										{ value: "relationType", label: t("relation") },
+										{ value: "target.name", label: t("place") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+							]}
 							xlsxLabel={t("download-xlsx")}
 							xlsxShortLabel={t("file-xlsx")}
 						/>

@@ -147,22 +147,144 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 
 						<DownloadMenu
 							columns={[
-								{ label: "ID", value: "id" },
-								{ label: t("first-name"), value: "firstName" },
-								{ label: t("name"), value: "name" },
-								{ label: t("kind"), value: "kind" },
-								{ label: t("gender"), value: "gender" },
-								{ label: t("birth-date"), value: "startDateWritten" },
-								{ label: t("birth-place"), value: "placeOfBirth" },
-								{ label: t("death-date"), value: "endDateWritten" },
-								{ label: t("death-place"), value: "placeOfDeath" },
-								{ label: t("status"), value: "status" },
+								t("base-data"),
+								[
+									{ label: "ID", value: "id" },
+									{ label: t("first-name"), value: "firstName" },
+									{ label: t("name"), value: "name" },
+									{ label: t("kind"), value: "kind" },
+									{ label: t("gender"), value: "gender" },
+									{ label: t("birth-date"), value: "startDateWritten" },
+									{ label: t("birth-place"), value: "placeOfBirth" },
+									{ label: t("death-date"), value: "endDateWritten" },
+									{ label: t("death-place"), value: "placeOfDeath" },
+									{ label: t("status"), value: "status" },
+									// { label: t("first-marriage"), value: "firstMarriage" },
+									{ label: t("confession"), value: "confession" },
+									// { label: t("alternative-birth-dates"), value: "alternativeBirthDates" },
+									// { label: t("alternative-death-dates"), value: "alternativeDeathDates" },
+									{ label: t("alternative-first-names"), value: "alternativeFirstNames" },
+									{ label: t("alternative-last-names"), value: "alternativeLastNames" },
+								],
 							]}
-							data={data}
+							data={{
+								...data,
+								allowance: data.allowance?.map((value) => {
+									return { value };
+								}),
+							}}
 							fileName={slugify(data.name)}
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
+							relations={[
+								[
+									{ value: "academicTitles", label: t("academic-titles") },
+									[
+										{ value: "relationType", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "honoraryTitles", label: t("honorary-titles") },
+									[
+										{ value: "relationType", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "marriedNames", label: t("married-names") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{
+										value: "marriagesAndFamilyRelations",
+										label: t("marriages-and-family-relations"),
+									},
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "duplicates", label: t("duplicates") },
+									[
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("birth-date") },
+										{ value: "endDateWritten", label: t("death-date") },
+									],
+								],
+								[
+									{ value: "courtFunctions", label: t("court-functions") },
+									[
+										{ value: "relationType", label: t("function") },
+										{ value: "target.name", label: t("court") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "personRelationsCourt", label: t("person-relations-court") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "relatedPlaces", label: t("related-places") },
+									[
+										{ value: "relationType", label: t("relation") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{
+										value: "relationsToChurchAndOrders",
+										label: t("relations-to-church-and-orders"),
+									},
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "nonCourtFunctions", label: t("non-court-functions") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "otherRelationsCourt", label: t("other-relations-court") },
+									[
+										{ value: "relationType", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								// [
+								// 	{ value: "hadCourts", label: t("had-courts") },
+								// 	[{ value: "name", label: t("name") }],
+								// ],
+								[
+									{ value: "allowance", label: t("allowance") },
+									[{ value: "value", label: t("value") }],
+								],
+							]}
 							xlsxLabel={t("download-xlsx")}
 							xlsxShortLabel={t("file-xlsx")}
 						/>
