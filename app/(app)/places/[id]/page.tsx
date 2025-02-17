@@ -3,7 +3,7 @@ import slugify from "@sindresorhus/slugify";
 import { InfoIcon, StickyNoteIcon } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { Fragment, type ReactNode } from "react";
 import { Errors } from "typesense";
 
@@ -61,6 +61,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 	const id = decodeURIComponent(_id);
 
 	const t = await getTranslations("PlacePage");
+	const format = await getFormatter();
 
 	const data = await getPlace(id);
 
@@ -161,31 +162,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 							isDisabled={!isNonEmptyArray(data.alternativeNames)}
 							label={t("alternative-names")}
 						>
-							<SortableTable
-								columns={[
-									{
-										field: "relationType",
-										label: t("designation"),
-										sort: "relationType",
-										order: "string",
-									},
-									{
-										field: "startDateWritten",
-										label: t("start-date"),
-										sort: "startDate",
-										order: "number",
-									},
-									{
-										field: "endDateWritten",
-										label: t("end-date"),
-										sort: "endDate",
-										order: "number",
-									},
-								]}
-								nextPageLabel={t("next-page")}
-								previousPageLabel={t("previous-page")}
-								rows={data.alternativeNames ?? []}
-							/>
+							{format.list(data.alternativeNames ?? [])}
 						</Collapsible>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.references)} label={t("references")}>
