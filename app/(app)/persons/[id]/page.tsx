@@ -256,6 +256,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 									},
 									[
 										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
 									],
@@ -741,6 +742,12 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 											field: "relationType",
 											label: t("relation-type"),
 											sort: "relationType",
+											order: "string",
+										},
+										{
+											field: "target",
+											label: t("name"),
+											sort: "target",
 											order: "string",
 										},
 										{
