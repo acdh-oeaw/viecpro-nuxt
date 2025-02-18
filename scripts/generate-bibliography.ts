@@ -7,7 +7,7 @@
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
-import { isNonEmptyString, log } from "@acdh-oeaw/lib";
+import { groupBy, isNonEmptyString, log } from "@acdh-oeaw/lib";
 
 import { getZoteroItems } from "@/app/(app)/documentation/bibliography/_lib/zotero";
 
@@ -15,23 +15,32 @@ async function generate() {
 	const items = await getZoteroItems();
 
 	const bibliography = items.data.map((item) => {
-		const { key, shortTitle, title, url } = item.data;
-		/**
-		 * Zotero collection has full citation info in the `shortTitle` field.
-		 * However, a few entries don't have a `shortTitle`.
-		 */
-		return { key, citation: shortTitle || title, url: isNonEmptyString(url.trim()) ? url : null };
+		const { key, shortTitle, tags, title, url } = item.data;
+
+		return {
+			key,
+			/**
+			 * Zotero collection has full citation info in the `shortTitle` field.
+			 * However, a few entries don't have a `shortTitle`.
+			 */
+			citation: shortTitle || title,
+			url: isNonEmptyString(url?.trim()) ? url : null,
+			tags: tags.map((tag) => {
+				return tag.tag.replace(/^(\d)_/, "$1. ");
+			}),
+		};
 	});
 
 	bibliography.sort((a, z) => {
 		return a.citation.localeCompare(z.citation);
 	});
 
-	await writeFile(
-		join(process.cwd(), "public", "bibliography.json"),
-		JSON.stringify(bibliography),
-		{ encoding: "utf-8" },
-	);
+	const grouped = groupBy(bibliography, (entry) => {
+		return entry.tags;
+	});
+
+	const outputFilePah = join(process.cwd(), "public", "bibliography.json");
+	await writeFile(outputFilePah, JSON.stringify(grouped), { encoding: "utf-8" });
 }
 
 generate()

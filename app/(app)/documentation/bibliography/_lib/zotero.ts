@@ -10,8 +10,9 @@ interface ZoteroItem {
 	data: {
 		key: string;
 		shortTitle: string;
+		tags: Array<{ tag: string }>;
 		title: string;
-		url: string;
+		url: string | null;
 	};
 }
 
