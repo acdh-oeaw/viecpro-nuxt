@@ -93,10 +93,6 @@ export default async function LocaleLayout(props: Readonly<LocaleLayoutProps>): 
 					})}
 				/>
 
-				<AnalyticsScript baseUrl={env.NEXT_PUBLIC_MATOMO_BASE_URL} id={env.NEXT_PUBLIC_MATOMO_ID} />
-
-				<SkipLink targetId={id}>{t("skip-to-main-content")}</SkipLink>
-
 				{/**
 				 * @see https://react-spectrum.adobe.com/react-aria/ssr.html#optimizing-bundle-size
 				 *
@@ -107,6 +103,13 @@ export default async function LocaleLayout(props: Readonly<LocaleLayoutProps>): 
 				<Translations locale={locale} />
 
 				<Providers locale={locale} messages={errorPageMessages}>
+					<AnalyticsScript
+						baseUrl={env.NEXT_PUBLIC_MATOMO_BASE_URL}
+						id={env.NEXT_PUBLIC_MATOMO_ID}
+					/>
+
+					<SkipLink targetId={id}>{t("skip-to-main-content")}</SkipLink>
+
 					<AppLayout>
 						<AppHeader />
 						{children}
