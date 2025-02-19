@@ -75,3 +75,12 @@ bookworm based linux environment -, and can be updated with:
 ```bash
 pnpm run test:e2e:update-snapshots
 ```
+
+## how to re-generate bibliography
+
+the bibliography is fetched from zotero via script. this does _not_ happen automatically on every
+build. to re-generate the bibliography, run:
+
+```bash
+pnpm run generate:bibliography
+```
