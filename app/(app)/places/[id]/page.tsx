@@ -190,7 +190,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 					<section className="row-span-2 grid content-start gap-y-3">
 						<h2 className="text-2xl text-brand-600">{t("section-data")}</h2>
 
-						<dl className="mb-6 grid grid-cols-[auto_auto] justify-start gap-x-8 gap-y-2">
+						<dl className="mb-6 grid grid-cols-[auto_1fr] justify-start gap-x-8 gap-y-2">
 							<dt className="text-neutral-600">{t("category")}:</dt>
 							<dd>{data.category}</dd>
 
@@ -198,12 +198,12 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 							<dd>{[data.latitude, data.longitude].filter(isNonEmptyString).join(", ")}</dd>
 
 							{data.latitude != null && data.longitude != null ? (
-								<Fragment>
+								<div className="col-span-2 h-96">
 									<dt className="sr-only">{t("map")}</dt>
 									<dd>
 										<PointMap latitude={data.latitude} longitude={data.longitude} />
 									</dd>
-								</Fragment>
+								</div>
 							) : null}
 						</dl>
 

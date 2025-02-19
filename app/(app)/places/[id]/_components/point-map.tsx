@@ -17,7 +17,7 @@ export function PointMap(props: PointMapProps): ReactNode {
 	const position: LatLngExpression = [latitude, longitude];
 
 	return (
-		<div className="relative h-96 w-full overflow-hidden rounded-md border border-brand-100">
+		<div className="relative h-96 w-full overflow-hidden rounded-md border border-brand-300">
 			<MapContainer
 				center={position}
 				className="absolute inset-0"
