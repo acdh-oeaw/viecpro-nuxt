@@ -196,6 +196,15 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 
 							<dt className="text-neutral-600">{t("coordinates")}:</dt>
 							<dd>{[data.latitude, data.longitude].filter(isNonEmptyString).join(", ")}</dd>
+
+							{data.latitude != null && data.longitude != null ? (
+								<Fragment>
+									<dt className="sr-only">{t("map")}</dt>
+									<dd>
+										<PointMap latitude={data.latitude} longitude={data.longitude} />
+									</dd>
+								</Fragment>
+							) : null}
 						</dl>
 
 						<Collapsible
@@ -252,17 +261,6 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 									);
 								})}
 							</ul>
-						</Collapsible>
-
-						<Collapsible
-							/** Needs to be expanded initially because leaflet does not seem to properly initialize when rendered in a hidden container. */
-							defaultExpanded={data.latitude != null && data.longitude != null}
-							isDisabled={data.latitude == null || data.longitude == null}
-							label={t("map")}
-						>
-							{data.latitude != null && data.longitude != null ? (
-								<PointMap latitude={data.latitude} longitude={data.longitude} />
-							) : null}
 						</Collapsible>
 					</section>
 
