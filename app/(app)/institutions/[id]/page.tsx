@@ -48,7 +48,8 @@ export async function generateMetadata(
 		const data = await getInstitution(id);
 
 		const metadata: Metadata = {
-			title: data.expandedName,
+			// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+			title: data.expandedName || data.name,
 		};
 
 		return metadata;
