@@ -45,16 +45,17 @@ export default async function SearchCourtsPage(
 			<SearchSidePanel
 				categoryFacetFilterLabel={t("facets.filter.category")}
 				categoryFacetLabel={t("facets.category")}
+				closeLabel={t("close-search-filter-panel")}
 				dateRangeLabel={t("date-range.label")}
 				emptyDateCheckBoxLabel={t("date-range.empty-date-label")}
 				label={t("search-filters")}
+				openLabel={t("open-search-filter-panel")}
 				searchFilters={searchFilters}
 				searchResults={searchResults}
 				searchTextFieldLabel={t("search")}
 				statusFacetFilterLabel={t("facets.filter.status")}
 				statusFacetLabel={t("facets.status")}
 				thumbLabels={[t("date-range.start"), t("date-range.end")]}
-				toggleLabel={t("toggle-sidepanel")}
 			/>
 
 			<MainContent className="min-w-0">
@@ -63,7 +64,11 @@ export default async function SearchCourtsPage(
 
 					<div className="flex min-h-14 items-center gap-x-6 border-b border-brand-100 px-2.5 py-2 text-brand-600 xs:px-6">
 						<div className="inline-flex items-center gap-x-4 text-xs font-medium sm:text-sm">
-							<SidePanelToggle className="block lg:hidden" label={t("toggle-sidepanel")} />
+							<SidePanelToggle
+								className="block lg:hidden"
+								closeLabel={t("close-search-filter-panel")}
+								openLabel={t("open-search-filter-panel")}
+							/>
 
 							<div className="flex items-center gap-x-1.5 text-brand-600">
 								<span>{t("search")}</span>

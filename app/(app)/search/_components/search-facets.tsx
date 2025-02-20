@@ -153,7 +153,7 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 				<SearchField className="group grid gap-y-2" onChange={onFilter} value={filterSearchTerm}>
 					<Label className="sr-only">{filterLabel}</Label>
 					<div className="relative">
-						<Input className="w-full border border-brand-100 py-0.5 pl-3 pr-9 bg-white" />
+						<Input className="w-full border border-brand-100 py-0.5 pl-3 pr-9 bg-white focus-visible:focus-outline focus-visible:focus-outline-offset-0" />
 						<Button className="absolute inset-y-0 right-3 group-empty:hidden">
 							<XIcon aria-hidden={true} className="size-4 text-brand-600" />
 						</Button>

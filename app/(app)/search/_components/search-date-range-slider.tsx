@@ -21,7 +21,7 @@ export function SearchDateRangeSlider(props: SearchDateRangeSliderProps): ReactN
 	return (
 		<Slider
 			defaultValue={defaultValue}
-			formatOptions={{ style: "decimal" }}
+			formatOptions={{ notation: "compact" }}
 			maxValue={maxValue}
 			minValue={minValue}
 			onChangeEnd={onChange}
@@ -38,17 +38,17 @@ export function SearchDateRangeSlider(props: SearchDateRangeSliderProps): ReactN
 					}}
 				</SliderOutput>
 			</div>
-			<SliderTrack className="relative h-7 w-full">
+			<SliderTrack className="relative h-5 w-full">
 				{({ state }) => {
 					return (
 						<Fragment>
-							<div className="absolute top-1/2 h-1 w-full translate-y-1/2 rounded-full bg-brand-600" />
+							<div className="absolute top-1/2 h-1 w-full -translate-y-1/2 rounded-full bg-brand-600" />
 							<div
-								className="absolute top-1/2 h-1 translate-y-1/2 rounded-full bg-brand-100"
+								className="absolute top-1/2 h-1 -translate-y-1/2 rounded-full bg-brand-100"
 								style={{ width: `${String(state.getThumbPercent(0) * 100)}%` }}
 							/>
 							<div
-								className="absolute right-0 top-1/2 h-1 translate-y-1/2 rounded-full bg-brand-100"
+								className="absolute right-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-brand-100"
 								style={{ width: `${String(100 - state.getThumbPercent(1) * 100)}%` }}
 							/>
 							{state.values.map((_, index) => {
@@ -56,7 +56,7 @@ export function SearchDateRangeSlider(props: SearchDateRangeSliderProps): ReactN
 									<SliderThumb
 										key={index}
 										aria-label={thumbLabels[index]}
-										className="top-1/2 size-5 rounded-full border border-brand-300 bg-brand-50 shadow-md transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-600 dragging:border-brand-600"
+										className="top-1/2 size-5 rounded-full border border-brand-300 bg-brand-50 shadow-md transition focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-brand-600 dragging:border-brand-600"
 										index={index}
 										name={names[index]}
 									/>

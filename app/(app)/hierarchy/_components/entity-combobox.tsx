@@ -52,8 +52,8 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 				{label}
 			</Label>
 
-			<div className="relative inline-flex w-full items-center justify-between overflow-hidden rounded-md border border-brand-100 bg-white has-[disabled]:cursor-not-allowed sm:min-w-96">
-				<Input className="flex-1 h-9 py-2.5 pl-4 pr-9 leading-none outline-none disabled:pointer-events-none" />
+			<div className="relative inline-flex w-full items-center justify-between overflow-hidden rounded-md border border-brand-100 bg-white has-[disabled]:cursor-not-allowed sm:min-w-96 focus-within:focus-outline focus-within:focus-outline-offset-0">
+				<Input className="flex-1 py-2.5 pl-4 pr-9 leading-none outline-none disabled:pointer-events-none" />
 				<Button
 					aria-label={triggerLabel}
 					className="absolute inset-y-0 right-2 disabled:pointer-events-none"
@@ -68,14 +68,14 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 						{(item: AutocompleteItem) => {
 							return (
 								<ListBoxItem
-									className="relative flex w-full select-none items-center rounded-md pl-9 pr-6 py-1.5 hover:bg-brand-50 hover:outline-none selected:bg-brand-50 disabled:pointer-events-none disabled:text-neutral-500"
+									className="relative flex w-full select-none items-center rounded-md px-8 py-2 hover:bg-brand-50 hover:outline-none selected:bg-brand-50 disabled:pointer-events-none disabled:text-neutral-500 focus-visible:bg-brand-50"
 									textValue={item.label}
 								>
 									{({ isSelected }) => {
 										return (
 											<Fragment>
 												{isSelected ? (
-													<span className="absolute left-3 inline-flex items-center justify-center">
+													<span className="absolute left-2 inline-flex items-center justify-center">
 														<CheckIcon
 															aria-hidden={true}
 															className="size-4 shrink-0 text-brand-600"
@@ -83,7 +83,7 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 													</span>
 												) : null}
 												<div className="grid">
-													<span className="truncate">{item.label}</span>
+													<span>{item.label}</span>
 													<span className="text-xs text-neutral-600">
 														{legendLabels[item.kind]}
 													</span>

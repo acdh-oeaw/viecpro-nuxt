@@ -3,7 +3,7 @@ import slugify from "@sindresorhus/slugify";
 import { InfoIcon, StickyNoteIcon } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { Fragment, type ReactNode } from "react";
 import { Errors } from "typesense";
 
@@ -12,9 +12,9 @@ import { getPlace } from "@/app/(app)/places/[id]/_lib/data";
 import { StatusIndicator } from "@/app/(app)/search/_components/status-indicator";
 import { Collapsible } from "@/components/collapsible";
 import { DownloadMenu } from "@/components/download-menu";
-import { Link } from "@/components/link";
 import { MainContent } from "@/components/main-content";
 import { PopoverNote } from "@/components/popover-note";
+import { SortableTable } from "@/components/sortable-table";
 import { env } from "@/config/env.config";
 import { parseLinks } from "@/lib/parse-links";
 
@@ -61,6 +61,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 	const id = decodeURIComponent(_id);
 
 	const t = await getTranslations("PlacePage");
+	const format = await getFormatter();
 
 	const data = await getPlace(id);
 
@@ -126,19 +127,59 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 
 						<DownloadMenu
 							columns={[
-								{ label: "ID", value: "id" },
-								{ label: t("name"), value: "name" },
-								{ label: t("kind"), value: "kind" },
-								{ label: t("category"), value: "category" },
-								{ label: t("latitude"), value: "latitude" },
-								{ label: t("longitude"), value: "longitude" },
-								{ label: t("status"), value: "status" },
+								t("base-data"),
+								[
+									{ label: "ID", value: "id" },
+									{ label: t("name"), value: "name" },
+									{ label: t("kind"), value: "kind" },
+									{ label: t("category"), value: "category" },
+									{ label: t("latitude"), value: "latitude" },
+									{ label: t("longitude"), value: "longitude" },
+									{ label: t("status"), value: "status" },
+								],
 							]}
 							data={data}
 							fileName={slugify(data.name)}
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
+							relations={[
+								[
+									{ value: "alternativeNames", label: t("alternative-names") },
+									[
+										{ value: "relationType", label: t("designation") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "institutionRelations", label: t("institution-relations") },
+									[
+										{ value: "relationType", label: t("relation") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "personRelations", label: t("person-relations") },
+									[
+										{ value: "relationType", label: t("relation") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "placeRelations", label: t("place-relations") },
+									[
+										{ value: "relationType", label: t("relation") },
+										{ value: "target.name", label: t("place") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+							]}
 							xlsxLabel={t("download-xlsx")}
 							xlsxShortLabel={t("file-xlsx")}
 						/>
@@ -149,46 +190,28 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 					<section className="row-span-2 grid content-start gap-y-3">
 						<h2 className="text-2xl text-brand-600">{t("section-data")}</h2>
 
-						<dl className="mb-6 grid grid-cols-[auto_auto] justify-start gap-x-8 gap-y-2">
+						<dl className="mb-6 grid grid-cols-[auto_1fr] justify-start gap-x-8 gap-y-2">
 							<dt className="text-neutral-600">{t("category")}:</dt>
 							<dd>{data.category}</dd>
 
 							<dt className="text-neutral-600">{t("coordinates")}:</dt>
 							<dd>{[data.latitude, data.longitude].filter(isNonEmptyString).join(", ")}</dd>
+
+							{data.latitude != null && data.longitude != null ? (
+								<div className="col-span-2 h-96">
+									<dt className="sr-only">{t("map")}</dt>
+									<dd>
+										<PointMap latitude={data.latitude} longitude={data.longitude} />
+									</dd>
+								</div>
+							) : null}
 						</dl>
 
 						<Collapsible
 							isDisabled={!isNonEmptyArray(data.alternativeNames)}
 							label={t("alternative-names")}
 						>
-							<div className="w-full overflow-x-auto">
-								<table className="min-w-full text-brand-950 text-sm">
-									<thead>
-										<tr className="border-b border-brand-100">
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("designation")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("start-date")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("end-date")}
-											</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-neutral-200">
-										{data.alternativeNames?.map((row, index) => {
-											return (
-												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
-												</tr>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
+							{format.list(data.alternativeNames ?? [])}
 						</Collapsible>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.references)} label={t("references")}>
@@ -239,17 +262,6 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 								})}
 							</ul>
 						</Collapsible>
-
-						<Collapsible
-							/** Needs to be expanded initially because leaflet does not seem to properly initialize when rendered in a hidden container. */
-							defaultExpanded={data.latitude != null && data.longitude != null}
-							isDisabled={data.latitude == null || data.longitude == null}
-							label={t("map")}
-						>
-							{data.latitude != null && data.longitude != null ? (
-								<PointMap latitude={data.latitude} longitude={data.longitude} />
-							) : null}
-						</Collapsible>
 					</section>
 
 					<section className="row-span-2 grid content-start gap-y-3">
@@ -259,135 +271,111 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 							isDisabled={!isNonEmptyArray(data.institutionRelations)}
 							label={t("institution-relations")}
 						>
-							<div className="w-full overflow-x-auto">
-								<table className="min-w-full text-brand-950 text-sm">
-									<thead>
-										<tr className="border-b border-brand-100">
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("relation")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("name")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("start-date")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("end-date")}
-											</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-neutral-200">
-										{data.institutionRelations?.map((row, index) => {
-											return (
-												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">
-														<Link
-															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
-															href={`/${row.target.kind}s/${String(row.target.id)}`}
-														>
-															{row.target.name}
-														</Link>
-													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
-												</tr>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
+							<SortableTable
+								columns={[
+									{
+										field: "relationType",
+										label: t("relation"),
+										sort: "relationType",
+										order: "string",
+									},
+									{
+										field: "target",
+										label: t("name"),
+										sort: "target",
+										order: "string",
+									},
+									{
+										field: "startDateWritten",
+										label: t("start-date"),
+										sort: "startDate",
+										order: "number",
+									},
+									{
+										field: "endDateWritten",
+										label: t("end-date"),
+										sort: "endDate",
+										order: "number",
+									},
+								]}
+								nextPageLabel={t("next-page")}
+								previousPageLabel={t("previous-page")}
+								rows={data.institutionRelations ?? []}
+							/>
 						</Collapsible>
 
 						<Collapsible
 							isDisabled={!isNonEmptyArray(data.personRelations)}
 							label={t("person-relations")}
 						>
-							<div className="w-full overflow-x-auto">
-								<table className="min-w-full text-brand-950 text-sm">
-									<thead>
-										<tr className="border-b border-brand-100">
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("relation")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("name")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("start-date")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("end-date")}
-											</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-neutral-200">
-										{data.personRelations?.map((row, index) => {
-											return (
-												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">
-														<Link
-															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
-															href={`/${row.target.kind}s/${String(row.target.id)}`}
-														>
-															{row.target.name}
-														</Link>
-													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
-												</tr>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
+							<SortableTable
+								columns={[
+									{
+										field: "relationType",
+										label: t("relation"),
+										sort: "relationType",
+										order: "string",
+									},
+									{
+										field: "target",
+										label: t("name"),
+										sort: "target",
+										order: "string",
+									},
+									{
+										field: "startDateWritten",
+										label: t("start-date"),
+										sort: "startDate",
+										order: "number",
+									},
+									{
+										field: "endDateWritten",
+										label: t("end-date"),
+										sort: "endDate",
+										order: "number",
+									},
+								]}
+								nextPageLabel={t("next-page")}
+								previousPageLabel={t("previous-page")}
+								rows={data.personRelations ?? []}
+							/>
 						</Collapsible>
 
 						<Collapsible
 							isDisabled={!isNonEmptyArray(data.placeRelations)}
 							label={t("place-relations")}
 						>
-							<div className="w-full overflow-x-auto">
-								<table className="min-w-full text-brand-950 text-sm">
-									<thead>
-										<tr className="border-b border-brand-100">
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("relation")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("place")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("start-date")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("end-date")}
-											</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-neutral-200">
-										{data.placeRelations?.map((row, index) => {
-											return (
-												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">
-														<Link
-															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
-															href={`/${row.target.kind}s/${String(row.target.id)}`}
-														>
-															{row.target.name}
-														</Link>
-													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
-												</tr>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
+							<SortableTable
+								columns={[
+									{
+										field: "relationType",
+										label: t("relation"),
+										sort: "relationType",
+										order: "string",
+									},
+									{
+										field: "target",
+										label: t("place"),
+										sort: "target",
+										order: "string",
+									},
+									{
+										field: "startDateWritten",
+										label: t("start-date"),
+										sort: "startDate",
+										order: "number",
+									},
+									{
+										field: "endDateWritten",
+										label: t("end-date"),
+										sort: "endDate",
+										order: "number",
+									},
+								]}
+								nextPageLabel={t("next-page")}
+								previousPageLabel={t("previous-page")}
+								rows={data.placeRelations ?? []}
+							/>
 						</Collapsible>
 					</section>
 				</div>

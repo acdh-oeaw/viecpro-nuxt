@@ -55,7 +55,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 
 	return (
 		<div className="w-full">
-			<div className="w-full overflow-x-auto xs:px-4 xs:pb-4">
+			<div className="w-full overflow-x-auto outline-none xs:px-4 xs:pb-4">
 				<table className="min-w-full text-sm text-brand-950">
 					<thead>
 						<tr className="sticky top-0 border-b border-brand-100 bg-white text-left text-xs font-bold tracking-wider text-brand-600">
@@ -89,7 +89,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 								return (
 									<th key={column.field} className={column.field === "status" ? "w-20" : undefined}>
 										<button
-											className="inline-flex w-full items-center justify-between gap-x-4 px-4 py-3 transition hover:bg-brand-50"
+											className="inline-flex w-full items-center justify-between gap-x-4 px-4 py-3 transition hover:bg-brand-50 focus-visible:focus-outline focus-visible:-focus-outline-offset-2"
 											onClick={onSortChange}
 											type="button"
 										>
@@ -129,7 +129,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 													<StatusIndicator status={searchResult[column.field]} />
 												) : column.field === linkField ? (
 													<Link
-														className="after:absolute after:inset-0 after:transition hover:after:bg-brand-500/15"
+														className="after:absolute after:inset-0 after:transition hover:after:bg-brand-500/15 focus-visible:after:focus-outline focus-visible:after:-focus-outline-offset-2"
 														href={createHref({ pathname: `/institutions/${searchResult.id}` })}
 													>
 														{searchResult[column.field]}
@@ -152,7 +152,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 				{hasPreviousPage || hasNextPage ? (
 					<span className="inline-flex items-center gap-x-6 sm:ml-auto">
 						<Link
-							className="inline-flex items-center gap-x-1.5 hover:underline disabled:opacity-50"
+							className="inline-flex items-center gap-x-1.5 hover:underline disabled:opacity-50 focus-visible:focus-outline"
 							href={createHref({
 								searchParams: { ...optimisticSearchFilters, page: searchResults.page - 1 },
 							})}
@@ -162,7 +162,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 							{previousPageLabel}
 						</Link>
 						<Link
-							className="inline-flex items-center gap-x-1.5 text-right hover:underline disabled:opacity-50"
+							className="inline-flex items-center gap-x-1.5 text-right hover:underline disabled:opacity-50 focus-visible:focus-outline"
 							href={createHref({
 								searchParams: { ...optimisticSearchFilters, page: searchResults.page + 1 },
 							})}

@@ -1,3 +1,4 @@
+import { cn } from "@acdh-oeaw/style-variants";
 import {
 	BookTextIcon,
 	CalendarRangeIcon,
@@ -85,9 +86,15 @@ export default async function SearchLayout(props: Readonly<SearchLayoutProps>): 
 									<li key={id} className="flex">
 										<TooltipTrigger>
 											<NavLink
-												className="focus-visible:focus-outline focus-visible:-focus-outline-offset-2 inline-block aspect-square border border-transparent p-3 transition aria-[current]:border-brand-100 aria-[current]:bg-brand-100 hover:border-brand-100 hover:bg-brand-100 disabled:opacity-50 xs:p-4"
-												href={link.href}
-												isDisabled={link.isDisabled}
+												className={cn(
+													"focus-visible:focus-outline focus-visible:-focus-outline-offset-2 inline-block aspect-square border border-transparent p-3 transition aria-[current]:border-brand-100 aria-[current]:bg-brand-100 hover:border-brand-100 hover:bg-brand-100 disabled:opacity-50 xs:p-4",
+													link.isDisabled && "opacity-50 cursor-not-allowed",
+												)}
+												/**
+												 * Not using `isDisabled` prop because that would make the element not
+												 * focusable and thus not allow tooltips.
+												 */
+												href={link.isDisabled ? undefined : link.href}
 											>
 												<Icon aria-hidden={true} className="size-5 shrink-0 xs:size-6" />
 												<span className="sr-only">{link.label}</span>

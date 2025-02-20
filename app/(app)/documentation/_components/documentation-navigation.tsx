@@ -18,7 +18,7 @@ export async function DocumentationNavigation(): Promise<ReactNode> {
 					return (
 						<li key={link.id}>
 							<NavLink
-								className="aria-[current]:font-medium hover:underline"
+								className="aria-[current]:font-medium hover:underline focus-visible:focus-outline"
 								href={`/documentation/${link.id}`}
 							>
 								{link.label}

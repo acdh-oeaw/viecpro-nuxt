@@ -40,6 +40,8 @@ export interface LinkProps
 }
 
 export function Link(props: Readonly<LinkProps>): ReactNode {
+	const { className: _, ...linkProps } = props;
+
 	const forwardedRef = props.ref;
 	const ref = useRef<HTMLAnchorElement | HTMLSpanElement>(null);
 	const linkRef = useObjectRef(
@@ -54,9 +56,9 @@ export function Link(props: Readonly<LinkProps>): ReactNode {
 	const isLinkElement = Boolean(props.href) && !isDisabled;
 	const ElementType: ElementType = isLinkElement ? LocaleLink : "span";
 
-	const { focusableProps } = useFocusable(props, linkRef);
-	const { pressProps, isPressed } = usePress({ ...props, ref: linkRef });
-	const { hoverProps, isHovered } = useHover(props);
+	const { focusableProps } = useFocusable(linkProps, linkRef);
+	const { pressProps, isPressed } = usePress({ ...linkProps, ref: linkRef });
+	const { hoverProps, isHovered } = useHover(linkProps);
 	const { focusProps, isFocused, isFocusVisible } = useFocusRing();
 
 	const renderProps = useRenderProps({

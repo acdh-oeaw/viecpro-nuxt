@@ -13,7 +13,6 @@ export function HeadingIdPreview(props: Readonly<HeadingIdPreviewProps>): ReactN
 	const { children } = props;
 
 	return (
-		// @ts-expect-error Keystatic expects react v18 types.
 		<NotEditable className="inline">
 			<span className="border-brand-100 bg-brand-50 px-2 text-brand-500 opacity-50">
 				{"#"}

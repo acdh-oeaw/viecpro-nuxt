@@ -36,7 +36,7 @@ interface Reference {
 }
 
 interface PlaceDetails extends Place {
-	alternativeNames?: Array<RelationShort>;
+	alternativeNames?: Array<string>;
 	institutionRelations: Array<Relation<"institution">> | null;
 	latitude: number | null;
 	longitude: number | null;

@@ -1,6 +1,6 @@
 "use client";
 
-import type { IContent } from "json-as-xlsx";
+import type { IContent, IJsonSheet } from "json-as-xlsx";
 import { DownloadIcon, FileJsonIcon, FileSpreadsheetIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { Button, Menu, MenuItem, MenuTrigger, Popover } from "react-aria-components";
@@ -8,20 +8,30 @@ import { Button, Menu, MenuItem, MenuTrigger, Popover } from "react-aria-compone
 import { Tooltip, TooltipTrigger } from "@/components/tooltip";
 import { downloadJson } from "@/lib/download-json";
 
-interface DownloadMenuProps {
-	columns: Array<{ label: string; value: string }>;
-	data: object;
+interface DownloadMenuProps<T extends object> {
+	columns: [string, Array<{ label: string; value: string }>];
+	data: T;
 	fileName: string;
 	jsonLabel: string;
 	jsonShortLabel: string;
 	label: ReactNode;
+	relations: Array<[{ label: string; value: keyof T }, Array<{ label: string; value: string }>]>;
 	xlsxLabel: string;
 	xlsxShortLabel: string;
 }
 
-export function DownloadMenu(props: DownloadMenuProps): ReactNode {
-	const { columns, data, fileName, jsonLabel, jsonShortLabel, label, xlsxLabel, xlsxShortLabel } =
-		props;
+export function DownloadMenu<T extends object>(props: DownloadMenuProps<T>): ReactNode {
+	const {
+		columns: base,
+		data,
+		fileName,
+		jsonLabel,
+		jsonShortLabel,
+		label,
+		relations,
+		xlsxLabel,
+		xlsxShortLabel,
+	} = props;
 
 	async function onAction(key: "json" | "xlsx") {
 		switch (key) {
@@ -34,15 +44,19 @@ export function DownloadMenu(props: DownloadMenuProps): ReactNode {
 			case "xlsx": {
 				const { downloadXlsx } = await import("@/lib/download-xlsx");
 
-				downloadXlsx(
-					[
-						{
-							columns,
-							content: [data as IContent],
-						},
-					],
-					fileName,
-				);
+				const [sheet, columns] = base;
+
+				const sheets: Array<IJsonSheet> = [{ columns, content: [data as IContent], sheet }];
+
+				relations.forEach(([{ label, value }, columns]) => {
+					const content = data[value] as Array<IContent> | undefined;
+
+					if (content != null) {
+						sheets.push({ columns, content, sheet: label.slice(0, 31) });
+					}
+				});
+
+				downloadXlsx(sheets, fileName);
 
 				break;
 			}
@@ -52,13 +66,16 @@ export function DownloadMenu(props: DownloadMenuProps): ReactNode {
 	return (
 		<MenuTrigger>
 			<TooltipTrigger>
-				<Button className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 disabled:cursor-not-allowed disabled:opacity-50">
+				<Button className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:focus-outline focus-visible:focus-outline-offset-0">
 					<DownloadIcon className="size-5 shrink-0 text-brand-500" />
 					<span className="sr-only">{label}</span>
 				</Button>
 				<Tooltip placement="bottom">{label}</Tooltip>
 			</TooltipTrigger>
-			<Popover className="group min-w-[var(--trigger-width)] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2">
+			<Popover
+				className="group min-w-[var(--trigger-width)] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2"
+				placement="bottom right"
+			>
 				<Menu className="py-2 text-sm outline-none">
 					<MenuItem
 						className="flex cursor-default gap-x-2 rounded px-3 py-2 transition hover:bg-brand-50"

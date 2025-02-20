@@ -22,16 +22,17 @@ import { useRouter } from "@/lib/i18n/navigation";
 interface SearchSidePanelProps {
 	categoryFacetFilterLabel: string;
 	categoryFacetLabel: string;
+	closeLabel: string;
 	dateRangeLabel: string;
 	emptyDateCheckBoxLabel: string;
 	label: string;
+	openLabel: string;
 	searchFilters: SearchFilters;
 	searchResults: SearchResults<Institution>;
 	searchTextFieldLabel: string;
 	statusFacetFilterLabel: string;
 	statusFacetLabel: string;
 	thumbLabels: [string, string];
-	toggleLabel: string;
 	typeFacetFilterLabel: string;
 	typeFacetLabel: string;
 }
@@ -40,16 +41,17 @@ export function SearchSidePanel(props: SearchSidePanelProps): ReactNode {
 	const {
 		categoryFacetFilterLabel,
 		categoryFacetLabel,
+		closeLabel,
 		dateRangeLabel,
 		emptyDateCheckBoxLabel,
 		label,
+		openLabel,
 		searchFilters,
 		searchResults,
 		searchTextFieldLabel,
 		statusFacetFilterLabel,
 		statusFacetLabel,
 		thumbLabels,
-		toggleLabel,
 		typeFacetFilterLabel,
 		typeFacetLabel,
 	} = props;
@@ -92,7 +94,11 @@ export function SearchSidePanel(props: SearchSidePanelProps): ReactNode {
 						<Loader2Icon aria-hidden={true} className="size-4 shrink-0 animate-spin" />
 					) : null}
 				</h2>
-				<SidePanelToggle className="-mr-2 block lg:hidden" label={toggleLabel} />
+				<SidePanelToggle
+					className="-mr-2 block lg:hidden"
+					closeLabel={closeLabel}
+					openLabel={openLabel}
+				/>
 			</header>
 
 			<div className="grid gap-y-6 px-8 py-4" role="search">

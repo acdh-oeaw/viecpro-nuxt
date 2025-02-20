@@ -49,8 +49,6 @@ export const createDocumentation = createCollection("/documentation/", (paths, l
 				label: "Content",
 				options: {
 					...createContentFieldOptions(paths),
-					/** Prefer `<Link>` component. */
-					link: false,
 				},
 				components: {
 					...createFootnote(paths, locale),

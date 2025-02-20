@@ -63,7 +63,6 @@ export const createLinkButton = createComponent((paths, locale) => {
 			ContentView(props) {
 				const { children, value } = props;
 
-				// @ts-expect-error Keystatic expects react v18 types.
 				return <LinkButtonPreview link={value.link}>{children}</LinkButtonPreview>;
 			},
 		}),

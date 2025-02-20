@@ -196,7 +196,7 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 			<MenuTrigger>
 				<TooltipTrigger>
 					<Button
-						className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 disabled:cursor-not-allowed disabled:opacity-50"
+						className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:focus-outline focus-visible:focus-outline-offset-0"
 						isDisabled={status === "pending"}
 					>
 						{status === "pending" ? (

@@ -39,7 +39,7 @@ export function GraphTypeSelect(props: GraphTypeSelectProps): ReactNode {
 				{label}
 			</Label>
 
-			<Button className="inline-flex w-full items-center justify-between gap-x-2.5 rounded-md border border-brand-100 bg-white py-2.5 pl-4 pr-3 leading-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-w-96">
+			<Button className="inline-flex w-full items-center justify-between gap-x-2.5 rounded-md border border-brand-100 bg-white py-2.5 pl-4 pr-3 leading-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-w-96 focus-visible:focus-outline focus-visible:focus-outline-offset-0">
 				<SelectValue className="placeholder-shown:text-neutral-500" />
 				<ChevronDownIcon aria-hidden={true} className="size-4 shrink-0 text-brand-500" />
 			</Button>
@@ -49,7 +49,7 @@ export function GraphTypeSelect(props: GraphTypeSelectProps): ReactNode {
 					{(item) => {
 						return (
 							<ListBoxItem
-								className="relative flex w-full select-none items-center rounded-md pl-9 pr-6 py-1.5 hover:bg-brand-50 hover:outline-none selected:bg-brand-50 disabled:pointer-events-none disabled:text-neutral-500"
+								className="relative flex w-full select-none items-center rounded-md px-8 py-2 hover:bg-brand-50 hover:outline-none selected:bg-brand-50 disabled:pointer-events-none disabled:text-neutral-500 focus-visible:bg-brand-50"
 								textValue={item.label}
 							>
 								{({ isSelected }) => {

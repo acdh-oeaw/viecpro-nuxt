@@ -20,6 +20,7 @@ import { DownloadMenu } from "@/components/download-menu";
 import { Link } from "@/components/link";
 import { MainContent } from "@/components/main-content";
 import { PopoverNote } from "@/components/popover-note";
+import { SortableTable } from "@/components/sortable-table";
 import { Tooltip, TooltipTrigger } from "@/components/tooltip";
 import { env } from "@/config/env.config";
 import { parseLinks } from "@/lib/parse-links";
@@ -47,7 +48,8 @@ export async function generateMetadata(
 		const data = await getInstitution(id);
 
 		const metadata: Metadata = {
-			title: data.expandedName,
+			// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+			title: data.expandedName || data.name,
 		};
 
 		return metadata;
@@ -109,7 +111,7 @@ export default async function InstitutionPage(
 
 						<TooltipTrigger>
 							<Link
-								className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200"
+								className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 focus-visible:focus-outline focus-visible:focus-outline-offset-0"
 								href={`/hierarchy?${String(createUrlSearchParams({ kind: "institution", id }))}`}
 							>
 								<NetworkIcon className="size-5 shrink-0 text-brand-500" />
@@ -145,21 +147,61 @@ export default async function InstitutionPage(
 
 						<DownloadMenu
 							columns={[
-								{ label: "ID", value: "id" },
-								{ label: t("name"), value: "name" },
-								{ label: t("expanded-name"), value: "expandedName" },
-								{ label: t("kind"), value: "kind" },
-								{ label: t("category"), value: "category" },
-								{ label: t("type"), value: "type" },
-								{ label: t("start-date"), value: "startDateWritten" },
-								{ label: t("end-date"), value: "endDateWritten" },
-								{ label: t("status"), value: "status" },
+								t("base-data"),
+								[
+									{ label: "ID", value: "id" },
+									{ label: t("name"), value: "name" },
+									{ label: t("expanded-name"), value: "expandedName" },
+									{ label: t("kind"), value: "kind" },
+									{ label: t("category"), value: "category" },
+									{ label: t("type"), value: "type" },
+									{ label: t("start-date"), value: "startDateWritten" },
+									{ label: t("end-date"), value: "endDateWritten" },
+									{ label: t("status"), value: "status" },
+								],
 							]}
 							data={data}
 							fileName={slugify(data.name)}
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
+							relations={[
+								[
+									{ value: "alternativeNames", label: t("alternative-names") },
+									[
+										{ value: "relationType", label: t("designation") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "hierarchy", label: t("hierarchy") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "locations", label: t("locations") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "personnel", label: t("personnel") },
+									[
+										{ value: "relationType", label: t("function") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+							]}
 							xlsxLabel={t("download-xlsx")}
 							xlsxShortLabel={t("file-xlsx")}
 						/>
@@ -187,34 +229,31 @@ export default async function InstitutionPage(
 							isDisabled={!isNonEmptyArray(data.alternativeNames)}
 							label={t("alternative-names")}
 						>
-							<div className="w-full overflow-x-auto">
-								<table className="min-w-full text-brand-950 text-sm">
-									<thead>
-										<tr className="border-b border-brand-100">
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("designation")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("start-date")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("end-date")}
-											</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-neutral-200">
-										{data.alternativeNames?.map((row, index) => {
-											return (
-												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
-												</tr>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
+							<SortableTable
+								columns={[
+									{
+										field: "relationType",
+										label: t("designation"),
+										sort: "relationType",
+										order: "string",
+									},
+									{
+										field: "startDateWritten",
+										label: t("start-date"),
+										sort: "startDate",
+										order: "number",
+									},
+									{
+										field: "endDateWritten",
+										label: t("end-date"),
+										sort: "endDate",
+										order: "number",
+									},
+								]}
+								nextPageLabel={t("next-page")}
+								previousPageLabel={t("previous-page")}
+								rows={data.alternativeNames ?? []}
+							/>
 						</Collapsible>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.references)} label={t("references")}>
@@ -271,129 +310,105 @@ export default async function InstitutionPage(
 						<h2 className="text-2xl text-brand-600">{t("section-relations")}</h2>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.personnel)} label={t("personnel")}>
-							<div className="w-full overflow-x-auto">
-								<table className="min-w-full text-brand-950 text-sm">
-									<thead>
-										<tr className="border-b border-brand-100">
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("function")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("name")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("start-date")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("end-date")}
-											</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-neutral-200">
-										{data.personnel?.map((row, index) => {
-											return (
-												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">
-														<Link
-															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
-															href={`/${row.target.kind}s/${String(row.target.id)}`}
-														>
-															{row.target.name}
-														</Link>
-													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
-												</tr>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
+							<SortableTable
+								columns={[
+									{
+										field: "relationType",
+										label: t("function"),
+										sort: "relationType",
+										order: "string",
+									},
+									{
+										field: "target",
+										label: t("name"),
+										sort: "target",
+										order: "string",
+									},
+									{
+										field: "startDateWritten",
+										label: t("start-date"),
+										sort: "startDate",
+										order: "number",
+									},
+									{
+										field: "endDateWritten",
+										label: t("end-date"),
+										sort: "endDate",
+										order: "number",
+									},
+								]}
+								nextPageLabel={t("next-page")}
+								previousPageLabel={t("previous-page")}
+								rows={data.personnel ?? []}
+							/>
 						</Collapsible>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.locations)} label={t("locations")}>
-							<div className="w-full overflow-x-auto">
-								<table className="min-w-full text-brand-950 text-sm">
-									<thead>
-										<tr className="border-b border-brand-100">
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("relation-type")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("name")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("start-date")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("end-date")}
-											</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-neutral-200">
-										{data.locations?.map((row, index) => {
-											return (
-												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">
-														<Link
-															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
-															href={`/${row.target.kind}s/${String(row.target.id)}`}
-														>
-															{row.target.name}
-														</Link>
-													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
-												</tr>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
+							<SortableTable
+								columns={[
+									{
+										field: "relationType",
+										label: t("relation-type"),
+										sort: "relationType",
+										order: "string",
+									},
+									{
+										field: "target",
+										label: t("name"),
+										sort: "target",
+										order: "string",
+									},
+									{
+										field: "startDateWritten",
+										label: t("start-date"),
+										sort: "startDate",
+										order: "number",
+									},
+									{
+										field: "endDateWritten",
+										label: t("end-date"),
+										sort: "endDate",
+										order: "number",
+									},
+								]}
+								nextPageLabel={t("next-page")}
+								previousPageLabel={t("previous-page")}
+								rows={data.locations ?? []}
+							/>
 						</Collapsible>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.hierarchy)} label={t("hierarchy")}>
-							<div className="w-full overflow-x-auto">
-								<table className="min-w-full text-brand-950 text-sm">
-									<thead>
-										<tr className="border-b border-brand-100">
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("relation-type")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("name")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("start-date")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("end-date")}
-											</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-neutral-200">
-										{data.hierarchy?.map((row, index) => {
-											return (
-												<tr key={index} className="relative">
-													<td className="px-3 py-2.5">{row.relationType}</td>
-													<td className="px-3 py-2.5">
-														<Link
-															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
-															href={`/${row.target.kind}s/${String(row.target.id)}`}
-														>
-															{row.target.name}
-														</Link>
-													</td>
-													<td className="px-3 py-2.5">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5">{row.endDateWritten}</td>
-												</tr>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
+							<SortableTable
+								columns={[
+									{
+										field: "relationType",
+										label: t("relation-type"),
+										sort: "relationType",
+										order: "string",
+									},
+									{
+										field: "target",
+										label: t("name"),
+										sort: "target",
+										order: "string",
+									},
+									{
+										field: "startDateWritten",
+										label: t("start-date"),
+										sort: "startDate",
+										order: "number",
+									},
+									{
+										field: "endDateWritten",
+										label: t("end-date"),
+										sort: "endDate",
+										order: "number",
+									},
+								]}
+								nextPageLabel={t("next-page")}
+								previousPageLabel={t("previous-page")}
+								rows={data.hierarchy ?? []}
+							/>
 						</Collapsible>
 					</section>
 				</div>

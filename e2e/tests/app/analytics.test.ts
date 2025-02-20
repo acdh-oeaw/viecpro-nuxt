@@ -10,7 +10,9 @@ test.describe("analytics service", () => {
 		return env.NEXT_PUBLIC_MATOMO_BASE_URL == null || env.NEXT_PUBLIC_MATOMO_ID == null;
 	}, "Analytics service disabled.");
 
-	const baseUrl = String(createUrl({ baseUrl: env.NEXT_PUBLIC_MATOMO_BASE_URL!, pathname: "/**" }));
+	const baseUrl = String(
+		createUrl({ baseUrl: env.NEXT_PUBLIC_MATOMO_BASE_URL!, pathname: "/matomo.php?**" }),
+	);
 
 	test("should track page views", async ({ createIndexPage }) => {
 		const { indexPage, i18n } = await createIndexPage(defaultLocale);

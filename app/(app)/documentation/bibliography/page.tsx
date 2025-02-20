@@ -1,3 +1,4 @@
+import { cn } from "@acdh-oeaw/style-variants";
 import type { Metadata, ResolvingMetadata } from "next";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
@@ -43,19 +44,32 @@ export default async function BibliographyPage(
 
 				<div className="w-full max-w-3xl px-4 xs:px-8">
 					<section className="prose max-w-none py-16 xs:py-20">
-						<ul role="list">
-							{bibliography.map((item) => {
-								return (
-									<li key={item.key}>
-										<div>{item.citation}</div>
-										{item.url ? (
-											<a className="break-all" href={item.url}>
-												{item.url}
-											</a>
-										) : null}
-									</li>
-								);
-							})}
+						<ul className="grid gap-y-4 content-start" role="list">
+							{Object.entries(bibliography)
+								.sort(([a], [z]) => {
+									return a.localeCompare(z);
+								})
+								.map(([group, items], index) => {
+									return (
+										<li key={group} className={cn("list-none", index === 0 && "mt-0")}>
+											<h2 className={index === 0 ? "mt-0" : undefined}>{group}</h2>
+											<ul role="list">
+												{items.map((item) => {
+													return (
+														<li key={item.key}>
+															<div>{item.citation}</div>
+															{item.url ? (
+																<a className="break-all" href={item.url}>
+																	{item.url}
+																</a>
+															) : null}
+														</li>
+													);
+												})}
+											</ul>
+										</li>
+									);
+								})}
 						</ul>
 					</section>
 				</div>

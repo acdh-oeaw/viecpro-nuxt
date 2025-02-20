@@ -2,9 +2,9 @@ import { cn } from "@acdh-oeaw/style-variants";
 import type { ReactNode } from "react";
 
 const colors = {
-	grün: "bg-green-600",
-	rot: "bg-red-600",
-	gelb: "bg-yellow-600",
+	grün: "bg-status-green",
+	rot: "bg-status-red",
+	gelb: "bg-status-yellow",
 };
 
 interface StatusIndicatorProps {

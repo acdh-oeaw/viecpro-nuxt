@@ -20,6 +20,7 @@ import { DownloadMenu } from "@/components/download-menu";
 import { Link } from "@/components/link";
 import { MainContent } from "@/components/main-content";
 import { PopoverNote } from "@/components/popover-note";
+import { SortableTable } from "@/components/sortable-table";
 import { Tooltip, TooltipTrigger } from "@/components/tooltip";
 import { env } from "@/config/env.config";
 import { parseLinks } from "@/lib/parse-links";
@@ -110,7 +111,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 
 						<TooltipTrigger>
 							<Link
-								className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200"
+								className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 focus-visible:focus-outline focus-visible:focus-outline-offset-0"
 								href={`/hierarchy?${String(createUrlSearchParams({ kind: "person", id }))}`}
 							>
 								<NetworkIcon className="size-5 shrink-0 text-brand-500" />
@@ -146,22 +147,145 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 
 						<DownloadMenu
 							columns={[
-								{ label: "ID", value: "id" },
-								{ label: t("first-name"), value: "firstName" },
-								{ label: t("name"), value: "name" },
-								{ label: t("kind"), value: "kind" },
-								{ label: t("gender"), value: "gender" },
-								{ label: t("birth-date"), value: "startDateWritten" },
-								{ label: t("birth-place"), value: "placeOfBirth" },
-								{ label: t("death-date"), value: "endDateWritten" },
-								{ label: t("death-place"), value: "placeOfDeath" },
-								{ label: t("status"), value: "status" },
+								t("base-data"),
+								[
+									{ label: "ID", value: "id" },
+									{ label: t("first-name"), value: "firstName" },
+									{ label: t("name"), value: "name" },
+									{ label: t("kind"), value: "kind" },
+									{ label: t("gender"), value: "gender" },
+									{ label: t("birth-date"), value: "startDateWritten" },
+									{ label: t("birth-place"), value: "placeOfBirth" },
+									{ label: t("death-date"), value: "endDateWritten" },
+									{ label: t("death-place"), value: "placeOfDeath" },
+									{ label: t("status"), value: "status" },
+									// { label: t("first-marriage"), value: "firstMarriage" },
+									{ label: t("confession"), value: "confession" },
+									// { label: t("alternative-birth-dates"), value: "alternativeBirthDates" },
+									// { label: t("alternative-death-dates"), value: "alternativeDeathDates" },
+									{ label: t("alternative-first-names"), value: "alternativeFirstNames" },
+									{ label: t("alternative-last-names"), value: "alternativeLastNames" },
+								],
 							]}
-							data={data}
+							data={{
+								...data,
+								allowance: data.allowance?.map((value) => {
+									return { value };
+								}),
+							}}
 							fileName={slugify(data.name)}
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
 							label={t("download")}
+							relations={[
+								[
+									{ value: "academicTitles", label: t("academic-titles") },
+									[
+										{ value: "relationType", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "honoraryTitles", label: t("honorary-titles") },
+									[
+										{ value: "relationType", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "marriedNames", label: t("married-names") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{
+										value: "marriagesAndFamilyRelations",
+										label: t("marriages-and-family-relations"),
+									},
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "duplicates", label: t("duplicates") },
+									[
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("birth-date") },
+										{ value: "endDateWritten", label: t("death-date") },
+									],
+								],
+								[
+									{ value: "courtFunctions", label: t("court-functions") },
+									[
+										{ value: "relationType", label: t("function") },
+										{ value: "target.name", label: t("court") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "personRelationsCourt", label: t("person-relations-court") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "relatedPlaces", label: t("related-places") },
+									[
+										{ value: "relationType", label: t("relation") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{
+										value: "relationsToChurchAndOrders",
+										label: t("relations-to-church-and-orders"),
+									},
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "nonCourtFunctions", label: t("non-court-functions") },
+									[
+										{ value: "relationType", label: t("relation-type") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								[
+									{ value: "otherRelationsCourt", label: t("other-relations-court") },
+									[
+										{ value: "relationType", label: t("name") },
+										{ value: "startDateWritten", label: t("start-date") },
+										{ value: "endDateWritten", label: t("end-date") },
+									],
+								],
+								// [
+								// 	{ value: "hadCourts", label: t("had-courts") },
+								// 	[{ value: "name", label: t("name") }],
+								// ],
+								[
+									{ value: "allowance", label: t("allowance") },
+									[{ value: "value", label: t("value") }],
+								],
+							]}
 							xlsxLabel={t("download-xlsx")}
 							xlsxShortLabel={t("file-xlsx")}
 						/>
@@ -246,41 +370,31 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 						</dl>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.duplicates)} label={t("duplicates")}>
-							<div className="w-full overflow-x-auto">
-								<table className="min-w-full text-brand-950 text-sm">
-									<thead>
-										<tr className="border-b border-brand-100">
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("name")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("birth-date")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("death-date")}
-											</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-neutral-200">
-										{data.duplicates?.map((row, index) => {
-											return (
-												<tr key={index} className="relative">
-													<td className="px-3 py-2.5 whitespace-nowrap">
-														<Link
-															className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
-															href={`/${row.target.kind}s/${String(row.target.id)}`}
-														>
-															{row.target.name}
-														</Link>
-													</td>
-													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
-												</tr>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
+							<SortableTable
+								columns={[
+									{
+										field: "target",
+										label: t("name"),
+										sort: "target",
+										order: "string",
+									},
+									{
+										field: "startDateWritten",
+										label: t("birth-date"),
+										sort: "startDate",
+										order: "number",
+									},
+									{
+										field: "endDateWritten",
+										label: t("death-date"),
+										sort: "endDate",
+										order: "number",
+									},
+								]}
+								nextPageLabel={t("next-page")}
+								previousPageLabel={t("previous-page")}
+								rows={data.duplicates ?? []}
+							/>
 						</Collapsible>
 
 						<Collapsible
@@ -315,68 +429,62 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 							isDisabled={!isNonEmptyArray(data.honoraryTitles)}
 							label={t("honorary-titles")}
 						>
-							<div className="w-full overflow-x-auto">
-								<table className="min-w-full text-brand-950 text-sm">
-									<thead>
-										<tr className="border-b border-brand-100">
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("name")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("start-date")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("end-date")}
-											</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-neutral-200">
-										{data.honoraryTitles?.map((row, index) => {
-											return (
-												<tr key={index} className="relative">
-													<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
-													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
-												</tr>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
+							<SortableTable
+								columns={[
+									{
+										field: "relationType",
+										label: t("name"),
+										sort: "relationType",
+										order: "string",
+									},
+									{
+										field: "startDateWritten",
+										label: t("start-date"),
+										sort: "startDate",
+										order: "number",
+									},
+									{
+										field: "endDateWritten",
+										label: t("end-date"),
+										sort: "endDate",
+										order: "number",
+									},
+								]}
+								nextPageLabel={t("next-page")}
+								previousPageLabel={t("previous-page")}
+								rows={data.honoraryTitles ?? []}
+							/>
 						</Collapsible>
 
 						<Collapsible
 							isDisabled={!isNonEmptyArray(data.academicTitles)}
 							label={t("academic-titles")}
 						>
-							<div className="w-full overflow-x-auto">
-								<table className="min-w-full text-brand-950 text-sm">
-									<thead>
-										<tr className="border-b border-brand-100">
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("name")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("start-date")}
-											</th>
-											<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-												{t("end-date")}
-											</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-neutral-200">
-										{data.academicTitles?.map((row, index) => {
-											return (
-												<tr key={index} className="relative">
-													<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
-													<td className="px-3 py-2.5 whitespace-nowrap">{row.startDateWritten}</td>
-													<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
-												</tr>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
+							<SortableTable
+								columns={[
+									{
+										field: "relationType",
+										label: t("name"),
+										sort: "relationType",
+										order: "string",
+									},
+									{
+										field: "startDateWritten",
+										label: t("start-date"),
+										sort: "startDate",
+										order: "number",
+									},
+									{
+										field: "endDateWritten",
+										label: t("end-date"),
+										sort: "endDate",
+										order: "number",
+									},
+								]}
+								nextPageLabel={t("next-page")}
+								previousPageLabel={t("previous-page")}
+								rows={data.academicTitles ?? []}
+							/>
 						</Collapsible>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.references)} label={t("references")}>
@@ -437,130 +545,105 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								isDisabled={!isNonEmptyArray(data.courtFunctions)}
 								label={t("court-functions")}
 							>
-								<div className="w-full overflow-x-auto">
-									<table className="min-w-full text-brand-950 text-sm">
-										<thead>
-											<tr className="border-b border-brand-100">
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("function")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("court")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("start-date")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("end-date")}
-												</th>
-											</tr>
-										</thead>
-										<tbody className="divide-y divide-neutral-200">
-											{data.courtFunctions?.map((row, index) => {
-												return (
-													<tr key={index} className="relative">
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">
-															<Link
-																className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
-																href={`/${row.target.kind}s/${String(row.target.id)}`}
-															>
-																{row.target.name}
-															</Link>
-														</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">
-															{row.startDateWritten}
-														</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
-													</tr>
-												);
-											})}
-										</tbody>
-									</table>
-								</div>
+								<SortableTable
+									columns={[
+										{
+											field: "relationType",
+											label: t("function"),
+											sort: "relationType",
+											order: "string",
+										},
+										{
+											field: "target",
+											label: t("court"),
+											sort: "target",
+											order: "string",
+										},
+										{
+											field: "startDateWritten",
+											label: t("start-date"),
+											sort: "startDate",
+											order: "number",
+										},
+										{
+											field: "endDateWritten",
+											label: t("end-date"),
+											sort: "endDate",
+											order: "number",
+										},
+									]}
+									nextPageLabel={t("next-page")}
+									previousPageLabel={t("previous-page")}
+									rows={data.courtFunctions ?? []}
+								/>
 							</Collapsible>
 
 							<Collapsible
 								isDisabled={!isNonEmptyArray(data.personRelationsCourt)}
 								label={t("person-relations-court")}
 							>
-								<div className="w-full overflow-x-auto">
-									<table className="min-w-full text-brand-950 text-sm">
-										<thead>
-											<tr className="border-b border-brand-100">
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("relation-type")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("name")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("start-date")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("end-date")}
-												</th>
-											</tr>
-										</thead>
-										<tbody className="divide-y divide-neutral-200">
-											{data.personRelationsCourt?.map((row, index) => {
-												return (
-													<tr key={index} className="relative">
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">
-															<Link
-																className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
-																href={`/${row.target.kind}s/${String(row.target.id)}`}
-															>
-																{row.target.name}
-															</Link>
-														</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">
-															{row.startDateWritten}
-														</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
-													</tr>
-												);
-											})}
-										</tbody>
-									</table>
-								</div>
+								<SortableTable
+									columns={[
+										{
+											field: "relationType",
+											label: t("relation-type"),
+											sort: "relationType",
+											order: "string",
+										},
+										{
+											field: "target",
+											label: t("name"),
+											sort: "target",
+											order: "string",
+										},
+										{
+											field: "startDateWritten",
+											label: t("start-date"),
+											sort: "startDate",
+											order: "number",
+										},
+										{
+											field: "endDateWritten",
+											label: t("end-date"),
+											sort: "endDate",
+											order: "number",
+										},
+									]}
+									nextPageLabel={t("next-page")}
+									previousPageLabel={t("previous-page")}
+									rows={data.personRelationsCourt ?? []}
+								/>
 							</Collapsible>
 
 							<Collapsible
 								isDisabled={!isNonEmptyArray(data.otherRelationsCourt)}
 								label={t("other-relations-court")}
 							>
-								<div className="w-full overflow-x-auto">
-									<table className="min-w-full text-brand-950 text-sm">
-										<thead>
-											<tr className="border-b border-brand-100">
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("name")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("start-date")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("end-date")}
-												</th>
-											</tr>
-										</thead>
-										<tbody className="divide-y divide-neutral-200">
-											{data.otherRelationsCourt?.map((row, index) => {
-												return (
-													<tr key={index} className="relative">
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">
-															{row.startDateWritten}
-														</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
-													</tr>
-												);
-											})}
-										</tbody>
-									</table>
-								</div>
+								<SortableTable
+									columns={[
+										{
+											field: "relationType",
+											label: t("name"),
+											sort: "relationType",
+											order: "string",
+										},
+										{
+											field: "startDateWritten",
+											label: t("start-date"),
+											sort: "startDate",
+											order: "number",
+										},
+										{
+											field: "endDateWritten",
+											label: t("end-date"),
+											sort: "endDate",
+											order: "number",
+										},
+									]}
+									nextPageLabel={t("next-page")}
+									previousPageLabel={t("previous-page")}
+									rows={data.otherRelationsCourt ?? []}
+								/>
 							</Collapsible>
 
 							<Collapsible isDisabled={!isNonEmptyArray(data.allowance)} label={t("allowance")}>
@@ -579,166 +662,142 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								isDisabled={!isNonEmptyArray(data.relatedPlaces)}
 								label={t("related-places")}
 							>
-								<div className="w-full overflow-x-auto">
-									<table className="min-w-full text-brand-950 text-sm">
-										<thead>
-											<tr className="border-b border-brand-100">
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("relation")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("name")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("start-date")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("end-date")}
-												</th>
-											</tr>
-										</thead>
-										<tbody className="divide-y divide-neutral-200">
-											{data.relatedPlaces?.map((row, index) => {
-												return (
-													<tr key={index} className="relative">
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">
-															<Link
-																className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
-																href={`/${row.target.kind}s/${String(row.target.id)}`}
-															>
-																{row.target.name}
-															</Link>
-														</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">
-															{row.startDateWritten}
-														</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
-													</tr>
-												);
-											})}
-										</tbody>
-									</table>
-								</div>
+								<SortableTable
+									columns={[
+										{
+											field: "relationType",
+											label: t("relation"),
+											sort: "relationType",
+											order: "string",
+										},
+										{
+											field: "target",
+											label: t("name"),
+											sort: "target",
+											order: "string",
+										},
+										{
+											field: "startDateWritten",
+											label: t("start-date"),
+											sort: "startDate",
+											order: "number",
+										},
+										{
+											field: "endDateWritten",
+											label: t("end-date"),
+											sort: "endDate",
+											order: "number",
+										},
+									]}
+									nextPageLabel={t("next-page")}
+									previousPageLabel={t("previous-page")}
+									rows={data.relatedPlaces ?? []}
+								/>
 							</Collapsible>
 
 							<Collapsible
 								isDisabled={!isNonEmptyArray(data.marriagesAndFamilyRelations)}
 								label={t("marriages-and-family-relations")}
 							>
-								<div className="w-full overflow-x-auto">
-									<table className="min-w-full text-brand-950 text-sm">
-										<thead>
-											<tr className="border-b border-brand-100">
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("relation-type")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("name")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("start-date")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("end-date")}
-												</th>
-											</tr>
-										</thead>
-										<tbody className="divide-y divide-neutral-200">
-											{data.marriagesAndFamilyRelations?.map((row, index) => {
-												return (
-													<tr key={index} className="relative">
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">
-															<Link
-																className="after:absolute after:inset-0 hover:after:bg-brand-600/5"
-																href={`/${row.target.kind}s/${String(row.target.id)}`}
-															>
-																{row.target.name}
-															</Link>
-														</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">
-															{row.startDateWritten}
-														</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
-													</tr>
-												);
-											})}
-										</tbody>
-									</table>
-								</div>
+								<SortableTable
+									columns={[
+										{
+											field: "relationType",
+											label: t("relation-type"),
+											sort: "relationType",
+											order: "string",
+										},
+										{
+											field: "target",
+											label: t("name"),
+											sort: "target",
+											order: "string",
+										},
+										{
+											field: "startDateWritten",
+											label: t("start-date"),
+											sort: "startDate",
+											order: "number",
+										},
+										{
+											field: "endDateWritten",
+											label: t("end-date"),
+											sort: "endDate",
+											order: "number",
+										},
+									]}
+									nextPageLabel={t("next-page")}
+									previousPageLabel={t("previous-page")}
+									rows={data.marriagesAndFamilyRelations ?? []}
+								/>
 							</Collapsible>
 
 							<Collapsible
 								isDisabled={!isNonEmptyArray(data.relationsToChurchAndOrders)}
 								label={t("relations-to-church-and-orders")}
 							>
-								<div className="w-full overflow-x-auto">
-									<table className="min-w-full text-brand-950 text-sm">
-										<thead>
-											<tr className="border-b border-brand-100">
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("relation-type")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("start-date")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("end-date")}
-												</th>
-											</tr>
-										</thead>
-										<tbody className="divide-y divide-neutral-200">
-											{data.relationsToChurchAndOrders?.map((row, index) => {
-												return (
-													<tr key={index} className="relative">
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">
-															{row.startDateWritten}
-														</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
-													</tr>
-												);
-											})}
-										</tbody>
-									</table>
-								</div>
+								<SortableTable
+									columns={[
+										{
+											field: "relationType",
+											label: t("relation-type"),
+											sort: "relationType",
+											order: "string",
+										},
+										{
+											field: "target",
+											label: t("name"),
+											sort: "target",
+											order: "string",
+										},
+										{
+											field: "startDateWritten",
+											label: t("start-date"),
+											sort: "startDate",
+											order: "number",
+										},
+										{
+											field: "endDateWritten",
+											label: t("end-date"),
+											sort: "endDate",
+											order: "number",
+										},
+									]}
+									nextPageLabel={t("next-page")}
+									previousPageLabel={t("previous-page")}
+									rows={data.relationsToChurchAndOrders ?? []}
+								/>
 							</Collapsible>
 
 							<Collapsible
 								isDisabled={!isNonEmptyArray(data.nonCourtFunctions)}
 								label={t("non-court-functions")}
 							>
-								<div className="w-full overflow-x-auto">
-									<table className="min-w-full text-brand-950 text-sm">
-										<thead>
-											<tr className="border-b border-brand-100">
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("relation-type")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("start-date")}
-												</th>
-												<th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-brand-600">
-													{t("end-date")}
-												</th>
-											</tr>
-										</thead>
-										<tbody className="divide-y divide-neutral-200">
-											{data.nonCourtFunctions?.map((row, index) => {
-												return (
-													<tr key={index} className="relative">
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.relationType}</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">
-															{row.startDateWritten}
-														</td>
-														<td className="px-3 py-2.5 whitespace-nowrap">{row.endDateWritten}</td>
-													</tr>
-												);
-											})}
-										</tbody>
-									</table>
-								</div>
+								<SortableTable
+									columns={[
+										{
+											field: "relationType",
+											label: t("relation-type"),
+											sort: "relationType",
+											order: "string",
+										},
+										{
+											field: "startDateWritten",
+											label: t("start-date"),
+											sort: "startDate",
+											order: "number",
+										},
+										{
+											field: "endDateWritten",
+											label: t("end-date"),
+											sort: "endDate",
+											order: "number",
+										},
+									]}
+									nextPageLabel={t("next-page")}
+									previousPageLabel={t("previous-page")}
+									rows={data.nonCourtFunctions ?? []}
+								/>
 							</Collapsible>
 						</section>
 					</div>

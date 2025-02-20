@@ -1,4 +1,4 @@
-const regex = /https?:\/\/[\w./]+/g;
+const regex = /https?:\/\/[\w./%?=&]+/g;
 
 /**
  * Parse links into html anchor elements, handling any trailing punctuation marks.
