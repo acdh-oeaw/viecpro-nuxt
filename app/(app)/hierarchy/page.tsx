@@ -124,7 +124,7 @@ async function SearchPanel(props: SearchPanelProps): Promise<ReactNode> {
 
 	return (
 		<aside className="border-b border-brand-100 bg-brand-50 text-brand-900">
-			<div className="container flex flex-col flex-wrap gap-x-6 gap-y-4 p-4 xs:px-8 sm:flex-row sm:items-center sm:justify-between">
+			<div className="flex flex-col flex-wrap gap-x-6 gap-y-4 p-4 xs:px-8 sm:flex-row sm:items-center sm:justify-between">
 				<SearchFilterPanel
 					directionOptions={directionOptions}
 					directionSelectLabel={t("direction.label")}
