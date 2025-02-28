@@ -355,9 +355,12 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 									: null}
 							</dd>
 
-							{/* FIXME: waiting on @see https://github.com/acdh-oeaw/viecpro-nuxt/issues/113 */}
-							{/* <dt className="text-neutral-600">{t("death-cause")}:</dt>
-							<dd>{data.cause_of_death}</dd> */}
+							{data.causeOfDeath ? (
+								<Fragment>
+									<dt className="text-neutral-600">{t("death-cause")}:</dt>
+									<dd>{data.causeOfDeath}</dd>
+								</Fragment>
+							) : null}
 
 							<dt className="text-neutral-600">{t("gender")}:</dt>
 							<dd>{data.gender}</dd>

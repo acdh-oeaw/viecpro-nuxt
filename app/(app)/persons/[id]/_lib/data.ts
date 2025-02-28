@@ -52,6 +52,7 @@ interface PersonDetails extends Person {
 	marriedNames: Array<RelationShort> | null;
 	nonCourtFunctions: Array<Relation | (RelationShort & { target: null })> | null;
 	notes: string;
+	causeOfDeath?: string;
 	otherRelationsCourt: Array<RelationShort> | null;
 	personRelationsCourt: Array<Relation> | null;
 	placeOfBirth: Entity<"place"> | null;
