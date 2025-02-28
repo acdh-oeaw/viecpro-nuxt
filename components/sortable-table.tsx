@@ -41,8 +41,14 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 
 		visibleRows.sort((_a, _z) => {
 			if (currentSortColumn.field === "target") {
-				const a = _a[currentSortColumn.sort] as { name: string };
-				const z = _z[currentSortColumn.sort] as { name: string };
+				const a = _a[currentSortColumn.sort] as { name: string } | null | undefined;
+				const z = _z[currentSortColumn.sort] as { name: string } | null | undefined;
+
+				// Handle cases where either value might be null or undefined
+				if (!a && !z) return 0;
+				if (!a) return 1; // Null values go to the end when sorting
+				if (!z) return -1;
+
 				return a.name.localeCompare(z.name);
 			}
 
@@ -122,7 +128,21 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 								<tr key={index} className="relative">
 									{columns.map((column) => {
 										if (column.field === "target") {
-											const value = row[column.field] as { kind: string; id: string; name: string };
+											const value = row[column.field] as
+												| { kind: string; id: string; name: string }
+												| null
+												| undefined;
+
+											if (!value) {
+												return (
+													<td
+														key={column.field}
+														className="px-3 py-2.5 whitespace-nowrap truncate max-w-sm"
+													>
+														{/* Empty cell when target is not available */}
+													</td>
+												);
+											}
 
 											return (
 												<td
