@@ -58,7 +58,7 @@ interface PersonDetails extends Person {
 	placeOfDeath: Entity<"place"> | null;
 	references: Array<Reference> | null;
 	relatedPlaces: Array<Relation<"place">> | null;
-	relationsToChurchAndOrders: Array<RelationShort | Relation> | null;
+	relationsToChurchAndOrders: Array<Relation | (RelationShort & { target: null })> | null;
 	sameAs: Array<string> | null;
 }
 

@@ -41,13 +41,18 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 
 		visibleRows.sort((_a, _z) => {
 			if (currentSortColumn.field === "target") {
-				const a = _a[currentSortColumn.sort] as { name: string } | null | undefined;
-				const z = _z[currentSortColumn.sort] as { name: string } | null | undefined;
+				const a = _a[currentSortColumn.sort] as { name: string } | null;
+				const z = _z[currentSortColumn.sort] as { name: string } | null;
 
-				// Handle cases where either value might be null or undefined
-				if (!a && !z) return 0;
-				if (!a) return 1; // Null values go to the end when sorting
-				if (!z) return -1;
+				if (a == null && z == null) {
+					return 0;
+				}
+				if (a == null) {
+					return 1;
+				}
+				if (z == null) {
+					return -1;
+				}
 
 				return a.name.localeCompare(z.name);
 			}
@@ -128,35 +133,27 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 								<tr key={index} className="relative">
 									{columns.map((column) => {
 										if (column.field === "target") {
-											const value = row[column.field] as
-												| { kind: string; id: string; name: string }
-												| null
-												| undefined;
-
-											if (!value) {
-												return (
-													<td
-														key={column.field}
-														className="px-3 py-2.5 whitespace-nowrap truncate max-w-sm"
-													>
-														{/* Empty cell when target is not available */}
-													</td>
-												);
-											}
+											const value = row[column.field] as {
+												kind: string;
+												id: string;
+												name: string;
+											} | null;
 
 											return (
 												<td
 													key={column.field}
 													className="px-3 py-2.5 whitespace-nowrap truncate max-w-sm"
-													// @ts-expect-error TODO: fix a11y
-													title={value}
+													title={value?.name}
 												>
-													<Link
-														className="after:absolute after:inset-0 hover:after:bg-brand-600/5 focus-visible:after:focus-outline focus-visible:after:-focus-outline-offset-2"
-														href={`/${value.kind}s/${String(value.id)}`}
-													>
-														{value.name}
-													</Link>
+													{value != null ? (
+														<Link
+															className="after:absolute after:inset-0 hover:after:bg-brand-600/5 focus-visible:after:focus-outline focus-visible:after:-focus-outline-offset-2"
+															href={`/${value.kind}s/${String(value.id)}`}
+														>
+															{value.name}
+														</Link>
+													) : /** Empty cell when to relation target available. */
+													null}
 												</td>
 											);
 										}
@@ -167,8 +164,7 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 											<td
 												key={column.field}
 												className="px-3 py-2.5 whitespace-nowrap truncate max-w-sm"
-												// @ts-expect-error TODO: fix a11y
-												title={value}
+												title={value != null ? String(value) : undefined}
 											>
 												{value}
 											</td>
