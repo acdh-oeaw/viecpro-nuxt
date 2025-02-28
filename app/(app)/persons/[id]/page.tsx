@@ -354,11 +354,15 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 									: null}
 							</dd>
 
+							{data.causeOfDeath ? (
+								<Fragment>
+									<dt className="text-neutral-600">{t("death-cause")}:</dt>
+									<dd>{data.causeOfDeath}</dd>
+								</Fragment>
+							) : null}
+
 							<dt className="text-neutral-600">{t("gender")}:</dt>
 							<dd>{data.gender}</dd>
-
-							<dt className="text-neutral-600">{t("death-cause")}:</dt>
-							<dd>{data.causeOfDeath}</dd>
 
 							{isNonEmptyArray(data.confession) ? (
 								<Fragment>
