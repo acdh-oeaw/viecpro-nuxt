@@ -50,7 +50,7 @@ interface PersonDetails extends Person {
 	honoraryTitles: Array<RelationShort> | null;
 	marriagesAndFamilyRelations: Array<Relation> | null;
 	marriedNames: Array<RelationShort> | null;
-	nonCourtFunctions: Array<RelationShort | Relation> | null;
+	nonCourtFunctions: Array<Relation | (RelationShort & { target: null })> | null;
 	notes: string;
 	otherRelationsCourt: Array<RelationShort> | null;
 	personRelationsCourt: Array<Relation> | null;
