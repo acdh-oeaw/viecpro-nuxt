@@ -265,6 +265,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 									{ value: "nonCourtFunctions", label: t("non-court-functions") },
 									[
 										{ value: "relationType", label: t("relation-type") },
+										{ value: "target.name", label: t("name") },
 										{ value: "startDateWritten", label: t("start-date") },
 										{ value: "endDateWritten", label: t("end-date") },
 									],
