@@ -41,7 +41,7 @@ export function GraphTypeSelect(props: GraphTypeSelectProps): ReactNode {
 
 			<Button className="inline-flex w-full items-center justify-between gap-x-2.5 rounded-md border border-brand-100 bg-white py-2.5 pl-4 pr-3 leading-none disabled:cursor-not-allowed disabled:opacity-50 sm:min-w-96 focus-visible:focus-outline focus-visible:focus-outline-offset-0">
 				<SelectValue className="placeholder-shown:text-neutral-500" />
-				<ChevronDownIcon aria-hidden={true} className="size-5 shrink-0 text-brand-500" />
+				<ChevronDownIcon aria-hidden={true} className="size-4 shrink-0 text-brand-500" />
 			</Button>
 
 			<Popover className="absolute z-10 w-[var(--trigger-width)] overflow-hidden rounded-md border border-neutral-200 bg-white text-brand-900 shadow-lg animate-in fade-in slide-in-from-top-2">
@@ -56,7 +56,7 @@ export function GraphTypeSelect(props: GraphTypeSelectProps): ReactNode {
 									return (
 										<Fragment>
 											{isSelected ? (
-												<span className="absolute left-2 inline-flex items-center justify-center">
+												<span className="absolute left-3 inline-flex items-center justify-center">
 													<CheckIcon
 														aria-hidden={true}
 														className="size-4 shrink-0 text-brand-600"
