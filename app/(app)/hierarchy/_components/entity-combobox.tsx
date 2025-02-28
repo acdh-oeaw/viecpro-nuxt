@@ -10,9 +10,10 @@ import {
 	Label,
 	ListBox,
 	ListBoxItem,
+	ListLayout,
 	Popover,
-	UNSTABLE_ListLayout as ListLayout,
-	UNSTABLE_Virtualizer as Virtualizer,
+	useFilter,
+	Virtualizer,
 } from "react-aria-components";
 
 import type { AutocompleteItem } from "@/app/(app)/hierarchy/_lib/autocomplete";
@@ -32,17 +33,17 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 		props;
 
 	const allOptions = useMemo(() => {
-		return Array.from(options.values()).slice(0, 2500);
+		return Array.from(options.values());
 	}, [options]);
 
-	const layout = useMemo(() => {
-		return new ListLayout({ rowHeight: 52 });
-	}, []);
+	// eslint-disable-next-line @typescript-eslint/unbound-method
+	const { contains } = useFilter();
 
 	return (
 		<ComboBox
 			allowsCustomValue={false}
 			className="grid gap-y-1"
+			defaultFilter={contains}
 			defaultItems={allOptions}
 			name={name}
 			onSelectionChange={onSelectionChange}
@@ -63,7 +64,12 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 			</div>
 
 			<Popover className="absolute z-10 w-[var(--trigger-width)] overflow-hidden rounded-md border border-neutral-200 bg-white text-brand-900 shadow-lg animate-in fade-in slide-in-from-top-2">
-				<Virtualizer layout={layout}>
+				<Virtualizer
+					layout={ListLayout}
+					layoutOptions={{
+						rowHeight: 52,
+					}}
+				>
 					<ListBox className="max-h-[32rem] overflow-y-auto py-2 outline-none">
 						{(item: AutocompleteItem) => {
 							return (
