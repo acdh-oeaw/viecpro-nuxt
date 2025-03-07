@@ -173,17 +173,20 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 						const isSelected = selectedKeys.has(value);
 
 						return (
-							<label key={value} className="inline-flex items-center gap-x-1.5 accent-brand-600">
-								<input
-									checked={isSelected}
-									className="h-[1lh] self-start"
-									name={name}
-									onChange={onChange}
-									type="checkbox"
-									value={value}
-								/>
-								<span className="flex w-full items-center justify-between gap-x-2">
-									{value} <span className="text-xs font-medium">{format.number(count)}</span>
+							<label key={value} className="inline-flex gap-x-1.5 accent-brand-600">
+								<span className="h-[1lh] inline-flex items-center">
+									<input
+										checked={isSelected}
+										className="h-[1lh]"
+										name={name}
+										onChange={onChange}
+										type="checkbox"
+										value={value}
+									/>
+								</span>
+								<span className="flex-1">{value}</span>
+								<span className="h-[1lh] inline-flex items-center">
+									<span className="text-xs font-medium">{format.number(count)}</span>
 								</span>
 							</label>
 						);
