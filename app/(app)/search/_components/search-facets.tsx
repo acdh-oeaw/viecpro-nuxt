@@ -176,6 +176,7 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 							<label key={value} className="inline-flex items-center gap-x-1.5 accent-brand-600">
 								<input
 									checked={isSelected}
+									className="h-[1lh] self-start"
 									name={name}
 									onChange={onChange}
 									type="checkbox"
