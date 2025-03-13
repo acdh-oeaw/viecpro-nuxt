@@ -362,15 +362,15 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								</Fragment>
 							) : null}
 
-							<dt className="text-neutral-600">{t("gender")}:</dt>
-							<dd>{data.gender}</dd>
-
-							{isNonEmptyArray(data.confession) ? (
+							{data.confession ? (
 								<Fragment>
 									<dt className="text-neutral-600">{t("confession")}:</dt>
-									<dd>{format.list(data.confession)}</dd>
+									<dd>{data.confession}</dd>
 								</Fragment>
 							) : null}
+
+							<dt className="text-neutral-600">{t("gender")}:</dt>
+							<dd>{data.gender}</dd>
 						</dl>
 
 						<Collapsible isDisabled={!isNonEmptyArray(data.duplicates)} label={t("duplicates")}>

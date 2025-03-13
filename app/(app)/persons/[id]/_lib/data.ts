@@ -42,7 +42,7 @@ interface PersonDetails extends Person {
 	alternativeDeathDates?: Array<string>;
 	alternativeFirstNames?: Array<string>;
 	alternativeLastNames?: Array<string>;
-	confession?: Array<string>;
+	confession?: string;
 	courtFunctions?: Array<Relation>;
 	duplicates: Array<Relation> | null;
 	firstMarriage?: string;
