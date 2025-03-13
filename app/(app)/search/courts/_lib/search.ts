@@ -34,7 +34,7 @@ export interface Court {
 
 const collection = [env.NEXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX, "court"].join("");
 
-const queryFields = ["name"] as const;
+const queryFields = ["name", "owner"] as const;
 const sortFields = ["name", "startDate", "endDate", "owner", "category", "status"] as const;
 const facetFields = ["category", "status"] as const;
 
