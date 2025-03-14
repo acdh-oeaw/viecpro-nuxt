@@ -1,7 +1,7 @@
 import { convertYearToTimestamp } from "@/lib/timestamp";
 
 export const limit = 25;
-export const maxFacetValues = 250;
+export const maxFacetValues = 5_000;
 
 export const minDate = 1550;
 export const maxDate = 1950;
@@ -11,6 +11,6 @@ export const maxDate = 1950;
 export const emptyDate = convertYearToTimestamp(5000);
 
 export const defaultFacets = 10;
-export const maxFacets = 25;
+export const maxFacets = maxFacetValues;
 
 export const perPageDownloadLimit = 250;
