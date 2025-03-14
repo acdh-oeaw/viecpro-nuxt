@@ -86,7 +86,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 					<div>
 						<span className="inline-flex items-center gap-x-2 text-xs font-bold uppercase tracking-wider text-brand-600">
 							{t("person")}
-							<div>
+							<div className="-mt-px">
 								<StatusIndicator status={data.status} />
 								<span className="sr-only">{data.status}</span>
 							</div>
