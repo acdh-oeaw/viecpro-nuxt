@@ -29,7 +29,7 @@ import {
 	getSearchFacetValues as getPlaceSearchFacetValues,
 	type SearchFilters as PlaceSearchFilters,
 } from "@/app/(app)/search/places/_lib/search";
-import { defaultFacets, maxFacets } from "@/config/search.config";
+import { defaultFacets } from "@/config/search.config";
 
 // FIXME: shared types
 type FacetValueCount =
@@ -80,14 +80,6 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 	const id = useId();
 
 	const format = useFormatter();
-
-	const [isShowingMore, setIsShowingMore] = useState(false);
-
-	function toggleIsShowingMore() {
-		setIsShowingMore((isShowingMore) => {
-			return !isShowingMore;
-		});
-	}
 
 	const [filterSearchTerm, setFilterSearchTerm] = useState("");
 	const [filteredFacetValues, setFilteredFacetValues] = useState<Array<FacetValueCount> | null>(
@@ -144,12 +136,15 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 		return null;
 	}
 
+	const items = filteredFacetValues ?? options;
+
 	return (
 		<div aria-labelledby={id} className="grid gap-y-2" role="group">
 			<h3 className="text-xs font-bold uppercase tracking-wider text-brand-600" id={id}>
 				{label}
+				{items.length > defaultFacets ? <span> ({format.number(items.length)})</span> : null}
 			</h3>
-			{options.length > maxFacets ? (
+			{options.length > defaultFacets ? (
 				<SearchField className="group grid gap-y-2" onChange={onFilter} value={filterSearchTerm}>
 					<Label className="sr-only">{filterLabel}</Label>
 					<div className="relative">
@@ -160,43 +155,36 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 					</div>
 				</SearchField>
 			) : null}
-			<div className="grid gap-1 text-sm text-brand-600">
-				{(filteredFacetValues ?? options)
-					.slice(0, isShowingMore ? maxFacets : defaultFacets)
-					.map(({ count, isSelected: _isSelected, value }) => {
-						function onChange(event: ChangeEvent<HTMLInputElement>): void {
-							// @ts-expect-error TODO: improve types
-							onFacetChange(name, value, event.currentTarget.checked);
-						}
+			<div className="grid gap-1 text-sm text-brand-600 overflow-y-auto pr-2 -mr-2 max-h-60">
+				{items.map(({ count, isSelected: _isSelected, value }) => {
+					function onChange(event: ChangeEvent<HTMLInputElement>): void {
+						// @ts-expect-error TODO: improve types
+						onFacetChange(name, value, event.currentTarget.checked);
+					}
 
-						/** Prefer selection info from optimistic search filters. */
-						const isSelected = selectedKeys.has(value);
+					/** Prefer selection info from optimistic search filters. */
+					const isSelected = selectedKeys.has(value);
 
-						return (
-							<label key={value} className="inline-flex gap-x-1.5 accent-brand-600">
-								<span className="h-[1lh] inline-flex items-center">
-									<input
-										checked={isSelected}
-										className="h-[1lh]"
-										name={name}
-										onChange={onChange}
-										type="checkbox"
-										value={value}
-									/>
-								</span>
-								<span className="flex-1">{value}</span>
-								<span className="h-[1lh] inline-flex items-center">
-									<span className="text-xs font-medium">{format.number(count)}</span>
-								</span>
-							</label>
-						);
-					})}
+					return (
+						<label key={value} className="inline-flex gap-x-1.5 accent-brand-600">
+							<span className="h-[1lh] inline-flex items-center">
+								<input
+									checked={isSelected}
+									className="h-[1lh]"
+									name={name}
+									onChange={onChange}
+									type="checkbox"
+									value={value}
+								/>
+							</span>
+							<span className="flex-1">{value}</span>
+							<span className="h-[1lh] inline-flex items-center">
+								<span className="text-xs font-medium">{format.number(count)}</span>
+							</span>
+						</label>
+					);
+				})}
 			</div>
-			{options.length > defaultFacets ? (
-				<Button className="text-sm text-brand-600 hover:underline" onPress={toggleIsShowingMore}>
-					{isShowingMore ? "Weniger anzeigen" : "Mehr anzeigen"}
-				</Button>
-			) : null}
 		</div>
 	);
 }
