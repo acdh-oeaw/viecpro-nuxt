@@ -1,5 +1,6 @@
 "use client";
 
+import { isNonNullable } from "@acdh-oeaw/lib";
 import { ChevronLeftIcon, ChevronRightIcon, SortAscIcon, SortDescIcon } from "lucide-react";
 import { Fragment, type ReactNode, useMemo, useState } from "react";
 import { Button } from "react-aria-components";
@@ -133,24 +134,31 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 								<tr key={index} className="relative">
 									{columns.map((column) => {
 										if (column.field === "target") {
-											const value = row[column.field] as {
+											const target = row[column.field] as {
 												kind: string;
 												id: string;
 												name: string;
 											} | null;
 
+											const title = [
+												"relationType" in row ? (row.relationType as string) : undefined,
+												target?.name,
+											]
+												.filter(isNonNullable)
+												.join(" ");
+
 											return (
 												<td
 													key={column.field}
 													className="px-3 py-2.5 whitespace-nowrap truncate max-w-sm"
-													title={value?.name}
+													title={title}
 												>
-													{value != null ? (
+													{target != null ? (
 														<Link
 															className="after:absolute after:inset-0 hover:after:bg-brand-600/5 focus-visible:after:focus-outline focus-visible:after:-focus-outline-offset-2"
-															href={`/${value.kind}s/${String(value.id)}`}
+															href={`/${target.kind}s/${String(target.id)}`}
 														>
-															{value.name}
+															{target.name}
 														</Link>
 													) : /** Empty cell when to relation target available. */
 													null}
