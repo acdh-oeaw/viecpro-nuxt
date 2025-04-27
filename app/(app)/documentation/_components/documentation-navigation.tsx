@@ -12,13 +12,13 @@ export async function DocumentationNavigation(): Promise<ReactNode> {
 
 	return (
 		<nav aria-label={t("documentation")} className="grid gap-y-3">
-			<h2 className="text-xs font-bold uppercase tracking-wider text-brand-600">{t("contents")}</h2>
+			<h2 className="text-xs font-bold tracking-wider text-brand-600 uppercase">{t("contents")}</h2>
 			<ul className="grid gap-y-1 text-brand-600" role="list">
 				{nav.data.links.map((link) => {
 					return (
 						<li key={link.id}>
 							<NavLink
-								className="aria-[current]:font-medium hover:underline focus-visible:focus-outline"
+								className="hover:underline focus-visible:focus-outline aria-[current]:font-medium"
 								href={`/documentation/${link.id}`}
 							>
 								{link.label}

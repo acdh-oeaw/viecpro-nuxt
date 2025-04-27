@@ -30,13 +30,13 @@ export default function InternalError(props: Readonly<InternalErrorProps>): Reac
 	return (
 		<MainContent className="flex flex-col">
 			<section className="grid flex-1 place-content-center place-items-center gap-y-8 py-16 xs:py-24">
-				<h1 className="text-balance text-center font-heading text-5xl font-bold text-brand-600 md:text-6xl">
+				<h1 className="text-center font-heading text-5xl font-bold text-balance text-brand-600 md:text-6xl">
 					{t("something-went-wrong")}
 				</h1>
 				<Button
 					className={cn(
 						"inline-flex min-h-8 items-center rounded-lg border border-brand-600 bg-brand-600 px-4 py-2 text-sm font-medium text-white shadow-md",
-						"interactive focus-visible:focus-outline transition hover:border-brand-700 hover:bg-brand-700 pressed:border-brand-800 pressed:bg-brand-800",
+						"interactive transition hover:border-brand-700 hover:bg-brand-700 focus-visible:focus-outline pressed:border-brand-800 pressed:bg-brand-800",
 					)}
 					isPending={isPending}
 					onPress={() => {

@@ -22,13 +22,13 @@ export function Collapsible(props: CollapsibleProps): ReactNode {
 		>
 			<Heading>
 				<Button
-					className="group inline-flex w-full cursor-pointer items-center justify-between rounded-md border border-brand-200 bg-brand-100 px-3 py-2 font-medium text-brand-900 transition group-expanded:border-brand-300 group-expanded:bg-brand-200 hover:border-brand-300 hover:bg-brand-200 disabled:cursor-not-allowed disabled:border-neutral-200 disabled:bg-transparent disabled:text-neutral-500 focus-visible:focus-outline focus-visible:focus-outline-offset-0"
+					className="group inline-flex w-full cursor-pointer items-center justify-between rounded-md border border-brand-200 bg-brand-100 px-3 py-2 font-medium text-brand-900 transition group-expanded:border-brand-300 group-expanded:bg-brand-200 hover:border-brand-300 hover:bg-brand-200 focus-visible:focus-outline focus-visible:focus-outline-offset-0 disabled:cursor-not-allowed disabled:border-neutral-200 disabled:bg-transparent disabled:text-neutral-500"
 					slot="trigger"
 				>
 					{label}
 					<ChevronDownIcon
 						aria-hidden={true}
-						className="size-5 shrink-0 text-brand-600 transition group-expanded:rotate-180 group-disabled:text-neutral-400"
+						className="size-5 shrink-0 text-brand-600 transition group-disabled:text-neutral-400 group-expanded:rotate-180"
 					/>
 				</Button>
 			</Heading>

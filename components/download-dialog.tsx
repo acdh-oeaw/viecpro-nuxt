@@ -196,7 +196,7 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 			<MenuTrigger>
 				<TooltipTrigger>
 					<Button
-						className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:focus-outline focus-visible:focus-outline-offset-0"
+						className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 focus-visible:focus-outline focus-visible:focus-outline-offset-0 disabled:cursor-not-allowed disabled:opacity-50 pressed:bg-brand-200"
 						isDisabled={status === "pending"}
 					>
 						{status === "pending" ? (
@@ -209,7 +209,7 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 					<Tooltip placement="left">{label}</Tooltip>
 				</TooltipTrigger>
 				<Popover
-					className="group min-w-[var(--trigger-width)] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2"
+					className="group max-w-72 min-w-[var(--trigger-width)] rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2"
 					placement="bottom right"
 				>
 					<Menu className="py-2 text-sm outline-none">
@@ -255,7 +255,7 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 									>
 										{title}
 									</Heading>
-									<Button className="absolute right-0 top-0" slot="close">
+									<Button className="absolute top-0 right-0" slot="close">
 										<span className="sr-only"></span>
 										<XIcon
 											aria-hidden={true}

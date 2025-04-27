@@ -31,7 +31,7 @@ export default async function BibliographyPage(
 		<MainContent className="flex flex-col">
 			<section className="border-b border-brand-100 bg-brand-50 py-16 xs:py-20">
 				<div className="mx-auto grid w-full max-w-7xl gap-y-4 px-4 xs:px-8">
-					<h1 className="text-balance font-heading text-3xl font-bold text-brand-600 xs:text-4xl md:text-5xl">
+					<h1 className="font-heading text-3xl font-bold text-balance text-brand-600 xs:text-4xl md:text-5xl">
 						{t("title")}
 					</h1>
 				</div>
@@ -44,7 +44,7 @@ export default async function BibliographyPage(
 
 				<div className="w-full max-w-3xl px-4 xs:px-8">
 					<section className="prose max-w-none py-16 xs:py-20">
-						<ul className="grid gap-y-4 content-start" role="list">
+						<ul className="grid content-start gap-y-4" role="list">
 							{Object.entries(bibliography)
 								.sort(([a], [z]) => {
 									return a.localeCompare(z);

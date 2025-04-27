@@ -165,7 +165,7 @@ function Legend(): ReactNode {
 	return (
 		<aside
 			aria-label={t("legend.title")}
-			className="absolute bottom-3 right-8 flex items-center gap-x-4 rounded-md border border-brand-100 bg-brand-50 px-3 py-0.5 text-sm font-medium"
+			className="absolute right-8 bottom-3 flex items-center gap-x-4 rounded-md border border-brand-100 bg-brand-50 px-3 py-0.5 text-sm font-medium"
 		>
 			{types.map((type) => {
 				return (

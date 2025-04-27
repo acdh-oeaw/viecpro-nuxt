@@ -124,7 +124,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 								<tr key={searchResult.id} className="relative odd:bg-brand-50">
 									{columns.map((column) => {
 										return (
-											<td key={column.field} className="whitespace-nowrap px-4 py-2.5">
+											<td key={column.field} className="px-4 py-2.5 whitespace-nowrap">
 												{column.field === "status" ? (
 													<StatusIndicator status={searchResult[column.field]} />
 												) : column.field === linkField ? (
@@ -152,7 +152,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 				{hasPreviousPage || hasNextPage ? (
 					<span className="inline-flex items-center gap-x-6 sm:ml-auto">
 						<Link
-							className="inline-flex items-center gap-x-1.5 hover:underline disabled:opacity-50 focus-visible:focus-outline"
+							className="inline-flex items-center gap-x-1.5 hover:underline focus-visible:focus-outline disabled:opacity-50"
 							href={createHref({
 								searchParams: { ...optimisticSearchFilters, page: searchResults.page - 1 },
 							})}
@@ -162,7 +162,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 							{previousPageLabel}
 						</Link>
 						<Link
-							className="inline-flex items-center gap-x-1.5 text-right hover:underline disabled:opacity-50 focus-visible:focus-outline"
+							className="inline-flex items-center gap-x-1.5 text-right hover:underline focus-visible:focus-outline disabled:opacity-50"
 							href={createHref({
 								searchParams: { ...optimisticSearchFilters, page: searchResults.page + 1 },
 							})}

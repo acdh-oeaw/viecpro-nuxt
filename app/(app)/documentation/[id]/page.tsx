@@ -65,7 +65,7 @@ export default async function DocumentationPage(
 		<MainContent className="flex flex-col">
 			<section className="border-b border-brand-100 bg-brand-50 py-16 xs:py-20">
 				<div className="mx-auto grid w-full max-w-7xl gap-y-4 px-4 xs:px-8">
-					<h1 className="text-balance font-heading text-3xl font-bold text-brand-600 xs:text-4xl md:text-5xl">
+					<h1 className="font-heading text-3xl font-bold text-balance text-brand-600 xs:text-4xl md:text-5xl">
 						{title}
 					</h1>
 					{lead ? <p className="font-heading text-brand-500 xl:text-lg">{lead}</p> : null}

@@ -84,7 +84,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 			<div className="mx-auto grid w-full max-w-7xl content-start gap-y-12 px-4 pt-8 pb-16 xs:gap-y-16 xs:px-8">
 				<div className="grid content-start gap-y-4">
 					<div>
-						<span className="inline-flex items-center gap-x-2 text-xs font-bold uppercase tracking-wider text-brand-600">
+						<span className="inline-flex items-center gap-x-2 text-xs font-bold tracking-wider text-brand-600 uppercase">
 							{t("person")}
 							<div className="-mt-px">
 								<StatusIndicator status={data.status} />
@@ -112,7 +112,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 
 						<TooltipTrigger>
 							<Link
-								className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 focus-visible:focus-outline focus-visible:focus-outline-offset-0"
+								className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 focus-visible:focus-outline focus-visible:focus-outline-offset-0 pressed:bg-brand-200"
 								href={`/hierarchy?${String(createUrlSearchParams({ kind: "person", id }))}`}
 							>
 								<NetworkIcon className="size-5 shrink-0 text-brand-500" />
@@ -413,7 +413,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 							<dl className="m-3 grid content-start gap-y-3 text-sm">
 								{isNonEmptyArray(data.alternativeFirstNames) ? (
 									<div className="grid gap-y-0.5">
-										<dt className="text-xs font-bold uppercase tracking-wider text-brand-600">
+										<dt className="text-xs font-bold tracking-wider text-brand-600 uppercase">
 											{t("alternative-first-names")}
 										</dt>
 										<dd>{format.list(data.alternativeFirstNames)}</dd>
@@ -422,7 +422,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 
 								{isNonEmptyArray(data.alternativeLastNames) ? (
 									<div className="grid gap-y-0.5">
-										<dt className="text-xs font-bold uppercase tracking-wider text-brand-600">
+										<dt className="text-xs font-bold tracking-wider text-brand-600 uppercase">
 											{t("alternative-last-names")}
 										</dt>
 										<dd>{format.list(data.alternativeLastNames)}</dd>
@@ -502,7 +502,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								).map(([tag, items]) => {
 									return (
 										<div key={tag} className="grid gap-y-0.5 text-sm">
-											<h4 className="text-xs font-bold uppercase tracking-wider text-brand-600">
+											<h4 className="text-xs font-bold tracking-wider text-brand-600 uppercase">
 												{tag}
 											</h4>
 											<ul className="grid gap-y-1" role="list">

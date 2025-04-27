@@ -80,11 +80,11 @@ export function SearchSidePanel(props: SearchSidePanelProps): ReactNode {
 
 	return (
 		<SidePanel
-			className="w-[min(100%,22rem)] lg:w-[22rem] border-r border-brand-100 bg-brand-50 animate-in slide-in-from-left fill-mode-both lg:animate-none"
+			className="w-[min(100%,22rem)] border-r border-brand-100 bg-brand-50 animate-in fill-mode-both slide-in-from-left lg:w-[22rem] lg:animate-none"
 			isPending={isPending}
 		>
 			<header className="flex min-h-14 items-center justify-between gap-x-4 border-b border-brand-100 px-8 py-4 text-brand-600">
-				<h2 className="inline-flex items-center gap-x-1.5 text-xs font-bold uppercase tracking-wider">
+				<h2 className="inline-flex items-center gap-x-1.5 text-xs font-bold tracking-wider uppercase">
 					{label}
 					{isPending ? (
 						<Loader2Icon aria-hidden={true} className="size-4 shrink-0 animate-spin" />

@@ -27,7 +27,7 @@ export function SidePanelToggle(props: SidePanelToggleProps): ReactNode {
 				aria-controls={id}
 				aria-expanded={isOpen}
 				className={cn(
-					"rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-500 transition hover:bg-brand-100 pressed:bg-brand-200 focus-visible:focus-outline focus-visible:focus-outline-offset-0",
+					"rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-500 transition hover:bg-brand-100 focus-visible:focus-outline focus-visible:focus-outline-offset-0 pressed:bg-brand-200",
 					className,
 				)}
 				onPress={toggle}
@@ -39,9 +39,9 @@ export function SidePanelToggle(props: SidePanelToggleProps): ReactNode {
 				</span>
 			</Button>
 			<Tooltip placement="right">
-				<span className="inline-flex gap-x-2 items-center">
+				<span className="inline-flex items-center gap-x-2">
 					{isOpen ? closeLabel : openLabel} {/* eslint-disable-next-line react/jsx-no-literals */}
-					<kbd className="font-body font-medium text-xs rounded-sm border border-white px-1 leading-4 opacity-75">
+					<kbd className="rounded-sm border border-white px-1 font-body text-xs leading-4 font-medium opacity-75">
 						⌘+K
 					</kbd>
 				</span>

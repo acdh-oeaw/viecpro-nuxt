@@ -87,8 +87,8 @@ export default async function SearchLayout(props: Readonly<SearchLayoutProps>): 
 										<TooltipTrigger>
 											<NavLink
 												className={cn(
-													"focus-visible:focus-outline focus-visible:-focus-outline-offset-2 inline-block aspect-square border border-transparent p-3 transition aria-[current]:border-brand-100 aria-[current]:bg-brand-100 hover:border-brand-100 hover:bg-brand-100 disabled:opacity-50 xs:p-4",
-													link.isDisabled && "opacity-50 cursor-not-allowed",
+													"inline-block aspect-square border border-transparent p-3 transition hover:border-brand-100 hover:bg-brand-100 focus-visible:focus-outline focus-visible:-focus-outline-offset-2 disabled:opacity-50 aria-[current]:border-brand-100 aria-[current]:bg-brand-100 xs:p-4",
+													link.isDisabled && "cursor-not-allowed opacity-50",
 												)}
 												/**
 												 * Not using `isDisabled` prop because that would make the element not

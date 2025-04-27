@@ -128,7 +128,7 @@ export function AppFooter(): ReactNode {
 						{Object.entries(links).map(([id, link]) => {
 							return (
 								<li key={id}>
-									<NavLink className="focus-visible:focus-outline hover:underline" href={link.href}>
+									<NavLink className="hover:underline focus-visible:focus-outline" href={link.href}>
 										{link.label}
 									</NavLink>
 								</li>
@@ -139,7 +139,7 @@ export function AppFooter(): ReactNode {
 
 				<small className="text-sm">
 					&copy; {new Date().getUTCFullYear()}{" "}
-					<a className="focus-visible:focus-outline hover:underline" href={acdhLinks[locale].href}>
+					<a className="hover:underline focus-visible:focus-outline" href={acdhLinks[locale].href}>
 						{acdhLinks[locale].label}
 					</a>
 				</small>

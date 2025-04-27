@@ -19,14 +19,14 @@ export function PopoverNote(props: PopoverNoteProps): ReactNode {
 		<DialogTrigger>
 			<TooltipTrigger>
 				<Button
-					className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 pressed:bg-brand-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:focus-outline focus-visible:focus-outline-offset-0"
+					className="inline-flex items-center gap-x-2 rounded-md border border-brand-200 bg-brand-50 p-2 text-sm font-medium text-brand-600 transition hover:bg-brand-100 focus-visible:focus-outline focus-visible:focus-outline-offset-0 disabled:cursor-not-allowed disabled:opacity-50 pressed:bg-brand-200"
 					isDisabled={isDisabled}
 				>
 					{label}
 				</Button>
 				<Tooltip placement="bottom">{tooltip}</Tooltip>
 			</TooltipTrigger>
-			<Popover className="group min-w-[var(--trigger-width)] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2 placement-top:mb-2 placement-bottom:mt-2">
+			<Popover className="group max-w-72 min-w-[var(--trigger-width)] rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2 placement-top:mb-2 placement-bottom:mt-2">
 				<OverlayArrow>
 					<svg
 						className="block size-4 fill-white stroke-brand-100 stroke-1 group-placement-bottom:rotate-180"

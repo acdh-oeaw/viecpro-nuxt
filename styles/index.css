@@ -56,7 +56,7 @@
 }
 
 @utility focus-outline {
-	@apply outline-solid outline-2 outline-brand-600 outline-offset-2;
+	@apply outline-2 outline-offset-2 outline-brand-600 outline-solid;
 }
 
 @utility focus-outline-inverse {
@@ -80,7 +80,7 @@
 }
 
 @utility select-overlay {
-	@apply after:border-white after:border-b-2;
+	@apply after:border-b-2 after:border-white;
 }
 
 @utility press-overlay {
@@ -88,7 +88,7 @@
 }
 
 @utility target-area {
-	@apply before:absolute before:min-w-[48px] before:min-h-[48px] before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2;
+	@apply before:absolute before:top-1/2 before:left-1/2 before:min-h-[48px] before:min-w-[48px] before:-translate-x-1/2 before:-translate-y-1/2;
 }
 
 @layer base {
@@ -105,7 +105,7 @@
 	}
 
 	:root {
-		@apply bg-white text-brand-950 font-body;
+		@apply bg-white font-body text-brand-950;
 
 		overflow-wrap: break-word;
 		font-synthesis: none;
@@ -121,7 +121,7 @@
 	}
 
 	:focus-visible {
-		@apply outline-solid outline-2 outline-brand-600 outline-offset-2;
+		@apply outline-2 outline-offset-2 outline-brand-600 outline-solid;
 	}
 
 	/** Let react aria components handle focus state. */

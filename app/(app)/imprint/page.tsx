@@ -33,13 +33,13 @@ export default async function ImprintPage(_props: Readonly<ImprintPageProps>): P
 		<MainContent className="flex flex-col">
 			<section className="border-b border-brand-100 bg-brand-50 py-16 xs:py-20">
 				<div className="mx-auto grid w-full max-w-7xl gap-y-4 px-4 xs:px-8">
-					<h1 className="text-balance font-heading text-3xl font-bold text-brand-600 xs:text-4xl md:text-5xl">
+					<h1 className="font-heading text-3xl font-bold text-balance text-brand-600 xs:text-4xl md:text-5xl">
 						{t("title")}
 					</h1>
 				</div>
 			</section>
 
-			<div className="mx-auto w-full max-w-7xl xs:px-8 px-4">
+			<div className="mx-auto w-full max-w-7xl px-4 xs:px-8">
 				<section
 					dangerouslySetInnerHTML={{ __html: html }}
 					className="prose w-full max-w-4xl py-16 xs:py-20"

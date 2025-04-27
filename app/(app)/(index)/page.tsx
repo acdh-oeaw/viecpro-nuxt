@@ -38,7 +38,7 @@ export default async function IndexPage(_props: Readonly<IndexPageProps>): Promi
 
 	return (
 		<MainContent className="flex flex-col">
-			<div className="border-b-8 border-t-4 border-brand-900">
+			<div className="border-t-4 border-b-8 border-brand-900">
 				<Image
 					alt=""
 					className="aspect-video max-h-[480px] min-h-[320px] w-full object-cover"

@@ -83,14 +83,14 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 	return (
 		<Fragment>
 			<div className="w-full overflow-x-auto">
-				<table className="min-w-full text-brand-950 text-sm">
+				<table className="min-w-full text-sm text-brand-950">
 					<thead>
 						<tr className="border-b border-brand-100">
 							{columns.map((column) => {
 								return (
 									<th
 										key={column.field}
-										className="text-left text-xs font-bold uppercase tracking-wider text-brand-600"
+										className="text-left text-xs font-bold tracking-wider text-brand-600 uppercase"
 									>
 										<Button
 											className="inline-flex w-full items-center justify-between gap-x-4 px-4 py-3 transition hover:bg-brand-50 focus-visible:focus-outline focus-visible:-focus-outline-offset-2"
@@ -108,7 +108,7 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 											}}
 											type="button"
 										>
-											<span className="uppercase whitespace-nowrap">{column.label}</span>
+											<span className="whitespace-nowrap uppercase">{column.label}</span>
 											{column.sort === currentSortColumn.sort ? (
 												currentSortDirection === "desc" ? (
 													<SortDescIcon
@@ -150,7 +150,7 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 											return (
 												<td
 													key={column.field}
-													className="px-3 py-2.5 whitespace-nowrap truncate max-w-sm"
+													className="max-w-sm truncate px-3 py-2.5 whitespace-nowrap"
 													title={title}
 												>
 													{target != null ? (
@@ -171,7 +171,7 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 										return (
 											<td
 												key={column.field}
-												className="px-3 py-2.5 whitespace-nowrap truncate max-w-sm"
+												className="max-w-sm truncate px-3 py-2.5 whitespace-nowrap"
 												title={value != null ? String(value) : undefined}
 											>
 												{value}
@@ -186,7 +186,7 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 			</div>
 
 			{hasPreviousPage || hasNextPage ? (
-				<footer className="text-sm flex px-3 justify-between items-center my-3">
+				<footer className="my-3 flex items-center justify-between px-3 text-sm">
 					<span className="text-xs">
 						{/* eslint-disable-next-line react/jsx-no-literals */}
 						{(currentPage - 1) * limit + 1} - {(currentPage - 1) * limit + visibleRows.length} von{" "}
@@ -194,7 +194,7 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 					</span>
 					<span className="inline-flex items-center gap-x-6 sm:ml-auto">
 						<Button
-							className="inline-flex items-center gap-x-1.5 hover:underline disabled:opacity-50 focus-visible:focus-outline"
+							className="inline-flex items-center gap-x-1.5 hover:underline focus-visible:focus-outline disabled:opacity-50"
 							isDisabled={!hasPreviousPage}
 							onPress={() => {
 								setCurrentPage((currentPage) => {
@@ -207,7 +207,7 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 							{previousPageLabel}
 						</Button>
 						<Button
-							className="inline-flex items-center gap-x-1.5 hover:underline disabled:opacity-50 focus-visible:focus-outline"
+							className="inline-flex items-center gap-x-1.5 hover:underline focus-visible:focus-outline disabled:opacity-50"
 							isDisabled={!hasNextPage}
 							onPress={() => {
 								setCurrentPage((currentPage) => {

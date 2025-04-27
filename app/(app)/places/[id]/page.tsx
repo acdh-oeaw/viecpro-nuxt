@@ -77,7 +77,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 			<div className="mx-auto grid w-full max-w-7xl content-start gap-y-12 px-4 pt-8 pb-16 xs:gap-y-16 xs:px-8">
 				<div className="grid content-start gap-y-4">
 					<div>
-						<span className="inline-flex items-center gap-x-2 text-xs font-bold uppercase tracking-wider text-brand-600">
+						<span className="inline-flex items-center gap-x-2 text-xs font-bold tracking-wider text-brand-600 uppercase">
 							{t("place")}
 							<div className="-mt-px">
 								<StatusIndicator status={data.status} />
@@ -225,7 +225,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 								).map(([tag, items]) => {
 									return (
 										<div key={tag} className="grid gap-y-0.5 text-sm">
-											<h4 className="text-xs font-bold uppercase tracking-wider text-brand-600">
+											<h4 className="text-xs font-bold tracking-wider text-brand-600 uppercase">
 												{tag}
 											</h4>
 											<ul className="grid gap-y-1" role="list">

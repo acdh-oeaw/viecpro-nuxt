@@ -8,7 +8,6 @@
 		"plugins": [{ "name": "next" }]
 	},
 	"include": [
-		"./next-env.d.ts",
 		"./**/*.d.ts",
 		"./**/*.js",
 		// "./**/*.mdx",

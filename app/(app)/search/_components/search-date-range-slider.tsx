@@ -27,7 +27,7 @@ export function SearchDateRangeSlider(props: SearchDateRangeSliderProps): ReactN
 			onChangeEnd={onChange}
 		>
 			<div className="flex items-center justify-between gap-x-2">
-				<Label className="text-xs font-bold uppercase tracking-wider text-brand-600">{label}</Label>
+				<Label className="text-xs font-bold tracking-wider text-brand-600 uppercase">{label}</Label>
 				<SliderOutput className="text-xs font-medium text-brand-600">
 					{({ state }) => {
 						return state.values
@@ -48,7 +48,7 @@ export function SearchDateRangeSlider(props: SearchDateRangeSliderProps): ReactN
 								style={{ width: `${String(state.getThumbPercent(0) * 100)}%` }}
 							/>
 							<div
-								className="absolute right-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-brand-100"
+								className="absolute top-1/2 right-0 h-1 -translate-y-1/2 rounded-full bg-brand-100"
 								style={{ width: `${String(100 - state.getThumbPercent(1) * 100)}%` }}
 							/>
 							{state.values.map((_, index) => {
@@ -56,7 +56,7 @@ export function SearchDateRangeSlider(props: SearchDateRangeSliderProps): ReactN
 									<SliderThumb
 										key={index}
 										aria-label={thumbLabels[index]}
-										className="top-1/2 size-5 rounded-full border border-brand-300 bg-brand-50 shadow-md transition focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-brand-600 dragging:border-brand-600"
+										className="top-1/2 size-5 rounded-full border border-brand-300 bg-brand-50 shadow-md transition focus-visible:outline-2 focus-visible:outline-brand-600 focus-visible:outline-solid dragging:border-brand-600"
 										index={index}
 										name={names[index]}
 									/>

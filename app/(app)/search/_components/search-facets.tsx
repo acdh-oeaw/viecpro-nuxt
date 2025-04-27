@@ -146,14 +146,14 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 
 	return (
 		<div aria-labelledby={id} className="grid gap-y-2" role="group">
-			<h3 className="text-xs font-bold uppercase tracking-wider text-brand-600" id={id}>
+			<h3 className="text-xs font-bold tracking-wider text-brand-600 uppercase" id={id}>
 				{label}
 			</h3>
 			{options.length > maxFacets ? (
 				<SearchField className="group grid gap-y-2" onChange={onFilter} value={filterSearchTerm}>
 					<Label className="sr-only">{filterLabel}</Label>
 					<div className="relative">
-						<Input className="w-full border border-brand-100 py-0.5 pl-3 pr-9 bg-white focus-visible:focus-outline focus-visible:focus-outline-offset-0" />
+						<Input className="w-full border border-brand-100 bg-white py-0.5 pr-9 pl-3 focus-visible:focus-outline focus-visible:focus-outline-offset-0" />
 						<Button className="absolute inset-y-0 right-3 group-empty:hidden">
 							<XIcon aria-hidden={true} className="size-4 text-brand-600" />
 						</Button>
@@ -174,7 +174,7 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 
 						return (
 							<label key={value} className="inline-flex gap-x-1.5 accent-brand-600">
-								<span className="h-[1lh] inline-flex items-center">
+								<span className="inline-flex h-[1lh] items-center">
 									<input
 										checked={isSelected}
 										className="h-[1lh]"
@@ -185,7 +185,7 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 									/>
 								</span>
 								<span className="flex-1">{value}</span>
-								<span className="h-[1lh] inline-flex items-center">
+								<span className="inline-flex h-[1lh] items-center">
 									<span className="text-xs font-medium">{format.number(count)}</span>
 								</span>
 							</label>

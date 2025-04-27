@@ -2,6 +2,8 @@
 
 frontend for [viecpro](https://viecpro-backend.acdh-ch-dev.oeaw.ac.at).
 
+deployed at <https://viecpro.acdh.oeaw.ac.at>.
+
 ## how to run
 
 prerequisites:

@@ -49,12 +49,12 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 			onSelectionChange={onSelectionChange}
 			selectedKey={selectedKey}
 		>
-			<Label className="cursor-default text-xs font-bold uppercase tracking-wider text-brand-600">
+			<Label className="cursor-default text-xs font-bold tracking-wider text-brand-600 uppercase">
 				{label}
 			</Label>
 
-			<div className="relative inline-flex w-full items-center justify-between overflow-hidden rounded-md border border-brand-100 bg-white has-[disabled]:cursor-not-allowed sm:min-w-96 focus-within:focus-outline focus-within:focus-outline-offset-0">
-				<Input className="flex-1 py-2.5 pl-4 pr-9 leading-none outline-none disabled:pointer-events-none" />
+			<div className="relative inline-flex w-full items-center justify-between overflow-hidden rounded-md border border-brand-100 bg-white focus-within:focus-outline focus-within:focus-outline-offset-0 has-[disabled]:cursor-not-allowed sm:min-w-96">
+				<Input className="flex-1 py-2.5 pr-9 pl-4 leading-none outline-none disabled:pointer-events-none" />
 				<Button
 					aria-label={triggerLabel}
 					className="absolute inset-y-0 right-2 disabled:pointer-events-none"
@@ -74,7 +74,7 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 						{(item: AutocompleteItem) => {
 							return (
 								<ListBoxItem
-									className="relative flex w-full select-none items-center rounded-md px-8 py-2 hover:bg-brand-50 hover:outline-none selected:bg-brand-50 disabled:pointer-events-none disabled:text-neutral-500 focus-visible:bg-brand-50"
+									className="relative flex w-full items-center rounded-md px-8 py-2 select-none hover:bg-brand-50 hover:outline-none focus-visible:bg-brand-50 disabled:pointer-events-none disabled:text-neutral-500 selected:bg-brand-50"
 									textValue={item.label}
 								>
 									{({ isSelected }) => {

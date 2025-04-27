@@ -34,7 +34,7 @@ export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
 			<NavLink
 				className={cn(
 					"-ml-2 grid h-full shrink-0 place-content-center self-center p-2",
-					"interactive focus-visible:focus-outline focus-visible:focus-outline-inverse focus-visible:-focus-outline-offset-2",
+					"interactive focus-visible:focus-outline focus-visible:-focus-outline-offset-2 focus-visible:focus-outline-inverse",
 				)}
 				href={navigation.home.href}
 			>
@@ -57,7 +57,7 @@ export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
 										}
 										className={cn(
 											"relative inline-flex px-4 py-6 text-white transition",
-											"interactive focus-visible:focus-outline focus-visible:focus-outline-inverse focus-visible:-focus-outline-offset-2 hover:bg-brand-700 pressed:bg-brand-800",
+											"interactive hover:bg-brand-700 focus-visible:focus-outline focus-visible:-focus-outline-offset-2 focus-visible:focus-outline-inverse pressed:bg-brand-800",
 											"aria-[current]:select-overlay",
 										)}
 										href={item.href}
@@ -93,7 +93,7 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 				className={cn(
 					"md:hidden",
 					"-ml-2 grid h-full shrink-0 place-content-center self-center p-2",
-					"interactive focus-visible:focus-outline focus-visible:focus-outline-inverse focus-visible:-focus-outline-offset-2",
+					"interactive focus-visible:focus-outline focus-visible:-focus-outline-offset-2 focus-visible:focus-outline-inverse",
 				)}
 				href={navigation.home.href}
 			>
@@ -105,7 +105,7 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 					<Button
 						className={cn(
 							"-mr-3 grid place-content-center rounded-lg p-3 transition",
-							"interactive focus-visible:focus-outline focus-visible:focus-outline-inverse focus-visible:focus-outline-offset-0 hover:bg-brand-700 pressed:bg-brand-800",
+							"interactive hover:bg-brand-700 focus-visible:focus-outline focus-visible:focus-outline-offset-0 focus-visible:focus-outline-inverse pressed:bg-brand-800",
 						)}
 					>
 						<MenuIcon aria-hidden={true} className="size-6 shrink-0 text-white" />
@@ -113,10 +113,10 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 					</Button>
 				</nav>
 				<ModalOverlay
-					className="fixed left-0 top-0 isolate z-20 grid h-[var(--visual-viewport-height)] w-full justify-items-end bg-brand-950/15"
+					className="fixed top-0 left-0 isolate z-20 grid h-[var(--visual-viewport-height)] w-full justify-items-end bg-brand-950/15"
 					isDismissable={true}
 				>
-					<Modal className="ml-12 size-full max-h-full max-w-xs bg-white shadow-lg animate-in slide-in-from-right fill-mode-both forced-colors:bg-[Canvas]">
+					<Modal className="ml-12 size-full max-h-full max-w-xs bg-white shadow-lg animate-in fill-mode-both slide-in-from-right forced-colors:bg-[Canvas]">
 						<Dialog className="relative h-full max-h-[inherit] overflow-auto">
 							{({ close }) => {
 								return (
@@ -128,7 +128,7 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 											<Button
 												className={cn(
 													"-my-3 -mr-3 grid place-content-center rounded-lg p-3 transition",
-													"interactive focus-visible:focus-outline focus-visible:focus-outline-offset-0 hover:bg-brand-100 pressed:bg-brand-200",
+													"interactive hover:bg-brand-100 focus-visible:focus-outline focus-visible:focus-outline-offset-0 pressed:bg-brand-200",
 												)}
 												slot="close"
 											>
@@ -151,7 +151,7 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 																	}
 																	className={cn(
 																		"inline-flex w-full px-6 py-3 text-brand-600 transition",
-																		"interactive focus-visible:focus-outline focus-visible:-focus-outline-offset-2 hover:bg-brand-100 pressed:bg-brand-200",
+																		"interactive hover:bg-brand-100 focus-visible:focus-outline focus-visible:-focus-outline-offset-2 pressed:bg-brand-200",
 																		"aria-[current]:bg-brand-100",
 																	)}
 																	href={item.href}
