@@ -15,6 +15,7 @@ const config: NextConfig = {
 	experimental: {
 		// dynamicIO: true,
 		// ppr: true,
+		useCache: true,
 	},
 	headers() {
 		const headers: Awaited<ReturnType<NonNullable<NextConfig["headers"]>>> = [
@@ -83,7 +84,7 @@ const plugins: Array<(config: NextConfig) => NextConfig> = [
 			/** @see https://v4.next-intl.dev/docs/workflows/typescript#messages-arguments */
 			createMessagesDeclaration: "./messages/de.json",
 		},
-		requestConfig: "./lib/i18n/get-request-config.ts",
+		requestConfig: "./lib/i18n/request.ts",
 	}),
 ];
 

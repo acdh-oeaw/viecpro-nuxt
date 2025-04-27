@@ -1,3 +1,5 @@
+"use cache";
+
 import { HttpError, request } from "@acdh-oeaw/lib";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";

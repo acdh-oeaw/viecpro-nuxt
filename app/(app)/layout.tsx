@@ -18,7 +18,6 @@ import { SkipLink } from "@/components/skip-link";
 import { env } from "@/config/env.config";
 import { AnalyticsScript } from "@/lib/analytics-script";
 import * as fonts from "@/lib/fonts";
-import { getToastMessage } from "@/lib/i18n/redirect-with-message";
 
 interface LocaleLayoutProps {
 	children: ReactNode;
@@ -76,9 +75,6 @@ export default async function LocaleLayout(props: Readonly<LocaleLayoutProps>): 
 	const meta = await getTranslations("metadata");
 	const messages = await getMessages();
 	const errorPageMessages = pick(messages, ["Error"]);
-
-	// TODO:
-	const _toastMessage = await getToastMessage();
 
 	return (
 		<html className={cn(fonts.body.variable, fonts.heading.variable, "antialiased")} lang={locale}>

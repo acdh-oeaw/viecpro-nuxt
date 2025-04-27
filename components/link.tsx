@@ -46,7 +46,6 @@ export function Link(props: Readonly<LinkProps>): ReactNode {
 	const ref = useRef<HTMLAnchorElement | HTMLSpanElement>(null);
 	const linkRef = useObjectRef(
 		useMemo(() => {
-			// eslint-disable-next-line react-compiler/react-compiler
 			return mergeRefs(forwardedRef, ref);
 		}, [forwardedRef, ref]),
 	);
