@@ -38,7 +38,7 @@ export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
 				)}
 				href={navigation.home.href}
 			>
-				<Image alt="" className="h-10 w-auto shrink-0" src={logo} />
+				<Image alt="" className="h-10 w-auto shrink-0" priority={true} src={logo} />
 				<span className="sr-only">{navigation.home.label}</span>
 			</NavLink>
 
@@ -97,7 +97,7 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 				)}
 				href={navigation.home.href}
 			>
-				<Image alt="" className="h-10 w-auto shrink-0" src={logo} />
+				<Image alt="" className="h-10 w-auto shrink-0" priority={true} src={logo} />
 				<span className="sr-only">{navigation.home.label}</span>
 			</NavLink>
 			<DialogTrigger>
