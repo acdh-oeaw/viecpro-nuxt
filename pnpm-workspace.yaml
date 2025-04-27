@@ -1,5 +1,7 @@
+ignoredBuiltDependencies:
+  - unrs-resolver
+
 onlyBuiltDependencies:
   - esbuild
   - sharp
   - simple-git-hooks
-  - unrs-resolver
