@@ -105,6 +105,7 @@ export default async function InstitutionPage(
 									<span className="sr-only">{t("notes")}</span>
 								</Fragment>
 							}
+							tooltip={t("notes")}
 						>
 							{data.notes}
 						</PopoverNote>
@@ -127,6 +128,7 @@ export default async function InstitutionPage(
 									<span className="sr-only">{t("citation")}</span>
 								</Fragment>
 							}
+							tooltip={t("citation")}
 						>
 							<div className="grid gap-y-1">
 								<div>

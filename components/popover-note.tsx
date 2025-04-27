@@ -9,10 +9,11 @@ interface PopoverNoteProps {
 	children: ReactNode;
 	isDisabled?: boolean;
 	label: ReactNode;
+	tooltip: ReactNode;
 }
 
 export function PopoverNote(props: PopoverNoteProps): ReactNode {
-	const { children, isDisabled, label } = props;
+	const { children, isDisabled, label, tooltip } = props;
 
 	return (
 		<DialogTrigger>
@@ -23,7 +24,7 @@ export function PopoverNote(props: PopoverNoteProps): ReactNode {
 				>
 					{label}
 				</Button>
-				<Tooltip placement="bottom">{label}</Tooltip>
+				<Tooltip placement="bottom">{tooltip}</Tooltip>
 			</TooltipTrigger>
 			<Popover className="group min-w-[var(--trigger-width)] max-w-72 rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2 placement-top:mb-2 placement-bottom:mt-2">
 				<OverlayArrow>

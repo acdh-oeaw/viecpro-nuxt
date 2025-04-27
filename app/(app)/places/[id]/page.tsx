@@ -96,6 +96,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 									<span className="sr-only">{t("notes")}</span>
 								</Fragment>
 							}
+							tooltip={t("notes")}
 						>
 							{data.notes}
 						</PopoverNote>
@@ -107,6 +108,7 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 									<span className="sr-only">{t("citation")}</span>
 								</Fragment>
 							}
+							tooltip={t("citation")}
 						>
 							<div className="grid gap-y-1">
 								<div>
