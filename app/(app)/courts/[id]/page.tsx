@@ -44,21 +44,19 @@ export async function generateMetadata(
 		notFound();
 	}
 
-	try {
-		const data = await getCourt(id);
-
-		const metadata: Metadata = {
-			title: data.name,
-		};
-
-		return metadata;
-	} catch (error) {
+	const data = await getCourt(id).catch((error: unknown) => {
 		if (error instanceof Errors.ObjectNotFound) {
 			notFound();
 		}
 
 		throw error;
-	}
+	});
+
+	const metadata: Metadata = {
+		title: data.name,
+	};
+
+	return metadata;
 }
 
 export default async function CourtPage(props: Readonly<CourtPageProps>): Promise<ReactNode> {
@@ -69,7 +67,13 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 
 	const t = await getTranslations("CourtPage");
 
-	const data = await getCourt(id);
+	const data = await getCourt(id).catch((error: unknown) => {
+		if (error instanceof Errors.ObjectNotFound) {
+			notFound();
+		}
+
+		throw error;
+	});
 
 	const href = String(
 		createUrl({

@@ -37,21 +37,19 @@ export async function generateMetadata(
 		notFound();
 	}
 
-	try {
-		const data = await getPlace(id);
-
-		const metadata: Metadata = {
-			title: data.name,
-		};
-
-		return metadata;
-	} catch (error) {
+	const data = await getPlace(id).catch((error: unknown) => {
 		if (error instanceof Errors.ObjectNotFound) {
 			notFound();
 		}
 
 		throw error;
-	}
+	});
+
+	const metadata: Metadata = {
+		title: data.name,
+	};
+
+	return metadata;
 }
 
 export default async function PlacePage(props: Readonly<PlacePageProps>): Promise<ReactNode> {
@@ -63,7 +61,13 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 	const t = await getTranslations("PlacePage");
 	const format = await getFormatter();
 
-	const data = await getPlace(id);
+	const data = await getPlace(id).catch((error: unknown) => {
+		if (error instanceof Errors.ObjectNotFound) {
+			notFound();
+		}
+
+		throw error;
+	});
 
 	const href = String(
 		createUrl({
