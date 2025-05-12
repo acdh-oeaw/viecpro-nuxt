@@ -44,21 +44,19 @@ export async function generateMetadata(
 		notFound();
 	}
 
-	try {
-		const data = await getPerson(id);
-
-		const metadata: Metadata = {
-			title: [data.firstName, data.name].filter(isNonEmptyString).join(" "),
-		};
-
-		return metadata;
-	} catch (error) {
+	const data = await getPerson(id).catch((error: unknown) => {
 		if (error instanceof Errors.ObjectNotFound) {
 			notFound();
 		}
 
 		throw error;
-	}
+	});
+
+	const metadata: Metadata = {
+		title: [data.firstName, data.name].filter(isNonEmptyString).join(" "),
+	};
+
+	return metadata;
 }
 
 export default async function PersonPage(props: Readonly<PersonPageProps>): Promise<ReactNode> {
@@ -70,7 +68,13 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 	const t = await getTranslations("PersonPage");
 	const format = await getFormatter();
 
-	const data = await getPerson(id);
+	const data = await getPerson(id).catch((error: unknown) => {
+		if (error instanceof Errors.ObjectNotFound) {
+			notFound();
+		}
+
+		throw error;
+	});
 
 	const href = String(
 		createUrl({

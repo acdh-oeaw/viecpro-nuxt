@@ -44,22 +44,20 @@ export async function generateMetadata(
 		notFound();
 	}
 
-	try {
-		const data = await getInstitution(id);
-
-		const metadata: Metadata = {
-			// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-			title: data.expandedName || data.name,
-		};
-
-		return metadata;
-	} catch (error) {
+	const data = await getInstitution(id).catch((error: unknown) => {
 		if (error instanceof Errors.ObjectNotFound) {
 			notFound();
 		}
 
 		throw error;
-	}
+	});
+
+	const metadata: Metadata = {
+		// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+		title: data.expandedName || data.name,
+	};
+
+	return metadata;
 }
 
 export default async function InstitutionPage(
@@ -72,7 +70,13 @@ export default async function InstitutionPage(
 
 	const t = await getTranslations("InstitutionPage");
 
-	const data = await getInstitution(id);
+	const data = await getInstitution(id).catch((error: unknown) => {
+		if (error instanceof Errors.ObjectNotFound) {
+			notFound();
+		}
+
+		throw error;
+	});
 
 	const href = String(
 		createUrl({
