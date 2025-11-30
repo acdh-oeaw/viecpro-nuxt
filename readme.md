@@ -8,12 +8,12 @@ deployed at <https://viecpro.acdh.oeaw.ac.at>.
 
 prerequisites:
 
-- [node.js v22](https://nodejs.org/en/download)
+- [node.js v24](https://nodejs.org/en/download)
 - [pnpm v10](https://pnpm.io/installation)
 
 > [!TIP]
 >
-> you can use `pnpm` to install the required node.js version with `pnpm env use 22 --global`
+> you can use `pnpm` to install the required node.js version with `pnpm env use 24 --global`
 
 set required environment variables in `.env.local`:
 
