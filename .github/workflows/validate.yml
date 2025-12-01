@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - uses: dorny/paths-filter@v3
         id: filter
@@ -44,6 +44,18 @@ jobs:
       matrix:
         node-version: [24.x]
         os: [ubuntu-24.04]
+
+    env:
+      NEXT_PUBLIC_API_BASE_URL: "${{ vars.NEXT_PUBLIC_API_BASE_URL }}"
+      NEXT_PUBLIC_APP_BASE_URL: "http://localhost:3000"
+      NEXT_PUBLIC_MATOMO_BASE_URL: "${{ vars.NEXT_PUBLIC_MATOMO_BASE_URL }}"
+      NEXT_PUBLIC_MATOMO_ID: "${{ vars.NEXT_PUBLIC_MATOMO_ID }}"
+      NEXT_PUBLIC_REDMINE_ID: "${{ vars.SERVICE_ID }}"
+      NEXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX: "${{ vars.NEXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX }}"
+      NEXT_PUBLIC_TYPESENSE_HOST: "${{ vars.NEXT_PUBLIC_TYPESENSE_HOST }}"
+      NEXT_PUBLIC_TYPESENSE_PORT: "${{ vars.NEXT_PUBLIC_TYPESENSE_PORT }}"
+      NEXT_PUBLIC_TYPESENSE_PROTOCOL: "${{ vars.NEXT_PUBLIC_TYPESENSE_PROTOCOL }}"
+      NEXT_PUBLIC_TYPESENSE_SEARCH_API_KEY: "${{ secrets.NEXT_PUBLIC_TYPESENSE_SEARCH_API_KEY }}"
 
     steps:
       - name: Checkout repository
@@ -101,28 +113,9 @@ jobs:
 
       - name: Build app
         run: pnpm run build
-        env:
-          NEXT_PUBLIC_API_BASE_URL: "${{ vars.NEXT_PUBLIC_API_BASE_URL }}"
-          NEXT_PUBLIC_APP_BASE_URL: "http://localhost:3000"
-          NEXT_PUBLIC_MATOMO_BASE_URL: "${{ vars.NEXT_PUBLIC_MATOMO_BASE_URL }}"
-          NEXT_PUBLIC_MATOMO_ID: "${{ vars.NEXT_PUBLIC_MATOMO_ID }}"
-          NEXT_PUBLIC_REDMINE_ID: "${{ vars.SERVICE_ID }}"
-          NEXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX:
-            "${{ vars.NEXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX }}"
-          NEXT_PUBLIC_TYPESENSE_HOST: "${{ vars.NEXT_PUBLIC_TYPESENSE_HOST }}"
-          NEXT_PUBLIC_TYPESENSE_PORT: "${{ vars.NEXT_PUBLIC_TYPESENSE_PORT }}"
-          NEXT_PUBLIC_TYPESENSE_PROTOCOL: "${{ vars.NEXT_PUBLIC_TYPESENSE_PROTOCOL }}"
-          NEXT_PUBLIC_TYPESENSE_SEARCH_API_KEY:
-            "${{ secrets.NEXT_PUBLIC_TYPESENSE_SEARCH_API_KEY }}"
 
       - name: Run e2e tests
         run: pnpm run test:e2e
-        env:
-          ENV_VALIDATION: "disabled"
-          NEXT_PUBLIC_APP_BASE_URL: "http://localhost:3000"
-          NEXT_PUBLIC_MATOMO_BASE_URL: "${{ vars.NEXT_PUBLIC_MATOMO_BASE_URL }}"
-          NEXT_PUBLIC_MATOMO_ID: "${{ vars.NEXT_PUBLIC_MATOMO_ID }}"
-          NEXT_PUBLIC_REDMINE_ID: "${{ vars.SERVICE_ID }}"
 
       - uses: actions/upload-artifact@v5
         if: ${{ !cancelled() }}
