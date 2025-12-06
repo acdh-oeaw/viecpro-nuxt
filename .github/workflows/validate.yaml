@@ -2,16 +2,16 @@ name: Validate
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}-validate"
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 on:
-  workflow_dispatch:
   pull_request:
     branches:
       - main
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   changes:
@@ -129,7 +129,7 @@ jobs:
     needs: [validate]
     # @see https://github.com/orgs/community/discussions/45058
     if: ${{ github.event_name == 'push' && !failure() && !cancelled() }}
-    uses: ./.github/workflows/build-deploy.yml
+    uses: ./.github/workflows/build-deploy.yaml
     secrets: inherit
     # https://docs.github.com/en/actions/using-workflows/reusing-workflows#access-and-permissions
     permissions:
