@@ -2,6 +2,8 @@ ignoredBuiltDependencies:
   - unrs-resolver
 
 onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@swc/core'
   - esbuild
   - sharp
   - simple-git-hooks
