@@ -88,7 +88,7 @@
 }
 
 @utility target-area {
-	@apply before:absolute before:top-1/2 before:left-1/2 before:min-h-[48px] before:min-w-[48px] before:-translate-x-1/2 before:-translate-y-1/2;
+	@apply before:absolute before:top-1/2 before:left-1/2 before:min-h-12 before:min-w-12 before:-translate-x-1/2 before:-translate-y-1/2;
 }
 
 @layer base {
@@ -194,4 +194,15 @@
 	.prose a:focus-visible {
 		@apply focus-outline;
 	}
+}
+
+/**
+ * Workaround for webkit bug.
+ *
+ * @see {@link https://github.com/acdh-oeaw/viecpro-nuxt/issues/212}
+ * @see {@link https://bugs.webkit.org/show_bug.cgi?id=240961}
+ */
+[data-search-results] tr {
+	transform: translate(0);
+	clip-path: inset(0);
 }

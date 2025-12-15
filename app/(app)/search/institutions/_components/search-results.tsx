@@ -56,7 +56,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 	return (
 		<div className="w-full">
 			<div className="w-full overflow-x-auto outline-none xs:px-4 xs:pb-4">
-				<table className="min-w-full text-sm text-brand-950">
+				<table className="min-w-full text-sm text-brand-950" data-search-results={true}>
 					<thead>
 						<tr className="sticky top-0 border-b border-brand-100 bg-white text-left text-xs font-bold tracking-wider text-brand-600">
 							{columns.map((column) => {
