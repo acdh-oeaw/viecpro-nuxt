@@ -5,6 +5,7 @@ import {
 	typographyConfig,
 	withCustomHeadingIds,
 	withFootnotes,
+	withGfm,
 	withIframeTitles,
 	withImageSizes,
 	withTableOfContents,
@@ -15,7 +16,6 @@ import type { ElementContent } from "hast";
 import { getTranslations } from "next-intl/server";
 import withHeadingIds from "rehype-slug";
 import withFrontmatter from "remark-frontmatter";
-import withGfm from "remark-gfm";
 import withMdxFrontmatter from "remark-mdx-frontmatter";
 import withTypographicQuotes from "remark-smartypants";
 

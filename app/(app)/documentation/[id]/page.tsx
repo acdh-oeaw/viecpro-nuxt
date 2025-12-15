@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import type { Metadata, ResolvingMetadata } from "next";
 import { getLocale } from "next-intl/server";
 import type { ReactNode } from "react";

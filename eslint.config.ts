@@ -1,18 +1,30 @@
+import * as path from "node:path";
+
 import baseConfig from "@acdh-oeaw/eslint-config";
 import nextConfig from "@acdh-oeaw/eslint-config-next";
 import nodeConfig from "@acdh-oeaw/eslint-config-node";
 import playwrightConfig from "@acdh-oeaw/eslint-config-playwright";
 import reactConfig from "@acdh-oeaw/eslint-config-react";
+import tailwindcssConfig from "@acdh-oeaw/eslint-config-tailwindcss";
+import { defineConfig } from "eslint/config";
 import gitignore from "eslint-config-flat-gitignore";
 import checkFilePlugin from "eslint-plugin-check-file";
-import type { Config } from "typescript-eslint";
 
-const config: Config = [
+const config = defineConfig(
 	gitignore({ strict: false }),
-	...baseConfig,
-	...reactConfig,
-	...nextConfig,
-	...playwrightConfig,
+	baseConfig,
+	reactConfig,
+	nextConfig,
+	{
+		name: "tailwindcss-config",
+		extends: [tailwindcssConfig],
+		settings: {
+			"better-tailwindcss": {
+				entryPoint: path.resolve("./styles/index.css"),
+			},
+		},
+	},
+	playwrightConfig,
 	{
 		plugins: {
 			"check-file": checkFilePlugin,
@@ -96,12 +108,10 @@ const config: Config = [
 			"react/jsx-sort-props": ["error", { reservedFirst: true }],
 		},
 	},
-	...nodeConfig.map((config) => {
-		return {
-			files: ["db/**/*.ts", "lib/server/**/*.ts", "**/_actions/**/*.ts"],
-			...config,
-		};
-	}),
-];
+	{
+		files: ["db/**/*.ts", "lib/server/**/*.ts", "**/_actions/**/*.ts"],
+		extends: [nodeConfig],
+	},
+);
 
 export default config;

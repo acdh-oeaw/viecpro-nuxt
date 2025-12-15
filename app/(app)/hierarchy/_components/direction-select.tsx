@@ -25,12 +25,7 @@ export function DirectionSelect(props: DirectionSelectProps): ReactNode {
 	const { label, name, onSelectionChange, options, selectedKey } = props;
 
 	return (
-		<Select
-			className="grid gap-y-1"
-			name={name}
-			onSelectionChange={onSelectionChange}
-			selectedKey={selectedKey}
-		>
+		<Select className="grid gap-y-1" name={name} onChange={onSelectionChange} value={selectedKey}>
 			<Label className="cursor-default text-xs font-bold tracking-wider text-brand-600 uppercase">
 				{label}
 			</Label>
@@ -40,7 +35,7 @@ export function DirectionSelect(props: DirectionSelectProps): ReactNode {
 				<ChevronDownIcon aria-hidden={true} className="size-4 shrink-0 text-brand-500" />
 			</Button>
 
-			<Popover className="absolute z-10 w-[var(--trigger-width)] overflow-hidden rounded-md border border-neutral-200 bg-white text-brand-900 shadow-lg animate-in fade-in slide-in-from-top-2">
+			<Popover className="absolute z-10 w-(--trigger-width) overflow-hidden rounded-md border border-neutral-200 bg-white text-brand-900 shadow-lg animate-in fade-in slide-in-from-top-2">
 				<ListBox className="py-2 outline-none" items={options}>
 					{(item) => {
 						return (

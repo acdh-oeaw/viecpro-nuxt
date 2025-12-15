@@ -41,7 +41,7 @@ export default async function IndexPage(_props: Readonly<IndexPageProps>): Promi
 			<div className="border-t-4 border-b-8 border-brand-900">
 				<Image
 					alt=""
-					className="aspect-video max-h-[480px] min-h-[320px] w-full object-cover"
+					className="aspect-video max-h-120 min-h-80 w-full object-cover"
 					decoding="sync"
 					priority={true}
 					sizes="100vw"

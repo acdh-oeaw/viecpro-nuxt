@@ -174,10 +174,10 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 
 						return (
 							<label key={value} className="inline-flex gap-x-1.5 accent-brand-600">
-								<span className="inline-flex h-[1lh] items-center">
+								<span className="inline-flex h-lh items-center">
 									<input
 										checked={isSelected}
-										className="h-[1lh]"
+										className="h-lh"
 										name={name}
 										onChange={onChange}
 										type="checkbox"
@@ -185,7 +185,7 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 									/>
 								</span>
 								<span className="flex-1">{value}</span>
-								<span className="inline-flex h-[1lh] items-center">
+								<span className="inline-flex h-lh items-center">
 									<span className="text-xs font-medium">{format.number(count)}</span>
 								</span>
 							</label>

@@ -209,12 +209,12 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 					<Tooltip placement="left">{label}</Tooltip>
 				</TooltipTrigger>
 				<Popover
-					className="group max-w-72 min-w-[var(--trigger-width)] rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2"
+					className="group max-w-72 min-w-(--trigger-width) rounded-lg border border-brand-100 bg-white shadow-lg animate-in fade-in slide-in-from-top-2"
 					placement="bottom right"
 				>
 					<Menu className="py-2 text-sm outline-none">
 						<MenuItem
-							className="flex cursor-default gap-x-2 rounded px-3 py-2 transition hover:bg-brand-50"
+							className="flex cursor-default gap-x-2 rounded-sm px-3 py-2 transition hover:bg-brand-50"
 							onAction={() => {
 								onAction("json");
 							}}
@@ -224,7 +224,7 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 							<span className="sr-only">{jsonLabel}</span>
 						</MenuItem>
 						<MenuItem
-							className="flex cursor-default gap-x-2 rounded px-3 py-2 transition hover:bg-brand-50"
+							className="flex cursor-default gap-x-2 rounded-sm px-3 py-2 transition hover:bg-brand-50"
 							onAction={() => {
 								onAction("xlsx");
 							}}
@@ -244,7 +244,7 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 					state.toggle();
 				}}
 			>
-				<Modal className="m-8 w-full max-w-screen-md overflow-hidden rounded-lg border border-brand-100 bg-white p-6 shadow-lg">
+				<Modal className="m-8 w-full max-w-3xl overflow-hidden rounded-lg border border-brand-100 bg-white p-6 shadow-lg">
 					<Dialog className="relative grid gap-y-4 text-left text-brand-950 outline-none">
 						{({ close }) => {
 							return (

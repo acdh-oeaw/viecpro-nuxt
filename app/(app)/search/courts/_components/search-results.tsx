@@ -99,13 +99,13 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 												currentSortDirection === "desc" ? (
 													<SortDescIcon
 														aria-hidden={true}
-														className="size-4 shrink-0 text-brand-400 data-[pending]:animate-pulse"
+														className="size-4 shrink-0 text-brand-400 pending:animate-pulse"
 														data-pending={isPending || undefined}
 													/>
 												) : (
 													<SortAscIcon
 														aria-hidden={true}
-														className="size-4 shrink-0 text-brand-400 data-[pending]:animate-pulse"
+														className="size-4 shrink-0 text-brand-400 pending:animate-pulse"
 														data-pending={isPending || undefined}
 													/>
 												)
@@ -127,7 +127,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 										return (
 											<td
 												key={column.field}
-												className="px-4 py-2.5 whitespace-nowrap data-[extra-link]:relative"
+												className="px-4 py-2.5 whitespace-nowrap data-extra-link:relative"
 												data-extra-link={column.field === extraLinkField || undefined}
 											>
 												{column.field === "status" ? (

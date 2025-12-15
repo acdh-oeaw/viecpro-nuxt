@@ -12,7 +12,7 @@ import {
 	createLink,
 	createLinkButton,
 } from "@/lib/keystatic/components";
-import { createPreviewUrl } from "@/lib/keystatic/create-preview-url";
+// import { createPreviewUrl } from "@/lib/keystatic/create-preview-url";
 
 export const createDocumentation = createCollection("/documentation/", (paths, locale) => {
 	return collection({
@@ -22,7 +22,7 @@ export const createDocumentation = createCollection("/documentation/", (paths, l
 		slugField: "title",
 		columns: ["title"],
 		entryLayout: "content",
-		previewUrl: createPreviewUrl("/documentation/{slug}"),
+		// previewUrl: createPreviewUrl("/documentation/{slug}"),
 		schema: {
 			title: fields.slug({
 				name: {

@@ -113,12 +113,12 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 												currentSortDirection === "desc" ? (
 													<SortDescIcon
 														aria-hidden={true}
-														className="size-4 shrink-0 text-brand-400 data-[pending]:animate-pulse"
+														className="size-4 shrink-0 text-brand-400 pending:animate-pulse"
 													/>
 												) : (
 													<SortAscIcon
 														aria-hidden={true}
-														className="size-4 shrink-0 text-brand-400 data-[pending]:animate-pulse"
+														className="size-4 shrink-0 text-brand-400 pending:animate-pulse"
 													/>
 												)
 											) : null}
@@ -156,7 +156,7 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 													{target != null ? (
 														<Link
 															className="after:absolute after:inset-0 hover:after:bg-brand-600/5 focus-visible:after:focus-outline focus-visible:after:-focus-outline-offset-2"
-															href={`/${target.kind}s/${String(target.id)}`}
+															href={`/${target.kind}s/${target.id}`}
 														>
 															{target.name}
 														</Link>

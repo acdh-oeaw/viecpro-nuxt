@@ -113,7 +113,7 @@ export function AppNavigationMobile(props: Readonly<AppNavigationMobileProps>): 
 					</Button>
 				</nav>
 				<ModalOverlay
-					className="fixed top-0 left-0 isolate z-20 grid h-[var(--visual-viewport-height)] w-full justify-items-end bg-brand-950/15"
+					className="fixed top-0 left-0 isolate z-20 grid h-(--visual-viewport-height) w-full justify-items-end bg-brand-950/15"
 					isDismissable={true}
 				>
 					<Modal className="ml-12 size-full max-h-full max-w-xs bg-white shadow-lg animate-in fill-mode-both slide-in-from-right forced-colors:bg-[Canvas]">

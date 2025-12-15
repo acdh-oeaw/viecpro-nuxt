@@ -98,13 +98,13 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 												currentSortDirection === "desc" ? (
 													<SortDescIcon
 														aria-hidden={true}
-														className="size-4 shrink-0 text-brand-400 data-[pending]:animate-pulse"
+														className="size-4 shrink-0 text-brand-400 pending:animate-pulse"
 														data-pending={isPending || undefined}
 													/>
 												) : (
 													<SortAscIcon
 														aria-hidden={true}
-														className="size-4 shrink-0 text-brand-400 data-[pending]:animate-pulse"
+														className="size-4 shrink-0 text-brand-400 pending:animate-pulse"
 														data-pending={isPending || undefined}
 													/>
 												)

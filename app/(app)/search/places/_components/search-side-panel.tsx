@@ -71,7 +71,7 @@ export function SearchSidePanel(props: SearchSidePanelProps): ReactNode {
 
 	return (
 		<SidePanel
-			className="w-[min(100%,22rem)] border-r border-brand-100 bg-brand-50 animate-in fill-mode-both slide-in-from-left lg:w-[22rem] lg:animate-none"
+			className="w-[min(100%,22rem)] border-r border-brand-100 bg-brand-50 animate-in fill-mode-both slide-in-from-left lg:w-88 lg:animate-none"
 			isPending={isPending}
 		>
 			<header className="flex min-h-14 items-center justify-between gap-x-4 border-b border-brand-100 px-8 py-4 text-brand-600">

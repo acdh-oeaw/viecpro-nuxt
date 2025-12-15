@@ -7,7 +7,7 @@ export function TailwindIndicator(): ReactNode {
 
 	return (
 		<div
-			className="font-mono fixed right-4 bottom-4 z-10 grid size-8 cursor-default place-content-center rounded-full bg-black text-sm font-bold text-white shadow-lg select-none"
+			className="fixed right-4 bottom-4 z-10 grid size-8 cursor-default place-content-center rounded-full bg-black font-code text-sm font-bold text-white shadow-lg select-none"
 			role="status"
 		>
 			<span className="xs:hidden">{"2xs"}</span>

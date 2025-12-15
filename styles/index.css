@@ -43,8 +43,9 @@
 	--color-status-yellow: oklch(68% 0.162 75.834deg);
 	--color-status-red: oklch(58% 0.245 27.325deg);
 
-	--font-body: var(--_font-body, ui-sans-serif), system-ui, sans-serif;
+	--font-body: var(--_font-body, var(--default-font-family));
 	--font-heading: var(--_font-heading, var(--font-body));
+	--font-code: var(--_font-code, var(--default-mono-font-family));
 
 	--breakpoint-xs: 30rem;
 	--breakpoint-sm: 40rem;
