@@ -33,7 +33,8 @@ import { useRenderProps } from "@/lib/use-render-props";
  */
 
 export interface LinkProps
-	extends Pick<LocaleLinkProps, "href" | "prefetch" | "replace" | "scroll" | "shallow">,
+	extends
+		Pick<LocaleLinkProps, "href" | "prefetch" | "replace" | "scroll" | "shallow">,
 		Omit<AriaLinkProps, "elementType" | "href" | "routerOptions" | "slot">,
 		Pick<ComponentPropsWithoutRef<"a">, "aria-current" | "id"> {
 	ref?: Ref<HTMLAnchorElement | HTMLSpanElement> | undefined;
