@@ -9,20 +9,20 @@
       "id": "data"
     },
     {
-      "label": "Materialien",
-      "id": "materials"
-    },
-    {
-      "label": "Bibliographie",
-      "id": "bibliography"
-    },
-    {
       "label": "Forschungsinfrastruktur",
       "id": "technical"
     },
     {
+      "label": "Materialien",
+      "id": "materials"
+    },
+    {
       "label": "Kooperationspartner",
       "id": "partners"
+    },
+    {
+      "label": "Bibliographie",
+      "id": "bibliography"
     },
     {
       "label": "Kontaktaufnahme",
