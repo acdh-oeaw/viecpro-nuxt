@@ -173,12 +173,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 									{ label: t("alternative-last-names"), value: "alternativeLastNames" },
 								],
 							]}
-							data={{
-								...data,
-								allowance: data.allowance?.map((value) => {
-									return { value };
-								}),
-							}}
+							data={data}
 							fileName={slugify(data.name)}
 							jsonLabel={t("download-json")}
 							jsonShortLabel={t("file-json")}
@@ -289,8 +284,12 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								// 	[{ value: "name", label: t("name") }],
 								// ],
 								[
-									{ value: "allowance", label: t("allowance") },
-									[{ value: "value", label: t("value") }],
+									{ value: "allowances", label: t("allowance") },
+									[
+										{ value: "times", label: t("allowance-times") },
+										{ value: "payment", label: t("allowance-payment") },
+										{ value: "source", label: t("allowance-source") },
+									],
 								],
 							]}
 							xlsxLabel={t("download-xlsx")}
@@ -656,12 +655,32 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								/>
 							</Collapsible>
 
-							<Collapsible isDisabled={!isNonEmptyArray(data.allowance)} label={t("allowance")}>
-								<ul className="m-3 grid content-start gap-y-1" role="list">
-									{data.allowance?.map((allowance, index) => {
-										return <li key={index}>{allowance}</li>;
-									})}
-								</ul>
+							<Collapsible isDisabled={!isNonEmptyArray(data.allowances)} label={t("allowance")}>
+								<SortableTable
+									columns={[
+										{
+											field: "times",
+											label: t("allowance-times"),
+											sort: "times",
+											order: "string",
+										},
+										{
+											field: "payment",
+											label: t("allowance-payment"),
+											sort: "payment",
+											order: "string",
+										},
+										{
+											field: "source",
+											label: t("allowance-source"),
+											sort: "source",
+											order: "string",
+										},
+									]}
+									nextPageLabel={t("next-page")}
+									previousPageLabel={t("previous-page")}
+									rows={data.allowances ?? []}
+								/>
 							</Collapsible>
 						</section>
 

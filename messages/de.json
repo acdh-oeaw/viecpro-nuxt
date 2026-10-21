@@ -172,6 +172,9 @@
 	"PersonPage": {
 		"academic-titles": "Akademische Titel",
 		"allowance": "Zahlungen",
+		"allowance-payment": "Zahlungen",
+		"allowance-source": "Quelle",
+		"allowance-times": "Zeitangaben",
 		"alternative-first-names": "Vornamen",
 		"alternative-last-names": "Nachnamen",
 		"alternative-names": "Alternative Namensschreibweisen",
@@ -221,8 +224,7 @@
 		"section-court-related": "Bezüge zum Wiener Hof",
 		"section-data": "Stammdaten",
 		"start-date": "Beginn",
-		"status": "Bearbeitungsstatus",
-		"value": "Betrag"
+		"status": "Bearbeitungsstatus"
 	},
 	"PlacePage": {
 		"alternative-names": "Alternative Bezeichnungen",
