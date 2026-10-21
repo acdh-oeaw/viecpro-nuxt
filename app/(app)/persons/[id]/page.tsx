@@ -677,6 +677,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 											order: "string",
 										},
 									]}
+									isTextWrapping={true}
 									nextPageLabel={t("next-page")}
 									previousPageLabel={t("previous-page")}
 									rows={data.allowances ?? []}
