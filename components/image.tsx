@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 interface ImageProps extends Omit<NextImageProps, "loader"> {}
 
 export function Image(props: Readonly<ImageProps>): ReactNode {
+	// eslint-disable-next-line @typescript-eslint/no-useless-default-assignment
 	const { alt = "", placeholder } = props;
 
 	/** @see https://nextjs.org/docs/pages/api-reference/components/image#getimageprops */

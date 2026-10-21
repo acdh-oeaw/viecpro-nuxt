@@ -46,7 +46,7 @@ export function SidePanel(props: SidePanelProps): ReactNode {
 			{}
 			<aside
 				className={cn(
-					"absolute inset-y-0 z-10 h-full shadow-lg data-[state=collapsed]:hidden lg:hidden",
+					"absolute inset-y-0 z-10 h-full shadow-lg lg:hidden data-[state=collapsed]:hidden",
 					className,
 				)}
 				data-pending={isPending || undefined}

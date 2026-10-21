@@ -25,15 +25,8 @@ interface RenderPropsHookOptions<T> extends RenderProps<T>, SharedDOMProps, Aria
 }
 
 export function useRenderProps<T>(props: RenderPropsHookOptions<T>) {
-	const {
-		className,
-		style,
-		children,
-		defaultClassName = undefined,
-		defaultChildren = undefined,
-		defaultStyle,
-		values,
-	} = props;
+	const { className, style, children, defaultClassName, defaultChildren, defaultStyle, values } =
+		props;
 
 	return useMemo(() => {
 		let computedClassName: string | undefined;

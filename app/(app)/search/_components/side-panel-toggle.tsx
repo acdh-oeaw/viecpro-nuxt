@@ -41,7 +41,7 @@ export function SidePanelToggle(props: SidePanelToggleProps): ReactNode {
 			<Tooltip placement="right">
 				<span className="inline-flex items-center gap-x-2">
 					{isOpen ? closeLabel : openLabel} {/* eslint-disable-next-line react/jsx-no-literals */}
-					<kbd className="rounded-sm border border-white px-1 font-body text-xs leading-4 font-medium opacity-75">
+					<kbd className="rounded-sm border border-white px-1 font-body text-xs/4 font-medium opacity-75">
 						⌘+K
 					</kbd>
 				</span>
