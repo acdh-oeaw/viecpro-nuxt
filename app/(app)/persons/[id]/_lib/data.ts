@@ -35,9 +35,15 @@ interface Reference {
 	title: string;
 }
 
+interface Allowance {
+	payment: string | null;
+	source: string | null;
+	times: string | null;
+}
+
 interface PersonDetails extends Person {
 	academicTitles?: Array<RelationShort>;
-	allowance?: Array<string>;
+	allowances: Array<Allowance> | null;
 	alternativeBirthDates?: Array<string>;
 	alternativeDeathDates?: Array<string>;
 	alternativeFirstNames?: Array<string>;
