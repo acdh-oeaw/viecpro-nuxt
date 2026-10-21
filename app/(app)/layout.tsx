@@ -30,6 +30,7 @@ export const viewport: Viewport = {
 };
 
 export async function generateMetadata(
+	// eslint-disable-next-line @typescript-eslint/no-generated-empty-object-type
 	_props: Omit<Readonly<LocaleLayoutProps>, "children">,
 	_parent: ResolvingMetadata,
 ): Promise<Metadata> {

@@ -87,7 +87,7 @@ export default async function SearchLayout(props: Readonly<SearchLayoutProps>): 
 										<TooltipTrigger>
 											<NavLink
 												className={cn(
-													"inline-block aspect-square border border-transparent p-3 transition hover:border-brand-100 hover:bg-brand-100 focus-visible:focus-outline focus-visible:-focus-outline-offset-2 disabled:opacity-50 aria-[current]:border-brand-100 aria-[current]:bg-brand-100 xs:p-4",
+													"inline-block aspect-square border border-transparent p-3 transition hover:border-brand-100 hover:bg-brand-100 focus-visible:focus-outline focus-visible:-focus-outline-offset-2 disabled:opacity-50 xs:p-4 aria-[current]:border-brand-100 aria-[current]:bg-brand-100",
 													link.isDisabled && "cursor-not-allowed opacity-50",
 												)}
 												/**

@@ -1,12 +1,12 @@
-ignoredBuiltDependencies:
-  - unrs-resolver
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  esbuild: true
+  sharp: true
+  simple-git-hooks: true
+  unrs-resolver: false
 
-onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - '@swc/core'
-  - esbuild
-  - sharp
-  - simple-git-hooks
+engineStrict: true
 
 shellEmulator: true
 

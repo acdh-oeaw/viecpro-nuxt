@@ -36,7 +36,6 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 		return Array.from(options.values());
 	}, [options]);
 
-	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const { contains } = useFilter();
 
 	return (
@@ -46,14 +45,16 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 			defaultFilter={contains}
 			defaultItems={allOptions}
 			name={name}
+			// eslint-disable-next-line @typescript-eslint/no-deprecated
 			onSelectionChange={onSelectionChange}
+			// eslint-disable-next-line @typescript-eslint/no-deprecated
 			selectedKey={selectedKey}
 		>
 			<Label className="cursor-default text-xs font-bold tracking-wider text-brand-600 uppercase">
 				{label}
 			</Label>
 
-			<div className="relative inline-flex w-full items-center justify-between overflow-hidden rounded-md border border-brand-100 bg-white focus-within:focus-outline focus-within:focus-outline-offset-0 has-[disabled]:cursor-not-allowed sm:min-w-96">
+			<div className="relative inline-flex w-full items-center justify-between overflow-hidden rounded-md border border-brand-100 bg-white focus-within:focus-outline focus-within:focus-outline-offset-0 sm:min-w-96 has-[disabled]:cursor-not-allowed">
 				<Input className="flex-1 py-2.5 pr-9 pl-4 leading-none outline-none disabled:pointer-events-none" />
 				<Button
 					aria-label={triggerLabel}

@@ -15,7 +15,7 @@ WORKDIR /app
 
 USER node
 
-COPY --chown=node:node .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY --chown=node:node package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 ENV CI=true
 ENV SKIP_INSTALL_SIMPLE_GIT_HOOKS=1

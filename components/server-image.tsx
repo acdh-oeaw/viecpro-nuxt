@@ -11,6 +11,7 @@ interface ServerImageProps extends Omit<NextImageProps, "loader"> {}
 
 export async function ServerImage(props: Readonly<ServerImageProps>): Promise<ReactNode> {
 	const {
+		// eslint-disable-next-line @typescript-eslint/no-useless-default-assignment
 		alt = "",
 		decoding: _decoding,
 		fill,
