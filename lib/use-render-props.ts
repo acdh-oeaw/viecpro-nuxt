@@ -10,8 +10,7 @@ import { type CSSProperties, type ReactNode, useMemo } from "react";
 export interface StyleRenderProps<T> {
 	className?: string | ((values: T & { defaultClassName: string | undefined }) => string);
 	style?:
-		| CSSProperties
-		| ((values: T & { defaultStyle: CSSProperties }) => CSSProperties | undefined);
+		CSSProperties | ((values: T & { defaultStyle: CSSProperties }) => CSSProperties | undefined);
 }
 
 export interface RenderProps<T> extends StyleRenderProps<T> {

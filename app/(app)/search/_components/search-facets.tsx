@@ -33,10 +33,7 @@ import { defaultFacets, maxFacets } from "@/config/search.config";
 
 // FIXME: shared types
 type FacetValueCount =
-	| CourtFacetValueCount
-	| InstitutionFacetValueCount
-	| PersonFacetValueCount
-	| PlaceFacetValueCount;
+	CourtFacetValueCount | InstitutionFacetValueCount | PersonFacetValueCount | PlaceFacetValueCount;
 
 type SearchFacetsProps = {
 	filterLabel: ReactNode;
