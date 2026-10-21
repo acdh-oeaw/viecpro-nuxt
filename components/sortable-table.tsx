@@ -17,6 +17,8 @@ interface SortableTableProps<T extends object> {
 	rows: Array<T>;
 	previousPageLabel: string;
 	nextPageLabel: string;
+	/** Wrap long cell contents instead of truncating them. */
+	isTextWrapping?: boolean;
 }
 
 // FIXME: this currently depends on the hard-coded assumption that fields named "target"
@@ -26,7 +28,11 @@ interface SortableTableProps<T extends object> {
 // and render individual table components for each case
 
 export function SortableTable<T extends object>(props: SortableTableProps<T>): ReactNode {
-	const { columns, nextPageLabel, previousPageLabel, rows } = props;
+	const { columns, isTextWrapping = false, nextPageLabel, previousPageLabel, rows } = props;
+
+	const cellClassName = isTextWrapping
+		? "max-w-sm px-3 py-2.5 wrap-break-word"
+		: "max-w-sm truncate px-3 py-2.5 whitespace-nowrap";
 
 	const [currentSortColumn, setCurrentSortColumn] = useState(columns.at(0)!);
 	const [currentSortDirection, setCurrentSortDirection] = useState<"asc" | "desc">("asc");
@@ -150,8 +156,8 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 											return (
 												<td
 													key={column.field}
-													className="max-w-sm truncate px-3 py-2.5 whitespace-nowrap"
-													title={title}
+													className={cellClassName}
+													title={isTextWrapping ? undefined : title}
 												>
 													{target != null ? (
 														<Link
@@ -171,8 +177,8 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 										return (
 											<td
 												key={column.field}
-												className="max-w-sm truncate px-3 py-2.5 whitespace-nowrap"
-												title={value != null ? String(value) : undefined}
+												className={cellClassName}
+												title={!isTextWrapping && value != null ? String(value) : undefined}
 											>
 												{value}
 											</td>
