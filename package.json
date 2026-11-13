@@ -67,7 +67,7 @@
 		"remark-mdx-frontmatter": "^5.2.0",
 		"remark-smartypants": "^3.0.3",
 		"server-only": "^0.0.1",
-		"sharp": "^0.34.5",
+		"sharp": "^0.35.5",
 		"shiki": "^3.23.0",
 		"typesense": "2.0.3",
 		"valibot": "^1.5.0"
