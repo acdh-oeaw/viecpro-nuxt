@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * React Aria hooks receive refs during render by design (mirroring `react-aria-components`'s own
+ * `Link`), which the React Compiler cannot optimize.
+ */
+/* eslint-disable react-hooks/refs */
+
 import { filterDOMProps, mergeRefs } from "@react-aria/utils";
 import {
 	type ComponentPropsWithoutRef,

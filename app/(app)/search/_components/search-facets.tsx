@@ -93,11 +93,14 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 
 	function onFilter(value: string): void {
 		setFilterSearchTerm(value);
+
+		if (value.trim().length === 0) {
+			setFilteredFacetValues(null);
+		}
 	}
 
 	useEffect(() => {
 		if (filterSearchTerm.trim().length === 0) {
-			setFilteredFacetValues(null);
 			return;
 		}
 

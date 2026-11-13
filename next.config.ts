@@ -8,14 +8,7 @@ import { env } from "@/config/env.config";
 const config: NextConfig = {
 	/** Compression should be handled by nginx reverse proxy. */
 	compress: false,
-	eslint: {
-		dirs: [process.cwd()],
-		ignoreDuringBuilds: true,
-	},
 	experimental: {
-		// dynamicIO: true,
-		// ppr: true,
-		reactCompiler: true,
 		useCache: true,
 	},
 	headers() {
@@ -40,6 +33,7 @@ const config: NextConfig = {
 		},
 	},
 	output: env.BUILD_MODE,
+	reactCompiler: true,
 	redirects() {
 		const redirects: Awaited<ReturnType<NonNullable<NextConfig["redirects"]>>> = [
 			{

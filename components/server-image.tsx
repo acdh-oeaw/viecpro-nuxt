@@ -17,13 +17,13 @@ export async function ServerImage(props: Readonly<ServerImageProps>): Promise<Re
 		fill,
 		height,
 		loading: _loading,
-		priority,
+		preload,
 		src,
 		width,
 	} = props;
 
-	const loading = _loading ?? (priority ? "eager" : "lazy");
-	const decoding = _decoding ?? (priority || loading === "eager" ? "auto" : "async");
+	const loading = _loading ?? (preload === true ? "eager" : "lazy");
+	const decoding = _decoding ?? (preload === true || loading === "eager" ? "auto" : "async");
 
 	const dimensions =
 		typeof src === "object" || fill === true || (width != null && height != null)
@@ -42,7 +42,7 @@ export async function ServerImage(props: Readonly<ServerImageProps>): Promise<Re
 			decoding={decoding}
 			height={dimensions.height}
 			loading={loading}
-			priority={priority}
+			preload={preload}
 			width={dimensions.width}
 		/>
 	);
