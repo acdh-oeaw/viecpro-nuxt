@@ -3,10 +3,10 @@ allowBuilds:
   '@swc/core': true
   esbuild: true
   sharp: true
-  simple-git-hooks: true
+  lefthook: false
   unrs-resolver: false
 
-engineStrict: true
+engineStrict: false
 
 shellEmulator: true
 

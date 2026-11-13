@@ -4,9 +4,9 @@
 	"license": "MIT",
 	"type": "module",
 	"engines": {
-		"node": "^24"
+		"node": "^26"
 	},
-	"packageManager": "pnpm@12.14.0",
+	"packageManager": "pnpm@12.18.0",
 	"scripts": {
 		"analyze": "BUNDLE_ANALYZER=\"enabled\" next build --no-lint",
 		"build": "next build",
@@ -22,7 +22,7 @@
 		"lint:styles:fix": "pnpm run lint:styles:check --fix",
 		"preinstall": "npx only-allow pnpm",
 		"prepare": "run-s setup types:prepare",
-		"setup": "is-in-ci || simple-git-hooks",
+		"setup": "is-in-ci || lefthook install",
 		"start": "next start",
 		"test": "exit 0",
 		"test:e2e": "playwright test",
@@ -46,14 +46,14 @@
 		"@shikijs/rehype": "^3.23.0",
 		"@sindresorhus/slugify": "^3.0.1",
 		"client-only": "^0.0.1",
-		"d3": "^7.9.0",
+		"d3": "^7.9.2",
 		"fast-glob": "^3.3.3",
 		"image-dimensions": "^2.6.0",
 		"json-as-xlsx": "^2.6.5",
 		"leaflet": "^1.9.4",
 		"lucide-react": "^0.561.0",
-		"next": "^15.5.28",
-		"next-intl": "^4.14.9",
+		"next": "^15.5.29",
+		"next-intl": "^4.15.1",
 		"react": "^19.3.1",
 		"react-aria": "^3.53.1",
 		"react-aria-components": "^1.22.1",
@@ -83,18 +83,18 @@
 		"@acdh-oeaw/stylelint-config": "^2.3.2",
 		"@acdh-oeaw/tsconfig": "^1.5.1",
 		"@dotenvx/dotenvx": "^1.75.1",
-		"@next/bundle-analyzer": "^15.5.28",
-		"@next/eslint-plugin-next": "^15.5.28",
-		"@playwright/test": "^1.64.1",
+		"@next/bundle-analyzer": "^15.5.29",
+		"@next/eslint-plugin-next": "^15.5.29",
+		"@playwright/test": "^1.65.0",
 		"@react-aria/optimize-locales-plugin": "^1.2.1",
 		"@react-types/shared": "^3.37.0",
-		"@tailwindcss/postcss": "^4.3.3",
+		"@tailwindcss/postcss": "^4.3.5",
 		"@tailwindcss/typography": "^0.5.20",
 		"@types/d3": "^7.4.3",
 		"@types/hast": "^3.0.5",
 		"@types/leaflet": "^1.9.22",
 		"@types/mdx": "^2.0.14",
-		"@types/node": "^24.19.2",
+		"@types/node": "^26.6.6",
 		"@types/react": "^19.3.0",
 		"@types/react-dom": "^19.3.0",
 		"axe-core": "^4.14.0",
@@ -105,14 +105,13 @@
 		"eslint-plugin-check-file": "^3.3.2",
 		"globals": "^16.5.0",
 		"is-in-ci": "^2.0.0",
-		"lint-staged": "^16.4.0",
+		"lefthook": "^2.2.2",
 		"npm-run-all2": "^8.0.4",
-		"postcss": "^8.5.31",
-		"prettier": "^3.9.10",
+		"postcss": "^8.5.32",
+		"prettier": "^3.10.1",
 		"schema-dts": "^1.1.5",
-		"simple-git-hooks": "^2.14.0",
 		"stylelint": "^16.26.1",
-		"tailwindcss": "^4.3.3",
+		"tailwindcss": "^4.3.5",
 		"tailwindcss-animate": "^1.0.7",
 		"tailwindcss-react-aria-components": "^2.2.0",
 		"tsx": "^4.23.15",
@@ -130,26 +129,12 @@
 			"not op_mini all"
 		]
 	},
-	"lint-staged": {
-		"*.@(js|ts|tsx)": [
-			"eslint --fix",
-			"prettier --cache --cache-location ./.prettiercache --write"
-		],
-		"*.@(css)": [
-			"stylelint --cache --fix",
-			"prettier --cache --cache-location ./.prettiercache --write"
-		],
-		"*.!(css|js|ts|tsx)": "prettier --cache --cache-location ./.prettiercache --ignore-unknown --write"
-	},
 	"postcss": {
 		"plugins": {
 			"@tailwindcss/postcss": {}
 		}
 	},
 	"prettier": "@acdh-oeaw/prettier-config",
-	"simple-git-hooks": {
-		"pre-commit": "pnpm exec lint-staged"
-	},
 	"stylelint": {
 		"extends": "@acdh-oeaw/stylelint-config"
 	}

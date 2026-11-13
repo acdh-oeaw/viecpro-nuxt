@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        node-version: [24.x]
+        node-version: [26.x]
         os: [ubuntu-24.04]
 
     env:
