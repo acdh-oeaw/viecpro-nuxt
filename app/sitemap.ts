@@ -85,6 +85,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		routes.push(`/places/${entry.id}`);
 	}
 
+	const functions = await client
+		.collections([env.NEXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX, "FunctionalIndex"].join(""))
+		.documents()
+		.export({ include_fields: "id" });
+
+	for (const line of functions.split("\n")) {
+		if (line === "") continue;
+		const entry = JSON.parse(line) as { id: string };
+		routes.push(`/functions/${entry.id}`);
+	}
+
 	const entries = routes.map((pathname) => {
 		return {
 			url: String(createUrl({ baseUrl, pathname })),

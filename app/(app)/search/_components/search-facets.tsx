@@ -12,6 +12,12 @@ import {
 	type SearchFilters as CourtSearchFilters,
 } from "@/app/(app)/search/courts/_lib/search";
 import {
+	type FacetField as FunctionFacetField,
+	type FacetValueCount as FunctionFacetValueCount,
+	getSearchFacetValues as getFunctionSearchFacetValues,
+	type SearchFilters as FunctionSearchFilters,
+} from "@/app/(app)/search/functions/_lib/search";
+import {
 	type FacetField as InstitutionFacetField,
 	type FacetValueCount as InstitutionFacetValueCount,
 	getSearchFacetValues as getInstitutionSearchFacetValues,
@@ -33,7 +39,11 @@ import { defaultFacets, maxFacets } from "@/config/search.config";
 
 // FIXME: shared types
 type FacetValueCount =
-	CourtFacetValueCount | InstitutionFacetValueCount | PersonFacetValueCount | PlaceFacetValueCount;
+	| CourtFacetValueCount
+	| FunctionFacetValueCount
+	| InstitutionFacetValueCount
+	| PersonFacetValueCount
+	| PlaceFacetValueCount;
 
 type SearchFacetsProps = {
 	filterLabel: ReactNode;
@@ -46,6 +56,13 @@ type SearchFacetsProps = {
 			name: CourtFacetField;
 			searchFilters: CourtSearchFilters;
 			onFacetChange: (name: CourtFacetField, value: string, isSelected: boolean) => void;
+	  }
+	| {
+			kind: "function";
+			options: Array<FunctionFacetValueCount>;
+			name: FunctionFacetField;
+			searchFilters: FunctionSearchFilters;
+			onFacetChange: (name: FunctionFacetField, value: string, isSelected: boolean) => void;
 	  }
 	| {
 			kind: "institution";
@@ -108,6 +125,10 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 				switch (kind) {
 					case "court": {
 						return getCourtSearchFacetValues(searchFilters, name, filterSearchTerm);
+					}
+
+					case "function": {
+						return getFunctionSearchFacetValues(searchFilters, name, filterSearchTerm);
 					}
 
 					case "institution": {
