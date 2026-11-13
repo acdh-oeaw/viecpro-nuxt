@@ -15,7 +15,6 @@ export const env = createEnv({
 	private(input) {
 		const Schema = v.object({
 			BUILD_MODE: v.optional(v.picklist(["export", "standalone"])),
-			BUNDLE_ANALYZER: v.optional(v.picklist(["disabled", "enabled"]), "disabled"),
 			CI: v.optional(v.pipe(v.unknown(), v.transform(Boolean), v.boolean())),
 			KEYSTATIC_GITHUB_CLIENT_ID: v.optional(v.pipe(v.string(), v.nonEmpty())),
 			KEYSTATIC_GITHUB_CLIENT_SECRET: v.optional(v.pipe(v.string(), v.nonEmpty())),
@@ -62,7 +61,6 @@ export const env = createEnv({
 	},
 	environment: {
 		BUILD_MODE: process.env.BUILD_MODE,
-		BUNDLE_ANALYZER: process.env.BUNDLE_ANALYZER,
 		CI: process.env.CI,
 		KEYSTATIC_GITHUB_CLIENT_ID: process.env.KEYSTATIC_GITHUB_CLIENT_ID,
 		KEYSTATIC_GITHUB_CLIENT_SECRET: process.env.KEYSTATIC_GITHUB_CLIENT_SECRET,
