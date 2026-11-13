@@ -269,8 +269,8 @@ importers:
         specifier: ^3.23.0
         version: 3.23.0
       typesense:
-        specifier: 2.0.3
-        version: 2.0.3(@babel/runtime@7.28.4)(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@babel/runtime@7.28.4)(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0)
       valibot:
         specifier: ^1.5.0
         version: 1.5.0(typescript@5.9.3)
@@ -5663,9 +5663,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typesense@2.0.3:
-    resolution: {integrity: sha512-fRJjFdDNZn6qF9XzIk+bB8n8cm0fiAx1SGcpLDfNcsGtp8znITfG+SO+l/qk63GCRXZwJGq7wrMDLFUvblJSHA==}
-    engines: {node: '>=18'}
+  typesense@3.2.0:
+    resolution: {integrity: sha512-CeqjNyblDxXR+9okyxMFPzctYXD9W9a0o7LMj9JN6BhzUySFH1gioua8HecKmtQVgCrqv+bBgjCo83p6gj2rjg==}
     peerDependencies:
       '@babel/runtime': ^7.23.2
 
@@ -12239,7 +12238,7 @@ snapshots:
 
   typescript@5.9.3: {}
 
-  typesense@2.0.3(@babel/runtime@7.28.4)(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0):
+  typesense@3.2.0(@babel/runtime@7.28.4)(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0):
     dependencies:
       '@babel/runtime': 7.28.4
       axios: 1.21.1(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0)

@@ -1,7 +1,7 @@
 import { log, range } from "@acdh-oeaw/lib";
 import { getFormatter, getTranslations } from "next-intl/server";
 import type { SearchResponseHit } from "typesense/lib/Typesense/Documents";
-import type { MultiSearchRequestSchema } from "typesense/lib/Typesense/MultiSearch";
+import type { MultiSearchRequestSchema } from "typesense/lib/Typesense/Types";
 import * as v from "valibot";
 
 import { env } from "@/config/env.config";
@@ -174,7 +174,7 @@ export async function getSearchResults(
 ): Promise<SearchResults<Institution>> {
 	const { createFilter, facetFilters } = generateFilter(searchFilters);
 
-	const searches: Array<MultiSearchRequestSchema> = [
+	const searches: Array<MultiSearchRequestSchema<Institution, string>> = [
 		{
 			page: searchFilters.page,
 			per_page: limit,
