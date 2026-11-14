@@ -29,13 +29,10 @@
 		"types:prepare": "next typegen"
 	},
 	"dependencies": {
-		"@acdh-oeaw/keystatic-lib": "^0.8.0",
 		"@acdh-oeaw/lib": "^0.3.7",
 		"@acdh-oeaw/mdx-lib": "^0.2.0",
 		"@acdh-oeaw/style-variants": "^0.1.0",
 		"@acdh-oeaw/validate-env": "^0.0.3",
-		"@keystatic/core": "^0.5.51",
-		"@keystatic/next": "^5.0.5",
 		"@react-aria/utils": "^3.34.1",
 		"@shikijs/rehype": "^3.23.0",
 		"@sindresorhus/slugify": "^3.0.1",

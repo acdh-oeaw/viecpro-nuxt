@@ -2,12 +2,12 @@ import { cn } from "@acdh-oeaw/style-variants";
 import type { ReactNode } from "react";
 
 import { Link } from "#/components/content/link.tsx";
-import type { LinkSchema } from "#/lib/keystatic/get-link-props.ts";
+import type { ContentLink } from "#/lib/content-link.ts";
 
 interface LinkButtonProps {
 	children: ReactNode;
 	className?: string;
-	link: LinkSchema;
+	link: ContentLink;
 }
 
 export function LinkButton(props: Readonly<LinkButtonProps>): ReactNode {

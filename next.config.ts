@@ -48,11 +48,6 @@ const config: NextConfig = {
 				destination: "/search/persons",
 				permanent: false,
 			},
-			{
-				source: "/admin",
-				destination: "/keystatic",
-				permanent: false,
-			},
 		];
 
 		return Promise.resolve(redirects);

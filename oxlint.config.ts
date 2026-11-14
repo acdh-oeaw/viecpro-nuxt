@@ -132,7 +132,6 @@ const config = defineConfig({
 		{
 			files: [
 				"config/oxlint/*.ts",
-				"keystatic.config.tsx",
 				/** `next-intl` requires a default export. */
 				"lib/i18n/request.ts",
 				"oxfmt.config.ts",

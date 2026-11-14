@@ -14,9 +14,6 @@ export const env = createEnv({
 		const Schema = v.object({
 			BUILD_MODE: v.optional(v.picklist(["export", "standalone"])),
 			CI: v.optional(v.pipe(v.unknown(), v.transform(Boolean), v.boolean())),
-			KEYSTATIC_GITHUB_CLIENT_ID: v.optional(v.pipe(v.string(), v.nonEmpty())),
-			KEYSTATIC_GITHUB_CLIENT_SECRET: v.optional(v.pipe(v.string(), v.nonEmpty())),
-			KEYSTATIC_SECRET: v.optional(v.pipe(v.string(), v.nonEmpty())),
 		});
 
 		return v.parse(Schema, input);
@@ -27,10 +24,6 @@ export const env = createEnv({
 			NEXT_PUBLIC_APP_BASE_URL: v.pipe(v.string(), v.url()),
 			NEXT_PUBLIC_BOTS: v.optional(v.picklist(["disabled", "enabled"]), "disabled"),
 			NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: v.optional(v.string()),
-			NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG: v.optional(v.pipe(v.string(), v.nonEmpty())),
-			NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO_NAME: v.optional(v.pipe(v.string(), v.nonEmpty())),
-			NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO_OWNER: v.optional(v.pipe(v.string(), v.nonEmpty())),
-			NEXT_PUBLIC_KEYSTATIC_MODE: v.optional(v.picklist(["github", "local"]), "local"),
 			NEXT_PUBLIC_MATOMO_BASE_URL: v.optional(v.pipe(v.string(), v.url())),
 			NEXT_PUBLIC_MATOMO_ID: v.optional(
 				v.pipe(v.string(), v.transform(Number), v.number(), v.integer(), v.minValue(1)),
@@ -60,17 +53,10 @@ export const env = createEnv({
 	environment: {
 		BUILD_MODE: process.env.BUILD_MODE,
 		CI: process.env.CI,
-		KEYSTATIC_GITHUB_CLIENT_ID: process.env.KEYSTATIC_GITHUB_CLIENT_ID,
-		KEYSTATIC_GITHUB_CLIENT_SECRET: process.env.KEYSTATIC_GITHUB_CLIENT_SECRET,
-		KEYSTATIC_SECRET: process.env.KEYSTATIC_SECRET,
 		NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
 		NEXT_PUBLIC_APP_BASE_URL: process.env.NEXT_PUBLIC_APP_BASE_URL,
 		NEXT_PUBLIC_BOTS: process.env.NEXT_PUBLIC_BOTS,
 		NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-		NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG: process.env.NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG,
-		NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO_NAME: process.env.NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO_NAME,
-		NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO_OWNER: process.env.NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO_OWNER,
-		NEXT_PUBLIC_KEYSTATIC_MODE: process.env.NEXT_PUBLIC_KEYSTATIC_MODE,
 		NEXT_PUBLIC_MATOMO_BASE_URL: process.env.NEXT_PUBLIC_MATOMO_BASE_URL,
 		NEXT_PUBLIC_MATOMO_ID: process.env.NEXT_PUBLIC_MATOMO_ID,
 		NEXT_PUBLIC_REDMINE_ID: process.env.NEXT_PUBLIC_REDMINE_ID,
