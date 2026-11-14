@@ -476,5 +476,49 @@
 		"latitude": "Breitengrad",
 		"longitude": "Längengrad",
 		"status": "Bearbeitungsstatus"
+	},
+	"SearchFunctionsPage": {
+		"close-search-filter-panel": "Suchfilter verbergen",
+		"facets": {
+			"field-of-activity": "Tätigkeitsbereiche",
+			"filter": {
+				"field-of-activity": "Tätigkeitsbereiche durchsuchen"
+			}
+		},
+		"field-of-activity": "Tätigkeitsbereich",
+		"functions": "Funktionen",
+		"meta": {
+			"title": "Funktionsregister"
+		},
+		"more-terms": "weitere …",
+		"name": "Oberbegriff",
+		"open-search-filter-panel": "Suchfilter anzeigen",
+		"search": "Suche",
+		"search-filters": "Suchfilter",
+		"search-results-count": "{count, plural, =0 {Nichts gefunden} =1 {1 Suchergebnis} other {# Suchergebnisse}}",
+		"search-results": {
+			"count": "{count, plural, =0 {Nichts gefunden} =1 {1 Suchergebnis} other {# Suchergebnisse}}, Seite {page} von {pages}",
+			"next-page": "Nächste Seite",
+			"previous-page": "Vorherige Seite"
+		},
+		"terms": "Funktionsbezeichnungen",
+		"title": "Funktionsregister",
+		"unassigned-terms": "Von den {total} erfassten Funktionsbezeichnungen sind derzeit {assigned} einem Oberbegriff zugeordnet. Die übrigen {unassigned} Funktionsbezeichnungen sind noch keinem Oberbegriff zugeordnet und werden daher nicht im Funktionsregister angezeigt."
+	},
+	"FunctionPage": {
+		"citation": "Zitationsvorschlag",
+		"definition": "Definition",
+		"field-of-activity": "Tätigkeitsbereich",
+		"function": "Funktion",
+		"no-definition": "Keine Definition vorhanden",
+		"persons": "Personen",
+		"register": "Funktionsregister",
+		"section-definition": "Begriffsbestimmung",
+		"section-terms": "{count, plural, =1 {Funktionsbezeichnung} other {Funktionsbezeichnungen (#)}}",
+		"show-all-persons": "{count, plural, =1 {1 Person mit diesen Funktionen anzeigen} other {Alle # Personen mit diesen Funktionen anzeigen}}",
+		"show-persons": "{count, plural, =1 {1 Person} other {# Personen}} mit der Funktion „{name}“ anzeigen",
+		"source": "Quelle",
+		"synonyms": "Synonyme",
+		"term": "Bezeichnung"
 	}
 }

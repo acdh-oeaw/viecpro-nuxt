@@ -60,7 +60,7 @@ export default async function SearchLayout(props: Readonly<SearchLayoutProps>): 
 			label: t("functions"),
 			href: createHref({ pathname: "/search/functions" }),
 			icon: MedalIcon,
-			isDisabled: true,
+			isDisabled: false,
 		},
 		bibliography: {
 			label: t("bibliography"),
