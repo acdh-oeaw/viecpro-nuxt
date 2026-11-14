@@ -94,6 +94,16 @@ jobs:
           #   type=semver,pattern={{major}}.{{minor}}
           #   type=raw,value=latest
 
+      # resolves `devEngines.packageManager.version` in `package.json`, which may be a semver range.
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Read resolved pnpm version
+        id: pnpm
+        run: |
+          VERSION=$(pnpm --version)
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
         with:
@@ -102,6 +112,7 @@ jobs:
           tags: "${{ steps.meta.outputs.tags }}"
           labels: "${{ steps.meta.outputs.labels }}"
           build-args: |
+            "PNPM_VERSION=${{ steps.pnpm.outputs.VERSION }}"
             "NEXT_PUBLIC_API_BASE_URL=${{ vars.NEXT_PUBLIC_API_BASE_URL }}"
             "NEXT_PUBLIC_APP_BASE_URL=${{ needs.vars.outputs.public_url }}"
             "NEXT_PUBLIC_BOTS=${{ vars.NEXT_PUBLIC_BOTS }}"

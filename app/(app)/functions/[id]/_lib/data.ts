@@ -6,9 +6,9 @@ import {
 	type FunctionalTerm,
 	indexCollection,
 	termsCollection,
-} from "@/app/(app)/search/functions/_lib/search";
-import { env } from "@/config/env.config";
-import { client } from "@/lib/typesense/client";
+} from "#/app/(app)/search/functions/_lib/search.ts";
+import { env } from "#/config/env.config.ts";
+import { client } from "#/lib/typesense/client.ts";
 
 const personCollection = [env.NEXT_PUBLIC_TYPESENSE_COLLECTION_PREFIX, "person"].join("");
 
@@ -18,9 +18,7 @@ export interface FunctionalIndexEntryDetails extends Omit<FunctionalIndexEntry, 
 	personCount: number;
 }
 
-type JoinedFunctionalIndexEntry = Omit<FunctionalIndexEntry, "functions"> & {
-	[key: string]: unknown;
-};
+type JoinedFunctionalIndexEntry = Omit<FunctionalIndexEntry, "functions"> & Record<string, unknown>;
 
 function escape(value: string): string {
 	return `\`${value}\``;
@@ -54,7 +52,9 @@ export const getFunction = cache(async function getFunction(
 
 	const document = result.hits?.at(0)?.document;
 
-	if (document == null) return null;
+	if (document == null) {
+		return null;
+	}
 
 	const { [termsCollection]: _terms, ...entry } = document;
 	const terms = ((_terms ?? []) as Array<FunctionalTerm>).toSorted((a, z) => {
@@ -72,7 +72,7 @@ export const getFunction = cache(async function getFunction(
 		kind: "function",
 		personCount: personCounts.total,
 		terms: terms.map((term) => {
-			return { ...term, personCount: personCounts.byTerm.get(term.name) ?? 0 };
+			return Object.assign(term, { personCount: personCounts.byTerm.get(term.name) ?? 0 });
 		}),
 	};
 });
@@ -83,7 +83,9 @@ export const getFunction = cache(async function getFunction(
 async function getPersonCounts(names: Array<string>) {
 	const byTerm = new Map<string, number>();
 
-	if (names.length === 0) return { total: 0, byTerm };
+	if (names.length === 0) {
+		return { total: 0, byTerm };
+	}
 
 	const response = await client.multiSearch.perform<Array<{ functions: Array<string> }>>({
 		searches: [
@@ -112,7 +114,9 @@ async function getPersonCounts(names: Array<string>) {
 	const requested = new Set(names);
 
 	for (const { count, value } of result.facet_counts?.at(0)?.counts ?? []) {
-		if (requested.has(value)) byTerm.set(value, count);
+		if (requested.has(value)) {
+			byTerm.set(value, count);
+		}
 	}
 
 	return { total: result.found, byTerm };

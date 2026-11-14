@@ -2,13 +2,13 @@
 
 import { HttpError, request } from "@acdh-oeaw/lib";
 import type { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
-import { MainContent } from "@/components/main-content";
-import type { Locale } from "@/config/i18n.config";
-import { createImprintUrl } from "@/config/imprint.config";
+import { MainContent } from "#/components/main-content.tsx";
+import type { Locale } from "#/config/i18n.config.ts";
+import { createImprintUrl } from "#/config/imprint.config.ts";
 
 interface ImprintPageProps extends EmptyObject {}
 

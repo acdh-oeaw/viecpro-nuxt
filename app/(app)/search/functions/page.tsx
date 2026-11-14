@@ -3,16 +3,16 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { type ReactNode, Suspense } from "react";
 
-import { SearchResults } from "@/app/(app)/search/functions/_components/search-results";
-import { SearchSidePanel } from "@/app/(app)/search/functions/_components/search-side-panel";
+import { SidePanelToggle } from "#/app/(app)/search/_components/side-panel-toggle.tsx";
+import { SearchResults } from "#/app/(app)/search/functions/_components/search-results.tsx";
+import { SearchSidePanel } from "#/app/(app)/search/functions/_components/search-side-panel.tsx";
 import {
 	getSearchFilters,
 	getSearchResults,
 	getTermStatistics,
-} from "@/app/(app)/search/functions/_lib/search";
-import { SidePanelToggle } from "@/app/(app)/search/_components/side-panel-toggle";
-import { LoadingIndicator } from "@/components/loading-indicator";
-import { MainContent } from "@/components/main-content";
+} from "#/app/(app)/search/functions/_lib/search.ts";
+import { LoadingIndicator } from "#/components/loading-indicator.tsx";
+import { MainContent } from "#/components/main-content.tsx";
 
 interface SearchFunctionsPageProps {
 	searchParams: Promise<SearchParams>;

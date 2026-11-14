@@ -8,10 +8,10 @@ import type {
 	FunctionalIndexSearchResult,
 	SearchFilters,
 	SearchResults,
-} from "@/app/(app)/search/functions/_lib/search";
-import { Link } from "@/components/link";
-import { createHref } from "@/lib/create-href";
-import { useRouter } from "@/lib/i18n/navigation";
+} from "#/app/(app)/search/functions/_lib/search.ts";
+import { Link } from "#/components/link.tsx";
+import { createHref } from "#/lib/create-href.ts";
+import { useRouter } from "#/lib/i18n/navigation.ts";
 
 /** Maximum number of function terms listed per generic term, the rest is on the details page. */
 const maxTerms = 12;
@@ -127,7 +127,7 @@ export function SearchResults(props: SearchResultsProps): ReactNode {
 												return (
 													<li key={term.id}>
 														<Link
-															className="text-brand-600 underline-offset-2 hover:underline data-[match]:bg-brand-100 data-[match]:font-semibold"
+															className="text-brand-600 underline-offset-2 hover:underline data-match:bg-brand-100 data-match:font-semibold"
 															data-match={isMatch || undefined}
 															href={createHref({
 																pathname: "/search/persons",

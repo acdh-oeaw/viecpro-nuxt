@@ -4,16 +4,16 @@ import { createUrlSearchParams } from "@acdh-oeaw/lib";
 import { ChevronLeftIcon, ChevronRightIcon, SortAscIcon, SortDescIcon } from "lucide-react";
 import { type ReactNode, useOptimistic, useTransition } from "react";
 
-import { StatusIndicator } from "@/app/(app)/search/_components/status-indicator";
+import { StatusIndicator } from "#/app/(app)/search/_components/status-indicator.tsx";
 import type {
 	Place,
 	SearchFilters,
 	SearchResults,
 	SortField,
-} from "@/app/(app)/search/places/_lib/search";
-import { Link } from "@/components/link";
-import { createHref } from "@/lib/create-href";
-import { useRouter } from "@/lib/i18n/navigation";
+} from "#/app/(app)/search/places/_lib/search.ts";
+import { Link } from "#/components/link.tsx";
+import { createHref } from "#/lib/create-href.ts";
+import { useRouter } from "#/lib/i18n/navigation.ts";
 
 const columns = [
 	{ field: "name", label: "Bezeichnung", sort: "name" },

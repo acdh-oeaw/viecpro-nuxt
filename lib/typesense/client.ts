@@ -1,6 +1,6 @@
 import { Client } from "typesense";
 
-import { env } from "@/config/env.config";
+import { env } from "#/config/env.config.ts";
 
 export function createClient(): Client {
 	const client = new Client({

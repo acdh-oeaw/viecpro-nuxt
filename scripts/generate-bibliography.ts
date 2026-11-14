@@ -9,7 +9,7 @@ import { join } from "node:path";
 
 import { groupBy, isNonEmptyString, log } from "@acdh-oeaw/lib";
 
-import { getZoteroItems } from "@/app/(app)/documentation/bibliography/_lib/zotero";
+import { getZoteroItems } from "#/app/(app)/documentation/bibliography/_lib/zotero.ts";
 
 async function generate() {
 	const items = await getZoteroItems();

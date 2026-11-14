@@ -3,8 +3,8 @@ import { fields } from "@keystatic/core";
 import { inline, mark, wrapper } from "@keystatic/core/content-components";
 import { HashIcon, LinkIcon, SuperscriptIcon } from "lucide-react";
 
-import { createLinkSchema } from "@/lib/keystatic/create-link-schema";
-import { HeadingIdPreview, LinkButtonPreview } from "@/lib/keystatic/previews";
+import { createLinkSchema } from "#/lib/keystatic/create-link-schema.ts";
+import { HeadingIdPreview, LinkButtonPreview } from "#/lib/keystatic/previews.tsx";
 
 export const createFootnote = createComponent((_paths, _locale) => {
 	return {

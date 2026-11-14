@@ -18,27 +18,27 @@ import {
 import { useOverlayTriggerState } from "react-stately";
 
 import {
+	type SearchFilters as CourtSearchFilters,
 	downloadCollection as downloadCourts,
 	isDownloadUnsupported as isCourtsDownloadUnsupported,
-	type SearchFilters as CourtSearchFilters,
-} from "@/app/(app)/search/courts/_lib/search";
+} from "#/app/(app)/search/courts/_lib/search.ts";
 import {
+	type SearchFilters as InstitutionSearchFilters,
 	downloadCollection as downloadInstitutions,
 	isDownloadUnsupported as isInstitutionsDownloadUnsupported,
-	type SearchFilters as InstitutionSearchFilters,
-} from "@/app/(app)/search/institutions/_lib/search";
+} from "#/app/(app)/search/institutions/_lib/search.ts";
 import {
+	type SearchFilters as PersonSearchFilters,
 	downloadCollection as downloadPersons,
 	isDownloadUnsupported as isPersonsDownloadUnsupported,
-	type SearchFilters as PersonSearchFilters,
-} from "@/app/(app)/search/persons/_lib/search";
+} from "#/app/(app)/search/persons/_lib/search.ts";
 import {
+	type SearchFilters as PlaceSearchFilters,
 	downloadCollection as downloadPlaces,
 	isDownloadUnsupported as isPlacesDownloadUnsupported,
-	type SearchFilters as PlaceSearchFilters,
-} from "@/app/(app)/search/places/_lib/search";
-import { Tooltip, TooltipTrigger } from "@/components/tooltip";
-import { downloadJson } from "@/lib/download-json";
+} from "#/app/(app)/search/places/_lib/search.ts";
+import { Tooltip, TooltipTrigger } from "#/components/tooltip.tsx";
+import { downloadJson } from "#/lib/download-json.ts";
 
 type DownloadDialogProps = {
 	cancelLabel: ReactNode;
@@ -152,7 +152,8 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 				}
 
 				case "xlsx": {
-					const { downloadXlsx } = await import("@/lib/download-xlsx");
+					// eslint-disable-next-line react/todo -- lazy-loaded, the react compiler skips this event handler.
+					const { downloadXlsx } = await import("#/lib/download-xlsx.ts");
 
 					downloadXlsx(
 						[
@@ -169,6 +170,7 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 			}
 		} catch {
 			// TODO:
+			// eslint-disable-next-line react/todo -- the react compiler skips this event handler.
 		} finally {
 			setStatus("idle");
 		}

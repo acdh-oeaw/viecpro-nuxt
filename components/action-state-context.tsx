@@ -1,7 +1,7 @@
 import { assert } from "@acdh-oeaw/lib";
-import { createContext, type ReactNode, use } from "react";
+import { type ReactNode, createContext, use } from "react";
 
-import type { ActionState } from "@/lib/server/actions";
+import type { ActionState } from "#/lib/server/actions.ts";
 
 const ActionStateContext = createContext<ActionState | null>(null);
 
@@ -13,7 +13,7 @@ interface ActionStateProviderProps {
 export function ActionStateProvider(props: Readonly<ActionStateProviderProps>): ReactNode {
 	const { children, state } = props;
 
-	return <ActionStateContext.Provider value={state}>{children}</ActionStateContext.Provider>;
+	return <ActionStateContext value={state}>{children}</ActionStateContext>;
 }
 
 export function useActionStateContext(): ActionState {

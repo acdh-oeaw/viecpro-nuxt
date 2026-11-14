@@ -1,38 +1,32 @@
 {
+	"$schema": "https://www.schemastore.org/package.json",
 	"name": "@acdh-oeaw/viecpro-frontend",
 	"private": true,
 	"license": "MIT",
 	"type": "module",
-	"engines": {
-		"node": "^24"
+	"imports": {
+		"#/*": "./*"
 	},
-	"packageManager": "pnpm@12.14.0",
 	"scripts": {
-		"analyze": "BUNDLE_ANALYZER=\"enabled\" next build --no-lint",
+		"analyze": "next analyze",
 		"build": "next build",
 		"dev": "next dev",
-		"format:check": "prettier . --cache --cache-location ./.prettiercache --check",
-		"format:fix": "pnpm run format:check --write",
-		"generate:bibliography": "tsx ./scripts/generate-bibliography.ts",
-		"lint:check": "run-p --continue-on-error \"lint:*:check\"",
-		"lint:fix": "run-p --continue-on-error \"lint:*:fix\"",
-		"lint:code:check": "eslint .",
-		"lint:code:fix": "pnpm run lint:code:check --fix",
-		"lint:styles:check": "stylelint \"./**/*.css\" --cache --ignore-path ./.gitignore",
-		"lint:styles:fix": "pnpm run lint:styles:check --fix",
+		"format:check": "oxfmt --check",
+		"format:fix": "oxfmt --write",
+		"generate:bibliography": "node ./scripts/generate-bibliography.ts",
+		"lint:check": "oxlint",
+		"lint:fix": "oxlint --fix",
 		"preinstall": "npx only-allow pnpm",
-		"prepare": "run-s setup types:prepare",
-		"setup": "is-in-ci || simple-git-hooks",
+		"prepare": "run-s types:prepare",
 		"start": "next start",
+		"styles:check": "stylelint \"./**/*.css\" --cache --ignore-path ./.gitignore",
+		"styles:fix": "pnpm run styles:check --fix",
 		"test": "exit 0",
 		"test:e2e": "playwright test",
-		"test:e2e:codegen": "playwright codegen",
 		"test:e2e:install": "playwright install --with-deps",
-		"test:e2e:ui": "playwright test --ui",
 		"test:e2e:update-snapshots": "playwright test --update-snapshots",
 		"types:check": "tsc --noEmit",
-		"types:prepare": "next typegen",
-		"validate": "run-p format:check lint:check types:check test test:e2e"
+		"types:prepare": "next typegen"
 	},
 	"dependencies": {
 		"@acdh-oeaw/keystatic-lib": "^0.8.0",
@@ -46,14 +40,14 @@
 		"@shikijs/rehype": "^3.23.0",
 		"@sindresorhus/slugify": "^3.0.1",
 		"client-only": "^0.0.1",
-		"d3": "^7.9.0",
+		"d3": "^7.9.2",
 		"fast-glob": "^3.3.3",
 		"image-dimensions": "^2.6.0",
 		"json-as-xlsx": "^2.6.5",
 		"leaflet": "^1.9.4",
 		"lucide-react": "^0.561.0",
-		"next": "^15.5.28",
-		"next-intl": "^4.14.9",
+		"next": "^16.4.6",
+		"next-intl": "^4.15.1",
 		"react": "^19.3.1",
 		"react-aria": "^3.53.1",
 		"react-aria-components": "^1.22.1",
@@ -67,56 +61,46 @@
 		"remark-mdx-frontmatter": "^5.2.0",
 		"remark-smartypants": "^3.0.3",
 		"server-only": "^0.0.1",
-		"sharp": "^0.34.5",
+		"sharp": "^0.35.5",
 		"shiki": "^3.23.0",
-		"typesense": "2.0.3",
+		"typesense": "^3.2.0",
 		"valibot": "^1.5.0"
 	},
 	"devDependencies": {
-		"@acdh-oeaw/eslint-config": "^2.0.13",
-		"@acdh-oeaw/eslint-config-next": "^2.0.23",
-		"@acdh-oeaw/eslint-config-node": "^2.0.13",
-		"@acdh-oeaw/eslint-config-playwright": "^2.0.15",
-		"@acdh-oeaw/eslint-config-react": "^2.0.14",
-		"@acdh-oeaw/eslint-config-tailwindcss": "^4.1.4",
-		"@acdh-oeaw/prettier-config": "^2.0.1",
-		"@acdh-oeaw/stylelint-config": "^2.3.2",
-		"@acdh-oeaw/tsconfig": "^1.5.1",
 		"@dotenvx/dotenvx": "^1.75.1",
-		"@next/bundle-analyzer": "^15.5.28",
-		"@next/eslint-plugin-next": "^15.5.28",
-		"@playwright/test": "^1.64.1",
-		"@react-aria/optimize-locales-plugin": "^1.2.1",
+		"@playwright/test": "^1.65.0",
+		"@react-aria/optimize-locales-plugin": "^2.1.0",
 		"@react-types/shared": "^3.37.0",
-		"@tailwindcss/postcss": "^4.3.3",
+		"@tailwindcss/turbopack": "^4.3.5",
 		"@tailwindcss/typography": "^0.5.20",
 		"@types/d3": "^7.4.3",
 		"@types/hast": "^3.0.5",
 		"@types/leaflet": "^1.9.22",
 		"@types/mdx": "^2.0.14",
-		"@types/node": "^24.19.2",
+		"@types/node": "^26.6.6",
 		"@types/react": "^19.3.0",
 		"@types/react-dom": "^19.3.0",
+		"@x18n/core": "^0.1.14",
 		"axe-core": "^4.14.0",
 		"axe-playwright": "^2.2.2",
 		"babel-plugin-react-compiler": "^1.0.0",
-		"eslint": "^9.39.5",
-		"eslint-config-flat-gitignore": "^2.4.0",
+		"eslint-plugin-better-tailwindcss": "^4.11.0",
 		"eslint-plugin-check-file": "^3.3.2",
-		"globals": "^16.5.0",
+		"eslint-plugin-playwright": "^2.12.2",
+		"eslint-plugin-regexp": "^3.3.3",
 		"is-in-ci": "^2.0.0",
-		"lint-staged": "^16.4.0",
+		"lefthook": "^2.2.2",
 		"npm-run-all2": "^8.0.4",
-		"postcss": "^8.5.31",
-		"prettier": "^3.9.10",
+		"oxfmt": "^0.78.0",
+		"oxlint": "^1.93.0",
+		"oxlint-tsgolint": "^7.0.2007",
 		"schema-dts": "^1.1.5",
-		"simple-git-hooks": "^2.14.0",
-		"stylelint": "^16.26.1",
-		"tailwindcss": "^4.3.3",
+		"stylelint": "^18.0.0",
+		"stylelint-order": "^8.1.3",
+		"tailwindcss": "^4.3.5",
 		"tailwindcss-animate": "^1.0.7",
 		"tailwindcss-react-aria-components": "^2.2.0",
-		"tsx": "^4.23.15",
-		"typescript": "^5.9.3"
+		"typescript": "^7.0.2"
 	},
 	"browserslist": {
 		"development": [
@@ -130,27 +114,17 @@
 			"not op_mini all"
 		]
 	},
-	"lint-staged": {
-		"*.@(js|ts|tsx)": [
-			"eslint --fix",
-			"prettier --cache --cache-location ./.prettiercache --write"
-		],
-		"*.@(css)": [
-			"stylelint --cache --fix",
-			"prettier --cache --cache-location ./.prettiercache --write"
-		],
-		"*.!(css|js|ts|tsx)": "prettier --cache --cache-location ./.prettiercache --ignore-unknown --write"
+	"stylelint": {
+		"extends": "./config/stylelint/base.json"
 	},
-	"postcss": {
-		"plugins": {
-			"@tailwindcss/postcss": {}
+	"devEngines": {
+		"packageManager": {
+			"name": "pnpm",
+			"version": "12.18.0",
+			"onFail": "download"
 		}
 	},
-	"prettier": "@acdh-oeaw/prettier-config",
-	"simple-git-hooks": {
-		"pre-commit": "pnpm exec lint-staged"
-	},
-	"stylelint": {
-		"extends": "@acdh-oeaw/stylelint-config"
+	"engines": {
+		"node": "^26"
 	}
 }

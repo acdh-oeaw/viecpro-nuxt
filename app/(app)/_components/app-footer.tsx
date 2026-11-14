@@ -1,18 +1,18 @@
 import { cn } from "@acdh-oeaw/style-variants";
+import { useLocale, useTranslations } from "next-intl";
 // eslint-disable-next-line no-restricted-imports
 import type { StaticImageData } from "next/image";
-import { useLocale, useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
-import { Image } from "@/components/image";
-import { NavLink, type NavLinkProps } from "@/components/nav-link";
-import type { Locale } from "@/config/i18n.config";
-import { createHref } from "@/lib/create-href";
-import logoAcdhCh from "@/public/assets/images/logo-acdh-ch-with-text.svg";
-import logoFwf from "@/public/assets/images/logo-fwf.svg";
-import logoIhb from "@/public/assets/images/logo-ihb.svg";
-import logoOeaw from "@/public/assets/images/logo-oeaw.svg";
-import logo from "@/public/assets/images/logo-viecpro-with-text.png";
+import { Image } from "#/components/image.tsx";
+import { NavLink, type NavLinkProps } from "#/components/nav-link.tsx";
+import type { Locale } from "#/config/i18n.config.ts";
+import { createHref } from "#/lib/create-href.ts";
+import logoAcdh from "#/public/assets/images/logo-acdh-with-text.svg";
+import logoFwf from "#/public/assets/images/logo-fwf.svg";
+import logoIhb from "#/public/assets/images/logo-ihb.svg";
+import logoOeaw from "#/public/assets/images/logo-oeaw.svg";
+import logo from "#/public/assets/images/logo-viecpro-with-text.png";
 
 export function AppFooter(): ReactNode {
 	const locale = useLocale();
@@ -34,7 +34,7 @@ export function AppFooter(): ReactNode {
 	const acdhLinks = {
 		de: {
 			href: "https://www.oeaw.ac.at/de/acdh/",
-			label: "Austrian Centre for Digital Humanities and Cultural Heritage",
+			label: "Austrian Centre for Digital Humanities",
 		},
 	} satisfies Record<Locale, { href: string; label: string }>;
 
@@ -42,28 +42,28 @@ export function AppFooter(): ReactNode {
 		ihb: {
 			href: "https://www.oeaw.ac.at/ihb/home",
 			label: "Institut für die Erforschung der Habsburgermonarchie und des Balkanraumes (IHB)",
-			image: logoIhb as StaticImageData,
+			image: logoIhb,
 			lang: "de",
 			className: "h-8",
 		},
-		acdhCh: {
-			href: "https://www.oeaw.ac.at/de/acdh/acdh-ch-home",
-			label: "Austrian Centre for Digital Humanities and Cultural Heritage (ACDH-CH)",
-			image: logoAcdhCh as StaticImageData,
+		acdh: {
+			href: acdhLinks[locale].href,
+			label: "Austrian Centre for Digital Humanities (ACDH)",
+			image: logoAcdh,
 			lang: "en",
 			className: "h-8",
 		},
 		oeaw: {
 			href: "https://www.oeaw.ac.at/",
 			label: "Österreichische Akademie der Wissenschaften",
-			image: logoOeaw as StaticImageData,
+			image: logoOeaw,
 			lang: "de",
 			className: "h-10",
 		},
 		fwf: {
 			href: "https://www.fwf.ac.at/",
 			label: "FWF",
-			image: logoFwf as StaticImageData,
+			image: logoFwf,
 			lang: "de",
 			className: "h-4",
 		},
@@ -138,6 +138,7 @@ export function AppFooter(): ReactNode {
 				</nav>
 
 				<small className="text-sm">
+					{/* eslint-disable-next-line react/purity -- the current year only changes between renders on new year's eve. */}
 					&copy; {new Date().getUTCFullYear()}{" "}
 					<a className="hover:underline focus-visible:focus-outline" href={acdhLinks[locale].href}>
 						{acdhLinks[locale].label}

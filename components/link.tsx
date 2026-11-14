@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * React Aria hooks receive refs during render by design (mirroring `react-aria-components`'s own
+ * `Link`), which the React Compiler cannot optimize.
+ */
+/* eslint-disable react-hooks/refs */
+
 import { filterDOMProps, mergeRefs } from "@react-aria/utils";
 import {
 	type ComponentPropsWithoutRef,
@@ -11,16 +17,16 @@ import {
 } from "react";
 import {
 	mergeProps,
-	useFocusable,
 	useFocusRing,
+	useFocusable,
 	useHover,
 	useObjectRef,
 	usePress,
 } from "react-aria";
 import type { LinkProps as AriaLinkProps } from "react-aria-components";
 
-import { LocaleLink, type LocaleLinkProps } from "@/lib/i18n/navigation";
-import { useRenderProps } from "@/lib/use-render-props";
+import { LocaleLink, type LocaleLinkProps } from "#/lib/i18n/navigation.ts";
+import { useRenderProps } from "#/lib/use-render-props.ts";
 
 /**
  * Not using `Link` from `react-aria-components` directly, because we want `next/link`'s built-in

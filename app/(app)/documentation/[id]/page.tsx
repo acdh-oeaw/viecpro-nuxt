@@ -5,9 +5,9 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { getLocale } from "next-intl/server";
 import type { ReactNode } from "react";
 
-import { DocumentationNavigation } from "@/app/(app)/documentation/_components/documentation-navigation";
-import { MainContent } from "@/components/main-content";
-import { createCollectionResource } from "@/lib/keystatic/resources";
+import { DocumentationNavigation } from "#/app/(app)/documentation/_components/documentation-navigation.tsx";
+import { MainContent } from "#/components/main-content.tsx";
+import { createCollectionResource } from "#/lib/keystatic/resources.ts";
 
 interface DocumentationPageProps {
 	params: Promise<{

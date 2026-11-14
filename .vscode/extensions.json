@@ -1,13 +1,13 @@
 {
 	"recommendations": [
+		"antfu.x18n",
 		"bradlc.vscode-tailwindcss",
-		"dbaeumer.vscode-eslint",
 		"editorconfig.editorconfig",
-		"esbenp.prettier-vscode",
-		"lokalise.i18n-ally",
 		"mikestead.dotenv",
 		"ms-playwright.playwright",
+		"oxc.oxc-vscode",
 		"stylelint.vscode-stylelint",
+		"typescriptteam.native-preview",
 		"unifiedjs.vscode-mdx"
 	]
 }

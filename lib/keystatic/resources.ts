@@ -2,8 +2,8 @@ import "server-only";
 
 import { createReaders } from "@acdh-oeaw/keystatic-lib/reader";
 
-import config from "@/keystatic.config";
-import { compileMdx } from "@/lib/compile-mdx";
+import config from "#/keystatic.config.tsx";
+import { compileMdx } from "#/lib/compile-mdx.ts";
 
 export const { createCollectionResource, createSingletonResource } = createReaders(
 	config,

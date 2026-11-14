@@ -1,5 +1,5 @@
-import { defaultLocale, locales } from "@/config/i18n.config";
-import { expect, test } from "@/e2e/lib/test";
+import { defaultLocale, locales } from "#/config/i18n.config.ts";
+import { expect, test } from "#/e2e/lib/test.ts";
 
 test.describe("i18n", () => {
 	/**

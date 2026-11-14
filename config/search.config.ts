@@ -1,4 +1,4 @@
-import { convertYearToTimestamp } from "@/lib/timestamp";
+import { convertYearToTimestamp } from "#/lib/timestamp.ts";
 
 export const limit = 25;
 export const maxFacetValues = 250;

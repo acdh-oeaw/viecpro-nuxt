@@ -4,20 +4,20 @@ import { createUrlSearchParams } from "@acdh-oeaw/lib";
 import { Loader2Icon } from "lucide-react";
 import { type ReactNode, useOptimistic, useTransition } from "react";
 
-import { SearchDateRangeSlider } from "@/app/(app)/search/_components/search-date-range-slider";
-import { SearchEmptyDateCheckbox } from "@/app/(app)/search/_components/search-empty-date-checkbox";
-import { SearchFacets } from "@/app/(app)/search/_components/search-facets";
-import { SearchTextField } from "@/app/(app)/search/_components/search-text-field";
-import { SidePanel } from "@/app/(app)/search/_components/side-panel";
-import { SidePanelToggle } from "@/app/(app)/search/_components/side-panel-toggle";
+import { SearchDateRangeSlider } from "#/app/(app)/search/_components/search-date-range-slider.tsx";
+import { SearchEmptyDateCheckbox } from "#/app/(app)/search/_components/search-empty-date-checkbox.tsx";
+import { SearchFacets } from "#/app/(app)/search/_components/search-facets.tsx";
+import { SearchTextField } from "#/app/(app)/search/_components/search-text-field.tsx";
+import { SidePanelToggle } from "#/app/(app)/search/_components/side-panel-toggle.tsx";
+import { SidePanel } from "#/app/(app)/search/_components/side-panel.tsx";
 import type {
 	FacetField,
 	Institution,
 	SearchFilters,
 	SearchResults,
-} from "@/app/(app)/search/institutions/_lib/search";
-import { maxDate, minDate } from "@/config/search.config";
-import { useRouter } from "@/lib/i18n/navigation";
+} from "#/app/(app)/search/institutions/_lib/search.ts";
+import { maxDate, minDate } from "#/config/search.config.ts";
+import { useRouter } from "#/lib/i18n/navigation.ts";
 
 interface SearchSidePanelProps {
 	categoryFacetFilterLabel: string;

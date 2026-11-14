@@ -1,5 +1,5 @@
-import type { ElementRef } from "@/app/(app)/hierarchy/_lib/use-element-ref";
-import { useResizeObserver } from "@/app/(app)/hierarchy/_lib/use-resize-observer";
+import type { ElementRef } from "#/app/(app)/hierarchy/_lib/use-element-ref.ts";
+import { useResizeObserver } from "#/app/(app)/hierarchy/_lib/use-resize-observer.ts";
 
 interface UseElementDimensionsParams {
 	element: ElementRef<Element> | null;

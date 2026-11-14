@@ -1,10 +1,10 @@
 import { log, range } from "@acdh-oeaw/lib";
 import { getFormatter, getTranslations } from "next-intl/server";
 import type { SearchResponseHit } from "typesense/lib/Typesense/Documents";
-import type { MultiSearchRequestSchema } from "typesense/lib/Typesense/MultiSearch";
+import type { MultiSearchRequestSchema } from "typesense/lib/Typesense/Types";
 import * as v from "valibot";
 
-import { env } from "@/config/env.config";
+import { env } from "#/config/env.config.ts";
 import {
 	emptyDate,
 	limit,
@@ -12,11 +12,11 @@ import {
 	maxFacetValues,
 	minDate,
 	perPageDownloadLimit,
-} from "@/config/search.config";
-import { ensureArray } from "@/lib/ensure-array";
-import { convertYearToTimestamp } from "@/lib/timestamp";
-import { client } from "@/lib/typesense/client";
-import { UnsupportedError } from "@/lib/typesense/errors";
+} from "#/config/search.config.ts";
+import { ensureArray } from "#/lib/ensure-array.ts";
+import { convertYearToTimestamp } from "#/lib/timestamp.ts";
+import { client } from "#/lib/typesense/client.ts";
+import { UnsupportedError } from "#/lib/typesense/errors.ts";
 
 export interface Institution {
 	kind: "institution";
@@ -119,7 +119,9 @@ function generateFilter(searchFilters: SearchFilters) {
 	for (const facetField of facetFields) {
 		const values = searchFilters[facetField];
 
-		if (values.length === 0) continue;
+		if (values.length === 0) {
+			continue;
+		}
 
 		facetFilters.set(
 			facetField,
@@ -136,7 +138,9 @@ function generateFilter(searchFilters: SearchFilters) {
 		const filters = [dateRangeFilter];
 
 		facetFilters.forEach((filter, facetField) => {
-			if (facetField === omit) return;
+			if (facetField === omit) {
+				return;
+			}
 
 			filters.push(filter);
 		});
@@ -148,9 +152,15 @@ function generateFilter(searchFilters: SearchFilters) {
 }
 
 function sortFacets(a: FacetValueCount, z: FacetValueCount) {
-	if (a.isSelected && !z.isSelected) return -1;
-	if (!a.isSelected && z.isSelected) return 1;
-	if (a.count !== z.count) return z.count - a.count;
+	if (a.isSelected && !z.isSelected) {
+		return -1;
+	}
+	if (!a.isSelected && z.isSelected) {
+		return 1;
+	}
+	if (a.count !== z.count) {
+		return z.count - a.count;
+	}
 	return a.value.localeCompare(z.value);
 }
 
@@ -174,7 +184,7 @@ export async function getSearchResults(
 ): Promise<SearchResults<Institution>> {
 	const { createFilter, facetFilters } = generateFilter(searchFilters);
 
-	const searches: Array<MultiSearchRequestSchema> = [
+	const searches: Array<MultiSearchRequestSchema<Institution, string>> = [
 		{
 			page: searchFilters.page,
 			per_page: limit,

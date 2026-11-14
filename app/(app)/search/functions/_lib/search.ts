@@ -1,12 +1,12 @@
 import { log, range } from "@acdh-oeaw/lib";
 import type { SearchResponseHit } from "typesense/lib/Typesense/Documents";
-import type { MultiSearchRequestSchema } from "typesense/lib/Typesense/MultiSearch";
+import type { MultiSearchRequestSchema } from "typesense/lib/Typesense/Types";
 import * as v from "valibot";
 
-import { env } from "@/config/env.config";
-import { limit, maxFacetValues } from "@/config/search.config";
-import { ensureArray } from "@/lib/ensure-array";
-import { client } from "@/lib/typesense/client";
+import { env } from "#/config/env.config.ts";
+import { limit, maxFacetValues } from "#/config/search.config.ts";
+import { ensureArray } from "#/lib/ensure-array.ts";
+import { client } from "#/lib/typesense/client.ts";
 
 /** Generic term ("Oberbegriff"), grouping several function terms. */
 export interface FunctionalIndexEntry {
@@ -118,13 +118,16 @@ async function getMatchingIds(
 	assertNoErrors(first.results);
 
 	const response = first.results.at(0)!;
-	const ids = response.hits?.map((hit) => hit.document.id) ?? [];
+	const ids =
+		response.hits?.map((hit) => {
+			return hit.document.id;
+		}) ?? [];
 	const pages = Math.ceil(response.found / perPage);
 
 	if (pages > 1) {
 		const rest = await client.multiSearch.perform<Array<{ id: string }>>({
 			searches: range(2, pages).map((page) => {
-				return { ...params, page };
+				return Object.assign({}, params, { page });
 			}),
 		});
 		assertNoErrors(rest.results);
@@ -158,11 +161,17 @@ async function generateFilter(searchFilters: SearchFilters) {
 			getMatchingIds(termsCollection, termQueryFields, q),
 		]);
 
-		termIds.forEach((id) => matchedTermIds.add(id));
+		for (const id of termIds) {
+			matchedTermIds.add(id);
+		}
 
 		const textFilters: Array<string> = [];
-		if (indexIds.length > 0) textFilters.push(`id:[${indexIds.join(",")}]`);
-		if (termIds.length > 0) textFilters.push(`functions:[${termIds.join(",")}]`);
+		if (indexIds.length > 0) {
+			textFilters.push(`id:[${indexIds.join(",")}]`);
+		}
+		if (termIds.length > 0) {
+			textFilters.push(`functions:[${termIds.join(",")}]`);
+		}
 
 		/** Nothing matches: use a filter which matches no documents. */
 		filters.push(textFilters.length > 0 ? `(${textFilters.join(" || ")})` : "id:[-1]");
@@ -173,7 +182,9 @@ async function generateFilter(searchFilters: SearchFilters) {
 	for (const facetField of facetFields) {
 		const values = searchFilters[facetField];
 
-		if (values.length === 0) continue;
+		if (values.length === 0) {
+			continue;
+		}
 
 		facetFilters.set(facetField, `${facetField}:=[${values.toSorted().map(escape).join(",")}]`);
 	}
@@ -182,7 +193,9 @@ async function generateFilter(searchFilters: SearchFilters) {
 		const result = [...filters];
 
 		facetFilters.forEach((filter, facetField) => {
-			if (facetField === omit) return;
+			if (facetField === omit) {
+				return;
+			}
 
 			result.push(filter);
 		});
@@ -194,9 +207,15 @@ async function generateFilter(searchFilters: SearchFilters) {
 }
 
 function sortFacets(a: FacetValueCount, z: FacetValueCount) {
-	if (a.isSelected && !z.isSelected) return -1;
-	if (!a.isSelected && z.isSelected) return 1;
-	if (a.count !== z.count) return z.count - a.count;
+	if (a.isSelected && !z.isSelected) {
+		return -1;
+	}
+	if (!a.isSelected && z.isSelected) {
+		return 1;
+	}
+	if (a.count !== z.count) {
+		return z.count - a.count;
+	}
 	return a.value.localeCompare(z.value);
 }
 
@@ -217,9 +236,7 @@ export interface SearchResults<T extends object, TFacetField = FacetField> {
 	matchedTermIds: Array<string>;
 }
 
-type JoinedFunctionalIndexEntry = Omit<FunctionalIndexEntry, "functions"> & {
-	[key: string]: unknown;
-};
+type JoinedFunctionalIndexEntry = Omit<FunctionalIndexEntry, "functions"> & Record<string, unknown>;
 
 function toSearchResult(document: JoinedFunctionalIndexEntry): FunctionalIndexSearchResult {
 	const { [termsCollection]: terms, ...entry } = document;
@@ -238,7 +255,7 @@ export async function getSearchResults(
 ): Promise<SearchResults<FunctionalIndexSearchResult>> {
 	const { createFilter, facetFilters, matchedTermIds } = await generateFilter(searchFilters);
 
-	const searches: Array<MultiSearchRequestSchema> = [
+	const searches: Array<MultiSearchRequestSchema<JoinedFunctionalIndexEntry, string>> = [
 		{
 			page: searchFilters.page,
 			per_page: limit,
@@ -301,7 +318,9 @@ export async function getSearchResults(
 			: facet.counts;
 
 		for (const { count, highlighted, value } of counts) {
-			if (values.has(value)) continue;
+			if (values.has(value)) {
+				continue;
+			}
 			values.set(value, { count, highlighted, isSelected: selected.has(value), value });
 		}
 

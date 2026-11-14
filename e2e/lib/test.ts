@@ -1,14 +1,12 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-
 import { createUrl } from "@acdh-oeaw/lib";
 import { test as base } from "@playwright/test";
 
-import { env } from "@/config/env.config";
-import { defaultLocale, type Locale } from "@/config/i18n.config";
-import { type AccessibilityScanner, createAccessibilityScanner } from "@/e2e/lib/fixtures/a11y";
-import { createI18n, type I18n, type WithI18n } from "@/e2e/lib/fixtures/i18n";
-import { ImprintPage } from "@/e2e/lib/fixtures/imprint-page";
-import { IndexPage } from "@/e2e/lib/fixtures/index-page";
+import { env } from "#/config/env.config.ts";
+import { type Locale, defaultLocale } from "#/config/i18n.config.ts";
+import { type AccessibilityScanner, createAccessibilityScanner } from "#/e2e/lib/fixtures/a11y.ts";
+import { type I18n, type WithI18n, createI18n } from "#/e2e/lib/fixtures/i18n.ts";
+import { ImprintPage } from "#/e2e/lib/fixtures/imprint-page.ts";
+import { IndexPage } from "#/e2e/lib/fixtures/index-page.ts";
 
 interface Fixtures {
 	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type

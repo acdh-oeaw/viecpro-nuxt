@@ -1,4 +1,4 @@
-import type { IntlFormats, IntlMessages, Locale } from "@/config/i18n.config";
+import type { IntlFormats, IntlMessages, Locale } from "#/config/i18n.config.ts";
 
 declare module "next-intl" {
 	interface AppConfig {

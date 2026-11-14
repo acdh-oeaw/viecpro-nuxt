@@ -1,16 +1,16 @@
 import { createUrl, isNonEmptyArray, isNonEmptyString } from "@acdh-oeaw/lib";
 import { InfoIcon, UsersIcon } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
 
-import { getFunction } from "@/app/(app)/functions/[id]/_lib/data";
-import { Link } from "@/components/link";
-import { MainContent } from "@/components/main-content";
-import { PopoverNote } from "@/components/popover-note";
-import { env } from "@/config/env.config";
-import { createHref } from "@/lib/create-href";
+import { getFunction } from "#/app/(app)/functions/[id]/_lib/data.ts";
+import { Link } from "#/components/link.tsx";
+import { MainContent } from "#/components/main-content.tsx";
+import { PopoverNote } from "#/components/popover-note.tsx";
+import { env } from "#/config/env.config.ts";
+import { createHref } from "#/lib/create-href.ts";
 
 interface FunctionPageProps {
 	params: Promise<{
@@ -106,9 +106,8 @@ export default async function FunctionPage(props: Readonly<FunctionPageProps>): 
 								<div>{data.name}</div>
 								{/* eslint-disable-next-line react/jsx-no-literals */}
 								<div>VieCPro-ID: {data.id}</div>
-								{/* eslint-disable-next-line react/jsx-no-literals */}
 								<div>
-									URI:{" "}
+									{"URI: "}
 									<a className="underline hover:no-underline" href={href}>
 										{href}
 									</a>
@@ -138,7 +137,7 @@ export default async function FunctionPage(props: Readonly<FunctionPageProps>): 
 							{isNonEmptyString(data.source) ? (
 								<Fragment>
 									<dt className="text-neutral-600">{t("source")}:</dt>
-									<dd className="break-words">
+									<dd className="wrap-break-word">
 										{isUrl(data.source) ? (
 											<a className="underline hover:no-underline" href={data.source}>
 												{data.source}

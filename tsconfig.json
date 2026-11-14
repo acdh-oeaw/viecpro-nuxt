@@ -1,21 +1,46 @@
 {
-	"$schema": "https://json.schemastore.org/tsconfig",
-	"extends": "@acdh-oeaw/tsconfig",
+	"$schema": "https://www.schemastore.org/tsconfig.json",
 	"compilerOptions": {
+		"allowArbitraryExtensions": true,
+		"allowImportingTsExtensions": true,
+		"allowJs": false,
+		"erasableSyntaxOnly": true,
+		"incremental": true,
+		"isolatedModules": true,
+		"jsx": "react-jsx",
+		/** `es2023` is the highest lib the `browserslist` targets in `package.json` fully support. */
+		"lib": ["dom", "es2023"],
+		"module": "preserve",
+		"moduleDetection": "force",
+		"noEmit": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": false,
+		"noUncheckedIndexedAccess": true,
+		"noUncheckedSideEffectImports": true,
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
 		"paths": {
-			"@/*": ["./*"]
+			"#/*": ["./*"]
 		},
-		"plugins": [{ "name": "next" }]
+		"plugins": [{ "name": "next" }],
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "esnext",
+		"types": ["node", "react", "react-dom"],
+		"verbatimModuleSyntax": true
 	},
 	"include": [
-		"./**/*.d.ts",
-		"./**/*.js",
-		// "./**/*.mdx",
-		"./**/*.ts",
-		"./**/*.tsx",
-		".next/types/**/*.ts"
+		"types/**/*.d.ts",
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		".next/types/**/*.ts",
+		".next/dev/types/**/*.ts"
 	],
-	"exclude": ["node_modules", "out"],
+	"exclude": ["node_modules/", "out/", "public/"],
 	"mdx": {
 		"checkMdx": false,
 		"plugins": ["remark-frontmatter", "remark-gfm"]

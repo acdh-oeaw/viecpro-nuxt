@@ -1,8 +1,8 @@
 import { cn } from "@acdh-oeaw/style-variants";
 import type { ReactNode } from "react";
 
-import { Link } from "@/components/content/link";
-import type { LinkSchema } from "@/lib/keystatic/get-link-props";
+import { Link } from "#/components/content/link.tsx";
+import type { LinkSchema } from "#/lib/keystatic/get-link-props.ts";
 
 interface LinkButtonProps {
 	children: ReactNode;

@@ -9,7 +9,9 @@ export function parseLinkHeader(header: string | null): Record<string, string> {
 
 	parts.forEach((part) => {
 		const section = part.split(";");
-		if (section.length < 2) return;
+		if (section.length < 2) {
+			return;
+		}
 
 		const url = section[0]!.trim().slice(1, -1);
 

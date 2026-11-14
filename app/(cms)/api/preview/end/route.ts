@@ -1,6 +1,6 @@
 import { cookies, draftMode } from "next/headers";
 
-import { rewriteUrl } from "@/lib/keystatic/rewrite-url";
+import { rewriteUrl } from "#/lib/keystatic/rewrite-url.ts";
 
 export async function POST(_request: Request): Promise<Response> {
 	const request = rewriteUrl(_request);

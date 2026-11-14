@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import { Button, Dialog, DialogTrigger, OverlayArrow, Popover } from "react-aria-components";
 
-import { Tooltip, TooltipTrigger } from "@/components/tooltip";
+import { Tooltip, TooltipTrigger } from "#/components/tooltip.tsx";
 
 interface PopoverNoteProps {
 	children: ReactNode;
