@@ -25,8 +25,8 @@ import {
 } from "react-aria";
 import type { LinkProps as AriaLinkProps } from "react-aria-components";
 
-import { LocaleLink, type LocaleLinkProps } from "@/lib/i18n/navigation";
-import { useRenderProps } from "@/lib/use-render-props";
+import { LocaleLink, type LocaleLinkProps } from "#/lib/i18n/navigation.ts";
+import { useRenderProps } from "#/lib/use-render-props.ts";
 
 /**
  * Not using `Link` from `react-aria-components` directly, because we want `next/link`'s built-in

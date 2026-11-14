@@ -1,8 +1,8 @@
 import { createAssetOptions, type Paths, withI18nPrefix } from "@acdh-oeaw/keystatic-lib";
 import { fields } from "@keystatic/core";
 
-import type { Locale } from "@/config/i18n.config";
-import { linkKinds } from "@/lib/keystatic/component-options";
+import type { Locale } from "#/config/i18n.config.ts";
+import { linkKinds } from "#/lib/keystatic/component-options.ts";
 
 export function createLinkSchema<TPath extends `/${string}/`>(
 	downloadPath: Paths<TPath>["downloadPath"],

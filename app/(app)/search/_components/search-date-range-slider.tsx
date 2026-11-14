@@ -3,7 +3,7 @@
 import { Fragment, type ReactNode } from "react";
 import { Label, Slider, SliderOutput, SliderThumb, SliderTrack } from "react-aria-components";
 
-import type { SearchFilters } from "@/app/(app)/search/persons/_lib/search";
+import type { SearchFilters } from "#/app/(app)/search/persons/_lib/search.ts";
 
 interface SearchDateRangeSliderProps {
 	defaultValue: [number, number];

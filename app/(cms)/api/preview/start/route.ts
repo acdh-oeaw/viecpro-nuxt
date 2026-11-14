@@ -2,7 +2,7 @@ import { cookies, draftMode } from "next/headers";
 // eslint-disable-next-line no-restricted-imports
 import { redirect } from "next/navigation";
 
-import { rewriteUrl } from "@/lib/keystatic/rewrite-url";
+import { rewriteUrl } from "#/lib/keystatic/rewrite-url.ts";
 
 export async function GET(_request: Request): Promise<Response> {
 	const request = rewriteUrl(_request);

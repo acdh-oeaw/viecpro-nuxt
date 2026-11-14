@@ -1,7 +1,7 @@
 import { cn } from "@acdh-oeaw/style-variants";
 import type { ReactNode } from "react";
 
-import type { ActionState } from "@/lib/server/actions";
+import type { ActionState } from "#/lib/server/actions.ts";
 
 interface FormErrorMessageProps {
 	children?: ReactNode | ((state: ActionState) => ReactNode);

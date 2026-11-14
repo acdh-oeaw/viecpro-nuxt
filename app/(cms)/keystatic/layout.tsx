@@ -1,12 +1,12 @@
-import "@/styles/index.css";
-import "@/styles/cms.css";
+import "#/styles/index.css";
+import "#/styles/cms.css";
 
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { type ReactNode, Suspense } from "react";
 import { LocalizedStringProvider as Translations } from "react-aria-components/i18n";
 
-import KeystaticApp from "@/app/(cms)/keystatic/keystatic";
+import KeystaticApp from "#/app/(cms)/keystatic/keystatic.ts";
 
 const locale = "en";
 

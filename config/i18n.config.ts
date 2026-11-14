@@ -1,7 +1,7 @@
 import type { Formats } from "next-intl";
 
-import type metadataDe from "@/content/de/metadata/index.json";
-import type de from "@/messages/de.json";
+import type metadataDe from "#/content/de/metadata/index.json";
+import type de from "#/messages/de.json";
 
 export const locales = ["de"] as const;
 

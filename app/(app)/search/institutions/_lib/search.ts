@@ -4,7 +4,7 @@ import type { SearchResponseHit } from "typesense/lib/Typesense/Documents";
 import type { MultiSearchRequestSchema } from "typesense/lib/Typesense/Types";
 import * as v from "valibot";
 
-import { env } from "@/config/env.config";
+import { env } from "#/config/env.config.ts";
 import {
 	emptyDate,
 	limit,
@@ -12,11 +12,11 @@ import {
 	maxFacetValues,
 	minDate,
 	perPageDownloadLimit,
-} from "@/config/search.config";
-import { ensureArray } from "@/lib/ensure-array";
-import { convertYearToTimestamp } from "@/lib/timestamp";
-import { client } from "@/lib/typesense/client";
-import { UnsupportedError } from "@/lib/typesense/errors";
+} from "#/config/search.config.ts";
+import { ensureArray } from "#/lib/ensure-array.ts";
+import { convertYearToTimestamp } from "#/lib/timestamp.ts";
+import { client } from "#/lib/typesense/client.ts";
+import { UnsupportedError } from "#/lib/typesense/errors.ts";
 
 export interface Institution {
 	kind: "institution";

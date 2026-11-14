@@ -10,26 +10,26 @@ import {
 	type FacetValueCount as CourtFacetValueCount,
 	getSearchFacetValues as getCourtSearchFacetValues,
 	type SearchFilters as CourtSearchFilters,
-} from "@/app/(app)/search/courts/_lib/search";
+} from "#/app/(app)/search/courts/_lib/search.ts";
 import {
 	type FacetField as InstitutionFacetField,
 	type FacetValueCount as InstitutionFacetValueCount,
 	getSearchFacetValues as getInstitutionSearchFacetValues,
 	type SearchFilters as InstitutionSearchFilters,
-} from "@/app/(app)/search/institutions/_lib/search";
+} from "#/app/(app)/search/institutions/_lib/search.ts";
 import {
 	type FacetField as PersonFacetField,
 	type FacetValueCount as PersonFacetValueCount,
 	getSearchFacetValues as getPersonSearchFacetValues,
 	type SearchFilters as PersonSearchFilters,
-} from "@/app/(app)/search/persons/_lib/search";
+} from "#/app/(app)/search/persons/_lib/search.ts";
 import {
 	type FacetField as PlaceFacetField,
 	type FacetValueCount as PlaceFacetValueCount,
 	getSearchFacetValues as getPlaceSearchFacetValues,
 	type SearchFilters as PlaceSearchFilters,
-} from "@/app/(app)/search/places/_lib/search";
-import { defaultFacets, maxFacets } from "@/config/search.config";
+} from "#/app/(app)/search/places/_lib/search.ts";
+import { defaultFacets, maxFacets } from "#/config/search.config.ts";
 
 // FIXME: shared types
 type FacetValueCount =

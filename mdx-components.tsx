@@ -1,7 +1,7 @@
-import { Link as ContentLink } from "@/components/content/link";
-import { LinkButton } from "@/components/content/link-button";
-import { Link } from "@/components/link";
-import { ServerImage as Image } from "@/components/server-image";
+import { Link as ContentLink } from "#/components/content/link.tsx";
+import { LinkButton } from "#/components/content/link-button.tsx";
+import { Link } from "#/components/link.tsx";
+import { ServerImage as Image } from "#/components/server-image.tsx";
 
 const components = {
 	a: Link,

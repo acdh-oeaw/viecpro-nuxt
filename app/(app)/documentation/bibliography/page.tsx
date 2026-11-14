@@ -3,9 +3,9 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 
-import { DocumentationNavigation } from "@/app/(app)/documentation/_components/documentation-navigation";
-import { MainContent } from "@/components/main-content";
-import bibliography from "@/public/bibliography.json";
+import { DocumentationNavigation } from "#/app/(app)/documentation/_components/documentation-navigation.tsx";
+import { MainContent } from "#/components/main-content.tsx";
+import bibliography from "#/public/bibliography.json";
 
 interface BibliographyPageProps extends EmptyObject {}
 

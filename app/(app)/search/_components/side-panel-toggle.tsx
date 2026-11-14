@@ -5,8 +5,8 @@ import { PanelLeftCloseIcon, PanelLeftOpenIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { Button } from "react-aria-components";
 
-import { useSidePanel } from "@/app/(app)/search/_components/side-panel-provider";
-import { Tooltip, TooltipTrigger } from "@/components/tooltip";
+import { useSidePanel } from "#/app/(app)/search/_components/side-panel-provider.tsx";
+import { Tooltip, TooltipTrigger } from "#/components/tooltip.tsx";
 
 interface SidePanelToggleProps {
 	className?: string;

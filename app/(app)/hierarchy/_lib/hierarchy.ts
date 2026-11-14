@@ -1,7 +1,7 @@
 import { assert, createUrl, request } from "@acdh-oeaw/lib";
 import * as v from "valibot";
 
-import { env } from "@/config/env.config";
+import { env } from "#/config/env.config.ts";
 
 export const defaultSearchFilters = {
 	direction: "down",

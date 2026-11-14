@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import type { ElementRef } from "@/app/(app)/hierarchy/_lib/use-element-ref";
+import type { ElementRef } from "#/app/(app)/hierarchy/_lib/use-element-ref.ts";
 
 interface UseResizeObserverParams {
 	element: ElementRef<Element> | null;

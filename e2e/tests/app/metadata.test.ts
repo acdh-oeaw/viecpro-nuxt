@@ -1,9 +1,9 @@
 import { createUrl } from "@acdh-oeaw/lib";
 import { jsonLdScriptProps } from "react-schemaorg";
 
-import { env } from "@/config/env.config";
-import { defaultLocale, locales } from "@/config/i18n.config";
-import { expect, test } from "@/e2e/lib/test";
+import { env } from "#/config/env.config.ts";
+import { defaultLocale, locales } from "#/config/i18n.config.ts";
+import { expect, test } from "#/e2e/lib/test.ts";
 
 test("should set a canonical url", async ({ createIndexPage }) => {
 	for (const locale of locales) {

@@ -4,8 +4,8 @@ import { createUrl } from "@acdh-oeaw/lib";
 import { glob } from "fast-glob";
 import type { MetadataRoute } from "next";
 
-import { env } from "@/config/env.config";
-import { client } from "@/lib/typesense/client";
+import { env } from "#/config/env.config.ts";
+import { client } from "#/lib/typesense/client.ts";
 
 const baseUrl = env.NEXT_PUBLIC_APP_BASE_URL;
 

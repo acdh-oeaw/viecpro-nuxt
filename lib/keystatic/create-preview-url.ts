@@ -1,4 +1,4 @@
-import { env } from "@/config/env.config";
+import { env } from "#/config/env.config.ts";
 
 /**
  * Use `{slug}` as a placeholder for the current entry's id.

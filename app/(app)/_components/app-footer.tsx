@@ -4,15 +4,15 @@ import type { StaticImageData } from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
-import { Image } from "@/components/image";
-import { NavLink, type NavLinkProps } from "@/components/nav-link";
-import type { Locale } from "@/config/i18n.config";
-import { createHref } from "@/lib/create-href";
-import logoAcdhCh from "@/public/assets/images/logo-acdh-ch-with-text.svg";
-import logoFwf from "@/public/assets/images/logo-fwf.svg";
-import logoIhb from "@/public/assets/images/logo-ihb.svg";
-import logoOeaw from "@/public/assets/images/logo-oeaw.svg";
-import logo from "@/public/assets/images/logo-viecpro-with-text.png";
+import { Image } from "#/components/image.tsx";
+import { NavLink, type NavLinkProps } from "#/components/nav-link.tsx";
+import type { Locale } from "#/config/i18n.config.ts";
+import { createHref } from "#/lib/create-href.ts";
+import logoAcdhCh from "#/public/assets/images/logo-acdh-ch-with-text.svg";
+import logoFwf from "#/public/assets/images/logo-fwf.svg";
+import logoIhb from "#/public/assets/images/logo-ihb.svg";
+import logoOeaw from "#/public/assets/images/logo-oeaw.svg";
+import logo from "#/public/assets/images/logo-viecpro-with-text.png";
 
 export function AppFooter(): ReactNode {
 	const locale = useLocale();

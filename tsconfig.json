@@ -3,7 +3,7 @@
 	"extends": "@acdh-oeaw/tsconfig",
 	"compilerOptions": {
 		"paths": {
-			"@/*": ["./*"]
+			"#/*": ["./*"]
 		},
 		"plugins": [{ "name": "next" }]
 	},

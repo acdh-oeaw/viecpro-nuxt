@@ -4,12 +4,12 @@ import { createUrlSearchParams } from "@acdh-oeaw/lib";
 import * as d3 from "d3";
 import { type ReactNode, use, useMemo } from "react";
 
-import { groups } from "@/app/(app)/hierarchy/_lib/autocomplete";
-import type { GraphNode } from "@/app/(app)/hierarchy/_lib/hierarchy";
-import { useElementRef } from "@/app/(app)/hierarchy/_lib/use-element-ref";
-import { useVisualisationDimensions } from "@/app/(app)/hierarchy/_lib/use-visualisation-dimensions";
-import { Link } from "@/components/link";
-import { colors } from "@/config/visualisation.config";
+import { groups } from "#/app/(app)/hierarchy/_lib/autocomplete.ts";
+import type { GraphNode } from "#/app/(app)/hierarchy/_lib/hierarchy.ts";
+import { useElementRef } from "#/app/(app)/hierarchy/_lib/use-element-ref.ts";
+import { useVisualisationDimensions } from "#/app/(app)/hierarchy/_lib/use-visualisation-dimensions.ts";
+import { Link } from "#/components/link.tsx";
+import { colors } from "#/config/visualisation.config.ts";
 
 interface HierarchyVisualisationProps {
 	data: Promise<GraphNode>;

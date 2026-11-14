@@ -5,10 +5,10 @@ import { MenuIcon, XIcon } from "lucide-react";
 import { Fragment, type ReactNode } from "react";
 import { Button, Dialog, DialogTrigger, Heading, Modal, ModalOverlay } from "react-aria-components";
 
-import { Image } from "@/components/image";
-import { NavLink, type NavLinkProps } from "@/components/nav-link";
-import { usePathname } from "@/lib/i18n/navigation";
-import logo from "@/public/assets/images/logo-viecpro-with-text.png";
+import { Image } from "#/components/image.tsx";
+import { NavLink, type NavLinkProps } from "#/components/nav-link.tsx";
+import { usePathname } from "#/lib/i18n/navigation.ts";
+import logo from "#/public/assets/images/logo-viecpro-with-text.png";
 
 interface NavigationLink {
 	type: "link";

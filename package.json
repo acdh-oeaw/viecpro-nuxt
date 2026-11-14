@@ -3,6 +3,9 @@
 	"private": true,
 	"license": "MIT",
 	"type": "module",
+	"imports": {
+		"#/*": "./*"
+	},
 	"engines": {
 		"node": "^26"
 	},
@@ -13,7 +16,7 @@
 		"dev": "next dev",
 		"format:check": "prettier . --cache --cache-location ./.prettiercache --check",
 		"format:fix": "pnpm run format:check --write",
-		"generate:bibliography": "tsx ./scripts/generate-bibliography.ts",
+		"generate:bibliography": "node ./scripts/generate-bibliography.ts",
 		"lint:check": "run-p --continue-on-error \"lint:*:check\"",
 		"lint:fix": "run-p --continue-on-error \"lint:*:fix\"",
 		"lint:code:check": "eslint .",
@@ -113,7 +116,6 @@
 		"tailwindcss": "^4.3.5",
 		"tailwindcss-animate": "^1.0.7",
 		"tailwindcss-react-aria-components": "^2.2.0",
-		"tsx": "^4.23.15",
 		"typescript": "^5.9.3"
 	},
 	"browserslist": {

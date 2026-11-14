@@ -8,5 +8,5 @@ import { lazy } from "react";
  * @see https://next-intl-docs.vercel.app/docs/environments/error-files#errorjs
  */
 export default lazy(async () => {
-	return import("@/app/(app)/internal-error");
+	return import("#/app/(app)/internal-error.tsx");
 });

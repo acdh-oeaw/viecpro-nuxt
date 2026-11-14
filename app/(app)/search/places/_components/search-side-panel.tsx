@@ -4,17 +4,17 @@ import { createUrlSearchParams } from "@acdh-oeaw/lib";
 import { Loader2Icon } from "lucide-react";
 import { type ReactNode, useOptimistic, useTransition } from "react";
 
-import { SearchFacets } from "@/app/(app)/search/_components/search-facets";
-import { SearchTextField } from "@/app/(app)/search/_components/search-text-field";
-import { SidePanel } from "@/app/(app)/search/_components/side-panel";
-import { SidePanelToggle } from "@/app/(app)/search/_components/side-panel-toggle";
+import { SearchFacets } from "#/app/(app)/search/_components/search-facets.tsx";
+import { SearchTextField } from "#/app/(app)/search/_components/search-text-field.tsx";
+import { SidePanel } from "#/app/(app)/search/_components/side-panel.tsx";
+import { SidePanelToggle } from "#/app/(app)/search/_components/side-panel-toggle.tsx";
 import type {
 	FacetField,
 	Place,
 	SearchFilters,
 	SearchResults,
-} from "@/app/(app)/search/places/_lib/search";
-import { useRouter } from "@/lib/i18n/navigation";
+} from "#/app/(app)/search/places/_lib/search.ts";
+import { useRouter } from "#/lib/i18n/navigation.ts";
 
 interface SearchSidePanelProps {
 	categoryFacetFilterLabel: string;

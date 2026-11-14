@@ -2,7 +2,7 @@ import localesPlugin from "@react-aria/optimize-locales-plugin";
 import type { NextConfig } from "next";
 import createI18nPlugin from "next-intl/plugin";
 
-import { env } from "@/config/env.config";
+import { env } from "#/config/env.config.ts";
 
 /** `@react-aria/optimize-locales-plugin` types loader options as `readonly`, which next.js rejects. */
 type TurbopackRules = NonNullable<NonNullable<NextConfig["turbopack"]>["rules"]>;

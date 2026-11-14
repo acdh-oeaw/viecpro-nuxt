@@ -1,5 +1,5 @@
-import { useElementDimensions } from "@/app/(app)/hierarchy/_lib/use-element-dimensions";
-import type { ElementRef } from "@/app/(app)/hierarchy/_lib/use-element-ref";
+import { useElementDimensions } from "#/app/(app)/hierarchy/_lib/use-element-dimensions.ts";
+import type { ElementRef } from "#/app/(app)/hierarchy/_lib/use-element-ref.ts";
 
 interface UseVisualizationDimensionsParams {
 	dimensions?: Partial<Omit<VisualizationDimensions, "boundedHeight" | "boundedWidth">> & {

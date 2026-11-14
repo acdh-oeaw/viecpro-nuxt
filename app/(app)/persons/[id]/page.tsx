@@ -13,17 +13,17 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { Fragment, type ReactNode } from "react";
 import { Errors } from "typesense";
 
-import { getPerson } from "@/app/(app)/persons/[id]/_lib/data";
-import { StatusIndicator } from "@/app/(app)/search/_components/status-indicator";
-import { Collapsible } from "@/components/collapsible";
-import { DownloadMenu } from "@/components/download-menu";
-import { Link } from "@/components/link";
-import { MainContent } from "@/components/main-content";
-import { PopoverNote } from "@/components/popover-note";
-import { SortableTable } from "@/components/sortable-table";
-import { Tooltip, TooltipTrigger } from "@/components/tooltip";
-import { env } from "@/config/env.config";
-import { parseLinks } from "@/lib/parse-links";
+import { getPerson } from "#/app/(app)/persons/[id]/_lib/data.ts";
+import { StatusIndicator } from "#/app/(app)/search/_components/status-indicator.tsx";
+import { Collapsible } from "#/components/collapsible.tsx";
+import { DownloadMenu } from "#/components/download-menu.tsx";
+import { Link } from "#/components/link.tsx";
+import { MainContent } from "#/components/main-content.tsx";
+import { PopoverNote } from "#/components/popover-note.tsx";
+import { SortableTable } from "#/components/sortable-table.tsx";
+import { Tooltip, TooltipTrigger } from "#/components/tooltip.tsx";
+import { env } from "#/config/env.config.ts";
+import { parseLinks } from "#/lib/parse-links.ts";
 
 interface PersonPageProps {
 	params: Promise<{

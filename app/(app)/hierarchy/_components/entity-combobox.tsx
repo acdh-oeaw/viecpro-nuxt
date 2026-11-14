@@ -16,7 +16,7 @@ import {
 	Virtualizer,
 } from "react-aria-components";
 
-import type { AutocompleteItem } from "@/app/(app)/hierarchy/_lib/autocomplete";
+import type { AutocompleteItem } from "#/app/(app)/hierarchy/_lib/autocomplete.ts";
 
 interface EntityComboBoxProps {
 	label: ReactNode;

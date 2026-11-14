@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 
-import type { SearchFilters } from "@/app/(app)/search/persons/_lib/search";
+import type { SearchFilters } from "#/app/(app)/search/persons/_lib/search.ts";
 
 interface SearchEmptyDateCheckboxProps {
 	checked: boolean;

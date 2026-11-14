@@ -8,9 +8,9 @@ import { useReportWebVitals } from "next/web-vitals";
 import { useLocale } from "next-intl";
 import { Fragment, type ReactNode, Suspense, useEffect } from "react";
 
-import { env } from "@/config/env.config";
-import type { Locale } from "@/config/i18n.config";
-import { usePathname } from "@/lib/i18n/navigation";
+import { env } from "#/config/env.config.ts";
+import type { Locale } from "#/config/i18n.config.ts";
+import { usePathname } from "#/lib/i18n/navigation.ts";
 
 declare global {
 	interface Window {

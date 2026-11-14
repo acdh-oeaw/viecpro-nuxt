@@ -1,7 +1,7 @@
 import { assert } from "@acdh-oeaw/lib";
 import { createContext, type ReactNode, use } from "react";
 
-import type { ActionState } from "@/lib/server/actions";
+import type { ActionState } from "#/lib/server/actions.ts";
 
 const ActionStateContext = createContext<ActionState | null>(null);
 

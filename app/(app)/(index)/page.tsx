@@ -3,11 +3,11 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 
-import { LinkButton } from "@/components/content/link-button";
-import { Image } from "@/components/image";
-import { MainContent } from "@/components/main-content";
-import { createSingletonResource } from "@/lib/keystatic/resources";
-import hero from "@/public/assets/images/hero.jpg";
+import { LinkButton } from "#/components/content/link-button.tsx";
+import { Image } from "#/components/image.tsx";
+import { MainContent } from "#/components/main-content.tsx";
+import { createSingletonResource } from "#/lib/keystatic/resources.ts";
+import hero from "#/public/assets/images/hero.jpg";
 
 interface IndexPageProps extends EmptyObject {}
 

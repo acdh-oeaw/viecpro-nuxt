@@ -5,9 +5,9 @@ import type { MDXModule } from "mdx/types";
 import { cache } from "react";
 import * as runtime from "react/jsx-runtime";
 
-import type { Locale } from "@/config/i18n.config";
-import { createConfig as createMdxConfig } from "@/config/mdx.config";
-import { useMDXComponents } from "@/mdx-components";
+import type { Locale } from "#/config/i18n.config.ts";
+import { createConfig as createMdxConfig } from "#/config/mdx.config.ts";
+import { useMDXComponents } from "#/mdx-components.tsx";
 
 const createMdxProcessor = createMdxProcessors(createMdxConfig);
 

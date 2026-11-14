@@ -1,8 +1,8 @@
 import { cache } from "react";
 
-import type { Place } from "@/app/(app)/search/places/_lib/search";
-import { env } from "@/config/env.config";
-import { client } from "@/lib/typesense/client";
+import type { Place } from "#/app/(app)/search/places/_lib/search.ts";
+import { env } from "#/config/env.config.ts";
+import { client } from "#/lib/typesense/client.ts";
 
 type Model = "person" | "place" | "institution" | "court" | "event";
 

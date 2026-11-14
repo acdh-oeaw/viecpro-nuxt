@@ -46,33 +46,55 @@ const config = defineConfig(
 		},
 	},
 	{
+		/** Internal modules are imported via `#/` subpath imports (see `imports` in `package.json`). */
+		settings: {
+			"import-x/internal-regex": "^#/",
+		},
+	},
+	{
 		rules: {
 			"arrow-body-style": ["error", "always"],
 			"no-restricted-imports": [
 				"error",
 				{
-					name: "next/image",
-					message: "Please use `@/components/image` or `@/components/server-image` instead.",
-				},
-				{
-					name: "next/link",
-					message: "Please use `@/components/link` instead.",
-				},
-				{
-					name: "next/navigation",
-					importNames: ["redirect", "permanentRedirect", "useRouter", "usePathname"],
-					message: "Please use `@/lib/i18n/navigation` instead.",
-				},
-				{
-					name: "next/router",
-					message: "Please use `@/lib/i18n/navigation` instead.",
+					paths: [
+						{
+							name: "next/image",
+							message: "Please use `#/components/image` or `#/components/server-image` instead.",
+						},
+						{
+							name: "next/link",
+							message: "Please use `#/components/link` instead.",
+						},
+						{
+							name: "next/navigation",
+							importNames: ["redirect", "permanentRedirect", "useRouter", "usePathname"],
+							message: "Please use `#/lib/i18n/navigation` instead.",
+						},
+						{
+							name: "next/router",
+							message: "Please use `#/lib/i18n/navigation` instead.",
+						},
+					],
+					patterns: [
+						{
+							/**
+							 * Require explicit file extensions for internal modules, so they can be resolved
+							 * natively by node.js. `import-x/extensions` cannot check `#/` imports, because it
+							 * parses `#` as a url fragment.
+							 */
+							regex:
+								"^(?:#|\\.{1,2})/(?!.*\\.(?:avif|css|gif|jpe?g|js|json|mdx?|mjs|png|svg|tsx?|webp)$)",
+							message: "Please add the file extension to internal imports.",
+						},
+					],
 				},
 			],
 			"no-restricted-syntax": [
 				"error",
 				{
 					selector: 'MemberExpression[computed!=true][object.name="process"][property.name="env"]',
-					message: "Please use `@/config/env.config` instead.",
+					message: "Please use `#/config/env.config` instead.",
 				},
 			],
 			// "@typescript-eslint/explicit-module-boundary-types": "error",

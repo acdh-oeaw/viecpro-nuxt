@@ -3,7 +3,7 @@
 import { cn } from "@acdh-oeaw/style-variants";
 import { type ReactNode, useEffect } from "react";
 
-import { useSidePanel } from "@/app/(app)/search/_components/side-panel-provider";
+import { useSidePanel } from "#/app/(app)/search/_components/side-panel-provider.tsx";
 
 interface SidePanelProps {
 	children: ReactNode;

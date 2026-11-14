@@ -7,16 +7,16 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { Fragment, type ReactNode } from "react";
 import { Errors } from "typesense";
 
-import { PointMap } from "@/app/(app)/places/[id]/_components/point-map-loader";
-import { getPlace } from "@/app/(app)/places/[id]/_lib/data";
-import { StatusIndicator } from "@/app/(app)/search/_components/status-indicator";
-import { Collapsible } from "@/components/collapsible";
-import { DownloadMenu } from "@/components/download-menu";
-import { MainContent } from "@/components/main-content";
-import { PopoverNote } from "@/components/popover-note";
-import { SortableTable } from "@/components/sortable-table";
-import { env } from "@/config/env.config";
-import { parseLinks } from "@/lib/parse-links";
+import { PointMap } from "#/app/(app)/places/[id]/_components/point-map-loader.tsx";
+import { getPlace } from "#/app/(app)/places/[id]/_lib/data.ts";
+import { StatusIndicator } from "#/app/(app)/search/_components/status-indicator.tsx";
+import { Collapsible } from "#/components/collapsible.tsx";
+import { DownloadMenu } from "#/components/download-menu.tsx";
+import { MainContent } from "#/components/main-content.tsx";
+import { PopoverNote } from "#/components/popover-note.tsx";
+import { SortableTable } from "#/components/sortable-table.tsx";
+import { env } from "#/config/env.config.ts";
+import { parseLinks } from "#/lib/parse-links.ts";
 
 interface PlacePageProps {
 	params: Promise<{

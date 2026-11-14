@@ -1,15 +1,15 @@
 import { withI18nPrefix } from "@acdh-oeaw/keystatic-lib";
 import { config } from "@keystatic/core";
 
-import { Logo } from "@/components/logo";
-import { env } from "@/config/env.config";
-import { locales } from "@/config/i18n.config";
-import { createDocumentation } from "@/lib/keystatic/collections";
+import { Logo } from "#/components/logo.tsx";
+import { env } from "#/config/env.config.ts";
+import { locales } from "#/config/i18n.config.ts";
+import { createDocumentation } from "#/lib/keystatic/collections.tsx";
 import {
 	createDocumentationNav,
 	createIndexPage,
 	createMetadata,
-} from "@/lib/keystatic/singletons";
+} from "#/lib/keystatic/singletons.tsx";
 
 export default config({
 	collections: {

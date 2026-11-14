@@ -2,18 +2,22 @@ import "server-only";
 
 import { getRequestConfig } from "next-intl/server";
 
-import { defaultLocale, formats, type IntlMessages } from "@/config/i18n.config";
+import { defaultLocale, formats, type IntlMessages } from "#/config/i18n.config.ts";
 
 export default getRequestConfig(async () => {
 	const locale = defaultLocale;
 
 	const timeZone = "UTC";
 
+	/**
+	 * Using relative paths, because turbopack does not resolve `#/` subpath imports in dynamic
+	 * imports with template literals.
+	 */
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-	const _messages = await import(`@/messages/${locale}.json`);
+	const _messages = await import(`../../messages/${locale}.json`);
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-	const _metadata = await import(`@/content/${locale}/metadata/index.json`);
+	const _metadata = await import(`../../content/${locale}/metadata/index.json`);
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 	const messages = { metadata: _metadata.default, ..._messages.default } as IntlMessages;

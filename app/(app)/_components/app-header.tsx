@@ -5,8 +5,8 @@ import {
 	AppNavigation,
 	AppNavigationMobile,
 	type NavigationItem,
-} from "@/app/(app)/_components/app-navigation";
-import { createHref } from "@/lib/create-href";
+} from "#/app/(app)/_components/app-navigation.tsx";
+import { createHref } from "#/lib/create-href.ts";
 
 export function AppHeader(): ReactNode {
 	const t = useTranslations("AppHeader");
