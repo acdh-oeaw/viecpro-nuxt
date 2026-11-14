@@ -43,7 +43,8 @@ export default async function IndexPage(_props: Readonly<IndexPageProps>): Promi
 					alt=""
 					className="aspect-video max-h-120 min-h-80 w-full object-cover"
 					decoding="sync"
-					preload={true}
+					fetchPriority="high"
+					loading="eager"
 					sizes="100vw"
 					src={hero}
 				/>
