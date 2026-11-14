@@ -4,7 +4,7 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll": "explicit"
 	},
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.defaultFormatter": "oxc.oxc-vscode",
 	"editor.formatOnSave": true,
 	"editor.inlayHints.enabled": "offUnlessPressed",
 	"editor.linkedEditing": true,
@@ -13,22 +13,15 @@
 	},
 	"editor.rulers": [100],
 	"editor.stickyScroll.enabled": true,
-	"eslint.enable": true,
-	"eslint.validate": ["javascript", "typescript", "typescriptreact"],
+	"eslint.enable": false,
 	"files.associations": {
 		"*.css": "tailwindcss"
 	},
 	"files.eol": "\n",
-	"i18n-ally.annotations": false,
-	"i18n-ally.keepFulfilled": true,
-	"i18n-ally.keystyle": "nested",
-	"i18n-ally.localesPaths": ["./messages"],
-	"i18n-ally.review.enabled": false,
-	"i18n-ally.sortKeys": true,
-	"i18n-ally.tabStyle": "tab",
+	"js/ts.experimental.useTsgo": true,
 	"less.validate": false,
 	"mdx.server.enable": true,
-	"prettier.ignorePath": ".gitignore",
+	"prettier.enable": false,
 	"scss.validate": false,
 	"stylelint.enable": true,
 	"stylelint.snippet": ["css", "postcss", "tailwindcss"],
@@ -60,6 +53,7 @@
 	},
 	"workbench.editor.labelFormat": "medium",
 	"workbench.tree.enableStickyScroll": true,
+	"x18n.annotations": false,
 	"[markdown]": {
 		"editor.wordWrap": "on"
 	},

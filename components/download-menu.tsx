@@ -42,6 +42,7 @@ export function DownloadMenu<T extends object>(props: DownloadMenuProps<T>): Rea
 			}
 
 			case "xlsx": {
+				// eslint-disable-next-line react/todo -- lazy-loaded, the react compiler skips this event handler.
 				const { downloadXlsx } = await import("#/lib/download-xlsx.ts");
 
 				const [sheet, columns] = base;

@@ -1,11 +1,11 @@
 "use client";
 
 import { createUrl } from "@acdh-oeaw/lib";
+import { useLocale } from "next-intl";
 import type { NextWebVitalsMetric } from "next/app";
 import { useSearchParams } from "next/navigation";
 import Script from "next/script";
 import { useReportWebVitals } from "next/web-vitals";
-import { useLocale } from "next-intl";
 import { Fragment, type ReactNode, Suspense, useEffect } from "react";
 
 import { env } from "#/config/env.config.ts";
@@ -26,7 +26,9 @@ interface AnalyticsProps {
 export function AnalyticsScript(props: AnalyticsProps): ReactNode {
 	const { baseUrl, id } = props;
 
-	if (baseUrl == null || id == null) return null;
+	if (baseUrl == null || id == null) {
+		return null;
+	}
 
 	return (
 		<Fragment>
@@ -52,7 +54,7 @@ function createAnalyticsScript(baseUrl: string, id: number): void {
 	_paq.push(["setSiteId", id]);
 	const d = document,
 		g = d.createElement("script"),
-		s = d.getElementsByTagName("script")[0];
+		s = d.querySelectorAll("script")[0];
 	g.async = true;
 	g.src = `${u}matomo.js`;
 	s?.parentNode?.insertBefore(g, s);

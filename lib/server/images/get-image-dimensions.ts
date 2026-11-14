@@ -15,11 +15,15 @@ export async function getImageDimensions(
 	if (URL.canParse(src)) {
 		const response = await fetch(src);
 
-		if (!response.ok || response.body == null) return null;
+		if (!response.ok || response.body == null) {
+			return null;
+		}
 
 		const contentType = response.headers.get("content-type");
 
-		if (!contentType?.startsWith("image/")) return null;
+		if (!contentType?.startsWith("image/")) {
+			return null;
+		}
 
 		const dimensions =
 			contentType === "image/svg+xml"
@@ -53,6 +57,7 @@ async function getSvgDimensions(stream: ReadableStream<Uint8Array>) {
 		chunks.push(...chunk);
 		const text = decoder.decode(new Uint8Array(chunks));
 
+		/* eslint-disable unicorn/prefer-number-coercion -- svg lengths can have units, e.g. `100px`, which `Number()` does not parse. */
 		const widthMatch = widthRegex.exec(text);
 		const heightMatch = heightRegex.exec(text);
 
@@ -71,6 +76,7 @@ async function getSvgDimensions(stream: ReadableStream<Uint8Array>) {
 				height: Number.parseFloat(viewBoxMatch[4]!) - Number.parseFloat(viewBoxMatch[2]!),
 			};
 		}
+		/* eslint-enable unicorn/prefer-number-coercion */
 	}
 
 	return null;

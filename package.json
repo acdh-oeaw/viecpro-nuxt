@@ -6,27 +6,23 @@
 	"imports": {
 		"#/*": "./*"
 	},
-	"engines": {
-		"node": "^26"
-	},
-	"packageManager": "pnpm@12.18.0",
 	"scripts": {
 		"analyze": "next analyze",
 		"build": "next build",
 		"dev": "next dev",
-		"format:check": "prettier . --cache --cache-location ./.prettiercache --check",
-		"format:fix": "pnpm run format:check --write",
+		"format:check": "oxfmt --check",
+		"format:fix": "oxfmt --write",
 		"generate:bibliography": "node ./scripts/generate-bibliography.ts",
 		"lint:check": "run-p --continue-on-error \"lint:*:check\"",
+		"lint:code:check": "oxlint",
+		"lint:code:fix": "oxlint --fix",
 		"lint:fix": "run-p --continue-on-error \"lint:*:fix\"",
-		"lint:code:check": "eslint .",
-		"lint:code:fix": "pnpm run lint:code:check --fix",
-		"lint:styles:check": "stylelint \"./**/*.css\" --cache --ignore-path ./.gitignore",
-		"lint:styles:fix": "pnpm run lint:styles:check --fix",
 		"preinstall": "npx only-allow pnpm",
 		"prepare": "run-s setup types:prepare",
 		"setup": "is-in-ci || lefthook install",
 		"start": "next start",
+		"styles:check": "stylelint \"./**/*.css\" --cache --ignore-path ./.gitignore",
+		"styles:fix": "pnpm run styles:check --fix",
 		"test": "exit 0",
 		"test:e2e": "playwright test",
 		"test:e2e:codegen": "playwright codegen",
@@ -35,7 +31,7 @@
 		"test:e2e:update-snapshots": "playwright test --update-snapshots",
 		"types:check": "tsc --noEmit",
 		"types:prepare": "next typegen",
-		"validate": "run-p format:check lint:check types:check test test:e2e"
+		"validate": "run-p format:check lint:check styles:check types:check test test:e2e"
 	},
 	"dependencies": {
 		"@acdh-oeaw/keystatic-lib": "^0.8.0",
@@ -76,17 +72,7 @@
 		"valibot": "^1.5.0"
 	},
 	"devDependencies": {
-		"@acdh-oeaw/eslint-config": "^2.0.13",
-		"@acdh-oeaw/eslint-config-next": "^4.0.7",
-		"@acdh-oeaw/eslint-config-node": "^2.0.13",
-		"@acdh-oeaw/eslint-config-playwright": "^2.0.15",
-		"@acdh-oeaw/eslint-config-react": "^3.0.6",
-		"@acdh-oeaw/eslint-config-tailwindcss": "^4.1.4",
-		"@acdh-oeaw/prettier-config": "^2.0.1",
-		"@acdh-oeaw/stylelint-config": "^2.3.2",
-		"@acdh-oeaw/tsconfig": "^1.5.1",
 		"@dotenvx/dotenvx": "^1.75.1",
-		"@next/eslint-plugin-next": "^16.4.6",
 		"@playwright/test": "^1.65.0",
 		"@react-aria/optimize-locales-plugin": "^2.1.0",
 		"@react-types/shared": "^3.37.0",
@@ -99,23 +85,27 @@
 		"@types/node": "^26.6.6",
 		"@types/react": "^19.3.0",
 		"@types/react-dom": "^19.3.0",
+		"@x18n/core": "^0.1.14",
 		"axe-core": "^4.14.0",
 		"axe-playwright": "^2.2.2",
 		"babel-plugin-react-compiler": "^1.0.0",
-		"eslint": "^9.39.5",
-		"eslint-config-flat-gitignore": "^2.4.0",
+		"eslint-plugin-better-tailwindcss": "^4.11.0",
 		"eslint-plugin-check-file": "^3.3.2",
-		"globals": "^16.5.0",
+		"eslint-plugin-playwright": "^2.12.2",
+		"eslint-plugin-regexp": "^3.3.3",
 		"is-in-ci": "^2.0.0",
 		"lefthook": "^2.2.2",
 		"npm-run-all2": "^8.0.4",
-		"prettier": "^3.10.1",
+		"oxfmt": "^0.78.0",
+		"oxlint": "^1.93.0",
+		"oxlint-tsgolint": "^7.0.2007",
 		"schema-dts": "^1.1.5",
-		"stylelint": "^16.26.1",
+		"stylelint": "^18.0.0",
+		"stylelint-order": "^8.1.3",
 		"tailwindcss": "^4.3.5",
 		"tailwindcss-animate": "^1.0.7",
 		"tailwindcss-react-aria-components": "^2.2.0",
-		"typescript": "^5.9.3"
+		"typescript": "^7.0.2"
 	},
 	"browserslist": {
 		"development": [
@@ -129,8 +119,11 @@
 			"not op_mini all"
 		]
 	},
-	"prettier": "@acdh-oeaw/prettier-config",
 	"stylelint": {
-		"extends": "@acdh-oeaw/stylelint-config"
-	}
+		"extends": "./config/stylelint/base.json"
+	},
+	"engines": {
+		"node": "^26"
+	},
+	"packageManager": "pnpm@12.18.0"
 }

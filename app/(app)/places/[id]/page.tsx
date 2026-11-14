@@ -2,8 +2,8 @@ import { createUrl, groupBy, isNonEmptyArray, isNonEmptyString } from "@acdh-oea
 import slugify from "@sindresorhus/slugify";
 import { InfoIcon, StickyNoteIcon } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
 import { Errors } from "typesense";
 
@@ -121,9 +121,8 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 								<div>{data.name}</div>
 								{/* eslint-disable-next-line react/jsx-no-literals */}
 								<div>VieCPro-ID: {data.id}</div>
-								{/* eslint-disable-next-line react/jsx-no-literals */}
 								<div>
-									URI:{" "}
+									{"URI: "}
 									<a className="underline hover:no-underline" href={href}>
 										{href}
 									</a>

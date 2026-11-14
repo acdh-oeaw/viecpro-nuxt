@@ -11,7 +11,7 @@ test.describe("app", () => {
 			const body = await response.body();
 
 			// TODO: use toMatchSnapshot
-			expect(body.toString()).toEqual(
+			expect(body.toString()).toStrictEqual(
 				["User-Agent: *", "Disallow: /", "", `Host: ${env.NEXT_PUBLIC_APP_BASE_URL}`, ""].join(
 					"\n",
 				),
@@ -23,7 +23,7 @@ test.describe("app", () => {
 			const body = await response.body();
 
 			// TODO: use toMatchSnapshot
-			expect(body.toString()).toEqual(
+			expect(body.toString()).toStrictEqual(
 				[
 					"User-Agent: *",
 					"Allow: /",
@@ -68,7 +68,7 @@ test.describe("app", () => {
 
 		const i18n = await createI18n(defaultLocale);
 
-		expect(body.toString()).toEqual(
+		expect(body.toString()).toStrictEqual(
 			JSON.stringify({
 				name: i18n.t("metadata.manifest.name"),
 				short_name: i18n.t("metadata.manifest.short-name"),
@@ -89,14 +89,14 @@ test.describe("app", () => {
 		const response = await request.get("/favicon.ico");
 		const status = response.status();
 
-		expect(status).toEqual(200);
+		expect(status).toBe(200);
 	});
 
 	test("should serve an apple favicon", async ({ request }) => {
 		const response = await request.get("/apple-icon.png");
 		const status = response.status();
 
-		expect(status).toEqual(200);
+		expect(status).toBe(200);
 	});
 
 	test("should skip to main content with skip-link", async ({ createIndexPage }) => {

@@ -24,16 +24,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	paths.forEach((path) => {
 		const route = path.slice(0, -"/page.tsx".length);
 
-		if (route === "[...notfound]") return;
+		if (route === "[...notfound]") {
+			return;
+		}
 
 		const segments = [];
 
 		for (const segment of route.split("/")) {
 			/** Dynamic routes. */
-			if (segment.startsWith("[") && segment.endsWith("]")) return;
+			if (segment.startsWith("[") && segment.endsWith("]")) {
+				return;
+			}
 
 			/** Route groups. */
-			if (segment.startsWith("(") && segment.endsWith(")")) continue;
+			if (segment.startsWith("(") && segment.endsWith(")")) {
+				continue;
+			}
 
 			segments.push(segment);
 		}
@@ -47,7 +53,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		.export({ include_fields: "id" });
 
 	for (const line of courts.split("\n")) {
-		if (line === "") continue;
+		if (line === "") {
+			continue;
+		}
 		const entry = JSON.parse(line) as { id: string };
 		routes.push(`/courts/${entry.id}`);
 	}
@@ -58,7 +66,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		.export({ include_fields: "id" });
 
 	for (const line of institutions.split("\n")) {
-		if (line === "") continue;
+		if (line === "") {
+			continue;
+		}
 		const entry = JSON.parse(line) as { id: string };
 		routes.push(`/institutions/${entry.id}`);
 	}
@@ -69,7 +79,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		.export({ include_fields: "id" });
 
 	for (const line of persons.split("\n")) {
-		if (line === "") continue;
+		if (line === "") {
+			continue;
+		}
 		const entry = JSON.parse(line) as { id: string };
 		routes.push(`/persons/${entry.id}`);
 	}
@@ -80,7 +92,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		.export({ include_fields: "id" });
 
 	for (const line of places.split("\n")) {
-		if (line === "") continue;
+		if (line === "") {
+			continue;
+		}
 		const entry = JSON.parse(line) as { id: string };
 		routes.push(`/places/${entry.id}`);
 	}

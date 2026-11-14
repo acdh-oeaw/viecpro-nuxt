@@ -8,9 +8,9 @@ import { HierarchyVisualisation } from "#/app/(app)/hierarchy/_components/hierar
 import { SearchFilterPanel } from "#/app/(app)/hierarchy/_components/search-filter-panel.tsx";
 import { getAutocompleteData } from "#/app/(app)/hierarchy/_lib/autocomplete.ts";
 import {
+	type SearchFilters,
 	getSearchFilters,
 	getSearchResults,
-	type SearchFilters,
 } from "#/app/(app)/hierarchy/_lib/hierarchy.ts";
 import { Link } from "#/components/link.tsx";
 import { LoadingIndicator } from "#/components/loading-indicator.tsx";
@@ -84,7 +84,9 @@ async function SearchPanel(props: SearchPanelProps): Promise<ReactNode> {
 	const autocomplete = await autocompletePromise;
 
 	function getGraphOptions() {
-		if (!isEnabled) return [];
+		if (!isEnabled) {
+			return [];
+		}
 
 		switch (searchFilters.kind!) {
 			case "institution": {

@@ -2,9 +2,9 @@
 
 import type { ReactNode } from "react";
 import {
-	OverlayArrow,
 	Tooltip as AriaTooltip,
 	type TooltipProps as AriaTooltipProps,
+	OverlayArrow,
 } from "react-aria-components";
 
 export { TooltipTrigger } from "react-aria-components";

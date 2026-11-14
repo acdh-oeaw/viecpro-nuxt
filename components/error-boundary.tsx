@@ -1,7 +1,7 @@
 "use client";
 
 import { assert } from "@acdh-oeaw/lib";
-import { Component, createContext, type ErrorInfo, type ReactNode, use } from "react";
+import { Component, type ErrorInfo, type ReactNode, createContext, use } from "react";
 
 interface ErrorBoundaryContextValue {
 	error: Error;
@@ -51,11 +51,12 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 	static getDerivedStateFromError(error: unknown) {
 		return {
 			status: "error",
+			// eslint-disable-next-line unicorn/no-instanceof-builtins -- `Error.isError` is not in the targeted `lib` yet.
 			error: error instanceof Error ? error : new Error(`Error: ${String(error)}`),
 		};
 	}
 
-	componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+	override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
 		this.props.onError?.(error, errorInfo);
 	}
 
@@ -63,7 +64,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 		this.setState(initialState);
 	}
 
-	render() {
+	override render() {
 		if (this.state.status === "error") {
 			return (
 				// eslint-disable-next-line @typescript-eslint/unbound-method

@@ -8,8 +8,8 @@ import {
 import slugify from "@sindresorhus/slugify";
 import { InfoIcon, NetworkIcon, StickyNoteIcon } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
 import { Errors } from "typesense";
 
@@ -138,9 +138,8 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 								<div>{data.name}</div>
 								{/* eslint-disable-next-line react/jsx-no-literals */}
 								<div>VieCPro-ID: {data.id}</div>
-								{/* eslint-disable-next-line react/jsx-no-literals */}
 								<div>
-									URI:{" "}
+									{"URI: "}
 									<a className="underline hover:no-underline" href={href}>
 										{href}
 									</a>

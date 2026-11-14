@@ -116,7 +116,7 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 											id: node.data.meta.pk,
 										}),
 									)}`}
-									// @ts-expect-error `transform` is valid on SVGAElement (but not HTMLAnchorElement)
+									// @ts-expect-error -- `transform` is valid on SVGAElement (but not HTMLAnchorElement)
 									transform={`translate(${String(node.y * dimensions.boundedWidth)},${String(node.x * dimensions.boundedHeight)})`}
 								>
 									<circle fill={getNodeColor(node)} r={3} />

@@ -8,8 +8,8 @@ import { SearchDateRangeSlider } from "#/app/(app)/search/_components/search-dat
 import { SearchEmptyDateCheckbox } from "#/app/(app)/search/_components/search-empty-date-checkbox.tsx";
 import { SearchFacets } from "#/app/(app)/search/_components/search-facets.tsx";
 import { SearchTextField } from "#/app/(app)/search/_components/search-text-field.tsx";
-import { SidePanel } from "#/app/(app)/search/_components/side-panel.tsx";
 import { SidePanelToggle } from "#/app/(app)/search/_components/side-panel-toggle.tsx";
+import { SidePanel } from "#/app/(app)/search/_components/side-panel.tsx";
 import type {
 	Court,
 	FacetField,

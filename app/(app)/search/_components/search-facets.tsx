@@ -8,32 +8,35 @@ import { Button, Input, Label, SearchField } from "react-aria-components";
 import {
 	type FacetField as CourtFacetField,
 	type FacetValueCount as CourtFacetValueCount,
-	getSearchFacetValues as getCourtSearchFacetValues,
 	type SearchFilters as CourtSearchFilters,
+	getSearchFacetValues as getCourtSearchFacetValues,
 } from "#/app/(app)/search/courts/_lib/search.ts";
 import {
 	type FacetField as InstitutionFacetField,
 	type FacetValueCount as InstitutionFacetValueCount,
-	getSearchFacetValues as getInstitutionSearchFacetValues,
 	type SearchFilters as InstitutionSearchFilters,
+	getSearchFacetValues as getInstitutionSearchFacetValues,
 } from "#/app/(app)/search/institutions/_lib/search.ts";
 import {
 	type FacetField as PersonFacetField,
 	type FacetValueCount as PersonFacetValueCount,
-	getSearchFacetValues as getPersonSearchFacetValues,
 	type SearchFilters as PersonSearchFilters,
+	getSearchFacetValues as getPersonSearchFacetValues,
 } from "#/app/(app)/search/persons/_lib/search.ts";
 import {
 	type FacetField as PlaceFacetField,
 	type FacetValueCount as PlaceFacetValueCount,
-	getSearchFacetValues as getPlaceSearchFacetValues,
 	type SearchFilters as PlaceSearchFilters,
+	getSearchFacetValues as getPlaceSearchFacetValues,
 } from "#/app/(app)/search/places/_lib/search.ts";
 import { defaultFacets, maxFacets } from "#/config/search.config.ts";
 
 // FIXME: shared types
 type FacetValueCount =
-	CourtFacetValueCount | InstitutionFacetValueCount | PersonFacetValueCount | PlaceFacetValueCount;
+	| CourtFacetValueCount
+	| InstitutionFacetValueCount
+	| PersonFacetValueCount
+	| PlaceFacetValueCount;
 
 type SearchFacetsProps = {
 	filterLabel: ReactNode;
@@ -165,7 +168,7 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 					.slice(0, isShowingMore ? maxFacets : defaultFacets)
 					.map(({ count, isSelected: _isSelected, value }) => {
 						function onChange(event: ChangeEvent<HTMLInputElement>): void {
-							// @ts-expect-error TODO: improve types
+							// @ts-expect-error -- TODO: improve types
 							onFacetChange(name, value, event.currentTarget.checked);
 						}
 

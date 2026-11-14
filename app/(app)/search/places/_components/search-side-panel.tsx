@@ -6,8 +6,8 @@ import { type ReactNode, useOptimistic, useTransition } from "react";
 
 import { SearchFacets } from "#/app/(app)/search/_components/search-facets.tsx";
 import { SearchTextField } from "#/app/(app)/search/_components/search-text-field.tsx";
-import { SidePanel } from "#/app/(app)/search/_components/side-panel.tsx";
 import { SidePanelToggle } from "#/app/(app)/search/_components/side-panel-toggle.tsx";
+import { SidePanel } from "#/app/(app)/search/_components/side-panel.tsx";
 import type {
 	FacetField,
 	Place,

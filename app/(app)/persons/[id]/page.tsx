@@ -8,8 +8,8 @@ import {
 import slugify from "@sindresorhus/slugify";
 import { InfoIcon, NetworkIcon, StickyNoteIcon } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
 import { Errors } from "typesense";
 
@@ -141,9 +141,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								<div>{[data.firstName, data.name].filter(isNonEmptyString).join(" ")}</div>
 								{/* eslint-disable-next-line react/jsx-no-literals */}
 								<div>VieCPro-ID: {data.id}</div>
-								{/* eslint-disable-next-line react/jsx-no-literals */}
 								<div>
-									URI:{" "}
+									{"URI: "}
 									<a className="underline hover:no-underline" href={href}>
 										{href}
 									</a>
@@ -328,7 +327,9 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								{data.placeOfBirth?.name
 									? t.rich("in-place", {
 											place() {
-												if (!data.placeOfBirth) return null;
+												if (!data.placeOfBirth) {
+													return null;
+												}
 												const href = `/places/${String(data.placeOfBirth.id)}`;
 												return (
 													<Link className="underline hover:no-underline" href={href}>
@@ -346,7 +347,9 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								{data.placeOfDeath?.name
 									? t.rich("in-place", {
 											place() {
-												if (!data.placeOfDeath) return null;
+												if (!data.placeOfDeath) {
+													return null;
+												}
 												const href = `/places/${String(data.placeOfDeath.id)}`;
 												return (
 													<Link className="underline hover:no-underline" href={href}>

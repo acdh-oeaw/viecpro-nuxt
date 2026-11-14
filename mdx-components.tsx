@@ -1,5 +1,5 @@
-import { Link as ContentLink } from "#/components/content/link.tsx";
 import { LinkButton } from "#/components/content/link-button.tsx";
+import { Link as ContentLink } from "#/components/content/link.tsx";
 import { Link } from "#/components/link.tsx";
 import { ServerImage as Image } from "#/components/server-image.tsx";
 

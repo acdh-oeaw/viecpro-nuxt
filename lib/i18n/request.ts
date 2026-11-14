@@ -2,7 +2,7 @@ import "server-only";
 
 import { getRequestConfig } from "next-intl/server";
 
-import { defaultLocale, formats, type IntlMessages } from "#/config/i18n.config.ts";
+import { type IntlMessages, defaultLocale, formats } from "#/config/i18n.config.ts";
 
 export default getRequestConfig(async () => {
 	const locale = defaultLocale;

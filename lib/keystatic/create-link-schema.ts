@@ -1,4 +1,4 @@
-import { createAssetOptions, type Paths, withI18nPrefix } from "@acdh-oeaw/keystatic-lib";
+import { type Paths, createAssetOptions, withI18nPrefix } from "@acdh-oeaw/keystatic-lib";
 import { fields } from "@keystatic/core";
 
 import type { Locale } from "#/config/i18n.config.ts";

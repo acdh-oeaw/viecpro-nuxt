@@ -1,0 +1,67 @@
+import { getDefaultSelectors } from "eslint-plugin-better-tailwindcss/api/defaults";
+import { defineConfig } from "oxlint";
+
+/**
+ * Settings are _not_ inherited through `extends` - the entry config's `settings` is used verbatim. Exported here so
+ * `oxlint.config.ts` can compose them; declaring a `settings` key in this file would be silently dropped.
+ */
+export const settings = {
+	/** Custom `selectors` replace the plugin's defaults instead of extending them, so the defaults are spread back in. */
+	selectors: [
+		...getDefaultSelectors(),
+		{
+			kind: "callee",
+			name: "^cn$",
+			match: [{ type: "strings" }, { type: "objectValues" }],
+		},
+		{
+			kind: "callee",
+			name: "^styles$",
+			match: [
+				{ type: "strings" },
+				{ type: "objectValues", path: "^base$" },
+				{ type: "objectValues", path: "^variants.*$" },
+				{ type: "objectValues", path: "^combinations\\[\\d+\\]\\[1\\]$" },
+			],
+		},
+	],
+};
+
+const config = defineConfig({
+	jsPlugins: [{ name: "better-tailwindcss", specifier: "eslint-plugin-better-tailwindcss" }],
+	rules: {
+		/**
+		 * ================================================================================================================
+		 * Correctness.
+		 * ================================================================================================================
+		 */
+
+		/** `ignore` takes unanchored regular expressions, so a bare `lead` would also ignore every `leading-*` class. */
+		"better-tailwindcss/no-unknown-classes": [
+			"error",
+			{ ignore: ["^lead$", "^not-prose$", "^not-richtext$"] },
+		],
+		"better-tailwindcss/no-conflicting-classes": "error",
+		"better-tailwindcss/no-restricted-classes": "error",
+
+		/**
+		 * ================================================================================================================
+		 * Style.
+		 * ================================================================================================================
+		 */
+
+		"better-tailwindcss/enforce-canonical-classes": "error",
+		"better-tailwindcss/enforce-consistent-class-order": ["error", { order: "strict" }],
+		"better-tailwindcss/enforce-consistent-important-position": "off",
+		"better-tailwindcss/enforce-consistent-line-wrapping": "off",
+		"better-tailwindcss/enforce-consistent-variable-syntax": "error",
+		"better-tailwindcss/enforce-consistent-variant-order": "error",
+		"better-tailwindcss/enforce-logical-properties": "error",
+		"better-tailwindcss/enforce-shorthand-classes": "off",
+		"better-tailwindcss/no-deprecated-classes": "error",
+		"better-tailwindcss/no-duplicate-classes": "error",
+		"better-tailwindcss/no-unnecessary-whitespace": "error",
+	},
+});
+
+export default config;

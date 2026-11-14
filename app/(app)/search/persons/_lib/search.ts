@@ -124,7 +124,9 @@ function generateFilter(searchFilters: SearchFilters) {
 	for (const facetField of facetFields) {
 		const values = searchFilters[facetField];
 
-		if (values.length === 0) continue;
+		if (values.length === 0) {
+			continue;
+		}
 
 		facetFilters.set(
 			facetField,
@@ -141,7 +143,9 @@ function generateFilter(searchFilters: SearchFilters) {
 		const filters = [dateRangeFilter];
 
 		facetFilters.forEach((filter, facetField) => {
-			if (facetField === omit) return;
+			if (facetField === omit) {
+				return;
+			}
 
 			filters.push(filter);
 		});
@@ -153,9 +157,15 @@ function generateFilter(searchFilters: SearchFilters) {
 }
 
 function sortFacets(a: FacetValueCount, z: FacetValueCount) {
-	if (a.isSelected && !z.isSelected) return -1;
-	if (!a.isSelected && z.isSelected) return 1;
-	if (a.count !== z.count) return z.count - a.count;
+	if (a.isSelected && !z.isSelected) {
+		return -1;
+	}
+	if (!a.isSelected && z.isSelected) {
+		return 1;
+	}
+	if (a.count !== z.count) {
+		return z.count - a.count;
+	}
 	return a.value.localeCompare(z.value);
 }
 

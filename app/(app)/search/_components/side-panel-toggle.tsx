@@ -40,9 +40,9 @@ export function SidePanelToggle(props: SidePanelToggleProps): ReactNode {
 			</Button>
 			<Tooltip placement="right">
 				<span className="inline-flex items-center gap-x-2">
-					{isOpen ? closeLabel : openLabel} {/* eslint-disable-next-line react/jsx-no-literals */}
+					{isOpen ? closeLabel : openLabel}{" "}
 					<kbd className="rounded-sm border border-white px-1 font-body text-xs/4 font-medium opacity-75">
-						⌘+K
+						{"⌘+K"}
 					</kbd>
 				</span>
 			</Tooltip>

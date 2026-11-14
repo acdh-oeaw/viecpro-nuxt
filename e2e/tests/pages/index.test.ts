@@ -20,7 +20,7 @@ test.describe("index page", () => {
 			await indexPage.goto();
 
 			const { getViolations } = await createAccessibilityScanner();
-			expect(await getViolations()).toEqual([]);
+			expect(await getViolations()).toStrictEqual([]);
 		}
 	});
 

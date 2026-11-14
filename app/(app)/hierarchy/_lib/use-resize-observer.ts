@@ -13,10 +13,14 @@ export function useResizeObserver(params: UseResizeObserverParams): ResizeObserv
 	const [entry, setEntry] = useState<ResizeObserverEntry | null>(null);
 
 	useEffect(() => {
-		if (element == null) return;
+		if (element == null) {
+			return;
+		}
 
 		const observer = new ResizeObserver(([entry]) => {
-			if (entry == null) return;
+			if (entry == null) {
+				return;
+			}
 
 			setEntry(entry);
 		});
