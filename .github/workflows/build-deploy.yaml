@@ -94,11 +94,14 @@ jobs:
           #   type=semver,pattern={{major}}.{{minor}}
           #   type=raw,value=latest
 
-      - name: Read pnpm version from package.json
+      # resolves `devEngines.packageManager.version` in `package.json`, which may be a semver range.
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Read resolved pnpm version
         id: pnpm
         run: |
-          # exact version or semver range. fails when the field is missing.
-          VERSION=$(jq -re '.devEngines.packageManager.version' package.json)
+          VERSION=$(pnpm --version)
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image

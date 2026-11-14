@@ -8,7 +8,7 @@
 # build
 FROM node:26-alpine AS build
 
-# exact version or semver range, from `devEngines.packageManager.version` in `package.json`.
+# ci passes the version resolved from `devEngines.packageManager.version` in `package.json`.
 ARG PNPM_VERSION
 RUN npm install --global "pnpm@${PNPM_VERSION:?build arg PNPM_VERSION is required}"
 
