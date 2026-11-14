@@ -5,37 +5,53 @@ import { useFormatter } from "next-intl";
 import { type ChangeEvent, type ReactNode, useEffect, useId, useState } from "react";
 import { Button, Input, Label, SearchField } from "react-aria-components";
 
-import {
-	type FacetField as CourtFacetField,
-	type FacetValueCount as CourtFacetValueCount,
-	type SearchFilters as CourtSearchFilters,
-	getSearchFacetValues as getCourtSearchFacetValues,
+import type {
+	FacetField as CourtFacetField,
+	FacetValueCount as CourtFacetValueCount,
+	SearchFilters as CourtSearchFilters,
 } from "#/app/(app)/search/courts/_lib/search.ts";
-import {
-	type FacetField as FunctionFacetField,
-	type FacetValueCount as FunctionFacetValueCount,
-	type SearchFilters as FunctionSearchFilters,
-	getSearchFacetValues as getFunctionSearchFacetValues,
+import type {
+	FacetField as FunctionFacetField,
+	FacetValueCount as FunctionFacetValueCount,
+	SearchFilters as FunctionSearchFilters,
 } from "#/app/(app)/search/functions/_lib/search.ts";
-import {
-	type FacetField as InstitutionFacetField,
-	type FacetValueCount as InstitutionFacetValueCount,
-	type SearchFilters as InstitutionSearchFilters,
-	getSearchFacetValues as getInstitutionSearchFacetValues,
+import type {
+	FacetField as InstitutionFacetField,
+	FacetValueCount as InstitutionFacetValueCount,
+	SearchFilters as InstitutionSearchFilters,
 } from "#/app/(app)/search/institutions/_lib/search.ts";
-import {
-	type FacetField as PersonFacetField,
-	type FacetValueCount as PersonFacetValueCount,
-	type SearchFilters as PersonSearchFilters,
-	getSearchFacetValues as getPersonSearchFacetValues,
+import type {
+	FacetField as PersonFacetField,
+	FacetValueCount as PersonFacetValueCount,
+	SearchFilters as PersonSearchFilters,
 } from "#/app/(app)/search/persons/_lib/search.ts";
-import {
-	type FacetField as PlaceFacetField,
-	type FacetValueCount as PlaceFacetValueCount,
-	type SearchFilters as PlaceSearchFilters,
-	getSearchFacetValues as getPlaceSearchFacetValues,
+import type {
+	FacetField as PlaceFacetField,
+	FacetValueCount as PlaceFacetValueCount,
+	SearchFilters as PlaceSearchFilters,
 } from "#/app/(app)/search/places/_lib/search.ts";
 import { defaultFacets, maxFacets } from "#/config/search.config.ts";
+
+/**
+ * Lazy-load search modules, so the typesense client is not included in the initial client bundle.
+ */
+const searchModules = {
+	court: () => {
+		return import("#/app/(app)/search/courts/_lib/search.ts");
+	},
+	function: () => {
+		return import("#/app/(app)/search/functions/_lib/search.ts");
+	},
+	institution: () => {
+		return import("#/app/(app)/search/institutions/_lib/search.ts");
+	},
+	person: () => {
+		return import("#/app/(app)/search/persons/_lib/search.ts");
+	},
+	place: () => {
+		return import("#/app/(app)/search/places/_lib/search.ts");
+	},
+};
 
 // FIXME: shared types
 type FacetValueCount =
@@ -124,26 +140,31 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 		let isCanceled = false;
 
 		async function run() {
-			function getSearchFacetValues() {
+			async function getSearchFacetValues() {
 				switch (kind) {
 					case "court": {
-						return getCourtSearchFacetValues(searchFilters, name, filterSearchTerm);
+						const { getSearchFacetValues } = await searchModules.court();
+						return getSearchFacetValues(searchFilters, name, filterSearchTerm);
 					}
 
 					case "function": {
-						return getFunctionSearchFacetValues(searchFilters, name, filterSearchTerm);
+						const { getSearchFacetValues } = await searchModules.function();
+						return getSearchFacetValues(searchFilters, name, filterSearchTerm);
 					}
 
 					case "institution": {
-						return getInstitutionSearchFacetValues(searchFilters, name, filterSearchTerm);
+						const { getSearchFacetValues } = await searchModules.institution();
+						return getSearchFacetValues(searchFilters, name, filterSearchTerm);
 					}
 
 					case "person": {
-						return getPersonSearchFacetValues(searchFilters, name, filterSearchTerm);
+						const { getSearchFacetValues } = await searchModules.person();
+						return getSearchFacetValues(searchFilters, name, filterSearchTerm);
 					}
 
 					case "place": {
-						return getPlaceSearchFacetValues(searchFilters, name, filterSearchTerm);
+						const { getSearchFacetValues } = await searchModules.place();
+						return getSearchFacetValues(searchFilters, name, filterSearchTerm);
 					}
 				}
 			}
