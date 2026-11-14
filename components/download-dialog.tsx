@@ -17,27 +17,12 @@ import {
 } from "react-aria-components";
 import { useOverlayTriggerState } from "react-stately";
 
-import {
-	type SearchFilters as CourtSearchFilters,
-	downloadCollection as downloadCourts,
-	isDownloadUnsupported as isCourtsDownloadUnsupported,
-} from "#/app/(app)/search/courts/_lib/search.ts";
-import {
-	type SearchFilters as InstitutionSearchFilters,
-	downloadCollection as downloadInstitutions,
-	isDownloadUnsupported as isInstitutionsDownloadUnsupported,
-} from "#/app/(app)/search/institutions/_lib/search.ts";
-import {
-	type SearchFilters as PersonSearchFilters,
-	downloadCollection as downloadPersons,
-	isDownloadUnsupported as isPersonsDownloadUnsupported,
-} from "#/app/(app)/search/persons/_lib/search.ts";
-import {
-	type SearchFilters as PlaceSearchFilters,
-	downloadCollection as downloadPlaces,
-	isDownloadUnsupported as isPlacesDownloadUnsupported,
-} from "#/app/(app)/search/places/_lib/search.ts";
+import type { SearchFilters as CourtSearchFilters } from "#/app/(app)/search/courts/_lib/search.ts";
+import type { SearchFilters as InstitutionSearchFilters } from "#/app/(app)/search/institutions/_lib/search.ts";
+import type { SearchFilters as PersonSearchFilters } from "#/app/(app)/search/persons/_lib/search.ts";
+import type { SearchFilters as PlaceSearchFilters } from "#/app/(app)/search/places/_lib/search.ts";
 import { Tooltip, TooltipTrigger } from "#/components/tooltip.tsx";
+import { isDownloadUnsupported } from "#/config/search.config.ts";
 import { downloadJson } from "#/lib/download-json.ts";
 
 type DownloadDialogProps = {
@@ -55,7 +40,9 @@ type DownloadDialogProps = {
 	unsupportedLabel: ReactNode;
 	xlsxLabel: string;
 	xlsxShortLabel: string;
-} & (
+} & SearchTarget;
+
+type SearchTarget =
 	| {
 			kind: "court";
 			searchFilters: CourtSearchFilters;
@@ -71,8 +58,34 @@ type DownloadDialogProps = {
 	| {
 			kind: "place";
 			searchFilters: PlaceSearchFilters;
-	  }
-);
+	  };
+
+/**
+ * Lazy-load search modules, so the typesense client is not included in the initial client bundle.
+ */
+async function getSearchResults(target: SearchTarget, count: number) {
+	switch (target.kind) {
+		case "court": {
+			const { downloadCollection } = await import("#/app/(app)/search/courts/_lib/search.ts");
+			return downloadCollection(target.searchFilters, count);
+		}
+
+		case "institution": {
+			const { downloadCollection } = await import("#/app/(app)/search/institutions/_lib/search.ts");
+			return downloadCollection(target.searchFilters, count);
+		}
+
+		case "person": {
+			const { downloadCollection } = await import("#/app/(app)/search/persons/_lib/search.ts");
+			return downloadCollection(target.searchFilters, count);
+		}
+
+		case "place": {
+			const { downloadCollection } = await import("#/app/(app)/search/places/_lib/search.ts");
+			return downloadCollection(target.searchFilters, count);
+		}
+	}
+}
 
 export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 	const {
@@ -83,10 +96,8 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 		fileName,
 		jsonLabel,
 		jsonShortLabel,
-		kind,
 		label,
 		needsConfirmation,
-		searchFilters,
 		submitLabel,
 		title,
 		unsupportedLabel,
@@ -97,53 +108,13 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 	const state = useOverlayTriggerState({});
 	const [action, setAction] = useState<"json" | "xlsx" | null>(null);
 
-	function isDownloadUnsupported() {
-		switch (kind) {
-			case "court": {
-				return isCourtsDownloadUnsupported(count);
-			}
-
-			case "institution": {
-				return isInstitutionsDownloadUnsupported(count);
-			}
-
-			case "person": {
-				return isPersonsDownloadUnsupported(count);
-			}
-
-			case "place": {
-				return isPlacesDownloadUnsupported(count);
-			}
-		}
-	}
-
-	async function getSearchResults() {
-		switch (kind) {
-			case "court": {
-				return downloadCourts(searchFilters, count);
-			}
-
-			case "institution": {
-				return downloadInstitutions(searchFilters, count);
-			}
-
-			case "person": {
-				return downloadPersons(searchFilters, count);
-			}
-
-			case "place": {
-				return downloadPlaces(searchFilters, count);
-			}
-		}
-	}
-
 	const [status, setStatus] = useState<"idle" | "pending">("idle");
 
 	async function download(action: "json" | "xlsx") {
 		setStatus("pending");
 
 		try {
-			const data = await getSearchResults();
+			const data = await getSearchResults(props, count);
 
 			switch (action) {
 				case "json": {
@@ -265,10 +236,10 @@ export function DownloadDialog(props: DownloadDialogProps): ReactNode {
 										/>
 									</Button>
 									<div className="text-brand-600">
-										{!isDownloadUnsupported() ? children : unsupportedLabel}
+										{!isDownloadUnsupported(count) ? children : unsupportedLabel}
 									</div>
 									<footer className="mt-2 flex justify-end gap-x-2">
-										{!isDownloadUnsupported() ? (
+										{!isDownloadUnsupported(count) ? (
 											<Button
 												className="inline-flex items-center gap-x-2 rounded-md border border-brand-600 bg-brand-600 p-2 text-sm font-medium text-white transition hover:border-brand-700 hover:bg-brand-700 pressed:border-brand-800 pressed:bg-brand-800"
 												onPress={chain(onSubmit, close)}
