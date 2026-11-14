@@ -1,10 +1,9 @@
 {
-	"$schema": "https://www.schemastore.org/tsconfig",
+	"$schema": "https://www.schemastore.org/tsconfig.json",
 	"compilerOptions": {
 		"allowArbitraryExtensions": true,
 		"allowImportingTsExtensions": true,
 		"allowJs": false,
-		"customConditions": ["react-server"],
 		"erasableSyntaxOnly": true,
 		"incremental": true,
 		"isolatedModules": true,
