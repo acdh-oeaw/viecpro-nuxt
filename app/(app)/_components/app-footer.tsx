@@ -34,7 +34,7 @@ export function AppFooter(): ReactNode {
 	const acdhLinks = {
 		de: {
 			href: "https://www.oeaw.ac.at/de/acdh/",
-			label: "Austrian Centre for Digital Humanities and Cultural Heritage",
+			label: "Austrian Centre for Digital Humanities",
 		},
 	} satisfies Record<Locale, { href: string; label: string }>;
 
@@ -48,7 +48,7 @@ export function AppFooter(): ReactNode {
 		},
 		acdhCh: {
 			href: "https://www.oeaw.ac.at/de/acdh/acdh-ch-home",
-			label: "Austrian Centre for Digital Humanities and Cultural Heritage (ACDH-CH)",
+			label: "Austrian Centre for Digital Humanities (ACDH)",
 			image: logoAcdhCh,
 			lang: "en",
 			className: "h-8",

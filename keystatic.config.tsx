@@ -40,7 +40,7 @@ export default config({
 			mark() {
 				return <Logo />;
 			},
-			name: "ACDH-CH",
+			name: "ACDH",
 		},
 		navigation: {
 			Pages: locales.map((locale) => {
