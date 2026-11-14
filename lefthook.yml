@@ -3,21 +3,23 @@ pre-commit:
   jobs:
     - name: scripts
       glob: "*.{js,ts,tsx}"
-      stage_fixed: true
       group:
         piped: true
         jobs:
           - run: pnpm exec eslint --fix {staged_files}
+            stage_fixed: true
           - run: pnpm exec prettier --cache --cache-location ./.prettiercache --write {staged_files}
+            stage_fixed: true
 
     - name: styles
       glob: "*.css"
-      stage_fixed: true
       group:
         piped: true
         jobs:
           - run: pnpm exec stylelint --cache --fix {staged_files}
+            stage_fixed: true
           - run: pnpm exec prettier --cache --cache-location ./.prettiercache --write {staged_files}
+            stage_fixed: true
 
     - name: other
       exclude: "*.{css,js,ts,tsx}"
