@@ -1,6 +1,6 @@
 import { createUrl, request } from "@acdh-oeaw/lib";
 
-import { env } from "@/config/env.config";
+import { env } from "#/config/env.config.ts";
 
 interface AutocompleteData {
 	context: Array<{

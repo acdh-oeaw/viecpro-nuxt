@@ -3,12 +3,12 @@
 import { createUrlSearchParams, includes } from "@acdh-oeaw/lib";
 import { type ReactNode, useOptimistic, useTransition } from "react";
 
-import { DirectionSelect } from "@/app/(app)/hierarchy/_components/direction-select";
-import { EntityComboBox } from "@/app/(app)/hierarchy/_components/entity-combobox";
-import { GraphTypeSelect } from "@/app/(app)/hierarchy/_components/graph-type-select";
-import type { AutocompleteItem } from "@/app/(app)/hierarchy/_lib/autocomplete";
-import { graphs, type SearchFilters } from "@/app/(app)/hierarchy/_lib/hierarchy";
-import { useRouter } from "@/lib/i18n/navigation";
+import { DirectionSelect } from "#/app/(app)/hierarchy/_components/direction-select.tsx";
+import { EntityComboBox } from "#/app/(app)/hierarchy/_components/entity-combobox.tsx";
+import { GraphTypeSelect } from "#/app/(app)/hierarchy/_components/graph-type-select.tsx";
+import type { AutocompleteItem } from "#/app/(app)/hierarchy/_lib/autocomplete.ts";
+import { type SearchFilters, graphs } from "#/app/(app)/hierarchy/_lib/hierarchy.ts";
+import { useRouter } from "#/lib/i18n/navigation.ts";
 
 interface SearchFilterPanelProps {
 	directionOptions: Array<{ id: string; label: string }>;

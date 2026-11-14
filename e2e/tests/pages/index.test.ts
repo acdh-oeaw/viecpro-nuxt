@@ -1,5 +1,5 @@
-import { locales } from "@/config/i18n.config";
-import { expect, test } from "@/e2e/lib/test";
+import { locales } from "#/config/i18n.config.ts";
+import { expect, test } from "#/e2e/lib/test.ts";
 
 test.describe("index page", () => {
 	test("should have document title", async ({ createIndexPage }) => {
@@ -20,7 +20,7 @@ test.describe("index page", () => {
 			await indexPage.goto();
 
 			const { getViolations } = await createAccessibilityScanner();
-			expect(await getViolations()).toEqual([]);
+			expect(await getViolations()).toStrictEqual([]);
 		}
 	});
 

@@ -2,8 +2,8 @@
 
 import type { ReactNode } from "react";
 
-import { Link, type LinkProps } from "@/components/link";
-import { useNavLink } from "@/lib/use-nav-link";
+import { Link, type LinkProps } from "#/components/link.tsx";
+import { useNavLink } from "#/lib/use-nav-link.ts";
 
 export interface NavLinkProps extends LinkProps {}
 

@@ -1,0 +1,27 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: scripts
+      glob: "*.{js,ts,tsx}"
+      group:
+        piped: true
+        jobs:
+          - run: pnpm exec oxlint --fix --no-error-on-unmatched-pattern {staged_files}
+            stage_fixed: true
+          - run: pnpm exec oxfmt --no-error-on-unmatched-pattern --write {staged_files}
+            stage_fixed: true
+
+    - name: styles
+      glob: "*.css"
+      group:
+        piped: true
+        jobs:
+          - run: pnpm exec stylelint --cache --fix {staged_files}
+            stage_fixed: true
+          - run: pnpm exec oxfmt --no-error-on-unmatched-pattern --write {staged_files}
+            stage_fixed: true
+
+    - name: other
+      exclude: "*.{css,js,ts,tsx}"
+      stage_fixed: true
+      run: pnpm exec oxfmt --no-error-on-unmatched-pattern --write {staged_files}

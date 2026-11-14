@@ -1,7 +1,7 @@
 import { NotEditable, type ParsedValueForComponentSchema } from "@keystatic/core";
 import type { ReactNode } from "react";
 
-import type { createLinkSchema } from "@/lib/keystatic/create-link-schema";
+import type { createLinkSchema } from "#/lib/keystatic/create-link-schema.ts";
 
 type LinkSchema = ParsedValueForComponentSchema<ReturnType<typeof createLinkSchema>>;
 

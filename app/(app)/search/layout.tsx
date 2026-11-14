@@ -11,10 +11,10 @@ import {
 import { getTranslations } from "next-intl/server";
 import type { FC, ReactNode } from "react";
 
-import { SidePanelProvider } from "@/app/(app)/search/_components/side-panel-provider";
-import { NavLink, type NavLinkProps } from "@/components/nav-link";
-import { Tooltip, TooltipTrigger } from "@/components/tooltip";
-import { createHref } from "@/lib/create-href";
+import { SidePanelProvider } from "#/app/(app)/search/_components/side-panel-provider.tsx";
+import { NavLink, type NavLinkProps } from "#/components/nav-link.tsx";
+import { Tooltip, TooltipTrigger } from "#/components/tooltip.tsx";
+import { createHref } from "#/lib/create-href.ts";
 
 interface SearchLayoutProps {
 	children: ReactNode;

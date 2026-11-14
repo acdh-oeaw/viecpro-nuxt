@@ -1,4 +1,4 @@
-import "@/styles/index.css";
+import "#/styles/index.css";
 
 import { pick } from "@acdh-oeaw/lib";
 import { cn } from "@acdh-oeaw/style-variants";
@@ -8,16 +8,16 @@ import type { ReactNode } from "react";
 import { LocalizedStringProvider as Translations } from "react-aria-components/i18n";
 import { jsonLdScriptProps } from "react-schemaorg";
 
-import { AppFooter } from "@/app/(app)/_components/app-footer";
-import { AppHeader } from "@/app/(app)/_components/app-header";
-import { AppLayout } from "@/app/(app)/_components/app-layout";
-import { Providers } from "@/app/(app)/_components/providers";
-import { TailwindIndicator } from "@/app/(app)/_components/tailwind-indicator";
-import { id } from "@/components/main-content";
-import { SkipLink } from "@/components/skip-link";
-import { env } from "@/config/env.config";
-import { AnalyticsScript } from "@/lib/analytics-script";
-import * as fonts from "@/lib/fonts";
+import { AppFooter } from "#/app/(app)/_components/app-footer.tsx";
+import { AppHeader } from "#/app/(app)/_components/app-header.tsx";
+import { AppLayout } from "#/app/(app)/_components/app-layout.tsx";
+import { Providers } from "#/app/(app)/_components/providers.tsx";
+import { TailwindIndicator } from "#/app/(app)/_components/tailwind-indicator.tsx";
+import { id } from "#/components/main-content.tsx";
+import { SkipLink } from "#/components/skip-link.tsx";
+import { env } from "#/config/env.config.ts";
+import { AnalyticsScript } from "#/lib/analytics-script.tsx";
+import * as fonts from "#/lib/fonts.ts";
 
 interface LocaleLayoutProps {
 	children: ReactNode;

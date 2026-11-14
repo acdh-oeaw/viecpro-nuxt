@@ -11,8 +11,8 @@ import {
 	createHeadingId,
 	createLink,
 	createLinkButton,
-} from "@/lib/keystatic/components";
-// import { createPreviewUrl } from "@/lib/keystatic/create-preview-url";
+} from "#/lib/keystatic/components.tsx";
+// import { createPreviewUrl } from "#/lib/keystatic/create-preview-url.ts";
 
 export const createDocumentation = createCollection("/documentation/", (paths, locale) => {
 	return collection({

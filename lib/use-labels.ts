@@ -1,6 +1,6 @@
 import type { AriaLabelingProps, DOMProps } from "@react-types/shared";
 
-import { useId } from "@/lib/use-id";
+import { useId } from "#/lib/use-id.ts";
 
 /**
  * Copied from `react-aria`, because it currently does not work in server components.

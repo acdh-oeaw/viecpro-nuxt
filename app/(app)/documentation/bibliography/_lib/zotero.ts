@@ -1,7 +1,7 @@
 import { createUrl, createUrlSearchParams, log, request } from "@acdh-oeaw/lib";
 
-import { zoteroGroupId } from "@/config/zotero.config";
-import { parseLinkHeader } from "@/lib/parse-link-header";
+import { zoteroGroupId } from "#/config/zotero.config.ts";
+import { parseLinkHeader } from "#/lib/parse-link-header.ts";
 
 const baseUrl = "https://api.zotero.org";
 const headers = { "Zotero-API-Version": "3" };

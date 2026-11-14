@@ -1,13 +1,13 @@
 import "server-only";
 
-import { createMdxProcessors, run, type TableOfContents } from "@acdh-oeaw/mdx-lib";
+import { type TableOfContents, createMdxProcessors, run } from "@acdh-oeaw/mdx-lib";
 import type { MDXModule } from "mdx/types";
 import { cache } from "react";
 import * as runtime from "react/jsx-runtime";
 
-import type { Locale } from "@/config/i18n.config";
-import { createConfig as createMdxConfig } from "@/config/mdx.config";
-import { useMDXComponents } from "@/mdx-components";
+import type { Locale } from "#/config/i18n.config.ts";
+import { createConfig as createMdxConfig } from "#/config/mdx.config.ts";
+import { useMDXComponents } from "#/mdx-components.tsx";
 
 const createMdxProcessor = createMdxProcessors(createMdxConfig);
 
@@ -28,7 +28,7 @@ export const compileMdx = cache(async function compileMdx<T extends Record<strin
 	return run(vfile, {
 		...runtime,
 		baseUrl,
-		// @ts-expect-error JSX types are not compatible.
+		// @ts-expect-error -- JSX types are not compatible.
 		useMDXComponents,
 	}) as Promise<MdxContent<T>>;
 });

@@ -1,7 +1,7 @@
 import { createUrl, createUrlSearchParams } from "@acdh-oeaw/lib";
 
-import { env } from "@/config/env.config";
-import type { Locale } from "@/config/i18n.config";
+import { env } from "#/config/env.config.ts";
+import type { Locale } from "#/config/i18n.config.ts";
 
 export function createImprintUrl(locale: Locale): URL {
 	return createUrl({

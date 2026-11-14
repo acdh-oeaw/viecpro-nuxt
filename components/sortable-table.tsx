@@ -5,7 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon, SortAscIcon, SortDescIcon } from "lu
 import { Fragment, type ReactNode, useMemo, useState } from "react";
 import { Button } from "react-aria-components";
 
-import { Link } from "@/components/link";
+import { Link } from "#/components/link.tsx";
 
 interface SortableTableProps<T extends object> {
 	columns: Array<{

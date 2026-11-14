@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 
-import { MainContent } from "@/components/main-content";
+import { MainContent } from "#/components/main-content.tsx";
 
 interface NotFoundPageProps extends EmptyObject {}
 

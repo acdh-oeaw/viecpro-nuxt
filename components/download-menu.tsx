@@ -5,8 +5,8 @@ import { DownloadIcon, FileJsonIcon, FileSpreadsheetIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { Button, Menu, MenuItem, MenuTrigger, Popover } from "react-aria-components";
 
-import { Tooltip, TooltipTrigger } from "@/components/tooltip";
-import { downloadJson } from "@/lib/download-json";
+import { Tooltip, TooltipTrigger } from "#/components/tooltip.tsx";
+import { downloadJson } from "#/lib/download-json.ts";
 
 interface DownloadMenuProps<T extends object> {
 	columns: [string, Array<{ label: string; value: string }>];
@@ -42,7 +42,8 @@ export function DownloadMenu<T extends object>(props: DownloadMenuProps<T>): Rea
 			}
 
 			case "xlsx": {
-				const { downloadXlsx } = await import("@/lib/download-xlsx");
+				// eslint-disable-next-line react/todo -- lazy-loaded, the react compiler skips this event handler.
+				const { downloadXlsx } = await import("#/lib/download-xlsx.ts");
 
 				const [sheet, columns] = base;
 

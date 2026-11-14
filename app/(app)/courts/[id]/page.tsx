@@ -8,22 +8,22 @@ import {
 import slugify from "@sindresorhus/slugify";
 import { InfoIcon, NetworkIcon, StickyNoteIcon } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
 import { Errors } from "typesense";
 
-import { getCourt } from "@/app/(app)/courts/[id]/_lib/data";
-import { StatusIndicator } from "@/app/(app)/search/_components/status-indicator";
-import { Collapsible } from "@/components/collapsible";
-import { DownloadMenu } from "@/components/download-menu";
-import { Link } from "@/components/link";
-import { MainContent } from "@/components/main-content";
-import { PopoverNote } from "@/components/popover-note";
-import { SortableTable } from "@/components/sortable-table";
-import { Tooltip, TooltipTrigger } from "@/components/tooltip";
-import { env } from "@/config/env.config";
-import { parseLinks } from "@/lib/parse-links";
+import { getCourt } from "#/app/(app)/courts/[id]/_lib/data.ts";
+import { StatusIndicator } from "#/app/(app)/search/_components/status-indicator.tsx";
+import { Collapsible } from "#/components/collapsible.tsx";
+import { DownloadMenu } from "#/components/download-menu.tsx";
+import { Link } from "#/components/link.tsx";
+import { MainContent } from "#/components/main-content.tsx";
+import { PopoverNote } from "#/components/popover-note.tsx";
+import { SortableTable } from "#/components/sortable-table.tsx";
+import { Tooltip, TooltipTrigger } from "#/components/tooltip.tsx";
+import { env } from "#/config/env.config.ts";
+import { parseLinks } from "#/lib/parse-links.ts";
 
 interface CourtPageProps {
 	params: Promise<{
@@ -138,9 +138,8 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 								<div>{data.name}</div>
 								{/* eslint-disable-next-line react/jsx-no-literals */}
 								<div>VieCPro-ID: {data.id}</div>
-								{/* eslint-disable-next-line react/jsx-no-literals */}
 								<div>
-									URI:{" "}
+									{"URI: "}
 									<a className="underline hover:no-underline" href={href}>
 										{href}
 									</a>

@@ -1,8 +1,8 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 
-import { NavLink } from "@/components/nav-link";
-import { createSingletonResource } from "@/lib/keystatic/resources";
+import { NavLink } from "#/components/nav-link.tsx";
+import { createSingletonResource } from "#/lib/keystatic/resources.ts";
 
 export async function DocumentationNavigation(): Promise<ReactNode> {
 	const locale = await getLocale();

@@ -19,8 +19,8 @@ import withFrontmatter from "remark-frontmatter";
 import withMdxFrontmatter from "remark-mdx-frontmatter";
 import withTypographicQuotes from "remark-smartypants";
 
-import type { Locale } from "@/config/i18n.config";
-import { config as syntaxHighlighterConfig } from "@/config/syntax-highlighter.config";
+import type { Locale } from "#/config/i18n.config.ts";
+import { config as syntaxHighlighterConfig } from "#/config/syntax-highlighter.config.ts";
 
 export async function createConfig(locale: Locale): Promise<MdxProcessorOptions> {
 	const t = await getTranslations("mdx");

@@ -3,7 +3,7 @@ import type { AriaLabelingProps, DOMProps } from "@react-types/shared";
 import { Loader2Icon } from "lucide-react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-import { useLabels } from "@/lib/use-labels";
+import { useLabels } from "#/lib/use-labels.ts";
 
 interface LoadingIndicatorProps
 	extends

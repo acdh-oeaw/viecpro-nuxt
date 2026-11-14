@@ -1,7 +1,7 @@
 import { createLabel, createSingleton, withI18nPrefix } from "@acdh-oeaw/keystatic-lib";
 import { fields, singleton } from "@keystatic/core";
 
-import * as validation from "@/lib/keystatic/validation";
+import * as validation from "#/lib/keystatic/validation.ts";
 
 export const createIndexPage = createSingleton("/index-page/", (paths, locale) => {
 	return singleton({

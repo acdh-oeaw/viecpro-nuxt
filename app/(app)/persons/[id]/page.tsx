@@ -8,22 +8,22 @@ import {
 import slugify from "@sindresorhus/slugify";
 import { InfoIcon, NetworkIcon, StickyNoteIcon } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
 import { Errors } from "typesense";
 
-import { getPerson } from "@/app/(app)/persons/[id]/_lib/data";
-import { StatusIndicator } from "@/app/(app)/search/_components/status-indicator";
-import { Collapsible } from "@/components/collapsible";
-import { DownloadMenu } from "@/components/download-menu";
-import { Link } from "@/components/link";
-import { MainContent } from "@/components/main-content";
-import { PopoverNote } from "@/components/popover-note";
-import { SortableTable } from "@/components/sortable-table";
-import { Tooltip, TooltipTrigger } from "@/components/tooltip";
-import { env } from "@/config/env.config";
-import { parseLinks } from "@/lib/parse-links";
+import { getPerson } from "#/app/(app)/persons/[id]/_lib/data.ts";
+import { StatusIndicator } from "#/app/(app)/search/_components/status-indicator.tsx";
+import { Collapsible } from "#/components/collapsible.tsx";
+import { DownloadMenu } from "#/components/download-menu.tsx";
+import { Link } from "#/components/link.tsx";
+import { MainContent } from "#/components/main-content.tsx";
+import { PopoverNote } from "#/components/popover-note.tsx";
+import { SortableTable } from "#/components/sortable-table.tsx";
+import { Tooltip, TooltipTrigger } from "#/components/tooltip.tsx";
+import { env } from "#/config/env.config.ts";
+import { parseLinks } from "#/lib/parse-links.ts";
 
 interface PersonPageProps {
 	params: Promise<{
@@ -141,9 +141,8 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								<div>{[data.firstName, data.name].filter(isNonEmptyString).join(" ")}</div>
 								{/* eslint-disable-next-line react/jsx-no-literals */}
 								<div>VieCPro-ID: {data.id}</div>
-								{/* eslint-disable-next-line react/jsx-no-literals */}
 								<div>
-									URI:{" "}
+									{"URI: "}
 									<a className="underline hover:no-underline" href={href}>
 										{href}
 									</a>
@@ -327,9 +326,10 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								{data.startDateWritten}{" "}
 								{data.placeOfBirth?.name
 									? t.rich("in-place", {
-											// eslint-disable-next-line react/no-unstable-nested-components
 											place() {
-												if (!data.placeOfBirth) return null;
+												if (!data.placeOfBirth) {
+													return null;
+												}
 												const href = `/places/${String(data.placeOfBirth.id)}`;
 												return (
 													<Link className="underline hover:no-underline" href={href}>
@@ -346,9 +346,10 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								{data.endDateWritten}{" "}
 								{data.placeOfDeath?.name
 									? t.rich("in-place", {
-											// eslint-disable-next-line react/no-unstable-nested-components
 											place() {
-												if (!data.placeOfDeath) return null;
+												if (!data.placeOfDeath) {
+													return null;
+												}
 												const href = `/places/${String(data.placeOfDeath.id)}`;
 												return (
 													<Link className="underline hover:no-underline" href={href}>

@@ -2,8 +2,8 @@
 
 import type { ReactNode } from "react";
 
-import { Link } from "@/components/link";
-import { createHref } from "@/lib/create-href";
+import { Link } from "#/components/link.tsx";
+import { createHref } from "#/lib/create-href.ts";
 
 interface SkipLinkProps {
 	children: ReactNode;

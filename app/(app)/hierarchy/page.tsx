@@ -4,18 +4,18 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { type ReactNode, Suspense } from "react";
 
-import { HierarchyVisualisation } from "@/app/(app)/hierarchy/_components/hierarchy-visualisation";
-import { SearchFilterPanel } from "@/app/(app)/hierarchy/_components/search-filter-panel";
-import { getAutocompleteData } from "@/app/(app)/hierarchy/_lib/autocomplete";
+import { HierarchyVisualisation } from "#/app/(app)/hierarchy/_components/hierarchy-visualisation.tsx";
+import { SearchFilterPanel } from "#/app/(app)/hierarchy/_components/search-filter-panel.tsx";
+import { getAutocompleteData } from "#/app/(app)/hierarchy/_lib/autocomplete.ts";
 import {
+	type SearchFilters,
 	getSearchFilters,
 	getSearchResults,
-	type SearchFilters,
-} from "@/app/(app)/hierarchy/_lib/hierarchy";
-import { Link } from "@/components/link";
-import { LoadingIndicator } from "@/components/loading-indicator";
-import { MainContent } from "@/components/main-content";
-import { colors } from "@/config/visualisation.config";
+} from "#/app/(app)/hierarchy/_lib/hierarchy.ts";
+import { Link } from "#/components/link.tsx";
+import { LoadingIndicator } from "#/components/loading-indicator.tsx";
+import { MainContent } from "#/components/main-content.tsx";
+import { colors } from "#/config/visualisation.config.ts";
 
 interface HierarchyPageProps {
 	searchParams: Promise<SearchParams>;
@@ -84,7 +84,9 @@ async function SearchPanel(props: SearchPanelProps): Promise<ReactNode> {
 	const autocomplete = await autocompletePromise;
 
 	function getGraphOptions() {
-		if (!isEnabled) return [];
+		if (!isEnabled) {
+			return [];
+		}
 
 		switch (searchFilters.kind!) {
 			case "institution": {

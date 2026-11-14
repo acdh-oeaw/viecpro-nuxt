@@ -3,14 +3,14 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { type ReactNode, Suspense } from "react";
 
-import { SidePanelToggle } from "@/app/(app)/search/_components/side-panel-toggle";
-import { SearchResults } from "@/app/(app)/search/places/_components/search-results";
-import { SearchSidePanel } from "@/app/(app)/search/places/_components/search-side-panel";
-import { getSearchFilters, getSearchResults } from "@/app/(app)/search/places/_lib/search";
-import { DownloadDialog } from "@/components/download-dialog";
-import { LoadingIndicator } from "@/components/loading-indicator";
-import { MainContent } from "@/components/main-content";
-import { isodate } from "@/lib/isodate";
+import { SidePanelToggle } from "#/app/(app)/search/_components/side-panel-toggle.tsx";
+import { SearchResults } from "#/app/(app)/search/places/_components/search-results.tsx";
+import { SearchSidePanel } from "#/app/(app)/search/places/_components/search-side-panel.tsx";
+import { getSearchFilters, getSearchResults } from "#/app/(app)/search/places/_lib/search.ts";
+import { DownloadDialog } from "#/components/download-dialog.tsx";
+import { LoadingIndicator } from "#/components/loading-indicator.tsx";
+import { MainContent } from "#/components/main-content.tsx";
+import { isodate } from "#/lib/isodate.ts";
 
 interface SearchPlacesPageProps {
 	searchParams: Promise<SearchParams>;
