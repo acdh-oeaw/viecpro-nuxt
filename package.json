@@ -90,7 +90,7 @@
 		"@playwright/test": "^1.65.0",
 		"@react-aria/optimize-locales-plugin": "^2.1.0",
 		"@react-types/shared": "^3.37.0",
-		"@tailwindcss/postcss": "^4.3.5",
+		"@tailwindcss/turbopack": "^4.3.5",
 		"@tailwindcss/typography": "^0.5.20",
 		"@types/d3": "^7.4.3",
 		"@types/hast": "^3.0.5",
@@ -109,7 +109,6 @@
 		"is-in-ci": "^2.0.0",
 		"lefthook": "^2.2.2",
 		"npm-run-all2": "^8.0.4",
-		"postcss": "^8.5.32",
 		"prettier": "^3.10.1",
 		"schema-dts": "^1.1.5",
 		"stylelint": "^16.26.1",
@@ -129,11 +128,6 @@
 			"not dead",
 			"not op_mini all"
 		]
-	},
-	"postcss": {
-		"plugins": {
-			"@tailwindcss/postcss": {}
-		}
 	},
 	"prettier": "@acdh-oeaw/prettier-config",
 	"stylelint": {

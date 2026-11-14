@@ -62,6 +62,9 @@ const config: NextConfig = {
 	},
 	turbopack: {
 		rules: {
+			"*.css": {
+				loaders: ["@tailwindcss/turbopack"],
+			},
 			/**
 			 * Strip react aria's bundled translations from the client bundle, since
 			 * `LocalizedStringProvider` injects the current locale's strings into the initial html.
