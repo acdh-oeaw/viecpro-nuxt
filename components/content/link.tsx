@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 
 import { Link as Anchor } from "#/components/link.tsx";
-import { type LinkSchema, getLinkProps } from "#/lib/keystatic/get-link-props.ts";
+import { type ContentLink, getLinkProps } from "#/lib/content-link.ts";
 
 interface LinkProps {
 	children: ReactNode;
 	className?: string;
-	link: LinkSchema;
+	link: ContentLink;
 }
 
 export function Link(props: Readonly<LinkProps>): ReactNode {

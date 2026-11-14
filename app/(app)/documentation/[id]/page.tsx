@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 import type { Metadata, ResolvingMetadata } from "next";
 import { getLocale } from "next-intl/server";
 import type { ReactNode } from "react";
 
 import { DocumentationNavigation } from "#/app/(app)/documentation/_components/documentation-navigation.tsx";
 import { MainContent } from "#/components/main-content.tsx";
-import { createCollectionResource } from "#/lib/keystatic/resources.ts";
+import { listDocumentationPages, readDocumentationPage } from "#/lib/content.ts";
 
 interface DocumentationPageProps {
 	params: Promise<{
@@ -22,7 +19,7 @@ export async function generateStaticParams(): Promise<
 > {
 	const locale = await getLocale();
 
-	const ids = await createCollectionResource("documentation", locale).list();
+	const ids = await listDocumentationPages(locale);
 
 	return ids.map((id) => {
 		return { id };
@@ -40,8 +37,7 @@ export async function generateMetadata(
 	const { id: _id } = await params;
 	const id = decodeURIComponent(_id);
 
-	const entry = await createCollectionResource("documentation", locale).read(id);
-	const { title } = entry.data;
+	const { title } = await readDocumentationPage(locale, id);
 
 	const metadata: Metadata = {
 		title,
@@ -60,9 +56,7 @@ export default async function DocumentationPage(
 	const { id: _id } = await params;
 	const id = decodeURIComponent(_id);
 
-	const entry = await createCollectionResource("documentation", locale).read(id);
-	const { content, lead, title } = entry.data;
-	const { default: Content } = await entry.compile(content);
+	const { Content, lead, title } = await readDocumentationPage(locale, id);
 
 	return (
 		<MainContent className="flex flex-col">

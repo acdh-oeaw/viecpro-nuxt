@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 import { LinkButton } from "#/components/content/link-button.tsx";
 import { Image } from "#/components/image.tsx";
 import { MainContent } from "#/components/main-content.tsx";
-import { createSingletonResource } from "#/lib/keystatic/resources.ts";
+import { readIndexPage } from "#/lib/content.ts";
 import hero from "#/public/assets/images/hero.jpg";
 
 interface IndexPageProps extends EmptyObject {}
@@ -32,8 +32,8 @@ export async function generateMetadata(
 export default async function IndexPage(_props: Readonly<IndexPageProps>): Promise<ReactNode> {
 	const locale = await getLocale();
 
-	const page = await createSingletonResource("index-page", locale).read();
-	const { content, sections, subtitle, title } = page.data;
+	const page = await readIndexPage(locale);
+	const { content, sections, subtitle, title } = page;
 	const { default: Content } = await page.compile(content);
 
 	return (
