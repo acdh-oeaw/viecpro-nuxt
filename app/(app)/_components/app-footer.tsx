@@ -8,7 +8,7 @@ import { Image } from "#/components/image.tsx";
 import { NavLink, type NavLinkProps } from "#/components/nav-link.tsx";
 import type { Locale } from "#/config/i18n.config.ts";
 import { createHref } from "#/lib/create-href.ts";
-import logoAcdhCh from "#/public/assets/images/logo-acdh-ch-with-text.svg";
+import logoAcdh from "#/public/assets/images/logo-acdh-with-text.svg";
 import logoFwf from "#/public/assets/images/logo-fwf.svg";
 import logoIhb from "#/public/assets/images/logo-ihb.svg";
 import logoOeaw from "#/public/assets/images/logo-oeaw.svg";
@@ -46,10 +46,10 @@ export function AppFooter(): ReactNode {
 			lang: "de",
 			className: "h-8",
 		},
-		acdhCh: {
-			href: "https://www.oeaw.ac.at/de/acdh/acdh-ch-home",
+		acdh: {
+			href: acdhLinks[locale].href,
 			label: "Austrian Centre for Digital Humanities (ACDH)",
-			image: logoAcdhCh,
+			image: logoAcdh,
 			lang: "en",
 			className: "h-8",
 		},
