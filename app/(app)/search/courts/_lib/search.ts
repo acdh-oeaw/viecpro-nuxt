@@ -7,8 +7,10 @@ import * as v from "valibot";
 import { env } from "#/config/env.config.ts";
 import {
 	emptyDate,
+	isDownloadUnsupported,
 	limit,
 	maxDate,
+	maxDownloadPages,
 	maxFacetValues,
 	minDate,
 	perPageDownloadLimit,
@@ -389,7 +391,7 @@ export async function downloadCollection(
 		const t = await getTranslations("SearchCourtsPage");
 
 		throw new UnsupportedError(
-			t("download-too-big", { count: format.number(50 * perPageDownloadLimit) }),
+			t("download-too-big", { count: format.number(maxDownloadPages * perPageDownloadLimit) }),
 		);
 	}
 
@@ -419,10 +421,4 @@ export async function downloadCollection(
 	});
 
 	return hits;
-}
-
-export function isDownloadUnsupported(count: number) {
-	const pages = Math.ceil(count / perPageDownloadLimit);
-
-	return pages > 50;
 }
