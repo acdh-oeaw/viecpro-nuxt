@@ -327,7 +327,6 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								{data.startDateWritten}{" "}
 								{data.placeOfBirth?.name
 									? t.rich("in-place", {
-											// eslint-disable-next-line react/no-unstable-nested-components
 											place() {
 												if (!data.placeOfBirth) return null;
 												const href = `/places/${String(data.placeOfBirth.id)}`;
@@ -346,7 +345,6 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								{data.endDateWritten}{" "}
 								{data.placeOfDeath?.name
 									? t.rich("in-place", {
-											// eslint-disable-next-line react/no-unstable-nested-components
 											place() {
 												if (!data.placeOfDeath) return null;
 												const href = `/places/${String(data.placeOfDeath.id)}`;

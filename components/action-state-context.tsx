@@ -13,7 +13,7 @@ interface ActionStateProviderProps {
 export function ActionStateProvider(props: Readonly<ActionStateProviderProps>): ReactNode {
 	const { children, state } = props;
 
-	return <ActionStateContext.Provider value={state}>{children}</ActionStateContext.Provider>;
+	return <ActionStateContext value={state}>{children}</ActionStateContext>;
 }
 
 export function useActionStateContext(): ActionState {
