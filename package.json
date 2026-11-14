@@ -117,8 +117,14 @@
 	"stylelint": {
 		"extends": "./config/stylelint/base.json"
 	},
+	"devEngines": {
+		"packageManager": {
+			"name": "pnpm",
+			"version": "12.18.0",
+			"onFail": "download"
+		}
+	},
 	"engines": {
 		"node": "^26"
-	},
-	"packageManager": "pnpm@12.18.0"
+	}
 }

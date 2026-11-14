@@ -8,7 +8,9 @@
 # build
 FROM node:26-alpine AS build
 
-RUN corepack enable
+# exact version or semver range, from `devEngines.packageManager.version` in `package.json`.
+ARG PNPM_VERSION
+RUN npm install --global "pnpm@${PNPM_VERSION:?build arg PNPM_VERSION is required}"
 
 RUN mkdir /app && chown -R node:node /app
 WORKDIR /app
