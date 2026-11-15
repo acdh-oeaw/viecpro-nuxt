@@ -11,7 +11,6 @@ import {
 	withTableOfContents,
 	withUnwrappedMdxFlowContent,
 } from "@acdh-oeaw/mdx-lib";
-import withSyntaxHighlighter from "@shikijs/rehype";
 import type { ElementContent } from "hast";
 import { getTranslations } from "next-intl/server";
 import withHeadingIds from "rehype-slug";
@@ -20,7 +19,6 @@ import withMdxFrontmatter from "remark-mdx-frontmatter";
 import withTypographicQuotes from "remark-smartypants";
 
 import type { Locale } from "#/config/i18n.config.ts";
-import { config as syntaxHighlighterConfig } from "#/config/syntax-highlighter.config.ts";
 
 export async function createConfig(locale: Locale): Promise<MdxProcessorOptions> {
 	const t = await getTranslations("mdx");
@@ -66,7 +64,6 @@ export async function createConfig(locale: Locale): Promise<MdxProcessorOptions>
 			withHeadingIds,
 			[withIframeTitles, { components: ["Embed", "Video"] }],
 			[withImageSizes, { components: ["Figure"] }],
-			[withSyntaxHighlighter, syntaxHighlighterConfig],
 			withTableOfContents,
 			[withUnwrappedMdxFlowContent, { components: ["LinkButton"] }],
 		],
