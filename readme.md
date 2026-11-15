@@ -47,25 +47,38 @@ pnpm run build
 pnpm run test:e2e
 ```
 
-visual snapshots need to match what ci renders, i.e. github's `ubuntu-26.04` runner image (see
-`.github/workflows/validate.yaml`). font rendering differs between distributions, so snapshots
-generated on other systems will likely fail in ci. to regenerate snapshots on the ci runner, push
-your branch and run:
+visual snapshots need to match what ci renders. ci runs in the official
+[playwright container image](https://playwright.dev/docs/docker) (see
+`.github/workflows/validate.yaml`), so font rendering is identical when running tests in the same
+image locally, which requires [docker](https://docs.docker.com/get-started/get-docker/):
+
+```bash
+pnpm run test:e2e:docker
+```
+
+to regenerate visual snapshots locally, run:
+
+```bash
+pnpm run test:e2e:update-snapshots:docker
+```
+
+arguments are passed through to `playwright test`, e.g.
+`pnpm run test:e2e:docker e2e/tests/pages/imprint.test.ts --project chromium`. the container uses
+docker volumes for `node_modules`, `.next` and the pnpm store, so the first run takes a while.
+
+alternatively, snapshots can be regenerated in ci, which requires the
+[github cli](https://cli.github.com) to be installed and authenticated. push your branch and run:
 
 ```bash
 pnpm run test:e2e:update-snapshots:ci
 ```
 
 this dispatches the `validate` workflow with `update-snapshots` enabled, waits for it to finish, and
-copies the regenerated snapshots to `e2e/snapshots/`. it requires the
-[github cli](https://cli.github.com) to be installed and authenticated. to only download snapshots
-from an already finished run, pass `--run <run-id>`.
+copies the regenerated snapshots to `e2e/snapshots/`. to only download snapshots from an already
+finished run, pass `--run <run-id>`.
 
-on an ubuntu 26.04 machine, snapshots can also be regenerated locally with:
-
-```bash
-pnpm run test:e2e:update-snapshots
-```
+the container image tag is derived from the `@playwright/test` version, which therefore needs to be
+pinned to an exact version in `package.json`.
 
 ## how to re-generate bibliography
 
