@@ -18,6 +18,8 @@ export function useLabels(
 	 * to the element itself.
 	 */
 	id = useId(id);
+
+	/* oxlint-disable typescript/strict-boolean-expressions -- empty strings count as missing labels. */
 	if (labelledBy && label) {
 		const ids = new Set([id, ...labelledBy.trim().split(/\s+/)]);
 		labelledBy = [...ids].join(" ");
@@ -29,6 +31,7 @@ export function useLabels(
 	if (!label && !labelledBy && defaultLabel) {
 		label = defaultLabel;
 	}
+	/* oxlint-enable typescript/strict-boolean-expressions */
 
 	return {
 		id,

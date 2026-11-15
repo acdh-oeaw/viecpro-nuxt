@@ -64,11 +64,11 @@ export function EntityComboBox(props: EntityComboBoxProps): ReactNode {
 				</Button>
 			</div>
 
-			<Popover className="absolute z-10 w-(--trigger-width) overflow-hidden rounded-md border border-neutral-200 bg-white text-brand-900 shadow-lg animate-in fade-in slide-in-from-top-2">
+			<Popover className="absolute z-10 w-(--trigger-width) animate-in overflow-hidden rounded-md border border-neutral-200 bg-white text-brand-900 shadow-lg fade-in slide-in-from-top-2">
 				<Virtualizer
 					layout={ListLayout}
 					layoutOptions={{
-						rowHeight: 52,
+						rowSize: 52,
 					}}
 				>
 					<ListBox className="max-h-128 overflow-y-auto py-2 outline-none">

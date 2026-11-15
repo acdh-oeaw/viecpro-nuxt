@@ -20,7 +20,7 @@ export function LoadingIndicator(props: Readonly<LoadingIndicatorProps>): ReactN
 		labelingProps["aria-label"] != null || labelingProps["aria-labelledby"] != null;
 
 	return (
-		<div className={cn("delay-500 duration-500 animate-in fade-in fill-mode-both", className)}>
+		<div className={cn("animate-in delay-500 duration-500 fill-mode-both fade-in", className)}>
 			<Loader2Icon
 				{...labelingProps}
 				aria-hidden={hasLabeling ? (ariaHidden ?? undefined) : true}

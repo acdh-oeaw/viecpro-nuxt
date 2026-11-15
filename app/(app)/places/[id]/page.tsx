@@ -5,6 +5,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
+import { JsonLd } from "react-schemaorg";
+import type { Place } from "schema-dts";
 import { Errors } from "typesense";
 
 import { PointMap } from "#/app/(app)/places/[id]/_components/point-map-loader.tsx";
@@ -78,6 +80,21 @@ export default async function PlacePage(props: Readonly<PlacePageProps>): Promis
 
 	return (
 		<MainContent className="flex flex-col">
+			<JsonLd<Place>
+				item={{
+					"@context": "https://schema.org",
+					"@type": "Place",
+					"@id": href,
+					url: href,
+					name: data.name,
+					alternateName: isNonEmptyArray(data.alternativeNames) ? data.alternativeNames : undefined,
+					geo:
+						data.latitude != null && data.longitude != null
+							? { "@type": "GeoCoordinates", latitude: data.latitude, longitude: data.longitude }
+							: undefined,
+					sameAs: isNonEmptyArray(data.sameAs) ? data.sameAs : undefined,
+				}}
+			/>
 			<div className="mx-auto grid w-full max-w-7xl content-start gap-y-12 px-4 pt-8 pb-16 xs:gap-y-16 xs:px-8">
 				<div className="grid content-start gap-y-4">
 					<div>

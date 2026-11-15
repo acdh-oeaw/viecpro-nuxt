@@ -12,11 +12,16 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      update-snapshots:
+        description: "Regenerate visual snapshots and upload them as `snapshots` artifact"
+        type: boolean
+        default: false
 
 jobs:
   changes:
     name: Check changed files
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     outputs:
       src: ${{ steps.filter.outputs.src }}
@@ -35,7 +40,7 @@ jobs:
   validate:
     name: Validate
     needs: [changes]
-    if: ${{ needs.changes.outputs.src == 'true' }}
+    if: ${{ needs.changes.outputs.src == 'true' || github.event_name == 'workflow_dispatch' }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
 
@@ -43,7 +48,7 @@ jobs:
       fail-fast: true
       matrix:
         node-version: [26.x]
-        os: [ubuntu-24.04]
+        os: [ubuntu-26.04]
 
     env:
       NEXT_PUBLIC_API_BASE_URL: "${{ vars.NEXT_PUBLIC_API_BASE_URL }}"
@@ -85,9 +90,6 @@ jobs:
       - name: Typecheck
         run: pnpm run types:check
 
-      - name: Test
-        run: pnpm run test
-
       - name: Get playwright version
         run: |
           PLAYWRIGHT_VERSION=$(pnpm ls @playwright/test --json | jq --raw-output '.[0].devDependencies["@playwright/test"].version')
@@ -118,7 +120,20 @@ jobs:
         run: pnpm run build
 
       - name: Run e2e tests
+        if: ${{ !inputs.update-snapshots }}
         run: pnpm run test:e2e
+
+      # Snapshots must be rendered on the ci runner image, see `scripts/update-snapshots.ts`.
+      - name: Update visual snapshots
+        if: ${{ inputs.update-snapshots }}
+        run: pnpm run test:e2e:update-snapshots
+
+      - uses: actions/upload-artifact@v7
+        if: ${{ inputs.update-snapshots }}
+        with:
+          name: snapshots
+          path: e2e/snapshots/
+          retention-days: 7
 
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}

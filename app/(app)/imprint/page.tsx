@@ -1,5 +1,3 @@
-"use cache";
-
 import { HttpError, request } from "@acdh-oeaw/lib";
 import type { Metadata, ResolvingMetadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -9,6 +7,9 @@ import type { ReactNode } from "react";
 import { MainContent } from "#/components/main-content.tsx";
 import type { Locale } from "#/config/i18n.config.ts";
 import { createImprintUrl } from "#/config/imprint.config.ts";
+
+/** Re-fetch imprint from the imprint service at most once a day. */
+export const revalidate = 86_400;
 
 interface ImprintPageProps extends EmptyObject {}
 

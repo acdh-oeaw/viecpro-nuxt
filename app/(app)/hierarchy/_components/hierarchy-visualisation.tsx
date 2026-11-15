@@ -1,7 +1,14 @@
 "use client";
 
 import { createUrlSearchParams } from "@acdh-oeaw/lib";
-import * as d3 from "d3";
+import {
+	type HierarchyNode,
+	type HierarchyPointLink,
+	type HierarchyPointNode,
+	tree as createTree,
+	hierarchy,
+} from "d3-hierarchy";
+import { linkHorizontal } from "d3-shape";
 import { type ReactNode, use, useMemo } from "react";
 
 import { groups } from "#/app/(app)/hierarchy/_lib/autocomplete.ts";
@@ -21,13 +28,13 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 	const data = use(dataPromise);
 
 	const tree = useMemo(() => {
-		const root = d3.hierarchy(data);
+		const root = hierarchy(data);
 
 		root.sort((a, z) => {
 			return z.height - a.height || a.data.meta.label.localeCompare(z.data.meta.label);
 		});
 
-		const layout = d3.tree<GraphNode>();
+		const layout = createTree<GraphNode>();
 		layout(root);
 
 		root.count();
@@ -51,8 +58,7 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 		element: containerRef,
 	});
 
-	const line = d3
-		.linkHorizontal<d3.HierarchyPointLink<GraphNode>, d3.HierarchyPointNode<GraphNode>>()
+	const line = linkHorizontal<HierarchyPointLink<GraphNode>, HierarchyPointNode<GraphNode>>()
 		.x((d) => {
 			return d.y * dimensions.boundedWidth;
 		})
@@ -60,7 +66,7 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 			return d.x * dimensions.boundedHeight;
 		});
 
-	function getNodeColor(node: d3.HierarchyNode<GraphNode>) {
+	function getNodeColor(node: HierarchyNode<GraphNode>) {
 		switch (node.data.meta.entity_type) {
 			case "Funktion": {
 				return colors.function;
@@ -96,7 +102,7 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 					transform={`translate(${String(dimensions.marginLeft)}, ${String(dimensions.marginTop)})`}
 				>
 					<g fill="none" stroke={colors.edge} strokeOpacity={0.25} strokeWidth={1.5}>
-						{(tree.links() as Array<d3.HierarchyPointLink<GraphNode>>).map((link, index) => {
+						{(tree.links() as Array<HierarchyPointLink<GraphNode>>).map((link, index) => {
 							return (
 								<path
 									key={[link.source.data.meta.pk, link.target.data.meta.pk, index].join("+")}
@@ -106,7 +112,7 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 						})}
 					</g>
 					<g strokeLinejoin="round" strokeWidth={3}>
-						{(tree.descendants() as Array<d3.HierarchyPointNode<GraphNode>>).map((node, index) => {
+						{(tree.descendants() as Array<HierarchyPointNode<GraphNode>>).map((node, index) => {
 							return (
 								<Link
 									key={[node.data.meta.pk, index].join("+")}

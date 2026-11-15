@@ -65,6 +65,7 @@ export default async function DocumentationPage(
 					<h1 className="font-heading text-3xl font-bold text-balance text-brand-600 xs:text-4xl md:text-5xl">
 						{title}
 					</h1>
+					{/* oxlint-disable-next-line typescript/strict-boolean-expressions */}
 					{lead ? <p className="font-heading text-brand-500 xl:text-lg">{lead}</p> : null}
 				</div>
 			</section>

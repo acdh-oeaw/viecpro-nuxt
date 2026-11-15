@@ -1,9 +1,9 @@
 /* stylelint-disable custom-property-empty-line-before */
 
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @plugin "@tailwindcss/typography";
-@plugin "tailwindcss-animate";
 @plugin "tailwindcss-react-aria-components";
 
 @theme {

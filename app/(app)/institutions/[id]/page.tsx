@@ -11,6 +11,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
+import { JsonLd } from "react-schemaorg";
+import type { Organization } from "schema-dts";
 import { Errors } from "typesense";
 
 import { getInstitution } from "#/app/(app)/institutions/[id]/_lib/data.ts";
@@ -23,6 +25,7 @@ import { PopoverNote } from "#/components/popover-note.tsx";
 import { SortableTable } from "#/components/sortable-table.tsx";
 import { Tooltip, TooltipTrigger } from "#/components/tooltip.tsx";
 import { env } from "#/config/env.config.ts";
+import { createFullUrl } from "#/lib/create-full-url.ts";
 import { parseLinks } from "#/lib/parse-links.ts";
 
 interface InstitutionPageProps {
@@ -53,7 +56,7 @@ export async function generateMetadata(
 	});
 
 	const metadata: Metadata = {
-		// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+		// oxlint-disable-next-line typescript/prefer-nullish-coalescing, typescript/strict-boolean-expressions
 		title: data.expandedName || data.name,
 	};
 
@@ -87,6 +90,24 @@ export default async function InstitutionPage(
 
 	return (
 		<MainContent className="flex flex-col">
+			<JsonLd<Organization>
+				item={{
+					"@context": "https://schema.org",
+					"@type": "Organization",
+					"@id": href,
+					url: href,
+					name: data.name,
+					alternateName: isNonEmptyString(data.expandedName) ? data.expandedName : undefined,
+					location: data.locations?.map((relation) => {
+						return {
+							"@type": "Place",
+							name: relation.target.name,
+							url: String(createFullUrl({ pathname: `/places/${String(relation.target.id)}` })),
+						};
+					}),
+					sameAs: isNonEmptyArray(data.sameAs) ? data.sameAs : undefined,
+				}}
+			/>
 			<div className="mx-auto grid w-full max-w-7xl content-start gap-y-12 px-4 pt-8 pb-16 xs:gap-y-16 xs:px-8">
 				<div className="grid content-start gap-y-4">
 					<div>
