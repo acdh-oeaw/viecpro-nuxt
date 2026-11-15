@@ -24,11 +24,21 @@ jobs:
     runs-on: ubuntu-26.04
 
     outputs:
+      playwright-version: ${{ steps.playwright.outputs.version }}
       src: ${{ steps.filter.outputs.src }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+
+      # The validate job runs in the playwright container image, whose tag must match the exact
+      # `@playwright/test` version. `container.image` is evaluated before any step runs, so the
+      # version needs to be resolved in a preceding job.
+      - name: Get playwright version
+        id: playwright
+        run:
+          echo "version=$(jq --raw-output '.devDependencies["@playwright/test"]' package.json)" >>
+          "$GITHUB_OUTPUT"
 
       - uses: dorny/paths-filter@v4
         id: filter
@@ -41,14 +51,16 @@ jobs:
     name: Validate
     needs: [changes]
     if: ${{ needs.changes.outputs.src == 'true' || github.event_name == 'workflow_dispatch' }}
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-26.04
     timeout-minutes: 60
 
-    strategy:
-      fail-fast: true
-      matrix:
-        node-version: [26.x]
-        os: [ubuntu-26.04]
+    # Provides node.js, browsers and their system dependencies, and makes visual snapshots
+    # reproducible locally with `pnpm run test:e2e:docker`.
+    # @see https://playwright.dev/docs/ci#via-containers
+    container:
+      image:
+        "mcr.microsoft.com/playwright:v${{ needs.changes.outputs.playwright-version }}-resolute"
+      options: --user 1001
 
     env:
       NEXT_PUBLIC_API_BASE_URL: "${{ vars.NEXT_PUBLIC_API_BASE_URL }}"
@@ -69,11 +81,16 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v6
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v7
+      - name: Get pnpm store path
+        run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
+
+      - name: Cache pnpm store
+        uses: actions/cache@v6
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          path: ${{ env.PNPM_STORE_PATH }}
+          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}"
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -90,31 +107,12 @@ jobs:
       - name: Typecheck
         run: pnpm run types:check
 
-      - name: Get playwright version
-        run: |
-          PLAYWRIGHT_VERSION=$(pnpm ls @playwright/test --json | jq --raw-output '.[0].devDependencies["@playwright/test"].version')
-          echo "PLAYWRIGHT_VERSION=$PLAYWRIGHT_VERSION" >> $GITHUB_ENV
-
-      - name: Cache playwright browsers
-        uses: actions/cache@v6
-        id: cache-playwright-browsers
-        with:
-          path: "~/.cache/ms-playwright"
-          key: "${{ matrix.os }}-playwright-browsers-${{ env.PLAYWRIGHT_VERSION }}"
-
-      - name: Install playwright browsers
-        if: steps.cache-playwright-browsers.outputs.cache-hit != 'true'
-        run: pnpm exec playwright install --with-deps
-      - name: Install playwright browsers (operating system dependencies)
-        if: steps.cache-playwright-browsers.outputs.cache-hit == 'true'
-        run: pnpm exec playwright install-deps
-
       # https://nextjs.org/docs/pages/building-your-application/deploying/ci-build-caching#github-actions
       - name: Cache Next.js build output
         uses: actions/cache@v6
         with:
           path: "${{ github.workspace }}/.next/cache"
-          key: "${{ matrix.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}"
+          key: "${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}"
 
       - name: Build app
         run: pnpm run build
@@ -123,7 +121,7 @@ jobs:
         if: ${{ !inputs.update-snapshots }}
         run: pnpm run test:e2e
 
-      # Snapshots must be rendered on the ci runner image, see `scripts/update-snapshots.ts`.
+      # Used by `scripts/update-snapshots.ts`.
       - name: Update visual snapshots
         if: ${{ inputs.update-snapshots }}
         run: pnpm run test:e2e:update-snapshots

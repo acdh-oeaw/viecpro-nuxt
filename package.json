@@ -22,9 +22,11 @@
 		"styles:check": "stylelint \"./**/*.css\" --cache --ignore-path ./.gitignore",
 		"styles:fix": "pnpm run styles:check --fix",
 		"test:e2e": "playwright test",
+		"test:e2e:docker": "node ./scripts/e2e-docker.ts",
 		"test:e2e:install": "playwright install --with-deps",
 		"test:e2e:update-snapshots": "playwright test --update-snapshots",
 		"test:e2e:update-snapshots:ci": "node ./scripts/update-snapshots.ts",
+		"test:e2e:update-snapshots:docker": "node ./scripts/e2e-docker.ts --update-snapshots",
 		"types:check": "tsc --noEmit",
 		"types:prepare": "next typegen"
 	},
@@ -64,7 +66,7 @@
 	},
 	"devDependencies": {
 		"@dotenvx/dotenvx": "^1.75.1",
-		"@playwright/test": "^1.65.0",
+		"@playwright/test": "1.65.1",
 		"@react-aria/optimize-locales-plugin": "^2.1.0",
 		"@react-types/shared": "^3.37.0",
 		"@tailwindcss/turbopack": "^4.3.5",
