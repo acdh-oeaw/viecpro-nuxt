@@ -127,7 +127,7 @@ function generateFilter(searchFilters: SearchFilters) {
 		facetFilters.set(
 			facetField,
 			`${facetField}:=[${values
-				.sort()
+				.toSorted()
 				.map((value) => {
 					return `\`${value}\``;
 				})
@@ -291,6 +291,7 @@ export async function getSearchResults(
 			}
 		});
 
+		// oxlint-disable-next-line unicorn/no-array-sort -- sorts a copy.
 		const sorted = Array.from(values.values()).sort(sortFacets);
 
 		facetCounts.set(facetField, { values: sorted });

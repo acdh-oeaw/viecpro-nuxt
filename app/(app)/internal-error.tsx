@@ -24,6 +24,7 @@ export default function InternalError(props: Readonly<InternalErrorProps>): Reac
 	const [isPending, startTransition] = useTransition();
 
 	useEffect(() => {
+		// oxlint-disable-next-line no-console -- surface client-side errors in the browser console.
 		console.error(error);
 	}, [error]);
 

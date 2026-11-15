@@ -54,6 +54,7 @@ export function SearchDateRangeSlider(props: SearchDateRangeSliderProps): ReactN
 							{state.values.map((_, index) => {
 								return (
 									<SliderThumb
+										// oxlint-disable-next-line react/no-array-index-key -- list is not reordered.
 										key={index}
 										aria-label={thumbLabels[index]}
 										className="top-1/2 size-5 rounded-full border border-brand-300 bg-brand-50 shadow-md transition focus-visible:outline-2 focus-visible:outline-brand-600 focus-visible:outline-solid dragging:border-brand-600"

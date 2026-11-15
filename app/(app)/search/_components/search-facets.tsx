@@ -139,36 +139,36 @@ export function SearchFacets(props: SearchFacetsProps): ReactNode {
 
 		let isCanceled = false;
 
-		async function run() {
-			async function getSearchFacetValues() {
-				switch (kind) {
-					case "court": {
-						const { getSearchFacetValues } = await searchModules.court();
-						return getSearchFacetValues(searchFilters, name, filterSearchTerm);
-					}
+		async function getSearchFacetValues() {
+			switch (kind) {
+				case "court": {
+					const { getSearchFacetValues } = await searchModules.court();
+					return getSearchFacetValues(searchFilters, name, filterSearchTerm);
+				}
 
-					case "function": {
-						const { getSearchFacetValues } = await searchModules.function();
-						return getSearchFacetValues(searchFilters, name, filterSearchTerm);
-					}
+				case "function": {
+					const { getSearchFacetValues } = await searchModules.function();
+					return getSearchFacetValues(searchFilters, name, filterSearchTerm);
+				}
 
-					case "institution": {
-						const { getSearchFacetValues } = await searchModules.institution();
-						return getSearchFacetValues(searchFilters, name, filterSearchTerm);
-					}
+				case "institution": {
+					const { getSearchFacetValues } = await searchModules.institution();
+					return getSearchFacetValues(searchFilters, name, filterSearchTerm);
+				}
 
-					case "person": {
-						const { getSearchFacetValues } = await searchModules.person();
-						return getSearchFacetValues(searchFilters, name, filterSearchTerm);
-					}
+				case "person": {
+					const { getSearchFacetValues } = await searchModules.person();
+					return getSearchFacetValues(searchFilters, name, filterSearchTerm);
+				}
 
-					case "place": {
-						const { getSearchFacetValues } = await searchModules.place();
-						return getSearchFacetValues(searchFilters, name, filterSearchTerm);
-					}
+				case "place": {
+					const { getSearchFacetValues } = await searchModules.place();
+					return getSearchFacetValues(searchFilters, name, filterSearchTerm);
 				}
 			}
+		}
 
+		async function run() {
 			const filteredValues = await getSearchFacetValues();
 			if (!isCanceled) {
 				setFilteredFacetValues(filteredValues.values);

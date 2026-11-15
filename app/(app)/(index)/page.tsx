@@ -72,6 +72,7 @@ export default async function IndexPage(_props: Readonly<IndexPageProps>): Promi
 					const { default: Content } = await page.compile(content);
 
 					return (
+						// oxlint-disable-next-line react/no-array-index-key -- list is not reordered.
 						<section key={index} className="prose max-w-none">
 							<h2 className="border-b border-brand-100 text-2xl font-bold text-brand-600">
 								{title}
@@ -80,6 +81,7 @@ export default async function IndexPage(_props: Readonly<IndexPageProps>): Promi
 							<div>
 								{links.map((link, index) => {
 									return (
+										// oxlint-disable-next-line react/no-array-index-key -- list is not reordered.
 										<LinkButton key={index} link={{ discriminant: "external", value: link.href }}>
 											{link.label}
 											<ArrowRightIcon aria-hidden={true} className="size-4 shrink-0" />

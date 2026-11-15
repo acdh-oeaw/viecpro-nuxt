@@ -34,11 +34,14 @@ export async function getZoteroItems() {
 	do {
 		log.info(`Fetching page ${String(page)}`);
 
+		/** Pages need to be fetched sequentially, since the next page url is read from the `link` header. */
+		// oxlint-disable-next-line no-await-in-loop
 		const response = await request(url, {
 			headers,
 			responseType: "raw",
 		});
 
+		// oxlint-disable-next-line no-await-in-loop
 		data.push(...((await response.json()) as Array<ZoteroItem>));
 
 		/**

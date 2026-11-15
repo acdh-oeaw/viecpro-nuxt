@@ -43,11 +43,12 @@ async function generate() {
 	await writeFile(outputFilePah, JSON.stringify(grouped), { encoding: "utf-8" });
 }
 
-generate()
-	.then(() => {
-		log.success("Successfully generated bibliography.");
-	})
-	.catch((error: unknown) => {
-		log.error("Failed to generate bibliography.\n", String(error));
-		console.error(error);
-	});
+async function main(): Promise<void> {
+	await generate();
+	log.success("Successfully generated bibliography.");
+}
+
+main().catch((error: unknown) => {
+	log.error("Failed to generate bibliography.\n", error);
+	process.exitCode = 1;
+});

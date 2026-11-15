@@ -105,12 +105,11 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 													setCurrentSortDirection((currentSortDirection) => {
 														return currentSortDirection === "asc" ? "desc" : "asc";
 													});
-													setCurrentPage(1);
 												} else {
 													setCurrentSortColumn(column);
 													setCurrentSortDirection("asc");
-													setCurrentPage(1);
 												}
+												setCurrentPage(1);
 											}}
 											type="button"
 										>
@@ -137,6 +136,7 @@ export function SortableTable<T extends object>(props: SortableTableProps<T>): R
 					<tbody className="divide-y divide-neutral-200">
 						{visibleRows.map((row, index) => {
 							return (
+								// oxlint-disable-next-line react/no-array-index-key -- list is not reordered.
 								<tr key={index} className="relative">
 									{columns.map((column) => {
 										if (column.field === "target") {
