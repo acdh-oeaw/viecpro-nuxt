@@ -8,11 +8,8 @@ import { env } from "#/config/env.config.ts";
 type TurbopackRules = NonNullable<NonNullable<NextConfig["turbopack"]>["rules"]>;
 
 const config: NextConfig = {
-	/** Compression should be handled by nginx reverse proxy. */
+	/** Compression is handled by the traefik ingress (`compress` middleware). */
 	compress: false,
-	experimental: {
-		useCache: true,
-	},
 	headers() {
 		const headers: Awaited<ReturnType<NonNullable<NextConfig["headers"]>>> = [
 			/** @see https://nextjs.org/docs/app/building-your-application/deploying#streaming-and-suspense */

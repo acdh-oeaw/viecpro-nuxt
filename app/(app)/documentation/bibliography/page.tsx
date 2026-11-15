@@ -58,6 +58,7 @@ export default async function BibliographyPage(
 													return (
 														<li key={item.key}>
 															<div>{item.citation}</div>
+															{/* oxlint-disable-next-line typescript/strict-boolean-expressions */}
 															{item.url ? (
 																<a className="break-all" href={item.url}>
 																	{item.url}

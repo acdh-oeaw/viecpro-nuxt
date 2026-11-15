@@ -11,6 +11,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
+import { JsonLd } from "react-schemaorg";
+import type { Person } from "schema-dts";
 import { Errors } from "typesense";
 
 import { getPerson } from "#/app/(app)/persons/[id]/_lib/data.ts";
@@ -23,6 +25,7 @@ import { PopoverNote } from "#/components/popover-note.tsx";
 import { SortableTable } from "#/components/sortable-table.tsx";
 import { Tooltip, TooltipTrigger } from "#/components/tooltip.tsx";
 import { env } from "#/config/env.config.ts";
+import { createFullUrl } from "#/lib/create-full-url.ts";
 import { parseLinks } from "#/lib/parse-links.ts";
 
 interface PersonPageProps {
@@ -85,6 +88,38 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 
 	return (
 		<MainContent className="flex flex-col">
+			<JsonLd<Person>
+				item={{
+					"@context": "https://schema.org",
+					"@type": "Person",
+					"@id": href,
+					url: href,
+					name: [data.firstName, data.name].filter(isNonEmptyString).join(" "),
+					givenName: isNonEmptyString(data.firstName) ? data.firstName : undefined,
+					familyName: data.name,
+					birthPlace:
+						data.placeOfBirth != null
+							? {
+									"@type": "Place",
+									name: data.placeOfBirth.name,
+									url: String(
+										createFullUrl({ pathname: `/places/${String(data.placeOfBirth.id)}` }),
+									),
+								}
+							: undefined,
+					deathPlace:
+						data.placeOfDeath != null
+							? {
+									"@type": "Place",
+									name: data.placeOfDeath.name,
+									url: String(
+										createFullUrl({ pathname: `/places/${String(data.placeOfDeath.id)}` }),
+									),
+								}
+							: undefined,
+					sameAs: isNonEmptyArray(data.sameAs) ? data.sameAs : undefined,
+				}}
+			/>
 			<div className="mx-auto grid w-full max-w-7xl content-start gap-y-12 px-4 pt-8 pb-16 xs:gap-y-16 xs:px-8">
 				<div className="grid content-start gap-y-4">
 					<div>
@@ -324,6 +359,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 							<dt className="text-neutral-600">{t("birth")}:</dt>
 							<dd>
 								{data.startDateWritten}{" "}
+								{/* oxlint-disable-next-line typescript/strict-boolean-expressions */}
 								{data.placeOfBirth?.name
 									? t.rich("in-place", {
 											place() {
@@ -344,6 +380,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 							<dt className="text-neutral-600">{t("death")}:</dt>
 							<dd>
 								{data.endDateWritten}{" "}
+								{/* oxlint-disable-next-line typescript/strict-boolean-expressions */}
 								{data.placeOfDeath?.name
 									? t.rich("in-place", {
 											place() {
@@ -361,6 +398,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 									: null}
 							</dd>
 
+							{/* oxlint-disable-next-line typescript/strict-boolean-expressions */}
 							{data.causeOfDeath ? (
 								<Fragment>
 									<dt className="text-neutral-600">{t("death-cause")}:</dt>
@@ -368,6 +406,7 @@ export default async function PersonPage(props: Readonly<PersonPageProps>): Prom
 								</Fragment>
 							) : null}
 
+							{/* oxlint-disable-next-line typescript/strict-boolean-expressions */}
 							{data.confession ? (
 								<Fragment>
 									<dt className="text-neutral-600">{t("confession")}:</dt>

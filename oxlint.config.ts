@@ -143,6 +143,13 @@ const config = defineConfig({
 			},
 		},
 		{
+			/** Playwright interactions are intentionally sequential. */
+			files: ["e2e/**"],
+			rules: {
+				"no-await-in-loop": "off",
+			},
+		},
+		{
 			files: ["config/env.config.ts"],
 			rules: {
 				"node/no-process-env": "off",

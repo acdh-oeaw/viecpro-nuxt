@@ -1,6 +1,4 @@
-# syntax=docker/dockerfile:1-labs
-# labs version is needed for `COPY --exclude`.
-# @see https://docs.docker.com/reference/dockerfile/#copy---exclude
+# syntax=docker/dockerfile:1
 
 # using alpine base image to avoid `sharp` memory leaks.
 # @see https://sharp.pixelplumbing.com/install#linux-memory-allocator
@@ -60,8 +58,7 @@ USER node
 COPY --from=build --chown=node:node /app/next.config.ts ./
 COPY --from=build --chown=node:node /app/.next/standalone ./
 COPY --from=build --chown=node:node /app/.next/static ./.next/static
-# exclude assets which should have been optimized with `next/image`.
-COPY --from=build --chown=node:node --exclude=assets/content/assets/ /app/public  ./public
+COPY --from=build --chown=node:node /app/public ./public
 # content needs to be available at request time.
 COPY --from=build --chown=node:node /app/content ./content
 

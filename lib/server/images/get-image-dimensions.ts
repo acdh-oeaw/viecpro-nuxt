@@ -21,6 +21,7 @@ export async function getImageDimensions(
 
 		const contentType = response.headers.get("content-type");
 
+		// oxlint-disable-next-line typescript/strict-boolean-expressions
 		if (!contentType?.startsWith("image/")) {
 			return null;
 		}
