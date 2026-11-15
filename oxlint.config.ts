@@ -107,6 +107,10 @@ const config = defineConfig({
 				],
 			},
 		],
+		/** Stylistic, and wrapping type guards like `isNonEmptyString` in arrow functions adds noise. */
+		"unicorn/no-array-callback-reference": "off",
+		/** Stylistic, and short regular expressions are clearer with positional capture groups. */
+		"prefer-named-capture-group": "off",
 		/** Superseded by `check-file/filename-naming-convention`, which ignores middle extensions. */
 		"unicorn/filename-case": "off",
 		"check-file/filename-naming-convention": [

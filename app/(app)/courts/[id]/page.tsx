@@ -301,6 +301,7 @@ export default async function CourtPage(props: Readonly<CourtPageProps>): Promis
 							<ul className="m-3 grid gap-y-1 text-sm" role="list">
 								{(data.sameAs ?? []).map((url, index) => {
 									return (
+										// oxlint-disable-next-line react/no-array-index-key -- list is not reordered.
 										<li key={index}>
 											<a className="underline hover:no-underline" href={url}>
 												{url}

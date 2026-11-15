@@ -66,26 +66,6 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 			return d.x * dimensions.boundedHeight;
 		});
 
-	function getNodeColor(node: HierarchyNode<GraphNode>) {
-		switch (node.data.meta.entity_type) {
-			case "Funktion": {
-				return colors.function;
-			}
-
-			case "Institution": {
-				return colors.institution;
-			}
-
-			case "Person": {
-				return colors.person;
-			}
-
-			default: {
-				return colors.default;
-			}
-		}
-	}
-
 	return (
 		<div
 			ref={setContainerRef}
@@ -144,4 +124,24 @@ export function HierarchyVisualisation(props: HierarchyVisualisationProps): Reac
 			</svg>
 		</div>
 	);
+}
+
+function getNodeColor(node: HierarchyNode<GraphNode>): string {
+	switch (node.data.meta.entity_type) {
+		case "Funktion": {
+			return colors.function;
+		}
+
+		case "Institution": {
+			return colors.institution;
+		}
+
+		case "Person": {
+			return colors.person;
+		}
+
+		default: {
+			return colors.default;
+		}
+	}
 }

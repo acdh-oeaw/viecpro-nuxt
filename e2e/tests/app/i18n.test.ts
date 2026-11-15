@@ -1,3 +1,5 @@
+/* oxlint-disable playwright/no-raw-locators -- the `<html>` element has no accessible role, so it can only be located via css selector. */
+
 import { defaultLocale, locales } from "#/config/i18n.config.ts";
 import { expect, test } from "#/e2e/lib/test.ts";
 

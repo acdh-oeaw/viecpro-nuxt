@@ -1,3 +1,5 @@
+/* oxlint-disable playwright/no-raw-locators -- document metadata (`<head>` elements) has no accessible roles, so it can only be located via css selectors. */
+
 import { createUrl } from "@acdh-oeaw/lib";
 import { jsonLdScriptProps } from "react-schemaorg";
 

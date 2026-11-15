@@ -46,6 +46,7 @@ export default async function BibliographyPage(
 					<section className="prose max-w-none py-16 xs:py-20">
 						<ul className="grid content-start gap-y-4" role="list">
 							{Object.entries(bibliography)
+								// oxlint-disable-next-line unicorn/no-array-sort -- sorts a copy.
 								.sort(([a], [z]) => {
 									return a.localeCompare(z);
 								})

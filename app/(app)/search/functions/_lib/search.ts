@@ -331,6 +331,7 @@ export async function getSearchResults(
 			}
 		});
 
+		// oxlint-disable-next-line unicorn/no-array-sort -- sorts a copy.
 		facetCounts.set(facetField, { values: Array.from(values.values()).sort(sortFacets) });
 	}
 
