@@ -1,13 +1,17 @@
 allowBuilds:
   '@parcel/watcher': true
   '@swc/core': true
-  esbuild: true
-  sharp: true
   lefthook: true
-  unrs-resolver: false
 
-engineStrict: false
+autoDedupe: true
+
+engineStrict: true
+
+lockfile:
+  includeResolutionSettings: true
+
+minimumReleaseAge: 720
+
+saveTypes: true
 
 shellEmulator: true
-
-strictDepBuilds: true
