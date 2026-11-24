@@ -128,15 +128,22 @@ const config = defineConfig({
 	overrides: [
 		{
 			files: [
+				".eloqnt/config.ts",
 				"config/oxlint/*.ts",
 				/** `next-intl` requires a default export. */
 				"lib/i18n/request.ts",
 				"oxfmt.config.ts",
 				"oxlint.config.ts",
-				"x18n.config.ts",
 			],
 			rules: {
 				"import/no-default-export": "off",
+			},
+		},
+		{
+			/** `eloqnt` expects its config in a `.eloqnt` folder. */
+			files: [".eloqnt/**"],
+			rules: {
+				"check-file/folder-naming-convention": "off",
 			},
 		},
 		{
