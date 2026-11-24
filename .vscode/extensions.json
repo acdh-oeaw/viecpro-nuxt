@@ -1,6 +1,5 @@
 {
 	"recommendations": [
-		"antfu.x18n",
 		"bradlc.vscode-tailwindcss",
 		"editorconfig.editorconfig",
 		"mikestead.dotenv",
