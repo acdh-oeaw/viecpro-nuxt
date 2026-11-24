@@ -33,16 +33,7 @@ const restrictedImports = {
 			name: "next/router",
 		},
 	],
-	patterns: [
-		...nextjsRestrictedImports.patterns,
-		{
-			/**
-			 * Require explicit file extensions for internal modules, so they can be resolved natively by node.js.
-			 */
-			regex: String.raw`^(?:#|\.{1,2})/(?!.*\.(?:avif|css|gif|jpe?g|js|json|mdx?|mjs|png|svg|tsx?|webp)$)`,
-			message: "Please add the file extension to internal imports.",
-		},
-	],
+	patterns: nextjsRestrictedImports.patterns,
 };
 
 const config = defineConfig({
@@ -78,6 +69,8 @@ const config = defineConfig({
 		"arrow-body-style": ["error", "always"],
 		/** Not enabled yet - switching to logical properties is a separate, ui-wide change. */
 		"better-tailwindcss/enforce-logical-properties": "off",
+		/** Require explicit file extensions for internal modules, so they can be resolved natively by node.js. */
+		"import/extensions": ["error", "always", { ignorePackages: true }],
 		"no-restricted-imports": ["error", restrictedImports],
 		"typescript/explicit-module-boundary-types": "off",
 		/** Avoid hardcoded, non-translated strings. */

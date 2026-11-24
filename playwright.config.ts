@@ -1,15 +1,18 @@
+import { existsSync } from "node:fs";
 import { join } from "node:path";
 
-import { config as dotenv } from "@dotenvx/dotenvx";
 import { defineConfig, devices } from "@playwright/test";
 import isCI from "is-in-ci";
 
 /**
- * Reading `.env` files here instead of using `dotenvx run` so environment variables are
+ * Reading `.env` files here instead of using `node --env-file` so environment variables are
  * available to the vs code plugin as well.
  */
 for (const envFilePath of [".env.test.local", ".env.local", ".env.test", ".env"]) {
-	dotenv({ path: join(process.cwd(), envFilePath) });
+	const filePath = join(process.cwd(), envFilePath);
+	if (existsSync(filePath)) {
+		process.loadEnvFile(filePath);
+	}
 }
 
 const port = 3000;

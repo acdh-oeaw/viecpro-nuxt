@@ -17,7 +17,7 @@
 		"lint:check": "oxlint",
 		"lint:fix": "oxlint --fix",
 		"preinstall": "npx only-allow pnpm",
-		"prepare": "run-s types:prepare",
+		"prepare": "pnpm run types:generate",
 		"start": "next start",
 		"styles:check": "stylelint \"./**/*.css\" --cache --ignore-path ./.gitignore",
 		"styles:fix": "pnpm run styles:check --fix",
@@ -26,23 +26,23 @@
 		"test:e2e:update-snapshots": "playwright test --update-snapshots",
 		"test:e2e:update-snapshots:ci": "node ./scripts/update-snapshots.ts",
 		"types:check": "tsc --noEmit",
-		"types:prepare": "next typegen"
+		"types:generate": "next typegen"
 	},
 	"dependencies": {
 		"@acdh-oeaw/lib": "^0.3.7",
 		"@acdh-oeaw/mdx-lib": "^0.2.0",
 		"@acdh-oeaw/style-variants": "^0.1.0",
-		"@acdh-oeaw/validate-env": "^0.0.3",
+		"@acdh-oeaw/validate-env": "^0.4.0",
 		"@react-aria/utils": "^3.34.1",
 		"@sindresorhus/slugify": "^4.0.1",
 		"d3-hierarchy": "^3.1.3",
 		"d3-shape": "^3.2.1",
 		"image-dimensions": "^2.6.0",
-		"json-as-xlsx": "^2.6.5",
+		"json-as-xlsx": "^2.7.0",
 		"leaflet": "^1.9.4",
-		"lucide-react": "^1.73.0",
+		"lucide-react": "^1.78.0",
 		"next": "^16.4.6",
-		"next-intl": "^4.15.1",
+		"next-intl": "^4.15.3",
 		"react": "^19.3.1",
 		"react-aria": "^3.53.1",
 		"react-aria-components": "^1.22.1",
@@ -61,8 +61,7 @@
 		"valibot": "^1.5.0"
 	},
 	"devDependencies": {
-		"@dotenvx/dotenvx": "^1.75.1",
-		"@playwright/test": "^1.65.0",
+		"@playwright/test": "^1.65.1",
 		"@react-aria/optimize-locales-plugin": "^2.1.0",
 		"@react-types/shared": "^3.37.0",
 		"@tailwindcss/turbopack": "^4.3.5",
@@ -75,8 +74,7 @@
 		"@types/node": "^26.6.6",
 		"@types/react": "^19.3.0",
 		"@types/react-dom": "^19.3.0",
-		"@x18n/core": "^0.1.14",
-		"axe-core": "^4.14.0",
+		"axe-core": "^4.14.1",
 		"axe-playwright": "^2.2.2",
 		"babel-plugin-react-compiler": "^1.0.0",
 		"eslint-plugin-better-tailwindcss": "^4.11.0",
@@ -85,12 +83,11 @@
 		"eslint-plugin-regexp": "^3.3.3",
 		"is-in-ci": "^2.0.0",
 		"lefthook": "^2.2.2",
-		"npm-run-all2": "^9.0.4",
-		"oxfmt": "^0.78.0",
-		"oxlint": "^1.93.0",
-		"oxlint-tsgolint": "^7.0.2007",
+		"oxfmt": "^0.79.0",
+		"oxlint": "^1.94.0",
+		"oxlint-tsgolint": "^7.0.2008",
 		"schema-dts": "^2.1.0",
-		"stylelint": "^18.0.0",
+		"stylelint": "^18.1.0",
 		"stylelint-order": "^8.1.3",
 		"tailwindcss": "^4.3.5",
 		"tailwindcss-react-aria-components": "^2.2.0",
@@ -115,7 +112,12 @@
 	"devEngines": {
 		"packageManager": {
 			"name": "pnpm",
-			"version": "12.18.0",
+			"version": "12.23.0",
+			"onFail": "download"
+		},
+		"runtime": {
+			"name": "node",
+			"version": "^26",
 			"onFail": "download"
 		}
 	},
